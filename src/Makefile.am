@@ -39,8 +39,6 @@ bin_PROGRAMS =						\
 
 noinst_LIBRARIES = libgpkshared.a
 libgpkshared_a_SOURCES =				\
-	egg-string.c					\
-	egg-string.h					\
 	gpk-debug.c					\
 	gpk-debug.h					\
 	gpk-enum.c					\
@@ -199,8 +197,6 @@ noinst_PROGRAMS =					\
 
 xings_self_test_SOURCES =				\
 	gpk-self-test.c					\
-	egg-string.c					\
-	egg-string.h					\
 	gpk-debug.c					\
 	gpk-debug.h					\
 	gpk-enum.c					\
