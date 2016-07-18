@@ -32,7 +32,6 @@
 G_BEGIN_DECLS
 
 #define GPK_SETTINGS_SCHEMA				"org.xings.packagekit"
-#define GPK_SETTINGS_AUTOCOMPLETE			"autocomplete"
 #define GPK_SETTINGS_CATEGORY_GROUPS			"category-groups"
 #define GPK_SETTINGS_DBUS_DEFAULT_INTERACTION		"dbus-default-interaction"
 #define GPK_SETTINGS_DBUS_ENFORCED_INTERACTION		"dbus-enforced-interaction"
@@ -74,7 +73,6 @@ gboolean	 gpk_set_animated_icon_from_status	(GpkAnimatedIcon *icon,
 							 PkStatusEnum	 status,
 							 GtkIconSize	 size);
 gchar		*gpk_strv_join_locale			(gchar		**array);
-GtkEntryCompletion *gpk_package_entry_completion_new	(void);
 gboolean	 gpk_window_set_size_request		(GtkWindow	*window,
 							 guint		 width,
 							 guint		 height);

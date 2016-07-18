@@ -530,14 +530,3 @@ gpk_strv_join_locale (gchar **array)
 					array[3], array[4]);
 	return NULL;
 }
-
-/**
- * gpk_package_entry_completion_new:
- *
- * Creates a %GtkEntryCompletion containing completions from the system package list
- **/
-GtkEntryCompletion *
-gpk_package_entry_completion_new (void)
-{
-	return NULL;
-}
