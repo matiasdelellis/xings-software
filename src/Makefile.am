@@ -1,8 +1,6 @@
 ## We require new-style dependency handling.
 AUTOMAKE_OPTIONS = 1.7
 
-NULL =
-
 AM_CPPFLAGS =						\
 	$(GLIB_CFLAGS)					\
 	$(GIO_CFLAGS)					\
@@ -25,8 +23,7 @@ AM_CPPFLAGS =						\
 	-DLOCALEDIR=\""$(localedir)"\"			\
 	-DVERSION="\"$(VERSION)\"" 			\
 	-DGPK_DATA=\"$(pkgdatadir)\"			\
-	-DG_LOG_DOMAIN=\"XingsPackageKit\"		\
-	$(NULL)
+	-DG_LOG_DOMAIN=\"XingsPackageKit\"
 
 bin_PROGRAMS =						\
 	xings-packages					\
@@ -34,8 +31,7 @@ bin_PROGRAMS =						\
 	xings-install-local-package			\
 	xings-package-updates				\
 	xings-package-history				\
-	xings-packagekit-service			\
-	$(NULL)
+	xings-packagekit-service
 
 noinst_LIBRARIES = libgpkshared.a
 libgpkshared_a_SOURCES =				\
@@ -70,8 +66,7 @@ libgpkshared_a_SOURCES =				\
 	gpk-task.c					\
 	gpk-task.h					\
 	gpk-error.c					\
-	gpk-error.h					\
-	$(NULL)
+	gpk-error.h
 
 if WITH_SYSTEMD
 libgpkshared_a_SOURCES +=				\
@@ -90,8 +85,7 @@ shared_LIBS =						\
 	$(PACKAGEKIT_LIBS)				\
 	$(GNOME_MENUS_LIBS)				\
 	$(CANBERRA_LIBS)				\
-	$(X11_LIBS)					\
-	$(NULL)
+	$(X11_LIBS)
 
 xings_install_local_package_SOURCES =			\
 	gpk-install-local-file.c			\
@@ -116,13 +110,11 @@ xings_packagekit_service_LDADD =			\
 	$(NULL)
 
 xings_packages_SOURCES =				\
-	gpk-application.c				\
-	$(NULL)
+	gpk-application.c
 
 xings_packages_LDADD =					\
 	libgpkshared.a					\
-	$(shared_LIBS)					\
-	$(NULL)
+	$(shared_LIBS)
 
 xings_preferences_SOURCES =				\
 	gpk-debug.h					\
@@ -135,8 +127,7 @@ xings_preferences_SOURCES =				\
 	gpk-common.h					\
 	gpk-error.c					\
 	gpk-error.h					\
-	gpk-prefs.c					\
-	$(NULL)
+	gpk-prefs.c
 
 xings_preferences_LDADD =				\
 	libgpkshared.a					\
@@ -150,22 +141,24 @@ xings_package_updates_SOURCES =				\
 	gpk-cell-renderer-info.c			\
 	gpk-cell-renderer-info.h			\
 	gpk-cell-renderer-restart.c			\
-	gpk-cell-renderer-restart.h			\
-	$(NULL)
+	gpk-cell-renderer-restart.h
 
 xings_package_updates_LDADD =				\
 	libgpkshared.a					\
-	$(shared_LIBS)					\
-	$(NULL)
+	$(shared_LIBS)
+
+gpk_update_viewer_CFLAGS =				\
+	$(WARN_CFLAGS)
 
 xings_package_history_SOURCES =				\
-	gpk-log.c					\
-	$(NULL)
+	gpk-log.c
 
 xings_package_history_LDADD =				\
 	libgpkshared.a					\
-	$(shared_LIBS)					\
-	$(NULL)
+	$(shared_LIBS)
+
+gpk_log_CFLAGS =					\
+	$(WARN_CFLAGS)
 
 BUILT_SOURCES = 					\
 	gpk-marshal.c					\
@@ -230,13 +223,11 @@ xings_self_test_SOURCES =				\
 	gpk-marshal.c					\
 	gpk-marshal.h					\
 	gpk-dialog.c					\
-	gpk-dialog.h					\
-	$(NULL)
+	gpk-dialog.h
 
 xings_self_test_LDADD =					\
 	$(shared_LIBS)					\
-	$(SELFTEST_LIBS)				\
-	$(NULL)
+	$(SELFTEST_LIBS)
 
 xings_self_test_CFLAGS = $(AM_CFLAGS)
 
@@ -260,6 +251,7 @@ clean-local:
 CLEANFILES = *~ $(BUILT_SOURCES)
 
 MAINTAINERCLEANFILES =					\
-	*~						\
-	Makefile.in					\
-	$(NULL)
+	*~			      			\
+	Makefile.in
+
+-include $(top_srcdir)/git.mk

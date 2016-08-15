@@ -768,7 +768,7 @@ gpk_restart_enum_to_localised_text_future (PkRestartEnum restart)
 		text = _("A restart will be required due to a security update.");
 		break;
 	default:
-		g_warning ("restart unrecognized: %i", restart);
+		g_warning ("restart unrecognized: %u", restart);
 	}
 	return text;
 }
@@ -800,7 +800,7 @@ gpk_restart_enum_to_localised_text (PkRestartEnum restart)
 		text = _("A restart is required to remain secure.");
 		break;
 	default:
-		g_warning ("restart unrecognized: %i", restart);
+		g_warning ("restart unrecognized: %u", restart);
 	}
 	return text;
 }
@@ -1622,7 +1622,7 @@ gpk_group_enum_to_localised_text (PkGroupEnum group)
 		text = _("Unknown group");
 		break;
 	default:
-		g_warning ("group unrecognized: %i", group);
+		g_warning ("group unrecognized: %u", group);
 	}
 	return text;
 }
