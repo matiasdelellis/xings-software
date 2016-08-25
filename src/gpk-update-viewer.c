@@ -21,6 +21,8 @@
 
 #include "config.h"
 
+#pragma GCC diagnostic ignored "-Wswitch-enum"
+
 #include <dbus/dbus-glib.h>
 #include <gdk/gdkkeysyms.h>
 #include <glib/gi18n.h>
