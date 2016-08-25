@@ -116,6 +116,9 @@ xings_packages_LDADD =					\
 	libgpkshared.a					\
 	$(shared_LIBS)
 
+xings_packages_CFLAGS =					\
+	$(WARN_CFLAGS)
+
 xings_preferences_SOURCES =				\
 	gpk-debug.h					\
 	gpk-debug.c					\
