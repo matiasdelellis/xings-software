@@ -3200,7 +3200,7 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   GPK_DATA G_DIR_SEPARATOR_S "icons");
+					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
 					   "/usr/share/PackageKit/icons");
 
@@ -3219,7 +3219,7 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	/* get UI */
 	priv->builder = gtk_builder_new ();
-	retval = gtk_builder_add_from_file (priv->builder, GPK_DATA "/gpk-application.ui", &error);
+	retval = gtk_builder_add_from_file (priv->builder, PKGDATADIR "/gpk-application.ui", &error);
 	if (retval == 0) {
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);

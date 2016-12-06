@@ -690,7 +690,7 @@ gpk_log_startup_cb (GtkApplication *application, gpointer user_data)
 
 	/* get UI */
 	builder = gtk_builder_new ();
-	retval = gtk_builder_add_from_file (builder, GPK_DATA "/gpk-log.ui", &error);
+	retval = gtk_builder_add_from_file (builder, PKGDATADIR "/gpk-log.ui", &error);
 	if (retval == 0) {
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);
@@ -814,7 +814,7 @@ main (int argc, char *argv[])
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   GPK_DATA G_DIR_SEPARATOR_S "icons");
+					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* are we already activated? */
 	application = gtk_application_new ("org.freedesktop.PackageKit.LogViewer", 0);

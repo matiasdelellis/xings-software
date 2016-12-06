@@ -3134,7 +3134,7 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 
 	/* get UI */
 	builder = gtk_builder_new ();
-	retval = gtk_builder_add_from_file (builder, GPK_DATA "/gpk-update-viewer.ui", &error);
+	retval = gtk_builder_add_from_file (builder, PKGDATADIR "/gpk-update-viewer.ui", &error);
 	if (retval == 0) {
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);
@@ -3312,7 +3312,7 @@ main (int argc, char *argv[])
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   GPK_DATA G_DIR_SEPARATOR_S "icons");
+					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* TRANSLATORS: title to pass to the user if there are not enough privs */
 	ret = gpk_check_privileged_user (_("Package Updater"), TRUE);

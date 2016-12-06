@@ -3179,7 +3179,7 @@ gpk_dbus_task_init (GpkDbusTask *dtask)
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   GPK_DATA G_DIR_SEPARATOR_S "icons");
+					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* only initialize if the application didn't do it before */
 	if (!notify_is_initted ())

@@ -540,7 +540,7 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
-					   GPK_DATA G_DIR_SEPARATOR_S "icons");
+					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* get actions */
 	control = pk_control_new ();
@@ -548,7 +548,7 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 			  G_CALLBACK (gpk_prefs_repo_list_changed_cb), priv);
 
 	/* get UI */
-	retval = gtk_builder_add_from_file (priv->builder, GPK_DATA "/gpk-prefs.ui", &error);
+	retval = gtk_builder_add_from_file (priv->builder, PKGDATADIR "/gpk-prefs.ui", &error);
 	if (retval == 0) {
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);
