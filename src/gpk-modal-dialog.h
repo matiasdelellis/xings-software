@@ -28,14 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_CLIENT_DIALOG		(gpk_modal_dialog_get_type ())
-#define GPK_MODAL_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_CLIENT_DIALOG, GpkModalDialog))
-#define GPK_MODAL_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_CLIENT_DIALOG, GpkModalDialogClass))
-#define GPK_IS_CLIENT_DIALOG(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_CLIENT_DIALOG))
-#define GPK_IS_CLIENT_DIALOG_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_CLIENT_DIALOG))
-#define GPK_MODAL_DIALOG_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_CLIENT_DIALOG, GpkModalDialogClass))
-#define GPK_MODAL_DIALOG_ERROR		(gpk_modal_dialog_error_quark ())
-#define GPK_MODAL_DIALOG_TYPE_ERROR	(gpk_modal_dialog_error_get_type ())
+#define GPK_TYPE_MODAL_DIALOG (gpk_modal_dialog_get_type())
+G_DECLARE_FINAL_TYPE (GpkModalDialog, gpk_modal_dialog, GPK, MODAL_DIALOG, GObject)
 
 /**
  * GpkModalDialogPage:
@@ -69,21 +63,6 @@ typedef enum
 #define GPK_MODAL_DIALOG_PACKAGE_PADDING	pk_bitfield_from_enums (GPK_MODAL_DIALOG_WIDGET_PADDING, GPK_MODAL_DIALOG_WIDGET_MESSAGE, -1)
 #define GPK_MODAL_DIALOG_PACKAGE_LIST		pk_bitfield_value (GPK_MODAL_DIALOG_WIDGET_PACKAGE_LIST)
 #define GPK_MODAL_DIALOG_BUTTON_ACTION		pk_bitfield_value (GPK_MODAL_DIALOG_WIDGET_BUTTON_ACTION)
-
-typedef struct _GpkModalDialogPrivate	 GpkModalDialogPrivate;
-typedef struct _GpkModalDialog		 GpkModalDialog;
-typedef struct _GpkModalDialogClass	 GpkModalDialogClass;
-
-struct _GpkModalDialog
-{
-	GObject				 parent;
-	GpkModalDialogPrivate		*priv;
-};
-
-struct _GpkModalDialogClass
-{
-	GObjectClass	parent_class;
-};
 
 GQuark		 gpk_modal_dialog_error_quark		(void);
 GType		 gpk_modal_dialog_get_type		(void);
@@ -124,4 +103,3 @@ gboolean	 gpk_modal_dialog_setup			(GpkModalDialog		*dialog,
 G_END_DECLS
 
 #endif /* __GPK_MODAL_DIALOG_H */
-

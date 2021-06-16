@@ -46,10 +46,9 @@
 
 static void     gpk_modal_dialog_finalize	(GObject		*object);
 
-#define GPK_MODAL_DIALOG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GPK_TYPE_CLIENT_DIALOG, GpkModalDialogPrivate))
-
-struct _GpkModalDialogPrivate
+struct _GpkModalDialog
 {
+	GObject			 parent;
 	GtkBuilder		*builder;
 	guint			 pulse_timer_id;
 	gboolean		 show_progress_files;
@@ -89,7 +88,7 @@ static void
 gpk_modal_dialog_show_widget (GpkModalDialog *dialog, const gchar *name, gboolean enabled)
 {
 	GtkWidget *widget;
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, name));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, name));
 	if (enabled)
 		gtk_widget_show (widget);
 	else
@@ -103,13 +102,13 @@ gboolean
 gpk_modal_dialog_setup (GpkModalDialog *dialog, GpkModalDialogPage page, PkBitfield options)
 {
 	GtkLabel *label;
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	/* reset state */
-	dialog->priv->set_image = FALSE;
-	dialog->priv->page = page;
-	dialog->priv->options = options;
-	label = GTK_LABEL (gtk_builder_get_object (dialog->priv->builder, "label_message"));
+	dialog->set_image = FALSE;
+	dialog->page = page;
+	dialog->options = options;
+	label = GTK_LABEL (gtk_builder_get_object (dialog->builder, "label_message"));
 	gtk_label_set_label (label, "");
 	gpk_modal_dialog_set_action (dialog, NULL);
 	return TRUE;
@@ -124,41 +123,41 @@ gpk_modal_dialog_present_with_time (GpkModalDialog *dialog, guint32 timestamp)
 	GtkWidget *widget;
 	PkBitfield bitfield = 0;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "label_title"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "label_title"));
 	gtk_widget_show (widget);
-	gtk_widget_show (dialog->priv->image_status);
+	gtk_widget_show (dialog->image_status);
 	/* helper */
-	if (dialog->priv->page == GPK_MODAL_DIALOG_PAGE_CONFIRM) {
-		if (!dialog->priv->set_image)
+	if (dialog->page == GPK_MODAL_DIALOG_PAGE_CONFIRM) {
+		if (!dialog->set_image)
 			gpk_modal_dialog_set_image (dialog, "dialog-question");
 		bitfield = pk_bitfield_from_enums (GPK_MODAL_DIALOG_WIDGET_BUTTON_CANCEL,
 						   GPK_MODAL_DIALOG_WIDGET_BUTTON_ACTION,
 						   GPK_MODAL_DIALOG_WIDGET_MESSAGE,
 						   -1);
 		gpk_modal_dialog_set_allow_cancel (dialog, TRUE);
-	} else if (dialog->priv->page == GPK_MODAL_DIALOG_PAGE_FINISHED) {
-		if (!dialog->priv->set_image)
+	} else if (dialog->page == GPK_MODAL_DIALOG_PAGE_FINISHED) {
+		if (!dialog->set_image)
 			gpk_modal_dialog_set_image (dialog, "dialog-information");
 		bitfield = pk_bitfield_from_enums (GPK_MODAL_DIALOG_WIDGET_BUTTON_CLOSE,
 						   GPK_MODAL_DIALOG_WIDGET_MESSAGE,
 						   -1);
-	} else if (dialog->priv->page == GPK_MODAL_DIALOG_PAGE_CONFIRM) {
-		if (!dialog->priv->set_image)
+	} else if (dialog->page == GPK_MODAL_DIALOG_PAGE_CONFIRM) {
+		if (!dialog->set_image)
 			gpk_modal_dialog_set_image (dialog, "dialog-question");
 		bitfield = pk_bitfield_from_enums (GPK_MODAL_DIALOG_WIDGET_BUTTON_CLOSE,
 						   GPK_MODAL_DIALOG_WIDGET_BUTTON_ACTION,
 						   GPK_MODAL_DIALOG_WIDGET_MESSAGE,
 						   -1);
-	} else if (dialog->priv->page == GPK_MODAL_DIALOG_PAGE_WARNING) {
-		if (!dialog->priv->set_image)
+	} else if (dialog->page == GPK_MODAL_DIALOG_PAGE_WARNING) {
+		if (!dialog->set_image)
 			gpk_modal_dialog_set_image (dialog, "dialog-warning");
 		bitfield = pk_bitfield_from_enums (GPK_MODAL_DIALOG_WIDGET_BUTTON_CLOSE,
 						   GPK_MODAL_DIALOG_WIDGET_MESSAGE,
 						   -1);
-	} else if (dialog->priv->page == GPK_MODAL_DIALOG_PAGE_PROGRESS) {
-		if (!dialog->priv->set_image)
+	} else if (dialog->page == GPK_MODAL_DIALOG_PAGE_PROGRESS) {
+		if (!dialog->set_image)
 			gpk_modal_dialog_set_image (dialog, "dialog-warning");
 		bitfield = pk_bitfield_from_enums (GPK_MODAL_DIALOG_WIDGET_BUTTON_CLOSE,
 						   GPK_MODAL_DIALOG_WIDGET_BUTTON_CANCEL,
@@ -167,7 +166,7 @@ gpk_modal_dialog_present_with_time (GpkModalDialog *dialog, guint32 timestamp)
 	}
 
 	/* we can specify extras */
-	bitfield += dialog->priv->options;
+	bitfield += dialog->options;
 
 	gpk_modal_dialog_show_widget (dialog, "button_cancel", pk_bitfield_contain (bitfield, GPK_MODAL_DIALOG_WIDGET_BUTTON_CANCEL));
 	gpk_modal_dialog_show_widget (dialog, "button_close", pk_bitfield_contain (bitfield, GPK_MODAL_DIALOG_WIDGET_BUTTON_CLOSE));
@@ -181,7 +180,7 @@ gpk_modal_dialog_present_with_time (GpkModalDialog *dialog, guint32 timestamp)
 	gpk_modal_dialog_show_widget (dialog, "label_force_width", TRUE);
 
 	/* show */
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	gtk_widget_realize (widget);
 	gtk_window_present_with_time (GTK_WINDOW (widget), timestamp);
 
@@ -205,22 +204,22 @@ gpk_modal_dialog_set_parent (GpkModalDialog *dialog, GdkWindow *window)
 {
 	GtkWidget *widget;
 	GdkWindow *window_ours;
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	/* never set, and nothing now */
-	if (window == NULL && !dialog->priv->has_parent)
+	if (window == NULL && !dialog->has_parent)
 		return TRUE;
 
 	/* not sure what to do here, should probably unparent somehow */
 	if (window == NULL) {
 		g_warning ("parent set NULL when already modal with another window, setting non-modal");
-		widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+		widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "dialog_client"));
 		gtk_window_set_modal (GTK_WINDOW (widget), FALSE);
-		dialog->priv->has_parent = FALSE;
+		dialog->has_parent = FALSE;
 
 		/* use the saved title if it exists */
-		if (dialog->priv->title != NULL)
-			gpk_modal_dialog_set_title (dialog, dialog->priv->title);
+		if (dialog->title != NULL)
+			gpk_modal_dialog_set_title (dialog, dialog->title);
 
 		return FALSE;
 	}
@@ -231,12 +230,12 @@ gpk_modal_dialog_set_parent (GpkModalDialog *dialog, GdkWindow *window)
 		return FALSE;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	gtk_widget_realize (widget);
 	gtk_window_set_modal (GTK_WINDOW (widget), TRUE);
 	window_ours = gtk_widget_get_window (widget);
 	gdk_window_set_transient_for (window_ours, window);
-	dialog->priv->has_parent = TRUE;
+	dialog->has_parent = TRUE;
 	return TRUE;
 }
 
@@ -248,11 +247,11 @@ gpk_modal_dialog_set_window_title (GpkModalDialog *dialog, const gchar *title)
 {
 	GtkWindow *window;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 	g_return_val_if_fail (title != NULL, FALSE);
 
 	g_debug ("setting window title: %s", title);
-	window = GTK_WINDOW (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	window = GTK_WINDOW (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	gtk_window_set_title (window, title);
 	return TRUE;
 }
@@ -265,11 +264,11 @@ gpk_modal_dialog_set_window_icon (GpkModalDialog *dialog, const gchar *icon)
 {
 	GtkWindow *window;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 	g_return_val_if_fail (icon != NULL, FALSE);
 
 	g_debug ("setting window icon: %s", icon);
-	window = GTK_WINDOW (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	window = GTK_WINDOW (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	gtk_window_set_icon_name (window, icon);
 	return TRUE;
 }
@@ -284,23 +283,23 @@ gpk_modal_dialog_set_title (GpkModalDialog *dialog, const gchar *title)
 	GtkWidget *widget;
 	gchar *title_bold;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 	g_return_val_if_fail (title != NULL, FALSE);
 
 	/* only set the window title if we are non-modal */
-	if (!dialog->priv->has_parent) {
-		widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder,
+	if (!dialog->has_parent) {
+		widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder,
 							     "dialog_client"));
 		gtk_window_set_modal (GTK_WINDOW (widget), FALSE);
 	}
 
 	/* we save this in case we are non-modal and have to use a title */
-	g_free (dialog->priv->title);
-	dialog->priv->title = g_strdup (title);
+	g_free (dialog->title);
+	dialog->title = g_strdup (title);
 
 	title_bold = g_strdup_printf ("<b><big>%s</big></b>", title);
 	g_debug ("setting title: %s", title_bold);
-	label = GTK_LABEL (gtk_builder_get_object (dialog->priv->builder, "label_title"));
+	label = GTK_LABEL (gtk_builder_get_object (dialog->builder, "label_title"));
 	gtk_label_set_markup (label, title_bold);
 	g_free (title_bold);
 	return TRUE;
@@ -314,15 +313,15 @@ gpk_modal_dialog_set_message (GpkModalDialog *dialog, const gchar *message)
 {
 	GtkLabel *label;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 	g_return_val_if_fail (message != NULL, FALSE);
 
 	/* ignore this if it's uninteresting */
-	if (!dialog->priv->show_progress_files)
+	if (!dialog->show_progress_files)
 		return FALSE;
 
 	g_debug ("setting message: %s", message);
-	label = GTK_LABEL (gtk_builder_get_object (dialog->priv->builder, "label_message"));
+	label = GTK_LABEL (gtk_builder_get_object (dialog->builder, "label_message"));
 	gtk_label_set_markup (label, message);
 	return TRUE;
 }
@@ -335,10 +334,10 @@ gpk_modal_dialog_set_action (GpkModalDialog *dialog, const gchar *action)
 {
 	GtkWidget *widget;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	g_debug ("setting action: %s", action);
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "button_action"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "button_action"));
 	if (action != NULL)
 		gtk_button_set_label (GTK_BUTTON (widget), action);
 	else
@@ -355,13 +354,13 @@ gpk_modal_dialog_pulse_progress (GpkModalDialog *dialog)
 	GtkWidget *widget;
 	static guint rate_limit = 0;
 	
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	/* debug so we can catch polling */
 	if (rate_limit++ % 20 == 0)
 		g_debug ("polling check");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "progressbar_percent"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "progressbar_percent"));
 	gtk_progress_bar_pulse (GTK_PROGRESS_BAR (widget));
 	return TRUE;
 }
@@ -373,11 +372,11 @@ static void
 gpk_modal_dialog_make_progressbar_pulse (GpkModalDialog *dialog)
 {
 	GtkProgressBar *progress_bar;
-	if (dialog->priv->pulse_timer_id == 0) {
-		progress_bar = GTK_PROGRESS_BAR (gtk_builder_get_object (dialog->priv->builder, "progressbar_percent"));
+	if (dialog->pulse_timer_id == 0) {
+		progress_bar = GTK_PROGRESS_BAR (gtk_builder_get_object (dialog->builder, "progressbar_percent"));
 		gtk_progress_bar_set_pulse_step (progress_bar, 0.04);
-		dialog->priv->pulse_timer_id = g_timeout_add (75, (GSourceFunc) gpk_modal_dialog_pulse_progress, dialog);
-		g_source_set_name_by_id (dialog->priv->pulse_timer_id, "[GpkModalDialog] pulse");
+		dialog->pulse_timer_id = g_timeout_add (75, (GSourceFunc) gpk_modal_dialog_pulse_progress, dialog);
+		g_source_set_name_by_id (dialog->pulse_timer_id, "[GpkModalDialog] pulse");
 	}
 }
 
@@ -389,15 +388,15 @@ gpk_modal_dialog_set_percentage (GpkModalDialog *dialog, gint percentage)
 {
 	GtkProgressBar *progress_bar;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 	g_return_val_if_fail (percentage <= 100, FALSE);
 
 	g_debug ("setting percentage: %u", percentage);
 
-	progress_bar = GTK_PROGRESS_BAR (gtk_builder_get_object (dialog->priv->builder, "progressbar_percent"));
-	if (dialog->priv->pulse_timer_id != 0) {
-		g_source_remove (dialog->priv->pulse_timer_id);
-		dialog->priv->pulse_timer_id = 0;
+	progress_bar = GTK_PROGRESS_BAR (gtk_builder_get_object (dialog->builder, "progressbar_percent"));
+	if (dialog->pulse_timer_id != 0) {
+		g_source_remove (dialog->pulse_timer_id);
+		dialog->pulse_timer_id = 0;
 	}
 
 	/* either pulse or set percentage */
@@ -418,10 +417,10 @@ gpk_modal_dialog_set_remaining (GpkModalDialog *dialog, guint remaining)
 	gchar *timestring = NULL;
 	gchar *text = NULL;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	g_debug ("setting remaining: %u", remaining);
-	progress_bar = GTK_PROGRESS_BAR (gtk_builder_get_object (dialog->priv->builder, "progressbar_percent"));
+	progress_bar = GTK_PROGRESS_BAR (gtk_builder_get_object (dialog->builder, "progressbar_percent"));
 
 	/* unknown */
 	if (remaining == 0) {
@@ -445,15 +444,15 @@ out:
 gboolean
 gpk_modal_dialog_set_image (GpkModalDialog *dialog, const gchar *image)
 {
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 	g_return_val_if_fail (image != NULL, FALSE);
 
 	/* set state */
-	dialog->priv->set_image = TRUE;
+	dialog->set_image = TRUE;
 
 	g_debug ("setting image: %s", image);
-	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->priv->image_status), FALSE);
-	gtk_image_set_from_icon_name (GTK_IMAGE (dialog->priv->image_status), image, GTK_ICON_SIZE_DIALOG);
+	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->image_status), FALSE);
+	gtk_image_set_from_icon_name (GTK_IMAGE (dialog->image_status), image, GTK_ICON_SIZE_DIALOG);
 	return TRUE;
 }
 
@@ -463,11 +462,11 @@ gpk_modal_dialog_set_image (GpkModalDialog *dialog, const gchar *image)
 gboolean
 gpk_modal_dialog_set_image_status (GpkModalDialog *dialog, PkStatusEnum status)
 {
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	/* set state */
-	dialog->priv->set_image = TRUE;
-	gpk_set_animated_icon_from_status (GPK_ANIMATED_ICON (dialog->priv->image_status), status, GTK_ICON_SIZE_DIALOG);
+	dialog->set_image = TRUE;
+	gpk_set_animated_icon_from_status (GPK_ANIMATED_ICON (dialog->image_status), status, GTK_ICON_SIZE_DIALOG);
 	return TRUE;
 }
 
@@ -479,9 +478,9 @@ gpk_modal_dialog_get_window (GpkModalDialog *dialog)
 {
 	GtkWindow *window;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), NULL);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), NULL);
 
-	window = GTK_WINDOW (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	window = GTK_WINDOW (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	return window;
 }
 
@@ -493,9 +492,9 @@ gpk_modal_dialog_set_allow_cancel (GpkModalDialog *dialog, gboolean can_cancel)
 {
 	GtkWidget *widget;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "button_cancel"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "button_cancel"));
 	gtk_widget_set_sensitive (widget, can_cancel);
 
 	return TRUE;
@@ -507,16 +506,16 @@ gpk_modal_dialog_set_allow_cancel (GpkModalDialog *dialog, gboolean can_cancel)
 GtkResponseType
 gpk_modal_dialog_run (GpkModalDialog *dialog)
 {
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	/* already running */
-	if (g_main_loop_is_running (dialog->priv->loop))
-		g_main_loop_quit (dialog->priv->loop);
+	if (g_main_loop_is_running (dialog->loop))
+		g_main_loop_quit (dialog->loop);
 
-	dialog->priv->response = GTK_RESPONSE_NONE;
-	g_main_loop_run (dialog->priv->loop);
+	dialog->response = GTK_RESPONSE_NONE;
+	g_main_loop_run (dialog->loop);
 
-	return dialog->priv->response;
+	return dialog->response;
 }
 
 /**
@@ -527,17 +526,17 @@ gpk_modal_dialog_close (GpkModalDialog *dialog)
 {
 	GtkWidget *widget;
 
-	g_return_val_if_fail (GPK_IS_CLIENT_DIALOG (dialog), FALSE);
+	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	gtk_widget_hide (widget);
 
-	if (dialog->priv->pulse_timer_id != 0) {
-		g_source_remove (dialog->priv->pulse_timer_id);
-		dialog->priv->pulse_timer_id = 0;
+	if (dialog->pulse_timer_id != 0) {
+		g_source_remove (dialog->pulse_timer_id);
+		dialog->pulse_timer_id = 0;
 	}
 
-	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->priv->image_status), FALSE);
+	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->image_status), FALSE);
 	return TRUE;
 }
 
@@ -547,10 +546,10 @@ gpk_modal_dialog_close (GpkModalDialog *dialog)
 static gboolean
 gpk_modal_dialog_window_delete_cb (GtkWidget *widget, GdkEvent *event, GpkModalDialog *dialog)
 {
-	dialog->priv->response = GTK_RESPONSE_DELETE_EVENT;
+	dialog->response = GTK_RESPONSE_DELETE_EVENT;
 	gpk_modal_dialog_close (dialog);
-	if (g_main_loop_is_running (dialog->priv->loop))
-		g_main_loop_quit (dialog->priv->loop);
+	if (g_main_loop_is_running (dialog->loop))
+		g_main_loop_quit (dialog->loop);
 	/* do not destroy the window */
 	return TRUE;
 }
@@ -561,17 +560,17 @@ gpk_modal_dialog_window_delete_cb (GtkWidget *widget, GdkEvent *event, GpkModalD
 static void
 gpk_modal_dialog_button_close_cb (GtkWidget *widget_button, GpkModalDialog *dialog)
 {
-	dialog->priv->response = GTK_RESPONSE_CLOSE;
-	g_main_loop_quit (dialog->priv->loop);
+	dialog->response = GTK_RESPONSE_CLOSE;
+	g_main_loop_quit (dialog->loop);
 
-	if (dialog->priv->pulse_timer_id != 0) {
-		g_source_remove (dialog->priv->pulse_timer_id);
-		dialog->priv->pulse_timer_id = 0;
+	if (dialog->pulse_timer_id != 0) {
+		g_source_remove (dialog->pulse_timer_id);
+		dialog->pulse_timer_id = 0;
 	}
 
-	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->priv->image_status), FALSE);
-	if (g_main_loop_is_running (dialog->priv->loop))
-		g_main_loop_quit (dialog->priv->loop);
+	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->image_status), FALSE);
+	if (g_main_loop_is_running (dialog->loop))
+		g_main_loop_quit (dialog->loop);
 	else
 		g_signal_emit (dialog, signals [GPK_MODAL_DIALOG_CLOSE], 0);
 }
@@ -582,10 +581,10 @@ gpk_modal_dialog_button_close_cb (GtkWidget *widget_button, GpkModalDialog *dial
 static void
 gpk_modal_dialog_button_action_cb (GtkWidget *widget_button, GpkModalDialog *dialog)
 {
-	dialog->priv->response = GTK_RESPONSE_OK;
-	g_main_loop_quit (dialog->priv->loop);
-	if (g_main_loop_is_running (dialog->priv->loop))
-		g_main_loop_quit (dialog->priv->loop);
+	dialog->response = GTK_RESPONSE_OK;
+	g_main_loop_quit (dialog->loop);
+	if (g_main_loop_is_running (dialog->loop))
+		g_main_loop_quit (dialog->loop);
 	else
 		g_signal_emit (dialog, signals [GPK_MODAL_DIALOG_ACTION], 0);
 }
@@ -596,9 +595,9 @@ gpk_modal_dialog_button_action_cb (GtkWidget *widget_button, GpkModalDialog *dia
 static void
 gpk_modal_dialog_button_cancel_cb (GtkWidget *widget_button, GpkModalDialog *dialog)
 {
-	dialog->priv->response = GTK_RESPONSE_CANCEL;
-	if (g_main_loop_is_running (dialog->priv->loop))
-		g_main_loop_quit (dialog->priv->loop);
+	dialog->response = GTK_RESPONSE_CANCEL;
+	if (g_main_loop_is_running (dialog->loop))
+		g_main_loop_quit (dialog->loop);
 	else
 		g_signal_emit (dialog, signals [GPK_MODAL_DIALOG_CANCEL], 0);
 }
@@ -620,9 +619,9 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 	gchar *package_id = NULL;
 	gchar *summary = NULL;
 
-	gtk_list_store_clear (dialog->priv->store);
+	gtk_list_store_clear (dialog->store);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "scrolledwindow_packages"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "scrolledwindow_packages"));
 	if (list->len > 5)
 		gtk_widget_set_size_request (widget, -1, 300);
 	else if (list->len > 1)
@@ -651,8 +650,8 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 		/* get the icon */
 		split = pk_package_id_split (package_id);
 		icon = gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLED);
-		gtk_list_store_append (dialog->priv->store, &iter);
-		gtk_list_store_set (dialog->priv->store, &iter,
+		gtk_list_store_append (dialog->store, &iter);
+		gtk_list_store_set (dialog->store, &iter,
 				    GPK_MODAL_DIALOG_STORE_IMAGE, icon,
 				    GPK_MODAL_DIALOG_STORE_ID, package_id,
 				    GPK_MODAL_DIALOG_STORE_TEXT, text,
@@ -677,7 +676,7 @@ gpk_dialog_treeview_for_package_list (GpkModalDialog *dialog)
 	GtkTreeViewColumn *column;
 	GtkTreeSelection *selection;
 
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (dialog->priv->builder, "treeview_packages"));
+	treeview = GTK_TREE_VIEW (gtk_builder_get_object (dialog->builder, "treeview_packages"));
 
 	/* column for images */
 	column = gtk_tree_view_column_new ();
@@ -713,7 +712,6 @@ gpk_modal_dialog_class_init (GpkModalDialogClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_modal_dialog_finalize;
-	g_type_class_add_private (klass, sizeof (GpkModalDialogPrivate));
 	signals [GPK_MODAL_DIALOG_QUIT] =
 		g_signal_new ("quit",
 			      G_TYPE_FROM_CLASS (object_class),
@@ -757,24 +755,22 @@ gpk_modal_dialog_init (GpkModalDialog *dialog)
 	GError *error = NULL;
 	GtkBox *box;
 
-	dialog->priv = GPK_MODAL_DIALOG_GET_PRIVATE (dialog);
+	dialog->loop = g_main_loop_new (NULL, FALSE);
+	dialog->response = GTK_RESPONSE_NONE;
+	dialog->pulse_timer_id = 0;
+	dialog->show_progress_files = TRUE;
+	dialog->has_parent = FALSE;
+	dialog->set_image = FALSE;
+	dialog->page = GPK_MODAL_DIALOG_PAGE_UNKNOWN;
+	dialog->options = 0;
+	dialog->title = NULL;
 
-	dialog->priv->loop = g_main_loop_new (NULL, FALSE);
-	dialog->priv->response = GTK_RESPONSE_NONE;
-	dialog->priv->pulse_timer_id = 0;
-	dialog->priv->show_progress_files = TRUE;
-	dialog->priv->has_parent = FALSE;
-	dialog->priv->set_image = FALSE;
-	dialog->priv->page = GPK_MODAL_DIALOG_PAGE_UNKNOWN;
-	dialog->priv->options = 0;
-	dialog->priv->title = NULL;
-
-	dialog->priv->store = gtk_list_store_new (GPK_MODAL_DIALOG_STORE_LAST,
+	dialog->store = gtk_list_store_new (GPK_MODAL_DIALOG_STORE_LAST,
 						  G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	/* get UI */
-	dialog->priv->builder = gtk_builder_new ();
-	retval = gtk_builder_add_from_file (dialog->priv->builder, PKGDATADIR "/gpk-client.ui", &error);
+	dialog->builder = gtk_builder_new ();
+	retval = gtk_builder_add_from_file (dialog->builder, PKGDATADIR "/gpk-client.ui", &error);
 	if (retval == 0) {
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);
@@ -782,28 +778,28 @@ gpk_modal_dialog_init (GpkModalDialog *dialog)
 	}
 
 	/* add animated widget */
-	dialog->priv->image_status = gpk_animated_icon_new ();
-	box = GTK_BOX (gtk_builder_get_object (dialog->priv->builder, "hbox_status"));
-	gtk_box_pack_start (box, dialog->priv->image_status, FALSE, FALSE, 0);
-	gtk_widget_show (dialog->priv->image_status);
+	dialog->image_status = gpk_animated_icon_new ();
+	box = GTK_BOX (gtk_builder_get_object (dialog->builder, "hbox_status"));
+	gtk_box_pack_start (box, dialog->image_status, FALSE, FALSE, 0);
+	gtk_widget_show (dialog->image_status);
 
 	gpk_dialog_treeview_for_package_list (dialog);
 
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (dialog->priv->builder, "treeview_packages"));
-	gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (dialog->priv->store));
+	treeview = GTK_TREE_VIEW (gtk_builder_get_object (dialog->builder, "treeview_packages"));
+	gtk_tree_view_set_model (treeview, GTK_TREE_MODEL (dialog->store));
 
 	/* common stuff */
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "dialog_client"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "dialog_client"));
 	g_signal_connect (widget, "delete_event", G_CALLBACK (gpk_modal_dialog_window_delete_cb), dialog);
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "button_close"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "button_close"));
 	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_modal_dialog_button_close_cb), dialog);
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "button_action"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "button_action"));
 	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_modal_dialog_button_action_cb), dialog);
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "button_cancel"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "button_cancel"));
 	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_modal_dialog_button_cancel_cb), dialog);
 
 	/* set the message text an absolute width so it's forced to wrap */
-	widget = GTK_WIDGET (gtk_builder_get_object (dialog->priv->builder, "label_message"));
+	widget = GTK_WIDGET (gtk_builder_get_object (dialog->builder, "label_message"));
 	gtk_label_set_max_width_chars (GTK_LABEL (widget), 80);
 
 out_build:
@@ -821,28 +817,27 @@ static void
 gpk_modal_dialog_finalize (GObject *object)
 {
 	GpkModalDialog *dialog;
-	g_return_if_fail (GPK_IS_CLIENT_DIALOG (object));
+	g_return_if_fail (GPK_IS_MODAL_DIALOG (object));
 
 	dialog = GPK_MODAL_DIALOG (object);
-	g_return_if_fail (dialog->priv != NULL);
 
 	/* no updates, we're about to rip the builder up  */
-	if (dialog->priv->pulse_timer_id != 0)
-		g_source_remove (dialog->priv->pulse_timer_id);
+	if (dialog->pulse_timer_id != 0)
+		g_source_remove (dialog->pulse_timer_id);
 
 	/* if it's closed, then hide */
 	gpk_modal_dialog_close (dialog);
 
 	/* shouldn't be, but just in case */
-	if (g_main_loop_is_running (dialog->priv->loop)) {
+	if (g_main_loop_is_running (dialog->loop)) {
 		g_warning ("mainloop running on exit");
-		g_main_loop_quit (dialog->priv->loop);
+		g_main_loop_quit (dialog->loop);
 	}
 
-	g_object_unref (dialog->priv->store);
-	g_object_unref (dialog->priv->builder);
-	g_main_loop_unref (dialog->priv->loop);
-	g_free (dialog->priv->title);
+	g_object_unref (dialog->store);
+	g_object_unref (dialog->builder);
+	g_main_loop_unref (dialog->loop);
+	g_free (dialog->title);
 
 	G_OBJECT_CLASS (gpk_modal_dialog_parent_class)->finalize (object);
 }
@@ -856,6 +851,6 @@ GpkModalDialog *
 gpk_modal_dialog_new (void)
 {
 	GpkModalDialog *dialog;
-	dialog = g_object_new (GPK_TYPE_CLIENT_DIALOG, NULL);
+	dialog = g_object_new (GPK_TYPE_MODAL_DIALOG, NULL);
 	return GPK_MODAL_DIALOG (dialog);
 }
