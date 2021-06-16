@@ -27,27 +27,8 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_X11		(gpk_x11_get_type ())
-#define GPK_X11(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_X11, GpkX11))
-#define GPK_X11_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_X11, GpkX11Class))
-#define GPK_IS_X11(o)	 	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_X11))
-#define GPK_IS_X11_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_X11))
-#define GPK_X11_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_X11, GpkX11Class))
-#define GPK_X11_ERROR		(gpk_x11_error_quark ())
-#define GPK_X11_TYPE_ERROR	(gpk_x11_error_get_type ())
-
-typedef struct GpkX11Private GpkX11Private;
-
-typedef struct
-{
-	 GObject		 parent;
-	 GpkX11Private		*priv;
-} GpkX11;
-
-typedef struct
-{
-	GObjectClass		parent_class;
-} GpkX11Class;
+#define GPK_TYPE_X11 (gpk_x11_get_type())
+G_DECLARE_FINAL_TYPE (GpkX11, gpk_x11, GPK, X11, GObject)
 
 GType		 gpk_x11_get_type		  	(void);
 GpkX11		*gpk_x11_new				(void);
