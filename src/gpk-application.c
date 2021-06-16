@@ -2487,8 +2487,9 @@ gpk_application_entry_text_icon_press_cb (GtkEntry *entry, GtkEntryIconPosition 
 	}
 
 	gtk_widget_show_all (GTK_WIDGET (menu));
-	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL,
-			event->button, event->time);
+	gtk_menu_popup_at_widget(GTK_MENU (menu), GTK_WIDGET (entry),
+				GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST,
+				(GdkEvent *)event);
 }
 
 /**
