@@ -28,10 +28,9 @@
 
 static void     gpk_vendor_finalize	(GObject          *object);
 
-#define GPK_VENDOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GPK_TYPE_VENDOR, GpkVendorPrivate))
-
-struct GpkVendorPrivate
+struct _GpkVendor
 {
+	GObject				 parent;
 	GKeyFile			 *file;
 };
 
@@ -46,7 +45,6 @@ gpk_vendor_class_init (GpkVendorClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_vendor_finalize;
-	g_type_class_add_private (klass, sizeof (GpkVendorPrivate));
 }
 
 /**
@@ -77,7 +75,7 @@ gpk_vendor_get_not_found_url (GpkVendor *vendor, GpkVendorUrlType type)
 
 	/* get data */
 	key = gpk_vendor_type_to_string (type);
-	url = g_key_file_get_string (vendor->priv->file, "PackagesNotFound", key, NULL);
+	url = g_key_file_get_string (vendor->file, "PackagesNotFound", key, NULL);
 
 	/* none is a special value */
 	if (g_strcmp0 (url, "none") == 0) {
@@ -96,7 +94,7 @@ gpk_vendor_get_not_found_url (GpkVendor *vendor, GpkVendorUrlType type)
 	/* get fallback data */
 	g_debug ("using fallback");
 	key = gpk_vendor_type_to_string (GPK_VENDOR_URL_TYPE_DEFAULT);
-	url = g_key_file_get_string (vendor->priv->file, "PackagesNotFound", key, NULL);
+	url = g_key_file_get_string (vendor->file, "PackagesNotFound", key, NULL);
 
 	/* none is a special value */
 	if (g_strcmp0 (url, "none") == 0) {
@@ -117,10 +115,8 @@ gpk_vendor_init (GpkVendor *vendor)
 {
 	gboolean ret;
 
-	vendor->priv = GPK_VENDOR_GET_PRIVATE (vendor);
-
-	vendor->priv->file = g_key_file_new ();
-	ret = g_key_file_load_from_file (vendor->priv->file, "/etc/PackageKit/Vendor.conf", G_KEY_FILE_NONE, NULL);
+	vendor->file = g_key_file_new ();
+	ret = g_key_file_load_from_file (vendor->file, "/etc/PackageKit/Vendor.conf", G_KEY_FILE_NONE, NULL);
 	if (!ret)
 		g_warning ("file not found");
 }
@@ -134,12 +130,11 @@ gpk_vendor_finalize (GObject *object)
 {
 	GpkVendor *vendor;
 
-	g_return_if_fail (PK_IS_VENDOR (object));
+	g_return_if_fail (GPK_IS_VENDOR (object));
 
 	vendor = GPK_VENDOR (object);
-	g_return_if_fail (vendor->priv != NULL);
 
-	g_key_file_free (vendor->priv->file);
+	g_key_file_free (vendor->file);
 
 	G_OBJECT_CLASS (gpk_vendor_parent_class)->finalize (object);
 }
@@ -156,4 +151,3 @@ gpk_vendor_new (void)
 	vendor = g_object_new (GPK_TYPE_VENDOR, NULL);
 	return GPK_VENDOR (vendor);
 }
-

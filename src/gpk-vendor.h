@@ -26,27 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_VENDOR			(gpk_vendor_get_type ())
-#define GPK_VENDOR(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_VENDOR, GpkVendor))
-#define GPK_VENDOR_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_VENDOR, GpkVendorClass))
-#define PK_IS_VENDOR(o)	 		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_VENDOR))
-#define PK_IS_VENDOR_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_VENDOR))
-#define GPK_VENDOR_GET_CLASS(o)		(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_VENDOR, GpkVendorClass))
-#define GPK_VENDOR_ERROR		(gpk_vendor_error_quark ())
-#define GPK_VENDOR_TYPE_ERROR		(gpk_vendor_error_get_type ())
-
-typedef struct GpkVendorPrivate GpkVendorPrivate;
-
-typedef struct
-{
-	 GObject		 parent;
-	 GpkVendorPrivate	*priv;
-} GpkVendor;
-
-typedef struct
-{
-	GObjectClass	parent_class;
-} GpkVendorClass;
+#define GPK_TYPE_VENDOR (gpk_vendor_get_type())
+G_DECLARE_FINAL_TYPE (GpkVendor, gpk_vendor, GPK, VENDOR, GObject)
 
 /**
  * GpkModalDialogWidgets:
