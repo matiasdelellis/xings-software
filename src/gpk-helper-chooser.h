@@ -28,30 +28,18 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_HELPER_CHOOSER		(gpk_helper_chooser_get_type ())
-#define GPK_HELPER_CHOOSER(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_HELPER_CHOOSER, GpkHelperChooser))
-#define GPK_HELPER_CHOOSER_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_HELPER_CHOOSER, GpkHelperChooserClass))
-#define GPK_IS_HELPER_CHOOSER(o)	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_HELPER_CHOOSER))
-#define GPK_IS_HELPER_CHOOSER_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_HELPER_CHOOSER))
-#define GPK_HELPER_CHOOSER_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_HELPER_CHOOSER, GpkHelperChooserClass))
-#define GPK_HELPER_CHOOSER_ERROR	(gpk_helper_chooser_error_quark ())
-#define GPK_HELPER_CHOOSER_TYPE_ERROR	(gpk_helper_chooser_error_get_type ())
+#define GPK_TYPE_HELPER_CHOOSER (gpk_helper_chooser_get_type())
 
-typedef struct GpkHelperChooserPrivate GpkHelperChooserPrivate;
+G_DECLARE_DERIVABLE_TYPE (GpkHelperChooser, gpk_helper_chooser, GPK, HELPER_CHOOSER, GObject)
 
-typedef struct
+struct _GpkHelperChooserClass
 {
-	 GObject			 parent;
-	 GpkHelperChooserPrivate	*priv;
-} GpkHelperChooser;
+	GObjectClass	parent_class;
 
-typedef struct
-{
 	void		(* event)			(GpkHelperChooser	*helper,
 							 GtkResponseType	 type,
 							 const gchar		*package_id);
-	GObjectClass	parent_class;
-} GpkHelperChooserClass;
+};
 
 GType		 gpk_helper_chooser_get_type	  	(void);
 GpkHelperChooser	*gpk_helper_chooser_new		(void);
