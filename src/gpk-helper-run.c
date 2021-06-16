@@ -34,10 +34,9 @@
 
 static void     gpk_helper_run_finalize	(GObject	  *object);
 
-#define GPK_HELPER_RUN_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GPK_TYPE_HELPER_RUN, GpkHelperRunPrivate))
-
-struct GpkHelperRunPrivate
+struct _GpkHelperRun
 {
+	GObject			 parent;
 	GtkBuilder		*builder;
 	GtkListStore		*list_store;
 };
@@ -94,7 +93,7 @@ gpk_helper_run_button_run_cb (GtkWidget *widget, GpkHelperRun *helper)
 	gchar *filename;
 
 	/* get selection */
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (helper->priv->builder, "treeview_simple"));
+	treeview = GTK_TREE_VIEW (gtk_builder_get_object (helper->builder, "treeview_simple"));
 	selection = gtk_tree_view_get_selection (treeview);
 	ret = gtk_tree_selection_get_selected (selection, &model, &iter);
 	if (!ret) {
@@ -113,7 +112,7 @@ gpk_helper_run_button_run_cb (GtkWidget *widget, GpkHelperRun *helper)
 static void
 gpk_helper_run_button_close_cb (GtkWidget *widget, GpkHelperRun *helper)
 {
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	gtk_widget_hide (widget);
 }
 
@@ -123,7 +122,7 @@ gpk_helper_run_button_close_cb (GtkWidget *widget, GpkHelperRun *helper)
 static gboolean
 gpk_helper_run_delete_event_cb (GtkWidget *widget, GdkEvent *event, GpkHelperRun *helper)
 {
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	gtk_widget_hide (widget);
 	return FALSE;
 }
@@ -227,7 +226,7 @@ gpk_helper_run_show (GpkHelperRun *helper, gchar **package_ids)
 	g_return_val_if_fail (package_ids != NULL, FALSE);
 
 	/* clear old list */
-	gtk_list_store_clear (helper->priv->list_store);
+	gtk_list_store_clear (helper->list_store);
 
 	/* add all the apps */
 	len = gpk_helper_run_add_package_ids (helper, package_ids);
@@ -237,7 +236,7 @@ gpk_helper_run_show (GpkHelperRun *helper, gchar **package_ids)
 	}
 
 	/* show window */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	gtk_widget_show (widget);
 out:
 	return TRUE;
@@ -255,7 +254,7 @@ gpk_helper_run_set_parent (GpkHelperRun *helper, GtkWindow *window)
 	g_return_val_if_fail (window != NULL, FALSE);
 
 	/* make modal if window set */
-	widget = GTK_WINDOW (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WINDOW (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	gtk_window_set_transient_for (widget, window);
 	gtk_window_set_modal (widget, TRUE);
 
@@ -274,7 +273,6 @@ gpk_helper_run_class_init (GpkHelperRunClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_helper_run_finalize;
-	g_type_class_add_private (klass, sizeof (GpkHelperRunPrivate));
 }
 
 /**
@@ -290,18 +288,16 @@ gpk_helper_run_init (GpkHelperRun *helper)
 	GtkTreeSelection *selection;
 	GtkBox *box;
 
-	helper->priv = GPK_HELPER_RUN_GET_PRIVATE (helper);
-
 	/* get UI */
-	helper->priv->builder = gtk_builder_new ();
-	retval = gtk_builder_add_from_file (helper->priv->builder, PKGDATADIR "/gpk-log.ui", &error);
+	helper->builder = gtk_builder_new ();
+	retval = gtk_builder_add_from_file (helper->builder, PKGDATADIR "/gpk-log.ui", &error);
 	if (retval == 0) {
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);
 	}
 
 	/* connect up default actions */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	g_signal_connect (widget, "delete_event", G_CALLBACK (gpk_helper_run_delete_event_cb), helper);
 
 	/* set icon name */
@@ -311,19 +307,19 @@ gpk_helper_run_init (GpkHelperRun *helper)
 	gpk_window_set_size_request (GTK_WINDOW (widget), 600, 300);
 
 	/* connect up buttons */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "button_close"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "button_close"));
 	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_helper_run_button_close_cb), helper);
 
 	/* hide the filter box */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "hbox_filter"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "hbox_filter"));
 	gtk_widget_hide (widget);
 
 	/* hide the refresh button */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "button_refresh"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "button_refresh"));
 	gtk_widget_hide (widget);
 
 	/* set icon name */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	gtk_window_set_icon_name (GTK_WINDOW (widget), GPK_ICON_SOFTWARE_INSTALLER);
 	/* TRANSLATORS: window title: do we want to execute a program we just installed? */
 	gtk_window_set_title (GTK_WINDOW (widget), _("Run new application?"));
@@ -336,13 +332,13 @@ gpk_helper_run_init (GpkHelperRun *helper)
 	g_signal_connect (button, "clicked", G_CALLBACK (gpk_helper_run_button_run_cb), helper);
 
 	/* create list stores */
-	helper->priv->list_store = gtk_list_store_new (GPK_CHOOSER_COLUMN_LAST, G_TYPE_STRING,
+	helper->list_store = gtk_list_store_new (GPK_CHOOSER_COLUMN_LAST, G_TYPE_STRING,
 						       G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	/* create package_id tree view */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "treeview_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "treeview_simple"));
 	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
-				 GTK_TREE_MODEL (helper->priv->list_store));
+				 GTK_TREE_MODEL (helper->list_store));
 	g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
 			  G_CALLBACK (gpk_helper_run_row_activated_cb), helper);
 
@@ -370,11 +366,11 @@ gpk_helper_run_finalize (GObject *object)
 	helper = GPK_HELPER_RUN (object);
 
 	/* hide window */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->priv->builder, "dialog_simple"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	if (GTK_IS_WIDGET (widget))
 		gtk_widget_hide (widget);
-	g_object_unref (helper->priv->builder);
-	g_object_unref (helper->priv->list_store);
+	g_object_unref (helper->builder);
+	g_object_unref (helper->list_store);
 
 	G_OBJECT_CLASS (gpk_helper_run_parent_class)->finalize (object);
 }
@@ -389,4 +385,3 @@ gpk_helper_run_new (void)
 	helper = g_object_new (GPK_TYPE_HELPER_RUN, NULL);
 	return GPK_HELPER_RUN (helper);
 }
-

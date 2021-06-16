@@ -27,29 +27,10 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_HELPER_RUN		(gpk_helper_run_get_type ())
-#define GPK_HELPER_RUN(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_HELPER_RUN, GpkHelperRun))
-#define GPK_HELPER_RUN_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_HELPER_RUN, GpkHelperRunClass))
-#define GPK_IS_HELPER_RUN(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_HELPER_RUN))
-#define GPK_IS_HELPER_RUN_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_HELPER_RUN))
-#define GPK_HELPER_RUN_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_HELPER_RUN, GpkHelperRunClass))
-#define GPK_HELPER_RUN_ERROR		(gpk_helper_run_error_quark ())
-#define GPK_HELPER_RUN_TYPE_ERROR	(gpk_helper_run_error_get_type ())
+#define GPK_TYPE_HELPER_RUN (gpk_helper_run_get_type())
+G_DECLARE_FINAL_TYPE (GpkHelperRun, gpk_helper_run, GPK, HELPER_RUN, GObject)
 
-typedef struct GpkHelperRunPrivate GpkHelperRunPrivate;
-
-typedef struct
-{
-	 GObject			 parent;
-	 GpkHelperRunPrivate		*priv;
-} GpkHelperRun;
-
-typedef struct
-{
-	GObjectClass	parent_class;
-} GpkHelperRunClass;
-
-GType		 gpk_helper_run_get_type	  	(void);
+//GType		 gpk_helper_run_get_type	  	(void);
 GpkHelperRun	*gpk_helper_run_new			(void);
 gboolean	 gpk_helper_run_set_parent		(GpkHelperRun		*helper,
 							 GtkWindow		*window);
