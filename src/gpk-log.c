@@ -147,22 +147,18 @@ gpk_log_model_get_iter (GtkTreeModel *model, GtkTreeIter *iter, const gchar *id)
 static gchar *
 gpk_log_get_localised_date (const gchar *timespec)
 {
-	GDate *date;
-	GTimeVal timeval;
-	gchar buffer[100];
+	GDateTime *datetime;
+	gchar *date_str;
 
 	/* the old date */
-	g_time_val_from_iso8601 (timespec, &timeval);
-
-	/* get printed string */
-	date = g_date_new ();
-	g_date_set_time_val (date, &timeval);
+	datetime = g_date_time_new_from_iso8601(timespec, NULL);
 
 	/* TRANSLATORS: strftime formatted please */
-	g_date_strftime (buffer, 100, _("%d %B %Y"), date);
+	date_str = g_date_time_format (datetime, _("%d %B %Y"));
 
-	g_date_free (date);
-	return g_strdup (buffer);
+	g_date_time_unref(datetime);
+
+	return date_str;
 }
 
 /**
