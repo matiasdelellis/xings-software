@@ -1810,9 +1810,7 @@ gpk_update_viewer_add_description_link_item (GtkTextBuffer *buffer,
 static gchar *
 gpk_update_viewer_iso8601_format_locale_date (const gchar *iso_date)
 {
-	GDate *date = NULL;
-	GTimeVal timeval;
-	gboolean ret;
+	GDateTime *datetime;
 	gchar *text = NULL;
 
 	/* not valid */
@@ -1820,23 +1818,18 @@ gpk_update_viewer_iso8601_format_locale_date (const gchar *iso_date)
 		goto out;
 
 	/* parse ISO8601 date */
-	ret = g_time_val_from_iso8601 (iso_date, &timeval);
-	if (!ret) {
+	datetime = g_date_time_new_from_iso8601(iso_date, NULL);
+	if (!datetime) {
 		g_warning ("failed to parse %s, falling back to ISO8601", iso_date);
 		text = g_strdup (iso_date);
 		goto out;
 	}
 
-	/* convert to a date object */
-	date = g_date_new ();
-	g_date_set_time_val (date, &timeval);
-
 	/* pretty print it */
-	text = g_new0 (gchar, 100);
-	g_date_strftime (text, 100, "%x", date);
+	text = g_date_time_format (datetime, "%x");
 out:
-	if (date != NULL)
-		g_date_free (date);
+	if (datetime != NULL)
+		 g_date_time_unref(datetime);
 	return text;
 }
 
