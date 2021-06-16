@@ -3,17 +3,17 @@ NULL =
 SUBDIRS = appdata icons
 
 migrationdir = $(datadir)/GConf/gsettings
-dist_migration_DATA = org.gnome.packagekit.gschema.migrate
+dist_migration_DATA = org.xings.packagekit.gschema.migrate
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
 desktop_in_files =					\
-	gpk-install-local-file.desktop.in		\
-	gpk-dbus-service.desktop.in			\
-	gpk-prefs.desktop.in				\
-	gpk-application.desktop.in			\
-	gpk-update-viewer.desktop.in			\
-	gpk-log.desktop.in				\
+	xings-install-local-package.desktop.in		\
+	xings-packagekit-service.desktop.in		\
+	xings-preferences.desktop.in			\
+	xings-packages.desktop.in			\
+	xings-package-updates.desktop.in		\
+	xings-package-history.desktop.in		\
 	$(NULL)
 
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
@@ -39,7 +39,7 @@ $(service_DATA): $(service_in_files) Makefile
 	@sed -e "s|\@servicedir\@|$(bindir)|" $< > $@
 
 @GSETTINGS_RULES@
-gsettings_SCHEMAS = org.gnome.packagekit.gschema.xml
+gsettings_SCHEMAS = org.xings.packagekit.gschema.xml
 
 EXTRA_DIST =						\
 	$(gsettings_SCHEMAS)				\
@@ -53,12 +53,11 @@ clean-local :
 	rm -f *~
 
 DISTCLEANFILES =					\
-	gpk-prefs.desktop				\
-	gpk-update-viewer.desktop			\
-	gpk-install-local-file.desktop			\
-	gpk-dbus-service.desktop			\
-	gpk-log.desktop					\
-	gpk-application.desktop				\
+	xings-preferences.desktop			\
+	xings-package-updates.desktop			\
+	xings-install-local-package.desktop		\
+	xings-packagekit-service.desktop		\
+	xings-package-history.desktop			\
+	xings-packages.desktop				\
 	org.freedesktop.PackageKit.service		\
 	$(NULL)
-

@@ -1,33 +1,33 @@
 EXTRA_DIST =						\
-	gpk-application.sgml				\
-	gpk-dbus-service.sgml				\
-	gpk-install-local-file.sgml			\
-	gpk-log.sgml					\
-	gpk-prefs.sgml					\
-	gpk-update-viewer.sgml
+	xings-packages.sgml				\
+	xings-packagekit-service.sgml			\
+	xings-install-local-package.sgml		\
+	xings-package-history.sgml			\
+	xings-preferences.sgml				\
+	xings-package-updates.sgml
 
 if HAVE_DOCBOOK2MAN
 man_MANS =						\
-	gpk-application.1				\
-	gpk-dbus-service.1				\
-	gpk-install-local-file.1			\
-	gpk-log.1					\
-	gpk-prefs.1					\
-	gpk-update-viewer.1
+	xings-packages.1				\
+	xings-packagekit-service.1			\
+	xings-install-local-package.1			\
+	xings-package-history.1				\
+	xings-preferences.1					\
+	xings-package-updates.1
 endif
 
 if HAVE_DOCBOOK2MAN
-gpk-application.1: gpk-application.sgml
+xings-packages.1: xings-packages.sgml
 	docbook2man $? > /dev/null
-gpk-install-local-file.1: gpk-install-local-file.sgml
+xings-install-local-package.1: xings-install-local-package.sgml
 	docbook2man $? > /dev/null
-gpk-prefs.1: gpk-prefs.sgml
+xings-preferences.1: xings-preferences.sgml
 	docbook2man $? > /dev/null
-gpk-dbus-service.1: gpk-dbus-service.sgml
+xings-packagekit-service.1: xings-packagekit-service.sgml
 	docbook2man $? > /dev/null
-gpk-update-viewer.1: gpk-update-viewer.sgml
+xings-package-updates.1: xings-package-updates.sgml
 	docbook2man $? > /dev/null
-gpk-log.1: gpk-log.sgml
+xings-package-history.1: xings-package-history.sgml
 	docbook2man $? > /dev/null
 endif
 

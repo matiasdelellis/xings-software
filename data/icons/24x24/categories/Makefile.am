@@ -4,13 +4,13 @@ context = actions
 
 iconsdir = $(themedir)/$(size)/$(context)
 
-icons_DATA = 			  \
-	pk-desktop-gnome.png	  \
-	pk-desktop-kde.png	  \
-	pk-desktop-xfce.png
+icons_DATA =				\
+	xings-desktop-gnome.png		\
+	xings-desktop-kde.png		\
+	xings-desktop-xfce.png
 
-noinst_DATA = 
+noinst_DATA =
 
-EXTRA_DIST =		\
-	$(icons_DATA)	\
+EXTRA_DIST =				\
+	$(icons_DATA)			\
 	$(noinst_DATA)

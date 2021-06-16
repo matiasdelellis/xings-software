@@ -11,8 +11,7 @@ EXTRA_DIST =						\
 	MAINTAINERS					\
 	intltool-extract.in				\
 	intltool-merge.in				\
-	intltool-update.in				\
-	omf.make
+	intltool-update.in
 
 clean-local :
 	rm -f *~
@@ -24,7 +23,7 @@ DISTCLEANFILES =					\
 	intltool-extract				\
 	intltool-merge					\
 	intltool-update					\
-	gnome-packagekit-*.tar.gz
+	xings-packagekit-*.tar.gz
 
 DISTCHECK_CONFIGURE_FLAGS = --disable-scrollkeeper
 

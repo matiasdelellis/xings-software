@@ -5,14 +5,14 @@ context = animations
 iconsdir = $(themedir)/$(size)/$(context)
 
 icons_DATA = 				\
-	pk-action-cleanup.png		\
-	pk-action-removing.png		\
-	pk-action-testing.png		\
-	pk-action-download.png		\
-	pk-action-refresh-cache.png	\
-	pk-action-searching.png		\
-	pk-action-installing.png	\
-	pk-action-waiting.png
+	xings-action-cleanup.png	\
+	xings-action-removing.png	\
+	xings-action-testing.png	\
+	xings-action-download.png	\
+	xings-action-refresh-cache.png	\
+	xings-action-searching.png	\
+	xings-action-installing.png	\
+	xings-action-waiting.png
 
 noinst_DATA =
 

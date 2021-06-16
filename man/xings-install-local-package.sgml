@@ -1,7 +1,7 @@
 <!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
   <!-- Please adjust the date whenever revising the manpage. -->
   <!ENTITY date        "<date>11 April,2008</date>">
-  <!ENTITY package     "gpk-install-local-file">
+  <!ENTITY package     "xings-install-local-package">
   <!ENTITY gnu         "<acronym>GNU</acronym>">
   <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
 ]>
@@ -9,25 +9,27 @@
 <refentry>
   <refentryinfo>
     <address>
-      <email>richard@hughsie.com</email>;
+      <email>mati86dl@gmail.com</email>;
     </address>
     <author>
-      <firstname>Richard</firstname>
-      <surname>Hughes</surname>
+      <firstname>Matias</firstname>
+      <surname>De lellis</surname>
     </author>
     <copyright>
+      <year>2021</year>
+      <holder>Matias De lellis</holder>
       <year>2008-2013</year>
       <holder>Richard Hughes</holder>
     </copyright>
     &date;
   </refentryinfo>
   <refmeta>
-    <refentrytitle>gpk-install-local-file</refentrytitle>
+    <refentrytitle>xings-install-local-package</refentrytitle>
     <manvolnum>1</manvolnum>
   </refmeta>
   <refnamediv>
     <refname>&package;</refname>
-    <refpurpose>GNOME PackageKit Local File Helper</refpurpose>
+    <refpurpose>Xings PackageKit Local File Helper</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
@@ -48,12 +50,14 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
-    <para>gpk-install-package-name (1).</para>
-    <para>gpk-install-provide-file (2).</para>
+    <para>xings-install-package-name (1).</para>
+    <para>xings-install-provide-file (2).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>
-    <para>This manual page was written by Richard Hughes <email>richard@hughsie.com</email>.
+    <para>
+      This manual page was written by Richard Hughes <email>richard@hughsie.com</email>
+      as part of GNOME PackageKit.
     </para>
   </refsect1>
 </refentry>
@@ -74,4 +78,3 @@ sgml-local-catalogs:nil
 sgml-local-ecat-files:nil
 End:
 -->
-

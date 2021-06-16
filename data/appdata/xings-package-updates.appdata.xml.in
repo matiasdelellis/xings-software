@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2013 Richard Hughes <richard@hughsie.com> -->
+<!-- Copyright 2021 Matias De lellis <mati86dl@gmail.com> -->
 <application>
-  <id type="desktop">gpk-update-viewer.desktop</id>
+  <id type="desktop">xings-package-updates.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
-  <_name>GNOME Package Updater</_name>
+  <_name>Package Updater</_name>
   <description>
     <_p>
       Package Updater allows you to update packages on your system without
@@ -17,8 +17,8 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot type="default">https://git.gnome.org/browse/gnome-packagekit/plain/data/appdata/ss-updater.png</screenshot>
+    <screenshot type="default">https://github.com/matiasdelellis/xings-packagekit/raw/xings/data/appdata/ss-updater.png</screenshot>
   </screenshots>
-  <url type="homepage">http://www.packagekit.org/</url>
-  <updatecontact>richard_at_hughsie.com</updatecontact>
+  <url type="homepage">https://github.com/matiasdelellis/xings-packagekit/</url>
+  <updatecontact>mati86dl@gmail.com</updatecontact>
 </application>

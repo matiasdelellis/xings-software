@@ -25,7 +25,7 @@ ltmain.sh
 missing
 mkinstalldirs
 omf.make
-*.tar.gz
+*.tar.xz
 stamp-h1
 xmldocs.make
 .svn

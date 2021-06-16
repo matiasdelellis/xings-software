@@ -2572,7 +2572,7 @@ gpk_application_activate_about_cb (GSimpleAction *action,
 			       "website-label", _("PackageKit Website"),
 			       "website", "http://www.packagekit.org",
 				/* TRANSLATORS: description of NULL, gpk-application that is */
-			       "comments", _("Package Manager for GNOME"),
+			       "comments", _("Package Manager"),
 			       "authors", authors,
 			       "artists", artists,
 			       "translator-credits", translators,
@@ -2599,7 +2599,7 @@ gpk_application_activate_sources_cb (GSimpleAction *action,
 	window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
 	xid = gdk_x11_window_get_xid (gtk_widget_get_window (window));
 
-	command = g_strdup_printf ("%s/gpk-prefs --parent-window %u", BINDIR, xid);
+	command = g_strdup_printf ("%s/xings-preferences --parent-window %u", BINDIR, xid);
 	g_debug ("running: %s", command);
 	ret = g_spawn_command_line_async (command, NULL);
 	if (!ret) {
@@ -2626,7 +2626,7 @@ gpk_application_activate_log_cb (GSimpleAction *action,
 	window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
 	xid = gdk_x11_window_get_xid (gtk_widget_get_window (window));
 
-	command = g_strdup_printf ("%s/gpk-log --parent-window %u", BINDIR, xid);
+	command = g_strdup_printf ("%s/xings-package-history --parent-window %u", BINDIR, xid);
 	g_debug ("running: %s", command);
 	ret = g_spawn_command_line_async (command, NULL);
 	if (!ret) {
@@ -3440,7 +3440,7 @@ gpk_application_activate_updates_cb (GSimpleAction *action,
 	gchar *command;
 	GError *error = NULL;
 
-	command = g_build_filename (BINDIR, "gpk-update-viewer", NULL);
+	command = g_build_filename (BINDIR, "xings-package-updates", NULL);
 	g_debug ("running: %s", command);
 	ret = g_spawn_command_line_async (command, &error);
 	if (!ret) {
@@ -3523,7 +3523,7 @@ main (int argc, char *argv[])
 					 G_N_ELEMENTS (gpk_menu_app_entries),
 					 priv);
 
-	filename = g_build_filename (BINDIR, "gpk-update-viewer", NULL);
+	filename = g_build_filename (BINDIR, "xings-package-updates", NULL);
 	if (!g_file_test (filename, G_FILE_TEST_IS_EXECUTABLE)) {
 		GAction *action = g_action_map_lookup_action (G_ACTION_MAP (priv->application), "updates");
 		g_simple_action_set_enabled (G_SIMPLE_ACTION (action), FALSE);

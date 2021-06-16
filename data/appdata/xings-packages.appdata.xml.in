@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2013 Richard Hughes <richard@hughsie.com> -->
+<!-- Copyright 2021 Matias De lellis <mati86dl@gmail.com> -->
 <application>
-  <id type="desktop">gpk-application.desktop</id>
+  <id type="desktop">xings-packages.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
-  <_name>GNOME Packages</_name>
+  <_name>Packages</_name>
   <description>
     <_p>
       Packages allows you to install and remove packages on your system.
@@ -19,9 +19,9 @@
     </_p>
   </description>
   <screenshots>
-    <screenshot type="default">https://git.gnome.org/browse/gnome-packagekit/plain/data/appdata/ss-application.png</screenshot>
-    <screenshot>https://git.gnome.org/browse/gnome-packagekit/plain/data/appdata/ss-application-details.png</screenshot>
+    <screenshot type="default">https://github.com/matiasdelellis/xings-packagekit/raw/xings/data/appdata/ss-application.png</screenshot>
+    <screenshot>https://github.com/matiasdelellis/xings-packagekit/raw/xings/data/appdata/ss-application-details.png</screenshot>
   </screenshots>
-  <url type="homepage">http://www.packagekit.org/</url>
-  <updatecontact>richard_at_hughsie.com</updatecontact>
+  <url type="homepage">https://github.com/matiasdelellis/xings-packagekit/</url>
+  <updatecontact>mati86dl@gmail.com</updatecontact>
 </application>

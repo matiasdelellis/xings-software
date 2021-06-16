@@ -1,8 +1,8 @@
 [Desktop Entry]
 _Name=Package Sources
 _Comment=Enable or disable package repositories
-Icon=gpk-prefs
-Exec=gpk-prefs
+Icon=xings-preferences
+Exec=xings-preferences
 Terminal=false
 Type=Application
 Categories=Settings;X-GNOME-SystemSettings;

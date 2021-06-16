@@ -1,23 +1,23 @@
 [encoding: UTF-8]
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/appdata/gpk-application.appdata.xml.in
-data/appdata/gpk-update-viewer.appdata.xml.in
-data/gpk-application.desktop.in
+data/appdata/xings-packages.appdata.xml.in
+data/appdata/xings-package-updates.appdata.xml.in
+data/xings-packages.desktop.in
 [type: gettext/glade]data/gpk-application.ui
 [type: gettext/glade]data/gpk-client.ui
-data/gpk-dbus-service.desktop.in
+data/xings-packagekit-service.desktop.in
 [type: gettext/glade]data/gpk-error.ui
 [type: gettext/glade]data/gpk-eula.ui
-data/gpk-install-local-file.desktop.in
-data/gpk-log.desktop.in
+data/xings-install-local-package.desktop.in
+data/xings-package-history.desktop.in
 [type: gettext/glade]data/gpk-log.ui
-data/gpk-prefs.desktop.in
+data/xings-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui
 [type: gettext/glade]data/gpk-signature.ui
-data/gpk-update-viewer.desktop.in
+data/xings-package-updates.desktop.in
 [type: gettext/glade]data/gpk-update-viewer.ui
-data/org.gnome.packagekit.gschema.xml
+data/org.xings.packagekit.gschema.xml
 src/gpk-application.c
 src/gpk-common.c
 src/gpk-dbus-service.c

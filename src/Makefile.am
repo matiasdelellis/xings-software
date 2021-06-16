@@ -25,16 +25,16 @@ AM_CPPFLAGS =						\
 	-DLOCALEDIR=\""$(localedir)"\"			\
 	-DVERSION="\"$(VERSION)\"" 			\
 	-DGPK_DATA=\"$(pkgdatadir)\"			\
-	-DG_LOG_DOMAIN=\"GnomePackageKit\"		\
+	-DG_LOG_DOMAIN=\"XingsPackageKit\"		\
 	$(NULL)
 
 bin_PROGRAMS =						\
-	gpk-application					\
-	gpk-prefs					\
-	gpk-install-local-file				\
-	gpk-update-viewer				\
-	gpk-log						\
-	gpk-dbus-service				\
+	xings-packages					\
+	xings-preferences				\
+	xings-install-local-package			\
+	xings-package-updates				\
+	xings-package-history				\
+	xings-packagekit-service			\
 	$(NULL)
 
 noinst_LIBRARIES = libgpkshared.a
@@ -97,16 +97,16 @@ shared_LIBS =						\
 	$(X11_LIBS)					\
 	$(NULL)
 
-gpk_install_local_file_SOURCES =			\
+xings_install_local_package_SOURCES =			\
 	gpk-install-local-file.c			\
 	$(NULL)
 
-gpk_install_local_file_LDADD =				\
+xings_install_local_package_LDADD =			\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	$(NULL)
 
-gpk_dbus_service_SOURCES =				\
+xings_packagekit_service_SOURCES =			\
 	gpk-dbus-service.c				\
 	gpk-dbus.c					\
 	gpk-dbus.h					\
@@ -114,21 +114,21 @@ gpk_dbus_service_SOURCES =				\
 	gpk-dbus-task.h					\
 	$(NULL)
 
-gpk_dbus_service_LDADD =				\
+xings_packagekit_service_LDADD =			\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	$(NULL)
 
-gpk_application_SOURCES =				\
+xings_packages_SOURCES =				\
 	gpk-application.c				\
 	$(NULL)
 
-gpk_application_LDADD =					\
+xings_packages_LDADD =					\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	$(NULL)
 
-gpk_prefs_SOURCES =					\
+xings_preferences_SOURCES =				\
 	gpk-debug.h					\
 	gpk-debug.c					\
 	gpk-animated-icon.c				\
@@ -142,12 +142,12 @@ gpk_prefs_SOURCES =					\
 	gpk-prefs.c					\
 	$(NULL)
 
-gpk_prefs_LDADD =					\
+xings_preferences_LDADD =				\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	-lm
 
-gpk_update_viewer_SOURCES =				\
+xings_package_updates_SOURCES =				\
 	gpk-update-viewer.c				\
 	gpk-cell-renderer-size.c			\
 	gpk-cell-renderer-size.h			\
@@ -157,16 +157,16 @@ gpk_update_viewer_SOURCES =				\
 	gpk-cell-renderer-restart.h			\
 	$(NULL)
 
-gpk_update_viewer_LDADD =				\
+xings_package_updates_LDADD =				\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	$(NULL)
 
-gpk_log_SOURCES =					\
+xings_package_history_SOURCES =				\
 	gpk-log.c					\
 	$(NULL)
 
-gpk_log_LDADD =						\
+xings_package_history_LDADD =				\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	$(NULL)
@@ -194,12 +194,12 @@ org.freedesktop.PackageKit.h: org.freedesktop.PackageKit.xml
 if EGG_BUILD_TESTS
 
 check_PROGRAMS =					\
-	gpk-self-test
+	xings-self-test
 
 noinst_PROGRAMS =					\
-	gpk-self-test
+	xings-self-test
 
-gpk_self_test_SOURCES =					\
+xings_self_test_SOURCES =				\
 	gpk-self-test.c					\
 	egg-string.c					\
 	egg-string.h					\
@@ -241,14 +241,14 @@ gpk_self_test_SOURCES =					\
 	gpk-dialog.h					\
 	$(NULL)
 
-gpk_self_test_LDADD =					\
+xings_self_test_LDADD =					\
 	$(shared_LIBS)					\
 	$(SELFTEST_LIBS)				\
 	$(NULL)
 
-gpk_self_test_CFLAGS = $(AM_CFLAGS)
+xings_self_test_CFLAGS = $(AM_CFLAGS)
 
-TESTS = gpk-self-test
+TESTS = xings-self-test
 endif
 
 EXTRA_DIST =						\
@@ -268,7 +268,6 @@ clean-local:
 CLEANFILES = *~ $(BUILT_SOURCES)
 
 MAINTAINERCLEANFILES =					\
-	*~			      			\
+	*~						\
 	Makefile.in					\
 	$(NULL)
-
