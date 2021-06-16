@@ -817,7 +817,7 @@ main (int argc, char *argv[])
 					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* are we already activated? */
-	application = gtk_application_new ("org.freedesktop.PackageKit.LogViewer", 0);
+	application = gtk_application_new ("org.xings.PackageHistory", 0);
 	g_signal_connect (application, "startup",
 			  G_CALLBACK (gpk_log_startup_cb), NULL);
 	g_signal_connect (application, "activate",
