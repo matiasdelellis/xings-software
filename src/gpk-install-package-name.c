@@ -61,7 +61,7 @@ main (int argc, char *argv[])
 
 	/* TRANSLATORS: program name: installs a package (or packages) by name */
 	g_set_application_name (_("Software Install"));
-	context = g_option_context_new ("gpk-install-package");
+	context = g_option_context_new ("PACKAGE1 PACKAGE2…");
 	g_option_context_set_summary (context, _("Package Name Installer"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
