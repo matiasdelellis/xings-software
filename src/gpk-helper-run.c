@@ -326,8 +326,7 @@ gpk_helper_run_init (GpkHelperRun *helper)
 
 	/* add run button */
 	button = gtk_button_new_with_mnemonic (_("_Run"));
-	box = GTK_BOX (gtk_dialog_get_action_area (GTK_DIALOG (widget)));
-	gtk_box_pack_start (box, button, FALSE, FALSE, 0);
+	gtk_dialog_add_action_widget (GTK_DIALOG (widget), button, GTK_RESPONSE_NONE);
 	gtk_widget_show (button);
 	g_signal_connect (button, "clicked", G_CALLBACK (gpk_helper_run_button_run_cb), helper);
 

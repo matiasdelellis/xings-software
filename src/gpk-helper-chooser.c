@@ -297,8 +297,7 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 
 	/* add to box */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_simple"));
-	widget = gtk_dialog_get_action_area (GTK_DIALOG(widget));
-	gtk_box_pack_start (GTK_BOX (widget), button, FALSE, FALSE, 0);
+	gtk_dialog_add_action_widget (GTK_DIALOG (widget), button, GTK_RESPONSE_NONE);
 	gtk_widget_show (button);
 
 	/* hide the filter box */
