@@ -29,6 +29,7 @@ bin_PROGRAMS =						\
 	xings-packages					\
 	xings-preferences				\
 	xings-install-local-package			\
+	xings-install-package-name			\
 	xings-package-updates				\
 	xings-package-history				\
 	xings-packagekit-service
@@ -92,6 +93,15 @@ xings_install_local_package_SOURCES =			\
 	$(NULL)
 
 xings_install_local_package_LDADD =			\
+	libgpkshared.a					\
+	$(shared_LIBS)					\
+	$(NULL)
+
+xings_install_package_name_SOURCES =			\
+	gpk-install-package-name.c			\
+	$(NULL)
+
+xings_install_package_name_LDADD =			\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	$(NULL)

@@ -1,0 +1,79 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY date        "<date>11 April,2008</date>">
+  <!ENTITY package     "xings-install-package-name">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+  <!ENTITY gpl         "&gnu; <acronym>GPL</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      <email>mati86dl@gmail.com</email>;
+    </address>
+    <author>
+      <firstname>Matias De lellis</firstname>
+      <surname>Matias De lellis</surname>
+    </author>
+    <copyright>
+      <year>2021</year>
+      <holder>Matias De lellis</holder>
+      <year>2008-2013</year>
+      <holder>Richard Hughes</holder>
+    </copyright>
+    &date;
+  </refentryinfo>
+  <refmeta>
+    <refentrytitle>xings-install-package-name</refentrytitle>
+    <manvolnum>1</manvolnum>
+  </refmeta>
+  <refnamediv>
+    <refname>&package;</refname>
+    <refpurpose>Xings PackageKit Package Name Helper</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&package;</command>
+      <arg><option>--verbose</option></arg>
+      <arg><option>package_name</option></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+    <para>
+      This manual page documents briefly the <command>&package;</command> command.
+    </para>
+    <para>
+      <command>&package;</command> allows you to install a a package from the package name.
+    </para>
+  </refsect1>
+  <refsect1>
+    <title>SEE ALSO</title>
+    <para>xings-install-local-package (1).</para>
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+    <para>
+      This manual page was written by Richard Hughes <email>richard@hughsie.com</email>
+      as part of GNOME PackageKit.
+    </para>
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->
+

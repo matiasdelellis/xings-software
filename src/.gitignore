@@ -15,6 +15,7 @@ gpk-marshal.c
 gpk-marshal.h
 org.freedesktop.PackageKit*.h
 xings-install-local-package
+xings-install-package-name
 xings-package-history
 xings-package-updates
 xings-packagekit-service

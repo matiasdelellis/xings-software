@@ -2,6 +2,7 @@ EXTRA_DIST =						\
 	xings-packages.sgml				\
 	xings-packagekit-service.sgml			\
 	xings-install-local-package.sgml		\
+	xings-install-package-name.sgml			\
 	xings-package-history.sgml			\
 	xings-preferences.sgml				\
 	xings-package-updates.sgml
@@ -11,8 +12,9 @@ man_MANS =						\
 	xings-packages.1				\
 	xings-packagekit-service.1			\
 	xings-install-local-package.1			\
+	xings-install-package-name.1			\
 	xings-package-history.1				\
-	xings-preferences.1					\
+	xings-preferences.1				\
 	xings-package-updates.1
 endif
 
@@ -22,6 +24,8 @@ xings-packages.1: xings-packages.sgml
 xings-install-local-package.1: xings-install-local-package.sgml
 	docbook2man $? > /dev/null
 xings-preferences.1: xings-preferences.sgml
+	docbook2man $? > /dev/null
+xings-install-package-name.1: xings-install-package-name.sgml
 	docbook2man $? > /dev/null
 xings-packagekit-service.1: xings-packagekit-service.sgml
 	docbook2man $? > /dev/null
