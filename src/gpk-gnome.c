@@ -39,7 +39,7 @@ gpk_gnome_open (const gchar *url)
 
 	g_return_val_if_fail (url != NULL, FALSE);
 
-	ret = gtk_show_uri (NULL, url, GDK_CURRENT_TIME, &error);
+	ret = gtk_show_uri_on_window (NULL, url, GDK_CURRENT_TIME, &error);
 
 	if (!ret) {
 		g_warning ("spawn of '%s' failed", url);
