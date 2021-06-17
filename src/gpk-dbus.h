@@ -27,27 +27,11 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_DBUS		(gpk_dbus_get_type ())
-#define GPK_DBUS(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_DBUS, GpkDbus))
-#define GPK_DBUS_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_DBUS, GpkDbusClass))
-#define PK_IS_DBUS(o)	 	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_DBUS))
-#define PK_IS_DBUS_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_DBUS))
-#define GPK_DBUS_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_DBUS, GpkDbusClass))
-#define GPK_DBUS_ERROR		(gpk_dbus_error_quark ())
-#define GPK_DBUS_TYPE_ERROR	(gpk_dbus_error_get_type ())
+#define GPK_TYPE_DBUS (gpk_dbus_get_type())
+#define GPK_DBUS_ERROR         (gpk_dbus_error_quark ())
+#define GPK_DBUS_TYPE_ERROR    (gpk_dbus_error_get_type ())
 
-typedef struct GpkDbusPrivate GpkDbusPrivate;
-
-typedef struct
-{
-	 GObject		 parent;
-	 GpkDbusPrivate	*priv;
-} GpkDbus;
-
-typedef struct
-{
-	GObjectClass	parent_class;
-} GpkDbusClass;
+G_DECLARE_FINAL_TYPE (GpkDbus, gpk_dbus, GPK, DBUS, GObject)
 
 GQuark		 gpk_dbus_error_quark			(void);
 GType		 gpk_dbus_error_get_type		(void);

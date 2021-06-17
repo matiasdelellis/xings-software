@@ -49,10 +49,9 @@
 
 static void     gpk_dbus_finalize	(GObject	*object);
 
-#define GPK_DBUS_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GPK_TYPE_DBUS, GpkDbusPrivate))
-
-struct GpkDbusPrivate
+struct _GpkDbus
 {
+	GObject			_parent_instance;
 	GSettings		*settings;
 	gint			 timeout_tmp;
 	GTimer			*timer;
@@ -107,10 +106,10 @@ gpk_dbus_get_idle_time (GpkDbus	*dbus)
 	guint idle = 0;
 
 	/* we need to return 0 if there is a task in progress */
-	if (dbus->priv->refcount > 0)
+	if (dbus->refcount > 0)
 		goto out;
 
-	idle = (guint) g_timer_elapsed (dbus->priv->timer, NULL);
+	idle = (guint) g_timer_elapsed (dbus->timer, NULL);
 	g_debug ("we've been idle for %is", idle);
 out:
 	return idle;
@@ -127,7 +126,7 @@ gpk_dbus_get_pid_session (GpkDbus *dbus, const gchar *sender)
 	GError *error = NULL;
 
 	/* get pid from DBus (quite slow) */
-	ret = dbus_g_proxy_call (dbus->priv->proxy_session_pid, "GetConnectionUnixProcessID", &error,
+	ret = dbus_g_proxy_call (dbus->proxy_session_pid, "GetConnectionUnixProcessID", &error,
 				 G_TYPE_STRING, sender,
 				 G_TYPE_INVALID,
 				 G_TYPE_UINT, &pid,
@@ -152,7 +151,7 @@ gpk_dbus_get_pid_system (GpkDbus *dbus, const gchar *sender)
 	GError *error = NULL;
 
 	/* get pid from DBus (quite slow) */
-	ret = dbus_g_proxy_call (dbus->priv->proxy_system_pid, "GetConnectionUnixProcessID", &error,
+	ret = dbus_g_proxy_call (dbus->proxy_system_pid, "GetConnectionUnixProcessID", &error,
 				 G_TYPE_STRING, sender,
 				 G_TYPE_INVALID,
 				 G_TYPE_UINT, &pid,
@@ -174,9 +173,9 @@ gpk_dbus_get_pid (GpkDbus *dbus, const gchar *sender)
 {
 	guint pid;
 
-	g_return_val_if_fail (PK_IS_DBUS (dbus), G_MAXUINT);
-	g_return_val_if_fail (dbus->priv->proxy_session_pid != NULL, G_MAXUINT);
-	g_return_val_if_fail (dbus->priv->proxy_system_pid != NULL, G_MAXUINT);
+	g_return_val_if_fail (GPK_IS_DBUS (dbus), G_MAXUINT);
+	g_return_val_if_fail (dbus->proxy_session_pid != NULL, G_MAXUINT);
+	g_return_val_if_fail (dbus->proxy_system_pid != NULL, G_MAXUINT);
 	g_return_val_if_fail (sender != NULL, G_MAXUINT);
 
 	/* check system bus first */
@@ -206,7 +205,7 @@ gpk_dbus_get_exec_for_sender (GpkDbus *dbus, const gchar *sender)
 	GError *error = NULL;
 	guint pid;
 
-	g_return_val_if_fail (PK_IS_DBUS (dbus), NULL);
+	g_return_val_if_fail (GPK_IS_DBUS (dbus), NULL);
 	g_return_val_if_fail (sender != NULL, NULL);
 
 	/* get pid */
@@ -293,30 +292,30 @@ gpk_dbus_parse_interaction (GpkDbus *dbus, const gchar *interaction, PkBitfield 
 
 	/* set temp default */
 	*interact = 0;
-	dbus->priv->timeout_tmp = -1;
+	dbus->timeout_tmp = -1;
 
 	/* get default policy from settings */
-	policy = g_settings_get_string (dbus->priv->settings, GPK_SETTINGS_DBUS_DEFAULT_INTERACTION);
+	policy = g_settings_get_string (dbus->settings, GPK_SETTINGS_DBUS_DEFAULT_INTERACTION);
 	if (policy != NULL) {
 		g_debug ("default is %s", policy);
-		gpk_dbus_set_interaction_from_text (interact, &dbus->priv->timeout_tmp, policy);
+		gpk_dbus_set_interaction_from_text (interact, &dbus->timeout_tmp, policy);
 	}
 	g_free (policy);
 
 	/* now override with policy from client */
-	gpk_dbus_set_interaction_from_text (interact, &dbus->priv->timeout_tmp, interaction);
+	gpk_dbus_set_interaction_from_text (interact, &dbus->timeout_tmp, interaction);
 	g_debug ("client is %s", interaction);
 
 	/* now override with enforced policy */
-	policy = g_settings_get_string (dbus->priv->settings, GPK_SETTINGS_DBUS_ENFORCED_INTERACTION);
+	policy = g_settings_get_string (dbus->settings, GPK_SETTINGS_DBUS_ENFORCED_INTERACTION);
 	if (policy != NULL) {
 		g_debug ("enforced is %s", policy);
-		gpk_dbus_set_interaction_from_text (interact, &dbus->priv->timeout_tmp, policy);
+		gpk_dbus_set_interaction_from_text (interact, &dbus->timeout_tmp, policy);
 	}
 	g_free (policy);
 
 	/* copy from temp */
-	*timeout = dbus->priv->timeout_tmp;
+	*timeout = dbus->timeout_tmp;
 }
 
 /**
@@ -344,9 +343,9 @@ gpk_dbus_create_task (GpkDbus *dbus, guint32 xid, const gchar *interaction, DBus
 
 	/* try to get the user time of the window */
 	if (xid != 0) {
-		ret = gpk_x11_set_xid (dbus->priv->x11, xid);
+		ret = gpk_x11_set_xid (dbus->x11, xid);
 		if (ret)
-			timestamp = gpk_x11_get_user_time (dbus->priv->x11);
+			timestamp = gpk_x11_get_user_time (dbus->x11);
 	}
 
 	/* set the context for the return values */
@@ -369,8 +368,8 @@ gpk_dbus_create_task (GpkDbus *dbus, guint32 xid, const gchar *interaction, DBus
 	//g_signal_connect...
 
 	/* reset time */
-	g_timer_reset (dbus->priv->timer);
-	dbus->priv->refcount++;
+	g_timer_reset (dbus->timer);
+	dbus->refcount++;
 
 	g_free (sender);
 	g_free (exec);
@@ -384,11 +383,11 @@ static void
 gpk_dbus_task_finished_cb (GpkDbusTask *task, GpkDbus *dbus)
 {
 	/* one context has returned */
-	if (dbus->priv->refcount > 0)
-		dbus->priv->refcount--;
+	if (dbus->refcount > 0)
+		dbus->refcount--;
 
 	/* reset time */
-	g_timer_reset (dbus->priv->timer);
+	g_timer_reset (dbus->timer);
 
 	g_object_unref (task);
 }
@@ -523,7 +522,6 @@ gpk_dbus_class_init (GpkDbusClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_dbus_finalize;
-	g_type_class_add_private (klass, sizeof (GpkDbusPrivate));
 }
 
 /**
@@ -535,21 +533,20 @@ gpk_dbus_init (GpkDbus *dbus)
 {
 	DBusGConnection *connection;
 
-	dbus->priv = GPK_DBUS_GET_PRIVATE (dbus);
-	dbus->priv->timeout_tmp = -1;
-	dbus->priv->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
-	dbus->priv->x11 = gpk_x11_new ();
-	dbus->priv->timer = g_timer_new ();
+	dbus->timeout_tmp = -1;
+	dbus->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
+	dbus->x11 = gpk_x11_new ();
+	dbus->timer = g_timer_new ();
 
 	/* find out PIDs on the session bus */
 	connection = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
-	dbus->priv->proxy_session_pid = dbus_g_proxy_new_for_name_owner (connection,
+	dbus->proxy_session_pid = dbus_g_proxy_new_for_name_owner (connection,
 								 "org.freedesktop.DBus",
 								 "/org/freedesktop/DBus/Bus",
 								 "org.freedesktop.DBus", NULL);
 	/* find out PIDs on the system bus */
 	connection = dbus_g_bus_get (DBUS_BUS_SYSTEM, NULL);
-	dbus->priv->proxy_system_pid = dbus_g_proxy_new_for_name_owner (connection,
+	dbus->proxy_system_pid = dbus_g_proxy_new_for_name_owner (connection,
 								 "org.freedesktop.DBus",
 								 "/org/freedesktop/DBus/Bus",
 								 "org.freedesktop.DBus", NULL);
@@ -563,15 +560,14 @@ static void
 gpk_dbus_finalize (GObject *object)
 {
 	GpkDbus *dbus;
-	g_return_if_fail (PK_IS_DBUS (object));
+	g_return_if_fail (GPK_IS_DBUS (object));
 
 	dbus = GPK_DBUS (object);
-	g_return_if_fail (dbus->priv != NULL);
-	g_timer_destroy (dbus->priv->timer);
-	g_object_unref (dbus->priv->settings);
-	g_object_unref (dbus->priv->x11);
-	g_object_unref (dbus->priv->proxy_session_pid);
-	g_object_unref (dbus->priv->proxy_system_pid);
+	g_timer_destroy (dbus->timer);
+	g_object_unref (dbus->settings);
+	g_object_unref (dbus->x11);
+	g_object_unref (dbus->proxy_session_pid);
+	g_object_unref (dbus->proxy_system_pid);
 
 	G_OBJECT_CLASS (gpk_dbus_parent_class)->finalize (object);
 }
