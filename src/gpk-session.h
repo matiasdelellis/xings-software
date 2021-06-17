@@ -26,22 +26,11 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_SESSION		(gpk_session_get_type ())
-#define GPK_SESSION(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_SESSION, GpkSession))
-#define GPK_SESSION_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_SESSION, GpkSessionClass))
-#define GPK_IS_SESSION(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_SESSION))
-#define GPK_IS_SESSION_CLASS(k)		(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_SESSION))
-#define GPK_SESSION_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_SESSION, GpkSessionClass))
+#define GPK_TYPE_SESSION (gpk_session_get_type())
 
-typedef struct GpkSessionPrivate GpkSessionPrivate;
+G_DECLARE_DERIVABLE_TYPE (GpkSession, gpk_session, GPK, SESSION, GObject)
 
-typedef struct
-{
-	GObject			 parent;
-	GpkSessionPrivate	*priv;
-} GpkSession;
-
-typedef struct
+struct _GpkSessionClass
 {
 	GObjectClass	parent_class;
 	void		(* idle_changed)		(GpkSession	*session,
@@ -57,7 +46,7 @@ typedef struct
 	void		(* end_session)			(GpkSession	*session,
 							 guint		 flags);
 	void		(* cancel_end_session)		(GpkSession	*session);
-} GpkSessionClass;
+};
 
 GType		 gpk_session_get_type			(void);
 GpkSession	*gpk_session_new			(void);
