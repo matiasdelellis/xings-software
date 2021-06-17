@@ -28,27 +28,8 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_DBUS_TASK		(gpk_dbus_task_get_type ())
-#define GPK_DBUS_TASK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_DBUS_TASK, GpkDbusTask))
-#define GPK_DBUS_TASK_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_DBUS_TASK, GpkDbusTaskClass))
-#define GPK_IS_DBUS_TASK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_DBUS_TASK))
-#define GPK_IS_DBUS_TASK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_DBUS_TASK))
-#define GPK_DBUS_TASK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_DBUS_TASK, GpkDbusTaskClass))
-
-typedef struct _GpkDbusTaskPrivate	 GpkDbusTaskPrivate;
-typedef struct _GpkDbusTask		 GpkDbusTask;
-typedef struct _GpkDbusTaskClass	 GpkDbusTaskClass;
-
-struct _GpkDbusTask
-{
-	GObject				 parent;
-	GpkDbusTaskPrivate		*priv;
-};
-
-struct _GpkDbusTaskClass
-{
-	GObjectClass	parent_class;
-};
+#define GPK_TYPE_DBUS_TASK (gpk_dbus_task_get_type())
+G_DECLARE_FINAL_TYPE (GpkDbusTask, gpk_dbus_task, GPK, DBUS_TASK, GObject)
 
 /**
  * GpkDbusTaskInteract:

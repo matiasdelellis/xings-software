@@ -54,16 +54,15 @@
 static void gpk_dbus_task_finalize (GObject *object);
 static void gpk_dbus_task_progress_cb (PkProgress *progress, PkProgressType type, GpkDbusTask *dtask);
 
-#define GPK_DBUS_TASK_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GPK_TYPE_DBUS_TASK, GpkDbusTaskPrivate))
 #define GPK_DBUS_TASK_FINISHED_AUTOCLOSE_DELAY	10 /* seconds */
 
 /**
- * GpkDbusTaskPrivate:
+ * GpkDbusTask:
  *
- * Private #GpkDbusTask data
  **/
-struct _GpkDbusTaskPrivate
+struct _GpkDbusTask
 {
+	GObject			_parent_instance;
 	GdkWindow		*parent_window;
 	GSettings		*settings;
 	PkTask			*task;
@@ -105,18 +104,18 @@ gpk_dbus_task_set_interaction (GpkDbusTask *dtask, PkBitfield interact)
 {
 	g_return_val_if_fail (GPK_IS_DBUS_TASK (dtask), FALSE);
 
-	dtask->priv->show_confirm_search = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_CONFIRM_SEARCH);
-	dtask->priv->show_confirm_deps = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_CONFIRM_DEPS);
-	dtask->priv->show_confirm_install = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_CONFIRM_INSTALL);
-	dtask->priv->show_progress = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_PROGRESS);
-	dtask->priv->show_finished = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_FINISHED);
-	dtask->priv->show_warning = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_WARNING);
+	dtask->show_confirm_search = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_CONFIRM_SEARCH);
+	dtask->show_confirm_deps = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_CONFIRM_DEPS);
+	dtask->show_confirm_install = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_CONFIRM_INSTALL);
+	dtask->show_progress = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_PROGRESS);
+	dtask->show_finished = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_FINISHED);
+	dtask->show_warning = pk_bitfield_contain (interact, GPK_CLIENT_INTERACT_WARNING);
 
 	/* debug */
 	g_debug ("confirm_search:%i, confirm_deps:%i, confirm_install:%i, progress:%i, finished:%i, warning:%i",
-		   dtask->priv->show_confirm_search, dtask->priv->show_confirm_deps,
-		   dtask->priv->show_confirm_install, dtask->priv->show_progress,
-		   dtask->priv->show_finished, dtask->priv->show_warning);
+		   dtask->show_confirm_search, dtask->show_confirm_deps,
+		   dtask->show_confirm_install, dtask->show_progress,
+		   dtask->show_finished, dtask->show_warning);
 
 	return TRUE;
 }
@@ -130,7 +129,7 @@ gpk_dbus_task_set_context (GpkDbusTask *dtask, DBusGMethodInvocation *context)
 	g_return_val_if_fail (GPK_IS_DBUS_TASK (dtask), FALSE);
 	g_return_val_if_fail (context != NULL, FALSE);
 
-	dtask->priv->context = context;
+	dtask->context = context;
 	return TRUE;
 }
 
@@ -144,9 +143,9 @@ gpk_dbus_task_set_xid (GpkDbusTask *dtask, guint32 xid)
 	g_return_val_if_fail (GPK_IS_DBUS_TASK (dtask), FALSE);
 
 	display = gdk_display_get_default ();
-	dtask->priv->parent_window = gdk_x11_window_foreign_new_for_display (display, xid);
-	g_debug ("parent_window=%p", dtask->priv->parent_window);
-	gpk_modal_dialog_set_parent (dtask->priv->dialog, dtask->priv->parent_window);
+	dtask->parent_window = gdk_x11_window_foreign_new_for_display (display, xid);
+	g_debug ("parent_window=%p", dtask->parent_window);
+	gpk_modal_dialog_set_parent (dtask->dialog, dtask->parent_window);
 	return TRUE;
 }
 
@@ -157,7 +156,7 @@ gboolean
 gpk_dbus_task_set_timestamp (GpkDbusTask *dtask, guint32 timestamp)
 {
 	g_return_val_if_fail (GPK_IS_DBUS_TASK (dtask), FALSE);
-	dtask->priv->timestamp = timestamp;
+	dtask->timestamp = timestamp;
 	return TRUE;
 }
 
@@ -172,21 +171,21 @@ gpk_dbus_task_dbus_return_error (GpkDbusTask *dtask, const GError *error)
 	g_return_if_fail (error != NULL);
 
 	/* already sent or never setup */
-	if (dtask->priv->context == NULL) {
+	if (dtask->context == NULL) {
 		g_error ("context does not exist, cannot return: %s", error->message);
 		goto out;
 	}
 
 	/* send error */
-	g_debug ("sending async return error in response to %p: %s", dtask->priv->context, error->message);
-	dbus_g_method_return_error (dtask->priv->context, error);
+	g_debug ("sending async return error in response to %p: %s", dtask->context, error->message);
+	dbus_g_method_return_error (dtask->context, error);
 
 	/* set context NULL just in case we try to repeat */
-	dtask->priv->context = NULL;
+	dtask->context = NULL;
 
 	/* do the finish callback */
-	if (dtask->priv->finished_cb)
-		dtask->priv->finished_cb (dtask, dtask->priv->finished_userdata);
+	if (dtask->finished_cb)
+		dtask->finished_cb (dtask, dtask->finished_userdata);
 out:
 	/* we can't touch dtask now, as it might have been unreffed in the finished callback */
 	return;
@@ -199,21 +198,21 @@ static void
 gpk_dbus_task_dbus_return_value (GpkDbusTask *dtask, gboolean ret)
 {
 	/* already sent or never setup */
-	if (dtask->priv->context == NULL) {
+	if (dtask->context == NULL) {
 		g_error ("context does not exist, cannot return %i", ret);
 		goto out;
 	}
 
 	/* send error */
-	g_debug ("sending async return in response to %p: %i", dtask->priv->context, ret);
-	dbus_g_method_return (dtask->priv->context, ret);
+	g_debug ("sending async return in response to %p: %i", dtask->context, ret);
+	dbus_g_method_return (dtask->context, ret);
 
 	/* set context NULL just in case we try to repeat */
-	dtask->priv->context = NULL;
+	dtask->context = NULL;
 
 	/* do the finish callback */
-	if (dtask->priv->finished_cb)
-		dtask->priv->finished_cb (dtask, dtask->priv->finished_userdata);
+	if (dtask->finished_cb)
+		dtask->finished_cb (dtask, dtask->finished_userdata);
 out:
 	/* we can't touch dtask now, as it might have been unreffed in the finished callback */
 	return;
@@ -235,20 +234,20 @@ gpk_dbus_task_chooser_event_cb (GpkHelperChooser *helper_chooser, GtkResponseTyp
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
 		g_error_free (error_dbus);
 
-		if (dtask->priv->show_warning) {
-			gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+		if (dtask->show_warning) {
+			gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: we failed to install */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to install software"));
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to install software"));
 			/* TRANSLATORS: we didn't select any applications that were returned */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("No applications were chosen to be installed"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_message (dtask->dialog, _("No applications were chosen to be installed"));
+			gpk_modal_dialog_present (dtask->dialog);
+			gpk_modal_dialog_run (dtask->dialog);
 		}
 		goto out;
 	}
 
 	/* install this specific package */
-	dtask->priv->package_ids = pk_package_ids_from_id (package_id);
+	dtask->package_ids = pk_package_ids_from_id (package_id);
 
 	/* install these packages with deps */
 	gpk_dbus_task_install_package_ids (dtask);
@@ -265,12 +264,12 @@ gpk_dbus_task_libnotify_cb (NotifyNotification *notification, gchar *action, gpo
 	GpkDbusTask *task = GPK_DBUS_TASK (data);
 	gchar *details;
 
-	if (task->priv->cached_error_code == NULL) {
+	if (task->cached_error_code == NULL) {
 		g_warning ("called show error with no error!");
 		return;
 	}
 	if (g_strcmp0 (action, "show-error-details") == 0) {
-		details = g_markup_escape_text (pk_error_get_details (task->priv->cached_error_code), -1);
+		details = g_markup_escape_text (pk_error_get_details (task->cached_error_code), -1);
 		/* TRANSLATORS: detailed text about the error */
 		gpk_error_dialog (_("Error details"), _("Package Manager error details"), details);
 		g_free (details);
@@ -290,11 +289,11 @@ gpk_dbus_task_error_msg (GpkDbusTask *dtask, const gchar *title, GError *error)
 	const gchar *message = _("Unknown error. Please refer to the detailed report and report in your distribution bug tracker.");
 	const gchar *details = NULL;
 
-	if (!dtask->priv->show_warning)
+	if (!dtask->show_warning)
 		return;
 
 	/* setup UI */
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 
 	/* print a proper error if we have it */
 	if (error != NULL) {
@@ -305,16 +304,16 @@ gpk_dbus_task_error_msg (GpkDbusTask *dtask, const gchar *title, GError *error)
 
 	/* it's a normal UI, not a backtrace so keep in the UI */
 	if (details == NULL) {
-		gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-		gpk_modal_dialog_set_message (dtask->priv->dialog, message);
-		gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-		gpk_modal_dialog_run (dtask->priv->dialog);
+		gpk_modal_dialog_set_title (dtask->dialog, title);
+		gpk_modal_dialog_set_message (dtask->dialog, message);
+		gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+		gpk_modal_dialog_run (dtask->dialog);
 		return;
 	}
 
 	/* hide the main window */
-	window = gpk_modal_dialog_get_window (dtask->priv->dialog);
-	gpk_error_dialog_modal_with_time (window, title, message, details, dtask->priv->timestamp);
+	window = gpk_modal_dialog_get_window (dtask->dialog);
+	gpk_error_dialog_modal_with_time (window, title, message, details, dtask->timestamp);
 }
 
 /**
@@ -342,16 +341,16 @@ gpk_dbus_task_handle_error (GpkDbusTask *dtask, PkError *error_code)
 	/* use a modal dialog if showing progress, else use libnotify */
 	title = gpk_error_enum_to_localised_text (pk_error_get_code (error_code));
 	message = gpk_error_enum_to_localised_message (pk_error_get_code (error_code));
-	if (dtask->priv->show_progress) {
-		widget = GTK_WIDGET (gpk_modal_dialog_get_window (dtask->priv->dialog));
+	if (dtask->show_progress) {
+		widget = GTK_WIDGET (gpk_modal_dialog_get_window (dtask->dialog));
 		gpk_error_dialog_modal (GTK_WINDOW (widget), title, message, pk_error_get_details (error_code));
 		return;
 	}
 
 	/* save this globally */
-	if (dtask->priv->cached_error_code != NULL)
-		g_object_unref (dtask->priv->cached_error_code);
-	dtask->priv->cached_error_code = g_object_ref (error_code);
+	if (dtask->cached_error_code != NULL)
+		g_object_unref (dtask->cached_error_code);
+	dtask->cached_error_code = g_object_ref (error_code);
 
 	/* do the bubble */
 	notification = notify_notification_new (title, message, NULL);
@@ -490,18 +489,18 @@ static void
 gpk_dbus_task_install_package_ids (GpkDbusTask *dtask)
 {
 	GtkWindow *window;
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
 	/* TRANSLATORS: title: installing packages */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Installing packages"));
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Installing packages"));
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* ensure parent is set */
-	window = gpk_modal_dialog_get_window (dtask->priv->dialog);
-	gpk_task_set_parent_window (GPK_TASK (dtask->priv->task), window);
+	window = gpk_modal_dialog_get_window (dtask->dialog);
+	gpk_task_set_parent_window (GPK_TASK (dtask->task), window);
 
 	/* install async */
-	pk_task_install_packages_async (dtask->priv->task, dtask->priv->package_ids, NULL,
+	pk_task_install_packages_async (dtask->task, dtask->package_ids, NULL,
 					(PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 					(GAsyncReadyCallback) gpk_dbus_task_install_packages_cb, dtask);
 }
@@ -515,7 +514,7 @@ gpk_dbus_task_set_status (GpkDbusTask *dtask, PkStatusEnum status)
 	g_return_val_if_fail (GPK_IS_DBUS_TASK (dtask), FALSE);
 
 	/* do we force progress? */
-	if (!dtask->priv->show_progress) {
+	if (!dtask->show_progress) {
 		if (status == PK_STATUS_ENUM_DOWNLOAD_REPOSITORY ||
 		    status == PK_STATUS_ENUM_DOWNLOAD_PACKAGELIST ||
 		    status == PK_STATUS_ENUM_DOWNLOAD_FILELIST ||
@@ -523,34 +522,34 @@ gpk_dbus_task_set_status (GpkDbusTask *dtask, PkStatusEnum status)
 		    status == PK_STATUS_ENUM_DOWNLOAD_GROUP ||
 		    status == PK_STATUS_ENUM_DOWNLOAD_UPDATEINFO ||
 		    status == PK_STATUS_ENUM_REFRESH_CACHE) {
-			gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
-			gpk_modal_dialog_present_with_time (dtask->priv->dialog, 0);
+			gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
+			gpk_modal_dialog_present_with_time (dtask->dialog, 0);
 		}
 	}
 
 	/* ignore */
-	if (!dtask->priv->show_progress) {
+	if (!dtask->show_progress) {
 		g_warning ("not showing progress");
 		return FALSE;
 	}
 
 	/* set icon */
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, status);
+	gpk_modal_dialog_set_image_status (dtask->dialog, status);
 
 	/* set label */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, gpk_status_enum_to_localised_text (status));
+	gpk_modal_dialog_set_title (dtask->dialog, gpk_status_enum_to_localised_text (status));
 
 	/* spin */
 	if (status == PK_STATUS_ENUM_WAIT)
-		gpk_modal_dialog_set_percentage (dtask->priv->dialog, -1);
+		gpk_modal_dialog_set_percentage (dtask->dialog, -1);
 
 	/* do visual stuff when finished */
 	if (status == PK_STATUS_ENUM_FINISHED) {
 		/* make insensitive */
-		gpk_modal_dialog_set_allow_cancel (dtask->priv->dialog, FALSE);
+		gpk_modal_dialog_set_allow_cancel (dtask->dialog, FALSE);
 
 		/* stop spinning */
-		gpk_modal_dialog_set_percentage (dtask->priv->dialog, 100);
+		gpk_modal_dialog_set_percentage (dtask->dialog, 100);
 	}
 	return TRUE;
 }
@@ -562,7 +561,7 @@ static void
 gpk_dbus_task_button_close_cb (GtkWidget *widget, GpkDbusTask *dtask)
 {
 	/* close, don't abort */
-	gpk_modal_dialog_close (dtask->priv->dialog);
+	gpk_modal_dialog_close (dtask->dialog);
 }
 
 /**
@@ -572,7 +571,7 @@ static void
 gpk_dbus_task_button_cancel_cb (GtkWidget *widget, GpkDbusTask *dtask)
 {
 	/* we might have a transaction running */
-	g_cancellable_cancel (dtask->priv->cancellable);
+	g_cancellable_cancel (dtask->cancellable);
 }
 
 /**
@@ -592,7 +591,7 @@ gpk_dbus_task_install_files_cb (PkTask *task, GAsyncResult *res, GpkDbusTask *dt
 	results = pk_task_generic_finish (task, res, &error);
 	if (results == NULL) {
 		/* TRANSLATORS: error: failed to install, detailed error follows */
-		length = g_strv_length (dtask->priv->files);
+		length = g_strv_length (dtask->files);
 		title = ngettext ("Failed to install file", "Failed to install files", length);
 		error_dbus = g_error_new (GPK_DBUS_ERROR, gpk_dbus_task_get_code_from_gerror (error), "%s", error->message);
 		gpk_dbus_task_error_msg (dtask, title, error_dbus);
@@ -687,13 +686,13 @@ gpk_dbus_task_install_package_files_verify (GpkDbusTask *dtask, GPtrArray *array
 	message = gpk_dbus_task_ptr_array_to_bullets (array, NULL);
 
 	/* show UI */
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, 0);
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, 0);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
 	/* TRANSLATORS: title: installing local files */
-	gpk_modal_dialog_set_action (dtask->priv->dialog, _("Install"));
-	gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-	button = gpk_modal_dialog_run (dtask->priv->dialog);
+	gpk_modal_dialog_set_action (dtask->dialog, _("Install"));
+	gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+	button = gpk_modal_dialog_run (dtask->dialog);
 	g_free (message);
 
 	/* did we click no or exit the window? */
@@ -716,27 +715,27 @@ gpk_dbus_task_confirm_action (GpkDbusTask *dtask, const gchar *title, const gcha
 	GtkResponseType button;
 
 	/* check the user wanted to call this method */
-	if (!dtask->priv->show_confirm_search)
+	if (!dtask->show_confirm_search)
 		return TRUE;
 
 	/* setup UI */
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, 0);
-	gpk_modal_dialog_set_action (dtask->priv->dialog, action);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, 0);
+	gpk_modal_dialog_set_action (dtask->dialog, action);
 
 	/* set icon */
-	if (dtask->priv->parent_icon_name != NULL)
-		gpk_modal_dialog_set_image (dtask->priv->dialog, dtask->priv->parent_icon_name);
+	if (dtask->parent_icon_name != NULL)
+		gpk_modal_dialog_set_image (dtask->dialog, dtask->parent_icon_name);
 	else
-		gpk_modal_dialog_set_image (dtask->priv->dialog, "emblem-system");
+		gpk_modal_dialog_set_image (dtask->dialog, "emblem-system");
 
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
-	gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-	button = gpk_modal_dialog_run (dtask->priv->dialog);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
+	gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+	button = gpk_modal_dialog_run (dtask->dialog);
 
 	/* close, we're going to fail the method */
 	if (button != GTK_RESPONSE_OK) {
-		gpk_modal_dialog_close (dtask->priv->dialog);
+		gpk_modal_dialog_close (dtask->dialog);
 		return FALSE;
 	}
 
@@ -757,7 +756,7 @@ gpk_dbus_task_progress_cb (PkProgress *progress, PkProgressType type, GpkDbusTas
 	gchar *text;
 
 	/* optimise */
-	if (!dtask->priv->show_progress)
+	if (!dtask->show_progress)
 		goto out;
 
 	g_object_get (progress,
@@ -771,21 +770,21 @@ gpk_dbus_task_progress_cb (PkProgress *progress, PkProgressType type, GpkDbusTas
 	if (type == PK_PROGRESS_TYPE_PACKAGE_ID) {
 		g_debug ("_package");
 	} else if (type == PK_PROGRESS_TYPE_PERCENTAGE) {
-		gpk_modal_dialog_set_percentage (dtask->priv->dialog, percentage);
+		gpk_modal_dialog_set_percentage (dtask->dialog, percentage);
 	} else if (type == PK_PROGRESS_TYPE_ALLOW_CANCEL) {
-		gpk_modal_dialog_set_allow_cancel (dtask->priv->dialog, allow_cancel);
+		gpk_modal_dialog_set_allow_cancel (dtask->dialog, allow_cancel);
 	} else if (type == PK_PROGRESS_TYPE_STATUS) {
 		gpk_dbus_task_set_status (dtask, status);
 
 		if (status == PK_STATUS_ENUM_FINISHED) {
 			/* stop spinning */
-			gpk_modal_dialog_set_percentage (dtask->priv->dialog, 100);
+			gpk_modal_dialog_set_percentage (dtask->dialog, 100);
 		}
 	} else if (type == PK_PROGRESS_TYPE_REMAINING_TIME) {
-		gpk_modal_dialog_set_remaining (dtask->priv->dialog, remaining_time);
+		gpk_modal_dialog_set_remaining (dtask->dialog, remaining_time);
 	} else if (type == PK_PROGRESS_TYPE_PACKAGE_ID) {
 		text = gpk_package_id_format_twoline (NULL, package_id, NULL); //TODO: need summary
-		gpk_modal_dialog_set_message (dtask->priv->dialog, text);
+		gpk_modal_dialog_set_message (dtask->dialog, text);
 		g_free (text);
 	}
 out:
@@ -850,12 +849,12 @@ gpk_dbus_task_is_installed (GpkDbusTask *dtask, const gchar *package_name, GpkDb
 	g_return_if_fail (package_name != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* get the package list for the installed packages */
 	package_names = g_strsplit (package_name, "|", 1);
-	pk_client_resolve_async (PK_CLIENT(dtask->priv->task), pk_bitfield_value (PK_FILTER_ENUM_INSTALLED), package_names, NULL,
+	pk_client_resolve_async (PK_CLIENT(dtask->task), pk_bitfield_value (PK_FILTER_ENUM_INSTALLED), package_names, NULL,
 				 (PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 				 (GAsyncReadyCallback) gpk_dbus_task_is_installed_resolve_cb, dtask);
 	g_strfreev (package_names);
@@ -917,11 +916,11 @@ gpk_dbus_task_search_file_search_file_cb (PkClient *client, GAsyncResult *res, G
 	split = pk_package_id_split (package_id);
 
 	/* send error */
-	g_debug ("sending async return in response to %p", dtask->priv->context);
-	dbus_g_method_return (dtask->priv->context, (info == PK_INFO_ENUM_INSTALLED), split[PK_PACKAGE_ID_NAME]);
+	g_debug ("sending async return in response to %p", dtask->context);
+	dbus_g_method_return (dtask->context, (info == PK_INFO_ENUM_INSTALLED), split[PK_PACKAGE_ID_NAME]);
 
 	/* set context NULL just in case we try to repeat */
-	dtask->priv->context = NULL;
+	dtask->context = NULL;
 out:
 	g_free (package_id);
 	g_strfreev (split);
@@ -945,13 +944,13 @@ gpk_dbus_task_search_file (GpkDbusTask *dtask, const gchar *search_file, GpkDbus
 	g_return_if_fail (search_file != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* get the package list for the installed packages */
 	g_debug ("package_name=%s", search_file);
 	values = g_strsplit (search_file, "&", -1);
-	pk_client_search_files_async (PK_CLIENT(dtask->priv->task), pk_bitfield_value (PK_FILTER_ENUM_NEWEST), values, NULL,
+	pk_client_search_files_async (PK_CLIENT(dtask->task), pk_bitfield_value (PK_FILTER_ENUM_NEWEST), values, NULL,
 				     (PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 				     (GAsyncReadyCallback) gpk_dbus_task_search_file_search_file_cb, dtask);
 	g_strfreev (values);
@@ -983,8 +982,8 @@ gpk_dbus_task_install_package_files (GpkDbusTask *dtask, gchar **files_rel, GpkD
 	g_return_if_fail (files_rel != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* only show the basenames */
 	array = g_ptr_array_new_with_free_func (g_free);
@@ -995,7 +994,7 @@ gpk_dbus_task_install_package_files (GpkDbusTask *dtask, gchar **files_rel, GpkD
 	}
 
 	/* check the user wanted to call this method */
-	if (dtask->priv->show_confirm_search) {
+	if (dtask->show_confirm_search) {
 		ret = gpk_dbus_task_install_package_files_verify (dtask, array_basename, &error);
 		if (!ret) {
 			error_dbus = g_error_new (GPK_DBUS_ERROR, gpk_dbus_task_get_code_from_gerror (error), "failed to verify files: %s", error->message);
@@ -1007,17 +1006,17 @@ gpk_dbus_task_install_package_files (GpkDbusTask *dtask, gchar **files_rel, GpkD
 	}
 
 	/* check for deps */
-	dtask->priv->files = pk_ptr_array_to_strv (array);
+	dtask->files = pk_ptr_array_to_strv (array);
 
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
-	len = g_strv_length (dtask->priv->files);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
+	len = g_strv_length (dtask->files);
 	/* TRANSLATORS: title: installing a local file */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, ngettext ("Install local file", "Install local files", len));
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
+	gpk_modal_dialog_set_title (dtask->dialog, ngettext ("Install local file", "Install local files", len));
+	if (dtask->show_progress)
+		gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
 
 	/* install async */
-	pk_task_install_files_async (dtask->priv->task, dtask->priv->files, NULL,
+	pk_task_install_files_async (dtask->task, dtask->files, NULL,
 				     (PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 				     (GAsyncReadyCallback) gpk_dbus_task_install_files_cb, dtask);
 
@@ -1070,22 +1069,22 @@ gpk_dbus_task_install_package_names_resolve_cb (PkTask *task, GAsyncResult *res,
 	/* found nothing? */
 	array = pk_results_get_package_array (results);
 	if (array->len == 0) {
-		if (!dtask->priv->show_warning) {
+		if (!dtask->show_warning) {
 			/* TRANSLATORS: couldn't resolve name to package */
 			title = g_strdup_printf (_("Could not find packages"));
-			info_url = gpk_vendor_get_not_found_url (dtask->priv->vendor, GPK_VENDOR_URL_TYPE_DEFAULT);
+			info_url = gpk_vendor_get_not_found_url (dtask->vendor, GPK_VENDOR_URL_TYPE_DEFAULT);
 			/* only show the "more info" button if there is a valid link */
 			if (info_url != NULL)
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
 			else
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
-			gpk_modal_dialog_set_title (dtask->priv->dialog, title);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+			gpk_modal_dialog_set_title (dtask->dialog, title);
 			/* TRANSLATORS: message: could not find */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("The packages could not be found in any package source"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("The packages could not be found in any package source"));
 			/* TRANSLATORS: button: a link to the help file */
-			gpk_modal_dialog_set_action (dtask->priv->dialog, _("More information"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			button = gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_action (dtask->dialog, _("More information"));
+			gpk_modal_dialog_present (dtask->dialog);
+			button = gpk_modal_dialog_run (dtask->dialog);
 			if (button == GTK_RESPONSE_OK)
 				gpk_gnome_open (info_url);
 			g_free (info_url);
@@ -1116,17 +1115,17 @@ gpk_dbus_task_install_package_names_resolve_cb (PkTask *task, GAsyncResult *res,
 
 	/* already installed? */
 	if (already_installed) {
-		if (dtask->priv->show_warning) {
-			gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_FINISHED, 0);
+		if (dtask->show_warning) {
+			gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_FINISHED, 0);
 			/* TRANSLATORS: title: package is already installed */
-			gpk_modal_dialog_set_title (dtask->priv->dialog,
+			gpk_modal_dialog_set_title (dtask->dialog,
 						    ngettext ("The package is already installed",
 							      "The packages are already installed",
-							      g_strv_length (dtask->priv->package_ids)));
+							      g_strv_length (dtask->package_ids)));
 			/* TRANSLATORS: message: package is already installed */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("Nothing to do."));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_message (dtask->dialog, _("Nothing to do."));
+			gpk_modal_dialog_present (dtask->dialog);
+			gpk_modal_dialog_run (dtask->dialog);
 		}
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_UNKNOWN, "package already found");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
@@ -1136,14 +1135,14 @@ gpk_dbus_task_install_package_names_resolve_cb (PkTask *task, GAsyncResult *res,
 
 	/* got junk? */
 	if (package_id == NULL) {
-		if (dtask->priv->show_warning) {
-			gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+		if (dtask->show_warning) {
+			gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: failed to install, shouldn't be shown */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to install package"));
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to install package"));
 			/* TRANSLATORS: the search gave us the wrong result. internal error. barf. */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("Incorrect response from search"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_message (dtask->dialog, _("Incorrect response from search"));
+			gpk_modal_dialog_present (dtask->dialog);
+			gpk_modal_dialog_run (dtask->dialog);
 		}
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_UNKNOWN, "incorrect response from search");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
@@ -1152,7 +1151,7 @@ gpk_dbus_task_install_package_names_resolve_cb (PkTask *task, GAsyncResult *res,
 	}
 
 	/* convert to data */
-	dtask->priv->package_ids = pk_package_array_to_strv (array);
+	dtask->package_ids = pk_package_array_to_strv (array);
 
 	/* install these packages with deps */
 	gpk_dbus_task_install_package_ids (dtask);
@@ -1191,11 +1190,11 @@ gpk_dbus_task_install_package_names (GpkDbusTask *dtask, gchar **packages, GpkDb
 	g_return_if_fail (packages != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* optional */
-	if (!dtask->priv->show_confirm_install) {
+	if (!dtask->show_confirm_install) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -1227,9 +1226,9 @@ gpk_dbus_task_install_package_names (GpkDbusTask *dtask, gchar **packages, GpkDb
 	g_free (text);
 
 	/* make title using application name */
-	if (dtask->priv->parent_title != NULL) {
+	if (dtask->parent_title != NULL) {
 		/* TRANSLATORS: string is a program name, e.g. "Movie Player" */
-		text = g_strdup_printf (ngettext ("%s wants to install a package", "%s wants to install packages", len), dtask->priv->parent_title);
+		text = g_strdup_printf (ngettext ("%s wants to install a package", "%s wants to install packages", len), dtask->parent_title);
 	} else {
 		/* TRANSLATORS: a random program which we can't get the name wants to do something */
 		text = g_strdup (ngettext ("A program wants to install a package", "A program wants to install packages", len));
@@ -1247,15 +1246,15 @@ gpk_dbus_task_install_package_names (GpkDbusTask *dtask, gchar **packages, GpkDb
 	}
 
 skip_checks:
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
 	/* TRANSLATORS: title, searching */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Searching for packages"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Searching for packages"));
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* find out if we can find a package */
-	pk_client_resolve_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1), packages, NULL,
+	pk_client_resolve_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1), packages, NULL,
 			         (PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 				 (GAsyncReadyCallback) gpk_dbus_task_install_package_names_resolve_cb, dtask);
 
@@ -1310,21 +1309,21 @@ gpk_dbus_task_install_provide_files_search_file_cb (PkClient *client, GAsyncResu
 
 	/* found nothing? */
 	if (array->len == 0) {
-		if (dtask->priv->show_warning) {
-			info_url = gpk_vendor_get_not_found_url (dtask->priv->vendor, GPK_VENDOR_URL_TYPE_DEFAULT);
+		if (dtask->show_warning) {
+			info_url = gpk_vendor_get_not_found_url (dtask->vendor, GPK_VENDOR_URL_TYPE_DEFAULT);
 			/* only show the "more info" button if there is a valid link */
 			if (info_url != NULL)
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
 			else
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: failed to fild the package for thefile */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to find package"));
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to find package"));
 			/* TRANSLATORS: nothing found */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("The file could not be found in any packages"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("The file could not be found in any packages"));
 			/* TRANSLATORS: button: show the user a button to get more help finding stuff */
-			gpk_modal_dialog_set_action (dtask->priv->dialog, _("More information"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			button = gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_action (dtask->dialog, _("More information"));
+			gpk_modal_dialog_present (dtask->dialog);
+			button = gpk_modal_dialog_run (dtask->dialog);
 			if (button == GTK_RESPONSE_OK)
 				gpk_gnome_open (info_url);
 			g_free (info_url);
@@ -1354,16 +1353,16 @@ gpk_dbus_task_install_provide_files_search_file_cb (PkClient *client, GAsyncResu
 
 	/* already installed? */
 	if (already_installed) {
-		if (dtask->priv->show_warning) {
+		if (dtask->show_warning) {
 			split = pk_package_id_split (package_id);
 			/* TRANSLATORS: we've already got a package that provides this file */
 			text = g_strdup_printf (_("The %s package already provides this file"), split[PK_PACKAGE_ID_NAME]);
-			gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+			gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: title */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to install file"));
-			gpk_modal_dialog_set_message (dtask->priv->dialog, text);
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to install file"));
+			gpk_modal_dialog_set_message (dtask->dialog, text);
+			gpk_modal_dialog_present (dtask->dialog);
+			gpk_modal_dialog_run (dtask->dialog);
 			g_free (text);
 			g_strfreev (split);
 		}
@@ -1374,7 +1373,7 @@ gpk_dbus_task_install_provide_files_search_file_cb (PkClient *client, GAsyncResu
 	}
 
 	/* convert to data */
-	dtask->priv->package_ids = pk_package_ids_from_id (package_id);
+	dtask->package_ids = pk_package_ids_from_id (package_id);
 
 	/* install these packages with deps */
 	gpk_dbus_task_install_package_ids (dtask);
@@ -1413,11 +1412,11 @@ gpk_dbus_task_install_provide_files (GpkDbusTask *dtask, gchar **full_paths, Gpk
 	g_return_if_fail (full_paths != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* optional */
-	if (!dtask->priv->show_confirm_search) {
+	if (!dtask->show_confirm_search) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -1444,9 +1443,9 @@ gpk_dbus_task_install_provide_files (GpkDbusTask *dtask, gchar **full_paths, Gpk
 				   ngettext ("Do you want to search for this file now?", "Do you want to search for these files now?", len));
 
 	/* make title using application name */
-	if (dtask->priv->parent_title != NULL) {
+	if (dtask->parent_title != NULL) {
 		/* TRANSLATORS: string is a program name, e.g. "Movie Player" */
-		text = g_strdup_printf (ngettext ("%s wants to install a file", "%s wants to install files", len), dtask->priv->parent_title);
+		text = g_strdup_printf (ngettext ("%s wants to install a file", "%s wants to install files", len), dtask->parent_title);
 	} else {
 		/* TRANSLATORS: a random program which we can't get the name wants to do something */
 		text = g_strdup (ngettext ("A program wants to install a file", "A program wants to install files", len));
@@ -1465,11 +1464,11 @@ gpk_dbus_task_install_provide_files (GpkDbusTask *dtask, gchar **full_paths, Gpk
 
 skip_checks:
 	/* TRANSLATORS: searching for the package that provides the file */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Searching for file"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Searching for file"));
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
 
 	/* do search */
-	pk_client_search_files_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1), full_paths, NULL,
+	pk_client_search_files_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1), full_paths, NULL,
 			             (PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 				     (GAsyncReadyCallback) gpk_dbus_task_install_provide_files_search_file_cb, dtask);
 
@@ -1536,19 +1535,19 @@ gpk_dbus_task_install_gstreamer_resources_confirm (GpkDbusTask *dtask, gchar **c
 	message = g_string_free (string, FALSE);
 
 	/* make title using application name */
-	if (dtask->priv->parent_title != NULL) {
+	if (dtask->parent_title != NULL) {
 		if (is_decoder && !is_encoder) {
 			/* TRANSLATORS: a program wants to decode something (unknown) -- string is a program name, e.g. "Movie Player" */
 			title = g_strdup_printf (ngettext ("%s requires an additional plugin to decode this file",
-							   "%s requires additional plugins to decode this file", len), dtask->priv->parent_title);
+							   "%s requires additional plugins to decode this file", len), dtask->parent_title);
 		} else if (!is_decoder && is_encoder) {
 			/* TRANSLATORS: a program wants to encode something (unknown) -- string is a program name, e.g. "Movie Player" */
 			title = g_strdup_printf (ngettext ("%s requires an additional plugin to encode this file",
-							   "%s requires additional plugins to encode this file", len), dtask->priv->parent_title);
+							   "%s requires additional plugins to encode this file", len), dtask->parent_title);
 		} else {
 			/* TRANSLATORS: a program wants to do something (unknown) -- string is a program name, e.g. "Movie Player" */
 			title = g_strdup_printf (ngettext ("%s requires an additional plugin for this operation",
-							   "%s requires additional plugins for this operation", len), dtask->priv->parent_title);
+							   "%s requires additional plugins for this operation", len), dtask->parent_title);
 		}
 	} else {
 		if (is_decoder && !is_encoder) {
@@ -1614,22 +1613,22 @@ gpk_dbus_task_codec_what_provides_cb (PkClient *client, GAsyncResult *res, GpkDb
 
 	/* found nothing? */
 	if (array->len == 0) {
-		if (dtask->priv->show_warning) {
-			info_url = gpk_vendor_get_not_found_url (dtask->priv->vendor, GPK_VENDOR_URL_TYPE_CODEC);
+		if (dtask->show_warning) {
+			info_url = gpk_vendor_get_not_found_url (dtask->vendor, GPK_VENDOR_URL_TYPE_CODEC);
 			/* only show the "more info" button if there is a valid link */
 			if (info_url != NULL)
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
 			else
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: failed to search for codec */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to search for plugin"));
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to search for plugin"));
 			/* TRANSLATORS: no package sources have the wanted codec */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("Could not find plugin in any configured package source"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("Could not find plugin in any configured package source"));
 
 			/* TRANSLATORS: button text */
-			gpk_modal_dialog_set_action (dtask->priv->dialog, _("More information"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			button = gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_action (dtask->dialog, _("More information"));
+			gpk_modal_dialog_present (dtask->dialog);
+			button = gpk_modal_dialog_run (dtask->dialog);
 			if (button == GTK_RESPONSE_OK)
 				gpk_gnome_open (info_url);
 			g_free (info_url);
@@ -1641,7 +1640,7 @@ gpk_dbus_task_codec_what_provides_cb (PkClient *client, GAsyncResult *res, GpkDb
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_install) {
+	if (!dtask->show_confirm_install) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks2;
 	}
@@ -1649,19 +1648,19 @@ gpk_dbus_task_codec_what_provides_cb (PkClient *client, GAsyncResult *res, GpkDb
 	title = ngettext ("Install the following plugin", "Install the following plugins", array->len);
 	message = ngettext ("Do you want to install this package now?", "Do you want to install these packages now?", array->len);
 
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
-	gpk_modal_dialog_set_package_list (dtask->priv->dialog, array);
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
-	gpk_modal_dialog_set_image (dtask->priv->dialog, "dialog-information");
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
+	gpk_modal_dialog_set_package_list (dtask->dialog, array);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
+	gpk_modal_dialog_set_image (dtask->dialog, "dialog-information");
 	/* TRANSLATORS: button: install codecs */
-	gpk_modal_dialog_set_action (dtask->priv->dialog, _("Install"));
-	gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-	button = gpk_modal_dialog_run (dtask->priv->dialog);
+	gpk_modal_dialog_set_action (dtask->dialog, _("Install"));
+	gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+	button = gpk_modal_dialog_run (dtask->dialog);
 
 	/* close, we're going to fail the method */
 	if (button != GTK_RESPONSE_OK) {
-		gpk_modal_dialog_close (dtask->priv->dialog);
+		gpk_modal_dialog_close (dtask->dialog);
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_TRANSACTION_CANCELLED, "did not agree to download");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
 		g_error_free (error_dbus);
@@ -1670,7 +1669,7 @@ gpk_dbus_task_codec_what_provides_cb (PkClient *client, GAsyncResult *res, GpkDb
 
 skip_checks2:
 	/* install with deps */
-	dtask->priv->package_ids = pk_package_array_to_strv (array);
+	dtask->package_ids = pk_package_array_to_strv (array);
 	gpk_dbus_task_install_package_ids (dtask);
 out:
 	if (error_code != NULL)
@@ -1709,11 +1708,11 @@ gpk_dbus_task_install_gstreamer_resources (GpkDbusTask *dtask, gchar **codec_nam
 	g_return_if_fail (codec_names != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* check it's not session wide banned */
-	ret = g_settings_get_boolean (dtask->priv->settings, GPK_SETTINGS_ENABLE_CODEC_HELPER);
+	ret = g_settings_get_boolean (dtask->settings, GPK_SETTINGS_ENABLE_CODEC_HELPER);
 	if (!ret) {
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_NOT_AUTHORIZED, "not enabled in GSettings : %s", GPK_SETTINGS_ENABLE_CODEC_HELPER);
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
@@ -1722,7 +1721,7 @@ gpk_dbus_task_install_gstreamer_resources (GpkDbusTask *dtask, gchar **codec_nam
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_search) {
+	if (!dtask->show_confirm_search) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -1737,14 +1736,14 @@ gpk_dbus_task_install_gstreamer_resources (GpkDbusTask *dtask, gchar **codec_nam
 	}
 
 skip_checks:
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
 	/* TRANSLATORS: search for codec */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Searching for plugins"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Searching for plugins"));
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
 
 	/* setup the UI */
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* get the request */
 	array_title = g_ptr_array_new_with_free_func (g_free);
@@ -1760,11 +1759,11 @@ skip_checks:
 	title = pk_ptr_array_to_strv (array_title);
 	title_str = g_strjoinv (", ", title);
 	message = g_strdup_printf (_("Searching for plugin: %s"), title_str);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
 
 	/* get codec packages */
 	search = pk_ptr_array_to_strv (array_search);
-	pk_client_what_provides_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
+	pk_client_what_provides_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
 #if PK_CHECK_VERSION(0,9,0)
 				       search, NULL,
 #else
@@ -1823,21 +1822,21 @@ gpk_dbus_task_mime_what_provides_cb (PkClient *client, GAsyncResult *res, GpkDbu
 
 	/* found nothing? */
 	if (array->len == 0) {
-		if (dtask->priv->show_warning) {
-			info_url = gpk_vendor_get_not_found_url (dtask->priv->vendor, GPK_VENDOR_URL_TYPE_MIME);
+		if (dtask->show_warning) {
+			info_url = gpk_vendor_get_not_found_url (dtask->vendor, GPK_VENDOR_URL_TYPE_MIME);
 			/* only show the "more info" button if there is a valid link */
 			if (info_url != NULL)
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
 			else
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: title */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to find software"));
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to find software"));
 			/* TRANSLATORS: nothing found in the package sources that helps */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("No new applications can be found to handle this type of file"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("No new applications can be found to handle this type of file"));
 			/* TRANSLATORS: button: show the user a button to get more help finding stuff */
-			gpk_modal_dialog_set_action (dtask->priv->dialog, _("More information"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			button = gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_action (dtask->dialog, _("More information"));
+			gpk_modal_dialog_present (dtask->dialog);
+			button = gpk_modal_dialog_run (dtask->dialog);
 			if (button == GTK_RESPONSE_OK)
 				gpk_gnome_open (info_url);
 			g_free (info_url);
@@ -1849,7 +1848,7 @@ gpk_dbus_task_mime_what_provides_cb (PkClient *client, GAsyncResult *res, GpkDbu
 	}
 
 	/* populate a chooser and wait for response */
-	gpk_helper_chooser_show (dtask->priv->helper_chooser, array);
+	gpk_helper_chooser_show (dtask->helper_chooser, array);
 out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
@@ -1882,11 +1881,11 @@ gpk_dbus_task_install_mime_types (GpkDbusTask *dtask, gchar **mime_types, GpkDbu
 	g_return_if_fail (mime_types != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* check it's not session wide banned */
-	ret = g_settings_get_boolean (dtask->priv->settings, GPK_SETTINGS_ENABLE_MIME_TYPE_HELPER);
+	ret = g_settings_get_boolean (dtask->settings, GPK_SETTINGS_ENABLE_MIME_TYPE_HELPER);
 	if (!ret) {
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_NOT_AUTHORIZED, "not enabled in GSettings : %s", GPK_SETTINGS_ENABLE_MIME_TYPE_HELPER);
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
@@ -1895,7 +1894,7 @@ gpk_dbus_task_install_mime_types (GpkDbusTask *dtask, gchar **mime_types, GpkDbu
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_search) {
+	if (!dtask->show_confirm_search) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -1912,9 +1911,9 @@ gpk_dbus_task_install_mime_types (GpkDbusTask *dtask, gchar **mime_types, GpkDbu
 	len = 1;
 
 	/* make title using application name */
-	if (dtask->priv->parent_title != NULL) {
+	if (dtask->parent_title != NULL) {
 		/* TRANSLATORS: string is a program name, e.g. "Movie Player" */
-		text = g_strdup_printf (ngettext ("%s requires a new mime type", "%s requires new mime types", len), dtask->priv->parent_title);
+		text = g_strdup_printf (ngettext ("%s requires a new mime type", "%s requires new mime types", len), dtask->parent_title);
 	} else {
 		/* TRANSLATORS: a random program which we can't get the name wants to do something */
 		text = g_strdup (ngettext ("A program requires a new mime type", "A program requires new mime types", len));
@@ -1930,17 +1929,17 @@ gpk_dbus_task_install_mime_types (GpkDbusTask *dtask, gchar **mime_types, GpkDbu
 	}
 
 skip_checks:
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
 	/* TRANSLATORS: title: searching for mime type handlers */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Searching for file handlers"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Searching for file handlers"));
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
 
 	/* setup the UI */
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* action */
-	pk_client_what_provides_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
+	pk_client_what_provides_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
 #if PK_CHECK_VERSION(0,9,0)
 				       mime_types, NULL,
 #else
@@ -2019,7 +2018,7 @@ gpk_dbus_task_font_tag_to_localised_name (GpkDbusTask *dtask, const gchar *tag)
 	}
 
 	/* convert to localisable name */
-	language = gpk_language_iso639_to_language (dtask->priv->language, lang);
+	language = gpk_language_iso639_to_language (dtask->language, lang);
 	if (language == NULL) {
 		/* TRANSLATORS: we could not find en_US string for ISO639 code */
 		name = g_strdup_printf ("%s: %s", _("Language code not matched"), lang);
@@ -2079,22 +2078,22 @@ gpk_dbus_task_fontconfig_what_provides_cb (PkClient *client, GAsyncResult *res, 
 
 	/* found nothing? */
 	if (array->len == 0) {
-		if (dtask->priv->show_warning) {
-			info_url = gpk_vendor_get_not_found_url (dtask->priv->vendor, GPK_VENDOR_URL_TYPE_FONT);
+		if (dtask->show_warning) {
+			info_url = gpk_vendor_get_not_found_url (dtask->vendor, GPK_VENDOR_URL_TYPE_FONT);
 			/* TRANSLATORS: title: cannot find in sources */
 			title = ngettext ("Failed to find font", "Failed to find fonts", array->len);
 			/* only show the "more info" button if there is a valid link */
 			if (info_url != NULL)
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
 			else
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
-			gpk_modal_dialog_set_title (dtask->priv->dialog, title);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+			gpk_modal_dialog_set_title (dtask->dialog, title);
 			/* TRANSLATORS: message: tell the user we suck */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("No new fonts can be found for this document"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("No new fonts can be found for this document"));
 			/* TRANSLATORS: button: show the user a button to get more help finding stuff */
-			gpk_modal_dialog_set_action (dtask->priv->dialog, _("More information"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			button = gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_action (dtask->dialog, _("More information"));
+			gpk_modal_dialog_present (dtask->dialog);
+			button = gpk_modal_dialog_run (dtask->dialog);
 			if (button == GTK_RESPONSE_OK)
 				gpk_gnome_open (info_url);
 			g_free (info_url);
@@ -2106,26 +2105,26 @@ gpk_dbus_task_fontconfig_what_provides_cb (PkClient *client, GAsyncResult *res, 
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_install) {
+	if (!dtask->show_confirm_install) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
 
 	/* TRANSLATORS: title: show a list of fonts */
 	title = ngettext ("Do you want to install this package now?", "Do you want to install these packages now?", array->len);
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
-	gpk_modal_dialog_set_package_list (dtask->priv->dialog, array);
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_image (dtask->priv->dialog, "dialog-information");
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
+	gpk_modal_dialog_set_package_list (dtask->dialog, array);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_message (dtask->dialog, title);
+	gpk_modal_dialog_set_image (dtask->dialog, "dialog-information");
 	/* TRANSLATORS: button: install a font */
-	gpk_modal_dialog_set_action (dtask->priv->dialog, _("Install"));
-	gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-	button = gpk_modal_dialog_run (dtask->priv->dialog);
+	gpk_modal_dialog_set_action (dtask->dialog, _("Install"));
+	gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+	button = gpk_modal_dialog_run (dtask->dialog);
 
 	/* close, we're going to fail the method */
 	if (button != GTK_RESPONSE_OK) {
-		gpk_modal_dialog_close (dtask->priv->dialog);
+		gpk_modal_dialog_close (dtask->dialog);
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_TRANSACTION_CANCELLED, "did not agree to download");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
 		g_error_free (error_dbus);
@@ -2134,7 +2133,7 @@ gpk_dbus_task_fontconfig_what_provides_cb (PkClient *client, GAsyncResult *res, 
 
 skip_checks:
 	/* convert to list of package id's */
-	dtask->priv->package_ids = pk_package_array_to_strv (array);
+	dtask->package_ids = pk_package_array_to_strv (array);
 	gpk_dbus_task_install_package_ids (dtask);
 out:
 	if (error_code != NULL)
@@ -2159,14 +2158,14 @@ gpk_dbus_task_install_check_exec_ignored (GpkDbusTask *dtask)
 	guint i;
 
 	/* check it's not session wide banned */
-	ignored_str = g_settings_get_string (dtask->priv->settings, GPK_SETTINGS_IGNORED_DBUS_REQUESTS);
+	ignored_str = g_settings_get_string (dtask->settings, GPK_SETTINGS_IGNORED_DBUS_REQUESTS);
 	if (ignored_str == NULL)
 		goto out;
 
 	/* check each one */
 	ignored = g_strsplit (ignored_str, ",", -1);
 	for (i=0; ignored[i] != NULL; i++) {
-		if (g_strcmp0 (dtask->priv->exec, ignored[i]) == 0) {
+		if (g_strcmp0 (dtask->exec, ignored[i]) == 0) {
 			ret = FALSE;
 			break;
 		}
@@ -2208,13 +2207,13 @@ gpk_dbus_task_install_fontconfig_resources (GpkDbusTask *dtask, gchar **fonts, G
 	g_return_if_fail (fonts != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* if this program banned? */
 	ret = gpk_dbus_task_install_check_exec_ignored (dtask);
 	if (!ret) {
-		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_NOT_AUTHORIZED, "skipping ignored program: %s", dtask->priv->exec);
+		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_NOT_AUTHORIZED, "skipping ignored program: %s", dtask->exec);
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
 		g_error_free (error_dbus);
 		goto out;
@@ -2224,7 +2223,7 @@ gpk_dbus_task_install_fontconfig_resources (GpkDbusTask *dtask, gchar **fonts, G
 	len = g_strv_length (fonts);
 
 	/* check it's not session wide banned */
-	ret = g_settings_get_boolean (dtask->priv->settings, GPK_SETTINGS_ENABLE_FONT_HELPER);
+	ret = g_settings_get_boolean (dtask->settings, GPK_SETTINGS_ENABLE_FONT_HELPER);
 	if (!ret) {
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_NOT_AUTHORIZED, "not enabled in GSettings : %s", GPK_SETTINGS_ENABLE_FONT_HELPER);
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
@@ -2233,7 +2232,7 @@ gpk_dbus_task_install_fontconfig_resources (GpkDbusTask *dtask, gchar **fonts, G
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_search) {
+	if (!dtask->show_confirm_search) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -2287,9 +2286,9 @@ gpk_dbus_task_install_fontconfig_resources (GpkDbusTask *dtask, gchar **fonts, G
 	g_free (text);
 
 	/* make title using application name */
-	if (dtask->priv->parent_title != NULL) {
+	if (dtask->parent_title != NULL) {
 		/* TRANSLATORS: string is a program name, e.g. "Movie Player" */
-		text = g_strdup_printf (ngettext ("%s wants to install a font", "%s wants to install fonts", len), dtask->priv->parent_title);
+		text = g_strdup_printf (ngettext ("%s wants to install a font", "%s wants to install fonts", len), dtask->parent_title);
 	} else {
 		/* TRANSLATORS: a random program which we can't get the name wants to do something */
 		text = g_strdup (ngettext ("A program wants to install a font", "A program wants to install fonts", len));
@@ -2309,16 +2308,16 @@ gpk_dbus_task_install_fontconfig_resources (GpkDbusTask *dtask, gchar **fonts, G
 skip_checks:
 	/* TRANSLATORS: title to show when searching for font files */
 	title = ngettext ("Searching for font", "Searching for fonts", len);
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, 0);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
 
 	/* setup the UI */
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* do each one */
-	pk_client_what_provides_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
+	pk_client_what_provides_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
 #if PK_CHECK_VERSION(0,9,0)
 				       fonts, NULL,
 #else
@@ -2419,21 +2418,21 @@ gpk_dbus_task_plasma_service_what_provides_cb (PkClient *client, GAsyncResult *r
 
 	/* found nothing? */
 	if (array->len == 0) {
-		if (dtask->priv->show_warning) {
-			info_url = gpk_vendor_get_not_found_url (dtask->priv->vendor, GPK_VENDOR_URL_TYPE_DEFAULT);
+		if (dtask->show_warning) {
+			info_url = gpk_vendor_get_not_found_url (dtask->vendor, GPK_VENDOR_URL_TYPE_DEFAULT);
 			/* only show the "more info" button if there is a valid link */
 			if (info_url != NULL)
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, GPK_MODAL_DIALOG_BUTTON_ACTION);
 			else
-				gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to search for Plasma service"));
+				gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to search for Plasma service"));
 			/* TRANSLATORS: no package sources have the wanted Plasma service */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("Could not find service in any configured package source"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("Could not find service in any configured package source"));
 
 			/* TRANSLATORS: button text */
-			gpk_modal_dialog_set_action (dtask->priv->dialog, _("More information"));
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			button = gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_set_action (dtask->dialog, _("More information"));
+			gpk_modal_dialog_present (dtask->dialog);
+			button = gpk_modal_dialog_run (dtask->dialog);
 			if (button == GTK_RESPONSE_OK)
 				gpk_gnome_open (info_url);
 			g_free (info_url);
@@ -2445,7 +2444,7 @@ gpk_dbus_task_plasma_service_what_provides_cb (PkClient *client, GAsyncResult *r
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_install) {
+	if (!dtask->show_confirm_install) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks2;
 	}
@@ -2453,19 +2452,19 @@ gpk_dbus_task_plasma_service_what_provides_cb (PkClient *client, GAsyncResult *r
 	title = ngettext ("Install the following plugin", "Install the following plugins", array->len);
 	message = ngettext ("Do you want to install this package now?", "Do you want to install these packages now?", array->len);
 
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
-	gpk_modal_dialog_set_package_list (dtask->priv->dialog, array);
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
-	gpk_modal_dialog_set_image (dtask->priv->dialog, "dialog-information");
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
+	gpk_modal_dialog_set_package_list (dtask->dialog, array);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
+	gpk_modal_dialog_set_image (dtask->dialog, "dialog-information");
 	/* TRANSLATORS: button: install Plasma services */
-	gpk_modal_dialog_set_action (dtask->priv->dialog, _("Install"));
-	gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-	button = gpk_modal_dialog_run (dtask->priv->dialog);
+	gpk_modal_dialog_set_action (dtask->dialog, _("Install"));
+	gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+	button = gpk_modal_dialog_run (dtask->dialog);
 
 	/* close, we're going to fail the method */
 	if (button != GTK_RESPONSE_OK) {
-		gpk_modal_dialog_close (dtask->priv->dialog);
+		gpk_modal_dialog_close (dtask->dialog);
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_TRANSACTION_CANCELLED, "did not agree to download");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
 		g_error_free (error_dbus);
@@ -2474,7 +2473,7 @@ gpk_dbus_task_plasma_service_what_provides_cb (PkClient *client, GAsyncResult *r
 
 skip_checks2:
 	/* install with deps */
-	dtask->priv->package_ids = pk_package_array_to_strv (array);
+	dtask->package_ids = pk_package_array_to_strv (array);
 	gpk_dbus_task_install_package_ids (dtask);
 out:
 	if (error_code != NULL)
@@ -2512,11 +2511,11 @@ gpk_dbus_task_install_plasma_resources (GpkDbusTask *dtask, gchar **service_name
 	g_return_if_fail (service_names != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* optional */
-	if (!dtask->priv->show_confirm_search) {
+	if (!dtask->show_confirm_search) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -2531,14 +2530,14 @@ gpk_dbus_task_install_plasma_resources (GpkDbusTask *dtask, gchar **service_name
 	}
 
 skip_checks:
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
 	/* TRANSLATORS: search for Plasma services */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Searching for services"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Searching for services"));
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
 
 	/* setup the UI */
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* get the request */
 	array_title = g_ptr_array_new_with_free_func (g_free);
@@ -2552,11 +2551,11 @@ skip_checks:
 	title = pk_ptr_array_to_strv (array_title);
 	title_str = g_strjoinv (", ", title);
 	message = g_strdup_printf (_("Searching for service: %s"), title_str);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
 
 	/* get service packages */
 	search = pk_ptr_array_to_strv (array_search);
-	pk_client_what_provides_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
+	pk_client_what_provides_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED, PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, -1),
 #if PK_CHECK_VERSION(0,9,0)
 				       search, NULL,
 #else
@@ -2673,13 +2672,13 @@ gpk_dbus_task_printer_driver_what_provides_cb (PkClient *client, GAsyncResult *r
 
 	/* found nothing?  No problem*/
 	if (array->len == 0) {
-		gpk_modal_dialog_close (dtask->priv->dialog);
+		gpk_modal_dialog_close (dtask->dialog);
 		gpk_dbus_task_dbus_return_value (dtask, FALSE);
 		goto out;
 	}
 
 	/* optional */
-	if (!dtask->priv->show_confirm_install) {
+	if (!dtask->show_confirm_install) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks2;
 	}
@@ -2687,19 +2686,19 @@ gpk_dbus_task_printer_driver_what_provides_cb (PkClient *client, GAsyncResult *r
 	title = ngettext ("Install the following driver", "Install the following drivers", array->len);
 	message = ngettext ("Do you want to install this package now?", "Do you want to install these packages now?", array->len);
 
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
-	gpk_modal_dialog_set_package_list (dtask->priv->dialog, array);
-	gpk_modal_dialog_set_title (dtask->priv->dialog, title);
-	gpk_modal_dialog_set_message (dtask->priv->dialog, message);
-	gpk_modal_dialog_set_image (dtask->priv->dialog, "dialog-information");
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_CONFIRM, GPK_MODAL_DIALOG_PACKAGE_LIST);
+	gpk_modal_dialog_set_package_list (dtask->dialog, array);
+	gpk_modal_dialog_set_title (dtask->dialog, title);
+	gpk_modal_dialog_set_message (dtask->dialog, message);
+	gpk_modal_dialog_set_image (dtask->dialog, "dialog-information");
 	/* TRANSLATORS: button: install printer drivers */
-	gpk_modal_dialog_set_action (dtask->priv->dialog, _("Install"));
-	gpk_modal_dialog_present_with_time (dtask->priv->dialog, dtask->priv->timestamp);
-	button = gpk_modal_dialog_run (dtask->priv->dialog);
+	gpk_modal_dialog_set_action (dtask->dialog, _("Install"));
+	gpk_modal_dialog_present_with_time (dtask->dialog, dtask->timestamp);
+	button = gpk_modal_dialog_run (dtask->dialog);
 
 	/* close, we're going to fail the method */
 	if (button != GTK_RESPONSE_OK) {
-		gpk_modal_dialog_close (dtask->priv->dialog);
+		gpk_modal_dialog_close (dtask->dialog);
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_TRANSACTION_CANCELLED, "did not agree to download");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
 		g_error_free (error_dbus);
@@ -2708,7 +2707,7 @@ gpk_dbus_task_printer_driver_what_provides_cb (PkClient *client, GAsyncResult *r
 
 skip_checks2:
 	/* install with deps */
-	dtask->priv->package_ids = pk_package_array_to_strv (array);
+	dtask->package_ids = pk_package_array_to_strv (array);
 	gpk_dbus_task_install_package_ids (dtask);
 out:
 	if (error_code != NULL)
@@ -2746,20 +2745,20 @@ gpk_dbus_task_install_printer_drivers (GpkDbusTask *dtask, gchar **device_ids, G
 	g_return_if_fail (device_ids != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
-	gpk_modal_dialog_setup (dtask->priv->dialog,
+	gpk_modal_dialog_setup (dtask->dialog,
 				GPK_MODAL_DIALOG_PAGE_PROGRESS,
 				GPK_MODAL_DIALOG_PACKAGE_PADDING);
-	gpk_modal_dialog_set_title (dtask->priv->dialog,
+	gpk_modal_dialog_set_title (dtask->dialog,
 				    _("Searching for packages"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog,
+	gpk_modal_dialog_set_image_status (dtask->dialog,
 					   PK_STATUS_ENUM_WAIT);
 
 	/* setup the UI */
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	len = g_strv_length (device_ids);
 	if (len > 1)
@@ -2810,7 +2809,7 @@ gpk_dbus_task_install_printer_drivers (GpkDbusTask *dtask, gchar **device_ids, G
 	tags[n_tags] = NULL;
 
 	/* get driver packages */
-	pk_client_what_provides_async (PK_CLIENT(dtask->priv->task),
+	pk_client_what_provides_async (PK_CLIENT(dtask->task),
 				       pk_bitfield_from_enums (PK_FILTER_ENUM_NOT_INSTALLED,
 							       PK_FILTER_ENUM_ARCH,
 							       PK_FILTER_ENUM_NEWEST,
@@ -2835,18 +2834,18 @@ gpk_dbus_task_remove_package_ids (GpkDbusTask *dtask)
 {
 	GtkWindow *window;
 
-	gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
+	gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_PROGRESS, GPK_MODAL_DIALOG_PACKAGE_PADDING);
 	/* TRANSLATORS: title: removing packages */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Removing packages"));
-	if (dtask->priv->show_progress)
-		gpk_modal_dialog_present (dtask->priv->dialog);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Removing packages"));
+	if (dtask->show_progress)
+		gpk_modal_dialog_present (dtask->dialog);
 
 	/* ensure parent is set */
-	window = gpk_modal_dialog_get_window (dtask->priv->dialog);
-	gpk_task_set_parent_window (GPK_TASK (dtask->priv->task), window);
+	window = gpk_modal_dialog_get_window (dtask->dialog);
+	gpk_task_set_parent_window (GPK_TASK (dtask->task), window);
 
 	/* remove async */
-	pk_task_remove_packages_async (dtask->priv->task, dtask->priv->package_ids, TRUE, TRUE, NULL,
+	pk_task_remove_packages_async (dtask->task, dtask->package_ids, TRUE, TRUE, NULL,
 					(PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 					(GAsyncReadyCallback) gpk_dbus_task_remove_packages_cb, dtask);
 }
@@ -2888,15 +2887,15 @@ gpk_dbus_task_remove_package_by_file_search_file_cb (PkClient *client, GAsyncRes
 
 	/* found nothing? */
 	if (array->len == 0) {
-		if (dtask->priv->show_warning) {
-			gpk_modal_dialog_setup (dtask->priv->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
+		if (dtask->show_warning) {
+			gpk_modal_dialog_setup (dtask->dialog, GPK_MODAL_DIALOG_PAGE_WARNING, 0);
 			/* TRANSLATORS: failed to find the package for the file */
-			gpk_modal_dialog_set_title (dtask->priv->dialog, _("Failed to find package for this file"));
+			gpk_modal_dialog_set_title (dtask->dialog, _("Failed to find package for this file"));
 			/* TRANSLATORS: nothing found */
-			gpk_modal_dialog_set_message (dtask->priv->dialog, _("The file could not be found in any packages"));
+			gpk_modal_dialog_set_message (dtask->dialog, _("The file could not be found in any packages"));
 			/* TRANSLATORS: button: show the user a button to get more help finding stuff */
-			gpk_modal_dialog_present (dtask->priv->dialog);
-			gpk_modal_dialog_run (dtask->priv->dialog);
+			gpk_modal_dialog_present (dtask->dialog);
+			gpk_modal_dialog_run (dtask->dialog);
 		}
 		error_dbus = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_PACKAGE_NOT_FOUND, "no packages found for this file");
 		gpk_dbus_task_dbus_return_error (dtask, error_dbus);
@@ -2905,7 +2904,7 @@ gpk_dbus_task_remove_package_by_file_search_file_cb (PkClient *client, GAsyncRes
 	}
 
 	/* convert to data */
-	dtask->priv->package_ids = pk_package_array_to_strv (array);
+	dtask->package_ids = pk_package_array_to_strv (array);
 
 	/* remove these packages with deps */
 	gpk_dbus_task_remove_package_ids (dtask);
@@ -2943,11 +2942,11 @@ gpk_dbus_task_remove_package_by_file (GpkDbusTask *dtask, gchar **full_paths, Gp
 	g_return_if_fail (full_paths != NULL);
 
 	/* save callback information */
-	dtask->priv->finished_cb = finished_cb;
-	dtask->priv->finished_userdata = userdata;
+	dtask->finished_cb = finished_cb;
+	dtask->finished_userdata = userdata;
 
 	/* optional */
-	if (!dtask->priv->show_confirm_search) {
+	if (!dtask->show_confirm_search) {
 		g_debug ("skip confirm as not allowed to interact with user");
 		goto skip_checks;
 	}
@@ -2974,9 +2973,9 @@ gpk_dbus_task_remove_package_by_file (GpkDbusTask *dtask, gchar **full_paths, Gp
 				   ngettext ("Do you want to remove this file now?", "Do you want to remove these files now?", len));
 
 	/* make title using application name */
-	if (dtask->priv->parent_title != NULL) {
+	if (dtask->parent_title != NULL) {
 		/* TRANSLATORS: string is a program name, e.g. "Movie Player" */
-		text = g_strdup_printf (ngettext ("%s wants to remove a file", "%s wants to remove files", len), dtask->priv->parent_title);
+		text = g_strdup_printf (ngettext ("%s wants to remove a file", "%s wants to remove files", len), dtask->parent_title);
 	} else {
 		/* TRANSLATORS: a random program which we can't get the name wants to do something */
 		text = g_strdup (ngettext ("A program wants to remove a file", "A program wants to remove files", len));
@@ -2995,11 +2994,11 @@ gpk_dbus_task_remove_package_by_file (GpkDbusTask *dtask, gchar **full_paths, Gp
 
 skip_checks:
 	/* TRANSLATORS: searching for the package that provides the file */
-	gpk_modal_dialog_set_title (dtask->priv->dialog, _("Searching for file"));
-	gpk_modal_dialog_set_image_status (dtask->priv->dialog, PK_STATUS_ENUM_WAIT);
+	gpk_modal_dialog_set_title (dtask->dialog, _("Searching for file"));
+	gpk_modal_dialog_set_image_status (dtask->dialog, PK_STATUS_ENUM_WAIT);
 
 	/* do search */
-	pk_client_search_files_async (PK_CLIENT(dtask->priv->task), pk_bitfield_from_enums (PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, PK_FILTER_ENUM_INSTALLED, -1), full_paths, NULL,
+	pk_client_search_files_async (PK_CLIENT(dtask->task), pk_bitfield_from_enums (PK_FILTER_ENUM_ARCH, PK_FILTER_ENUM_NEWEST, PK_FILTER_ENUM_INSTALLED, -1), full_paths, NULL,
 			             (PkProgressCallback) gpk_dbus_task_progress_cb, dtask,
 				     (GAsyncReadyCallback) gpk_dbus_task_remove_package_by_file_search_file_cb, dtask);
 
@@ -3025,7 +3024,7 @@ gpk_dbus_task_get_package_for_exec (GpkDbusTask *dtask, const gchar *exec)
 
 	/* find the package name */
 	values = g_strsplit (exec, "&", -1);
-	results = pk_client_search_files (PK_CLIENT(dtask->priv->task), pk_bitfield_value (PK_FILTER_ENUM_INSTALLED), values, NULL,
+	results = pk_client_search_files (PK_CLIENT(dtask->task), pk_bitfield_value (PK_FILTER_ENUM_INSTALLED), values, NULL,
 					 (PkProgressCallback) gpk_dbus_task_progress_cb, dtask, &error);
 	if (results == NULL) {
 		g_warning ("failed to search file: %s", error->message);
@@ -3100,21 +3099,21 @@ gpk_dbus_task_set_exec (GpkDbusTask *dtask, const gchar *exec)
 	g_return_val_if_fail (GPK_IS_DBUS_TASK (dtask), FALSE);
 
 	/* old values invalid */
-	g_free (dtask->priv->exec);
-	g_free (dtask->priv->parent_title);
-	g_free (dtask->priv->parent_icon_name);
-	dtask->priv->exec = g_strdup (exec);
-	dtask->priv->parent_title = NULL;
-	dtask->priv->parent_icon_name = NULL;
+	g_free (dtask->exec);
+	g_free (dtask->parent_title);
+	g_free (dtask->parent_icon_name);
+	dtask->exec = g_strdup (exec);
+	dtask->parent_title = NULL;
+	dtask->parent_icon_name = NULL;
 
 	/* is the binary trusted, i.e. can we probe it's window properties */
 	if (gpk_dbus_task_path_is_trusted (exec) &&
-            dtask->priv->parent_window != NULL) {
+            dtask->parent_window != NULL) {
 		g_debug ("using application window properties");
 		/* get from window properties */
 		x11 = gpk_x11_new ();
-		gpk_x11_set_window (x11, dtask->priv->parent_window);
-		dtask->priv->parent_title = gpk_x11_get_title (x11);
+		gpk_x11_set_window (x11, dtask->parent_window);
+		dtask->parent_title = gpk_x11_get_title (x11);
 		g_object_unref (x11);
 		goto out;
 	}
@@ -3123,16 +3122,16 @@ gpk_dbus_task_set_exec (GpkDbusTask *dtask, const gchar *exec)
 	package = gpk_dbus_task_get_package_for_exec (dtask, exec);
 	g_debug ("got package %s", package);
 	if (package != NULL)
-		dtask->priv->parent_title = g_strdup (package);
+		dtask->parent_title = g_strdup (package);
 
 	/* fallback to exec - eugh... */
-	if (dtask->priv->parent_title == NULL) {
+	if (dtask->parent_title == NULL) {
 		g_debug ("did not get package for %s, using exec basename", package);
-		dtask->priv->parent_title = g_path_get_basename (exec);
+		dtask->parent_title = g_path_get_basename (exec);
 	}
 out:
 	g_free (package);
-	g_debug ("got name=%s, icon=%s", dtask->priv->parent_title, dtask->priv->parent_icon_name);
+	g_debug ("got name=%s, icon=%s", dtask->parent_title, dtask->parent_icon_name);
 	return TRUE;
 }
 
@@ -3145,7 +3144,6 @@ gpk_dbus_task_class_init (GpkDbusTaskClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_dbus_task_finalize;
-	g_type_class_add_private (klass, sizeof (GpkDbusTaskPrivate));
 }
 
 /**
@@ -3157,25 +3155,23 @@ gpk_dbus_task_init (GpkDbusTask *dtask)
 {
 	GtkWindow *main_window;
 
-	dtask->priv = GPK_DBUS_TASK_GET_PRIVATE (dtask);
-
-	dtask->priv->package_ids = NULL;
-	dtask->priv->files = NULL;
-	dtask->priv->parent_window = NULL;
-	dtask->priv->parent_title = NULL;
-	dtask->priv->exec = NULL;
-	dtask->priv->parent_icon_name = NULL;
-	dtask->priv->cached_error_code = NULL;
-	dtask->priv->context = NULL;
-	dtask->priv->cancellable = g_cancellable_new ();
-	dtask->priv->exit = PK_EXIT_ENUM_FAILED;
-	dtask->priv->show_confirm_search = TRUE;
-	dtask->priv->show_confirm_deps = TRUE;
-	dtask->priv->show_confirm_install = TRUE;
-	dtask->priv->show_progress = TRUE;
-	dtask->priv->show_finished = TRUE;
-	dtask->priv->show_warning = TRUE;
-	dtask->priv->timestamp = 0;
+	dtask->package_ids = NULL;
+	dtask->files = NULL;
+	dtask->parent_window = NULL;
+	dtask->parent_title = NULL;
+	dtask->exec = NULL;
+	dtask->parent_icon_name = NULL;
+	dtask->cached_error_code = NULL;
+	dtask->context = NULL;
+	dtask->cancellable = g_cancellable_new ();
+	dtask->exit = PK_EXIT_ENUM_FAILED;
+	dtask->show_confirm_search = TRUE;
+	dtask->show_confirm_deps = TRUE;
+	dtask->show_confirm_install = TRUE;
+	dtask->show_progress = TRUE;
+	dtask->show_finished = TRUE;
+	dtask->show_warning = TRUE;
+	dtask->timestamp = 0;
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
@@ -3185,34 +3181,34 @@ gpk_dbus_task_init (GpkDbusTask *dtask)
 	if (!notify_is_initted ())
 		notify_init (_("Software Install"));
 
-	dtask->priv->vendor = gpk_vendor_new ();
-	dtask->priv->dialog = gpk_modal_dialog_new ();
-	main_window = gpk_modal_dialog_get_window (dtask->priv->dialog);
-	gpk_modal_dialog_set_window_icon (dtask->priv->dialog, "pk-package-installed");
-	g_signal_connect (dtask->priv->dialog, "cancel",
+	dtask->vendor = gpk_vendor_new ();
+	dtask->dialog = gpk_modal_dialog_new ();
+	main_window = gpk_modal_dialog_get_window (dtask->dialog);
+	gpk_modal_dialog_set_window_icon (dtask->dialog, "pk-package-installed");
+	g_signal_connect (dtask->dialog, "cancel",
 			  G_CALLBACK (gpk_dbus_task_button_cancel_cb), dtask);
-	g_signal_connect (dtask->priv->dialog, "close",
+	g_signal_connect (dtask->dialog, "close",
 			  G_CALLBACK (gpk_dbus_task_button_close_cb), dtask);
 
 	/* helpers */
-	dtask->priv->helper_run = gpk_helper_run_new ();
-	gpk_helper_run_set_parent (dtask->priv->helper_run, main_window);
+	dtask->helper_run = gpk_helper_run_new ();
+	gpk_helper_run_set_parent (dtask->helper_run, main_window);
 
-	dtask->priv->helper_chooser = gpk_helper_chooser_new ();
-	g_signal_connect (dtask->priv->helper_chooser, "event", G_CALLBACK (gpk_dbus_task_chooser_event_cb), dtask);
-	gpk_helper_chooser_set_parent (dtask->priv->helper_chooser, main_window);
+	dtask->helper_chooser = gpk_helper_chooser_new ();
+	g_signal_connect (dtask->helper_chooser, "event", G_CALLBACK (gpk_dbus_task_chooser_event_cb), dtask);
+	gpk_helper_chooser_set_parent (dtask->helper_chooser, main_window);
 
 	/* map ISO639 to language names */
-	dtask->priv->language = gpk_language_new ();
-	gpk_language_populate (dtask->priv->language, NULL);
+	dtask->language = gpk_language_new ();
+	gpk_language_populate (dtask->language, NULL);
 
 	/* gat session settings */
-	dtask->priv->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
+	dtask->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
 
 	/* get actions */
-	dtask->priv->control = pk_control_new ();
-	dtask->priv->task = PK_TASK(gpk_task_new ());
-	dtask->priv->roles = pk_control_get_properties (dtask->priv->control, NULL, NULL);
+	dtask->control = pk_control_new ();
+	dtask->task = PK_TASK(gpk_task_new ());
+	dtask->roles = pk_control_get_properties (dtask->control, NULL, NULL);
 }
 
 /**
@@ -3228,31 +3224,30 @@ gpk_dbus_task_finalize (GObject *object)
 	g_return_if_fail (GPK_IS_DBUS_TASK (object));
 
 	dtask = GPK_DBUS_TASK (object);
-	g_return_if_fail (dtask->priv != NULL);
 
 	/* no reply was sent */
-	if (dtask->priv->context != NULL) {
+	if (dtask->context != NULL) {
 		error = g_error_new (GPK_DBUS_ERROR, PK_ERROR_ENUM_INTERNAL_ERROR, "context never was returned");
 		gpk_dbus_task_dbus_return_error (dtask, error);
 		g_error_free (error);
 	}
 
-	g_free (dtask->priv->parent_title);
-	g_free (dtask->priv->parent_icon_name);
-	g_free (dtask->priv->exec);
-	if (dtask->priv->cached_error_code != NULL)
-		g_object_unref (dtask->priv->cached_error_code);
-	g_strfreev (dtask->priv->files);
-	g_strfreev (dtask->priv->package_ids);
-	g_object_unref (PK_CLIENT(dtask->priv->task));
-	g_object_unref (dtask->priv->control);
-	g_object_unref (dtask->priv->settings);
-	g_object_unref (dtask->priv->dialog);
-	g_object_unref (dtask->priv->vendor);
-	g_object_unref (dtask->priv->language);
-	g_object_unref (dtask->priv->cancellable);
-	g_object_unref (dtask->priv->helper_run);
-	g_object_unref (dtask->priv->helper_chooser);
+	g_free (dtask->parent_title);
+	g_free (dtask->parent_icon_name);
+	g_free (dtask->exec);
+	if (dtask->cached_error_code != NULL)
+		g_object_unref (dtask->cached_error_code);
+	g_strfreev (dtask->files);
+	g_strfreev (dtask->package_ids);
+	g_object_unref (PK_CLIENT(dtask->task));
+	g_object_unref (dtask->control);
+	g_object_unref (dtask->settings);
+	g_object_unref (dtask->dialog);
+	g_object_unref (dtask->vendor);
+	g_object_unref (dtask->language);
+	g_object_unref (dtask->cancellable);
+	g_object_unref (dtask->helper_run);
+	g_object_unref (dtask->helper_chooser);
 
 	G_OBJECT_CLASS (gpk_dbus_task_parent_class)->finalize (object);
 }
