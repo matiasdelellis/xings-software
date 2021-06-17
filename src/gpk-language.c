@@ -28,10 +28,9 @@
 
 static void     gpk_language_finalize	(GObject	  *object);
 
-#define GPK_LANGUAGE_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), GPK_TYPE_LANGUAGE, GpkLanguagePrivate))
-
-struct GpkLanguagePrivate
+struct _GpkLanguage
 {
+	GObject			 parent;
 	GHashTable		*hash;
 };
 
@@ -71,9 +70,9 @@ gpk_language_parser_start_element (GMarkupParseContext *context, const gchar *el
 
 	/* add both to hash */
 	if (code1 != NULL)
-		g_hash_table_insert (language->priv->hash, g_strdup (code1), g_strdup (name));
+		g_hash_table_insert (language->hash, g_strdup (code1), g_strdup (name));
 	if (code2b != NULL)
-		g_hash_table_insert (language->priv->hash, g_strdup (code2b), g_strdup (name));
+		g_hash_table_insert (language->hash, g_strdup (code2b), g_strdup (name));
 }
 
 /* trivial parser */
@@ -137,7 +136,7 @@ out:
 gchar *
 gpk_language_iso639_to_language (GpkLanguage *language, const gchar *iso639)
 {
-	return g_strdup (g_hash_table_lookup (language->priv->hash, iso639));
+	return g_strdup (g_hash_table_lookup (language->hash, iso639));
 }
 
 /**
@@ -153,8 +152,7 @@ gpk_language_finalize (GObject *object)
 
 	language = GPK_LANGUAGE (object);
 
-	g_return_if_fail (language->priv != NULL);
-	g_hash_table_unref (language->priv->hash);
+	g_hash_table_unref (language->hash);
 
 	G_OBJECT_CLASS (gpk_language_parent_class)->finalize (object);
 }
@@ -166,8 +164,7 @@ gpk_language_finalize (GObject *object)
 static void
 gpk_language_init (GpkLanguage *language)
 {
-	language->priv = GPK_LANGUAGE_GET_PRIVATE (language);
-	language->priv->hash = g_hash_table_new_full (g_str_hash, g_str_equal, (GDestroyNotify) g_free, (GDestroyNotify) g_free);
+	language->hash = g_hash_table_new_full (g_str_hash, g_str_equal, (GDestroyNotify) g_free, (GDestroyNotify) g_free);
 }
 
 /**
@@ -179,7 +176,6 @@ gpk_language_class_init (GpkLanguageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_language_finalize;
-	g_type_class_add_private (klass, sizeof (GpkLanguagePrivate));
 }
 
 /**

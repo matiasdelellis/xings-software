@@ -26,27 +26,8 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_LANGUAGE		(gpk_language_get_type ())
-#define GPK_LANGUAGE(o)			(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_LANGUAGE, GpkLanguage))
-#define GPK_LANGUAGE_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_LANGUAGE, GpkLanguageClass))
-#define GPK_IS_LANGUAGE(o)	 	(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_LANGUAGE))
-#define GPK_IS_LANGUAGE_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_LANGUAGE))
-#define GPK_LANGUAGE_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_LANGUAGE, GpkLanguageClass))
-#define GPK_LANGUAGE_ERROR		(gpk_language_error_quark ())
-#define GPK_LANGUAGE_TYPE_ERROR		(gpk_language_error_get_type ())
-
-typedef struct GpkLanguagePrivate GpkLanguagePrivate;
-
-typedef struct
-{
-	 GObject		 parent;
-	 GpkLanguagePrivate	*priv;
-} GpkLanguage;
-
-typedef struct
-{
-	GObjectClass	parent_class;
-} GpkLanguageClass;
+#define GPK_TYPE_LANGUAGE (gpk_language_get_type())
+G_DECLARE_FINAL_TYPE (GpkLanguage, gpk_language, GPK, LANGUAGE, GObject)
 
 GType		 gpk_language_get_type		  	(void);
 GpkLanguage	*gpk_language_new			(void);
