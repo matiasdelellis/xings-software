@@ -36,8 +36,6 @@
 #include <glib/gi18n.h>
 #include <packagekit-glib2/packagekit.h>
 
-#include "egg-string.h"
-
 #include "gpk-animated-icon.h"
 #include "gpk-modal-dialog.h"
 #include "gpk-common.h"

@@ -34,8 +34,6 @@
 #include <libnotify/notify.h>
 #include <packagekit-glib2/packagekit.h>
 
-#include "egg-string.h"
-
 #include "gpk-common.h"
 #include "gpk-dbus.h"
 #include "gpk-dbus-task.h"

@@ -23,7 +23,6 @@
 
 #include <glib/gi18n.h>
 
-#include "egg-string.h"
 #include "gpk-vendor.h"
 
 static void     gpk_vendor_finalize	(GObject          *object);

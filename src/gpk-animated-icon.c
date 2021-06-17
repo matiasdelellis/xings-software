@@ -26,8 +26,6 @@
 #include <gtk/gtk.h>
 #include <packagekit-glib2/packagekit.h>
 
-#include "egg-string.h"
-
 #include "gpk-animated-icon.h"
 
 G_DEFINE_TYPE (GpkAnimatedIcon, gpk_animated_icon, GTK_TYPE_IMAGE)

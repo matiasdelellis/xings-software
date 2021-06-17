@@ -40,8 +40,6 @@
 #include <dbus/dbus-glib-lowlevel.h>
 #include <packagekit-glib2/packagekit.h>
 
-#include "egg-string.h"
-
 #include "gpk-dbus.h"
 #include "gpk-dbus-task.h"
 #include "gpk-x11.h"

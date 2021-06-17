@@ -26,8 +26,6 @@
 #include <gdk/gdkx.h>
 #include <X11/Xatom.h>
 
-#include "egg-string.h"
-
 #include "gpk-x11.h"
 
 static void     gpk_x11_finalize	(GObject	  *object);
