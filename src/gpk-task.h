@@ -28,30 +28,10 @@
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_TASK		(gpk_task_get_type ())
-#define GPK_TASK(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), GPK_TYPE_TASK, GpkTask))
-#define GPK_TASK_CLASS(k)	(G_TYPE_CHECK_CLASS_CAST((k), GPK_TYPE_TASK, GpkTaskClass))
-#define GPK_IS_TASK(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), GPK_TYPE_TASK))
-#define GPK_IS_TASK_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), GPK_TYPE_TASK))
-#define GPK_TASK_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), GPK_TYPE_TASK, GpkTaskClass))
-
-typedef struct _GpkTaskPrivate	GpkTaskPrivate;
-typedef struct _GpkTask		GpkTask;
-typedef struct _GpkTaskClass	GpkTaskClass;
-
-struct _GpkTask
-{
-	 PkTask			 parent;
-	 GpkTaskPrivate		*priv;
-};
-
-struct _GpkTaskClass
-{
-	PkTaskClass		 parent_class;
-};
+#define GPK_TYPE_TASK (gpk_task_get_type())
+G_DECLARE_FINAL_TYPE (GpkTask, gpk_task, GPK, TASK, PkTask)
 
 GQuark		 gpk_task_error_quark		(void);
-GType		 gpk_task_get_type		(void);
 GpkTask		*gpk_task_new			(void);
 gboolean	 gpk_task_set_parent_window	(GpkTask	*task,
 						 GtkWindow	*window);
@@ -59,4 +39,3 @@ gboolean	 gpk_task_set_parent_window	(GpkTask	*task,
 G_END_DECLS
 
 #endif /* __GPK_TASK_H */
-
