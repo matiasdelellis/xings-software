@@ -516,16 +516,6 @@ out:
 }
 
 /**
- * gpk_prefs_close_cb:
- **/
-static void
-gpk_prefs_close_cb (GtkWidget *widget, gpointer data)
-{
-	GpkPrefsPrivate *priv = (GpkPrefsPrivate *) data;
-	g_application_release (G_APPLICATION (priv->application));
-}
-
-/**
  * gpk_pack_startup_cb:
  **/
 static void
@@ -554,10 +544,6 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 		g_error_free (error);
 		goto out;
 	}
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_close"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_prefs_close_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "checkbutton_detail"));
 	g_settings_bind (priv->settings_gpk,
