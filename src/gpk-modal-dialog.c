@@ -36,7 +36,6 @@
 #include <glib/gi18n.h>
 #include <packagekit-glib2/packagekit.h>
 
-#include "gpk-animated-icon.h"
 #include "gpk-modal-dialog.h"
 #include "gpk-common.h"
 #include "gpk-gnome.h"
@@ -450,7 +449,6 @@ gpk_modal_dialog_set_image (GpkModalDialog *dialog, const gchar *image)
 	dialog->set_image = TRUE;
 
 	g_debug ("setting image: %s", image);
-	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->image_status), FALSE);
 	gtk_image_set_from_icon_name (GTK_IMAGE (dialog->image_status), image, GTK_ICON_SIZE_DIALOG);
 	return TRUE;
 }
@@ -461,11 +459,15 @@ gpk_modal_dialog_set_image (GpkModalDialog *dialog, const gchar *image)
 gboolean
 gpk_modal_dialog_set_image_status (GpkModalDialog *dialog, PkStatusEnum status)
 {
+	const gchar *name = NULL;
+
 	g_return_val_if_fail (GPK_IS_MODAL_DIALOG (dialog), FALSE);
 
 	/* set state */
 	dialog->set_image = TRUE;
-	gpk_set_animated_icon_from_status (GPK_ANIMATED_ICON (dialog->image_status), status, GTK_ICON_SIZE_DIALOG);
+
+	name = gpk_status_enum_to_icon_name (status);
+	gtk_image_set_from_icon_name (GTK_IMAGE (dialog->image_status), name, GTK_ICON_SIZE_DIALOG);
 	return TRUE;
 }
 
@@ -535,7 +537,6 @@ gpk_modal_dialog_close (GpkModalDialog *dialog)
 		dialog->pulse_timer_id = 0;
 	}
 
-	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->image_status), FALSE);
 	return TRUE;
 }
 
@@ -567,7 +568,6 @@ gpk_modal_dialog_button_close_cb (GtkWidget *widget_button, GpkModalDialog *dial
 		dialog->pulse_timer_id = 0;
 	}
 
-	gpk_animated_icon_enable_animation (GPK_ANIMATED_ICON (dialog->image_status), FALSE);
 	if (g_main_loop_is_running (dialog->loop))
 		g_main_loop_quit (dialog->loop);
 	else
@@ -787,7 +787,7 @@ gpk_modal_dialog_init (GpkModalDialog *dialog)
 	}
 
 	/* add animated widget */
-	dialog->image_status = gpk_animated_icon_new ();
+	dialog->image_status = gtk_image_new_from_icon_name ("dialog-information", GTK_ICON_SIZE_DIALOG);
 	box = GTK_BOX (gtk_builder_get_object (dialog->builder, "hbox_status"));
 	gtk_box_pack_start (box, dialog->image_status, FALSE, FALSE, 0);
 	gtk_widget_show (dialog->image_status);

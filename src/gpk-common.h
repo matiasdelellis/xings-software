@@ -26,7 +26,6 @@
 #include <gtk/gtk.h>
 #include <packagekit-glib2/packagekit.h>
 
-#include "gpk-animated-icon.h"
 #include "gpk-enum.h"
 
 G_BEGIN_DECLS
@@ -69,9 +68,6 @@ gchar		*gpk_time_to_localised_string		(guint		 time_secs);
 gchar		*gpk_time_to_imprecise_string		(guint		 time_secs);
 gboolean	 gpk_check_privileged_user		(const gchar	*application_name,
 							 gboolean	 show_ui);
-gboolean	 gpk_set_animated_icon_from_status	(GpkAnimatedIcon *icon,
-							 PkStatusEnum	 status,
-							 GtkIconSize	 size);
 gchar		*gpk_strv_join_locale			(gchar		**array);
 gboolean	 gpk_window_set_size_request		(GtkWindow	*window,
 							 guint		 width,

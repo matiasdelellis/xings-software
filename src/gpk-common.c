@@ -333,38 +333,6 @@ out:
 }
 
 /**
- * gpk_set_animated_icon_from_status:
- **/
-gboolean
-gpk_set_animated_icon_from_status (GpkAnimatedIcon *icon, PkStatusEnum status, GtkIconSize size)
-{
-	const gchar *name = NULL;
-	guint delay = 0;
-
-	/* see if there is an animation */
-	name = gpk_status_enum_to_animation (status);
-
-	/* get the timing */
-	if (g_str_has_prefix (name, "pk-action-"))
-		delay = 150;
-	else if (g_str_has_prefix (name, "process-working"))
-		delay = 50;
-
-	/* animate or set static */
-	if (delay != 0) {
-		gpk_animated_icon_set_frame_delay (icon, delay);
-		gpk_animated_icon_set_filename_tile (icon, size, name);
-	} else {
-		gpk_animated_icon_set_icon_name (icon, size, name);
-	}
-
-	/* stop spinning */
-	if (status == PK_STATUS_ENUM_FINISHED)
-		gpk_animated_icon_enable_animation (icon, FALSE);
-	return TRUE;
-}
-
-/**
  * gpk_time_to_imprecise_string:
  * @time_secs: The time value to convert in seconds
  *

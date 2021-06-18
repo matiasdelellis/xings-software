@@ -48,8 +48,6 @@ libgpkshared_a_SOURCES =				\
 	gpk-session.h					\
 	gpk-desktop.c					\
 	gpk-desktop.h					\
-	gpk-animated-icon.c				\
-	gpk-animated-icon.h				\
 	gpk-dialog.c					\
 	gpk-dialog.h					\
 	gpk-vendor.c					\
@@ -134,8 +132,6 @@ xings_packages_CFLAGS =					\
 xings_preferences_SOURCES =				\
 	gpk-debug.h					\
 	gpk-debug.c					\
-	gpk-animated-icon.c				\
-	gpk-animated-icon.h				\
 	gpk-enum.c					\
 	gpk-enum.h					\
 	gpk-common.c					\
@@ -221,8 +217,6 @@ xings_self_test_SOURCES =				\
 	gpk-dbus.h					\
 	gpk-dbus-task.c					\
 	gpk-dbus-task.h					\
-	gpk-animated-icon.c				\
-	gpk-animated-icon.h				\
 	gpk-gnome.c					\
 	gpk-gnome.h					\
 	gpk-x11.c					\

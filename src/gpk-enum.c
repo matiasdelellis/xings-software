@@ -104,46 +104,6 @@ static const PkEnumMatch enum_status_icon_name[] = {
 	{0, NULL}
 };
 
-static const PkEnumMatch enum_status_animation[] = {
-	{PK_STATUS_ENUM_UNKNOWN,		"help-browser"},
-	{PK_STATUS_ENUM_CANCEL,			"xings-action-cleanup"},
-	{PK_STATUS_ENUM_CLEANUP,		"xings-action-cleanup"},
-	{PK_STATUS_ENUM_COMMIT,			"xings-setup"},
-	{PK_STATUS_ENUM_DEP_RESOLVE,		"xings-action-testing"},
-	{PK_STATUS_ENUM_DOWNLOAD_CHANGELOG,	"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_DOWNLOAD_FILELIST,	"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_DOWNLOAD_GROUP,		"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_DOWNLOAD_PACKAGELIST,	"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_DOWNLOAD,		"xings-action-download"},
-	{PK_STATUS_ENUM_DOWNLOAD_REPOSITORY,	"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_DOWNLOAD_UPDATEINFO,	"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_FINISHED,		"xings-package-cleanup"},
-	{PK_STATUS_ENUM_GENERATE_PACKAGE_LIST,	"xings-action-searching"},
-	{PK_STATUS_ENUM_WAITING_FOR_LOCK,	"xings-action-waiting"},
-	{PK_STATUS_ENUM_WAITING_FOR_AUTH,	"xings-action-waiting"},
-	{PK_STATUS_ENUM_INFO,			"process-working"},
-	{PK_STATUS_ENUM_INSTALL,		"xings-action-installing"},
-	{PK_STATUS_ENUM_LOADING_CACHE,		"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_OBSOLETE,		"xings-package-cleanup"},
-	{PK_STATUS_ENUM_QUERY,			"xings-action-searching"},
-	{PK_STATUS_ENUM_REFRESH_CACHE,		"xings-action-refresh-cache"},
-	{PK_STATUS_ENUM_REMOVE,			"xings-action-removing"},
-	{PK_STATUS_ENUM_REPACKAGING,		"xings-package-info"},
-	{PK_STATUS_ENUM_REQUEST,		"process-working"},
-	{PK_STATUS_ENUM_RUNNING,		"xings-setup"},
-	{PK_STATUS_ENUM_SCAN_APPLICATIONS,	"xings-action-searching"},
-	{PK_STATUS_ENUM_SETUP,			"xings-package-info"},
-	{PK_STATUS_ENUM_SIG_CHECK,		"xings-package-info"},
-	{PK_STATUS_ENUM_TEST_COMMIT,		"xings-action-testing"},
-	{PK_STATUS_ENUM_UPDATE,			"xings-action-installing"},
-	{PK_STATUS_ENUM_WAIT,			"xings-action-waiting"},
-	{PK_STATUS_ENUM_SCAN_PROCESS_LIST,	"xings-package-info"},
-	{PK_STATUS_ENUM_CHECK_EXECUTABLE_FILES,	"xings-package-info"},
-	{PK_STATUS_ENUM_CHECK_LIBRARIES,	"xings-package-info"},
-	{PK_STATUS_ENUM_COPY_FILES,		"xings-package-info"},
-	{0, NULL}
-};
-
 static const PkEnumMatch enum_role_icon_name[] = {
 	{PK_ROLE_ENUM_UNKNOWN,			"help-browser"},	/* fall though value */
 	{PK_ROLE_ENUM_ACCEPT_EULA,		"xings-package-info"},
@@ -1680,15 +1640,6 @@ const gchar *
 gpk_status_enum_to_icon_name (PkStatusEnum status)
 {
 	return pk_enum_find_string (enum_status_icon_name, status);
-}
-
-/**
- * gpk_status_enum_to_animation:
- **/
-const gchar *
-gpk_status_enum_to_animation (PkStatusEnum status)
-{
-	return pk_enum_find_string (enum_status_animation, status);
 }
 
 /**
