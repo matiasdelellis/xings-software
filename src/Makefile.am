@@ -46,6 +46,8 @@ libgpkshared_a_SOURCES =				\
 	gpk-marshal.h					\
 	gpk-session.c					\
 	gpk-session.h					\
+	gpk-desktop.c					\
+	gpk-desktop.h					\
 	gpk-animated-icon.c				\
 	gpk-animated-icon.h				\
 	gpk-dialog.c					\
@@ -227,6 +229,8 @@ xings_self_test_SOURCES =				\
 	gpk-x11.h					\
 	gpk-vendor.c					\
 	gpk-vendor.h					\
+	gpk-desktop.c					\
+	gpk-desktop.h					\
 	gpk-task.c					\
 	gpk-task.h					\
 	gpk-helper-run.c				\

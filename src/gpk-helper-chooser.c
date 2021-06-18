@@ -30,12 +30,14 @@
 #include "gpk-gnome.h"
 #include "gpk-common.h"
 #include "gpk-enum.h"
+#include "gpk-desktop.h"
 
 static void     gpk_helper_chooser_finalize	(GObject	  *object);
 
 typedef struct
 {
 	GtkBuilder		*builder;
+	PkDesktop		*desktop;
 	gchar			*package_id;
 	GtkListStore		*list_store;
 } GpkHelperChooserPrivate;
@@ -164,6 +166,7 @@ gpk_helper_chooser_show (GpkHelperChooser *helper, GPtrArray *list)
 	guint i;
 	PkPackage *item;
 	GtkTreeIter iter;
+	gchar **split;
 	PkInfoEnum info;
 	gchar *package_id = NULL;
 	gchar *summary = NULL;
@@ -190,7 +193,14 @@ gpk_helper_chooser_show (GpkHelperChooser *helper, GPtrArray *list)
 		text = gpk_package_id_format_twoline (gtk_widget_get_style_context (widget),
 						      package_id,
 						      summary);
-		icon_name = gpk_info_enum_to_icon_name (info);
+
+		/* get the icon */
+		split = pk_package_id_split (package_id);
+		icon_name = gpk_desktop_guess_icon_name (priv->desktop, split[PK_PACKAGE_ID_NAME]);
+		g_strfreev (split);
+		if (icon_name == NULL)
+			icon_name = gpk_info_enum_to_icon_name (info);
+
 		gtk_list_store_set (priv->list_store, &iter,
 				    GPK_CHOOSER_COLUMN_TEXT, text,
 				    GPK_CHOOSER_COLUMN_ID, package_id, -1);
@@ -325,6 +335,9 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 	pk_treeview_add_general_columns (GTK_TREE_VIEW (widget));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (widget), FALSE);
+
+	/* use PkDesktop to get better icon */
+	priv->desktop = pk_desktop_new ();
 }
 
 /**
@@ -347,6 +360,7 @@ gpk_helper_chooser_finalize (GObject *object)
 		gtk_widget_hide (widget);
 	g_free (priv->package_id);
 	g_object_unref (priv->builder);
+	g_object_unref (priv->desktop);
 
 	G_OBJECT_CLASS (gpk_helper_chooser_parent_class)->finalize (object);
 }

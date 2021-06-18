@@ -37,6 +37,7 @@
 #include "gpk-common.h"
 #include "gpk-dbus.h"
 #include "gpk-dbus-task.h"
+#include "gpk-desktop.h"
 #include "gpk-dialog.h"
 #include "gpk-enum.h"
 #include "gpk-error.h"
@@ -64,6 +65,7 @@ struct _GpkDbusTask
 	GdkWindow		*parent_window;
 	GSettings		*settings;
 	PkTask			*task;
+	PkDesktop		*desktop;
 	PkControl		*control;
 	PkExitEnum		 exit;
 	PkBitfield		 roles;
@@ -3119,8 +3121,17 @@ gpk_dbus_task_set_exec (GpkDbusTask *dtask, const gchar *exec)
 	/* get from installed database */
 	package = gpk_dbus_task_get_package_for_exec (dtask, exec);
 	g_debug ("got package %s", package);
-	if (package != NULL)
-		dtask->parent_title = g_strdup (package);
+
+	/* try to get from PkDesktop */
+	if (package != NULL) {
+		dtask->parent_title = gpk_desktop_guess_localised_name (dtask->desktop, package);
+		dtask->parent_icon_name = gpk_desktop_guess_icon_name (dtask->desktop, package);
+		/* fallback to package name */
+		if (dtask->parent_title == NULL) {
+			g_debug ("did not get localized description for %s", package);
+			dtask->parent_title = g_strdup (package);
+		}
+	}
 
 	/* fallback to exec - eugh... */
 	if (dtask->parent_title == NULL) {
@@ -3151,6 +3162,7 @@ gpk_dbus_task_class_init (GpkDbusTaskClass *klass)
 static void
 gpk_dbus_task_init (GpkDbusTask *dtask)
 {
+	gboolean ret;
 	GtkWindow *main_window;
 
 	dtask->package_ids = NULL;
@@ -3207,6 +3219,12 @@ gpk_dbus_task_init (GpkDbusTask *dtask)
 	dtask->control = pk_control_new ();
 	dtask->task = PK_TASK(gpk_task_new ());
 	dtask->roles = pk_control_get_properties (dtask->control, NULL, NULL);
+
+	/* used for icons and translations */
+	dtask->desktop = pk_desktop_new ();
+	ret = pk_desktop_open_database (dtask->desktop, NULL);
+	if (!ret)
+		g_warning ("failed to open desktop database");
 }
 
 /**
@@ -3239,6 +3257,7 @@ gpk_dbus_task_finalize (GObject *object)
 	g_strfreev (dtask->package_ids);
 	g_object_unref (PK_CLIENT(dtask->task));
 	g_object_unref (dtask->control);
+	g_object_unref (dtask->desktop);
 	g_object_unref (dtask->settings);
 	g_object_unref (dtask->dialog);
 	g_object_unref (dtask->vendor);

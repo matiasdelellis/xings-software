@@ -29,6 +29,7 @@
 #include "gpk-common.h"
 #include "gpk-dialog.h"
 #include "gpk-enum.h"
+#include "gpk-desktop.h"
 
 enum {
 	GPK_DIALOG_STORE_IMAGE,
@@ -81,6 +82,7 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 	GtkListStore *store;
 	GtkTreeIter iter;
 	PkPackage *item;
+	PkDesktop *desktop;
 	const gchar *icon;
 	gchar *text;
 	guint i;
@@ -89,6 +91,7 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 	gchar *package_id = NULL;
 	gchar *summary = NULL;
 
+	desktop = pk_desktop_new ();
 	store = gtk_list_store_new (GPK_DIALOG_STORE_LAST, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	/* add each well */
@@ -103,7 +106,9 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 
 		/* get the icon */
 		split = pk_package_id_split (package_id);
-		icon = gpk_info_enum_to_icon_name (info);
+		icon = gpk_desktop_guess_icon_name (desktop, split[0]);
+		if (icon == NULL)
+			icon = gpk_info_enum_to_icon_name (info);
 
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter,
@@ -117,6 +122,7 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 		g_free (text);
 	}
 
+	g_object_unref (desktop);
 	return store;
 }
 
