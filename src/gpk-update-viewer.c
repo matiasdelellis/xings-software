@@ -118,15 +118,6 @@ gpk_update_viewer_quit (void)
 }
 
 /**
- * gpk_update_viewer_button_quit_cb:
- **/
-static void
-gpk_update_viewer_button_quit_cb (GtkWidget *widget, gpointer user_data)
-{
-	gpk_update_viewer_quit ();
-}
-
-/**
  * gpk_update_viewer_packages_set_sensitive:
  **/
 static void
@@ -485,10 +476,6 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 	} else {
 		goto out;
 	}
-
-	/* hide close button */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_quit"));
-	gtk_widget_hide (widget);
 
 	/* show a new title */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
@@ -1073,15 +1060,6 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 					    -1);
 		}
 		gtk_tree_path_free (path);
-
-	} else if (type == PK_PROGRESS_TYPE_ALLOW_CANCEL) {
-		gboolean idle;
-		widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_quit"));
-
-		/* we have to also check for idle as we might be getting the AllowCancel(false)
-		 * signal _after_ the PkClient has been marked as idle */
-		g_object_get (task, "idle", &idle, NULL);
-		gtk_widget_set_sensitive (widget, (allow_cancel || idle));
 	}
 out:
 	g_free (summary);
@@ -1097,16 +1075,12 @@ static void
 gpk_update_viewer_client_notify_idle_cb (PkClient *client, GParamSpec *pspec, gpointer user_data)
 {
 	gboolean idle;
-	GtkWidget *widget;
 
 	g_object_get (client,
 		      "idle", &idle,
 		      NULL);
-	/* ensure button is sensitive */
-	if (idle) {
-		widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_quit"));
-		gtk_widget_set_sensitive (widget, TRUE);
-	}
+
+	g_debug ("client is idle: %i", idle);
 }
 
 /**
@@ -1502,16 +1476,16 @@ gpk_update_viewer_reconsider_info (void)
 	gtk_widget_show (widget);
 
 	/* total */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_summary"));
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "headerbar"));
 	if (number_total == 0) {
-		gtk_label_set_label (GTK_LABEL(widget), "");
+		gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 	} else {
 		if (size_total == 0) {
 			/* TRANSLATORS: how many updates are selected in the UI */
 			text = g_strdup_printf (ngettext ("%u update selected",
 							  "%u updates selected",
 							  number_total), number_total);
-			gtk_label_set_label (GTK_LABEL(widget), text);
+			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
 			g_free (text);
 		} else {
 			text_size = g_format_size (size_total);
@@ -1519,14 +1493,11 @@ gpk_update_viewer_reconsider_info (void)
 			text = g_strdup_printf (ngettext ("%u update selected (%s)",
 							  "%u updates selected (%s)",
 							  number_total), number_total, text_size);
-			gtk_label_set_label (GTK_LABEL(widget), text);
+			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
 			g_free (text);
 			g_free (text_size);
 		}
 	}
-
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_summary"));
-	gtk_widget_show (widget);
 out:
 	gpk_update_viewer_check_mobile_broadband ();
 }
@@ -3188,8 +3159,6 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	/* bottom UI */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "progressbar_progress"));
 	gtk_widget_hide (widget);
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_summary"));
-	gtk_widget_hide (widget);
 
 	/* set install button insensitive */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_install"));
@@ -3202,12 +3171,6 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	gtk_widget_set_sensitive (widget, FALSE);
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "scrolledwindow_details"));
 	gtk_widget_set_sensitive (widget, FALSE);
-
-	/* close button */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_quit"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_update_viewer_button_quit_cb), NULL);
-	gtk_window_set_focus (GTK_WINDOW(main_window), widget);
 
 	/* upgrade button */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_upgrade"));
