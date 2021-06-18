@@ -629,10 +629,9 @@ gpk_application_status_changed_timeout_cb (GpkApplicationPrivate *priv)
 	GtkWidget *widget;
 
 	/* set the text and show */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
 	text = gpk_status_enum_to_localised_text (priv->status_last);
-	gtk_label_set_label (GTK_LABEL (widget), text);
-	gtk_widget_show (widget);
+	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
 
 	/* show cancel button */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
@@ -686,8 +685,8 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 				priv->status_id = 0;
 			}
 
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_status"));
-			gtk_widget_hide (widget);
+			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
+			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
 			gtk_widget_hide (widget);
 			goto out;
@@ -2291,10 +2290,6 @@ gpk_application_packages_treeview_clicked_cb (GtkTreeSelection *selection, GpkAp
 		goto out;
 	}
 
-	/* set the summary as we know it already */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_summary"));
-	gtk_label_set_label (GTK_LABEL (widget), summary);
-
 	/* show the menu item */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
 	gtk_widget_show (widget);
@@ -3164,7 +3159,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	GAction *action;
 	GError *error = NULL;
 	GMenuModel *menu;
-	GtkStyleContext *context;
 	GtkTreeSelection *selection;
 	GtkWidget *main_window;
 	GtkWidget *widget;
@@ -3332,11 +3326,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	/* add columns to the tree view */
 	gpk_application_packages_add_columns (priv);
-
-	/* make the header draggable */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "toolbar_header"));
-	context = gtk_widget_get_style_context (widget);
-	gtk_style_context_add_class (context, GTK_STYLE_CLASS_MENUBAR);
 
 	/* set up the groups checkbox */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
