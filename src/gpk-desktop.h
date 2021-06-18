@@ -27,11 +27,14 @@
 
 G_BEGIN_DECLS
 
-gchar		*gpk_desktop_guess_best_file		(PkDesktop	*desktop,
+GPtrArray	*gpk_desktop_get_files_for_package	(PkClient	*client,
+							 const gchar	*package,
+							 GError		**error);
+gchar		*gpk_desktop_guess_best_file		(PkClient	*client,
 							 const gchar	*package);
-gchar		*gpk_desktop_guess_icon_name		(PkDesktop	*desktop,
+gchar		*gpk_desktop_guess_icon_name		(PkClient	*client,
 							 const gchar	*package);
-gchar		*gpk_desktop_guess_localised_name	(PkDesktop	*desktop,
+gchar		*gpk_desktop_guess_localised_name	(PkClient	*client,
 							 const gchar	*package);
 gint		 gpk_desktop_get_file_weight		(const gchar	*filename);
 gboolean	 gpk_desktop_check_icon_valid		(const gchar	*icon);

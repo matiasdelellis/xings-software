@@ -82,7 +82,7 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 	GtkListStore *store;
 	GtkTreeIter iter;
 	PkPackage *item;
-	PkDesktop *desktop;
+	PkClient *client;
 	const gchar *icon;
 	gchar *text;
 	guint i;
@@ -91,7 +91,9 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 	gchar *package_id = NULL;
 	gchar *summary = NULL;
 
-	desktop = pk_desktop_new ();
+	client = pk_client_new ();
+	g_object_set (client, "cache-age", G_MAXUINT, "interactive", FALSE, "background", FALSE, NULL);
+
 	store = gtk_list_store_new (GPK_DIALOG_STORE_LAST, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);
 
 	/* add each well */
@@ -106,7 +108,7 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 
 		/* get the icon */
 		split = pk_package_id_split (package_id);
-		icon = gpk_desktop_guess_icon_name (desktop, split[0]);
+		icon = gpk_desktop_guess_icon_name (client, split[0]);
 		if (icon == NULL)
 			icon = gpk_info_enum_to_icon_name (info);
 
@@ -122,7 +124,7 @@ gpk_dialog_package_array_to_list_store (GPtrArray *array)
 		g_free (text);
 	}
 
-	g_object_unref (desktop);
+	g_object_unref (client);
 	return store;
 }
 

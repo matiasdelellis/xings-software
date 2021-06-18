@@ -37,7 +37,7 @@ static void     gpk_helper_chooser_finalize	(GObject	  *object);
 typedef struct
 {
 	GtkBuilder		*builder;
-	PkDesktop		*desktop;
+	PkClient		*client;
 	gchar			*package_id;
 	GtkListStore		*list_store;
 } GpkHelperChooserPrivate;
@@ -196,7 +196,7 @@ gpk_helper_chooser_show (GpkHelperChooser *helper, GPtrArray *list)
 
 		/* get the icon */
 		split = pk_package_id_split (package_id);
-		icon_name = gpk_desktop_guess_icon_name (priv->desktop, split[PK_PACKAGE_ID_NAME]);
+		icon_name = gpk_desktop_guess_icon_name (priv->client, split[PK_PACKAGE_ID_NAME]);
 		g_strfreev (split);
 		if (icon_name == NULL)
 			icon_name = gpk_info_enum_to_icon_name (info);
@@ -337,7 +337,7 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (widget), FALSE);
 
 	/* use PkDesktop to get better icon */
-	priv->desktop = pk_desktop_new ();
+	priv->client = pk_client_new ();
 }
 
 /**
@@ -360,7 +360,7 @@ gpk_helper_chooser_finalize (GObject *object)
 		gtk_widget_hide (widget);
 	g_free (priv->package_id);
 	g_object_unref (priv->builder);
-	g_object_unref (priv->desktop);
+	g_object_unref (priv->client);
 
 	G_OBJECT_CLASS (gpk_helper_chooser_parent_class)->finalize (object);
 }

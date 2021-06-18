@@ -223,6 +223,7 @@ gpk_helper_run_add_desktop_file (GpkHelperRun *helper, const gchar *package_id, 
 	gboolean hidden;
 
 	/* get weight */
+
 	weight = gpk_desktop_get_file_weight (filename);
 	if (weight < 0) {
 		g_debug ("ignoring %s", filename);
@@ -313,26 +314,20 @@ gpk_helper_run_add_package_ids (GpkHelperRun *helper, gchar **package_ids)
 	guint added = 0;
 	const gchar *filename;
 	GPtrArray *array;
-	gchar **parts;
 	gboolean ret;
-	PkDesktop *desktop;
+	PkClient *client;
 	GError *error = NULL;
 
 	/* open database */
-	desktop = pk_desktop_new ();
-	ret = pk_desktop_open_database (desktop, NULL);
-	if (!ret) {
-		g_debug ("failed to open desktop DB");
-		goto out;
-	}
+	client = pk_client_new ();
+	g_object_set (client, "cache-age", G_MAXUINT, "interactive", FALSE, "background", FALSE, NULL);
 
 	/* add each package */
 	length = g_strv_length (package_ids);
-	for (i=0; i<length; i++) {
-		parts = g_strsplit (package_ids[i], ";", 0);
-		array = pk_desktop_get_files_for_package (desktop, parts[0], &error);
+	for (i = 0; i < length; i++) {
+		array = gpk_desktop_get_files_for_package (client, package_ids[i], &error);
 		if (array != NULL) {
-			for (j=0; j<array->len; j++) {
+			for (j = 0; j < array->len; j++) {
 				filename = g_ptr_array_index (array, j);
 				ret = gpk_helper_run_add_desktop_file (helper, package_ids[i], filename);
 				if (ret)
@@ -340,12 +335,11 @@ gpk_helper_run_add_package_ids (GpkHelperRun *helper, gchar **package_ids)
 			}
 			g_ptr_array_unref (array);
 		} else {
-			g_warning ("failed to get files for %s: %s", parts[0], error->message);
+			g_warning ("failed to desktop get files for %s: %s", package_ids[i], error->message);
 			g_clear_error (&error);
 		}
-		g_strfreev (parts);
 	}
-	g_object_unref (desktop);
+	g_object_unref (client);
 out:
 	return added;
 }

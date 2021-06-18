@@ -27,7 +27,6 @@
 #include <packagekit-glib2/packagekit.h>
 
 G_BEGIN_DECLS
-
 gboolean	 gpk_dialog_embed_package_list_widget	(GtkDialog	*dialog,
 							 GPtrArray	*array);
 gboolean	 gpk_dialog_embed_file_list_widget	(GtkDialog	*dialog,

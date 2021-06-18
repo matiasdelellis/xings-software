@@ -40,6 +40,63 @@ _g_strzero (const gchar *text)
 	return FALSE;
 }
 
+
+/**
+ * gpk_desktop_get_files_for_package:
+ *
+ * Return all desktop files owned by a package, regardless if they are shown in the main menu or not.
+ **/
+GPtrArray *
+gpk_desktop_get_files_for_package (PkClient *client, const gchar *package, GError **error)
+{
+	PkResults *results = NULL;
+	PkError *error_code = NULL;
+	PkFiles *item = NULL;
+	GPtrArray *array = NULL, *desktops_array = NULL;
+	const gchar *to_array[] = { NULL, NULL };
+	gchar **fns = NULL;
+
+	to_array[0] = package;
+
+	results = pk_client_get_files (client,
+	                               (gchar **) to_array,
+	                               NULL,
+	                               NULL, NULL,
+	                               error);
+
+	if (results == NULL) {
+		return NULL;
+	}
+
+	error_code = pk_results_get_error_code (results);
+	if (error_code != NULL) {
+		return NULL;
+	}
+
+	array = pk_results_get_files_array (results);
+	if (array->len == 0) {
+		g_set_error (error, 1, 0, "no files for %s", package);
+		return NULL;
+	}
+
+	desktops_array = g_ptr_array_new ();
+	for (guint i = 0; i < array->len; i++) {
+		item = g_ptr_array_index (array, i);
+		fns = pk_files_get_files (item);
+		for (guint j = 0; fns[j] != NULL; j++) {
+			if (g_str_has_prefix (fns[j], "/usr/share/applications/") &&
+			    g_str_has_suffix (fns[j], ".desktop")) {
+				g_ptr_array_add(desktops_array, g_strdup(fns[j]));
+			}
+		}
+	}
+
+	g_object_unref (results);
+	g_ptr_array_unref (array);
+
+	return desktops_array;
+}
+
 /**
  * gpk_desktop_check_icon_valid:
  *
@@ -48,27 +105,14 @@ _g_strzero (const gchar *text)
 gboolean
 gpk_desktop_check_icon_valid (const gchar *icon)
 {
-	GtkIconInfo *icon_info;
 	GtkIconTheme *icon_theme = NULL;
-	gboolean ret = TRUE;
 
 	/* trivial case */
 	if (_g_strzero (icon))
 		return FALSE;
 
-	/* no unref required */
 	icon_theme = gtk_icon_theme_get_default ();
-
-	/* default to 32x32 */
-	icon_info = gtk_icon_theme_lookup_icon (icon_theme, icon, 32, GTK_ICON_LOOKUP_USE_BUILTIN);
-	if (icon_info == NULL) {
-		g_debug ("ignoring broken icon %s", icon);
-		ret = FALSE;
-	} else {
-		/* we only used this to see if it was valid */
-		g_object_unref (icon_info);
-	}
-	return ret;
+	return gtk_icon_theme_has_icon(icon_theme, icon);
 }
 
 /**
@@ -140,7 +184,7 @@ out:
  * gpk_desktop_guess_best_file:
  **/
 gchar *
-gpk_desktop_guess_best_file (PkDesktop *desktop, const gchar *package)
+gpk_desktop_guess_best_file (PkClient *client, const gchar *package)
 {
 	GPtrArray *array;
 	const gchar *filename;
@@ -150,7 +194,7 @@ gpk_desktop_guess_best_file (PkDesktop *desktop, const gchar *package)
 	gint weight;
 	guint max_index = 0;
 
-	array = pk_desktop_get_files_for_package (desktop, package, NULL);
+	array = gpk_desktop_get_files_for_package (client, package, NULL);
 	if (array == NULL)
 		goto out;
 	if (array->len == 0)
@@ -184,14 +228,14 @@ out:
  * gpk_desktop_guess_icon_name:
  **/
 gchar *
-gpk_desktop_guess_icon_name (PkDesktop *desktop, const gchar *package)
+gpk_desktop_guess_icon_name (PkClient *client, const gchar *package)
 {
 	GKeyFile *file;
 	gchar *filename;
 	gchar *data = NULL;
 	gboolean ret;
 
-	filename = gpk_desktop_guess_best_file (desktop, package);
+	filename = gpk_desktop_guess_best_file (client, package);
 	if (filename == NULL)
 		goto out;
 
@@ -219,14 +263,14 @@ out:
  * gpk_desktop_guess_localised_name:
  **/
 gchar *
-gpk_desktop_guess_localised_name (PkDesktop *desktop, const gchar *package)
+gpk_desktop_guess_localised_name (PkClient *client, const gchar *package)
 {
 	GKeyFile *file;
 	gchar *filename;
 	gchar *data = NULL;
 	gboolean ret;
 
-	filename = gpk_desktop_guess_best_file (desktop, package);
+	filename = gpk_desktop_guess_best_file (client, package);
 	if (filename == NULL)
 		goto out;
 

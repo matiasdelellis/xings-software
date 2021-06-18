@@ -609,7 +609,7 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 {
 	GtkTreeIter iter;
 	PkPackage *item;
-	PkDesktop *desktop;
+	PkClient *client;
 	gchar *icon;
 	gchar *text;
 	guint i;
@@ -627,7 +627,8 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 	else if (list->len > 1)
 		gtk_widget_set_size_request (widget, -1, 150);
 
-	desktop = pk_desktop_new ();
+	client = pk_client_new ();
+	g_object_set (client, "cache-age", G_MAXUINT, "interactive", FALSE, "background", FALSE, NULL);
 
 	/* add each well */
 	for (i=0; i<list->len; i++) {
@@ -651,7 +652,7 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 
 		/* get the icon */
 		split = pk_package_id_split (package_id);
-		icon = gpk_desktop_guess_icon_name (desktop, split[0]);
+		icon = gpk_desktop_guess_icon_name (client, split[0]);
 		if (icon == NULL)
 			icon = g_strdup (gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLED));
 
@@ -668,7 +669,7 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 		g_free (text);
 	}
 
-	g_object_unref (desktop);
+	g_object_unref (client);
 
 	return TRUE;
 }

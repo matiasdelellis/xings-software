@@ -65,7 +65,7 @@ struct _GpkDbusTask
 	GdkWindow		*parent_window;
 	GSettings		*settings;
 	PkTask			*task;
-	PkDesktop		*desktop;
+	PkClient		*client;
 	PkControl		*control;
 	PkExitEnum		 exit;
 	PkBitfield		 roles;
@@ -3124,8 +3124,8 @@ gpk_dbus_task_set_exec (GpkDbusTask *dtask, const gchar *exec)
 
 	/* try to get from PkDesktop */
 	if (package != NULL) {
-		dtask->parent_title = gpk_desktop_guess_localised_name (dtask->desktop, package);
-		dtask->parent_icon_name = gpk_desktop_guess_icon_name (dtask->desktop, package);
+		dtask->parent_title = gpk_desktop_guess_localised_name (dtask->client, package);
+		dtask->parent_icon_name = gpk_desktop_guess_icon_name (dtask->client, package);
 		/* fallback to package name */
 		if (dtask->parent_title == NULL) {
 			g_debug ("did not get localized description for %s", package);
@@ -3221,10 +3221,8 @@ gpk_dbus_task_init (GpkDbusTask *dtask)
 	dtask->roles = pk_control_get_properties (dtask->control, NULL, NULL);
 
 	/* used for icons and translations */
-	dtask->desktop = pk_desktop_new ();
-	ret = pk_desktop_open_database (dtask->desktop, NULL);
-	if (!ret)
-		g_warning ("failed to open desktop database");
+	dtask->client = pk_client_new ();
+	g_object_set (dtask->client, "cache-age", G_MAXUINT, "interactive", FALSE, "background", FALSE, NULL);
 }
 
 /**
@@ -3257,7 +3255,7 @@ gpk_dbus_task_finalize (GObject *object)
 	g_strfreev (dtask->package_ids);
 	g_object_unref (PK_CLIENT(dtask->task));
 	g_object_unref (dtask->control);
-	g_object_unref (dtask->desktop);
+	g_object_unref (dtask->client);
 	g_object_unref (dtask->settings);
 	g_object_unref (dtask->dialog);
 	g_object_unref (dtask->vendor);
