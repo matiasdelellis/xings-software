@@ -73,20 +73,6 @@ gpk_helper_chooser_button_install_cb (GtkWidget *widget, GpkHelperChooser *helpe
 }
 
 /**
- * gpk_helper_chooser_button_cancel_cb:
- **/
-static void
-gpk_helper_chooser_button_cancel_cb (GtkWidget *widget, GpkHelperChooser *helper)
-{
-	GpkHelperChooserPrivate *priv;
-	priv = gpk_helper_chooser_get_instance_private (GPK_HELPER_CHOOSER (helper));
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_simple"));
-	gtk_widget_hide (widget);
-	g_signal_emit (helper, signals [GPK_HELPER_CHOOSER_EVENT], 0, GTK_RESPONSE_NO, priv->package_id);
-}
-
-/**
  * gpk_helper_chooser_button_response_cb:
  **/
 static void
@@ -294,10 +280,6 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 	/* set a size, if the screen allows */
 	gpk_window_set_size_request (GTK_WINDOW (widget), 600, 300);
 
-	/* connect up buttons */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_close"));
-	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_helper_chooser_button_cancel_cb), helper);
-
 	/* TRANSLATORS: button label, install */
 	button = gtk_button_new_with_mnemonic (_("_Install"));
 	g_signal_connect (button, "clicked", G_CALLBACK (gpk_helper_chooser_button_install_cb), helper);
@@ -306,12 +288,15 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 	gtk_widget_set_tooltip_text (button, _("Install package"));
 
 	/* add to box */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_simple"));
-	gtk_dialog_add_action_widget (GTK_DIALOG (widget), button, GTK_RESPONSE_NONE);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
+	gtk_header_bar_pack_end (GTK_HEADER_BAR (widget), button);
 	gtk_widget_show (button);
 
 	/* hide the filter box */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_filter"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_package"));
+	gtk_widget_hide (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_filter"));
 	gtk_widget_hide (widget);
 
 	/* hide the refresh button */

@@ -108,16 +108,6 @@ gpk_helper_run_button_run_cb (GtkWidget *widget, GpkHelperRun *helper)
 }
 
 /**
- * gpk_helper_run_button_close_cb:
- **/
-static void
-gpk_helper_run_button_close_cb (GtkWidget *widget, GpkHelperRun *helper)
-{
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
-	gtk_widget_hide (widget);
-}
-
-/**
  * gpk_helper_run_delete_event_cb:
  **/
 static gboolean
@@ -439,12 +429,11 @@ gpk_helper_run_init (GpkHelperRun *helper)
 	/* set a size, if the screen allows */
 	gpk_window_set_size_request (GTK_WINDOW (widget), 600, 300);
 
-	/* connect up buttons */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "button_close"));
-	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_helper_run_button_close_cb), helper);
-
 	/* hide the filter box */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "hbox_filter"));
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "entry_package"));
+	gtk_widget_hide (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "button_filter"));
 	gtk_widget_hide (widget);
 
 	/* hide the refresh button */
@@ -459,7 +448,8 @@ gpk_helper_run_init (GpkHelperRun *helper)
 
 	/* add run button */
 	button = gtk_button_new_with_mnemonic (_("_Run"));
-	gtk_dialog_add_action_widget (GTK_DIALOG (widget), button, GTK_RESPONSE_NONE);
+	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "headerbar"));
+	gtk_header_bar_pack_end (GTK_HEADER_BAR (widget), button);
 	gtk_widget_show (button);
 	g_signal_connect (button, "clicked", G_CALLBACK (gpk_helper_run_button_run_cb), helper);
 
