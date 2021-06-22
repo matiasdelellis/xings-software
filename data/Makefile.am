@@ -2,9 +2,6 @@ NULL =
 
 SUBDIRS = appdata icons
 
-migrationdir = $(datadir)/GConf/gsettings
-dist_migration_DATA = org.xings.packagekit.gschema.migrate
-
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications
 desktop_in_files =					\
