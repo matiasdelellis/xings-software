@@ -49,6 +49,8 @@ G_BEGIN_DECLS
 #define GPK_SETTINGS_SEARCH_MODE			"search-mode"
 #define GPK_SETTINGS_SHOW_ALL_PACKAGES			"show-all-packages"
 #define GPK_SETTINGS_SHOW_DEPENDS			"show-depends"
+#define GPK_SETTINGS_FREQUENCY_GET_UPDATES		"frequency-get-updates"
+#define GPK_SETTINGS_FREQUENCY_REFRESH_CACHE		"frequency-refresh-cache"
 
 #define GPK_ICON_SOFTWARE_UPDATE		"system-software-update"
 #define GPK_ICON_SOFTWARE_SOURCES		"gpk-repo"

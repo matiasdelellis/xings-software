@@ -93,5 +93,15 @@
       <default>'show-confirm-install'</default>
       <description>When displaying UI from a session D-Bus request, force these options to be turned on.</description>
     </key>
+    <key name="frequency-get-updates" type="i">
+      <default>86400</default>
+      <summary>How often to check for updates</summary>
+      <description>How often to check for updates. Value is in seconds. This is a maximum amount of time that can pass between a security update being published, and the user notified.</description>
+    </key>
+    <key name="frequency-refresh-cache" type="i">
+      <default>86400</default>
+      <summary>How often to refresh the package cache</summary>
+      <description>How often to refresh the package cache. Value is in seconds.</description>
+    </key>
   </schema>
 </schemalist>

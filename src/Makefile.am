@@ -64,6 +64,8 @@ libgpkshared_a_SOURCES =				\
 	gpk-gnome.h					\
 	gpk-common.c					\
 	gpk-common.h					\
+	gpk-scheduler.c					\
+	gpk-scheduler.h					\
 	gpk-task.c					\
 	gpk-task.h					\
 	gpk-error.c					\
