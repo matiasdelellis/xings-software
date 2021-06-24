@@ -103,5 +103,15 @@
       <summary>How often to refresh the package cache</summary>
       <description>How often to refresh the package cache. Value is in seconds.</description>
     </key>
+    <key name="frequency-updates-notification" type="i">
+      <default>604800</default>
+      <summary>How often to notify the user that non-critical updates are available</summary>
+      <description>How often to tell the user there are non-critical updates. Value is in seconds. Security update notifications are always shown after the check for updates, but non-critical notifications should be shown a lot less frequently.</description>
+    </key>
+    <key name="last-updates-notification" type="t">
+      <default>0</default>
+      <summary>The last time we told the user about non-critical notifications</summary>
+      <description>The last time we notified the user about non-critical updates. Value is in seconds since the epoch, or zero for never.</description>
+    </key>
   </schema>
 </schemalist>

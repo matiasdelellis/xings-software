@@ -32,6 +32,9 @@ src/gpk-install-local-file.c
 src/gpk-install-package-name.c
 src/gpk-log.c
 src/gpk-modal-dialog.c
+src/gpk-notifier-service.c
 src/gpk-prefs.c
 src/gpk-task.c
 src/gpk-update-viewer.c
+src/gpk-updates-notification.c
+src/gpk-updates-notifier.c

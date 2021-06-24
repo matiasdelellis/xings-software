@@ -32,7 +32,8 @@ bin_PROGRAMS =						\
 	xings-install-package-name			\
 	xings-package-updates				\
 	xings-package-history				\
-	xings-packagekit-service
+	xings-packagekit-service			\
+	xings-updates-notifier
 
 noinst_LIBRARIES = libgpkshared.a
 libgpkshared_a_SOURCES =				\
@@ -64,10 +65,10 @@ libgpkshared_a_SOURCES =				\
 	gpk-gnome.h					\
 	gpk-common.c					\
 	gpk-common.h					\
-	gpk-scheduler.c					\
-	gpk-scheduler.h					\
 	gpk-task.c					\
 	gpk-task.h					\
+	gpk-updates-notification.c			\
+	gpk-updates-notification.h			\
 	gpk-error.c					\
 	gpk-error.h
 
@@ -170,8 +171,18 @@ xings_package_history_LDADD =				\
 	libgpkshared.a					\
 	$(shared_LIBS)
 
-gpk_log_CFLAGS =					\
+xings_package_history_CFLAGS =				\
 	$(WARN_CFLAGS)
+
+xings_updates_notifier_SOURCES =			\
+	gpk-updates-notifier.c				\
+	gpk-updates-notifier.h				\
+	gpk-notifier-service.c
+
+xings_updates_notifier_LDADD =				\
+	libgpkshared.a					\
+	$(shared_LIBS)					\
+	$(NULL)
 
 BUILT_SOURCES = 					\
 	gpk-marshal.c					\

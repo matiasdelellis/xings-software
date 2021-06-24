@@ -1,8 +1,6 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
  * Copyright (C) 2021 Matias De lellis <mati86dl@gmail.com>
- *
- * Licensed under the GNU General Public License Version 2
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,22 +13,24 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * along with this program; if not, see <http://www.gnu.org/licenses/>.
+ *
  */
 
-#ifndef __GPK_SCHEDULER_H
-#define __GPK_SCHEDULER_H
+#ifndef __GPK_UPDATES_NOTIFIER_H
+#define __GPK_UPDATES_NOTIFIER_H
 
+#include <glib.h>
 #include <glib-object.h>
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_SCHEDULER (gpk_scheduler_get_type())
-G_DECLARE_FINAL_TYPE (GpkScheduler, gpk_scheduler, GPK, SCHEDULER, GObject)
+#define GPK_TYPE_UPDATES_NOTIFIER (gpk_updates_notifier_get_type ())
 
-GpkScheduler *gsd_scheduler_new (void);
+G_DECLARE_FINAL_TYPE (GpkUpdatesNotifier, gpk_updates_notifier, GPK, UPDATES_NOTIFIER, GObject)
+
+GpkUpdatesNotifier *gpk_updates_notifier_new (void);
 
 G_END_DECLS
 
-#endif /* __GPK_SCHEDULER_H */
+#endif /* __GPK_UPDATES_NOTIFIER_H */

@@ -21,6 +21,7 @@ xings-package-updates
 xings-packagekit-service
 xings-packages
 xings-preferences
+xings-updates-notifier
 gpk-self-test
 gpk-self-test.log
 gpk-self-test.trs
