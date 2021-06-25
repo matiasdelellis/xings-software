@@ -23,7 +23,9 @@
 #include <packagekit-glib2/packagekit.h>
 
 #include "gpk-common.h"
+#include "gpk-updates-applet.h"
 #include "gpk-updates-notification.h"
+
 #include "gpk-updates-notifier.h"
 
 
@@ -44,7 +46,8 @@ struct _GpkUpdatesNotifier
 
 	GPtrArray		*update_packages;
 
-	GpkUpdatesNotification  *notification;
+	GpkUpdatesApplet	*applet;
+	GpkUpdatesNotification	*notification;
 };
 
 G_DEFINE_TYPE (GpkUpdatesNotifier, gpk_updates_notifier, G_TYPE_OBJECT)
@@ -74,6 +77,21 @@ gpk_updates_notifier_is_online (GpkUpdatesNotifier *notifier)
 }
 
 static void
+gpk_updates_notififier_launch_update_viewer (GpkUpdatesNotifier *notifier)
+{
+	gboolean ret;
+	GError *error = NULL;
+
+	ret = g_spawn_command_line_async (BINDIR "/xings-package-updates",
+	                                  &error);
+
+	if (!ret) {
+		g_warning ("Failure launching update viewer: %s", error->message);
+		g_error_free (error);
+	}
+}
+
+static void
 gpk_updates_notifier_should_notify_for_importance (GpkUpdatesNotifier *notifier)
 {
 	PkPackage *pkg;
@@ -90,9 +108,13 @@ gpk_updates_notifier_should_notify_for_importance (GpkUpdatesNotifier *notifier)
 	if (important_packages > 0) {
 		gpk_updates_notification_show_critical_updates (notifier->notification,
 		                                                important_packages);
+		gpk_updates_applet_show_critical_updates (notifier->applet,
+		                                          important_packages);
 	} else {
 		gpk_updates_notification_maybe_show_normal_updates (notifier->notification,
 		                                                    notifier->update_packages->len);
+		gpk_updates_applet_show_normal_updates (notifier->applet,
+		                                        notifier->update_packages->len);
 	}
 }
 
@@ -108,7 +130,6 @@ gpk_updates_notifier_check_updates_finished_cb (GObject            *object,
 {
 	PkResults *results;
 	GError *error = NULL;
-	gboolean ret;
 	PkError *error_code = NULL;
 
 	PkClient *client = PK_CLIENT(object);
@@ -123,6 +144,7 @@ gpk_updates_notifier_check_updates_finished_cb (GObject            *object,
 		g_warning ("failed to get updates: %s", error->message);
 		g_error_free (error);
 		gpk_updates_notification_show_failed (notifier->notification);
+		gpk_updates_applet_show_failed (notifier->applet);
 		goto out;
 	}
 
@@ -139,6 +161,7 @@ gpk_updates_notifier_check_updates_finished_cb (GObject            *object,
 				break;
 			default:
 				gpk_updates_notification_show_failed (notifier->notification);
+				gpk_updates_applet_show_failed (notifier->applet);
 				break;
 		}
 		goto out;
@@ -353,6 +376,32 @@ g_network_monitor_network_changed_cb (GNetworkMonitor    *network_monitor,
 }
 
 
+/*
+ * Signals on user actions.
+ */
+
+static void
+gpk_updates_notifier_applet_activated_cb (GpkUpdatesApplet   *applet,
+                                          GpkUpdatesNotifier *notifier)
+{
+	gpk_updates_notififier_launch_update_viewer (notifier);
+}
+
+static void
+gpk_updates_notifier_notification_show_update_viewer_cb (GpkUpdatesNotification *notification,
+                                                         GpkUpdatesNotifier     *notifier)
+{
+	gpk_updates_notififier_launch_update_viewer (notifier);
+}
+
+static void
+gpk_updates_notifier_notification_ignore_updates_cb (GpkUpdatesNotification *notification,
+                                                     GpkUpdatesNotifier     *notifier)
+{
+	gpk_updates_notififier_launch_update_viewer (notifier);
+}
+
+
 /**
  *  GpkUpdatesNotifier:
  */
@@ -381,6 +430,9 @@ gpk_updates_notifier_dispose (GObject *object)
 		notifier->update_packages = NULL;
 	}
 
+	g_clear_object (&notifier->applet);
+	g_clear_object (&notifier->notification);
+
 	g_clear_object (&notifier->settings);
 	g_clear_object (&notifier->control);
 	g_clear_object (&notifier->task);
@@ -400,6 +452,9 @@ static void
 gpk_updates_notifier_init (GpkUpdatesNotifier *notifier)
 {
 	g_debug ("Starting updates notifier");
+
+	/* the notification applet */
+	notifier->applet = gpk_updates_applet_new ();
 
 	/* the notification manager */
 	notifier->notification = gpk_updates_notification_new ();
@@ -435,6 +490,14 @@ gpk_updates_notifier_init (GpkUpdatesNotifier *notifier)
 
 	/* check current state of cache */
 	gpk_updates_notifier_check_refresh_cache (notifier);
+
+	/* show update viewer on user actions */
+	g_signal_connect (notifier->applet, "activate",
+			  G_CALLBACK (gpk_updates_notifier_applet_activated_cb), notifier);
+	g_signal_connect (notifier->notification, "show-update-viewer",
+			  G_CALLBACK (gpk_updates_notifier_notification_show_update_viewer_cb), notifier);
+	g_signal_connect (notifier->notification, "ignore-updates",
+			  G_CALLBACK (gpk_updates_notifier_notification_ignore_updates_cb), notifier);
 
 	/* success */
 	g_debug ("Started updates notifier");

@@ -161,6 +161,34 @@ AC_SUBST(SYSTEMD_LIBS)
 
 AM_CONDITIONAL(WITH_SYSTEMD, [test "$with_systemd" = "yes"], [Using systemd])
 
+
+dnl ---------------------------------------------------------------------------
+dnl - Application indicator
+dnl ---------------------------------------------------------------------------
+
+STATUSNOTIFIER_PKG=statusnotifier
+STATUSNOTIFIER_REQUIRED=1.0.0
+AC_ARG_ENABLE([statusnotifier],
+        AS_HELP_STRING([--enable-statusnotifier[=@<:@no/auto/yes@:>@]],[Build support for status notifier]),
+                       [enable_statusnotifier=$enableval],
+                       [enable_statusnotifier="auto"])
+
+if test "x$enable_statusnotifier" = "xauto"; then
+        PKG_CHECK_EXISTS($STATUSNOTIFIER_PKG >= $STATUSNOTIFIER_REQUIRED,
+                         [enable_statusnotifier="yes"],
+                         [enable_statusnotifier="no"])
+fi
+
+if test "x$enable_statusnotifier" = "xyes"; then
+        PKG_CHECK_MODULES(STATUSNOTIFIER,
+                          [$STATUSNOTIFIER_PKG >= $STATUSNOTIFIER_REQUIRED],
+                          [AC_DEFINE(HAVE_STATUSNOTIFIER, 1, [Have StatusNotifier])])
+fi
+
+AM_CONDITIONAL(HAVE_STATUSNOTIFIER, test "x$enable_statusnotifier" = "xyes")
+AC_SUBST(STATUSNOTIFIER_CFLAGS)
+AC_SUBST(STATUSNOTIFIER_LIBS)
+
 dnl ---------------------------------------------------------------------------
 dnl - Enable small form factor code
 dnl ---------------------------------------------------------------------------
@@ -238,4 +266,6 @@ echo "
         compiler:                  ${CC}
         cflags:                    ${CFLAGS}
         cppflags:                  ${CPPFLAGS}
+
+        Status Notifier:           ${enable_statusnotifier}
 "

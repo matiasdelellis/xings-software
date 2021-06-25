@@ -34,6 +34,14 @@ struct _GpkUpdatesNotification
 	GSettings		*settings;
 };
 
+enum {
+	SHOW_UPDATE_VIEWER,
+	IGNORE_UPDATES,
+	LAST_SIGNAL
+};
+
+static guint signals [LAST_SIGNAL] = { 0 };
+
 G_DEFINE_TYPE (GpkUpdatesNotification, gpk_updates_notification, G_TYPE_OBJECT)
 
 
@@ -72,21 +80,19 @@ gpk_updates_notification_response_action (NotifyNotification *update_notificatio
 
 	notify_notification_close (update_notification, NULL);
 
-	if (g_strcmp0 (action, "ignore") == 0)
-		goto out;
-
-	if (g_strcmp0 (action, "show-package-updates") == 0) {
-		ret = g_spawn_command_line_async (BINDIR "/xings-package-updates",
-		                                  &error);
-		if (!ret) {
-			g_warning ("Failure launching update viewer: %s",
-			           error->message);
-			g_error_free (error);
-		}
+	if (g_strcmp0 (action, "ignore") == 0) {
+		g_debug ("notification ignore updates");
+		g_signal_emit (notification, signals [IGNORE_UPDATES], 0);
 		goto out;
 	}
 
-	g_warning ("unknown action id: %s", action);
+	if (g_strcmp0 (action, "show-update-viewer") == 0) {
+		g_debug ("notification show updates");
+		g_signal_emit (notification, signals [SHOW_UPDATE_VIEWER], 0);
+		goto out;
+	}
+
+	g_warning ("unknown notification action id: %s", action);
 
 out:
 	return;
@@ -145,7 +151,7 @@ gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notifica
 	                                notification, NULL);
 
 	notify_notification_add_action (notification_updates,
-	                                "show-package-updates",
+	                                "show-update-viewer",
 	                                /* TRANSLATORS: button: open the update viewer to install updates */
 	                                _("Install updates"),
 	                                gpk_updates_notification_response_action,
@@ -216,7 +222,7 @@ gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *noti
 	                                notification, NULL);
 
 	notify_notification_add_action (notification_updates,
-	                                "show-package-updates",
+	                                "show-update-viewer",
 	                                /* TRANSLATORS: button: open the update viewer to install updates */
 	                                _("Install updates"),
 	                                gpk_updates_notification_response_action,
@@ -317,6 +323,18 @@ gpk_updates_notification_class_init (GpkUpdatesNotificationClass *klass)
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	object_class->dispose = gpk_updates_notification_dispose;
+
+	signals [SHOW_UPDATE_VIEWER] =
+		g_signal_new ("show-update-viewer",
+		              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
+		              0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+		              G_TYPE_NONE, 0);
+
+	signals [IGNORE_UPDATES] =
+		g_signal_new ("ignore-updates",
+		              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
+		              0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+		              G_TYPE_NONE, 0);
 }
 
 static void

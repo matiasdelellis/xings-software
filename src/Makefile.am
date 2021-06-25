@@ -177,12 +177,18 @@ xings_package_history_CFLAGS =				\
 xings_updates_notifier_SOURCES =			\
 	gpk-updates-notifier.c				\
 	gpk-updates-notifier.h				\
+	gpk-updates-applet.c				\
+	gpk-updates-applet.h				\
 	gpk-notifier-service.c
 
 xings_updates_notifier_LDADD =				\
 	libgpkshared.a					\
-	$(shared_LIBS)					\
-	$(NULL)
+	$(STATUSNOTIFIER_LIBS)				\
+	$(shared_LIBS)
+
+xings_updates_notifier_CFLAGS = 			\
+	$(STATUSNOTIFIER_CFLAGS)				\
+	$(WARN_CFLAGS)
 
 BUILT_SOURCES = 					\
 	gpk-marshal.c					\
