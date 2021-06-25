@@ -16,6 +16,13 @@ desktop_in_files =					\
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_DESKTOP_RULE@
+autostartdir = $(sysconfdir)/xdg/autostart
+autostart_in_files =					\
+	xings-updates-notifier.desktop.in
+
+autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
+
+@INTLTOOL_DESKTOP_RULE@
 
 pkgdata_DATA =						\
 	gpk-eula.ui					\
@@ -46,9 +53,6 @@ EXTRA_DIST =						\
 	$(service_in_files)				\
 	$(NULL)
 
-clean-local :
-	rm -f *~
-
 DISTCLEANFILES =					\
 	xings-preferences.desktop			\
 	xings-package-updates.desktop			\
@@ -56,5 +60,10 @@ DISTCLEANFILES =					\
 	xings-packagekit-service.desktop		\
 	xings-package-history.desktop			\
 	xings-packages.desktop				\
+	xings-updates-notifier.desktop			\
 	org.freedesktop.PackageKit.service		\
 	$(NULL)
+
+clean-local :
+	rm -f *~
+

@@ -5,10 +5,5 @@ Makefile.in
 *.gladep
 *.gladep.bak
 *.valid
-org.freedesktop.PackageKit.service
-xings-packages.desktop
-xings-packagekit-service.desktop
-xings-install-local-package.desktop
-xings-package-history.desktop
-xings-preferences.desktop
-xings-package-updates.desktop
+*.service
+*.desktop

@@ -16,6 +16,7 @@ data/xings-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui
 [type: gettext/glade]data/gpk-signature.ui
 data/xings-package-updates.desktop.in
+data/xings-updates-notifier.desktop.in
 [type: gettext/glade]data/gpk-update-viewer.ui
 data/org.xings.packagekit.gschema.xml
 src/gpk-application.c
