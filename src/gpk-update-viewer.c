@@ -991,9 +991,6 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 
 			widget = GTK_WIDGET(gtk_builder_get_object (builder, "progressbar_progress"));
 			gtk_widget_hide (widget);
-
-			widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_quit"));
-			gtk_widget_set_sensitive (widget, TRUE);
 		} else {
 			if (status == PK_STATUS_ENUM_QUERY || status == PK_STATUS_ENUM_SETUP) {
 				/* TRANSLATORS: querying update array */
@@ -1341,10 +1338,6 @@ gpk_update_viewer_modal_error_with_timeout (const gchar *title, const gchar *mes
 	GtkWidget *dialog;
 	GtkWidget *widget;
 	gchar *text;
-
-	/* hide close button */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_quit"));
-	gtk_widget_hide (widget);
 
 	/* show a new title */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
