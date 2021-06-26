@@ -1316,6 +1316,12 @@ gpk_role_enum_to_localised_present (PkRoleEnum role)
 		/* TRANSLATORS: The role of the transaction, in present tense */
 		text = _("Repairing the system");
 		break;
+#if PK_CHECK_VERSION(1,0,10)
+	case PK_ROLE_ENUM_UPGRADE_SYSTEM:
+		/* TRANSLATORS: The role of the transaction, in past tense */
+		text = _("Upgrading the system");
+		break;
+#endif
 	default:
 		g_warning ("role unrecognized: %s", pk_role_enum_to_string (role));
 	}

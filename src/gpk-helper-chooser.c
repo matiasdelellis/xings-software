@@ -73,21 +73,6 @@ gpk_helper_chooser_button_install_cb (GtkWidget *widget, GpkHelperChooser *helpe
 }
 
 /**
- * gpk_helper_chooser_button_response_cb:
- **/
-static void
-gpk_helper_chooser_button_response_cb (GtkDialog *dialog, GtkResponseType response_id, GpkHelperChooser *helper)
-{
-	GpkHelperChooserPrivate *priv;
-	priv = gpk_helper_chooser_get_instance_private (GPK_HELPER_CHOOSER (helper));
-
-	if (response_id == GTK_RESPONSE_DELETE_EVENT) {
-		gtk_widget_hide (GTK_WIDGET (dialog));
-		g_signal_emit (helper, signals [GPK_HELPER_CHOOSER_EVENT], 0, GTK_RESPONSE_NO, priv->package_id);
-	}
-}
-
-/**
  * gpk_helper_chooser_treeview_clicked_cb:
  **/
 static void
@@ -267,10 +252,6 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 		g_warning ("failed to load ui: %s", error->message);
 		g_error_free (error);
 	}
-
-	/* connect up default actions */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_simple"));
-	g_signal_connect (GTK_DIALOG (widget), "response", G_CALLBACK (gpk_helper_chooser_button_response_cb), helper);
 
 	/* set icon name */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_simple"));

@@ -101,29 +101,10 @@ PKG_CHECK_MODULES(DBUS, \
  gthread-2.0)
 PKG_CHECK_MODULES(GTK, \
  gtk+-3.0 >= 3.15.2 gdk-3.0 fontconfig)
-PKG_CHECK_MODULES(CANBERRA, libcanberra-gtk3 >= 0.10)
 PKG_CHECK_MODULES(X11, x11)
 
 dnl **** Check for libnotify ****
 PKG_CHECK_MODULES(NOTIFY, libnotify >= 0.7.0)
-
-dnl ---------------------------------------------------------------------------
-dnl - GUdev integration (default enabled)
-dnl ---------------------------------------------------------------------------
-AC_ARG_ENABLE(gudev, AS_HELP_STRING([--disable-gudev],[Disable GUdev support]), enable_gudev=$enableval)
-if test x$enable_gudev != xno; then
-	PKG_CHECK_MODULES(GUDEV, gudev-1.0, HAVE_GUDEV="yes", HAVE_GUDEV="no")
-	if test "x$HAVE_GUDEV" = "xyes"; then
-		AC_DEFINE(HAVE_GUDEV, 1, [define if GUdev is available])
-	else
-		if test x$enable_gudev = xyes; then
-			AC_MSG_ERROR([GUdev enabled but not found])
-		fi
-	fi
-else
-	HAVE_GUDEV=no
-fi
-AM_CONDITIONAL(HAVE_GUDEV, test x$HAVE_GUDEV = xyes)
 
 dnl ---------------------------------------------------------------------------
 dnl systemd integration
@@ -134,7 +115,7 @@ AC_ARG_ENABLE([systemd],
               [with_systemd=auto])
 
 PKG_CHECK_MODULES(SYSTEMD,
-                  [libsystemd-login polkit-gobject-1],
+                  [libsystemd polkit-gobject-1],
                   [have_systemd=yes], [have_systemd=no])
 
 AC_MSG_CHECKING([whether to use systemd])
@@ -267,5 +248,6 @@ echo "
         cflags:                    ${CFLAGS}
         cppflags:                  ${CPPFLAGS}
 
+        systemd integrations       ${have_systemd}
         Status Notifier:           ${enable_statusnotifier}
 "

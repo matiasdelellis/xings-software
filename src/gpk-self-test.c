@@ -108,15 +108,6 @@ gpk_test_enum_func (void)
 		}
 	}
 
-	/* check we convert all the status animation enums */
-	for (i = PK_STATUS_ENUM_UNKNOWN+1; i < PK_STATUS_ENUM_UNKNOWN; i++) {
-		string = gpk_status_enum_to_animation (i);
-		if (string == NULL || g_strcmp0 (string, "help-browser") == 0) {
-			g_warning ("failed to get %s", pk_status_enum_to_string (i));
-			break;
-		}
-	}
-
 	/* check we convert all the info icon names enums */
 	for (i = PK_INFO_ENUM_UNKNOWN+1; i < PK_INFO_ENUM_LAST; i++) {
 		string = gpk_info_enum_to_icon_name (i);
@@ -356,7 +347,7 @@ gpk_test_dbus_task_func (void)
 
 	/* convert tag to language */
 	language = gpk_dbus_task_font_tag_to_localised_name (dtask, ":lang=mn");
-	g_assert_cmpstr (language, ==, "Mongolian");
+	g_assert_cmpstr (language, ==, "Mongol");
 	g_free (language);
 
 	/* test trusted path */
@@ -364,16 +355,16 @@ gpk_test_dbus_task_func (void)
 //	g_assert (ret);
 
 	/* test trusted path */
-	ret = gpk_dbus_task_path_is_trusted ("/usr/bin/totem");
+	ret = gpk_dbus_task_path_is_trusted ("/usr/bin/mandb");
 	g_assert (!ret);
 
 	/* get package for exec */
-	package = gpk_dbus_task_get_package_for_exec (dtask, "/usr/bin/totem");
-	g_assert_cmpstr (package, ==, "totem");
+	package = gpk_dbus_task_get_package_for_exec (dtask, "/usr/bin/mandb");
+	g_assert_cmpstr (package, ==, "man-db");
 	g_free (package);
 
 	/* set exec */
-	ret = gpk_dbus_task_set_exec (dtask, "/usr/bin/totem");
+	ret = gpk_dbus_task_set_exec (dtask, "/usr/bin/mandb");
 	g_assert (ret);
 #if 0
 	/* install fonts (no UI) */
@@ -590,7 +581,6 @@ main (int argc, char **argv)
 	g_test_add_func ("/gnome-packagekit/enum", gpk_test_enum_func);
 	g_test_add_func ("/gnome-packagekit/common", gpk_test_common_func);
 	g_test_add_func ("/gnome-packagekit/language", gpk_test_language_func);
-	g_test_add_func ("/gnome-packagekit/markdown", gpk_test_markdown_func);
 	g_test_add_func ("/gnome-packagekit/dbus", gpk_test_dbus_func);
 	g_test_add_func ("/gnome-packagekit/dbus-task", gpk_test_dbus_task_func);
 	if (g_test_thorough ()) {

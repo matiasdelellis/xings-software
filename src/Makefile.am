@@ -8,12 +8,8 @@ AM_CPPFLAGS =						\
 	$(DBUS_CFLAGS)					\
 	$(NOTIFY_CFLAGS)				\
 	$(PACKAGEKIT_CFLAGS)				\
-	$(GUDEV_CFLAGS)					\
 	$(SYSTEMD_CFLAGS)				\
-	$(GNOME_MENUS_CFLAGS)				\
 	-DI_KNOW_THE_PACKAGEKIT_GLIB2_API_IS_SUBJECT_TO_CHANGE	\
-	-DG_UDEV_API_IS_SUBJECT_TO_CHANGE		\
-	$(CANBERRA_CFLAGS)				\
 	-DBINDIR=\"$(bindir)\"			 	\
 	-DDATADIR=\"$(datadir)\"			\
 	-DPREFIX=\""$(prefix)"\" 			\
@@ -83,12 +79,9 @@ shared_LIBS =						\
 	$(GIO_LIBS)					\
 	$(DBUS_LIBS)					\
 	$(GTK_LIBS)					\
-	$(GUDEV_LIBS)					\
 	$(NOTIFY_LIBS)					\
 	$(SYSTEMD_LIBS)					\
 	$(PACKAGEKIT_LIBS)				\
-	$(GNOME_MENUS_LIBS)				\
-	$(CANBERRA_LIBS)				\
 	$(X11_LIBS)
 
 xings_install_local_package_SOURCES =			\
