@@ -48,7 +48,6 @@ struct _GpkSessionClass
 	void		(* cancel_end_session)		(GpkSession	*session);
 };
 
-GType		 gpk_session_get_type			(void);
 GpkSession	*gpk_session_new			(void);
 
 gboolean	 gpk_session_logout			(GpkSession	*session);

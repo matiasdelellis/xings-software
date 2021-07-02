@@ -154,7 +154,7 @@ xings_package_updates_LDADD =				\
 	libgpkshared.a					\
 	$(shared_LIBS)
 
-gpk_update_viewer_CFLAGS =				\
+xings_package_updates_CFLAGS =				\
 	$(WARN_CFLAGS)
 
 xings_package_history_SOURCES =				\
