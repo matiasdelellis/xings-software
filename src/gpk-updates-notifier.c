@@ -46,6 +46,8 @@ struct _GpkUpdatesNotifier
 
 	GPtrArray		*update_packages;
 
+	guint			 dbus_watch_id;
+
 	GpkUpdatesApplet	*applet;
 	GpkUpdatesNotification	*notification;
 };
@@ -376,6 +378,36 @@ g_network_monitor_network_changed_cb (GNetworkMonitor    *network_monitor,
 }
 
 
+/**
+ * React when updater is launched or closed.
+ */
+
+static void
+gpk_updates_viewer_appeared_cb (GDBusConnection *connection,
+                                const gchar     *name,
+                                const gchar     *name_owner,
+                                gpointer         user_data)
+{
+	GpkUpdatesNotifier *notifier = GPK_UPDATES_NOTIFIER(user_data);
+
+	g_debug ("Xings package updates appeared on dbus. Hiding applet.");
+
+	gpk_updates_applet_hide (notifier->applet);
+}
+
+static void
+gpk_updates_viewer_vanished_cb (GDBusConnection *connection,
+                                const gchar     *name,
+                                gpointer         user_data)
+{
+	GpkUpdatesNotifier *notifier = GPK_UPDATES_NOTIFIER(user_data);
+
+	g_debug ("Xings package updates vanished on dbus. Check for updates.");
+
+	gpk_updates_notifier_check_updates (notifier);
+}
+
+
 /*
  * Signals on user actions.
  */
@@ -418,6 +450,11 @@ gpk_updates_notifier_dispose (GObject *object)
 	if (notifier->periodic_id != 0) {
 		g_source_remove (notifier->periodic_id);
 		notifier->periodic_id = 0;
+	}
+
+	if (notifier->dbus_watch_id > 0) {
+		g_bus_unwatch_name (notifier->dbus_watch_id);
+		notifier->dbus_watch_id = 0;
 	}
 
 	if (notifier->cancellable) {
@@ -487,6 +524,15 @@ gpk_updates_notifier_init (GpkUpdatesNotifier *notifier)
 		                       notifier);
 	g_source_set_name_by_id (notifier->periodic_id,
 	                         "[GpkScheduler] periodic check");
+
+	/* Check if starts the update viewer to hide the icon. */
+	notifier->dbus_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
+	                                            "org.xings.PackageUpdates",
+	                                            G_BUS_NAME_WATCHER_FLAGS_NONE,
+	                                            gpk_updates_viewer_appeared_cb,
+	                                            gpk_updates_viewer_vanished_cb,
+	                                            notifier,
+	                                            NULL);
 
 	/* check current state of cache */
 	gpk_updates_notifier_check_refresh_cache (notifier);
