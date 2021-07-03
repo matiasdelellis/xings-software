@@ -24,7 +24,7 @@
     &date;
   </refentryinfo>
   <refmeta>
-    <refentrytitle>xings-preferences</refentrytitle>
+    <refentrytitle>xings-packagekit-preferences</refentrytitle>
     <manvolnum>1</manvolnum>
   </refmeta>
   <refnamediv>
@@ -52,7 +52,6 @@
     <para>xings-packagekit-service (1).</para>
     <para>xings-package-updates (2).</para>
     <para>xings-packages (3).</para>
-    <para>xings-install-catalog (4).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

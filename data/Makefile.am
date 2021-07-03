@@ -7,7 +7,7 @@ desktopdir = $(datadir)/applications
 desktop_in_files =					\
 	xings-install-local-package.desktop.in		\
 	xings-packagekit-service.desktop.in		\
-	xings-preferences.desktop.in			\
+	xings-packagekit-preferences.desktop.in		\
 	xings-packages.desktop.in			\
 	xings-package-updates.desktop.in		\
 	xings-package-history.desktop.in		\
@@ -54,7 +54,7 @@ EXTRA_DIST =						\
 	$(NULL)
 
 DISTCLEANFILES =					\
-	xings-preferences.desktop			\
+	xings-packagekit-preferences.desktop		\
 	xings-package-updates.desktop			\
 	xings-install-local-package.desktop		\
 	xings-packagekit-service.desktop		\

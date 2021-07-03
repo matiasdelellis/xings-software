@@ -2570,7 +2570,7 @@ gpk_application_activate_sources_cb (GSimpleAction *action,
 	window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
 	xid = gdk_x11_window_get_xid (gtk_widget_get_window (window));
 
-	command = g_strdup_printf ("%s/xings-preferences --parent-window %u", BINDIR, xid);
+	command = g_strdup_printf ("%s/xings-packagekit-preferences --parent-window %u", BINDIR, xid);
 	g_debug ("running: %s", command);
 	ret = g_spawn_command_line_async (command, NULL);
 	if (!ret) {

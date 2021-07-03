@@ -34,7 +34,7 @@ install-data-hook:
 	mkdir -p $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/mimetypes;
 	ln -fs $(iconsdir)/xings-package-sources.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-repo.png;
 	ln -fs $(iconsdir)/xings-package-info.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-package-history.png;
-	ln -fs $(iconsdir)/xings-update-high.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-preferences.png;
+	ln -fs $(iconsdir)/xings-update-high.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-packagekit-preferences.png;
 	ln -fs $(iconsdir)/xings-package-info.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/mimetypes/application-x-package-list.png;
 	ln -fs $(iconsdir)/xings-collection-installed.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/mimetypes/application-x-catalog.png;
 

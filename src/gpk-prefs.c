@@ -657,7 +657,7 @@ main (int argc, char *argv[])
 		      NULL);
 
 	/* are we already activated? */
-	priv->application = gtk_application_new ("org.xings.Preferences",
+	priv->application = gtk_application_new ("org.xings.PackageKitPreferences",
 						 G_APPLICATION_HANDLES_COMMAND_LINE);
 	g_signal_connect (priv->application, "startup",
 			  G_CALLBACK (gpk_pack_startup_cb), priv);

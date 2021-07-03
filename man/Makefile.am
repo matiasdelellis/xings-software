@@ -4,7 +4,7 @@ EXTRA_DIST =						\
 	xings-install-local-package.sgml		\
 	xings-install-package-name.sgml			\
 	xings-package-history.sgml			\
-	xings-preferences.sgml				\
+	xings-packagekit-preferences.sgml			\
 	xings-package-updates.sgml
 
 if HAVE_DOCBOOK2MAN
@@ -14,7 +14,7 @@ man_MANS =						\
 	xings-install-local-package.1			\
 	xings-install-package-name.1			\
 	xings-package-history.1				\
-	xings-preferences.1				\
+	xings-packagekit-preferences.1			\
 	xings-package-updates.1
 endif
 
@@ -23,7 +23,7 @@ xings-packages.1: xings-packages.sgml
 	$(AM_V_GEN) docbook2man $? > /dev/null
 xings-install-local-package.1: xings-install-local-package.sgml
 	$(AM_V_GEN) docbook2man $? > /dev/null
-xings-preferences.1: xings-preferences.sgml
+xings-packagekit-preferences.1: xings-packagekit-preferences.sgml
 	$(AM_V_GEN) docbook2man $? > /dev/null
 xings-install-package-name.1: xings-install-package-name.sgml
 	$(AM_V_GEN) docbook2man $? > /dev/null

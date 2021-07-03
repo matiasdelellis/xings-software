@@ -23,7 +23,7 @@ AM_CPPFLAGS =						\
 
 bin_PROGRAMS =						\
 	xings-packages					\
-	xings-preferences				\
+	xings-packagekit-preferences			\
 	xings-install-local-package			\
 	xings-install-package-name			\
 	xings-package-updates				\
@@ -125,7 +125,7 @@ xings_packages_LDADD =					\
 xings_packages_CFLAGS =					\
 	$(WARN_CFLAGS)
 
-xings_preferences_SOURCES =				\
+xings_packagekit_preferences_SOURCES =			\
 	gpk-debug.h					\
 	gpk-debug.c					\
 	gpk-enum.c					\
@@ -136,10 +136,13 @@ xings_preferences_SOURCES =				\
 	gpk-error.h					\
 	gpk-prefs.c
 
-xings_preferences_LDADD =				\
+xings_packagekit_preferences_LDADD =			\
 	libgpkshared.a					\
 	$(shared_LIBS)					\
 	-lm
+
+xings_packagekit_preferences_CFLAGS =			\
+	$(WARN_CFLAGS)
 
 xings_package_updates_SOURCES =				\
 	gpk-update-viewer.c				\
