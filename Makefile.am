@@ -19,6 +19,9 @@ clean-local :
 snapshot:
 	$(MAKE) dist distdir=$(PACKAGE)-$(VERSION)-`date +"%Y%m%d"`
 
+CLEANFILES =						\
+	README
+
 DISTCLEANFILES =					\
 	intltool-extract				\
 	intltool-merge					\
@@ -31,6 +34,9 @@ distclean-local:
 	if test $(srdcir) = .; then :; else \
 		rm -f ChangeLog; \
 	fi
+
+README:
+	cp -f README.md README
 
 ChangeLog:
 	@echo Creating $@

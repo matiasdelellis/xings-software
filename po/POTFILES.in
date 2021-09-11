@@ -12,7 +12,7 @@ data/xings-packagekit-service.desktop.in
 data/xings-install-local-package.desktop.in
 data/xings-package-history.desktop.in
 [type: gettext/glade]data/gpk-log.ui
-data/xings-preferences.desktop.in
+data/xings-packagekit-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui
 [type: gettext/glade]data/gpk-signature.ui
 data/xings-package-updates.desktop.in
@@ -37,5 +37,6 @@ src/gpk-notifier-service.c
 src/gpk-prefs.c
 src/gpk-task.c
 src/gpk-update-viewer.c
+src/gpk-updates-applet.c
 src/gpk-updates-notification.c
 src/gpk-updates-notifier.c
