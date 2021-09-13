@@ -2748,13 +2748,6 @@ gpk_update_viewer_get_new_update_array (void)
 		NULL,
 		FALSE);
 
-	/* only show newest updates? */
-	ret = g_settings_get_boolean (settings, GPK_SETTINGS_ONLY_NEWEST);
-	if (ret) {
-		g_debug ("only showing newest updates");
-		filter = pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST, -1);
-	}
-
 	/* get new array */
 	pk_client_get_updates_async (PK_CLIENT(task), filter, cancellable,
 				     (PkProgressCallback) gpk_update_viewer_progress_cb, NULL,
