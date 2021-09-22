@@ -39,10 +39,10 @@ struct _GpkUpdatesNotifier
 
 	GSettings		*settings;
 
-	guint			 periodic_id;
+	guint			 check_startup_id;	/* 60s after startup */
+	guint			 check_hourly_id;	/* and then every hour */
 
 	GNetworkMonitor		*network_monitor;
-	gboolean		 network_online;
 
 	GPtrArray		*update_packages;
 
@@ -126,9 +126,9 @@ gpk_updates_notifier_should_notify_for_importance (GpkUpdatesNotifier *notifier)
  */
 
 static void
-gpk_updates_notifier_check_updates_finished_cb (GObject            *object,
-                                                GAsyncResult       *res,
-                                                GpkUpdatesNotifier *notifier)
+gpk_updates_notifier_pk_check_updates_finished_cb (GObject            *object,
+                                                   GAsyncResult       *res,
+                                                   GpkUpdatesNotifier *notifier)
 {
 	PkResults *results;
 	GError *error = NULL;
@@ -191,7 +191,7 @@ out:
 }
 
 static void
-gpk_updates_notifier_check_updates (GpkUpdatesNotifier *notifier)
+gpk_updates_notifier_pk_check_updates (GpkUpdatesNotifier *notifier)
 {
 	/* optimize the amount of downloaded data by setting the cache age */
 	pk_client_set_cache_age (PK_CLIENT(notifier->task),
@@ -203,7 +203,7 @@ gpk_updates_notifier_check_updates (GpkUpdatesNotifier *notifier)
 	                             pk_bitfield_value (PK_FILTER_ENUM_NONE),
 	                             notifier->cancellable,
 	                             NULL, NULL,
-	                             (GAsyncReadyCallback) gpk_updates_notifier_check_updates_finished_cb,
+	                             (GAsyncReadyCallback) gpk_updates_notifier_pk_check_updates_finished_cb,
 	                             notifier);
 }
 
@@ -213,9 +213,9 @@ gpk_updates_notifier_check_updates (GpkUpdatesNotifier *notifier)
  */
 
 static void
-gpk_updates_notifier_refresh_cache_finished_cb (GObject            *object,
-                                                GAsyncResult       *res,
-                                                GpkUpdatesNotifier *notifier)
+gpk_updates_notifier_pk_refresh_cache_finished_cb (GObject            *object,
+                                                   GAsyncResult       *res,
+                                                   GpkUpdatesNotifier *notifier)
 {
 	PkResults *results;
 	GError *error = NULL;
@@ -241,16 +241,16 @@ gpk_updates_notifier_refresh_cache_finished_cb (GObject            *object,
 		g_warning ("failed to refresh the cache: %s, %s",
 		           pk_error_enum_to_string (pk_error_get_code (error_code)),
 		           pk_error_get_details (error_code));
+		g_object_unref (error_code);
+		g_object_unref (results);
 	}
 
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (results != NULL)
-		g_object_unref (results);
+	g_debug ("Cache was updated. Looking for updates.");
+	gpk_updates_notifier_pk_check_updates (notifier);
 }
 
 static void
-gpk_updates_notifier_refresh_cache (GpkUpdatesNotifier *notifier)
+gpk_updates_notifier_pk_refresh_cache (GpkUpdatesNotifier *notifier)
 {
 	/* optimize the amount of downloaded data by setting the cache age */
 	pk_client_set_cache_age (PK_CLIENT(notifier->task),
@@ -261,7 +261,7 @@ gpk_updates_notifier_refresh_cache (GpkUpdatesNotifier *notifier)
 	                               TRUE,
 	                               notifier->cancellable,
 	                               NULL, NULL,
-	                               (GAsyncReadyCallback) gpk_updates_notifier_refresh_cache_finished_cb,
+	                               (GAsyncReadyCallback) gpk_updates_notifier_pk_refresh_cache_finished_cb,
 	                               notifier);
 }
 
@@ -271,9 +271,9 @@ gpk_updates_notifier_refresh_cache (GpkUpdatesNotifier *notifier)
  */
 
 static void
-gpk_updates_notifier_get_time_since_refresh_cache_cb (GObject            *object,
-                                                      GAsyncResult       *res,
-                                                      GpkUpdatesNotifier *notifier)
+gpk_updates_notifier_pk_get_time_since_refresh_cache_cb (GObject            *object,
+                                                         GAsyncResult       *res,
+                                                         GpkUpdatesNotifier *notifier)
 {
 	GError *error = NULL;
 	guint seconds;
@@ -295,17 +295,17 @@ gpk_updates_notifier_get_time_since_refresh_cache_cb (GObject            *object
 
 	if (seconds < threshold) {
 		g_debug ("not refresh before timeout, thresh=%u, now=%u", threshold, seconds);
-		gpk_updates_notifier_check_updates (notifier);
+		gpk_updates_notifier_pk_check_updates (notifier);
 		return;
 	}
 
 	/* send signal */
 	g_debug ("must refresh cache");
-	gpk_updates_notifier_refresh_cache (notifier);
+	gpk_updates_notifier_pk_refresh_cache (notifier);
 }
 
 static void
-gpk_updates_notifier_check_refresh_cache (GpkUpdatesNotifier *notifier)
+gpk_updates_notifier_pk_check_refresh_cache (GpkUpdatesNotifier *notifier)
 {
 	guint threshold;
 
@@ -331,50 +331,72 @@ gpk_updates_notifier_check_refresh_cache (GpkUpdatesNotifier *notifier)
 	pk_control_get_time_since_action_async (notifier->control,
 	                                        PK_ROLE_ENUM_REFRESH_CACHE,
 	                                        NULL,
-	                                        (GAsyncReadyCallback) gpk_updates_notifier_get_time_since_refresh_cache_cb,
+	                                        (GAsyncReadyCallback) gpk_updates_notifier_pk_get_time_since_refresh_cache_cb,
 	                                        notifier);
 }
 
+
+/**
+ *  Logic for update scheduler.
+ */
+
+static void
+gpk_updates_notifier_check_updates (GpkUpdatesNotifier *notifier)
+{
+	/* never check for updates when offline */
+	if (!gpk_updates_notifier_is_online(notifier))
+		return;
+
+	/* check if need refresh cache. */
+	gpk_updates_notifier_pk_check_refresh_cache (notifier);
+}
+
 static gboolean
-gpk_updates_notifier_periodic_refresh_cache_timeout_cb (gpointer user_data)
+gpk_updates_notifier_check_hourly_cb (gpointer data)
+{
+	GpkUpdatesNotifier *notifier = GPK_UPDATES_NOTIFIER (data);
+
+	g_debug ("Hourly updates check");
+	gpk_updates_notifier_check_updates (notifier);
+
+	return G_SOURCE_CONTINUE;
+}
+
+static void
+gpk_updates_notifier_stop_updates_check (GpkUpdatesNotifier *notifier)
+{
+	if (notifier->check_hourly_id == 0)
+		return;
+
+	g_source_remove (notifier->check_hourly_id);
+	notifier->check_hourly_id = 0;
+}
+
+static void
+gpk_updates_notifier_restart_updates_check (GpkUpdatesNotifier *notifier)
+{
+	gpk_updates_notifier_stop_updates_check (notifier);
+	gpk_updates_notifier_check_updates (notifier);
+
+	notifier->check_hourly_id
+		= g_timeout_add_seconds (SECONDS_IN_AN_HOUR,
+		                         gpk_updates_notifier_check_hourly_cb,
+		                         notifier);
+}
+
+static gboolean
+gpk_updates_notifier_check_updates_on_startup_cb (gpointer user_data)
 {
 	GpkUpdatesNotifier *notifier = GPK_UPDATES_NOTIFIER (user_data);
 
 	g_return_val_if_fail (GPK_IS_UPDATES_NOTIFIER (notifier), G_SOURCE_REMOVE);
 
-	/* debug so we can catch polling */
-	g_debug ("periodic check");
+	g_debug ("First hourly updates check");
+	gpk_updates_notifier_restart_updates_check (notifier);
 
-	/* check if need refresh cache. */
-	gpk_updates_notifier_check_refresh_cache (notifier);
+	notifier->check_startup_id = 0;
 
-	/* always return */
-	return G_SOURCE_CONTINUE;
-}
-
-
-/*
- * Network change handler.
- */
-
-static void
-g_network_monitor_network_changed_cb (GNetworkMonitor    *network_monitor,
-                                      gboolean            available,
-                                      GpkUpdatesNotifier *notifier)
-{
-	gboolean network_online = FALSE;
-
-	g_return_if_fail (GPK_IS_UPDATES_NOTIFIER (notifier));
-
-	network_online = gpk_updates_notifier_is_online (notifier);
-	if (notifier->network_online == network_online)
-		return;
-
-	/* If network state changed and now it is online, check */
-	notifier->network_online = network_online;
-
-	if (notifier->network_online)
-		gpk_updates_notifier_check_refresh_cache (notifier);
+	return G_SOURCE_REMOVE;
 }
 
 
@@ -400,11 +422,7 @@ gpk_updates_viewer_vanished_cb (GDBusConnection *connection,
                                 const gchar     *name,
                                 gpointer         user_data)
 {
-	GpkUpdatesNotifier *notifier = GPK_UPDATES_NOTIFIER(user_data);
-
-	g_debug ("Xings package updates vanished on dbus. Check for updates.");
-
-	gpk_updates_notifier_check_updates (notifier);
+	g_debug ("Xings package updates dialog is closed");
 }
 
 
@@ -430,7 +448,7 @@ static void
 gpk_updates_notifier_notification_ignore_updates_cb (GpkUpdatesNotification *notification,
                                                      GpkUpdatesNotifier     *notifier)
 {
-	gpk_updates_notififier_launch_update_viewer (notifier);
+	g_debug ("User just ignore updates from notification...");
 }
 
 
@@ -447,19 +465,21 @@ gpk_updates_notifier_dispose (GObject *object)
 
 	g_debug ("Stopping updates notifier");
 
-	if (notifier->periodic_id != 0) {
-		g_source_remove (notifier->periodic_id);
-		notifier->periodic_id = 0;
+	if (notifier->cancellable) {
+		g_cancellable_cancel (notifier->cancellable);
+		g_clear_object (&notifier->cancellable);
+	}
+
+	gpk_updates_notifier_stop_updates_check (notifier);
+
+	if (notifier->check_startup_id != 0) {
+		g_source_remove (notifier->check_startup_id);
+		notifier->check_startup_id = 0;
 	}
 
 	if (notifier->dbus_watch_id > 0) {
 		g_bus_unwatch_name (notifier->dbus_watch_id);
 		notifier->dbus_watch_id = 0;
-	}
-
-	if (notifier->cancellable) {
-		g_cancellable_cancel (notifier->cancellable);
-		g_clear_object (&notifier->cancellable);
 	}
 
 	if (notifier->update_packages != NULL) {
@@ -513,17 +533,14 @@ gpk_updates_notifier_init (GpkUpdatesNotifier *notifier)
 
 	/* we have to consider the network connection before looking for updates */
 	notifier->network_monitor = g_network_monitor_get_default ();
-	g_signal_connect (notifier->network_monitor, "network-changed",
-			  G_CALLBACK (g_network_monitor_network_changed_cb), notifier);
-	notifier->network_online = gpk_updates_notifier_is_online (notifier);
 
-	/* we check this in case we miss one of the async signals */
-	notifier->periodic_id =
-		g_timeout_add_seconds (SECONDS_IN_AN_HOUR,
-		                       gpk_updates_notifier_periodic_refresh_cache_timeout_cb,
+	/* do a first check 60 seconds after login, and then every hour */
+	notifier->check_startup_id =
+		g_timeout_add_seconds (60,
+		                       gpk_updates_notifier_check_updates_on_startup_cb,
 		                       notifier);
-	g_source_set_name_by_id (notifier->periodic_id,
-	                         "[GpkScheduler] periodic check");
+	g_source_set_name_by_id (notifier->check_startup_id,
+	                         "[GpkUpdatesNotifier] periodic check");
 
 	/* Check if starts the update viewer to hide the icon. */
 	notifier->dbus_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
@@ -534,12 +551,11 @@ gpk_updates_notifier_init (GpkUpdatesNotifier *notifier)
 	                                            notifier,
 	                                            NULL);
 
-	/* check current state of cache */
-	gpk_updates_notifier_check_refresh_cache (notifier);
-
 	/* show update viewer on user actions */
+
 	g_signal_connect (notifier->applet, "activate",
 			  G_CALLBACK (gpk_updates_notifier_applet_activated_cb), notifier);
+
 	g_signal_connect (notifier->notification, "show-update-viewer",
 			  G_CALLBACK (gpk_updates_notifier_notification_show_update_viewer_cb), notifier);
 	g_signal_connect (notifier->notification, "ignore-updates",
