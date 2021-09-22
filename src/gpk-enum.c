@@ -453,7 +453,7 @@ gpk_error_enum_to_localised_text (PkErrorEnum code)
 		break;
 #endif
 	default:
-		g_warning ("Unknown error %i", code);
+		g_warning ("Unknown error %u", code);
 	}
 	return text;
 }
@@ -805,7 +805,7 @@ gpk_update_state_enum_to_localised_text (PkUpdateStateEnum state)
 		text = _("Testing");
 		break;
 	default:
-		g_warning ("state unrecognized: %i", state);
+		g_warning ("state unrecognized: %u", state);
 	}
 	return text;
 }
@@ -984,31 +984,31 @@ gpk_update_enum_to_localised_text (PkInfoEnum info, guint number)
 	switch (info) {
 	case PK_INFO_ENUM_LOW:
 		/* TRANSLATORS: type of update */
-		text = g_strdup_printf (ngettext ("%i trivial update", "%i trivial updates", number), number);
+		text = g_strdup_printf (ngettext ("%u trivial update", "%u trivial updates", number), number);
 		break;
 	case PK_INFO_ENUM_NORMAL:
 		/* TRANSLATORS: type of update in the case that we don't have any data */
-		text = g_strdup_printf (ngettext ("%i update", "%i updates", number), number);
+		text = g_strdup_printf (ngettext ("%u update", "%u updates", number), number);
 		break;
 	case PK_INFO_ENUM_IMPORTANT:
 		/* TRANSLATORS: type of update */
-		text = g_strdup_printf (ngettext ("%i important update", "%i important updates", number), number);
+		text = g_strdup_printf (ngettext ("%u important update", "%u important updates", number), number);
 		break;
 	case PK_INFO_ENUM_SECURITY:
 		/* TRANSLATORS: type of update */
-		text = g_strdup_printf (ngettext ("%i security update", "%i security updates", number), number);
+		text = g_strdup_printf (ngettext ("%u security update", "%u security updates", number), number);
 		break;
 	case PK_INFO_ENUM_BUGFIX:
 		/* TRANSLATORS: type of update */
-		text = g_strdup_printf (ngettext ("%i bug fix update", "%i bug fix updates", number), number);
+		text = g_strdup_printf (ngettext ("%u bug fix update", "%u bug fix updates", number), number);
 		break;
 	case PK_INFO_ENUM_ENHANCEMENT:
 		/* TRANSLATORS: type of update */
-		text = g_strdup_printf (ngettext ("%i enhancement update", "%i enhancement updates", number), number);
+		text = g_strdup_printf (ngettext ("%u enhancement update", "%u enhancement updates", number), number);
 		break;
 	case PK_INFO_ENUM_BLOCKED:
 		/* TRANSLATORS: number of updates that cannot be installed due to deps */
-		text = g_strdup_printf (ngettext ("%i blocked update", "%i blocked updates", number), number);
+		text = g_strdup_printf (ngettext ("%u blocked update", "%u blocked updates", number), number);
 		break;
 	default:
 		g_warning ("update info unrecognized: %s", pk_info_enum_to_string (info));
@@ -1318,7 +1318,7 @@ gpk_role_enum_to_localised_present (PkRoleEnum role)
 		break;
 #if PK_CHECK_VERSION(1,0,10)
 	case PK_ROLE_ENUM_UPGRADE_SYSTEM:
-		/* TRANSLATORS: The role of the transaction, in past tense */
+		/* TRANSLATORS: The role of the transaction, in present tense */
 		text = _("Upgrading the system");
 		break;
 #endif

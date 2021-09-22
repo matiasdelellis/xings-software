@@ -108,11 +108,11 @@ gpk_window_set_size_request (GtkWindow *window, guint width, guint height)
 	/* find percentage of screen area */
 	percent_w = (width * 100) / screen_w;
 	percent_h = (height * 100) / screen_h;
-	g_debug ("window coverage x:%i%% y:%i%%", percent_w, percent_h);
+	g_debug ("window coverage x:%u%% y:%u%%", percent_w, percent_h);
 
 	if (percent_w > GPK_SMALL_FORM_FACTOR_SCREEN_PERCENT ||
 	    percent_h > GPK_SMALL_FORM_FACTOR_SCREEN_PERCENT) {
-		g_debug ("using small form factor mode as %ix%i and requested %ix%i",
+		g_debug ("using small form factor mode as %ux%u and requested %ux%u",
 			   screen_w, screen_h, width, height);
 		gtk_window_maximize (window);
 		small_form_factor_mode = TRUE;
@@ -361,7 +361,7 @@ gpk_time_to_imprecise_string (guint time_secs)
 	/* less than a minute */
 	if (seconds < 60) {
 		/* TRANSLATORS: time */
-		timestring = g_strdup_printf (ngettext ("%i second", "%i seconds", seconds), seconds);
+		timestring = g_strdup_printf (ngettext ("%u second", "%u seconds", seconds), seconds);
 		goto out;
 	}
 
@@ -371,13 +371,13 @@ gpk_time_to_imprecise_string (guint time_secs)
 	/* less than an hour */
 	if (minutes < 60) {
 		/* TRANSLATORS: time */
-		timestring = g_strdup_printf (ngettext ("%i minute", "%i minutes", minutes), minutes);
+		timestring = g_strdup_printf (ngettext ("%u minute", "%u minutes", minutes), minutes);
 		goto out;
 	}
 
 	hours = minutes / 60;
 	/* TRANSLATORS: time */
-	timestring = g_strdup_printf (ngettext ("%i hour", "%i hours", hours), hours);
+	timestring = g_strdup_printf (ngettext ("%u hour", "%u hours", hours), hours);
 out:
 	return timestring;
 }
@@ -411,8 +411,8 @@ gpk_time_to_localised_string (guint time_secs)
 	/* less than a minute */
 	if (seconds < 60) {
 		/* TRANSLATORS: time */
-		timestring = g_strdup_printf (ngettext ("%i second",
-							"%i seconds",
+		timestring = g_strdup_printf (ngettext ("%u second",
+							"%u seconds",
 							seconds), seconds);
 		goto out;
 	}
@@ -424,13 +424,13 @@ gpk_time_to_localised_string (guint time_secs)
 	/* less than an hour */
 	if (minutes < 60) {
 		if (seconds == 0) {
-			timestring = g_strdup_printf (ngettext ("%i minute",
-								"%i minutes",
+			timestring = g_strdup_printf (ngettext ("%u minute",
+								"%u minutes",
 								minutes), minutes);
 		} else {
 			/* TRANSLATOR: "%i %s %i %s" are "%i minutes %i seconds"
 			 * Swap order with "%2$s %2$i %1$s %1$i if needed */
-			timestring = g_strdup_printf (_("%i %s %i %s"),
+			timestring = g_strdup_printf (_("%u %s %u %s"),
 					minutes, ngettext ("minute", "minutes", minutes),
 					seconds, ngettext ("second", "seconds", seconds));
 		}
@@ -443,13 +443,13 @@ gpk_time_to_localised_string (guint time_secs)
 	if (minutes == 0) {
 		/* TRANSLATORS: time */
 		timestring = g_strdup_printf (ngettext (
-				"%i hour",
-				"%i hours",
+				"%u hour",
+				"%u hours",
 				hours), hours);
 	} else {
 		/* TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 		 * Swap order with "%2$s %2$i %1$s %1$i if needed */
-		timestring = g_strdup_printf (_("%i %s %i %s"),
+		timestring = g_strdup_printf (_("%u %s %u %s"),
 				hours, ngettext ("hour", "hours", hours),
 				minutes, ngettext ("minute", "minutes", minutes));
 	}

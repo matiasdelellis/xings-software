@@ -756,7 +756,7 @@ out:
 /**
  * gpk_application_remove:
  **/
-static gboolean
+static void
 gpk_application_remove (GpkApplicationPrivate *priv)
 {
 	gboolean ret;
@@ -781,11 +781,9 @@ gpk_application_remove (GpkApplicationPrivate *priv)
 			gpk_application_allow_install (priv, TRUE);
 			gpk_application_allow_remove (priv, FALSE);
 			gpk_application_packages_checkbox_invert (priv);
-			ret = TRUE;
 			goto out;
 		}
 		g_warning ("wrong mode and not in array");
-		ret = FALSE;
 		goto out;
 	}
 
@@ -810,12 +808,13 @@ gpk_application_remove (GpkApplicationPrivate *priv)
 	gpk_application_allow_install (priv, TRUE);
 	gpk_application_allow_remove (priv, FALSE);
 	gpk_application_packages_checkbox_invert (priv);
+
 out:
 	/* add the selected group if there are any packages in the queue */
 	gpk_application_change_queue_status (priv);
+
 	g_free (package_id_selected);
 	g_free (summary_selected);
-	return TRUE;
 }
 
 /**
