@@ -37,3 +37,4 @@ py-compile
 m4
 ChangeLog
 test-driver
+Makecache

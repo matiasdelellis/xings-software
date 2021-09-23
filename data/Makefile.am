@@ -18,7 +18,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files =					\
-	xings-updates-notifier.desktop.in
+	xings-updates-service.desktop.in
 
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
@@ -60,7 +60,7 @@ DISTCLEANFILES =					\
 	xings-packagekit-service.desktop		\
 	xings-package-history.desktop			\
 	xings-packages.desktop				\
-	xings-updates-notifier.desktop			\
+	xings-updates-service.desktop			\
 	org.freedesktop.PackageKit.service		\
 	$(NULL)
 

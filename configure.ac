@@ -213,6 +213,14 @@ dnl ---------------------------------------------------------------------------
 AC_CONFIG_FILES([
 Makefile
 src/Makefile
+src/common/Makefile
+src/helpers/Makefile
+src/history/Makefile
+src/packagekit-service/Makefile
+src/packages/Makefile
+src/preferences/Makefile
+src/updates-service/Makefile
+src/updates-viewer/Makefile
 man/Makefile
 po/Makefile.in
 data/Makefile

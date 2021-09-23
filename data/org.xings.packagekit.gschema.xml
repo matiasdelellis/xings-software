@@ -93,6 +93,11 @@
       <default>'show-confirm-install'</default>
       <description>When displaying UI from a session D-Bus request, force these options to be turned on.</description>
     </key>
+    <key name="auto-download-updates" type="b">
+      <default>true</default>
+      <summary>Automatically download updates in the background without confirmation</summary>
+      <description>Automatically download updates in the background without confirmation.</description>
+    </key>
     <key name="frequency-get-updates" type="i">
       <default>86400</default>
       <summary>How often to check for updates</summary>
