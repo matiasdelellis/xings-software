@@ -26,6 +26,8 @@
 
 #include "gpk-updates-applet.h"
 #include "gpk-updates-notification.h"
+
+#include "gpk-updates-checker.h"
 #include "gpk-updates-refresh.h"
 #include "gpk-updates-shared.h"
 
@@ -43,10 +45,9 @@ struct _GpkUpdatesManager
 
 	GNetworkMonitor		*network_monitor;
 
-	GPtrArray		*update_packages;
-
 	guint			 dbus_watch_id;
 
+	GpkUpdatesChecker	*checker;
 	GpkUpdatesRefresh	*refresh;
 	GpkUpdatesApplet	*applet;
 	GpkUpdatesNotification	*notification;
@@ -96,27 +97,21 @@ gpk_updates_notififier_launch_update_viewer (GpkUpdatesManager *manager)
 static void
 gpk_updates_manager_should_notify_for_importance (GpkUpdatesManager *manager)
 {
-	PkPackage *pkg;
-	guint i, important_packages = 0;
+	guint updates_count = 0, important_packages = 0;
 
-	/* check each package */
-	for (i = 0; i < manager->update_packages->len; i++) {
-		pkg = g_ptr_array_index (manager->update_packages, i);
-		if (pk_package_get_info (pkg) == PK_INFO_ENUM_SECURITY ||
-		    pk_package_get_info (pkg) == PK_INFO_ENUM_IMPORTANT)
-			important_packages++;
-	}
+	important_packages = gpk_updates_checker_get_important_updates_count (manager->checker);
 
-	if (important_packages > 0) {
+	if (important_packages) {
 		gpk_updates_notification_show_critical_updates (manager->notification,
 		                                                important_packages);
 		gpk_updates_applet_show_critical_updates (manager->applet,
 		                                          important_packages);
 	} else {
+		updates_count = gpk_updates_checker_get_updates_count (manager->checker);
 		gpk_updates_notification_maybe_show_normal_updates (manager->notification,
-		                                                    manager->update_packages->len);
+		                                                    updates_count);
 		gpk_updates_applet_show_normal_updates (manager->applet,
-		                                        manager->update_packages->len);
+		                                        updates_count);
 	}
 }
 
@@ -179,16 +174,10 @@ out:
 static void
 gpk_updates_manager_pk_auto_download_updates (GpkUpdatesManager *manager)
 {
-	PkPackage *pkg;
 	gchar **package_ids;
-	guint i;
 
 	/* download each package */
-	package_ids = g_new0 (gchar *, manager->update_packages->len + 1);
-	for (i = 0; i < manager->update_packages->len; i++) {
-		pkg = g_ptr_array_index (manager->update_packages, i);
-		package_ids[i] = g_strdup (pk_package_get_id (pkg));
-	}
+	package_ids = gpk_updates_checker_get_update_packages_ids (manager->checker);
 
 	/* we've set only-download in PkTask */
 	pk_task_update_packages_async (gpk_updates_shared_get_pk_task (manager->shared),
@@ -202,65 +191,21 @@ gpk_updates_manager_pk_auto_download_updates (GpkUpdatesManager *manager)
 }
 
 
-/*
- * Search for updates.
+
+/**
+ *  Logic for update scheduler.
  */
 
 static void
-gpk_updates_manager_pk_check_updates_finished_cb (GObject           *object,
-                                                  GAsyncResult      *res,
-                                                  GpkUpdatesManager *manager)
+gpk_updates_manager_refresh_cache_done (GpkUpdatesManager *manager)
 {
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
+	gpk_updates_checker_check_for_updates (manager->checker);
+}
 
-	PkClient *client = PK_CLIENT(object);
 
-	/* get the results */
-	results = pk_client_generic_finish (PK_CLIENT(client), res, &error);
-	if (results == NULL) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-		g_warning ("failed to get updates: %s", error->message);
-		g_error_free (error);
-		gpk_updates_notification_show_failed (manager->notification);
-		gpk_updates_applet_show_failed (manager->applet);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get updates: %s, %s",
-		           pk_error_enum_to_string (pk_error_get_code (error_code)),
-		           pk_error_get_details (error_code));
-		switch (pk_error_get_code (error_code)) {
-			case PK_ERROR_ENUM_CANCELLED_PRIORITY:
-			case PK_ERROR_ENUM_TRANSACTION_CANCELLED:
-				g_debug ("ignoring error");
-				break;
-			default:
-				gpk_updates_notification_show_failed (manager->notification);
-				gpk_updates_applet_show_failed (manager->applet);
-				break;
-		}
-		goto out;
-	}
-
-	/* so we can download or check for important & security updates */
-	if (manager->update_packages != NULL)
-		g_ptr_array_unref (manager->update_packages);
-	manager->update_packages = pk_results_get_package_array (results);
-
-	/* we have no updates */
-	if (manager->update_packages->len == 0) {
-		g_debug ("no updates");
-		goto out;
-	}
-
+static void
+gpk_updates_manager_checker_has_updates (GpkUpdatesManager *manager)
+{
 	/* should we auto-download the updates? */
 	if (g_settings_get_boolean (gpk_updates_shared_get_settings (manager->shared),
 	                            GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES)) {
@@ -271,42 +216,8 @@ gpk_updates_manager_pk_check_updates_finished_cb (GObject           *object,
 		g_debug ("there are updates to notify");
 		gpk_updates_manager_should_notify_for_importance (manager);
 	}
-
-out:
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (results != NULL)
-		g_object_unref (results);
 }
 
-static void
-gpk_updates_manager_pk_check_updates (GpkUpdatesManager *manager)
-{
-	/* optimize the amount of downloaded data by setting the cache age */
-	pk_client_set_cache_age (PK_CLIENT(gpk_updates_shared_get_pk_task (manager->shared)),
-	                         g_settings_get_int (gpk_updates_shared_get_settings (manager->shared),
-	                                             GPK_SETTINGS_FREQUENCY_GET_UPDATES));
-
-	/* get new update list */
-	pk_client_get_updates_async (PK_CLIENT(gpk_updates_shared_get_pk_task (manager->shared)),
-	                             pk_bitfield_value (PK_FILTER_ENUM_NONE),
-	                             gpk_updates_shared_get_cancellable (manager->shared),
-	                             NULL, NULL,
-	                             (GAsyncReadyCallback) gpk_updates_manager_pk_check_updates_finished_cb,
-	                             manager);
-}
-
-
-
-/**
- *  Logic for update scheduler.
- */
-
-static void
-gpk_updates_manager_refresh_cache_done (GpkUpdatesManager *manager)
-{
-	gpk_updates_manager_pk_check_updates (manager);
-}
 
 static void
 gpk_updates_manager_generic_error (GpkUpdatesManager *manager)
@@ -453,14 +364,11 @@ gpk_updates_manager_dispose (GObject *object)
 		manager->dbus_watch_id = 0;
 	}
 
-	if (manager->update_packages != NULL) {
-		g_ptr_array_unref (manager->update_packages);
-		manager->update_packages = NULL;
-	}
-
 	g_clear_object (&manager->applet);
 	g_clear_object (&manager->notification);
 
+	g_clear_object (&manager->refresh);
+	g_clear_object (&manager->checker);
 	g_clear_object (&manager->shared);
 
 	g_debug ("Stopped updates manager");
@@ -499,6 +407,14 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	g_signal_connect_swapped (manager->refresh, "valid-cache",
 	                          G_CALLBACK (gpk_updates_manager_refresh_cache_done), manager);
 	g_signal_connect_swapped (manager->refresh, "error-refresh",
+	                          G_CALLBACK (gpk_updates_manager_generic_error), manager);
+
+	/* The check for updates task */
+
+	manager->checker = gpk_updates_checker_new ();
+	g_signal_connect_swapped (manager->checker, "has-updates",
+	                          G_CALLBACK (gpk_updates_manager_checker_has_updates), manager);
+	g_signal_connect_swapped (manager->checker, "error-checking",
 	                          G_CALLBACK (gpk_updates_manager_generic_error), manager);
 
 	/* do a first check 60 seconds after login, and then every hour */
