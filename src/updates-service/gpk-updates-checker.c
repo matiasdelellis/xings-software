@@ -138,6 +138,9 @@ gpk_updates_checker_get_important_updates_count (GpkUpdatesChecker *checker)
 	PkPackage *pkg;
 	guint i, important_packages = 0;
 
+	if (!checker->update_packages)
+		return 0;
+
 	for (i = 0; i < checker->update_packages->len; i++) {
 		pkg = g_ptr_array_index (checker->update_packages, i);
 		if (pk_package_get_info (pkg) == PK_INFO_ENUM_SECURITY ||
@@ -151,7 +154,10 @@ gpk_updates_checker_get_important_updates_count (GpkUpdatesChecker *checker)
 guint
 gpk_updates_checker_get_updates_count (GpkUpdatesChecker *checker)
 {
-	return checker->update_packages->len;
+	if (checker->update_packages)
+		return checker->update_packages->len;
+
+	return 0;
 }
 
 gchar **
