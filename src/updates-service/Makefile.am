@@ -27,6 +27,8 @@ xings_updates_service_SOURCES =				\
 	gpk-updates-applet.h				\
 	gpk-updates-checker.c				\
 	gpk-updates-checker.h				\
+	gpk-updates-download.c				\
+	gpk-updates-download.h				\
 	gpk-updates-manager.c				\
 	gpk-updates-manager.h				\
 	gpk-updates-notification.c			\
