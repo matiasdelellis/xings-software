@@ -24,17 +24,13 @@
 #include <common/gpk-common.h>
 
 #include "gpk-updates-refresh.h"
+#include "gpk-updates-shared.h"
 
 struct _GpkUpdatesRefresh
 {
 	GObject			_parent;
 
-	PkControl		*control;
-	PkTask			*task;
-
-	GCancellable		*cancellable;
-
-	GSettings		*settings;
+	GpkUpdatesShared	*shared;
 };
 
 enum {
@@ -98,13 +94,13 @@ static void
 gpk_updates_refresh_pk_refresh_cache (GpkUpdatesRefresh *refresh)
 {
 	/* optimize the amount of downloaded data by setting the cache age */
-	pk_client_set_cache_age (PK_CLIENT(refresh->task),
-	                         g_settings_get_int (refresh->settings,
+	pk_client_set_cache_age (PK_CLIENT(gpk_updates_shared_get_pk_task (refresh->shared)),
+	                         g_settings_get_int (gpk_updates_shared_get_settings (refresh->shared),
 	                                             GPK_SETTINGS_FREQUENCY_REFRESH_CACHE));
 
-	pk_client_refresh_cache_async (PK_CLIENT(refresh->task),
+	pk_client_refresh_cache_async (PK_CLIENT(gpk_updates_shared_get_pk_task (refresh->shared)),
 	                               TRUE,
-	                               refresh->cancellable,
+	                               gpk_updates_shared_get_cancellable (refresh->shared),
 	                               NULL, NULL,
 	                               (GAsyncReadyCallback) gpk_updates_refresh_pk_refresh_cache_finished_cb,
 	                               refresh);
@@ -135,7 +131,7 @@ gpk_updates_refresh_pk_get_time_since_refresh_cache_cb (GObject           *objec
 	}
 
 	/* have we passed the timeout? */
-	threshold = g_settings_get_int (refresh->settings,
+	threshold = g_settings_get_int (gpk_updates_shared_get_settings (refresh->shared),
 	                                GPK_SETTINGS_FREQUENCY_GET_UPDATES);
 
 	if (seconds < threshold) {
@@ -157,7 +153,7 @@ gpk_updates_refresh_pk_check_refresh_cache (GpkUpdatesRefresh *refresh)
 	g_return_if_fail (GPK_IS_UPDATES_REFRESH (refresh));
 
 	/* if we don't want to auto check for updates, don't do this either */
-	threshold = g_settings_get_int (refresh->settings,
+	threshold = g_settings_get_int (gpk_updates_shared_get_settings (refresh->shared),
 	                                GPK_SETTINGS_FREQUENCY_GET_UPDATES);
 	if (threshold == 0) {
 		g_debug ("not when policy is set to never");
@@ -165,7 +161,7 @@ gpk_updates_refresh_pk_check_refresh_cache (GpkUpdatesRefresh *refresh)
 	}
 
 	/* get this each time, as it may have changed behind out back */
-	threshold = g_settings_get_int (refresh->settings,
+	threshold = g_settings_get_int (gpk_updates_shared_get_settings (refresh->shared),
 	                                GPK_SETTINGS_FREQUENCY_REFRESH_CACHE);
 	if (threshold == 0) {
 		g_debug ("not when policy is set to never");
@@ -173,7 +169,7 @@ gpk_updates_refresh_pk_check_refresh_cache (GpkUpdatesRefresh *refresh)
 	}
 
 	/* get the time since the last scheduler */
-	pk_control_get_time_since_action_async (refresh->control,
+	pk_control_get_time_since_action_async (gpk_updates_shared_get_pk_control (refresh->shared),
 	                                        PK_ROLE_ENUM_REFRESH_CACHE,
 	                                        NULL,
 	                                        (GAsyncReadyCallback) gpk_updates_refresh_pk_get_time_since_refresh_cache_cb,
@@ -201,15 +197,9 @@ gpk_updates_refresh_dispose (GObject *object)
 
 	g_debug ("Stopping updates refresh");
 
-	if (refresh->cancellable) {
-		g_cancellable_cancel (refresh->cancellable);
-		g_clear_object (&refresh->cancellable);
-	}
+	g_clear_object (&refresh->shared);
 
-	g_clear_object (&refresh->control);
-	g_clear_object (&refresh->task);
-
-	g_clear_object (&refresh->settings);
+	g_debug ("Stopped pdates refresh");
 
 	G_OBJECT_CLASS (gpk_updates_refresh_parent_class)->dispose (object);
 }
@@ -239,20 +229,8 @@ gpk_updates_refresh_init (GpkUpdatesRefresh *refresh)
 {
 	g_debug ("Starting updates refresh");
 
-	/* we need to know the updates frequency */
-	refresh->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
-
-	/* PackageKit */
-	refresh->control = pk_control_new ();
-
-	refresh->task = pk_task_new ();
-	g_object_set (refresh->task,
-	              "background", TRUE,
-	              "interactive", FALSE,
-	              "only-download", TRUE,
-	              NULL);
-
-	refresh->cancellable = g_cancellable_new ();
+	/* The shared code between the different tasks */
+	refresh->shared = gpk_updates_shared_get ();
 
 	g_debug ("Started updates refresh");
 }

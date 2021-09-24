@@ -31,6 +31,8 @@ xings_updates_service_SOURCES =				\
 	gpk-updates-notification.h			\
 	gpk-updates-refresh.c				\
 	gpk-updates-refresh.h				\
+	gpk-updates-shared.c				\
+	gpk-updates-shared.h				\
 	gpk-updates-service.c
 
 xings_updates_service_LDADD =				\

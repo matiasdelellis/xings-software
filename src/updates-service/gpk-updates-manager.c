@@ -27,6 +27,7 @@
 #include "gpk-updates-applet.h"
 #include "gpk-updates-notification.h"
 #include "gpk-updates-refresh.h"
+#include "gpk-updates-shared.h"
 
 #include "gpk-updates-manager.h"
 
@@ -35,11 +36,7 @@ struct _GpkUpdatesManager
 {
 	GObject			_parent;
 
-	PkControl		*control;
-	PkTask			*task;
-	GCancellable		*cancellable;
-
-	GSettings		*settings;
+	GpkUpdatesShared	*shared;
 
 	guint			 check_startup_id;	/* 60s after startup */
 	guint			 check_hourly_id;	/* and then every hour */
@@ -194,9 +191,9 @@ gpk_updates_manager_pk_auto_download_updates (GpkUpdatesManager *manager)
 	}
 
 	/* we've set only-download in PkTask */
-	pk_task_update_packages_async (manager->task,
+	pk_task_update_packages_async (gpk_updates_shared_get_pk_task (manager->shared),
 	                               package_ids,
-	                               manager->cancellable,
+	                               gpk_updates_shared_get_cancellable (manager->shared),
 	                               NULL, NULL,
 	                               (GAsyncReadyCallback) gpk_updates_manager_pk_download_finished_cb,
 	                               manager);
@@ -265,7 +262,8 @@ gpk_updates_manager_pk_check_updates_finished_cb (GObject           *object,
 	}
 
 	/* should we auto-download the updates? */
-	if (g_settings_get_boolean (manager->settings, GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES)) {
+	if (g_settings_get_boolean (gpk_updates_shared_get_settings (manager->shared),
+	                            GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES)) {
 		g_debug ("there are updates to download");
 		gpk_updates_manager_pk_auto_download_updates (manager);
 	}
@@ -285,14 +283,14 @@ static void
 gpk_updates_manager_pk_check_updates (GpkUpdatesManager *manager)
 {
 	/* optimize the amount of downloaded data by setting the cache age */
-	pk_client_set_cache_age (PK_CLIENT(manager->task),
-	                         g_settings_get_int (manager->settings,
+	pk_client_set_cache_age (PK_CLIENT(gpk_updates_shared_get_pk_task (manager->shared)),
+	                         g_settings_get_int (gpk_updates_shared_get_settings (manager->shared),
 	                                             GPK_SETTINGS_FREQUENCY_GET_UPDATES));
 
 	/* get new update list */
-	pk_client_get_updates_async (PK_CLIENT(manager->task),
+	pk_client_get_updates_async (PK_CLIENT(gpk_updates_shared_get_pk_task (manager->shared)),
 	                             pk_bitfield_value (PK_FILTER_ENUM_NONE),
-	                             manager->cancellable,
+	                             gpk_updates_shared_get_cancellable (manager->shared),
 	                             NULL, NULL,
 	                             (GAsyncReadyCallback) gpk_updates_manager_pk_check_updates_finished_cb,
 	                             manager);
@@ -443,11 +441,6 @@ gpk_updates_manager_dispose (GObject *object)
 
 	g_debug ("Stopping updates manager");
 
-	if (manager->cancellable) {
-		g_cancellable_cancel (manager->cancellable);
-		g_clear_object (&manager->cancellable);
-	}
-
 	gpk_updates_manager_stop_updates_check (manager);
 
 	if (manager->check_startup_id != 0) {
@@ -468,9 +461,9 @@ gpk_updates_manager_dispose (GObject *object)
 	g_clear_object (&manager->applet);
 	g_clear_object (&manager->notification);
 
-	g_clear_object (&manager->settings);
-	g_clear_object (&manager->control);
-	g_clear_object (&manager->task);
+	g_clear_object (&manager->shared);
+
+	g_debug ("Stopped updates manager");
 
 	G_OBJECT_CLASS (gpk_updates_manager_parent_class)->dispose (object);
 }
@@ -488,26 +481,14 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 {
 	g_debug ("Starting updates manager");
 
+	/* The shared code between the different tasks */
+	manager->shared = gpk_updates_shared_get ();
+
 	/* the notification applet */
 	manager->applet = gpk_updates_applet_new ();
 
 	/* the notification manager */
 	manager->notification = gpk_updates_notification_new ();
-
-	/* we need to know the updates frequency */
-	manager->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
-
-	/* PackageKit */
-	manager->control = pk_control_new ();
-
-	manager->task = pk_task_new ();
-	g_object_set (manager->task,
-	              "background", TRUE,
-	              "interactive", FALSE,
-	              "only-download", TRUE,
-	              NULL);
-
-	manager->cancellable = g_cancellable_new ();
 
 	/* we have to consider the network connection before looking for updates */
 	manager->network_monitor = g_network_monitor_get_default ();
