@@ -23,12 +23,14 @@ AM_CPPFLAGS =						\
 bin_PROGRAMS = xings-updates-service
 
 xings_updates_service_SOURCES =				\
+	gpk-updates-applet.c				\
+	gpk-updates-applet.h				\
 	gpk-updates-manager.c				\
 	gpk-updates-manager.h				\
 	gpk-updates-notification.c			\
 	gpk-updates-notification.h			\
-	gpk-updates-applet.c				\
-	gpk-updates-applet.h				\
+	gpk-updates-refresh.c				\
+	gpk-updates-refresh.h				\
 	gpk-updates-service.c
 
 xings_updates_service_LDADD =				\

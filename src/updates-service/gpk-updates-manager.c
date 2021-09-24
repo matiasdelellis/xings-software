@@ -26,6 +26,7 @@
 
 #include "gpk-updates-applet.h"
 #include "gpk-updates-notification.h"
+#include "gpk-updates-refresh.h"
 
 #include "gpk-updates-manager.h"
 
@@ -49,6 +50,7 @@ struct _GpkUpdatesManager
 
 	guint			 dbus_watch_id;
 
+	GpkUpdatesRefresh	*refresh;
 	GpkUpdatesApplet	*applet;
 	GpkUpdatesNotification	*notification;
 };
@@ -297,137 +299,24 @@ gpk_updates_manager_pk_check_updates (GpkUpdatesManager *manager)
 }
 
 
-/*
- * Refresh cache.
- */
-
-static void
-gpk_updates_manager_pk_refresh_cache_finished_cb (GObject           *object,
-                                                  GAsyncResult      *res,
-                                                  GpkUpdatesManager *manager)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-
-	PkClient *client = PK_CLIENT(object);
-
-	/* get the results */
-	results = pk_client_generic_finish (PK_CLIENT(client), res, &error);
-	if (results == NULL) {
-		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-			g_error_free (error);
-			return;
-		}
-		g_warning ("failed to refresh the cache: %s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to refresh the cache: %s, %s",
-		           pk_error_enum_to_string (pk_error_get_code (error_code)),
-		           pk_error_get_details (error_code));
-		g_object_unref (error_code);
-		g_object_unref (results);
-	}
-
-	g_debug ("Cache was updated. Looking for updates.");
-	gpk_updates_manager_pk_check_updates (manager);
-}
-
-static void
-gpk_updates_manager_pk_refresh_cache (GpkUpdatesManager *manager)
-{
-	/* optimize the amount of downloaded data by setting the cache age */
-	pk_client_set_cache_age (PK_CLIENT(manager->task),
-	                         g_settings_get_int (manager->settings,
-	                                             GPK_SETTINGS_FREQUENCY_REFRESH_CACHE));
-
-	pk_client_refresh_cache_async (PK_CLIENT(manager->task),
-	                               TRUE,
-	                               manager->cancellable,
-	                               NULL, NULL,
-	                               (GAsyncReadyCallback) gpk_updates_manager_pk_refresh_cache_finished_cb,
-	                               manager);
-}
-
-
-/*
- * Scheduler the refesh cache to optimize usage.
- */
-
-static void
-gpk_updates_manager_pk_get_time_since_refresh_cache_cb (GObject           *object,
-                                                        GAsyncResult      *res,
-                                                        GpkUpdatesManager *manager)
-{
-	GError *error = NULL;
-	guint seconds;
-	guint threshold;
-
-	PkControl *control = PK_CONTROL (object);
-
-	/* get the result */
-	seconds = pk_control_get_time_since_action_finish (control, res, &error);
-	if (seconds == 0) {
-		g_warning ("failed to get time: %s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	/* have we passed the timeout? */
-	threshold = g_settings_get_int (manager->settings,
-	                                GPK_SETTINGS_FREQUENCY_GET_UPDATES);
-
-	if (seconds < threshold) {
-		g_debug ("not refresh before timeout, thresh=%u, now=%u", threshold, seconds);
-		gpk_updates_manager_pk_check_updates (manager);
-		return;
-	}
-
-	/* send signal */
-	g_debug ("must refresh cache");
-	gpk_updates_manager_pk_refresh_cache (manager);
-}
-
-static void
-gpk_updates_manager_pk_check_refresh_cache (GpkUpdatesManager *manager)
-{
-	guint threshold;
-
-	g_return_if_fail (GPK_IS_UPDATES_MANAGER (manager));
-
-	/* if we don't want to auto check for updates, don't do this either */
-	threshold = g_settings_get_int (manager->settings,
-	                                GPK_SETTINGS_FREQUENCY_GET_UPDATES);
-	if (threshold == 0) {
-		g_debug ("not when policy is set to never");
-		return;
-	}
-
-	/* get this each time, as it may have changed behind out back */
-	threshold = g_settings_get_int (manager->settings,
-	                                GPK_SETTINGS_FREQUENCY_REFRESH_CACHE);
-	if (threshold == 0) {
-		g_debug ("not when policy is set to never");
-		return;
-	}
-
-	/* get the time since the last scheduler */
-	pk_control_get_time_since_action_async (manager->control,
-	                                        PK_ROLE_ENUM_REFRESH_CACHE,
-	                                        NULL,
-	                                        (GAsyncReadyCallback) gpk_updates_manager_pk_get_time_since_refresh_cache_cb,
-	                                        manager);
-}
-
 
 /**
  *  Logic for update scheduler.
  */
+
+static void
+gpk_updates_manager_refresh_cache_done (GpkUpdatesManager *manager)
+{
+	gpk_updates_manager_pk_check_updates (manager);
+}
+
+static void
+gpk_updates_manager_generic_error (GpkUpdatesManager *manager)
+{
+	/* TODO: Do something non-generic. */
+	g_debug ("generic error");
+}
+
 
 static void
 gpk_updates_manager_check_updates (GpkUpdatesManager *manager)
@@ -437,7 +326,7 @@ gpk_updates_manager_check_updates (GpkUpdatesManager *manager)
 		return;
 
 	/* check if need refresh cache. */
-	gpk_updates_manager_pk_check_refresh_cache (manager);
+	gpk_updates_refresh_update_cache (manager->refresh);
 }
 
 static gboolean
@@ -622,6 +511,14 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 
 	/* we have to consider the network connection before looking for updates */
 	manager->network_monitor = g_network_monitor_get_default ();
+
+	/* the cache manager.*/
+
+	manager->refresh = gpk_updates_refresh_new ();
+	g_signal_connect_swapped (manager->refresh, "valid-cache",
+	                          G_CALLBACK (gpk_updates_manager_refresh_cache_done), manager);
+	g_signal_connect_swapped (manager->refresh, "error-refresh",
+	                          G_CALLBACK (gpk_updates_manager_generic_error), manager);
 
 	/* do a first check 60 seconds after login, and then every hour */
 	manager->check_startup_id =
