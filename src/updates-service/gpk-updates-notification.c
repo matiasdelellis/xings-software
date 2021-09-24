@@ -298,6 +298,19 @@ gpk_updates_notification_show_failed (GpkUpdatesNotification *notification)
 	}
 }
 
+void
+gpk_updates_notification_should_notify_updates (GpkUpdatesNotification *notification,
+                                                guint                   updates_count,
+                                                guint                   important_count)
+{
+	if (important_count) {
+		gpk_updates_notification_show_critical_updates (notification,
+		                                                important_count);
+	} else {
+		gpk_updates_notification_maybe_show_normal_updates (notification,
+		                                                    updates_count);
+	}
+}
 
 /**
  *  GpkUpdatesNotification:
@@ -344,6 +357,8 @@ gpk_updates_notification_init (GpkUpdatesNotification *notification)
 
 	/* we need to know the updates frequency */
 	notification->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
+
+	g_debug ("Started updates notification");
 }
 
 GpkUpdatesNotification *

@@ -129,6 +129,18 @@ gpk_updates_applet_hide (GpkUpdatesApplet *applet)
 #endif
 }
 
+void
+gpk_updates_applet_should_notify_updates (GpkUpdatesApplet *applet,
+                                          guint             updates_count,
+                                          guint             important_count)
+{
+	if (important_count) {
+		gpk_updates_applet_show_critical_updates (applet, important_count);
+	} else {
+		gpk_updates_applet_show_normal_updates (applet, updates_count);
+	}
+}
+
 
 /**
  *  GpkUpdatesApplet:

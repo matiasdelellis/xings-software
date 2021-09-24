@@ -40,6 +40,11 @@ gpk_updates_applet_show_normal_updates (GpkUpdatesApplet *applet,
                                         gint              updates_count);
 
 void
+gpk_updates_applet_should_notify_updates (GpkUpdatesApplet *applet,
+                                          guint             updates_count,
+                                          guint             important_count);
+
+void
 gpk_updates_applet_hide (GpkUpdatesApplet *applet);
 
 GpkUpdatesApplet *gpk_updates_applet_new (void);

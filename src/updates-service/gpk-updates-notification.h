@@ -39,6 +39,10 @@ void
 gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *notification,
                                                     gint                    updates_count);
 
+void
+gpk_updates_notification_should_notify_updates (GpkUpdatesNotification *notification,
+                                                guint                   updates_count,
+                                                guint                   important_count);
 
 GpkUpdatesNotification *gpk_updates_notification_new (void);
 

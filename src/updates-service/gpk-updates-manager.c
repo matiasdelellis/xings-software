@@ -69,7 +69,6 @@ G_DEFINE_TYPE (GpkUpdatesManager, gpk_updates_manager, G_TYPE_OBJECT)
 /**
  *  Utils
  */
-
 static gboolean
 gpk_updates_manager_is_online (GpkUpdatesManager *manager)
 {
@@ -97,36 +96,28 @@ gpk_updates_notififier_launch_update_viewer (GpkUpdatesManager *manager)
 	}
 }
 
-static void
-gpk_updates_manager_should_notify_for_importance (GpkUpdatesManager *manager)
-{
-	guint updates_count = 0, important_packages = 0;
-
-	important_packages = gpk_updates_checker_get_important_updates_count (manager->checker);
-
-	if (important_packages) {
-		gpk_updates_notification_show_critical_updates (manager->notification,
-		                                                important_packages);
-		gpk_updates_applet_show_critical_updates (manager->applet,
-		                                          important_packages);
-	} else {
-		updates_count = gpk_updates_checker_get_updates_count (manager->checker);
-		gpk_updates_notification_maybe_show_normal_updates (manager->notification,
-		                                                    updates_count);
-		gpk_updates_applet_show_normal_updates (manager->applet,
-		                                        updates_count);
-	}
-}
-
 
 /**
  *  Logic for update scheduler.
  */
 
 static void
+gpk_updates_manager_notify_updates (GpkUpdatesManager *manager)
+{
+	guint updates_count = 0, important_packages = 0;
+
+	updates_count = gpk_updates_checker_get_updates_count (manager->checker);
+	important_packages = gpk_updates_checker_get_important_updates_count (manager->checker);
+
+	gpk_updates_applet_should_notify_updates (manager->applet, updates_count, important_packages);
+	gpk_updates_notification_should_notify_updates (manager->notification, updates_count, important_packages);
+}
+
+static void
 gpk_updates_manager_auto_download_done (GpkUpdatesManager *manager)
 {
 	g_debug ("Download done.");
+	gpk_updates_manager_notify_updates (manager);
 }
 
 static void
@@ -145,7 +136,7 @@ gpk_updates_manager_checker_has_updates (GpkUpdatesManager *manager)
 	}
 	else {
 		g_debug ("there are updates to notify");
-		gpk_updates_manager_should_notify_for_importance (manager);
+		gpk_updates_manager_notify_updates (manager);
 	}
 }
 
@@ -326,16 +317,8 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	g_debug ("Starting updates manager");
 
 	/* The shared code between the different tasks */
+
 	manager->shared = gpk_updates_shared_get ();
-
-	/* the notification applet */
-	manager->applet = gpk_updates_applet_new ();
-
-	/* the notification manager */
-	manager->notification = gpk_updates_notification_new ();
-
-	/* we have to consider the network connection before looking for updates */
-	manager->network_monitor = g_network_monitor_get_default ();
 
 	/* the cache manager.*/
 
@@ -361,6 +344,24 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	g_signal_connect_swapped (manager->download, "error-downloading",
 	                          G_CALLBACK (gpk_updates_manager_generic_error), manager);
 
+	/* the notification applet */
+
+	manager->applet = gpk_updates_applet_new ();
+	g_signal_connect (manager->applet, "activate",
+	                  G_CALLBACK (gpk_updates_manager_applet_activated_cb), manager);
+
+	/* the notification manager */
+
+	manager->notification = gpk_updates_notification_new ();
+	g_signal_connect (manager->notification, "show-update-viewer",
+	                  G_CALLBACK (gpk_updates_manager_notification_show_update_viewer_cb), manager);
+	g_signal_connect (manager->notification, "ignore-updates",
+	                  G_CALLBACK (gpk_updates_manager_notification_ignore_updates_cb), manager);
+
+	/* we have to consider the network connection before looking for updates */
+
+	manager->network_monitor = g_network_monitor_get_default ();
+
 	/* do a first check 60 seconds after login, and then every hour */
 	manager->check_startup_id =
 		g_timeout_add_seconds (60,
@@ -380,13 +381,6 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 
 	/* show update viewer on user actions */
 
-	g_signal_connect (manager->applet, "activate",
-			  G_CALLBACK (gpk_updates_manager_applet_activated_cb), manager);
-
-	g_signal_connect (manager->notification, "show-update-viewer",
-			  G_CALLBACK (gpk_updates_manager_notification_show_update_viewer_cb), manager);
-	g_signal_connect (manager->notification, "ignore-updates",
-			  G_CALLBACK (gpk_updates_manager_notification_ignore_updates_cb), manager);
 
 	/* success */
 	g_debug ("Started updates manager");
@@ -399,5 +393,4 @@ gpk_updates_manager_new (void)
 	manager = g_object_new (GPK_TYPE_UPDATES_MANAGER, NULL);
 	return GPK_UPDATES_MANAGER (manager);
 }
-
 
