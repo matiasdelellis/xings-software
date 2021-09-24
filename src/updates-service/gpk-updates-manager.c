@@ -23,6 +23,7 @@
 #include <packagekit-glib2/packagekit.h>
 
 #include <common/gpk-common.h>
+
 #include "gpk-updates-applet.h"
 #include "gpk-updates-notification.h"
 
@@ -121,14 +122,95 @@ gpk_updates_manager_should_notify_for_importance (GpkUpdatesManager *manager)
 }
 
 
+/**
+ * Auto download updates.
+ */
+static void
+gpk_updates_manager_pk_download_finished_cb (GObject           *object,
+                                             GAsyncResult      *res,
+                                             GpkUpdatesManager *manager)
+{
+	PkClient *client = PK_CLIENT(object);
+	PkResults *results;
+	PkError *error_code = NULL;
+	GError *error = NULL;
+
+	/* get the results */
+	results = pk_client_generic_finish (PK_CLIENT(client), res, &error);
+	if (results == NULL) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_error_free (error);
+			return;
+		}
+		g_warning ("failed to download: %s", error->message);
+		g_error_free (error);
+		gpk_updates_notification_show_failed (manager->notification);
+		return;
+	}
+
+	/* check error code */
+	error_code = pk_results_get_error_code (results);
+	if (error_code != NULL) {
+		g_warning ("failed to download: %s, %s",
+		           pk_error_enum_to_string (pk_error_get_code (error_code)),
+		           pk_error_get_details (error_code));
+		switch (pk_error_get_code (error_code)) {
+			case PK_ERROR_ENUM_CANCELLED_PRIORITY:
+			case PK_ERROR_ENUM_TRANSACTION_CANCELLED:
+				g_debug ("ignoring error");
+				break;
+			default:
+				gpk_updates_notification_show_failed (manager->notification);
+				break;
+		}
+		goto out;
+	}
+
+	g_debug ("updates downloaded");
+
+	/* check to see if should notify */
+	gpk_updates_manager_should_notify_for_importance (manager);
+
+out:
+	if (error_code != NULL)
+		g_object_unref (error_code);
+	if (results != NULL)
+		g_object_unref (results);
+}
+static void
+gpk_updates_manager_pk_auto_download_updates (GpkUpdatesManager *manager)
+{
+	PkPackage *pkg;
+	gchar **package_ids;
+	guint i;
+
+	/* download each package */
+	package_ids = g_new0 (gchar *, manager->update_packages->len + 1);
+	for (i = 0; i < manager->update_packages->len; i++) {
+		pkg = g_ptr_array_index (manager->update_packages, i);
+		package_ids[i] = g_strdup (pk_package_get_id (pkg));
+	}
+
+	/* we've set only-download in PkTask */
+	pk_task_update_packages_async (manager->task,
+	                               package_ids,
+	                               manager->cancellable,
+	                               NULL, NULL,
+	                               (GAsyncReadyCallback) gpk_updates_manager_pk_download_finished_cb,
+	                               manager);
+
+	g_strfreev (package_ids);
+}
+
+
 /*
  * Search for updates.
  */
 
 static void
-gpk_updates_manager_pk_check_updates_finished_cb (GObject            *object,
-                                                   GAsyncResult       *res,
-                                                   GpkUpdatesManager *manager)
+gpk_updates_manager_pk_check_updates_finished_cb (GObject           *object,
+                                                  GAsyncResult      *res,
+                                                  GpkUpdatesManager *manager)
 {
 	PkResults *results;
 	GError *error = NULL;
@@ -180,8 +262,15 @@ gpk_updates_manager_pk_check_updates_finished_cb (GObject            *object,
 		goto out;
 	}
 
-	/* just check to see if should notify */
-	gpk_updates_manager_should_notify_for_importance (manager);
+	/* should we auto-download the updates? */
+	if (g_settings_get_boolean (manager->settings, GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES)) {
+		g_debug ("there are updates to download");
+		gpk_updates_manager_pk_auto_download_updates (manager);
+	}
+	else {
+		g_debug ("there are updates to notify");
+		gpk_updates_manager_should_notify_for_importance (manager);
+	}
 
 out:
 	if (error_code != NULL)
@@ -213,9 +302,9 @@ gpk_updates_manager_pk_check_updates (GpkUpdatesManager *manager)
  */
 
 static void
-gpk_updates_manager_pk_refresh_cache_finished_cb (GObject            *object,
-                                                   GAsyncResult       *res,
-                                                   GpkUpdatesManager *manager)
+gpk_updates_manager_pk_refresh_cache_finished_cb (GObject           *object,
+                                                  GAsyncResult      *res,
+                                                  GpkUpdatesManager *manager)
 {
 	PkResults *results;
 	GError *error = NULL;
@@ -271,9 +360,9 @@ gpk_updates_manager_pk_refresh_cache (GpkUpdatesManager *manager)
  */
 
 static void
-gpk_updates_manager_pk_get_time_since_refresh_cache_cb (GObject            *object,
-                                                         GAsyncResult       *res,
-                                                         GpkUpdatesManager *manager)
+gpk_updates_manager_pk_get_time_since_refresh_cache_cb (GObject           *object,
+                                                        GAsyncResult      *res,
+                                                        GpkUpdatesManager *manager)
 {
 	GError *error = NULL;
 	guint seconds;
@@ -431,22 +520,22 @@ gpk_updates_viewer_vanished_cb (GDBusConnection *connection,
  */
 
 static void
-gpk_updates_manager_applet_activated_cb (GpkUpdatesApplet   *applet,
-                                          GpkUpdatesManager *manager)
+gpk_updates_manager_applet_activated_cb (GpkUpdatesApplet  *applet,
+                                         GpkUpdatesManager *manager)
 {
 	gpk_updates_notififier_launch_update_viewer (manager);
 }
 
 static void
 gpk_updates_manager_notification_show_update_viewer_cb (GpkUpdatesNotification *notification,
-                                                         GpkUpdatesManager     *manager)
+                                                        GpkUpdatesManager      *manager)
 {
 	gpk_updates_notififier_launch_update_viewer (manager);
 }
 
 static void
 gpk_updates_manager_notification_ignore_updates_cb (GpkUpdatesNotification *notification,
-                                                     GpkUpdatesManager     *manager)
+                                                    GpkUpdatesManager      *manager)
 {
 	g_debug ("User just ignore updates from notification...");
 }
