@@ -32,15 +32,8 @@ void
 gpk_updates_applet_show_failed (GpkUpdatesApplet *applet);
 
 void
-gpk_updates_applet_show_critical_updates (GpkUpdatesApplet *applet,
-                                          gint              updates_count);
-
-void
-gpk_updates_applet_show_normal_updates (GpkUpdatesApplet *applet,
-                                        gint              updates_count);
-
-void
 gpk_updates_applet_should_notify_updates (GpkUpdatesApplet *applet,
+                                          gboolean          need_restart,
                                           guint             updates_count,
                                           guint             important_count);
 

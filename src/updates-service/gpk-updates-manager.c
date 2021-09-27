@@ -102,22 +102,22 @@ gpk_updates_notififier_launch_update_viewer (GpkUpdatesManager *manager)
  */
 
 static void
-gpk_updates_manager_notify_updates (GpkUpdatesManager *manager)
+gpk_updates_manager_notify_updates (GpkUpdatesManager *manager, gboolean need_restart)
 {
 	guint updates_count = 0, important_packages = 0;
 
 	updates_count = gpk_updates_checker_get_updates_count (manager->checker);
 	important_packages = gpk_updates_checker_get_important_updates_count (manager->checker);
 
-	gpk_updates_applet_should_notify_updates (manager->applet, updates_count, important_packages);
-	gpk_updates_notification_should_notify_updates (manager->notification, updates_count, important_packages);
+	gpk_updates_applet_should_notify_updates (manager->applet, need_restart, updates_count, important_packages);
+	gpk_updates_notification_should_notify_updates (manager->notification, need_restart, updates_count, important_packages);
 }
 
 static void
 gpk_updates_manager_auto_download_done (GpkUpdatesManager *manager)
 {
 	g_debug ("Download done.");
-	gpk_updates_manager_notify_updates (manager);
+	gpk_updates_manager_notify_updates (manager, TRUE);
 }
 
 static void
@@ -136,7 +136,7 @@ gpk_updates_manager_checker_has_updates (GpkUpdatesManager *manager)
 	}
 	else {
 		g_debug ("there are updates to notify");
-		gpk_updates_manager_notify_updates (manager);
+		gpk_updates_manager_notify_updates (manager, FALSE);
 	}
 }
 
@@ -378,9 +378,6 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	                                            gpk_updates_viewer_vanished_cb,
 	                                            manager,
 	                                            NULL);
-
-	/* show update viewer on user actions */
-
 
 	/* success */
 	g_debug ("Started updates manager");

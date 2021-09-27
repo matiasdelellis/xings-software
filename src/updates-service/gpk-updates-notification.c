@@ -36,6 +36,7 @@ struct _GpkUpdatesNotification
 
 enum {
 	SHOW_UPDATE_VIEWER,
+	REBOOT_SYSTEM,
 	IGNORE_UPDATES,
 	LAST_SIGNAL
 };
@@ -92,6 +93,12 @@ gpk_updates_notification_response_action (NotifyNotification *update_notificatio
 		goto out;
 	}
 
+	if (g_strcmp0 (action, "reboot-system") == 0) {
+		g_debug ("notification reboot system");
+		g_signal_emit (notification, signals [REBOOT_SYSTEM], 0);
+		goto out;
+	}
+
 	g_warning ("unknown notification action id: %s", action);
 
 out:
@@ -104,8 +111,9 @@ gpk_updates_notification_closed (NotifyNotification *notification, gpointer data
 	g_object_unref (notification);
 }
 
-void
+static void
 gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notification,
+                                                gboolean                need_restart,
                                                 gint                    updates_count)
 {
 	NotifyNotification *notification_updates;
@@ -152,10 +160,19 @@ gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notifica
 
 	notify_notification_add_action (notification_updates,
 	                                "show-update-viewer",
-	                                /* TRANSLATORS: button: open the update viewer to install updates */
-	                                _("Install updates"),
+	                                /* TRANSLATORS: view available updates */
+	                                _("View"),
 	                                gpk_updates_notification_response_action,
 	                                notification, NULL);
+
+	if (need_restart) {
+		notify_notification_add_action (notification_updates,
+		                                "reboot-system",
+		                                /* TRANSLATORS: install available updates */
+		                                _("Restart & Install"),
+		                                gpk_updates_notification_response_action,
+		                                notification, NULL);
+	}
 
 	g_signal_connect (notification_updates, "closed",
 	                  G_CALLBACK (gpk_updates_notification_closed), NULL);
@@ -172,8 +189,9 @@ gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notifica
 	                           (void **) &notification->notification_updates);
 }
 
-void
+static void
 gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *notification,
+                                                    gboolean                need_restart,
                                                     gint                    updates_count)
 {
 	NotifyNotification *notification_updates;
@@ -223,10 +241,19 @@ gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *noti
 
 	notify_notification_add_action (notification_updates,
 	                                "show-update-viewer",
-	                                /* TRANSLATORS: button: open the update viewer to install updates */
-	                                _("Install updates"),
+	                                /* TRANSLATORS: view available updates */
+	                                _("View"),
 	                                gpk_updates_notification_response_action,
 	                                notification, NULL);
+
+	if (need_restart) {
+		notify_notification_add_action (notification_updates,
+		                                "reboot-system",
+		                                /* TRANSLATORS: install available updates */
+		                                _("Restart & Install"),
+		                                gpk_updates_notification_response_action,
+		                                notification, NULL);
+	}
 
 	g_signal_connect (notification_updates, "closed",
 	                  G_CALLBACK (gpk_updates_notification_closed), NULL);
@@ -300,14 +327,17 @@ gpk_updates_notification_show_failed (GpkUpdatesNotification *notification)
 
 void
 gpk_updates_notification_should_notify_updates (GpkUpdatesNotification *notification,
+                                                gboolean                need_restart,
                                                 guint                   updates_count,
                                                 guint                   important_count)
 {
 	if (important_count) {
 		gpk_updates_notification_show_critical_updates (notification,
+		                                                need_restart,
 		                                                important_count);
 	} else {
 		gpk_updates_notification_maybe_show_normal_updates (notification,
+		                                                    need_restart,
 		                                                    updates_count);
 	}
 }
@@ -345,6 +375,12 @@ gpk_updates_notification_class_init (GpkUpdatesNotificationClass *klass)
 
 	signals [IGNORE_UPDATES] =
 		g_signal_new ("ignore-updates",
+		              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
+		              0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
+		              G_TYPE_NONE, 0);
+
+	signals [REBOOT_SYSTEM] =
+		g_signal_new ("reboot-system",
 		              G_TYPE_FROM_CLASS (object_class), G_SIGNAL_RUN_LAST,
 		              0, NULL, NULL, g_cclosure_marshal_VOID__VOID,
 		              G_TYPE_NONE, 0);

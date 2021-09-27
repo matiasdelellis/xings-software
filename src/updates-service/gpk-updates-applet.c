@@ -22,6 +22,7 @@
 #include <glib/gi18n.h>
 
 #include <common/gpk-common.h>
+
 #include "gpk-updates-applet.h"
 
 #ifdef HAVE_STATUSNOTIFIER
@@ -47,8 +48,9 @@ static guint signals [LAST_SIGNAL] = { 0 };
 G_DEFINE_TYPE (GpkUpdatesApplet, gpk_updates_applet, G_TYPE_OBJECT)
 
 
-void
+static void
 gpk_updates_applet_show_critical_updates (GpkUpdatesApplet *applet,
+                                          gboolean          need_restart,
                                           gint              updates_count)
 {
 	const gchar *message;
@@ -72,8 +74,9 @@ gpk_updates_applet_show_critical_updates (GpkUpdatesApplet *applet,
 	g_debug ("applet title=%s, message=%s", title, message);
 }
 
-void
+static void
 gpk_updates_applet_show_normal_updates (GpkUpdatesApplet *applet,
+                                        gboolean          need_restart,
                                         gint              updates_count)
 {
 	const gchar *message;
@@ -131,13 +134,14 @@ gpk_updates_applet_hide (GpkUpdatesApplet *applet)
 
 void
 gpk_updates_applet_should_notify_updates (GpkUpdatesApplet *applet,
+                                          gboolean          need_restart,
                                           guint             updates_count,
                                           guint             important_count)
 {
 	if (important_count) {
-		gpk_updates_applet_show_critical_updates (applet, important_count);
+		gpk_updates_applet_show_critical_updates (applet, need_restart, important_count);
 	} else {
-		gpk_updates_applet_show_normal_updates (applet, updates_count);
+		gpk_updates_applet_show_normal_updates (applet, need_restart, updates_count);
 	}
 }
 
@@ -166,6 +170,8 @@ gpk_updates_applet_dispose (GObject *object)
 #ifdef HAVE_STATUSNOTIFIER
 	g_clear_object (&applet->status_notifier);
 #endif
+
+	g_debug ("Stopped updates applet");
 
 	G_OBJECT_CLASS (gpk_updates_applet_parent_class)->dispose (object);
 }

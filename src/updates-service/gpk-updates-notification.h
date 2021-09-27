@@ -32,15 +32,8 @@ void
 gpk_updates_notification_show_failed (GpkUpdatesNotification *notification);
 
 void
-gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notification,
-                                                gint                    updates_count);
-
-void
-gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *notification,
-                                                    gint                    updates_count);
-
-void
 gpk_updates_notification_should_notify_updates (GpkUpdatesNotification *notification,
+                                                gboolean                need_restart,
                                                 guint                   updates_count,
                                                 guint                   important_count);
 
