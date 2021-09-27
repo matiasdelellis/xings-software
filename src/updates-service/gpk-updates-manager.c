@@ -24,7 +24,6 @@
 
 #include <common/gpk-common.h>
 
-#include "gpk-updates-applet.h"
 #include "gpk-updates-notification.h"
 
 #include "gpk-updates-checker.h"
@@ -52,7 +51,6 @@ struct _GpkUpdatesManager
 	GpkUpdatesChecker	*checker;
 	GpkUpdatesDownload	*download;
 
-	GpkUpdatesApplet	*applet;
 	GpkUpdatesNotification	*notification;
 };
 
@@ -109,7 +107,6 @@ gpk_updates_manager_notify_updates (GpkUpdatesManager *manager, gboolean need_re
 	updates_count = gpk_updates_checker_get_updates_count (manager->checker);
 	important_packages = gpk_updates_checker_get_important_updates_count (manager->checker);
 
-	gpk_updates_applet_should_notify_updates (manager->applet, need_restart, updates_count, important_packages);
 	gpk_updates_notification_should_notify_updates (manager->notification, need_restart, updates_count, important_packages);
 }
 
@@ -223,11 +220,6 @@ gpk_updates_viewer_appeared_cb (GDBusConnection *connection,
                                 const gchar     *name_owner,
                                 gpointer         user_data)
 {
-	GpkUpdatesManager *manager = GPK_UPDATES_MANAGER(user_data);
-
-	g_debug ("Xings package updates appeared on dbus. Hiding applet.");
-
-	gpk_updates_applet_hide (manager->applet);
 }
 
 static void
@@ -242,13 +234,6 @@ gpk_updates_viewer_vanished_cb (GDBusConnection *connection,
 /*
  * Signals on user actions.
  */
-
-static void
-gpk_updates_manager_applet_activated_cb (GpkUpdatesApplet  *applet,
-                                         GpkUpdatesManager *manager)
-{
-	gpk_updates_notififier_launch_update_viewer (manager);
-}
 
 static void
 gpk_updates_manager_notification_show_update_viewer_cb (GpkUpdatesNotification *notification,
@@ -290,7 +275,6 @@ gpk_updates_manager_dispose (GObject *object)
 		manager->dbus_watch_id = 0;
 	}
 
-	g_clear_object (&manager->applet);
 	g_clear_object (&manager->notification);
 
 	g_clear_object (&manager->refresh);
@@ -343,12 +327,6 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	                          G_CALLBACK (gpk_updates_manager_auto_download_done), manager);
 	g_signal_connect_swapped (manager->download, "error-downloading",
 	                          G_CALLBACK (gpk_updates_manager_generic_error), manager);
-
-	/* the notification applet */
-
-	manager->applet = gpk_updates_applet_new ();
-	g_signal_connect (manager->applet, "activate",
-	                  G_CALLBACK (gpk_updates_manager_applet_activated_cb), manager);
 
 	/* the notification manager */
 

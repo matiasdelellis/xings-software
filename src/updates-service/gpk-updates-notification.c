@@ -22,7 +22,12 @@
 #include <glib/gi18n.h>
 #include <libnotify/notify.h>
 
+#ifdef HAVE_STATUSNOTIFIER
+#include <statusnotifier.h>
+#endif
+
 #include <common/gpk-common.h>
+
 #include "gpk-updates-notification.h"
 
 struct _GpkUpdatesNotification
@@ -30,6 +35,10 @@ struct _GpkUpdatesNotification
 	GObject			_parent;
 
 	NotifyNotification	*notification_updates;
+
+#ifdef HAVE_STATUSNOTIFIER
+	StatusNotifierItem	*status_notifier;
+#endif
 
 	GSettings		*settings;
 };
@@ -69,6 +78,64 @@ gpk_updates_notification_must_show_non_critical (GpkUpdatesNotification *notific
 	return TRUE;
 }
 
+#ifdef HAVE_STATUSNOTIFIER
+static void
+gpk_updates_notification_show_applet (GpkUpdatesNotification *notification,
+                                      const gchar            *title,
+                                      const gchar            *message,
+                                      const gchar            *icon_name)
+{
+	g_object_set (notification->status_notifier,
+	              "title", title, NULL);
+	g_object_set (notification->status_notifier,
+	              "tooltip-title", message, NULL);
+	g_object_set (notification->status_notifier,
+	              "main-icon-name", icon_name, NULL);
+
+	g_object_set (notification->status_notifier,
+	              "status", STATUS_NOTIFIER_STATUS_ACTIVE, NULL);
+
+	g_debug ("show applet title=%s, message=%s", title, message);
+}
+
+static void
+gpk_updates_notification_hide_applet (GpkUpdatesNotification *notification)
+{
+	g_object_set (notification->status_notifier,
+	              "status", STATUS_NOTIFIER_STATUS_PASSIVE,
+	              NULL);
+	g_debug ("hidding applet");
+}
+#endif
+
+static void
+gpk_updates_notification_ignore_action (GpkUpdatesNotification *notification)
+{
+#ifdef HAVE_STATUSNOTIFIER
+	gpk_updates_notification_hide_applet (notification);
+#endif
+	g_signal_emit (notification, signals [IGNORE_UPDATES], 0);
+}
+
+static void
+gpk_updates_notification_view_action (GpkUpdatesNotification *notification)
+{
+#ifdef HAVE_STATUSNOTIFIER
+	gpk_updates_notification_hide_applet (notification);
+#endif
+	g_signal_emit (notification, signals [SHOW_UPDATE_VIEWER], 0);
+}
+
+static void
+gpk_updates_notification_reboot_system_action (GpkUpdatesNotification *notification)
+{
+#ifdef HAVE_STATUSNOTIFIER
+	gpk_updates_notification_hide_applet (notification);
+#endif
+	g_signal_emit (notification, signals [REBOOT_SYSTEM], 0);
+}
+
+
 static void
 gpk_updates_notification_response_action (NotifyNotification *update_notification,
                                           gchar              *action,
@@ -83,19 +150,19 @@ gpk_updates_notification_response_action (NotifyNotification *update_notificatio
 
 	if (g_strcmp0 (action, "ignore") == 0) {
 		g_debug ("notification ignore updates");
-		g_signal_emit (notification, signals [IGNORE_UPDATES], 0);
+		gpk_updates_notification_ignore_action (notification);
 		goto out;
 	}
 
 	if (g_strcmp0 (action, "show-update-viewer") == 0) {
 		g_debug ("notification show updates");
-		g_signal_emit (notification, signals [SHOW_UPDATE_VIEWER], 0);
+		gpk_updates_notification_view_action (notification);
 		goto out;
 	}
 
 	if (g_strcmp0 (action, "reboot-system") == 0) {
 		g_debug ("notification reboot system");
-		g_signal_emit (notification, signals [REBOOT_SYSTEM], 0);
+		gpk_updates_notification_reboot_system_action (notification);
 		goto out;
 	}
 
@@ -112,34 +179,26 @@ gpk_updates_notification_closed (NotifyNotification *notification, gpointer data
 }
 
 static void
-gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notification,
-                                                gboolean                need_restart,
-                                                gint                    updates_count)
+gpk_updates_notification_show (GpkUpdatesNotification *notification,
+                               const gchar            *title,
+                               const gchar            *message,
+                               const gchar            *icon_name,
+                               gboolean                need_restart)
 {
 	NotifyNotification *notification_updates;
-	const gchar *message;
-	const gchar *title;
 	gboolean ret;
 	GError *error = NULL;
 
-	/* TRANSLATORS: title in the libnotify popup */
-	title = ngettext ("Update", "Updates", updates_count);
-
-	/* TRANSLATORS: message when there are security updates */
-	message = ngettext ("An important software update is available",
-	                    "Important software updates are available", updates_count);
-
-	/* close any existing notification */
 	if (notification->notification_updates != NULL) {
 		notify_notification_close (notification->notification_updates, NULL);
 		notification->notification_updates = NULL;
 	}
 
 	/* do the bubble */
-	g_debug ("title=%s, message=%s", title, message);
+
 	notification_updates = notify_notification_new (title,
 	                                                message,
-	                                                GPK_ICON_UPDATES_URGENT);
+	                                                icon_name);
 
 	notify_notification_set_app_name (notification_updates,
 	                                  _("Software Updates"));
@@ -190,15 +249,45 @@ gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notifica
 }
 
 static void
+gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notification,
+                                                gboolean                need_restart,
+                                                gint                    updates_count)
+{
+	const gchar *message;
+	const gchar *title;
+
+	/* TRANSLATORS: title in the libnotify popup */
+	title = ngettext ("Update", "Updates", updates_count);
+
+	/* TRANSLATORS: message when there are security updates */
+	message = ngettext ("An important software update is available",
+	                    "Important software updates are available", updates_count);
+
+	/* do the bubble */
+
+	gpk_updates_notification_show (notification,
+	                               title,
+	                               message,
+	                               GPK_ICON_UPDATES_URGENT,
+	                               need_restart);
+
+#ifdef HAVE_STATUSNOTIFIER
+	gpk_updates_notification_show_applet (notification,
+	                                      title,
+	                                      message,
+	                                      GPK_ICON_UPDATES_URGENT);
+#endif
+
+	g_debug ("notification title=%s, message=%s", title, message);
+}
+
+static void
 gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *notification,
                                                     gboolean                need_restart,
                                                     gint                    updates_count)
 {
-	NotifyNotification *notification_updates;
 	const gchar *message;
 	const gchar *title;
-	gboolean ret;
-	GError *error = NULL;
 
 	if (!gpk_updates_notification_must_show_non_critical(notification))
 		return;
@@ -210,80 +299,32 @@ gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *noti
 	message = ngettext ("A software update is available.",
 	                    "Software updates are available.", updates_count);
 
-	/* close any existing notification */
-	if (notification->notification_updates != NULL) {
-		notify_notification_close (notification->notification_updates, NULL);
-		notification->notification_updates = NULL;
-	}
-
 	/* do the bubble */
-	g_debug ("title=%s, message=%s", title, message);
-	notification_updates = notify_notification_new (title,
-	                                                message,
-	                                                GPK_ICON_UPDATES_NORMAL);
 
-	notify_notification_set_app_name (notification_updates,
-	                                  _("Software Updates"));
-	notify_notification_set_timeout (notification_updates,
-	                                 15000);
-	notify_notification_set_urgency (notification_updates,
-	                                 NOTIFY_URGENCY_NORMAL);
-	notify_notification_set_hint_string (notification_updates,
-	                                     "desktop-entry",
-	                                     "xings-package-updates");
+	gpk_updates_notification_show (notification,
+	                               title,
+	                               message,
+	                               GPK_ICON_UPDATES_NORMAL,
+	                               need_restart);
 
-	notify_notification_add_action (notification_updates,
-	                                "ignore",
-	                                /* TRANSLATORS: don't install updates now */
-	                                _("Not Now"),
-	                                gpk_updates_notification_response_action,
-	                                notification, NULL);
-
-	notify_notification_add_action (notification_updates,
-	                                "show-update-viewer",
-	                                /* TRANSLATORS: view available updates */
-	                                _("View"),
-	                                gpk_updates_notification_response_action,
-	                                notification, NULL);
-
-	if (need_restart) {
-		notify_notification_add_action (notification_updates,
-		                                "reboot-system",
-		                                /* TRANSLATORS: install available updates */
-		                                _("Restart & Install"),
-		                                gpk_updates_notification_response_action,
-		                                notification, NULL);
-	}
-
-	g_signal_connect (notification_updates, "closed",
-	                  G_CALLBACK (gpk_updates_notification_closed), NULL);
-
-	ret = notify_notification_show (notification_updates, &error);
-	if (!ret) {
-		g_warning ("error: %s", error->message);
-		g_error_free (error);
-	}
+#ifdef HAVE_STATUSNOTIFIER
+	gpk_updates_notification_show_applet (notification,
+	                                      title,
+	                                      message,
+	                                      GPK_ICON_UPDATES_NORMAL);
+#endif
 
 	/* reset notification time */
 	g_settings_set_uint64 (notification->settings,
 	                       GPK_SETTINGS_LAST_UPDATES_NOTIFICATION,
 	                       g_get_real_time () / G_USEC_PER_SEC);
-
-	/* track so we can prevent doubled notifications */
-	notification->notification_updates = notification_updates;
-	g_object_add_weak_pointer (G_OBJECT (notification->notification_updates),
-	                           (void **) &notification->notification_updates);
 }
 
 void
 gpk_updates_notification_show_failed (GpkUpdatesNotification *notification)
 {
-	NotifyNotification *notification_updates;
-	const gchar *button;
 	const gchar *message;
 	const gchar *title;
-	gboolean ret;
-	GError *error = NULL;
 
 	/* TRANSLATORS: the updates mechanism */
 	title = _("Updates");
@@ -292,37 +333,18 @@ gpk_updates_notification_show_failed (GpkUpdatesNotification *notification)
 	 * and now we need to inform the user that something might be wrong */
 	message = _("Unable to access software updates");
 
-	/* TRANSLATORS: try again, this time launching the update viewer */
-	button = _("Try again");
+	gpk_updates_notification_show (notification,
+	                               title,
+	                               message,
+	                               GPK_ICON_UPDATES_URGENT,
+	                               FALSE);
 
-	notification_updates = notify_notification_new (title,
-	                                                message,
-	                                                GPK_ICON_UPDATES_NORMAL);
-
-	notify_notification_set_app_name (notification_updates,
-	                                  _("Software Updates"));
-	notify_notification_set_timeout (notification_updates,
-	                                 120*1000);
-	notify_notification_set_urgency (notification_updates,
-	                                 NOTIFY_URGENCY_NORMAL);
-	notify_notification_set_hint_string (notification_updates,
-	                                     "desktop-entry",
-	                                     "xings-package-updates");
-
-	notify_notification_add_action (notification_updates,
-	                                "show-update-viewer",
-	                                button,
-	                                gpk_updates_notification_response_action,
-	                                notification, NULL);
-
-	g_signal_connect (notification_updates, "closed",
-	                  G_CALLBACK (gpk_updates_notification_closed), NULL);
-
-	ret = notify_notification_show (notification_updates, &error);
-	if (!ret) {
-		g_warning ("failed to show notification: %s", error->message);
-		g_error_free (error);
-	}
+#ifdef HAVE_STATUSNOTIFIER
+	gpk_updates_notification_show_applet (notification,
+	                                      title,
+	                                      message,
+	                                      GPK_ICON_UPDATES_URGENT);
+#endif
 }
 
 void
@@ -342,10 +364,18 @@ gpk_updates_notification_should_notify_updates (GpkUpdatesNotification *notifica
 	}
 }
 
+#ifdef HAVE_STATUSNOTIFIER
+static void
+gpk_updates_notification_applet_icon_activate_cb (GpkUpdatesNotification *notification)
+{
+	g_debug ("applet activated");
+}
+#endif
+
+
 /**
  *  GpkUpdatesNotification:
  */
-
 static void
 gpk_updates_notification_dispose (GObject *object)
 {
@@ -355,7 +385,13 @@ gpk_updates_notification_dispose (GObject *object)
 
 	g_debug ("Stopping updates notification");
 
+#ifdef HAVE_STATUSNOTIFIER
+	g_clear_object (&notification->status_notifier);
+#endif
+
 	g_clear_object (&notification->settings);
+
+	g_debug ("Stopped updates notification");
 
 	G_OBJECT_CLASS (gpk_updates_notification_parent_class)->dispose (object);
 }
@@ -393,6 +429,22 @@ gpk_updates_notification_init (GpkUpdatesNotification *notification)
 
 	/* we need to know the updates frequency */
 	notification->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
+
+#ifdef HAVE_STATUSNOTIFIER
+	notification->status_notifier = g_object_new (STATUS_NOTIFIER_TYPE_ITEM,
+	                                              "id",           "xings-updates-notifier",
+	                                              "category",     STATUS_NOTIFIER_CATEGORY_SYSTEM_SERVICES,
+	                                              "status",       STATUS_NOTIFIER_STATUS_PASSIVE,
+	                                              "title",        _("Software Updates"),
+	                                              "item-is-menu", FALSE,
+	                                              NULL);
+
+	g_signal_connect_swapped (notification->status_notifier, "activate",
+	                          G_CALLBACK(gpk_updates_notification_applet_icon_activate_cb),
+	                          notification);
+
+	status_notifier_item_register (notification->status_notifier);
+#endif
 
 	g_debug ("Started updates notification");
 }
