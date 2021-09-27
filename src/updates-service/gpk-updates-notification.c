@@ -28,6 +28,8 @@
 
 #include <common/gpk-common.h>
 
+#include "gpk-updates-shared.h"
+
 #include "gpk-updates-notification.h"
 
 struct _GpkUpdatesNotification
@@ -40,7 +42,7 @@ struct _GpkUpdatesNotification
 	StatusNotifierItem	*status_notifier;
 #endif
 
-	GSettings		*settings;
+	GpkUpdatesShared	*shared;
 };
 
 enum {
@@ -54,29 +56,6 @@ static guint signals [LAST_SIGNAL] = { 0 };
 
 G_DEFINE_TYPE (GpkUpdatesNotification, gpk_updates_notification, G_TYPE_OBJECT)
 
-
-static gboolean
-gpk_updates_notification_must_show_non_critical (GpkUpdatesNotification *notification)
-{
-	guint64 time_now, time_last_notify;
-	guint threshold;
-
-	/* find out if enough time has passed since the last notification */
-	time_now = g_get_real_time () / G_USEC_PER_SEC;
-	threshold = g_settings_get_int (notification->settings,
-	                                GPK_SETTINGS_FREQUENCY_UPDATES_NOTIFICATION);
-
-	time_last_notify = g_settings_get_uint64 (notification->settings,
-	                                          GPK_SETTINGS_LAST_UPDATES_NOTIFICATION);
-
-	if ((guint64) threshold > time_now - time_last_notify) {
-		g_debug ("not must show non-critical updates as already shown %i hours ago",
-		        (guint) (time_now - time_last_notify) / (60 * 60));
-		return FALSE;
-	}
-
-	return TRUE;
-}
 
 #ifdef HAVE_STATUSNOTIFIER
 static void
@@ -289,7 +268,7 @@ gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *noti
 	const gchar *message;
 	const gchar *title;
 
-	if (!gpk_updates_notification_must_show_non_critical(notification))
+	if (!gpk_updates_shared_must_show_non_critical(notification->shared))
 		return;
 
 	/* TRANSLATORS: title in the libnotify popup */
@@ -315,9 +294,7 @@ gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *noti
 #endif
 
 	/* reset notification time */
-	g_settings_set_uint64 (notification->settings,
-	                       GPK_SETTINGS_LAST_UPDATES_NOTIFICATION,
-	                       g_get_real_time () / G_USEC_PER_SEC);
+	gpk_updates_shared_reset_show_non_critical (notification->shared);
 }
 
 void
@@ -389,7 +366,7 @@ gpk_updates_notification_dispose (GObject *object)
 	g_clear_object (&notification->status_notifier);
 #endif
 
-	g_clear_object (&notification->settings);
+	g_clear_object (&notification->shared);
 
 	g_debug ("Stopped updates notification");
 
@@ -427,8 +404,7 @@ gpk_updates_notification_init (GpkUpdatesNotification *notification)
 {
 	g_debug ("Starting updates notification");
 
-	/* we need to know the updates frequency */
-	notification->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
+	notification->shared = gpk_updates_shared_get ();
 
 #ifdef HAVE_STATUSNOTIFIER
 	notification->status_notifier = g_object_new (STATUS_NOTIFIER_TYPE_ITEM,

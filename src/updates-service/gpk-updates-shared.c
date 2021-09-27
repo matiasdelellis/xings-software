@@ -38,6 +38,38 @@ struct _GpkUpdatesShared
 G_DEFINE_TYPE (GpkUpdatesShared, gpk_updates_shared, G_TYPE_OBJECT)
 
 
+gboolean
+gpk_updates_shared_must_show_non_critical (GpkUpdatesShared *shared)
+{
+	guint64 time_now, time_last_notify;
+	guint threshold;
+
+	/* find out if enough time has passed since the last notification */
+	time_now = g_get_real_time () / G_USEC_PER_SEC;
+	threshold = g_settings_get_int (shared->settings,
+	                                GPK_SETTINGS_FREQUENCY_UPDATES_NOTIFICATION);
+
+	time_last_notify = g_settings_get_uint64 (shared->settings,
+	                                          GPK_SETTINGS_LAST_UPDATES_NOTIFICATION);
+
+	if ((guint64) threshold > time_now - time_last_notify) {
+		g_debug ("not must show non-critical updates as already shown %i hours ago",
+		        (guint) (time_now - time_last_notify) / (60 * 60));
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+void
+gpk_updates_shared_reset_show_non_critical (GpkUpdatesShared *shared)
+{
+	/* reset notification time */
+	g_settings_set_uint64 (shared->settings,
+	                       GPK_SETTINGS_LAST_UPDATES_NOTIFICATION,
+	                       g_get_real_time () / G_USEC_PER_SEC);
+}
+
 PkControl *
 gpk_updates_shared_get_pk_control (GpkUpdatesShared *shared)
 {

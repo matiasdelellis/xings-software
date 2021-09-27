@@ -28,11 +28,13 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (GpkUpdatesShared, gpk_updates_shared, GPK, UPDATES_SHARED, GObject)
 
+gboolean          gpk_updates_shared_must_show_non_critical  (GpkUpdatesShared *shared);
+void              gpk_updates_shared_reset_show_non_critical (GpkUpdatesShared *shared);
+
 PkControl        *gpk_updates_shared_get_pk_control  (GpkUpdatesShared *shared);
 PkTask           *gpk_updates_shared_get_pk_task     (GpkUpdatesShared *shared);
 GCancellable     *gpk_updates_shared_get_cancellable (GpkUpdatesShared *shared);
 GSettings        *gpk_updates_shared_get_settings    (GpkUpdatesShared *shared);
-
 
 GpkUpdatesShared *gpk_updates_shared_get            (void);
 
