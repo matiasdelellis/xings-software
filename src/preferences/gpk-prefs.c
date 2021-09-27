@@ -57,6 +57,87 @@ enum {
 	GPK_COLUMN_LAST
 };
 
+
+/* TRANSLATORS: check once an hour */
+#define PK_FREQ_HOURLY_TEXT		_("Hourly")
+/* TRANSLATORS: check once a day */
+#define PK_FREQ_DAILY_TEXT		_("Daily")
+/* TRANSLATORS: check once a week */
+#define PK_FREQ_WEEKLY_TEXT		_("Weekly")
+/* TRANSLATORS: never check for updates/upgrades */
+#define PK_FREQ_NEVER_TEXT		_("Never (Not recommended)")
+
+#define GPK_PREFS_VALUE_NEVER		(0)
+#define GPK_PREFS_VALUE_HOURLY		(60*60)
+#define GPK_PREFS_VALUE_DAILY		(60*60*24)
+#define GPK_PREFS_VALUE_WEEKLY		(60*60*24*7)
+
+
+/**
+ * gpk_prefs_update_freq_combo_changed:
+ **/
+static void
+gpk_prefs_update_freq_combo_changed (GtkWidget *widget, GpkPrefsPrivate *priv)
+{
+	gchar *value;
+	guint freq = 0;
+
+	value = gtk_combo_box_text_get_active_text (GTK_COMBO_BOX_TEXT (widget));
+	if (strcmp (value, PK_FREQ_HOURLY_TEXT) == 0)
+		freq = GPK_PREFS_VALUE_HOURLY;
+	else if (strcmp (value, PK_FREQ_DAILY_TEXT) == 0)
+		freq = GPK_PREFS_VALUE_DAILY;
+	else if (strcmp (value, PK_FREQ_WEEKLY_TEXT) == 0)
+		freq = GPK_PREFS_VALUE_WEEKLY;
+	else if (strcmp (value, PK_FREQ_NEVER_TEXT) == 0)
+		freq = GPK_PREFS_VALUE_NEVER;
+	else
+		g_assert (FALSE);
+
+	g_debug ("Changing %s to %u", GPK_SETTINGS_FREQUENCY_GET_UPDATES, freq);
+	g_settings_set_int (priv->settings_gpk, GPK_SETTINGS_FREQUENCY_GET_UPDATES, freq);
+	g_free (value);
+}
+
+/**
+ * gpk_prefs_update_freq_combo_setup:
+ **/
+static void
+gpk_prefs_update_freq_combo_setup (GpkPrefsPrivate *priv)
+{
+	gboolean is_writable;
+	GtkWidget *widget;
+	guint value;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "combobox_check"));
+	is_writable = g_settings_is_writable (priv->settings_gpk, GPK_SETTINGS_FREQUENCY_GET_UPDATES);
+	value = g_settings_get_int (priv->settings_gpk, GPK_SETTINGS_FREQUENCY_GET_UPDATES);
+	g_debug ("value from settings %u", value);
+
+	/* do we have permission to write? */
+	gtk_widget_set_sensitive (widget, is_writable);
+
+	/* use a simple text model */
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (widget), PK_FREQ_HOURLY_TEXT);
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (widget), PK_FREQ_DAILY_TEXT);
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (widget), PK_FREQ_WEEKLY_TEXT);
+	gtk_combo_box_text_append_text (GTK_COMBO_BOX_TEXT (widget), PK_FREQ_NEVER_TEXT);
+
+	/* select the correct entry */
+	if (value == GPK_PREFS_VALUE_HOURLY)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 0);
+	else if (value == GPK_PREFS_VALUE_DAILY)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 1);
+	else if (value == GPK_PREFS_VALUE_WEEKLY)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 2);
+	else if (value == GPK_PREFS_VALUE_NEVER)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (widget), 3);
+
+	/* only do this after else we redraw the window */
+	g_signal_connect (G_OBJECT (widget), "changed",
+	                  G_CALLBACK (gpk_prefs_update_freq_combo_changed), priv);
+}
+
 /**
  * gpk_prefs_find_iter_model_cb:
  **/
@@ -545,6 +626,16 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 		goto out;
 	}
 
+	/* setup the updates page */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "switch_download"));
+	g_settings_bind (priv->settings_gpk,
+	                 GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES,
+	                 widget, "active",
+	                 G_SETTINGS_BIND_DEFAULT);
+
+	gpk_prefs_update_freq_combo_setup (priv);
+
+	/* setup the packages sourses */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "checkbutton_detail"));
 	g_settings_bind (priv->settings_gpk,
 			 GPK_SETTINGS_REPO_SHOW_DETAILS,
