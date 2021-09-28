@@ -20,6 +20,8 @@ snapshot:
 	$(MAKE) dist distdir=$(PACKAGE)-$(VERSION)-`date +"%Y%m%d"`
 
 CLEANFILES =						\
+	ChangeLog					\
+	NEWS						\
 	README
 
 DISTCLEANFILES =					\
@@ -34,6 +36,9 @@ distclean-local:
 	if test $(srdcir) = .; then :; else \
 		rm -f ChangeLog; \
 	fi
+
+NEWS:
+	cp -f NEWS.md NEWS
 
 README:
 	cp -f README.md README

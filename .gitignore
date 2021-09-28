@@ -40,4 +40,6 @@ test-driver
 Makecache
 *.mo
 *~
+ChangeLog
+NEWS
 README

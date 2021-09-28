@@ -61,7 +61,7 @@ DISTCLEANFILES =					\
 	xings-package-history.desktop			\
 	xings-packages.desktop				\
 	xings-updates-service.desktop			\
-	org.freedesktop.PackageKit.service		\
+	org.xings.PackageKit.service		\
 	$(NULL)
 
 clean-local :
