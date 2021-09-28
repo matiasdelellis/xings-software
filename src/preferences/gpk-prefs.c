@@ -597,6 +597,38 @@ out:
 }
 
 /**
+ * gpk_prefs_page_sync_title:
+ **/
+static void
+gpk_prefs_page_sync_title (GtkStack        *stack,
+                           GpkPrefsPrivate *priv)
+{
+	GtkWidget *widget;
+	gchar *title;
+
+	widget = gtk_stack_get_visible_child (stack);
+	gtk_container_child_get (GTK_CONTAINER (stack), widget,
+	                         "title", &title,
+	                         NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_prefs"));
+	gtk_window_set_title (GTK_WINDOW (widget), title);
+
+	g_free (title);
+}
+
+/**
+ * gpk_prefs_page_changed_cb:
+ **/
+static void
+gpk_prefs_page_changed_cb (GObject         *gobject,
+                           GParamSpec      *pspec,
+                           GpkPrefsPrivate *priv)
+{
+	gpk_prefs_page_sync_title (GTK_STACK (gobject), priv);
+}
+
+/**
  * gpk_pack_startup_cb:
  **/
 static void
@@ -657,6 +689,12 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 	gpk_treeview_add_columns (priv, GTK_TREE_VIEW (widget));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
 
+	/* update window title when change page */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "prefs-stack"));
+	gpk_prefs_page_sync_title (GTK_STACK (widget), priv);
+	g_signal_connect (widget, "notify::visible-child",
+	                  G_CALLBACK (gpk_prefs_page_changed_cb), priv);
+
 	main_window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_prefs"));
 	gtk_application_add_window (application, GTK_WINDOW (main_window));
 
@@ -682,12 +720,17 @@ gpm_prefs_commandline_cb (GApplication *application,
 	gint argc;
 	GOptionContext *context;
 	GtkWindow *window;
+	GtkWidget *widget;
 	guint xid = 0;
+	gchar *startup_page = NULL;
 
 	const GOptionEntry options[] = {
 		{ "parent-window", 'p', 0, G_OPTION_ARG_INT, &xid,
 		  /* TRANSLATORS: we can make this modal (stay on top of) another window */
 		  _("Set the parent window to make this modal"), NULL },
+		{ "startup-page", 's', 0, G_OPTION_ARG_STRING, &startup_page,
+		  /* TRANSLATORS: we can display updates or repsository tab by default */
+		  _("Set the startup page: either ‘updates’or ‘repositories’"), NULL },
 		{ NULL}
 	};
 
@@ -696,7 +739,7 @@ gpm_prefs_commandline_cb (GApplication *application,
 
 	context = g_option_context_new (NULL);
 	/* TRANSLATORS: program name, an application to add and remove software repositories */
-	g_option_context_set_summary(context, _("Package Sources"));
+	g_option_context_set_summary(context, _("Software preferences"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	ret = g_option_context_parse (context, &argc, &argv, NULL);
@@ -712,6 +755,18 @@ gpm_prefs_commandline_cb (GApplication *application,
 		g_debug ("Setting xid %u", xid);
 		gpk_window_set_parent_xid (window, xid);
 	}
+
+	if (startup_page != NULL) {
+		if ((g_strcmp0 (startup_page, "updates") == 0) ||
+		    (g_strcmp0 (startup_page, "repositories") == 0)) {
+			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "prefs-stack"));
+			gtk_stack_set_visible_child_name (GTK_STACK(widget), startup_page);
+			g_warning ("Set startup page to '%s'", startup_page);
+		} else {
+			g_warning ("Startup page '%s' not recognised", startup_page);
+		}
+	}
+
 out:
 	g_strfreev (argv);
 	g_option_context_free (context);

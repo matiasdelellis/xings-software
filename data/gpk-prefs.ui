@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.38.2 -->
 <interface>
-  <requires lib="gtk+" version="3.18"/>
+  <requires lib="gtk+" version="3.22"/>
   <object class="GtkApplicationWindow" id="dialog_prefs">
     <property name="can-focus">False</property>
     <property name="border-width">18</property>
@@ -24,7 +24,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="margin-bottom">12</property>
-                <property name="label" translatable="yes">When your device is online, we regularly check for updates that improve security or add new features to your system.</property>
+                <property name="label" translatable="yes">When your device is online, we check for updates regularly. These updates can fix bugs, eliminate security vulnerabilities, and provide new features.</property>
                 <property name="wrap">True</property>
                 <property name="max-width-chars">60</property>
                 <property name="xalign">0</property>
@@ -122,7 +122,7 @@
             </child>
           </object>
           <packing>
-            <property name="name">page0</property>
+            <property name="name">updates</property>
             <property name="title" translatable="yes">Updates</property>
           </packing>
         </child>
@@ -144,6 +144,7 @@
                 <property name="label" translatable="yes">A package source contains packages that can be installed on this computer.</property>
                 <property name="wrap">True</property>
                 <property name="max-width-chars">60</property>
+                <property name="xalign">0</property>
                 <attributes>
                   <attribute name="style" value="normal"/>
                 </attributes>
@@ -239,7 +240,7 @@
             </child>
           </object>
           <packing>
-            <property name="name">page1</property>
+            <property name="name">repositories</property>
             <property name="title" translatable="yes">Package Sources</property>
             <property name="position">1</property>
           </packing>

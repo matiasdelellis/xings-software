@@ -145,11 +145,17 @@ gpk_window_set_parent_xid (GtkWindow *window, guint32 xid)
 
 	display = gdk_display_get_default ();
 	parent_window = gdk_x11_window_foreign_new_for_display (display, xid);
+	if (!parent_window) {
+		g_warning ("Failed to create foreign window for XID %u", xid);
+		return FALSE;
+	}
+
 	our_window = gtk_widget_get_window (GTK_WIDGET (window));
 
 	/* set this above our parent */
 	gtk_window_set_modal (window, TRUE);
 	gdk_window_set_transient_for (our_window, parent_window);
+
 	return TRUE;
 }
 
