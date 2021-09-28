@@ -150,11 +150,16 @@ gpk_window_set_parent_xid (GtkWindow *window, guint32 xid)
 		return FALSE;
 	}
 
+	gtk_widget_realize (GTK_WIDGET (window));
+
 	our_window = gtk_widget_get_window (GTK_WIDGET (window));
 
 	/* set this above our parent */
-	gtk_window_set_modal (window, TRUE);
 	gdk_window_set_transient_for (our_window, parent_window);
+
+	gtk_window_set_modal (window, TRUE);
+	gtk_window_set_destroy_with_parent (GTK_WINDOW (window), TRUE);
+	gtk_window_set_position (GTK_WINDOW (window), GTK_WIN_POS_CENTER_ON_PARENT);
 
 	return TRUE;
 }

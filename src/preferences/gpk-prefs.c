@@ -696,9 +696,9 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 	                  G_CALLBACK (gpk_prefs_page_changed_cb), priv);
 
 	main_window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_prefs"));
-	gtk_application_add_window (application, GTK_WINDOW (main_window));
+	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 
-	gtk_widget_show (main_window);
+	gtk_application_add_window (application, GTK_WINDOW (main_window));
 
 	/* get some data */
 	pk_control_get_properties_async (control, NULL, (GAsyncReadyCallback) gpk_prefs_get_properties_cb, priv);
@@ -748,7 +748,6 @@ gpm_prefs_commandline_cb (GApplication *application,
 
 	/* make sure the window is raised */
 	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "dialog_prefs"));
-	gtk_window_present (window);
 
 	/* set the parent window if it is specified */
 	if (xid != 0) {
@@ -766,6 +765,8 @@ gpm_prefs_commandline_cb (GApplication *application,
 			g_warning ("Startup page '%s' not recognised", startup_page);
 		}
 	}
+
+	gtk_window_present (window);
 
 out:
 	g_strfreev (argv);

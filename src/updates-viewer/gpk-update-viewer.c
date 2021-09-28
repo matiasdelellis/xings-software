@@ -3092,6 +3092,7 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	}
 
 	main_window = GTK_WIDGET(gtk_builder_get_object (builder, "dialog_updates"));
+	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 	gtk_window_set_icon_name (GTK_WINDOW(main_window), GPK_ICON_SOFTWARE_UPDATE);
 	gtk_application_add_window (application, GTK_WINDOW(main_window));
 
@@ -3166,7 +3167,7 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 			  G_CALLBACK (gpk_update_viewer_button_upgrade_cb), NULL);
 
 	/* tall, but not so tall as to look ridiculous on large monitors */
-	ret = gpk_window_set_size_request (GTK_WINDOW(main_window), -1, 800);
+	ret = gpk_window_set_size_request (GTK_WINDOW(main_window), 800, 600);
 	if (!ret) {
 		g_debug ("small form factor mode");
 		/* hide the header in SFF mode;

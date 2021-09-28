@@ -685,11 +685,12 @@ gpk_log_startup_cb (GtkApplication *application, gpointer user_data)
 	}
 
 	window = GTK_WINDOW (gtk_builder_get_object (builder, "dialog_simple"));
+	gtk_window_set_position (window, GTK_WIN_POS_CENTER);
 	gtk_window_set_icon_name (window, GPK_ICON_SOFTWARE_LOG);
 	gtk_window_set_application (window, application);
 
 	/* set a size, as the screen allows */
-	gpk_window_set_size_request (window, 1200, 1200);
+	gpk_window_set_size_request (window, 800, 600);
 
 	/* if command line arguments are set, then setup UI */
 	if (filter != NULL) {
@@ -733,7 +734,6 @@ gpk_log_startup_cb (GtkApplication *application, gpointer user_data)
 
 	/* show */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "dialog_simple"));
-	gtk_widget_show (widget);
 
 	/* set the parent window if it is specified */
 	if (xid != 0) {
