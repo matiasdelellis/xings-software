@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-packagekit.master\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-09-28 10:38-0300\n"
-"PO-Revision-Date: 2021-09-28 10:32-0300\n"
+"PO-Revision-Date: 2021-09-28 20:48-0300\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -172,7 +172,7 @@ msgstr "Actualizar las listas de paquetes"
 #: ../data/gpk-application.ui.h:18 ../data/xings-package-history.desktop.in.h:1
 #: ../data/gpk-log.ui.h:2
 msgid "Package Log"
-msgstr "Registro del paquete"
+msgstr "Registro de paquetes"
 
 #: ../data/gpk-application.ui.h:19
 msgid "Only Newest Versions"

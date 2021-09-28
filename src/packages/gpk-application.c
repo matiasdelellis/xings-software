@@ -3370,28 +3370,7 @@ gpk_application_activate_quit_cb (GSimpleAction *action,
 	gpk_application_quit (priv);
 }
 
-static void
-gpk_application_activate_updates_cb (GSimpleAction *action,
-				     GVariant *parameter,
-				     gpointer user_data)
-{
-	gboolean ret;
-	gchar *command;
-	GError *error = NULL;
-
-	command = g_build_filename (BINDIR, "xings-package-updates", NULL);
-	g_debug ("running: %s", command);
-	ret = g_spawn_command_line_async (command, &error);
-	if (!ret) {
-		g_warning ("spawn of %s failed: %s", command, error->message);
-		g_error_free (error);
-	}
-	g_free (command);
-
-}
-
 static GActionEntry gpk_menu_app_entries[] = {
-	{ "updates",		gpk_application_activate_updates_cb, NULL, NULL, NULL },
 	{ "sources",		gpk_application_activate_sources_cb, NULL, NULL, NULL },
 	{ "refresh",		gpk_application_activate_refresh_cb, NULL, NULL, NULL },
 	{ "log",		gpk_application_activate_log_cb, NULL, NULL, NULL },
@@ -3409,7 +3388,6 @@ main (int argc, char *argv[])
 	GOptionContext *context;
 	gboolean ret;
 	gint status = 0;
-	gchar *filename;
 	GpkApplicationPrivate *priv;
 
 	const GOptionEntry options[] = {
@@ -3461,13 +3439,6 @@ main (int argc, char *argv[])
 					 gpk_menu_app_entries,
 					 G_N_ELEMENTS (gpk_menu_app_entries),
 					 priv);
-
-	filename = g_build_filename (BINDIR, "xings-package-updates", NULL);
-	if (!g_file_test (filename, G_FILE_TEST_IS_EXECUTABLE)) {
-		GAction *action = g_action_map_lookup_action (G_ACTION_MAP (priv->application), "updates");
-		g_simple_action_set_enabled (G_SIMPLE_ACTION (action), FALSE);
-	}
-	g_free (filename);
 
 	/* run */
 	status = g_application_run (G_APPLICATION (priv->application), argc, argv);

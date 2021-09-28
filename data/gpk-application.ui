@@ -433,16 +433,12 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Check for Updates</attribute>
-        <attribute name="action">app.updates</attribute>
+        <attribute name="label" translatable="yes">Refresh Package Lists</attribute>
+        <attribute name="action">app.refresh</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Package Sources</attribute>
         <attribute name="action">app.sources</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Refresh Package Lists</attribute>
-        <attribute name="action">app.refresh</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">Package Log</attribute>
