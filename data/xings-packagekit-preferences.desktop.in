@@ -1,11 +1,11 @@
 [Desktop Entry]
-_Name=Package Sources
-_Comment=Enable or disable package repositories
+_Name=Software Settings
+_Comment=Change software update preferences and enable or disable software sources
 Icon=xings-packagekit-preferences
 Exec=xings-packagekit-preferences
 Terminal=false
 Type=Application
-Categories=Settings;X-GNOME-SystemSettings;
-NotShowIn=KDE;
+Categories=Settings;SystemSettings;X-GNOME-SystemSettings;X-XFCE;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;
+NotShowIn=GNOME;KDE;Unity;
 StartupNotify=true
-NoDisplay=true
+X-XfcePluggable=false

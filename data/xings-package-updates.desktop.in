@@ -1,11 +1,11 @@
 [Desktop Entry]
-_Name=Package Updater
+_Name=Software Update
 _Comment=Update software installed on the system
 Icon=system-software-update
 Exec=xings-package-updates
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;System;
-NotShowIn=KDE;
+NotShowIn=GNOME;KDE;Unity;
 StartupNotify=true
 X-GNOME-UsesNotifications=true

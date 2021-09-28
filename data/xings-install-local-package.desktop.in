@@ -1,5 +1,5 @@
 [Desktop Entry]
-_Name=Package Install
+_Name=Install Software Package
 _Comment=Install selected packages on the system
 Categories=System;
 Exec=xings-install-local-package %F
