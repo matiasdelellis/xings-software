@@ -1,3 +1,18 @@
+Version 0.3.0
+~~~~~~~~~~~~~
+Released: 2021-09-28
+
+* New Features:
+ - Add a user service that update the repository and checks for updates.
+ - It can automatically download updates to install when shutdown the computer.
+ - Show "Software Settings" in xfce4-settings-manager and mate-control-center.
+
+Bug fixes:
+ - Fix run and select apps dialogs.
+ - Fix systemd logind integration to restart. Although it is not currently used.
+ - Fix use without initialization that caused a segmentation fault.
+ - Rename packageKit service to avoid conflict with gnome-software.
+
 Version 0.2.0
 ~~~~~~~~~~~~~
 Released: 2021-06-18
