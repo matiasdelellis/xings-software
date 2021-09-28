@@ -38,3 +38,6 @@ m4
 ChangeLog
 test-driver
 Makecache
+*.mo
+*~
+README

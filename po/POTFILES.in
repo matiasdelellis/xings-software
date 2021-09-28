@@ -35,7 +35,6 @@ src/packagekit-service/gpk-dbus-service.c
 src/packagekit-service/gpk-dbus-task.c
 src/packages/gpk-application.c
 src/preferences/gpk-prefs.c
-src/updates-service/gpk-updates-applet.c
 src/updates-service/gpk-updates-manager.c
 src/updates-service/gpk-updates-notification.c
 src/updates-service/gpk-updates-service.c

@@ -739,7 +739,7 @@ gpm_prefs_commandline_cb (GApplication *application,
 
 	context = g_option_context_new (NULL);
 	/* TRANSLATORS: program name, an application to add and remove software repositories */
-	g_option_context_set_summary(context, _("Software preferences"));
+	g_option_context_set_summary(context, _("Software Settings"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	ret = g_option_context_parse (context, &argc, &argv, NULL);
