@@ -67,7 +67,6 @@ static	GtkTextBuffer		*text_buffer = NULL;
 static	PkControl		*control = NULL;
 static	PkRestartEnum		 restart_update = 0;
 static	PkTask			*task = NULL;
-static	GtkWidget		*info_updates = NULL;
 static	GtkWidget		*info_mobile = NULL;
 static	GtkWidget		*info_mobile_label = NULL;
 static	GtkApplication		*application = NULL;
@@ -1137,9 +1136,6 @@ gpk_update_viewer_button_install_cb (GtkWidget *widget, gpointer user_data)
 	/* hide the upgrade viewbox from now on */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "viewport_upgrade"));
 	gtk_widget_hide (widget);
-
-	/* hide the held-back notice */
-	gtk_widget_hide (info_updates);
 
 	g_debug ("Doing the package updates");
 
@@ -2983,7 +2979,6 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 {
 	GtkWidget *main_window;
 	GtkWidget *widget;
-	GtkWidget *label;
 	GtkTreeSelection *selection;
 	gboolean ret;
 	guint retval;
@@ -3122,8 +3117,6 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	/* add info bars: TODO, fix glade to put these in the ui file */
 	info_mobile = gtk_info_bar_new ();
 	gtk_widget_set_no_show_all (info_mobile, TRUE);
-	info_updates = gtk_info_bar_new ();
-	gtk_widget_set_no_show_all (info_updates, TRUE);
 
 	/* pack label into infobar */
 	info_mobile_label = gtk_label_new ("");
@@ -3131,17 +3124,10 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	gtk_container_add (GTK_CONTAINER(widget), info_mobile_label);
 	gtk_widget_show (info_mobile_label);
 
-	/* TRANSLATORS: this is when some updates are not being shown as other packages need updating first */
-	label = gtk_label_new (_("Other updates are held back as some important system packages need to be installed first."));
-	widget = gtk_info_bar_get_content_area (GTK_INFO_BAR(info_updates));
-	gtk_container_add (GTK_CONTAINER(widget), label);
-	gtk_widget_show (label);
-
 	/* pack infobars into main UI */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "vbox1"));
 	gtk_box_pack_start (GTK_BOX(widget), info_mobile, FALSE, FALSE, 3);
 	gtk_box_reorder_child (GTK_BOX(widget), info_mobile, 1);
-	gtk_box_pack_start (GTK_BOX(widget), info_updates, FALSE, FALSE, 3);
 
 	/* show window */
 	gtk_widget_show (main_window);
