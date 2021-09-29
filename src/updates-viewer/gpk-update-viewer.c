@@ -71,7 +71,6 @@ static	GtkWidget		*info_mobile = NULL;
 static	GtkWidget		*info_mobile_label = NULL;
 static	GtkApplication		*application = NULL;
 static	PkBitfield		 roles = 0;
-static	gboolean		 have_available_distro_upgrades = FALSE;
 
 enum {
 	GPK_UPDATES_COLUMN_TEXT,
@@ -2900,9 +2899,6 @@ gpk_update_viewer_get_distro_upgrades_cb (PkClient *client, GAsyncResult *res, g
 
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "viewport_upgrade"));
 	gtk_widget_show (widget);
-
-	/* don't autoclose when upgrades */
-	have_available_distro_upgrades = TRUE;
 
 	/* get model */
 	gpk_update_viewer_reconsider_info ();
