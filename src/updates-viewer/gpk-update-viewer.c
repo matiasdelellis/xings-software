@@ -1289,6 +1289,9 @@ gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message)
 {
 	GtkWidget *widget;
 
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "headerbar"));
+	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
+
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_title"));
 	gtk_label_set_text (GTK_LABEL (widget), title);
 
