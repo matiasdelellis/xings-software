@@ -53,7 +53,6 @@
 
 static	gboolean		 ignore_updates_changed = FALSE;
 static	gchar			*package_id_last = NULL;
-static	guint			 auto_shutdown_id = 0;
 static	guint			 size_total = 0;
 static	guint			 number_total = 0;
 static	PkRestartEnum		 restart_worst = 0;
@@ -94,6 +93,8 @@ enum {
 	GPK_UPDATES_COLUMN_VISIBLE,
 	GPK_UPDATES_COLUMN_LAST
 };
+
+static void gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message);
 
 static gboolean gpk_update_viewer_get_new_update_array (void);
 
@@ -154,18 +155,6 @@ gpk_update_viewer_packages_set_sensitive (gboolean sensitive)
 
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
-}
-
-/**
- * gpk_update_viewer_auto_shutdown_cb:
- **/
-static gboolean
-gpk_update_viewer_auto_shutdown_cb (GtkDialog *dialog)
-{
-	g_debug ("autoclosing dialog");
-	gtk_dialog_response (dialog, GTK_RESPONSE_CANCEL);
-	auto_shutdown_id = 0;
-	return FALSE;
 }
 
 /**
@@ -393,14 +382,12 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 	PkResults *results;
 	GError *error = NULL;
 	GPtrArray *array = NULL;
-	GtkWidget *dialog;
 	GtkWidget *widget;
 	PkRestartEnum restart;
 	gchar *text;
 	PkError *error_code = NULL;
 	GtkWindow *window;
 	gboolean ret;
-	const gchar *message;
 	GtkTreeView *treeview;
 	GtkTreeModel *model;
 
@@ -491,40 +478,19 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 	model = gtk_tree_view_get_model (treeview);
 	ret = gpk_update_viewer_are_all_updates_selected (model);
 	if (ret) {
-		/* TRANSLATORS: title: all updates for the machine installed okay */
-		message = _("All updates were installed successfully.");
+		gpk_update_viewer_empty_stack_message (
+			/* TRANSLATORS: title: all updates installed okay */
+			_("Updates installed"),
+			/* TRANSLATORS: title: all updates for the machine installed okay */
+			_("All updates were installed successfully."));
 	} else {
-		/* TRANSLATORS: title: all the selected updates installed okay */
-		message = _("The selected updates were installed successfully.");
+		gpk_update_viewer_empty_stack_message (
+			/* TRANSLATORS: title: all updates installed okay */
+			_("Updates installed"),
+			/* TRANSLATORS: title: all the selected updates installed okay */
+			_("The selected updates were installed successfully."));
 	}
 
-	/* show modal dialog */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "dialog_updates"));
-	dialog = gtk_message_dialog_new (GTK_WINDOW(widget), GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
-					 /* TRANSLATORS: title: all updates installed okay */
-					 "%s", _("Updates installed"));
-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG(dialog),
-						  "%s", message);
-	gtk_window_set_icon_name (GTK_WINDOW(dialog), GPK_ICON_SOFTWARE_UPDATE);
-
-	/* setup a callback so we autoclose */
-	auto_shutdown_id =
-		g_timeout_add_seconds (GPK_UPDATE_VIEWER_AUTO_RESTART_TIMEOUT,
-				       (GSourceFunc) gpk_update_viewer_auto_shutdown_cb, dialog);
-	g_source_set_name_by_id (auto_shutdown_id, "[GpkUpdateViewer] auto-shutdown");
-
-	gtk_dialog_run (GTK_DIALOG(dialog));
-	gtk_widget_destroy (dialog);
-
-	/* remove auto-shutdown */
-	if (auto_shutdown_id != 0) {
-		g_source_remove (auto_shutdown_id);
-		auto_shutdown_id = 0;
-	}
-
-	/* quit after we successfully updated */
-	gpk_update_viewer_quit ();
 out:
 	/* no longer updating */
 	ignore_updates_changed = FALSE;
@@ -1328,49 +1294,21 @@ gpk_update_viewer_update_global_state (void)
 }
 
 /**
- * gpk_update_viewer_modal_error_with_timeout:
+ * gpk_update_viewer_empty_stack_message:
  **/
 static void
-gpk_update_viewer_modal_error_with_timeout (const gchar *title, const gchar *message)
+gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message)
 {
-	GtkWidget *dialog;
 	GtkWidget *widget;
-	gchar *text = NULL;
 
-	/* show a new title */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
-	/* TRANSLATORS: there are no updates */
-	text = g_strdup_printf ("<big><b>%s</b></big>", _("There are no updates available"));
-	gtk_label_set_label (GTK_LABEL(widget), text);
-	g_free (text);
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_title"));
+	gtk_label_set_text (GTK_LABEL (widget), title);
 
-	/* show modal dialog */
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "dialog_updates"));
-	dialog = gtk_message_dialog_new (GTK_WINDOW(widget), GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
-					 "%s", title);
-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG(dialog),
-						  "%s", message);
-	gtk_window_set_icon_name (GTK_WINDOW(dialog), GPK_ICON_SOFTWARE_UPDATE);
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_detail"));
+	gtk_label_set_text (GTK_LABEL (widget), message);
 
-	/* setup a callback so we autoclose */
-	auto_shutdown_id =
-		g_timeout_add_seconds (GPK_UPDATE_VIEWER_AUTO_RESTART_TIMEOUT,
-				       (GSourceFunc) gpk_update_viewer_auto_shutdown_cb, dialog);
-	g_source_set_name_by_id (auto_shutdown_id, "[GpkUpdateViewer] shutdown no updates");
-
-	gtk_dialog_run (GTK_DIALOG(dialog));
-	gtk_widget_destroy (dialog);
-
-	/* remove auto-shutdown */
-	if (auto_shutdown_id != 0) {
-		g_source_remove (auto_shutdown_id);
-		auto_shutdown_id = 0;
-	}
-
-	/* exit the program */
-	if (!have_available_distro_upgrades)
-		gpk_update_viewer_quit ();
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty");
 }
 
 /**
@@ -1399,11 +1337,11 @@ gpk_update_viewer_reconsider_info (void)
 	/* not when offline */
 	g_debug ("network status is %s", pk_network_enum_to_string (state));
 	if (state == PK_NETWORK_ENUM_OFFLINE) {
-		gpk_update_viewer_modal_error_with_timeout (
-				/* TRANSLATORS: title: nothing to do */
-				_("No updates are available"),
-				/* TRANSLATORS: no network connection, according to PackageKit */
-				_("No network connection was detected."));
+		gpk_update_viewer_empty_stack_message (
+			/* TRANSLATORS: title: nothing to do */
+			_("No updates are available"),
+			/* TRANSLATORS: no network connection, according to PackageKit */
+			_("No network connection was detected."));
 		goto out;
 	}
 
@@ -1427,7 +1365,8 @@ gpk_update_viewer_reconsider_info (void)
 	if (update_array != NULL) {
 		len = update_array->len;
 		if (len == 0) {
-			gpk_update_viewer_modal_error_with_timeout (
+			g_debug ("no updates");
+			gpk_update_viewer_empty_stack_message (
 					/* TRANSLATORS: title: nothing to do */
 					_("All packages are up to date"),
 					/* TRANSLATORS: tell the user the problem */
@@ -1435,6 +1374,9 @@ gpk_update_viewer_reconsider_info (void)
 			goto out;
 		}
 	}
+
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "updates");
 
 	/* use correct status pane */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "hbox_status"));
@@ -2653,10 +2595,12 @@ gpk_update_viewer_get_new_update_array (void)
 	gtk_tree_store_clear (array_store_updates);
 	gtk_text_buffer_set_text (text_buffer, "", -1);
 
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_title"));
 	/* TRANSLATORS: this is the header */
-	text = g_strdup_printf ("<big><b>%s</b></big>", _("Checking for updates…"));
-	gtk_label_set_label (GTK_LABEL(widget), text);
+	gtk_label_set_label (GTK_LABEL(widget), _("Checking for updates…"));
+
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_detail"));
+	gtk_label_set_label (GTK_LABEL(widget), "");
 
 	/* only show newest updates? */
 	ret = g_settings_get_boolean (settings, GPK_SETTINGS_ONLY_NEWEST);
@@ -3052,7 +2996,6 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	guint retval;
 	GError *error = NULL;
 
-	auto_shutdown_id = 0;
 	size_total = 0;
 	ignore_updates_changed = FALSE;
 	restart_update = PK_RESTART_ENUM_NONE;
@@ -3271,10 +3214,6 @@ main (int argc, char *argv[])
 
 	/* we might have visual stuff running, close it down */
 	g_cancellable_cancel (cancellable);
-
-	/* remove auto-shutdown */
-	if (auto_shutdown_id != 0)
-		g_source_remove (auto_shutdown_id);
 
 	if (update_array != NULL)
 		g_ptr_array_unref (update_array);
