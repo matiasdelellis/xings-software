@@ -52,7 +52,6 @@
 #define GPK_UPDATE_VIEWER_MOBILE_SMALL_SIZE	512*1024 /* bytes */
 
 static	gboolean		 ignore_updates_changed = FALSE;
-static	gchar			*package_id_last = NULL;
 static	guint			 size_total = 0;
 static	guint			 number_total = 0;
 static	PkRestartEnum		 restart_worst = 0;
@@ -847,12 +846,6 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 					gpk_update_viewer_add_active_row (model, path);
 			}
 			gtk_tree_path_free (path);
-		}
-
-		/* used for progress */
-		if (g_strcmp0 (package_id_last, package_id) != 0) {
-			g_free (package_id_last);
-			package_id_last = g_strdup (package_id);
 		}
 
 		/* update icon */
@@ -3217,7 +3210,6 @@ main (int argc, char *argv[])
 
 	if (update_array != NULL)
 		g_ptr_array_unref (update_array);
-	g_free (package_id_last);
 	if (array_store_updates != NULL)
 		g_object_unref (array_store_updates);
 	if (builder != NULL)
