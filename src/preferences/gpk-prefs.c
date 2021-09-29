@@ -659,13 +659,19 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 	}
 
 	/* setup the updates page */
+	gpk_prefs_update_freq_combo_setup (priv);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "switch_mobile"));
+	g_settings_bind (priv->settings_gpk,
+	                 GPK_SETTINGS_UPDATE_ON_MOBILE,
+	                 widget, "active",
+	                 G_SETTINGS_BIND_DEFAULT);
+
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "switch_download"));
 	g_settings_bind (priv->settings_gpk,
 	                 GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES,
 	                 widget, "active",
 	                 G_SETTINGS_BIND_DEFAULT);
-
-	gpk_prefs_update_freq_combo_setup (priv);
 
 	/* setup the packages sourses */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "checkbutton_detail"));

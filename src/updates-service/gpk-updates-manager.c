@@ -73,7 +73,9 @@ gpk_updates_manager_is_online (GpkUpdatesManager *manager)
 	if (!g_network_monitor_get_network_available (manager->network_monitor))
 		return FALSE;
 
-	if (g_network_monitor_get_network_metered (manager->network_monitor))
+	if (g_network_monitor_get_network_metered (manager->network_monitor) &&
+	    !g_settings_get_boolean (gpk_updates_shared_get_settings (manager->shared),
+	                             GPK_SETTINGS_UPDATE_ON_MOBILE))
 		return FALSE;
 
 	return TRUE;

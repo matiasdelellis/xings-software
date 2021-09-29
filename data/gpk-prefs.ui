@@ -45,13 +45,12 @@
               <object class="GtkTable" id="table1">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="n-rows">2</property>
+                <property name="n-rows">3</property>
                 <property name="n-columns">2</property>
                 <property name="column-spacing">20</property>
                 <property name="row-spacing">9</property>
                 <child>
                   <object class="GtkComboBoxText" id="combobox_check">
-                    <property name="width-request">200</property>
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                   </object>
@@ -67,8 +66,6 @@
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="label" translatable="yes">Check for updates</property>
-                    <property name="use-underline">True</property>
-                    <property name="mnemonic-widget">combobox_check</property>
                     <property name="xalign">0</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -80,13 +77,24 @@
                   </packing>
                 </child>
                 <child>
+                  <object class="GtkSwitch" id="switch_mobile">
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="halign">start</property>
+                    <property name="hexpand">False</property>
+                  </object>
+                  <packing>
+                    <property name="left-attach">1</property>
+                    <property name="right-attach">2</property>
+                    <property name="top-attach">1</property>
+                    <property name="bottom-attach">2</property>
+                  </packing>
+                </child>
+                <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="tooltip-text" translatable="yes">You will be notified when the updates are ready to be installed</property>
-                    <property name="label" translatable="yes">Download updates in the background</property>
-                    <property name="use-underline">True</property>
-                    <property name="mnemonic-widget">combobox_check</property>
+                    <property name="label" translatable="yes">Check for updates on mobile connections</property>
                     <property name="xalign">0</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -95,6 +103,24 @@
                   <packing>
                     <property name="top-attach">1</property>
                     <property name="bottom-attach">2</property>
+                    <property name="x-options">GTK_FILL</property>
+                    <property name="y-options"/>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="tooltip-text" translatable="yes">You will be notified when the updates are ready to be installed</property>
+                    <property name="label" translatable="yes">Download updates in the background</property>
+                    <property name="xalign">0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                  <packing>
+                    <property name="top-attach">2</property>
+                    <property name="bottom-attach">3</property>
                     <property name="x-options">GTK_FILL</property>
                     <property name="y-options"/>
                   </packing>
@@ -109,8 +135,8 @@
                   <packing>
                     <property name="left-attach">1</property>
                     <property name="right-attach">2</property>
-                    <property name="top-attach">1</property>
-                    <property name="bottom-attach">2</property>
+                    <property name="top-attach">2</property>
+                    <property name="bottom-attach">3</property>
                   </packing>
                 </child>
               </object>
