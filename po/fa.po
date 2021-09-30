@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-28 10:38-0300\n"
+"POT-Creation-Date: 2021-09-30 16:11-0300\n"
 "PO-Revision-Date: 2011-09-06 19:20+0330\n"
 "Last-Translator: Arash Mousavi <mousavi.arash@gmail.com>\n"
 "Language-Team: Persian <translate@ifsug.org>\n"
@@ -43,8 +43,8 @@ msgstr ""
 
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-package-updates.appdata.xml.in.h:1
-#: ../data/gpk-update-viewer.ui.h:4
-#: ../src/updates-viewer/gpk-update-viewer.c:3257
+#: ../data/gpk-update-viewer.ui.h:6
+#: ../src/updates-viewer/gpk-update-viewer.c:3190
 #, fuzzy
 msgid "Package Updater"
 msgstr "مدیر بسته‌ها"
@@ -147,41 +147,36 @@ msgid "Changes are not applied instantly, this button applies all changes"
 msgstr "تغییرات فورا اعمال نمی‌شوند، این دکمه همه‌ی تغییرات را اعمال می‌کند"
 
 #: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Check for Updates"
-msgstr "_بررسی برای بروزرسانی‌ها:"
+msgid "Refresh Package Lists"
+msgstr "نوسازی فهرست‌های بسته‌ها"
 
-#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:9
+#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
 #, fuzzy
 msgid "Package Sources"
 msgstr "مجموعه‌های بسته"
 
-#: ../data/gpk-application.ui.h:17
-msgid "Refresh Package Lists"
-msgstr "نوسازی فهرست‌های بسته‌ها"
-
-#: ../data/gpk-application.ui.h:18 ../data/xings-package-history.desktop.in.h:1
+#: ../data/gpk-application.ui.h:17 ../data/xings-package-history.desktop.in.h:1
 #: ../data/gpk-log.ui.h:2
 #, fuzzy
 msgid "Package Log"
 msgstr "بسته"
 
-#: ../data/gpk-application.ui.h:19
+#: ../data/gpk-application.ui.h:18
 #, fuzzy
 msgid "Only Newest Versions"
 msgstr "فقط بسته‌های _جدیدتر"
 
-#: ../data/gpk-application.ui.h:20
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Only Native Packages"
 msgstr "تنها _بسته‌های محلی"
 
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:20
 #, fuzzy
 msgid "About"
 msgstr "_درباره"
 
-#: ../data/gpk-application.ui.h:22
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr ""
 
@@ -246,7 +241,7 @@ msgstr "فیلتر"
 
 #. TRANSLATORS: program name, an application to add and remove software repositories
 #: ../data/xings-packagekit-preferences.desktop.in.h:1
-#: ../src/preferences/gpk-prefs.c:742
+#: ../src/preferences/gpk-prefs.c:748
 msgid "Software Settings"
 msgstr "تنظیمات نرم‌افزار"
 
@@ -272,22 +267,27 @@ msgid "Check for updates"
 msgstr "_بررسی برای بروزرسانی‌ها:"
 
 #: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "_بررسی برای بروزرسانی‌ها:"
+
+#: ../data/gpk-prefs.ui.h:4
 msgid "You will be notified when the updates are ready to be installed"
 msgstr ""
 
-#: ../data/gpk-prefs.ui.h:4
+#: ../data/gpk-prefs.ui.h:5
 #, fuzzy
 msgid "Download updates in the background"
 msgstr "درحال بارگیری اطلاعات بروزرسانی"
 
 #. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:5
+#: ../data/gpk-prefs.ui.h:6
 #: ../src/updates-service/gpk-updates-notification.c:307
 #, fuzzy
 msgid "Updates"
 msgstr "بروزرسانی"
 
-#: ../data/gpk-prefs.ui.h:6
+#: ../data/gpk-prefs.ui.h:7
 #, fuzzy
 msgid ""
 "A package source contains packages that can be installed on this computer."
@@ -296,7 +296,7 @@ msgstr ""
 "کرد."
 
 #. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:8
+#: ../data/gpk-prefs.ui.h:9
 #, fuzzy
 msgid "_Show debug and development package sources"
 msgstr "_نمایش منابع نرم‌افزاری توسعه‌دهندگان و اشکال‌زدایی"
@@ -360,6 +360,15 @@ msgstr "بروزرسانی‌ها را در زمان استفاده از شبک�
 
 #: ../data/gpk-update-viewer.ui.h:1
 #, fuzzy
+msgid "Software is up to date"
+msgstr "بروزرسانی نرم‌افزار"
+
+#: ../data/gpk-update-viewer.ui.h:2
+msgid "Last checked: Today, 10 : 46 PM"
+msgstr ""
+
+#: ../data/gpk-update-viewer.ui.h:3
+#, fuzzy
 msgid ""
 "Package updates correct errors, eliminate security vulnerabilities, and "
 "provide new features."
@@ -367,16 +376,16 @@ msgstr ""
 "بروزرسانی‌های نرم‌افزارها خطاها را درست می‌کنند، آسیب‌پذیری‌های امنیتی "
 "برطرف‌می‌کنند و امکانات جدیدی فراهم می‌کنند."
 
-#: ../data/gpk-update-viewer.ui.h:2
+#: ../data/gpk-update-viewer.ui.h:4
 msgid "_Upgrade"
 msgstr "_ارتقا"
 
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:3 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:5 ../src/history/gpk-log.c:309
 msgid "Details"
 msgstr "جزئیات"
 
-#: ../data/gpk-update-viewer.ui.h:5
+#: ../data/gpk-update-viewer.ui.h:7
 msgid "_Install Updates"
 msgstr "_نصب بروزرسانی‌ها"
 
@@ -552,39 +561,49 @@ msgid ""
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:35
-msgid "Automatically download updates in the background without confirmation"
-msgstr ""
+#, fuzzy
+msgid "Check for updates even on a mobile connection"
+msgstr "بروزرسانی‌ها را در زمان استفاده از شبکه‌ی پهن‌باند تلفن همراه، بررسی کن"
 
 #: ../data/org.xings.packagekit.gschema.xml.h:36
-msgid "Automatically download updates in the background without confirmation."
+msgid ""
+"Use mobile broadband connections such as GSM and CDMA to check for updates."
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:37
+msgid "Automatically download updates in the background without confirmation"
+msgstr ""
+
+#: ../data/org.xings.packagekit.gschema.xml.h:38
+msgid "Automatically download updates in the background without confirmation."
+msgstr ""
+
+#: ../data/org.xings.packagekit.gschema.xml.h:39
 #, fuzzy
 msgid "How often to check for updates"
 msgstr "_بررسی برای بروزرسانی‌ها:"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:38
+#: ../data/org.xings.packagekit.gschema.xml.h:40
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:39
+#: ../data/org.xings.packagekit.gschema.xml.h:41
 #, fuzzy
 msgid "How often to refresh the package cache"
 msgstr "حافظه نهان بسته نوسازی شد"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:40
+#: ../data/org.xings.packagekit.gschema.xml.h:42
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:41
+#: ../data/org.xings.packagekit.gschema.xml.h:43
 msgid "How often to notify the user that non-critical updates are available"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:42
+#: ../data/org.xings.packagekit.gschema.xml.h:44
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -592,44 +611,44 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:43
+#: ../data/org.xings.packagekit.gschema.xml.h:45
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:44
+#: ../data/org.xings.packagekit.gschema.xml.h:46
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:176
+#: ../src/common/gpk-common.c:181
 msgid "32-bit"
 msgstr ""
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:183
+#: ../src/common/gpk-common.c:188
 msgid "64-bit"
 msgstr ""
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:308
+#: ../src/common/gpk-common.c:313
 msgid "This application is running as a privileged user"
 msgstr "این برنامه توسط یک کاربر با دسترسی ویژه، درحال اجرا است"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:311
+#: ../src/common/gpk-common.c:316
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s از طریق یک کاربر با دسترسی ویژه، درحال اجرا است."
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:314
+#: ../src/common/gpk-common.c:319
 msgid "Package management applications are security sensitive."
 msgstr "برنامه‌های مدیریت بسته از لحاظ امنیتی حساس هستند."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:316
+#: ../src/common/gpk-common.c:321
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -638,18 +657,18 @@ msgstr ""
 "ویژه اجتناب کرد."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:322
+#: ../src/common/gpk-common.c:327
 msgid "Continue _Anyway"
 msgstr "در هر صورت _ادامه بده"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:360 ../src/common/gpk-common.c:410
+#: ../src/common/gpk-common.c:365 ../src/common/gpk-common.c:415
 #, c-format
 msgid "Now"
 msgstr "اکنون"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:370 ../src/common/gpk-common.c:420
+#: ../src/common/gpk-common.c:375 ../src/common/gpk-common.c:425
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -657,7 +676,7 @@ msgstr[0] "%Ii ثانیه"
 msgstr[1] "%Ii ثانیه"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:380 ../src/common/gpk-common.c:433
+#: ../src/common/gpk-common.c:385 ../src/common/gpk-common.c:438
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -665,7 +684,7 @@ msgstr[0] "%Ii دقیقه"
 msgstr[1] "%Ii دقیقه"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:386 ../src/common/gpk-common.c:452
+#: ../src/common/gpk-common.c:391 ../src/common/gpk-common.c:457
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -676,49 +695,49 @@ msgstr[1] "%Ii ساعت"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:439 ../src/common/gpk-common.c:458
+#: ../src/common/gpk-common.c:444 ../src/common/gpk-common.c:463
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%Ii %s و %Ii %s"
 
-#: ../src/common/gpk-common.c:440 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:445 ../src/common/gpk-common.c:465
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "دقیقه"
 msgstr[1] "دقیقه"
 
-#: ../src/common/gpk-common.c:441
+#: ../src/common/gpk-common.c:446
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "ثانیه"
 msgstr[1] "ثانیه"
 
-#: ../src/common/gpk-common.c:459
+#: ../src/common/gpk-common.c:464
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ساعت"
 msgstr[1] "ساعت"
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:487
+#: ../src/common/gpk-common.c:492
 #, c-format
 msgid "%s and %s"
 msgstr "%s و %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:491
+#: ../src/common/gpk-common.c:496
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s، %s و %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:495
+#: ../src/common/gpk-common.c:500
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s، %s، %s و %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:505
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s، %s، %s، %s و %s"
@@ -2755,7 +2774,7 @@ msgid "Set the filter to this value"
 msgstr "تنظیم فیلتر با این مقدار"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:730
+#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
 msgid "Set the parent window to make this modal"
 msgstr "پنجره‌ی والد را تنظیم کنید تا این همیشه بر رو باشد"
 
@@ -3501,18 +3520,18 @@ msgid "Show all packages"
 msgstr "نمایش تمام بسته‌ها"
 
 #. TRANSLATORS: show the program version
-#: ../src/packages/gpk-application.c:3416
-#: ../src/updates-viewer/gpk-update-viewer.c:3227
+#: ../src/packages/gpk-application.c:3396
+#: ../src/updates-viewer/gpk-update-viewer.c:3160
 msgid "Show the program version and exit"
 msgstr "نمایش نسخه نصب شده‌ی برنامه و خروج"
 
-#: ../src/packages/gpk-application.c:3430
+#: ../src/packages/gpk-application.c:3410
 #, fuzzy
 msgid "Install Software"
 msgstr "نصب میان‌افزار"
 
 #. are we running privileged
-#: ../src/packages/gpk-application.c:3446
+#: ../src/packages/gpk-application.c:3426
 msgid "Package installer"
 msgstr "نصب‌کننده‌ی بسته‌ها"
 
@@ -3559,7 +3578,7 @@ msgstr "دریافت فهرست منابع شکست خورد"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/updates-viewer/gpk-update-viewer.c:3001
+#: ../src/updates-viewer/gpk-update-viewer.c:2949
 msgid "Exiting as backend details could not be retrieved"
 msgstr "درحال خروج چون جزئیات پسانه را نمی‌توان دریافت کرد."
 
@@ -3569,7 +3588,7 @@ msgid "Getting package source list not supported by backend"
 msgstr "دریافت فهرست منبع نرم‌افزار در پسانه پشتیبانی نمی‌شود."
 
 #. TRANSLATORS: we can display updates or repsository tab by default
-#: ../src/preferences/gpk-prefs.c:733
+#: ../src/preferences/gpk-prefs.c:739
 msgid "Set the startup page: either ‘updates’or ‘repositories’"
 msgstr ""
 
@@ -3622,12 +3641,12 @@ msgid "Software Update Service with PackageKit"
 msgstr "نمایش‌گر بروزرسانی برنامه‌ها"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/updates-viewer/gpk-update-viewer.c:182
+#: ../src/updates-viewer/gpk-update-viewer.c:168
 msgid "Failed to process request."
 msgstr "انجام درخواست شکست خورد."
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:196
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3636,13 +3655,13 @@ msgstr ""
 "رایانه مجددا راه‌اندازی شود."
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:212
-#: ../src/updates-viewer/gpk-update-viewer.c:218
+#: ../src/updates-viewer/gpk-update-viewer.c:198
+#: ../src/updates-viewer/gpk-update-viewer.c:204
 msgid "Restart Computer"
 msgstr "راه‌اندازی مجدد رایانه"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:216
+#: ../src/updates-viewer/gpk-update-viewer.c:202
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
@@ -3651,7 +3670,7 @@ msgstr ""
 "مجددا راه‌اندازی شود."
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:222
+#: ../src/updates-viewer/gpk-update-viewer.c:208
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3660,13 +3679,13 @@ msgstr ""
 "شوند، از سیستم خارج و مجددا وارد شوید."
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:224
-#: ../src/updates-viewer/gpk-update-viewer.c:230
+#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:216
 msgid "Log Out"
 msgstr "خروج از سیستم"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:228
+#: ../src/updates-viewer/gpk-update-viewer.c:214
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3675,85 +3694,86 @@ msgstr ""
 "سیستم خارج و مجددا وارد شوید."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:274
+#: ../src/updates-viewer/gpk-update-viewer.c:260
 msgid "Could not restart"
 msgstr "نمی‌توان مجددا راه‌اندازی کرد"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/updates-viewer/gpk-update-viewer.c:344
+#: ../src/updates-viewer/gpk-update-viewer.c:330
 msgid "Some updates were not installed"
 msgstr "تعدادی از بسته‌ها نصب نشدند"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:413
-#: ../src/updates-viewer/gpk-update-viewer.c:424
+#: ../src/updates-viewer/gpk-update-viewer.c:397
+#: ../src/updates-viewer/gpk-update-viewer.c:408
 msgid "Could not update packages"
 msgstr "نمی‌توان بسته‌ها را بروزرسانی کرد"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
+#: ../src/updates-viewer/gpk-update-viewer.c:469
+#: ../src/updates-viewer/gpk-update-viewer.c:479
 #: ../src/updates-viewer/gpk-update-viewer.c:485
-#: ../src/updates-viewer/gpk-update-viewer.c:506
 msgid "Updates installed"
 msgstr "بروزرسانی‌ها نصب شدند"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:495
+#: ../src/updates-viewer/gpk-update-viewer.c:481
 msgid "All updates were installed successfully."
 msgstr "تمام بروزرسانی‌ها با موفقیت نصب شدند"
 
 #. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:498
+#: ../src/updates-viewer/gpk-update-viewer.c:487
 msgid "The selected updates were installed successfully."
 msgstr "بروزرسانی‌های انتخاب شده با موفقیت نصب شد."
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:714
+#: ../src/updates-viewer/gpk-update-viewer.c:694
 msgid "Trivial updates"
 msgstr "بروزرسانی‌های جزئی"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:718
+#: ../src/updates-viewer/gpk-update-viewer.c:698
 msgid "Important updates"
 msgstr "بروزرسانی‌های مهم"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:722
+#: ../src/updates-viewer/gpk-update-viewer.c:702
 msgid "Security updates"
 msgstr "بروزرسانی‌های امنیتی"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:726
+#: ../src/updates-viewer/gpk-update-viewer.c:706
 msgid "Bug fix updates"
 msgstr "بروزرسانی‌های رفع اشکال"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:730
+#: ../src/updates-viewer/gpk-update-viewer.c:710
 msgid "Enhancement updates"
 msgstr "بروزرسانی‌های افزایش کارایی"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:734
+#: ../src/updates-viewer/gpk-update-viewer.c:714
 msgid "Blocked updates"
 msgstr "بروزرسانی‌های مسدود شده"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/updates-viewer/gpk-update-viewer.c:738
+#: ../src/updates-viewer/gpk-update-viewer.c:718
 msgid "Other updates"
 msgstr "دیگر بروزرسانی‌ها"
 
 #. TRANSLATORS: querying update array
-#: ../src/updates-viewer/gpk-update-viewer.c:999
+#: ../src/updates-viewer/gpk-update-viewer.c:975
 msgid "Getting the list of updates"
 msgstr "درحال دریافت فهرست بروزرسانی‌ها"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:1228
+#: ../src/updates-viewer/gpk-update-viewer.c:1201
 msgid "Could not run upgrade script"
 msgstr "نمی‌توان کدنوشته‌ی بروزرسانی را اجرا کرد."
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/updates-viewer/gpk-update-viewer.c:1259
+#: ../src/updates-viewer/gpk-update-viewer.c:1232
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3767,41 +3787,36 @@ msgstr[1] ""
 "اتصال از طریق پهنای باند بی‌سیم تامین شده است، و ممکن است بروزرسانی این "
 "بسته‌ها هزینه‌بر باشد."
 
-#. TRANSLATORS: there are no updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1343
-msgid "There are no updates available"
-msgstr "هیچ بروزرسانی‌ای موجود نیست"
-
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1404
+#: ../src/updates-viewer/gpk-update-viewer.c:1351
 msgid "No updates are available"
 msgstr "هیچ بروزرسانی‌ای موجود نیست"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/updates-viewer/gpk-update-viewer.c:1406
+#: ../src/updates-viewer/gpk-update-viewer.c:1353
 msgid "No network connection was detected."
 msgstr "هیچ اتصال شبکه‌ای پیدا نشد."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1423
+#: ../src/updates-viewer/gpk-update-viewer.c:1370
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_نصب بروزرسانی"
 msgstr[1] "_نصب بروزرسانی‌ها"
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1432
+#: ../src/updates-viewer/gpk-update-viewer.c:1380
 #, fuzzy
 msgid "All packages are up to date"
 msgstr "تمام نرم‌افزارها به‌روز هستند"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/updates-viewer/gpk-update-viewer.c:1434
+#: ../src/updates-viewer/gpk-update-viewer.c:1382
 #, fuzzy
 msgid "There are no package updates available for your computer at this time."
 msgstr "هیچ بروزرسانی‌ای برای رایانه‌ی شما، اکنون وجود ندارد."
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1461
+#: ../src/updates-viewer/gpk-update-viewer.c:1412
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3809,7 +3824,7 @@ msgstr[0] "تعداد %Ii بروزرسانی موجود است"
 msgstr[1] "تعداد %Ii بروزرسانی موجوداند"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/updates-viewer/gpk-update-viewer.c:1478
+#: ../src/updates-viewer/gpk-update-viewer.c:1424
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3817,7 +3832,7 @@ msgstr[0] "تعداد %Ii بروزرسانی انتخاب شد"
 msgstr[1] "تعداد %Ii بروزرسانی انتخاب شدند"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/updates-viewer/gpk-update-viewer.c:1486
+#: ../src/updates-viewer/gpk-update-viewer.c:1433
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3825,51 +3840,51 @@ msgstr[0] "تعداد %Ii بروزرسانی انتخاب شد (%s)"
 msgstr[1] "تعداد %Ii بروزرسانی انتخاب شدند (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/updates-viewer/gpk-update-viewer.c:1680
+#: ../src/updates-viewer/gpk-update-viewer.c:1629
 msgid "Status"
 msgstr "وضعیت"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1858
+#: ../src/updates-viewer/gpk-update-viewer.c:1807
 msgid "This update will add new features and expand functionality."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1862
+#: ../src/updates-viewer/gpk-update-viewer.c:1811
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "این بروزرسانی باعث اصلاح خطاها و باقی مشکلات غیر بحرانی می‌شود."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1866
+#: ../src/updates-viewer/gpk-update-viewer.c:1815
 msgid "This update is important as it may solve critical problems."
 msgstr "این بروزرسانی به دلیل اینکه باعث حل مشکلات بحرانی می‌شود مهم است."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1870
+#: ../src/updates-viewer/gpk-update-viewer.c:1819
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
 "این بروزرسانی برای اصلاح آسیب‌پذیری‌های امنیتی در این بسته مورد نیاز است."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1874
+#: ../src/updates-viewer/gpk-update-viewer.c:1823
 msgid "This update is blocked."
 msgstr "این بروزرسانی مسدود شده است"
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/updates-viewer/gpk-update-viewer.c:1886
+#: ../src/updates-viewer/gpk-update-viewer.c:1835
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "این اخطار در %s پیش‌آمده و آخرین بروزرسانی در %s بوده است."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/updates-viewer/gpk-update-viewer.c:1893
+#: ../src/updates-viewer/gpk-update-viewer.c:1842
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "این اخطار در %s پیش‌آمده است."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1911
+#: ../src/updates-viewer/gpk-update-viewer.c:1860
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3880,7 +3895,7 @@ msgstr[1] ""
 "کنید:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1918
+#: ../src/updates-viewer/gpk-update-viewer.c:1867
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3895,7 +3910,7 @@ msgstr[1] ""
 "پایگاه‌های وب بازدید کنید:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1925
+#: ../src/updates-viewer/gpk-update-viewer.c:1874
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3908,7 +3923,7 @@ msgstr[1] ""
 "بازدید کنید:"
 
 #. TRANSLATORS: reboot required
-#: ../src/updates-viewer/gpk-update-viewer.c:1934
+#: ../src/updates-viewer/gpk-update-viewer.c:1883
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -3917,7 +3932,7 @@ msgstr ""
 "گردد."
 
 #. TRANSLATORS: log out required
-#: ../src/updates-viewer/gpk-update-viewer.c:1938
+#: ../src/updates-viewer/gpk-update-viewer.c:1887
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3926,7 +3941,7 @@ msgstr ""
 "وارد شوید."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1945
+#: ../src/updates-viewer/gpk-update-viewer.c:1894
 #, fuzzy
 msgid ""
 "The classification of this update is unstable which means it is not designed "
@@ -3936,7 +3951,7 @@ msgstr ""
 "تولیدی ساخته نشده است."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1949
+#: ../src/updates-viewer/gpk-update-viewer.c:1898
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3945,95 +3960,100 @@ msgstr ""
 "هرگونه مشکلی که مواجه می‌شوید را گزارش کنید."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/updates-viewer/gpk-update-viewer.c:1957
+#: ../src/updates-viewer/gpk-update-viewer.c:1906
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr ""
 "وقایع توسعه دهندگان نشان می‌دهند که هیچ توصیفی برای این بروزرسانی موجود است:"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2004
+#: ../src/updates-viewer/gpk-update-viewer.c:1953
 #, fuzzy
 msgid "Loading…"
 msgstr "درحال بارکردن..."
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2007
+#: ../src/updates-viewer/gpk-update-viewer.c:1956
 msgid "No update details available."
 msgstr "جزئیات هیچ بروزرسانی‌ای موجود نیست."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2039
-#: ../src/updates-viewer/gpk-update-viewer.c:2137
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:1988
+#: ../src/updates-viewer/gpk-update-viewer.c:2086
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 msgid "Could not get update details"
 msgstr "نمی‌توان جزئیات بروزرسانی را دریافت کرد"
 
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
 msgid "Could not get package details"
 msgstr "نمی‌توان جزئیات بسته را دریافت کرد"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 msgid "No results were returned."
 msgstr "هیچ نتیجه‌ای برگشت داده نشد."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2392
+#: ../src/updates-viewer/gpk-update-viewer.c:2341
 msgid "Select all"
 msgstr "انتخاب همه"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2400
+#: ../src/updates-viewer/gpk-update-viewer.c:2349
 msgid "Unselect all"
 msgstr "لغو انتخاب همه"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2407
+#: ../src/updates-viewer/gpk-update-viewer.c:2356
 msgid "Select security updates"
 msgstr "انتخاب بروزرسانی‌های امنیتی"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/updates-viewer/gpk-update-viewer.c:2413
+#: ../src/updates-viewer/gpk-update-viewer.c:2362
 msgid "Ignore this update"
 msgstr "نادیده گرفتن این بروزرسانی"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2520
+#: ../src/updates-viewer/gpk-update-viewer.c:2469
 msgid "Could not get updates"
 msgstr "نمی‌توان بروزرسانی‌ها را گرفت"
 
 #. TRANSLATORS: this is the header
-#: ../src/updates-viewer/gpk-update-viewer.c:2658
+#: ../src/updates-viewer/gpk-update-viewer.c:2607
 #, fuzzy
 msgid "Checking for updates…"
 msgstr "بررسی برای بروزرسانی‌ها..."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2934
+#: ../src/updates-viewer/gpk-update-viewer.c:2885
 msgid "Could not get list of distribution upgrades"
 msgstr "نمی‌توان فهرست ارتقاهای توزیع را گرفت"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/updates-viewer/gpk-update-viewer.c:2964
+#: ../src/updates-viewer/gpk-update-viewer.c:2915
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "ارتقای جدیدی از توزیع موجود است «%s»"
 
-#. TRANSLATORS: this is when some updates are not being shown as other packages need updating first
-#: ../src/updates-viewer/gpk-update-viewer.c:3198
-msgid ""
-"Other updates are held back as some important system packages need to be "
-"installed first."
-msgstr ""
-"نصب باقی بروزرسانی‌ها با توجه به اینکه تعدادی بسته مهم ابتدا باید نصب گردند، "
-"نگه داشته شدند."
-
-#: ../src/updates-viewer/gpk-update-viewer.c:3240
+#: ../src/updates-viewer/gpk-update-viewer.c:3173
 #, fuzzy
 msgid "Update Packages"
 msgstr "بسته‌ها بروزرسانی شدند"
+
+#, fuzzy
+#~ msgid "Check for Updates"
+#~ msgstr "_بررسی برای بروزرسانی‌ها:"
+
+#~ msgid "There are no updates available"
+#~ msgstr "هیچ بروزرسانی‌ای موجود نیست"
+
+#~ msgid ""
+#~ "Other updates are held back as some important system packages need to be "
+#~ "installed first."
+#~ msgstr ""
+#~ "نصب باقی بروزرسانی‌ها با توجه به اینکه تعدادی بسته مهم ابتدا باید نصب "
+#~ "گردند، نگه داشته شدند."
 
 #, fuzzy
 #~ msgid "Software Packages"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packageit gnome 3.14\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-28 10:38-0300\n"
+"POT-Creation-Date: 2021-09-30 16:11-0300\n"
 "PO-Revision-Date: 2014-09-20 13:21+0400\n"
 "Last-Translator: Pawan Chitrakar <chautari@gmail.com>\n"
 "Language-Team: Nepali Translation Team <chautari@gmail.com>\n"
@@ -40,8 +40,8 @@ msgstr ""
 
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-package-updates.appdata.xml.in.h:1
-#: ../data/gpk-update-viewer.ui.h:4
-#: ../src/updates-viewer/gpk-update-viewer.c:3257
+#: ../data/gpk-update-viewer.ui.h:6
+#: ../src/updates-viewer/gpk-update-viewer.c:3190
 msgid "Package Updater"
 msgstr "प्याकेज अपडेटर"
 
@@ -142,36 +142,32 @@ msgid "Changes are not applied instantly, this button applies all changes"
 msgstr ""
 
 #: ../data/gpk-application.ui.h:15
-msgid "Check for Updates"
-msgstr "अपडेट जाँच गर्नुहोस्"
-
-#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:9
-msgid "Package Sources"
-msgstr "प्याकेजहरू स्रोतहरू"
-
-#: ../data/gpk-application.ui.h:17
 #, fuzzy
 msgid "Refresh Package Lists"
 msgstr "प्याकेज सूची अद्यावधिक गर्दै"
 
-#: ../data/gpk-application.ui.h:18 ../data/xings-package-history.desktop.in.h:1
+#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
+msgid "Package Sources"
+msgstr "प्याकेजहरू स्रोतहरू"
+
+#: ../data/gpk-application.ui.h:17 ../data/xings-package-history.desktop.in.h:1
 #: ../data/gpk-log.ui.h:2
 msgid "Package Log"
 msgstr "प्याकेज लग"
 
-#: ../data/gpk-application.ui.h:19
+#: ../data/gpk-application.ui.h:18
 msgid "Only Newest Versions"
 msgstr "नया संस्करण मात्रै"
 
-#: ../data/gpk-application.ui.h:20
+#: ../data/gpk-application.ui.h:19
 msgid "Only Native Packages"
 msgstr " प्याकेजहरू मात्रै"
 
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "बारेमा"
 
-#: ../data/gpk-application.ui.h:22
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "अन्त्य गर्नुहोस्"
 
@@ -239,7 +235,7 @@ msgstr "छनौट गर्नु"
 
 #. TRANSLATORS: program name, an application to add and remove software repositories
 #: ../data/xings-packagekit-preferences.desktop.in.h:1
-#: ../src/preferences/gpk-prefs.c:742
+#: ../src/preferences/gpk-prefs.c:748
 #, fuzzy
 msgid "Software Settings"
 msgstr "सफ्टवेयर स्थापना गर्नुहोस्"
@@ -261,28 +257,33 @@ msgid "Check for updates"
 msgstr "अपडेट जाँच गर्नुहोस्"
 
 #: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "अपडेट जाँच गर्नुहोस्"
+
+#: ../data/gpk-prefs.ui.h:4
 msgid "You will be notified when the updates are ready to be installed"
 msgstr ""
 
-#: ../data/gpk-prefs.ui.h:4
+#: ../data/gpk-prefs.ui.h:5
 #, fuzzy
 msgid "Download updates in the background"
 msgstr "प्याकेज जानकारी ताजा गर्नुहोस्"
 
 #. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:5
+#: ../data/gpk-prefs.ui.h:6
 #: ../src/updates-service/gpk-updates-notification.c:307
 #, fuzzy
 msgid "Updates"
 msgstr "अद्यावधिक गर्नुहोस्"
 
-#: ../data/gpk-prefs.ui.h:6
+#: ../data/gpk-prefs.ui.h:7
 msgid ""
 "A package source contains packages that can be installed on this computer."
 msgstr ""
 
 #. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:8
+#: ../data/gpk-prefs.ui.h:9
 msgid "_Show debug and development package sources"
 msgstr ""
 
@@ -343,21 +344,30 @@ msgid "Checks for system updates when start session"
 msgstr ""
 
 #: ../data/gpk-update-viewer.ui.h:1
+#, fuzzy
+msgid "Software is up to date"
+msgstr "सफ्टवेयर स्थापना गर्नुहोस्"
+
+#: ../data/gpk-update-viewer.ui.h:2
+msgid "Last checked: Today, 10 : 46 PM"
+msgstr ""
+
+#: ../data/gpk-update-viewer.ui.h:3
 msgid ""
 "Package updates correct errors, eliminate security vulnerabilities, and "
 "provide new features."
 msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:2
+#: ../data/gpk-update-viewer.ui.h:4
 msgid "_Upgrade"
 msgstr "स्तरवृद्धि गर्नुहोस्"
 
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:3 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:5 ../src/history/gpk-log.c:309
 msgid "Details"
 msgstr "विवरण"
 
-#: ../data/gpk-update-viewer.ui.h:5
+#: ../data/gpk-update-viewer.ui.h:7
 msgid "_Install Updates"
 msgstr "अपडेट स्थापना गर्नुहोस् "
 
@@ -519,39 +529,48 @@ msgid ""
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:35
-msgid "Automatically download updates in the background without confirmation"
+msgid "Check for updates even on a mobile connection"
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:36
-msgid "Automatically download updates in the background without confirmation."
+msgid ""
+"Use mobile broadband connections such as GSM and CDMA to check for updates."
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:37
+msgid "Automatically download updates in the background without confirmation"
+msgstr ""
+
+#: ../data/org.xings.packagekit.gschema.xml.h:38
+msgid "Automatically download updates in the background without confirmation."
+msgstr ""
+
+#: ../data/org.xings.packagekit.gschema.xml.h:39
 #, fuzzy
 msgid "How often to check for updates"
 msgstr "अपडेट जाँच गर्नुहोस्"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:38
+#: ../data/org.xings.packagekit.gschema.xml.h:40
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:39
+#: ../data/org.xings.packagekit.gschema.xml.h:41
 #, fuzzy
 msgid "How often to refresh the package cache"
 msgstr "प्याकेज क्यास पुन लोड गर्नुहोस्"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:40
+#: ../data/org.xings.packagekit.gschema.xml.h:42
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:41
+#: ../data/org.xings.packagekit.gschema.xml.h:43
 msgid "How often to notify the user that non-critical updates are available"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:42
+#: ../data/org.xings.packagekit.gschema.xml.h:44
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -559,62 +578,62 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:43
+#: ../data/org.xings.packagekit.gschema.xml.h:45
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:44
+#: ../data/org.xings.packagekit.gschema.xml.h:46
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:176
+#: ../src/common/gpk-common.c:181
 msgid "32-bit"
 msgstr "३२-बिट"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:183
+#: ../src/common/gpk-common.c:188
 msgid "64-bit"
 msgstr "६४-बिट"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:308
+#: ../src/common/gpk-common.c:313
 msgid "This application is running as a privileged user"
 msgstr ""
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:311
+#: ../src/common/gpk-common.c:316
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr ""
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:314
+#: ../src/common/gpk-common.c:319
 msgid "Package management applications are security sensitive."
 msgstr ""
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:316
+#: ../src/common/gpk-common.c:321
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
 msgstr ""
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:322
+#: ../src/common/gpk-common.c:327
 msgid "Continue _Anyway"
 msgstr "जारि गर्नुहोस्"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:360 ../src/common/gpk-common.c:410
+#: ../src/common/gpk-common.c:365 ../src/common/gpk-common.c:415
 #, c-format
 msgid "Now"
 msgstr "अहिले"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:370 ../src/common/gpk-common.c:420
+#: ../src/common/gpk-common.c:375 ../src/common/gpk-common.c:425
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -622,7 +641,7 @@ msgstr[0] "%d सेकेण्ड"
 msgstr[1] "%d सेकेण्ड"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:380 ../src/common/gpk-common.c:433
+#: ../src/common/gpk-common.c:385 ../src/common/gpk-common.c:438
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -630,7 +649,7 @@ msgstr[0] "%i मिनट"
 msgstr[1] "%i मिनट"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:386 ../src/common/gpk-common.c:452
+#: ../src/common/gpk-common.c:391 ../src/common/gpk-common.c:457
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -641,49 +660,49 @@ msgstr[1] "%i घण्टा"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:439 ../src/common/gpk-common.c:458
+#: ../src/common/gpk-common.c:444 ../src/common/gpk-common.c:463
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:440 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:445 ../src/common/gpk-common.c:465
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "मिनेट"
 msgstr[1] "मिनेट"
 
-#: ../src/common/gpk-common.c:441
+#: ../src/common/gpk-common.c:446
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "सेकेन्ड"
 msgstr[1] "सेकेन्ड"
 
-#: ../src/common/gpk-common.c:459
+#: ../src/common/gpk-common.c:464
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "घन्टा"
 msgstr[1] "घन्टा"
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:487
+#: ../src/common/gpk-common.c:492
 #, c-format
 msgid "%s and %s"
 msgstr "%s र %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:491
+#: ../src/common/gpk-common.c:496
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s र %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:495
+#: ../src/common/gpk-common.c:500
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s र %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:505
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s र %s"
@@ -2702,7 +2721,7 @@ msgid "Set the filter to this value"
 msgstr "कुञ्जीका लागि सेट गर्न कुनै मान छैन: `%s'\n"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:730
+#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
 msgid "Set the parent window to make this modal"
 msgstr ""
 
@@ -3465,17 +3484,17 @@ msgid "Show all packages"
 msgstr "सबै प्याकेजहरू देखाउनुहोस्"
 
 #. TRANSLATORS: show the program version
-#: ../src/packages/gpk-application.c:3416
-#: ../src/updates-viewer/gpk-update-viewer.c:3227
+#: ../src/packages/gpk-application.c:3396
+#: ../src/updates-viewer/gpk-update-viewer.c:3160
 msgid "Show the program version and exit"
 msgstr "संस्करण सूचना देखाउनुहोस् र निस्कनुहोस्"
 
-#: ../src/packages/gpk-application.c:3430
+#: ../src/packages/gpk-application.c:3410
 msgid "Install Software"
 msgstr "सफ्टवेयर स्थापना गर्नुहोस्"
 
 #. are we running privileged
-#: ../src/packages/gpk-application.c:3446
+#: ../src/packages/gpk-application.c:3426
 msgid "Package installer"
 msgstr "प्याकेज स्थापना गर्नुहोस्"
 
@@ -3521,7 +3540,7 @@ msgstr "स्रोत सूची प्राप्त गर्न अस�
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/updates-viewer/gpk-update-viewer.c:3001
+#: ../src/updates-viewer/gpk-update-viewer.c:2949
 msgid "Exiting as backend details could not be retrieved"
 msgstr ""
 
@@ -3530,7 +3549,7 @@ msgid "Getting package source list not supported by backend"
 msgstr ""
 
 #. TRANSLATORS: we can display updates or repsository tab by default
-#: ../src/preferences/gpk-prefs.c:733
+#: ../src/preferences/gpk-prefs.c:739
 msgid "Set the startup page: either ‘updates’or ‘repositories’"
 msgstr ""
 
@@ -3583,141 +3602,142 @@ msgid "Software Update Service with PackageKit"
 msgstr ""
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/updates-viewer/gpk-update-viewer.c:182
+#: ../src/updates-viewer/gpk-update-viewer.c:168
 #, fuzzy
 msgid "Failed to process request."
 msgstr "शाखा प्रक्रिया \"%s\" (%s) कार्यान्वयन गर्न असफल"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:196
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
 msgstr ""
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:212
-#: ../src/updates-viewer/gpk-update-viewer.c:218
+#: ../src/updates-viewer/gpk-update-viewer.c:198
+#: ../src/updates-viewer/gpk-update-viewer.c:204
 msgid "Restart Computer"
 msgstr "कम्प्युटर फेरि सुरु गर्नुहोस्"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:216
+#: ../src/updates-viewer/gpk-update-viewer.c:202
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
 msgstr ""
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:222
+#: ../src/updates-viewer/gpk-update-viewer.c:208
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
 msgstr ""
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:224
-#: ../src/updates-viewer/gpk-update-viewer.c:230
+#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:216
 msgid "Log Out"
 msgstr "लगआउट"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:228
+#: ../src/updates-viewer/gpk-update-viewer.c:214
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
 msgstr ""
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:274
+#: ../src/updates-viewer/gpk-update-viewer.c:260
 msgid "Could not restart"
 msgstr "फेरिसुरु गर्न सकेन"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/updates-viewer/gpk-update-viewer.c:344
+#: ../src/updates-viewer/gpk-update-viewer.c:330
 msgid "Some updates were not installed"
 msgstr ""
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:413
-#: ../src/updates-viewer/gpk-update-viewer.c:424
+#: ../src/updates-viewer/gpk-update-viewer.c:397
+#: ../src/updates-viewer/gpk-update-viewer.c:408
 msgid "Could not update packages"
 msgstr "प्याकेज अद्यावधिक गर्न सकेन"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
+#: ../src/updates-viewer/gpk-update-viewer.c:469
+#: ../src/updates-viewer/gpk-update-viewer.c:479
 #: ../src/updates-viewer/gpk-update-viewer.c:485
-#: ../src/updates-viewer/gpk-update-viewer.c:506
 #, fuzzy
 msgid "Updates installed"
 msgstr "स्थापना नगरिएको"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:495
+#: ../src/updates-viewer/gpk-update-viewer.c:481
 msgid "All updates were installed successfully."
 msgstr ""
 
 #. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:498
+#: ../src/updates-viewer/gpk-update-viewer.c:487
 msgid "The selected updates were installed successfully."
 msgstr ""
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:714
+#: ../src/updates-viewer/gpk-update-viewer.c:694
 #, fuzzy
 msgid "Trivial updates"
 msgstr "अपडेट स्थापना गर्नुहोस् "
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:718
+#: ../src/updates-viewer/gpk-update-viewer.c:698
 #, fuzzy
 msgid "Important updates"
 msgstr "अपडेट स्थापना गर्नुहोस् "
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:722
+#: ../src/updates-viewer/gpk-update-viewer.c:702
 #, fuzzy
 msgid "Security updates"
 msgstr "युबन्टु ४.१० सुरक्षा अद्यावधिकहरु"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:726
+#: ../src/updates-viewer/gpk-update-viewer.c:706
 #, fuzzy
 msgid "Bug fix updates"
 msgstr "अपडेट जाँच गर्नुहोस्"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:730
+#: ../src/updates-viewer/gpk-update-viewer.c:710
 #, fuzzy
 msgid "Enhancement updates"
 msgstr "अपडेट स्थापना गर्नुहोस् "
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:734
+#: ../src/updates-viewer/gpk-update-viewer.c:714
 #, fuzzy
 msgid "Blocked updates"
 msgstr "अपडेट स्थापना गर्नुहोस् "
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/updates-viewer/gpk-update-viewer.c:738
+#: ../src/updates-viewer/gpk-update-viewer.c:718
 #, fuzzy
 msgid "Other updates"
 msgstr "अपडेट स्थापना गर्नुहोस् "
 
 #. TRANSLATORS: querying update array
-#: ../src/updates-viewer/gpk-update-viewer.c:999
+#: ../src/updates-viewer/gpk-update-viewer.c:975
 #, fuzzy
 msgid "Getting the list of updates"
 msgstr "फाइल सूची प्राप्त गर्दै"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:1228
+#: ../src/updates-viewer/gpk-update-viewer.c:1201
 #, fuzzy
 msgid "Could not run upgrade script"
 msgstr "चलाउने संवाद प्रदर्शन गर्न सकेन"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/updates-viewer/gpk-update-viewer.c:1259
+#: ../src/updates-viewer/gpk-update-viewer.c:1232
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3727,42 +3747,36 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#. TRANSLATORS: there are no updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1343
-#, fuzzy
-msgid "There are no updates available"
-msgstr "अब अरू चाल छैनन्"
-
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1404
+#: ../src/updates-viewer/gpk-update-viewer.c:1351
 #, fuzzy
 msgid "No updates are available"
 msgstr "निम्न आदेशहरू उपलब्ध छन्:"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/updates-viewer/gpk-update-viewer.c:1406
+#: ../src/updates-viewer/gpk-update-viewer.c:1353
 msgid "No network connection was detected."
 msgstr ""
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1423
+#: ../src/updates-viewer/gpk-update-viewer.c:1370
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "अद्यावधिक स्थापना गर्नुहोस्"
 msgstr[1] "अद्यावधिक स्थापना गर्नुहोस्"
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1432
+#: ../src/updates-viewer/gpk-update-viewer.c:1380
 #, fuzzy
 msgid "All packages are up to date"
 msgstr "तपाईँका द्रष्टव्यहरू अद्यावधिक छैनन् ।"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/updates-viewer/gpk-update-viewer.c:1434
+#: ../src/updates-viewer/gpk-update-viewer.c:1382
 msgid "There are no package updates available for your computer at this time."
 msgstr ""
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1461
+#: ../src/updates-viewer/gpk-update-viewer.c:1412
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3770,7 +3784,7 @@ msgstr[0] "यदि सेवा उपलब्ध छ भने जाँच 
 msgstr[1] ""
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/updates-viewer/gpk-update-viewer.c:1478
+#: ../src/updates-viewer/gpk-update-viewer.c:1424
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3778,7 +3792,7 @@ msgstr[0] "%d फोल्डर चयन गरियो"
 msgstr[1] ""
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/updates-viewer/gpk-update-viewer.c:1486
+#: ../src/updates-viewer/gpk-update-viewer.c:1433
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3786,51 +3800,51 @@ msgstr[0] "%d फोल्डर चयन गरियो"
 msgstr[1] ""
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/updates-viewer/gpk-update-viewer.c:1680
+#: ../src/updates-viewer/gpk-update-viewer.c:1629
 msgid "Status"
 msgstr "वस्तुस्थिति"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1858
+#: ../src/updates-viewer/gpk-update-viewer.c:1807
 msgid "This update will add new features and expand functionality."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1862
+#: ../src/updates-viewer/gpk-update-viewer.c:1811
 msgid "This update will fix bugs and other non-critical problems."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1866
+#: ../src/updates-viewer/gpk-update-viewer.c:1815
 msgid "This update is important as it may solve critical problems."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1870
+#: ../src/updates-viewer/gpk-update-viewer.c:1819
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1874
+#: ../src/updates-viewer/gpk-update-viewer.c:1823
 #, fuzzy
 msgid "This update is blocked."
 msgstr "यो द्रष्टव्य ताल्चा लगाइएको छ ।"
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/updates-viewer/gpk-update-viewer.c:1886
+#: ../src/updates-viewer/gpk-update-viewer.c:1835
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr ""
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/updates-viewer/gpk-update-viewer.c:1893
+#: ../src/updates-viewer/gpk-update-viewer.c:1842
 #, fuzzy, c-format
 msgid "This notification was issued on %s."
 msgstr "यो सन्देश <b>%s</b>को पक्षमा <b>%s</b> द्वारा पठाइएको थियो"
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1911
+#: ../src/updates-viewer/gpk-update-viewer.c:1860
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3838,7 +3852,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1918
+#: ../src/updates-viewer/gpk-update-viewer.c:1867
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3849,7 +3863,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1925
+#: ../src/updates-viewer/gpk-update-viewer.c:1874
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3858,125 +3872,125 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: reboot required
-#: ../src/updates-viewer/gpk-update-viewer.c:1934
+#: ../src/updates-viewer/gpk-update-viewer.c:1883
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr ""
 
 #. TRANSLATORS: log out required
-#: ../src/updates-viewer/gpk-update-viewer.c:1938
+#: ../src/updates-viewer/gpk-update-viewer.c:1887
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
 msgstr ""
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1945
+#: ../src/updates-viewer/gpk-update-viewer.c:1894
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
 msgstr ""
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1949
+#: ../src/updates-viewer/gpk-update-viewer.c:1898
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
 msgstr ""
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/updates-viewer/gpk-update-viewer.c:1957
+#: ../src/updates-viewer/gpk-update-viewer.c:1906
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr ""
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2004
+#: ../src/updates-viewer/gpk-update-viewer.c:1953
 msgid "Loading…"
 msgstr ""
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2007
+#: ../src/updates-viewer/gpk-update-viewer.c:1956
 #, fuzzy
 msgid "No update details available."
 msgstr "जङ्क प्लगइन उपलब्ध छैन"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2039
-#: ../src/updates-viewer/gpk-update-viewer.c:2137
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:1988
+#: ../src/updates-viewer/gpk-update-viewer.c:2086
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 #, fuzzy
 msgid "Could not get update details"
 msgstr "%s (%s)प्रयोगकर्ताका लागि विबरणहरू प्राप्त गर्न सकेन ।"
 
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
 #, fuzzy
 msgid "Could not get package details"
 msgstr "%s (%s)प्रयोगकर्ताका लागि विबरणहरू प्राप्त गर्न सकेन ।"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 #, fuzzy
 msgid "No results were returned."
 msgstr "मिल्दो रेकर्डहरू फेला परेन।"
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2392
+#: ../src/updates-viewer/gpk-update-viewer.c:2341
 msgid "Select all"
 msgstr "सबै चयन गर्नुहोस्"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2400
+#: ../src/updates-viewer/gpk-update-viewer.c:2349
 msgid "Unselect all"
 msgstr "सबै चयन हटाउनुहोस्"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2407
+#: ../src/updates-viewer/gpk-update-viewer.c:2356
 #, fuzzy
 msgid "Select security updates"
 msgstr "युबन्टु ४.१० सुरक्षा अद्यावधिकहरु"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/updates-viewer/gpk-update-viewer.c:2413
+#: ../src/updates-viewer/gpk-update-viewer.c:2362
 #, fuzzy
 msgid "Ignore this update"
 msgstr "ग्राहक अद्यावधिक आवश्यक"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2520
+#: ../src/updates-viewer/gpk-update-viewer.c:2469
 #, fuzzy
 msgid "Could not get updates"
 msgstr "सन्देश प्राप्त गर्न सकेन"
 
 #. TRANSLATORS: this is the header
-#: ../src/updates-viewer/gpk-update-viewer.c:2658
+#: ../src/updates-viewer/gpk-update-viewer.c:2607
 #, fuzzy
 msgid "Checking for updates…"
 msgstr "नयाँ पत्र लागि जाँच गर्दै"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2934
+#: ../src/updates-viewer/gpk-update-viewer.c:2885
 msgid "Could not get list of distribution upgrades"
 msgstr ""
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/updates-viewer/gpk-update-viewer.c:2964
+#: ../src/updates-viewer/gpk-update-viewer.c:2915
 #, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr ""
 
-#. TRANSLATORS: this is when some updates are not being shown as other packages need updating first
-#: ../src/updates-viewer/gpk-update-viewer.c:3198
-msgid ""
-"Other updates are held back as some important system packages need to be "
-"installed first."
-msgstr ""
-
-#: ../src/updates-viewer/gpk-update-viewer.c:3240
+#: ../src/updates-viewer/gpk-update-viewer.c:3173
 msgid "Update Packages"
 msgstr "प्याकेज अद्यावधिक"
+
+#~ msgid "Check for Updates"
+#~ msgstr "अपडेट जाँच गर्नुहोस्"
+
+#, fuzzy
+#~ msgid "There are no updates available"
+#~ msgstr "अब अरू चाल छैनन्"
 
 #, fuzzy
 #~ msgid "Software Packages"

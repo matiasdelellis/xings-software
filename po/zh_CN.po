@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-28 10:38-0300\n"
+"POT-Creation-Date: 2021-09-30 16:11-0300\n"
 "PO-Revision-Date: 2014-08-02 21:43+0800\n"
 "Last-Translator: irisgyq <gouyingqiyanxuan321@gmail.com>\n"
 "Language-Team: Chinese (simplified) <i18n-zh@googlegroups.com>\n"
@@ -51,8 +51,8 @@ msgstr ""
 
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-package-updates.appdata.xml.in.h:1
-#: ../data/gpk-update-viewer.ui.h:4
-#: ../src/updates-viewer/gpk-update-viewer.c:3257
+#: ../data/gpk-update-viewer.ui.h:6
+#: ../src/updates-viewer/gpk-update-viewer.c:3190
 msgid "Package Updater"
 msgstr "软件包更新程序"
 
@@ -159,35 +159,31 @@ msgid "Changes are not applied instantly, this button applies all changes"
 msgstr "更改不是立即应用的；此按钮将应用全部更改"
 
 #: ../data/gpk-application.ui.h:15
-msgid "Check for Updates"
-msgstr "检查更新"
-
-#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:9
-msgid "Package Sources"
-msgstr "软件包来源"
-
-#: ../data/gpk-application.ui.h:17
 msgid "Refresh Package Lists"
 msgstr "刷新软件包列表"
 
-#: ../data/gpk-application.ui.h:18 ../data/xings-package-history.desktop.in.h:1
+#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
+msgid "Package Sources"
+msgstr "软件包来源"
+
+#: ../data/gpk-application.ui.h:17 ../data/xings-package-history.desktop.in.h:1
 #: ../data/gpk-log.ui.h:2
 msgid "Package Log"
 msgstr "软件包日志"
 
-#: ../data/gpk-application.ui.h:19
+#: ../data/gpk-application.ui.h:18
 msgid "Only Newest Versions"
 msgstr "仅最新版本"
 
-#: ../data/gpk-application.ui.h:20
+#: ../data/gpk-application.ui.h:19
 msgid "Only Native Packages"
 msgstr "仅原生软件包"
 
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "关于"
 
-#: ../data/gpk-application.ui.h:22
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "退出(_Q)"
 
@@ -251,7 +247,7 @@ msgstr "过滤"
 
 #. TRANSLATORS: program name, an application to add and remove software repositories
 #: ../data/xings-packagekit-preferences.desktop.in.h:1
-#: ../src/preferences/gpk-prefs.c:742
+#: ../src/preferences/gpk-prefs.c:748
 msgid "Software Settings"
 msgstr "软件设置"
 
@@ -273,28 +269,33 @@ msgid "Check for updates"
 msgstr "检查更新"
 
 #: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "检查更新"
+
+#: ../data/gpk-prefs.ui.h:4
 msgid "You will be notified when the updates are ready to be installed"
 msgstr ""
 
-#: ../data/gpk-prefs.ui.h:4
+#: ../data/gpk-prefs.ui.h:5
 #, fuzzy
 msgid "Download updates in the background"
 msgstr "正在下载更新信息"
 
 #. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:5
+#: ../data/gpk-prefs.ui.h:6
 #: ../src/updates-service/gpk-updates-notification.c:307
 #, fuzzy
 msgid "Updates"
 msgstr "更新"
 
-#: ../data/gpk-prefs.ui.h:6
+#: ../data/gpk-prefs.ui.h:7
 msgid ""
 "A package source contains packages that can be installed on this computer."
 msgstr "一个包含可以安装到此计算机的软件包的软件包来源。"
 
 #. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:8
+#: ../data/gpk-prefs.ui.h:9
 msgid "_Show debug and development package sources"
 msgstr "显示调试及开发软件包来源(_S)"
 
@@ -354,21 +355,30 @@ msgid "Checks for system updates when start session"
 msgstr ""
 
 #: ../data/gpk-update-viewer.ui.h:1
+#, fuzzy
+msgid "Software is up to date"
+msgstr "软件更新"
+
+#: ../data/gpk-update-viewer.ui.h:2
+msgid "Last checked: Today, 10 : 46 PM"
+msgstr ""
+
+#: ../data/gpk-update-viewer.ui.h:3
 msgid ""
 "Package updates correct errors, eliminate security vulnerabilities, and "
 "provide new features."
 msgstr "软件包更新可更正软件中的错误、修补安全漏洞以及提供新功能。"
 
-#: ../data/gpk-update-viewer.ui.h:2
+#: ../data/gpk-update-viewer.ui.h:4
 msgid "_Upgrade"
 msgstr "升级(_U)"
 
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:3 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:5 ../src/history/gpk-log.c:309
 msgid "Details"
 msgstr "详细信息"
 
-#: ../data/gpk-update-viewer.ui.h:5
+#: ../data/gpk-update-viewer.ui.h:7
 msgid "_Install Updates"
 msgstr "安装更新(_I)"
 
@@ -532,39 +542,48 @@ msgid ""
 msgstr "当显示来自会话 D-Bus 请求的用户界面时，强制开启这些选项。"
 
 #: ../data/org.xings.packagekit.gschema.xml.h:35
-msgid "Automatically download updates in the background without confirmation"
+msgid "Check for updates even on a mobile connection"
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:36
-msgid "Automatically download updates in the background without confirmation."
+msgid ""
+"Use mobile broadband connections such as GSM and CDMA to check for updates."
 msgstr ""
 
 #: ../data/org.xings.packagekit.gschema.xml.h:37
+msgid "Automatically download updates in the background without confirmation"
+msgstr ""
+
+#: ../data/org.xings.packagekit.gschema.xml.h:38
+msgid "Automatically download updates in the background without confirmation."
+msgstr ""
+
+#: ../data/org.xings.packagekit.gschema.xml.h:39
 #, fuzzy
 msgid "How often to check for updates"
 msgstr "检查更新"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:38
+#: ../data/org.xings.packagekit.gschema.xml.h:40
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:39
+#: ../data/org.xings.packagekit.gschema.xml.h:41
 #, fuzzy
 msgid "How often to refresh the package cache"
 msgstr "刷新软件包缓存"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:40
+#: ../data/org.xings.packagekit.gschema.xml.h:42
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:41
+#: ../data/org.xings.packagekit.gschema.xml.h:43
 msgid "How often to notify the user that non-critical updates are available"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:42
+#: ../data/org.xings.packagekit.gschema.xml.h:44
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -572,76 +591,76 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:43
+#: ../data/org.xings.packagekit.gschema.xml.h:45
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:44
+#: ../data/org.xings.packagekit.gschema.xml.h:46
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:176
+#: ../src/common/gpk-common.c:181
 msgid "32-bit"
 msgstr "32 位"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:183
+#: ../src/common/gpk-common.c:188
 msgid "64-bit"
 msgstr "64 位"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:308
+#: ../src/common/gpk-common.c:313
 msgid "This application is running as a privileged user"
 msgstr "此应用程序正在特权用户身份运行"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:311
+#: ../src/common/gpk-common.c:316
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s 正以特权用户身份运行"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:314
+#: ../src/common/gpk-common.c:319
 msgid "Package management applications are security sensitive."
 msgstr "软件包管理器对安全性是敏感的。"
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:316
+#: ../src/common/gpk-common.c:321
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
 msgstr "出于安全原因，应避免以特权用户身份运行图形界面应用程序。"
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:322
+#: ../src/common/gpk-common.c:327
 msgid "Continue _Anyway"
 msgstr "确认继续(_A)"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:360 ../src/common/gpk-common.c:410
+#: ../src/common/gpk-common.c:365 ../src/common/gpk-common.c:415
 #, c-format
 msgid "Now"
 msgstr "现在"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:370 ../src/common/gpk-common.c:420
+#: ../src/common/gpk-common.c:375 ../src/common/gpk-common.c:425
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
 msgstr[0] "%i 秒"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:380 ../src/common/gpk-common.c:433
+#: ../src/common/gpk-common.c:385 ../src/common/gpk-common.c:438
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
 msgstr[0] "%i 分钟"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:386 ../src/common/gpk-common.c:452
+#: ../src/common/gpk-common.c:391 ../src/common/gpk-common.c:457
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -651,46 +670,46 @@ msgstr[0] "%i 小时"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:439 ../src/common/gpk-common.c:458
+#: ../src/common/gpk-common.c:444 ../src/common/gpk-common.c:463
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:440 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:445 ../src/common/gpk-common.c:465
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分钟"
 
-#: ../src/common/gpk-common.c:441
+#: ../src/common/gpk-common.c:446
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "秒"
 
-#: ../src/common/gpk-common.c:459
+#: ../src/common/gpk-common.c:464
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "小时"
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:487
+#: ../src/common/gpk-common.c:492
 #, c-format
 msgid "%s and %s"
 msgstr "%s 和 %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:491
+#: ../src/common/gpk-common.c:496
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s 和 %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:495
+#: ../src/common/gpk-common.c:500
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s 和 %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:505
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s 和 %s"
@@ -2672,7 +2691,7 @@ msgid "Set the filter to this value"
 msgstr "将过滤关键词设为此值"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:730
+#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
 msgid "Set the parent window to make this modal"
 msgstr "设置父窗口以将此窗口设为模态"
 
@@ -3366,17 +3385,17 @@ msgid "Show all packages"
 msgstr "显示全部软件包"
 
 #. TRANSLATORS: show the program version
-#: ../src/packages/gpk-application.c:3416
-#: ../src/updates-viewer/gpk-update-viewer.c:3227
+#: ../src/packages/gpk-application.c:3396
+#: ../src/updates-viewer/gpk-update-viewer.c:3160
 msgid "Show the program version and exit"
 msgstr "显示程序版本号并退出"
 
-#: ../src/packages/gpk-application.c:3430
+#: ../src/packages/gpk-application.c:3410
 msgid "Install Software"
 msgstr "安装软件"
 
 #. are we running privileged
-#: ../src/packages/gpk-application.c:3446
+#: ../src/packages/gpk-application.c:3426
 msgid "Package installer"
 msgstr "软件包安装程序"
 
@@ -3422,7 +3441,7 @@ msgstr "获取软件源列表失败"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/updates-viewer/gpk-update-viewer.c:3001
+#: ../src/updates-viewer/gpk-update-viewer.c:2949
 msgid "Exiting as backend details could not be retrieved"
 msgstr "后端的详细信息无法取得。正在退出。"
 
@@ -3431,7 +3450,7 @@ msgid "Getting package source list not supported by backend"
 msgstr "后端程序不支持获取软件包来源列表"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
-#: ../src/preferences/gpk-prefs.c:733
+#: ../src/preferences/gpk-prefs.c:739
 msgid "Set the startup page: either ‘updates’or ‘repositories’"
 msgstr ""
 
@@ -3483,130 +3502,131 @@ msgid "Software Update Service with PackageKit"
 msgstr "软件更新查看器"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/updates-viewer/gpk-update-viewer.c:182
+#: ../src/updates-viewer/gpk-update-viewer.c:168
 msgid "Failed to process request."
 msgstr "请求处理失败。"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:196
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
 msgstr "某些安装的更新需要在应用更改之前重新启动计算机。"
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:212
-#: ../src/updates-viewer/gpk-update-viewer.c:218
+#: ../src/updates-viewer/gpk-update-viewer.c:198
+#: ../src/updates-viewer/gpk-update-viewer.c:204
 msgid "Restart Computer"
 msgstr "重新启动计算机"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:216
+#: ../src/updates-viewer/gpk-update-viewer.c:202
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
 msgstr "某些已安装的更新需要重新启动计算机以保持安全。"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:222
+#: ../src/updates-viewer/gpk-update-viewer.c:208
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
 msgstr "某些已安装的更新需要在应用更改之前注销后重新登录。"
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:224
-#: ../src/updates-viewer/gpk-update-viewer.c:230
+#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:216
 msgid "Log Out"
 msgstr "注销"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:228
+#: ../src/updates-viewer/gpk-update-viewer.c:214
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
 msgstr "某些已安装的更新需要注销后重新登录以保持安全。"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:274
+#: ../src/updates-viewer/gpk-update-viewer.c:260
 msgid "Could not restart"
 msgstr "无法重新启动"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/updates-viewer/gpk-update-viewer.c:344
+#: ../src/updates-viewer/gpk-update-viewer.c:330
 msgid "Some updates were not installed"
 msgstr "一些更新没有安装"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:413
-#: ../src/updates-viewer/gpk-update-viewer.c:424
+#: ../src/updates-viewer/gpk-update-viewer.c:397
+#: ../src/updates-viewer/gpk-update-viewer.c:408
 msgid "Could not update packages"
 msgstr "无法更新软件包"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
+#: ../src/updates-viewer/gpk-update-viewer.c:469
+#: ../src/updates-viewer/gpk-update-viewer.c:479
 #: ../src/updates-viewer/gpk-update-viewer.c:485
-#: ../src/updates-viewer/gpk-update-viewer.c:506
 msgid "Updates installed"
 msgstr "更新已安装"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:495
+#: ../src/updates-viewer/gpk-update-viewer.c:481
 msgid "All updates were installed successfully."
 msgstr "所有更新已成功安装。"
 
 #. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:498
+#: ../src/updates-viewer/gpk-update-viewer.c:487
 msgid "The selected updates were installed successfully."
 msgstr "选定的更新已成功安装。"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:714
+#: ../src/updates-viewer/gpk-update-viewer.c:694
 msgid "Trivial updates"
 msgstr "小更新"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:718
+#: ../src/updates-viewer/gpk-update-viewer.c:698
 msgid "Important updates"
 msgstr "重要更新"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:722
+#: ../src/updates-viewer/gpk-update-viewer.c:702
 msgid "Security updates"
 msgstr "安全更新"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:726
+#: ../src/updates-viewer/gpk-update-viewer.c:706
 msgid "Bug fix updates"
 msgstr "错误修正更新"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:730
+#: ../src/updates-viewer/gpk-update-viewer.c:710
 msgid "Enhancement updates"
 msgstr "增强更新"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:734
+#: ../src/updates-viewer/gpk-update-viewer.c:714
 msgid "Blocked updates"
 msgstr "阻止的更新"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/updates-viewer/gpk-update-viewer.c:738
+#: ../src/updates-viewer/gpk-update-viewer.c:718
 msgid "Other updates"
 msgstr "其他更新"
 
 #. TRANSLATORS: querying update array
-#: ../src/updates-viewer/gpk-update-viewer.c:999
+#: ../src/updates-viewer/gpk-update-viewer.c:975
 msgid "Getting the list of updates"
 msgstr "正在获取更新列表"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:1228
+#: ../src/updates-viewer/gpk-update-viewer.c:1201
 msgid "Could not run upgrade script"
 msgstr "无法运行升级脚本"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/updates-viewer/gpk-update-viewer.c:1259
+#: ../src/updates-viewer/gpk-update-viewer.c:1232
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3615,109 +3635,104 @@ msgid_plural ""
 "expensive to update these packages."
 msgstr[0] "连接正在由无线宽带提供，更新软件包产生的较多费用。"
 
-#. TRANSLATORS: there are no updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1343
-msgid "There are no updates available"
-msgstr "没有可用更新"
-
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1404
+#: ../src/updates-viewer/gpk-update-viewer.c:1351
 msgid "No updates are available"
 msgstr "无可用更新"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/updates-viewer/gpk-update-viewer.c:1406
+#: ../src/updates-viewer/gpk-update-viewer.c:1353
 msgid "No network connection was detected."
 msgstr "未检测到网络连接。"
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1423
+#: ../src/updates-viewer/gpk-update-viewer.c:1370
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "安装更新(_I)"
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1432
+#: ../src/updates-viewer/gpk-update-viewer.c:1380
 msgid "All packages are up to date"
 msgstr "所有软件包都是最新的"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/updates-viewer/gpk-update-viewer.c:1434
+#: ../src/updates-viewer/gpk-update-viewer.c:1382
 msgid "There are no package updates available for your computer at this time."
 msgstr "现在没有针对您的计算机的可用更新。"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1461
+#: ../src/updates-viewer/gpk-update-viewer.c:1412
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
 msgstr[0] "%i 个更新可用"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/updates-viewer/gpk-update-viewer.c:1478
+#: ../src/updates-viewer/gpk-update-viewer.c:1424
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
 msgstr[0] "已选定 %i 个更新"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/updates-viewer/gpk-update-viewer.c:1486
+#: ../src/updates-viewer/gpk-update-viewer.c:1433
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
 msgstr[0] "已选定 %i 个更新 (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/updates-viewer/gpk-update-viewer.c:1680
+#: ../src/updates-viewer/gpk-update-viewer.c:1629
 msgid "Status"
 msgstr "状态"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1858
+#: ../src/updates-viewer/gpk-update-viewer.c:1807
 msgid "This update will add new features and expand functionality."
 msgstr "此更新将添加新功能和扩展用途。"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1862
+#: ../src/updates-viewer/gpk-update-viewer.c:1811
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "此更新将修正软件错误以及其他非严重问题。"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1866
+#: ../src/updates-viewer/gpk-update-viewer.c:1815
 msgid "This update is important as it may solve critical problems."
 msgstr "此更新为重要更新，将对严重问题予以解决。"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1870
+#: ../src/updates-viewer/gpk-update-viewer.c:1819
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "需要此更新来修正此软件包的一个安全漏洞。"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1874
+#: ../src/updates-viewer/gpk-update-viewer.c:1823
 msgid "This update is blocked."
 msgstr "此更新被阻止。"
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/updates-viewer/gpk-update-viewer.c:1886
+#: ../src/updates-viewer/gpk-update-viewer.c:1835
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "此通告于 %s 签发，最后更新于 %s。"
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/updates-viewer/gpk-update-viewer.c:1893
+#: ../src/updates-viewer/gpk-update-viewer.c:1842
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "此通告于 %s 签发。"
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1911
+#: ../src/updates-viewer/gpk-update-viewer.c:1860
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
 msgstr[0] "请参阅以下网站以获取更多关于此更新的信息："
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1918
+#: ../src/updates-viewer/gpk-update-viewer.c:1867
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3727,7 +3742,7 @@ msgid_plural ""
 msgstr[0] "请参阅以下网站以获取更多关于此更新所修正的错误的信息："
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1925
+#: ../src/updates-viewer/gpk-update-viewer.c:1874
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3735,117 +3750,121 @@ msgid_plural ""
 msgstr[0] "请参阅以下网站以获取更多关于此安全更新的信息："
 
 #. TRANSLATORS: reboot required
-#: ../src/updates-viewer/gpk-update-viewer.c:1934
+#: ../src/updates-viewer/gpk-update-viewer.c:1883
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr "要使更新生效，必须重新启动计算机。"
 
 #. TRANSLATORS: log out required
-#: ../src/updates-viewer/gpk-update-viewer.c:1938
+#: ../src/updates-viewer/gpk-update-viewer.c:1887
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
 msgstr "更新完成后，您将需要注销后重新登录以使更新生效。"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1945
+#: ../src/updates-viewer/gpk-update-viewer.c:1894
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
 msgstr "此更新被归类为“不稳定”，这意味着它不是为生产环境应用而设计。"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1949
+#: ../src/updates-viewer/gpk-update-viewer.c:1898
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
 msgstr "此更新为测试更新，非针对正常使用而设计。请报告您遇到的问题及缺陷。"
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/updates-viewer/gpk-update-viewer.c:1957
+#: ../src/updates-viewer/gpk-update-viewer.c:1906
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "没有关于此更新的信息，将显示开发者日志："
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2004
+#: ../src/updates-viewer/gpk-update-viewer.c:1953
 msgid "Loading…"
 msgstr "正在加载..."
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2007
+#: ../src/updates-viewer/gpk-update-viewer.c:1956
 msgid "No update details available."
 msgstr "无更新详情。"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2039
-#: ../src/updates-viewer/gpk-update-viewer.c:2137
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:1988
+#: ../src/updates-viewer/gpk-update-viewer.c:2086
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 msgid "Could not get update details"
 msgstr "无法获取更新详细信息"
 
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
 msgid "Could not get package details"
 msgstr "无法获取软件包详细信息"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 msgid "No results were returned."
 msgstr "无返回结果。"
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2392
+#: ../src/updates-viewer/gpk-update-viewer.c:2341
 msgid "Select all"
 msgstr "全部选定"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2400
+#: ../src/updates-viewer/gpk-update-viewer.c:2349
 msgid "Unselect all"
 msgstr "全部取消选定"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2407
+#: ../src/updates-viewer/gpk-update-viewer.c:2356
 msgid "Select security updates"
 msgstr "选择安全更新"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/updates-viewer/gpk-update-viewer.c:2413
+#: ../src/updates-viewer/gpk-update-viewer.c:2362
 msgid "Ignore this update"
 msgstr "忽略此软件包"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2520
+#: ../src/updates-viewer/gpk-update-viewer.c:2469
 msgid "Could not get updates"
 msgstr "无法获取更新"
 
 #. TRANSLATORS: this is the header
-#: ../src/updates-viewer/gpk-update-viewer.c:2658
+#: ../src/updates-viewer/gpk-update-viewer.c:2607
 msgid "Checking for updates…"
 msgstr "检查更新..."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2934
+#: ../src/updates-viewer/gpk-update-viewer.c:2885
 msgid "Could not get list of distribution upgrades"
 msgstr "无法获取发行版升级列表"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/updates-viewer/gpk-update-viewer.c:2964
+#: ../src/updates-viewer/gpk-update-viewer.c:2915
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "发行版版本升级“%s”可用"
 
-#. TRANSLATORS: this is when some updates are not being shown as other packages need updating first
-#: ../src/updates-viewer/gpk-update-viewer.c:3198
-msgid ""
-"Other updates are held back as some important system packages need to be "
-"installed first."
-msgstr "被保持而未进行的其他更新，有其他重要的系统软件包需要先更新。"
-
-#: ../src/updates-viewer/gpk-update-viewer.c:3240
+#: ../src/updates-viewer/gpk-update-viewer.c:3173
 msgid "Update Packages"
 msgstr "更新软件包"
+
+#~ msgid "Check for Updates"
+#~ msgstr "检查更新"
+
+#~ msgid "There are no updates available"
+#~ msgstr "没有可用更新"
+
+#~ msgid ""
+#~ "Other updates are held back as some important system packages need to be "
+#~ "installed first."
+#~ msgstr "被保持而未进行的其他更新，有其他重要的系统软件包需要先更新。"
 
 #, fuzzy
 #~ msgid "Software Packages"

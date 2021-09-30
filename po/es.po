@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-28 10:38-0300\n"
-"PO-Revision-Date: 2021-09-28 20:48-0300\n"
+"POT-Creation-Date: 2021-09-30 16:11-0300\n"
+"PO-Revision-Date: 2021-09-30 16:13-0300\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Español; Castellano <gnome-es-list@gnome.org>\n"
 "Language: es\n"
@@ -50,8 +50,8 @@ msgstr ""
 
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-package-updates.appdata.xml.in.h:1
-#: ../data/gpk-update-viewer.ui.h:4
-#: ../src/updates-viewer/gpk-update-viewer.c:3257
+#: ../data/gpk-update-viewer.ui.h:6
+#: ../src/updates-viewer/gpk-update-viewer.c:3190
 msgid "Package Updater"
 msgstr "Actualizador de paquetes"
 
@@ -158,35 +158,31 @@ msgstr ""
 "cambios"
 
 #: ../data/gpk-application.ui.h:15
-msgid "Check for Updates"
-msgstr "Comprobar si hay actualizaciones"
-
-#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:9
-msgid "Package Sources"
-msgstr "Fuentes de paquetes"
-
-#: ../data/gpk-application.ui.h:17
 msgid "Refresh Package Lists"
 msgstr "Actualizar las listas de paquetes"
 
-#: ../data/gpk-application.ui.h:18 ../data/xings-package-history.desktop.in.h:1
+#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
+msgid "Package Sources"
+msgstr "Fuentes de paquetes"
+
+#: ../data/gpk-application.ui.h:17 ../data/xings-package-history.desktop.in.h:1
 #: ../data/gpk-log.ui.h:2
 msgid "Package Log"
 msgstr "Registro de paquetes"
 
-#: ../data/gpk-application.ui.h:19
+#: ../data/gpk-application.ui.h:18
 msgid "Only Newest Versions"
 msgstr "Sólo versiones nuevas"
 
-#: ../data/gpk-application.ui.h:20
+#: ../data/gpk-application.ui.h:19
 msgid "Only Native Packages"
 msgstr "Sólo paquetes nativos"
 
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "Acerca de"
 
-#: ../data/gpk-application.ui.h:22
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "_Salir"
 
@@ -249,7 +245,7 @@ msgstr "Filtros"
 
 #. TRANSLATORS: program name, an application to add and remove software repositories
 #: ../data/xings-packagekit-preferences.desktop.in.h:1
-#: ../src/preferences/gpk-prefs.c:742
+#: ../src/preferences/gpk-prefs.c:748
 msgid "Software Settings"
 msgstr "Configuración del software"
 
@@ -274,21 +270,25 @@ msgid "Check for updates"
 msgstr "Comprobar si hay actualizaciones"
 
 #: ../data/gpk-prefs.ui.h:3
+msgid "Check for updates on mobile connections"
+msgstr "Comprobar si hay actualizaciones en conexiones móviles"
+
+#: ../data/gpk-prefs.ui.h:4
 msgid "You will be notified when the updates are ready to be installed"
 msgstr ""
 "Se le notificará cuando las actualizaciones estén listas para instalarse"
 
-#: ../data/gpk-prefs.ui.h:4
+#: ../data/gpk-prefs.ui.h:5
 msgid "Download updates in the background"
 msgstr "Descargar actualizaciones en segundo plano"
 
 #. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:5
+#: ../data/gpk-prefs.ui.h:6
 #: ../src/updates-service/gpk-updates-notification.c:307
 msgid "Updates"
 msgstr "Actualizaciones"
 
-#: ../data/gpk-prefs.ui.h:6
+#: ../data/gpk-prefs.ui.h:7
 msgid ""
 "A package source contains packages that can be installed on this computer."
 msgstr ""
@@ -296,7 +296,7 @@ msgstr ""
 "equipo."
 
 #. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:8
+#: ../data/gpk-prefs.ui.h:9
 msgid "_Show debug and development package sources"
 msgstr "_Mostrar repositorios de paquetes de depuración y desarrollo"
 
@@ -351,6 +351,14 @@ msgid "Checks for system updates when start session"
 msgstr "Comprueba si hay actualizaciones del sistema al iniciar la sesión"
 
 #: ../data/gpk-update-viewer.ui.h:1
+msgid "Software is up to date"
+msgstr "El software está actualizado"
+
+#: ../data/gpk-update-viewer.ui.h:2
+msgid "Last checked: Today, 10 : 46 PM"
+msgstr ""
+
+#: ../data/gpk-update-viewer.ui.h:3
 msgid ""
 "Package updates correct errors, eliminate security vulnerabilities, and "
 "provide new features."
@@ -358,16 +366,16 @@ msgstr ""
 "Las actualizaciones de paquetes corrigen errores, eliminan vulnerabilidades "
 "de seguridad y proporcionan nuevas funcionalidades."
 
-#: ../data/gpk-update-viewer.ui.h:2
+#: ../data/gpk-update-viewer.ui.h:4
 msgid "_Upgrade"
 msgstr "_Actualizar"
 
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:3 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:5 ../src/history/gpk-log.c:309
 msgid "Details"
 msgstr "Detalles"
 
-#: ../data/gpk-update-viewer.ui.h:5
+#: ../data/gpk-update-viewer.ui.h:7
 msgid "_Install Updates"
 msgstr "_Instalar actualizaciones"
 
@@ -550,20 +558,31 @@ msgstr ""
 "de estas opciones."
 
 #: ../data/org.xings.packagekit.gschema.xml.h:35
+msgid "Check for updates even on a mobile connection"
+msgstr "Comprobar si hay actualizaciones incluso en una conexión móvil"
+
+#: ../data/org.xings.packagekit.gschema.xml.h:36
+msgid ""
+"Use mobile broadband connections such as GSM and CDMA to check for updates."
+msgstr ""
+"Usar conexiones móviles de banda ancha como GSM o CDMA para buscar "
+"actualizaciones."
+
+#: ../data/org.xings.packagekit.gschema.xml.h:37
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 "Descargar actualizaciones automáticamente en segundo plano sin confirmación"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:36
+#: ../data/org.xings.packagekit.gschema.xml.h:38
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 "Descargar actualizaciones automáticamente en segundo plano sin confirmación."
 
-#: ../data/org.xings.packagekit.gschema.xml.h:37
+#: ../data/org.xings.packagekit.gschema.xml.h:39
 msgid "How often to check for updates"
 msgstr "Con qué frecuencia deben comprobarse las actualizaciones"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:38
+#: ../data/org.xings.packagekit.gschema.xml.h:40
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
@@ -573,23 +592,23 @@ msgstr ""
 "es la cantidad máxima de tiempo que puede pasar entre la publicación de una "
 "actualización de seguridad y la notificación al usuario."
 
-#: ../data/org.xings.packagekit.gschema.xml.h:39
+#: ../data/org.xings.packagekit.gschema.xml.h:41
 msgid "How often to refresh the package cache"
 msgstr "Con qué frecuencia se debe comprobar la caché de paquetes"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:40
+#: ../data/org.xings.packagekit.gschema.xml.h:42
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr ""
 "Con qué frecuencia se debe actualizar la caché de paquetes. Valor en "
 "segundos."
 
-#: ../data/org.xings.packagekit.gschema.xml.h:41
+#: ../data/org.xings.packagekit.gschema.xml.h:43
 msgid "How often to notify the user that non-critical updates are available"
 msgstr ""
 "Con qué frecuencia notificar al usuario que hay actualizaciones no críticas "
 "disponibles"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:42
+#: ../data/org.xings.packagekit.gschema.xml.h:44
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -601,12 +620,12 @@ msgstr ""
 "seguridad siempre se muestran después de buscar actualizaciones, pero las "
 "notificaciones no críticas deberían mostrarse con mucha menos frecuencia."
 
-#: ../data/org.xings.packagekit.gschema.xml.h:43
+#: ../data/org.xings.packagekit.gschema.xml.h:45
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 "La última vez que le contamos al usuario sobre notificaciones no críticas"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:44
+#: ../data/org.xings.packagekit.gschema.xml.h:46
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
@@ -615,33 +634,33 @@ msgstr ""
 "El valor está en segundos desde la época, o cero para nunca."
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:176
+#: ../src/common/gpk-common.c:181
 msgid "32-bit"
 msgstr "32 bits"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:183
+#: ../src/common/gpk-common.c:188
 msgid "64-bit"
 msgstr "64 bits"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:308
+#: ../src/common/gpk-common.c:313
 msgid "This application is running as a privileged user"
 msgstr "Esta aplicación se está ejecutando como usuario privilegiado"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:311
+#: ../src/common/gpk-common.c:316
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s está ejecutándose como usuario privilegiado"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:314
+#: ../src/common/gpk-common.c:319
 msgid "Package management applications are security sensitive."
 msgstr "Las aplicaciones de gestión de paquetes son sensibles a la seguridad."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:316
+#: ../src/common/gpk-common.c:321
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -650,18 +669,18 @@ msgstr ""
 "gráficas como usuario privilegiado."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:322
+#: ../src/common/gpk-common.c:327
 msgid "Continue _Anyway"
 msgstr "Continuar de _todas formas"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:360 ../src/common/gpk-common.c:410
+#: ../src/common/gpk-common.c:365 ../src/common/gpk-common.c:415
 #, c-format
 msgid "Now"
 msgstr "Ahora"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:370 ../src/common/gpk-common.c:420
+#: ../src/common/gpk-common.c:375 ../src/common/gpk-common.c:425
 #, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -669,7 +688,7 @@ msgstr[0] "%u segundo"
 msgstr[1] "%u segundos"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:380 ../src/common/gpk-common.c:433
+#: ../src/common/gpk-common.c:385 ../src/common/gpk-common.c:438
 #, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -677,7 +696,7 @@ msgstr[0] "%u minuto"
 msgstr[1] "%u minutos"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:386 ../src/common/gpk-common.c:452
+#: ../src/common/gpk-common.c:391 ../src/common/gpk-common.c:457
 #, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -688,49 +707,49 @@ msgstr[1] "%u horas"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:439 ../src/common/gpk-common.c:458
+#: ../src/common/gpk-common.c:444 ../src/common/gpk-common.c:463
 #, c-format
 msgid "%u %s %u %s"
 msgstr "%u %s %u %s"
 
-#: ../src/common/gpk-common.c:440 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:445 ../src/common/gpk-common.c:465
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
-#: ../src/common/gpk-common.c:441
+#: ../src/common/gpk-common.c:446
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "segundo"
 msgstr[1] "segundos"
 
-#: ../src/common/gpk-common.c:459
+#: ../src/common/gpk-common.c:464
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:487
+#: ../src/common/gpk-common.c:492
 #, c-format
 msgid "%s and %s"
 msgstr "%s y %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:491
+#: ../src/common/gpk-common.c:496
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s y %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:495
+#: ../src/common/gpk-common.c:500
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s y %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:505
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s y %s"
@@ -2753,7 +2772,7 @@ msgid "Set the filter to this value"
 msgstr "Establecer el filtro a este valor"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:730
+#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
 msgid "Set the parent window to make this modal"
 msgstr "Establecer la ventana padre para hacer esta modal"
 
@@ -3513,17 +3532,17 @@ msgid "Show all packages"
 msgstr "Mostrar todos los paquetes"
 
 #. TRANSLATORS: show the program version
-#: ../src/packages/gpk-application.c:3416
-#: ../src/updates-viewer/gpk-update-viewer.c:3227
+#: ../src/packages/gpk-application.c:3396
+#: ../src/updates-viewer/gpk-update-viewer.c:3160
 msgid "Show the program version and exit"
 msgstr "Mostrar la versión del programa y salir"
 
-#: ../src/packages/gpk-application.c:3430
+#: ../src/packages/gpk-application.c:3410
 msgid "Install Software"
 msgstr "Instalar software"
 
 #. are we running privileged
-#: ../src/packages/gpk-application.c:3446
+#: ../src/packages/gpk-application.c:3426
 msgid "Package installer"
 msgstr "Instalador de paquetes"
 
@@ -3569,7 +3588,7 @@ msgstr "Falló al obtener la lista de fuentes"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/updates-viewer/gpk-update-viewer.c:3001
+#: ../src/updates-viewer/gpk-update-viewer.c:2949
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Saliendo puesto que no se pudieron obtener los detalles del «backend»"
 
@@ -3579,7 +3598,7 @@ msgstr ""
 "El «backend» no soporta la obtención de listas de repositorios de paquetes"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
-#: ../src/preferences/gpk-prefs.c:733
+#: ../src/preferences/gpk-prefs.c:739
 msgid "Set the startup page: either ‘updates’or ‘repositories’"
 msgstr "Establecer la página de inicio: ya sea \"updates\" o \"repositories\""
 
@@ -3628,12 +3647,12 @@ msgid "Software Update Service with PackageKit"
 msgstr "Servicio de actualización de software con PackageKit"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/updates-viewer/gpk-update-viewer.c:182
+#: ../src/updates-viewer/gpk-update-viewer.c:168
 msgid "Failed to process request."
 msgstr "Falló al procesar la petición."
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:196
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3642,13 +3661,13 @@ msgstr ""
 "reinicie el equipo antes de que se apliquen los cambios."
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:212
-#: ../src/updates-viewer/gpk-update-viewer.c:218
+#: ../src/updates-viewer/gpk-update-viewer.c:198
+#: ../src/updates-viewer/gpk-update-viewer.c:204
 msgid "Restart Computer"
 msgstr "Reiniciar el equipo"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:216
+#: ../src/updates-viewer/gpk-update-viewer.c:202
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
@@ -3657,7 +3676,7 @@ msgstr ""
 "reinicie el equipo para mantener la seguridad."
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:222
+#: ../src/updates-viewer/gpk-update-viewer.c:208
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3666,13 +3685,13 @@ msgstr ""
 "sesión y la inicie de nuevo antes de que se apliquen los cambios."
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:224
-#: ../src/updates-viewer/gpk-update-viewer.c:230
+#: ../src/updates-viewer/gpk-update-viewer.c:210
+#: ../src/updates-viewer/gpk-update-viewer.c:216
 msgid "Log Out"
 msgstr "Cerrar la sesión"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:228
+#: ../src/updates-viewer/gpk-update-viewer.c:214
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3681,86 +3700,87 @@ msgstr ""
 "sesión y la inicie de nuevo para mantener la seguridad."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:274
+#: ../src/updates-viewer/gpk-update-viewer.c:260
 msgid "Could not restart"
 msgstr "No se pudo reiniciar"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/updates-viewer/gpk-update-viewer.c:344
+#: ../src/updates-viewer/gpk-update-viewer.c:330
 msgid "Some updates were not installed"
 msgstr "Algunas actualizaciones no se han instalado"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:413
-#: ../src/updates-viewer/gpk-update-viewer.c:424
+#: ../src/updates-viewer/gpk-update-viewer.c:397
+#: ../src/updates-viewer/gpk-update-viewer.c:408
 msgid "Could not update packages"
 msgstr "No se pudieron actualizar los paquetes"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
+#: ../src/updates-viewer/gpk-update-viewer.c:469
+#: ../src/updates-viewer/gpk-update-viewer.c:479
 #: ../src/updates-viewer/gpk-update-viewer.c:485
-#: ../src/updates-viewer/gpk-update-viewer.c:506
 msgid "Updates installed"
 msgstr "Actualizaciones instaladas"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:495
+#: ../src/updates-viewer/gpk-update-viewer.c:481
 msgid "All updates were installed successfully."
 msgstr ""
 "Todas las actualizaciones seleccionadas se han instalado correctamente."
 
 #. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:498
+#: ../src/updates-viewer/gpk-update-viewer.c:487
 msgid "The selected updates were installed successfully."
 msgstr "Las actualizaciones seleccionadas se han instalado correctamente."
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:714
+#: ../src/updates-viewer/gpk-update-viewer.c:694
 msgid "Trivial updates"
 msgstr "Actualizaciones triviales"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:718
+#: ../src/updates-viewer/gpk-update-viewer.c:698
 msgid "Important updates"
 msgstr "Actualizaciones importantes"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:722
+#: ../src/updates-viewer/gpk-update-viewer.c:702
 msgid "Security updates"
 msgstr "Actualizaciones de seguridad"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:726
+#: ../src/updates-viewer/gpk-update-viewer.c:706
 msgid "Bug fix updates"
 msgstr "Actualizaciones de corrección de errores"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:730
+#: ../src/updates-viewer/gpk-update-viewer.c:710
 msgid "Enhancement updates"
 msgstr "Actualizaciones destacada"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:734
+#: ../src/updates-viewer/gpk-update-viewer.c:714
 msgid "Blocked updates"
 msgstr "Actualizaciones bloqueadas"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/updates-viewer/gpk-update-viewer.c:738
+#: ../src/updates-viewer/gpk-update-viewer.c:718
 msgid "Other updates"
 msgstr "Otras actualizaciones"
 
 #. TRANSLATORS: querying update array
-#: ../src/updates-viewer/gpk-update-viewer.c:999
+#: ../src/updates-viewer/gpk-update-viewer.c:975
 msgid "Getting the list of updates"
 msgstr "Obteniendo la lista de actualizaciones"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:1228
+#: ../src/updates-viewer/gpk-update-viewer.c:1201
 msgid "Could not run upgrade script"
 msgstr "No se pudo ejecutar el script de actualización"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/updates-viewer/gpk-update-viewer.c:1259
+#: ../src/updates-viewer/gpk-update-viewer.c:1232
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3774,41 +3794,36 @@ msgstr[1] ""
 "La conectividad se proporciona por banda ancha inalámbrica y actualizar "
 "estos paquetes puede ser caro."
 
-#. TRANSLATORS: there are no updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1343
-msgid "There are no updates available"
-msgstr "No hay actualizaciones disponibles"
-
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1404
+#: ../src/updates-viewer/gpk-update-viewer.c:1351
 msgid "No updates are available"
 msgstr "No hay actualizaciones disponibles"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/updates-viewer/gpk-update-viewer.c:1406
+#: ../src/updates-viewer/gpk-update-viewer.c:1353
 msgid "No network connection was detected."
 msgstr "No se detectó ninguna conexión de red."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1423
+#: ../src/updates-viewer/gpk-update-viewer.c:1370
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Instalar actualización"
 msgstr[1] "_Instalar actualizaciones"
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1432
+#: ../src/updates-viewer/gpk-update-viewer.c:1380
 msgid "All packages are up to date"
 msgstr "Todos los paquetes están actualizados"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/updates-viewer/gpk-update-viewer.c:1434
+#: ../src/updates-viewer/gpk-update-viewer.c:1382
 msgid "There are no package updates available for your computer at this time."
 msgstr ""
 "No hay actualizaciones de paquetes disponibles para su equipo en este "
 "momento."
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1461
+#: ../src/updates-viewer/gpk-update-viewer.c:1412
 #, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3816,7 +3831,7 @@ msgstr[0] "Hay %u actualización disponible"
 msgstr[1] "Hay %u actualizaciones disponibles"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/updates-viewer/gpk-update-viewer.c:1478
+#: ../src/updates-viewer/gpk-update-viewer.c:1424
 #, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3824,7 +3839,7 @@ msgstr[0] "%u actualización seleccionada"
 msgstr[1] "%u actualizaciones seleccionadas"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/updates-viewer/gpk-update-viewer.c:1486
+#: ../src/updates-viewer/gpk-update-viewer.c:1433
 #, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3832,30 +3847,30 @@ msgstr[0] "%u actualización seleccionada (%s)"
 msgstr[1] "%u actualizaciones seleccionadas (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/updates-viewer/gpk-update-viewer.c:1680
+#: ../src/updates-viewer/gpk-update-viewer.c:1629
 msgid "Status"
 msgstr "Estado"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1858
+#: ../src/updates-viewer/gpk-update-viewer.c:1807
 msgid "This update will add new features and expand functionality."
 msgstr ""
 "Esta actualización añadirá características nuevas y ampliará la "
 "funcionalidad."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1862
+#: ../src/updates-viewer/gpk-update-viewer.c:1811
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "Esta actualización corregirá errores y otros problemas no críticos."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1866
+#: ../src/updates-viewer/gpk-update-viewer.c:1815
 msgid "This update is important as it may solve critical problems."
 msgstr ""
 "Esta actualización es importante y puede resolver varios problemas críticos."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1870
+#: ../src/updates-viewer/gpk-update-viewer.c:1819
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
@@ -3863,24 +3878,24 @@ msgstr ""
 "seguridad en este paquete."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1874
+#: ../src/updates-viewer/gpk-update-viewer.c:1823
 msgid "This update is blocked."
 msgstr "Esta actualización está bloqueada."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/updates-viewer/gpk-update-viewer.c:1886
+#: ../src/updates-viewer/gpk-update-viewer.c:1835
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "Esta notificación se emitió en %s y se actualizó por última vez en %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/updates-viewer/gpk-update-viewer.c:1893
+#: ../src/updates-viewer/gpk-update-viewer.c:1842
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "Esta notificación se emitió en %s."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1911
+#: ../src/updates-viewer/gpk-update-viewer.c:1860
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3890,7 +3905,7 @@ msgstr[1] ""
 "Para obtener más información acerca de actualización visite las páginas web:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1918
+#: ../src/updates-viewer/gpk-update-viewer.c:1867
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3905,7 +3920,7 @@ msgstr[1] ""
 "actualización visite las páginas web:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1925
+#: ../src/updates-viewer/gpk-update-viewer.c:1874
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3918,7 +3933,7 @@ msgstr[1] ""
 "las páginas web:"
 
 #. TRANSLATORS: reboot required
-#: ../src/updates-viewer/gpk-update-viewer.c:1934
+#: ../src/updates-viewer/gpk-update-viewer.c:1883
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -3927,7 +3942,7 @@ msgstr ""
 "surtan efecto."
 
 #. TRANSLATORS: log out required
-#: ../src/updates-viewer/gpk-update-viewer.c:1938
+#: ../src/updates-viewer/gpk-update-viewer.c:1887
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3936,7 +3951,7 @@ msgstr ""
 "para que los cambios surtan efecto."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1945
+#: ../src/updates-viewer/gpk-update-viewer.c:1894
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -3945,7 +3960,7 @@ msgstr ""
 "no está diseñada para usarse en producción."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1949
+#: ../src/updates-viewer/gpk-update-viewer.c:1898
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3954,7 +3969,7 @@ msgstr ""
 "Informe de cualquier problema o regresión que encuentre."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/updates-viewer/gpk-update-viewer.c:1957
+#: ../src/updates-viewer/gpk-update-viewer.c:1906
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
@@ -3962,85 +3977,89 @@ msgstr ""
 "Se mostrarán los registros del desarrollador ya que no hay una descripción "
 "disponible para esta actualización:"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2004
+#: ../src/updates-viewer/gpk-update-viewer.c:1953
 msgid "Loading…"
 msgstr "Cargando…"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2007
+#: ../src/updates-viewer/gpk-update-viewer.c:1956
 msgid "No update details available."
 msgstr "No hay detalles sobre la actualización disponible."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2039
-#: ../src/updates-viewer/gpk-update-viewer.c:2137
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:1988
+#: ../src/updates-viewer/gpk-update-viewer.c:2086
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 msgid "Could not get update details"
 msgstr "No se pudieron obtener los detalles de la actualización"
 
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
 msgid "Could not get package details"
 msgstr "No se pudieron obtener los detalles del paquete"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2059
-#: ../src/updates-viewer/gpk-update-viewer.c:2157
+#: ../src/updates-viewer/gpk-update-viewer.c:2008
+#: ../src/updates-viewer/gpk-update-viewer.c:2106
 msgid "No results were returned."
 msgstr "No se encontraron resultados."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2392
+#: ../src/updates-viewer/gpk-update-viewer.c:2341
 msgid "Select all"
 msgstr "Seleccionar todo"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2400
+#: ../src/updates-viewer/gpk-update-viewer.c:2349
 msgid "Unselect all"
 msgstr "Deseleccionar todo"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2407
+#: ../src/updates-viewer/gpk-update-viewer.c:2356
 msgid "Select security updates"
 msgstr "Seleccionar actualizaciones de seguridad"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/updates-viewer/gpk-update-viewer.c:2413
+#: ../src/updates-viewer/gpk-update-viewer.c:2362
 msgid "Ignore this update"
 msgstr "Ignorar esta actualización"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2520
+#: ../src/updates-viewer/gpk-update-viewer.c:2469
 msgid "Could not get updates"
 msgstr "No se pudieron obtener las actualizaciones"
 
 #. TRANSLATORS: this is the header
-#: ../src/updates-viewer/gpk-update-viewer.c:2658
+#: ../src/updates-viewer/gpk-update-viewer.c:2607
 msgid "Checking for updates…"
 msgstr "Comprobando si hay actualizaciones…"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2934
+#: ../src/updates-viewer/gpk-update-viewer.c:2885
 msgid "Could not get list of distribution upgrades"
 msgstr "No se pudo obtener la lista de actualizaciones de las distribución"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/updates-viewer/gpk-update-viewer.c:2964
+#: ../src/updates-viewer/gpk-update-viewer.c:2915
 #, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "Está disponible la nueva actualización «%s» de la distribución"
 
-#. TRANSLATORS: this is when some updates are not being shown as other packages need updating first
-#: ../src/updates-viewer/gpk-update-viewer.c:3198
-msgid ""
-"Other updates are held back as some important system packages need to be "
-"installed first."
-msgstr ""
-"Se han retenido otras actualizaciones porque primero se deben instalar "
-"algunos paquetes importantes del sistema."
-
-#: ../src/updates-viewer/gpk-update-viewer.c:3240
+#: ../src/updates-viewer/gpk-update-viewer.c:3173
 msgid "Update Packages"
 msgstr "Actualizar paquetes"
+
+#~ msgid "Check for Updates"
+#~ msgstr "Comprobar si hay actualizaciones"
+
+#~ msgid "There are no updates available"
+#~ msgstr "No hay actualizaciones disponibles"
+
+#~ msgid ""
+#~ "Other updates are held back as some important system packages need to be "
+#~ "installed first."
+#~ msgstr ""
+#~ "Se han retenido otras actualizaciones porque primero se deben instalar "
+#~ "algunos paquetes importantes del sistema."
 
 #, fuzzy
 #~ msgid "Software Packages"
@@ -4209,9 +4228,6 @@ msgstr "Actualizar paquetes"
 
 #~ msgid "Check for major _upgrades:"
 #~ msgstr "Comprobar si hay actualizaciones _importantes:"
-
-#~ msgid "Check for updates on battery power"
-#~ msgstr "Comprobar si hay actualizaciones en modo batería"
 
 #~ msgid "Currently using mobile broadband"
 #~ msgstr "Actualmente usando banda ancha móvil"
@@ -5240,12 +5256,6 @@ msgstr "Actualizar paquetes"
 
 #~ msgid "Use mobile broadband connections"
 #~ msgstr "Usar conexiones móviles de banda ancha"
-
-#~ msgid ""
-#~ "Use mobile broadband connections such as GSM and CDMA to check for updates"
-#~ msgstr ""
-#~ "Usar conexiones móviles de banda ancha como GSM o CDMA para buscar "
-#~ "actualizaciones"
 
 #~ msgid ""
 #~ "When removable media is inserted, it is checked to see if it contains any "
