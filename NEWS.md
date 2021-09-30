@@ -1,3 +1,19 @@
+Version 0.3.1
+~~~~~~~~~~~~~
+Released: 2021-09-30
+
+* New Features:
+ - Add and friendly empty page instead a annoying modal dialog when updating.
+ - Add the option to check for updates even on mobile connections.
+
+Bug fixes:
+ - Remove unused icons with conflict with gnome-packagekit.
+ - Center the windows and reduce its size by default.
+ - Fix xfce4-settings and mate-control-center integration.
+ - Remove the check for updates from Package installer.
+ - Remove some unused code.
+ - Fix some ghost package in the listing when updating with some backends.
+
 Version 0.3.0
 ~~~~~~~~~~~~~
 Released: 2021-09-28
