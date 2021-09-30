@@ -52,8 +52,8 @@
 #define GPK_UPDATE_VIEWER_MOBILE_SMALL_SIZE	512*1024 /* bytes */
 
 static	gboolean		 ignore_updates_changed = FALSE;
-static	guint			 size_total = 0;
-static	guint			 number_total = 0;
+static	guint			 size_selected = 0;
+static	guint			 number_selected = 0;
 static	PkRestartEnum		 restart_worst = 0;
 #ifdef HAVE_SYSTEMD
 static  SystemdProxy		*proxy = NULL;
@@ -466,8 +466,7 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 	/* show a new title */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
 	/* TRANSLATORS: completed all updates */
-	text = g_strdup_printf ("<big><b>%s</b></big>", _("Updates installed"));
-	gtk_label_set_label (GTK_LABEL(widget), text);
+	gtk_label_set_label (GTK_LABEL(widget), _("Updates installed"));
 	g_free (text);
 
 	/* do different text depending on if we deselected any */
@@ -1206,13 +1205,13 @@ gpk_update_viewer_check_mobile_broadband (void)
 		return;
 
 	/* not when small */
-	if (size_total < GPK_UPDATE_VIEWER_MOBILE_SMALL_SIZE)
+	if (size_selected < GPK_UPDATE_VIEWER_MOBILE_SMALL_SIZE)
 		return;
 
 	/* TRANSLATORS, are we going to cost the user lots of money? */
 	message = ngettext ("Connectivity is being provided by wireless broadband, and it may be expensive to update this package.",
 			    "Connectivity is being provided by wireless broadband, and it may be expensive to update these packages.",
-			    number_total);
+			    number_selected);
 	gtk_label_set_label (GTK_LABEL(info_mobile_label), message);
 
 	gtk_info_bar_set_message_type (GTK_INFO_BAR(info_mobile), GTK_MESSAGE_WARNING);
@@ -1239,8 +1238,8 @@ gpk_update_viewer_update_global_state_recursive (GtkTreeModel *model, GtkTreeIte
 			    GPK_UPDATES_COLUMN_ID, &package_id,
 			    -1);
 	if (selected && package_id != NULL) {
-		size_total += size;
-		number_total++;
+		size_selected += size;
+		number_selected++;
 		if (restart > restart_worst)
 			restart_worst = restart;
 	}
@@ -1266,8 +1265,8 @@ gpk_update_viewer_update_global_state (void)
 	GtkTreeModel *model;
 
 	/* reset to zero */
-	size_total = 0;
-	number_total = 0;
+	size_selected = 0;
+	number_selected = 0;
 	restart_worst = PK_RESTART_ENUM_NONE;
 
 	treeview = GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_updates"));
@@ -1312,7 +1311,6 @@ gpk_update_viewer_reconsider_info (void)
 	guint len = 0;
 	const gchar *title;
 	gchar *text_total = NULL;
-	gchar *text_markup = NULL;
 	gchar *text_size = NULL;
 	gchar *text = NULL;
 	PkNetworkEnum state;
@@ -1338,7 +1336,7 @@ gpk_update_viewer_reconsider_info (void)
 
 	/* action button */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_install"));
-	gtk_widget_set_sensitive (widget, (number_total > 0));
+	gtk_widget_set_sensitive (widget, (number_selected > 0));
 
 	/* sensitive */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "scrolledwindow_updates"));
@@ -1349,7 +1347,7 @@ gpk_update_viewer_reconsider_info (void)
 	/* set the pluralisation of the button */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_install"));
 	/* TRANSLATORS: this is the button text when we have updates */
-	title = ngettext ("_Install Update", "_Install Updates", number_total);
+	title = ngettext ("_Install Update", "_Install Updates", number_selected);
 	gtk_button_set_label (GTK_BUTTON (widget), title);
 
 	/* no updates */
@@ -1393,32 +1391,30 @@ gpk_update_viewer_reconsider_info (void)
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
 	text_total = g_strdup_printf (ngettext ("There is %u update available",
 						"There are %u updates available", len), len);
-	text_markup = g_strdup_printf ("<big><b>%s</b></big>", text_total);
-	gtk_label_set_label (GTK_LABEL(widget), text_markup);
+	gtk_label_set_label (GTK_LABEL(widget), text_total);
 	g_free (text_total);
-	g_free (text_markup);
-
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "hbox_header"));
-	gtk_widget_show (widget);
 
 	/* total */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "headerbar"));
-	if (number_total == 0) {
+	if (number_selected == 0) {
 		gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 	} else {
-		if (size_total == 0) {
+		if (size_selected == 0) {
 			/* TRANSLATORS: how many updates are selected in the UI */
 			text = g_strdup_printf (ngettext ("%u update selected",
-							  "%u updates selected",
-							  number_total), number_total);
+			                                  "%u updates selected",
+			                                  number_selected),
+			                        number_selected);
 			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
 			g_free (text);
 		} else {
-			text_size = g_format_size (size_total);
+			text_size = g_format_size (size_selected);
 			/* TRANSLATORS: how many updates are selected in the UI, and the size of packages to download */
 			text = g_strdup_printf (ngettext ("%u update selected (%s)",
-							  "%u updates selected (%s)",
-							  number_total), number_total, text_size);
+			                                  "%u updates selected (%s)",
+			                                  number_selected),
+			                        number_selected,
+			                        text_size);
 			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
 			g_free (text);
 			g_free (text_size);
@@ -2983,7 +2979,7 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	guint retval;
 	GError *error = NULL;
 
-	size_total = 0;
+	size_selected = 0;
 	ignore_updates_changed = FALSE;
 	restart_update = PK_RESTART_ENUM_NONE;
 
@@ -3100,11 +3096,6 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	ret = gpk_window_set_size_request (GTK_WINDOW(main_window), 800, 600);
 	if (!ret) {
 		g_debug ("small form factor mode");
-		/* hide the header in SFF mode;
-		FIXME: this doesn't work because most window managers simply allocate
-		the maximum height without returning False, so this is never called */
-		widget = GTK_WIDGET(gtk_builder_get_object (builder, "hbox_header"));
-		gtk_widget_hide (widget);
 	}
 
 	/* use correct status pane */

@@ -28,7 +28,7 @@
                     <property name="can-focus">False</property>
                     <property name="valign">start</property>
                     <property name="pixel-size">96</property>
-                    <property name="icon-name">package-supported</property>
+                    <property name="icon-name">system-software-update</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -83,16 +83,20 @@
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <child>
-                  <object class="GtkBox" id="hbox_header">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="spacing">12</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
                     <child>
-                      <object class="GtkImage" id="image_header">
+                      <object class="GtkLabel" id="label_header_title">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="pixel-size">48</property>
-                        <property name="icon-name">system-software-update</property>
+                        <property name="halign">start</property>
+                        <property name="label">There are updates available</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -101,44 +105,20 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkBox">
+                      <object class="GtkLabel" id="label_header_desc">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkLabel" id="label_header_title">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label">&lt;big&gt;&lt;b&gt;There are updates available&lt;/b&gt;&lt;/big&gt;</property>
-                            <property name="use-markup">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label_header_desc">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes">Package updates correct errors, eliminate security vulnerabilities, and provide new features.</property>
-                            <property name="wrap">True</property>
-                            <property name="xalign">0</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">False</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
+                        <property name="halign">start</property>
+                        <property name="label" translatable="yes">Package updates correct errors, eliminate security vulnerabilities, and provide new features.</property>
+                        <property name="wrap">True</property>
+                        <property name="xalign">0</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
                       </object>
                       <packing>
                         <property name="expand">False</property>
-                        <property name="fill">True</property>
+                        <property name="fill">False</property>
                         <property name="position">1</property>
                       </packing>
                     </child>
