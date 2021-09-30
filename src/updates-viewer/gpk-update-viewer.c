@@ -623,28 +623,46 @@ gpk_update_viewer_remove_active_row (GtkTreeModel *model, GtkTreePath *path)
  **/
 static gboolean
 gpk_update_viewer_find_iter_model_cb (GtkTreeModel *model,
-				      GtkTreePath *path,
-				      GtkTreeIter *iter,
-				      const gchar *package_id)
+                                      GtkTreePath  *path,
+                                      GtkTreeIter  *iter,
+                                      const gchar  *package_id)
 {
+	gchar **split_a = NULL, **split_b = NULL;
 	gchar *package_id_tmp = NULL;
+	gchar *package_name_a = NULL, *package_name_b = NULL;
+	gchar *arch_a = NULL, *arch_b = NULL;
 	GtkTreePath **_path = NULL;
 	gboolean ret = FALSE;
 
 	gtk_tree_model_get (model, iter,
-			    GPK_UPDATES_COLUMN_ID, &package_id_tmp,
-			    -1);
+	                    GPK_UPDATES_COLUMN_ID, &package_id_tmp,
+	                   - 1);
+
+	// maybe headers
 	if (package_id_tmp == NULL)
 		goto out;
 
-	/* match on the package id */
-	if (g_strcmp0 (package_id, package_id_tmp) == 0) {
+	split_a = pk_package_id_split (package_id);
+	package_name_a = split_a[PK_PACKAGE_ID_NAME];
+	arch_a = split_a[PK_PACKAGE_ID_ARCH];
+
+	split_b = pk_package_id_split (package_id_tmp);
+	package_name_b = split_b[PK_PACKAGE_ID_NAME];
+	arch_b = split_b[PK_PACKAGE_ID_ARCH];
+
+	/* match on the package name and arch but ignore version */
+	if ((g_strcmp0 (package_name_a, package_name_b) == 0) &&
+	    (g_strcmp0 (arch_a, arch_b) == 0))
+	{
 		_path = (GtkTreePath **) g_object_get_data (G_OBJECT(model), "_path");
 		*_path = gtk_tree_path_copy (path);
 		ret = TRUE;
 	}
 
 	g_free (package_id_tmp);
+	g_strfreev (split_a);
+	g_strfreev (split_b);
+
 out:
 	return ret;
 }
@@ -848,6 +866,8 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 		/* update icon */
 		path = gpk_update_viewer_model_get_path (model, package_id);
 		if (path == NULL) {
+			g_debug ("Not found %s", package_id);
+
 			text = gpk_package_id_format_twoline (gtk_widget_get_style_context (GTK_WIDGET (treeview)),
 							      package_id,
 							      summary);
