@@ -120,9 +120,6 @@ gpk_updates_notification_response_action (NotifyNotification *update_notificatio
                                           gchar              *action,
                                           gpointer            user_data)
 {
-	gboolean ret;
-	GError *error = NULL;
-
 	GpkUpdatesNotification *notification = GPK_UPDATES_NOTIFICATION (user_data);
 
 	notify_notification_close (update_notification, NULL);
