@@ -491,7 +491,7 @@ gpk_time_ago_to_localised_string (guint seconds_ago)
 
 	if (minutes_ago < 5) {
 		/* TRANSLATORS: something happened less than 5 minutes ago */
-		return g_strdup (_("Just now"));
+		return g_strdup (_("A moment ago"));
 	} else if (hours_ago < 1)
 		return g_strdup_printf (ngettext ("%d minute ago",
 		                                  "%d minutes ago",

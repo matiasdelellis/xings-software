@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-30 16:11-0300\n"
+"POT-Creation-Date: 2021-10-01 20:07-0300\n"
 "PO-Revision-Date: 2011-09-27 17:27+0200\n"
 "Last-Translator: Xandru Armesto <xandru@softastur.org>\n"
 "Language-Team: Softastur <alministradores@softastur.org>\n"
@@ -43,8 +43,8 @@ msgstr ""
 
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-package-updates.appdata.xml.in.h:1
-#: ../data/gpk-update-viewer.ui.h:6
-#: ../src/updates-viewer/gpk-update-viewer.c:3190
+#: ../data/gpk-update-viewer.ui.h:7
+#: ../src/updates-viewer/gpk-update-viewer.c:3372
 #, fuzzy
 msgid "Package Updater"
 msgstr "Instalador de paquetes"
@@ -262,7 +262,7 @@ msgstr ""
 "Los anovamientos de software corrixen fallos, desanicien vulnerabilidaes de "
 "seguridá y proporcionen nueves funcionalidaes."
 
-#: ../data/gpk-prefs.ui.h:2
+#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
 #, fuzzy
 msgid "Check for updates"
 msgstr "Comprobar si _hai anovamientos:"
@@ -283,7 +283,7 @@ msgstr "Descargando información d'anovamientu"
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/updates-service/gpk-updates-notification.c:307
+#: ../src/updates-service/gpk-updates-notification.c:304
 #, fuzzy
 msgid "Updates"
 msgstr "Anovar"
@@ -359,16 +359,21 @@ msgstr "Preferencies d'anovamientu de software"
 msgid "Checks for system updates when start session"
 msgstr "Guetar anovamientos cuando s'use banda ancha móvil"
 
+#. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
+#: ../src/updates-viewer/gpk-update-viewer.c:1464
 #, fuzzy
-msgid "Software is up to date"
-msgstr "Anovamientu de software"
+msgid "All packages are up to date"
+msgstr "Anovóse tol software"
 
+#. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-msgid "Last checked: Today, 10 : 46 PM"
-msgstr ""
+#: ../src/updates-viewer/gpk-update-viewer.c:1466
+#, fuzzy
+msgid "There are no package updates available for your computer at this time."
+msgstr "Nun hai anovamientos disponibles pal equipu nesti intre."
 
-#: ../data/gpk-update-viewer.ui.h:3
+#: ../data/gpk-update-viewer.ui.h:4
 #, fuzzy
 msgid ""
 "Package updates correct errors, eliminate security vulnerabilities, and "
@@ -377,16 +382,16 @@ msgstr ""
 "Los anovamientos de software corrixen fallos, desanicien vulnerabilidaes de "
 "seguridá y proporcionen nueves funcionalidaes."
 
-#: ../data/gpk-update-viewer.ui.h:4
+#: ../data/gpk-update-viewer.ui.h:5
 msgid "_Upgrade"
 msgstr "_Anovar"
 
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:5 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:309
 msgid "Details"
 msgstr "Detalles"
 
-#: ../data/gpk-update-viewer.ui.h:7
+#: ../data/gpk-update-viewer.ui.h:8
 msgid "_Install Updates"
 msgstr "_Instalar anovamientos"
 
@@ -719,26 +724,74 @@ msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "hores"
 
+#. TRANSLATORS: something happened less than 5 minutes ago
+#: ../src/common/gpk-common.c:494
+#, fuzzy
+msgid "A moment ago"
+msgstr "%i minutu"
+
+#: ../src/common/gpk-common.c:496
+#, fuzzy, c-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] "%i minutu"
+msgstr[1] "%i minutos"
+
+#: ../src/common/gpk-common.c:501
+#, fuzzy, c-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] "%i hora"
+msgstr[1] "%i hores"
+
+#: ../src/common/gpk-common.c:506
+#, c-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/common/gpk-common.c:511
+#, c-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/common/gpk-common.c:516
+#, c-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../src/common/gpk-common.c:521
+#, c-format
+msgid "%d year ago"
+msgid_plural "%d years ago"
+msgstr[0] ""
+msgstr[1] ""
+
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:492
+#: ../src/common/gpk-common.c:548
 #, c-format
 msgid "%s and %s"
 msgstr "%s y %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:496
+#: ../src/common/gpk-common.c:552
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s y %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:556
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s y %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:505
+#: ../src/common/gpk-common.c:561
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s y %s"
@@ -2596,8 +2649,8 @@ msgstr "Hai d'anovar el siguiente software"
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/updates-service/gpk-updates-notification.c:239
-#: ../src/updates-service/gpk-updates-notification.c:275
+#: ../src/updates-service/gpk-updates-notification.c:236
+#: ../src/updates-service/gpk-updates-notification.c:272
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -3543,7 +3596,7 @@ msgstr "Amosar tolos paquetes"
 
 #. TRANSLATORS: show the program version
 #: ../src/packages/gpk-application.c:3396
-#: ../src/updates-viewer/gpk-update-viewer.c:3160
+#: ../src/updates-viewer/gpk-update-viewer.c:3342
 msgid "Show the program version and exit"
 msgstr "Amosar la versión del programa y colar"
 
@@ -3600,7 +3653,7 @@ msgstr "Falló al obtener la llista de fontes"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/updates-viewer/gpk-update-viewer.c:2949
+#: ../src/updates-viewer/gpk-update-viewer.c:3126
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Colando, darréu que nun pudieron obtenese los detalles del «backend»"
 
@@ -3615,30 +3668,30 @@ msgstr ""
 msgid "Set the startup page: either ‘updates’or ‘repositories’"
 msgstr ""
 
-#: ../src/updates-service/gpk-updates-notification.c:183
-#: ../src/updates-service/gpk-updates-notification.c:414
+#: ../src/updates-service/gpk-updates-notification.c:180
+#: ../src/updates-service/gpk-updates-notification.c:411
 #, fuzzy
 msgid "Software Updates"
 msgstr "Anovamientu de software"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/updates-service/gpk-updates-notification.c:195
+#: ../src/updates-service/gpk-updates-notification.c:192
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/updates-service/gpk-updates-notification.c:202
+#: ../src/updates-service/gpk-updates-notification.c:199
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/updates-service/gpk-updates-notification.c:210
+#: ../src/updates-service/gpk-updates-notification.c:207
 #, fuzzy
 msgid "Restart & Install"
 msgstr "Instalador de software"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/updates-service/gpk-updates-notification.c:242
+#: ../src/updates-service/gpk-updates-notification.c:239
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3646,7 +3699,7 @@ msgstr[0] "Nun hai anovamientos disponibles"
 msgstr[1] "Nun hai anovamientos disponibles"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/updates-service/gpk-updates-notification.c:278
+#: ../src/updates-service/gpk-updates-notification.c:275
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3655,7 +3708,7 @@ msgstr[1] "Nun hai detalles sobre l'anovamientu disponible."
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/updates-service/gpk-updates-notification.c:311
+#: ../src/updates-service/gpk-updates-notification.c:308
 msgid "Unable to access software updates"
 msgstr ""
 
@@ -3665,12 +3718,12 @@ msgid "Software Update Service with PackageKit"
 msgstr "Visor d'anovamientos de software"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/updates-viewer/gpk-update-viewer.c:168
+#: ../src/updates-viewer/gpk-update-viewer.c:175
 msgid "Failed to process request."
 msgstr "Falló al procesar la petición."
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:196
+#: ../src/updates-viewer/gpk-update-viewer.c:203
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3679,13 +3732,13 @@ msgstr ""
 "l'equipu enantes de que s'apliquen los cambeos."
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:198
-#: ../src/updates-viewer/gpk-update-viewer.c:204
+#: ../src/updates-viewer/gpk-update-viewer.c:205
+#: ../src/updates-viewer/gpk-update-viewer.c:211
 msgid "Restart Computer"
 msgstr "Reaniciar l'equipu"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:202
+#: ../src/updates-viewer/gpk-update-viewer.c:209
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
@@ -3694,7 +3747,7 @@ msgstr ""
 "l'equipu pa caltener la seguridá."
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:208
+#: ../src/updates-viewer/gpk-update-viewer.c:215
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3703,13 +3756,13 @@ msgstr ""
 "y l'anicies de nueves enantes de que s'apliquen los cambeos."
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:210
-#: ../src/updates-viewer/gpk-update-viewer.c:216
+#: ../src/updates-viewer/gpk-update-viewer.c:217
+#: ../src/updates-viewer/gpk-update-viewer.c:223
 msgid "Log Out"
 msgstr "Zarrar la sesión"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:214
+#: ../src/updates-viewer/gpk-update-viewer.c:221
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3718,86 +3771,86 @@ msgstr ""
 "y l'anicies de nueves pa caltener la seguridá."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:260
+#: ../src/updates-viewer/gpk-update-viewer.c:267
 msgid "Could not restart"
 msgstr "Nun pudo reaniciase"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/updates-viewer/gpk-update-viewer.c:330
+#: ../src/updates-viewer/gpk-update-viewer.c:337
 msgid "Some updates were not installed"
 msgstr "Dalgunos anovamientos nun s'instalaron"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:397
-#: ../src/updates-viewer/gpk-update-viewer.c:408
+#: ../src/updates-viewer/gpk-update-viewer.c:404
+#: ../src/updates-viewer/gpk-update-viewer.c:415
 msgid "Could not update packages"
 msgstr "Nun se pudieron anovar los paquetes"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:469
-#: ../src/updates-viewer/gpk-update-viewer.c:479
-#: ../src/updates-viewer/gpk-update-viewer.c:485
+#: ../src/updates-viewer/gpk-update-viewer.c:476
+#: ../src/updates-viewer/gpk-update-viewer.c:486
+#: ../src/updates-viewer/gpk-update-viewer.c:493
 msgid "Updates installed"
 msgstr "Anovamientos instalaos"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:481
+#: ../src/updates-viewer/gpk-update-viewer.c:488
 msgid "All updates were installed successfully."
 msgstr "Tolos anovamientos escoyíos instaláronse correcho."
 
 #. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:487
+#: ../src/updates-viewer/gpk-update-viewer.c:495
 msgid "The selected updates were installed successfully."
 msgstr "Los anovamientos escoyíos instaláronse correcho."
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:694
+#: ../src/updates-viewer/gpk-update-viewer.c:703
 msgid "Trivial updates"
 msgstr "Anovamientos triviales"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:698
+#: ../src/updates-viewer/gpk-update-viewer.c:707
 msgid "Important updates"
 msgstr "Anovamientos importantes"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:702
+#: ../src/updates-viewer/gpk-update-viewer.c:711
 msgid "Security updates"
 msgstr "Anovamientos de seguridá"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:706
+#: ../src/updates-viewer/gpk-update-viewer.c:715
 msgid "Bug fix updates"
 msgstr "Anovamientos d'igua de fallos"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:710
+#: ../src/updates-viewer/gpk-update-viewer.c:719
 msgid "Enhancement updates"
 msgstr "Anovamientos destacaos"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:714
+#: ../src/updates-viewer/gpk-update-viewer.c:723
 msgid "Blocked updates"
 msgstr "Anovamientos bloquiaos"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/updates-viewer/gpk-update-viewer.c:718
+#: ../src/updates-viewer/gpk-update-viewer.c:727
 msgid "Other updates"
 msgstr "Otros anovamientos"
 
 #. TRANSLATORS: querying update array
-#: ../src/updates-viewer/gpk-update-viewer.c:975
+#: ../src/updates-viewer/gpk-update-viewer.c:984
 msgid "Getting the list of updates"
 msgstr "Obteniendo la llista d'anovamientos"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:1201
+#: ../src/updates-viewer/gpk-update-viewer.c:1220
 msgid "Could not run upgrade script"
 msgstr "Nun pudo executase'l script d'anovamientu"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/updates-viewer/gpk-update-viewer.c:1232
+#: ../src/updates-viewer/gpk-update-viewer.c:1251
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3811,36 +3864,29 @@ msgstr[1] ""
 "La conectividá proporciónase per banda ancha inalámbrica y anovar estos "
 "paquetes pue ser costosu."
 
+#: ../src/updates-viewer/gpk-update-viewer.c:1396
+#, c-format
+msgid "Last checked: %s"
+msgstr ""
+
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1351
+#: ../src/updates-viewer/gpk-update-viewer.c:1434
 msgid "No updates are available"
 msgstr "Nun hai anovamientos disponibles"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/updates-viewer/gpk-update-viewer.c:1353
+#: ../src/updates-viewer/gpk-update-viewer.c:1436
 msgid "No network connection was detected."
 msgstr "Nun se deteutó denguna conexón de rede."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1370
+#: ../src/updates-viewer/gpk-update-viewer.c:1454
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Instalar anovamientu"
 msgstr[1] "_Instalar anovamientos"
 
-#. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1380
-#, fuzzy
-msgid "All packages are up to date"
-msgstr "Anovóse tol software"
-
-#. TRANSLATORS: tell the user the problem
-#: ../src/updates-viewer/gpk-update-viewer.c:1382
-#, fuzzy
-msgid "There are no package updates available for your computer at this time."
-msgstr "Nun hai anovamientos disponibles pal equipu nesti intre."
-
-#: ../src/updates-viewer/gpk-update-viewer.c:1412
+#: ../src/updates-viewer/gpk-update-viewer.c:1499
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3848,7 +3894,7 @@ msgstr[0] "Hai %i anovamientu disponible"
 msgstr[1] "Hai %i anovamientos disponibles"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/updates-viewer/gpk-update-viewer.c:1424
+#: ../src/updates-viewer/gpk-update-viewer.c:1511
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3856,7 +3902,7 @@ msgstr[0] "%i anovamientu esbilláu"
 msgstr[1] "%i anovamientos esbillaos"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/updates-viewer/gpk-update-viewer.c:1433
+#: ../src/updates-viewer/gpk-update-viewer.c:1520
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3864,27 +3910,27 @@ msgstr[0] "%i anovamientu esbilláu (%s)"
 msgstr[1] "%i anovamientos esbillaos (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/updates-viewer/gpk-update-viewer.c:1629
+#: ../src/updates-viewer/gpk-update-viewer.c:1716
 msgid "Status"
 msgstr "Estáu"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1807
+#: ../src/updates-viewer/gpk-update-viewer.c:1894
 msgid "This update will add new features and expand functionality."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1811
+#: ../src/updates-viewer/gpk-update-viewer.c:1898
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "Esti anovamientu correxirá fallos y otros problemes non críticos."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1815
+#: ../src/updates-viewer/gpk-update-viewer.c:1902
 msgid "This update is important as it may solve critical problems."
 msgstr "Esti anovamientu ye importante y pue iguar dellos problemes críticos."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1819
+#: ../src/updates-viewer/gpk-update-viewer.c:1906
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
@@ -3892,24 +3938,24 @@ msgstr ""
 "nesti paquete."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1823
+#: ../src/updates-viewer/gpk-update-viewer.c:1910
 msgid "This update is blocked."
 msgstr "Esti anovamientu ta bloquiáu."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/updates-viewer/gpk-update-viewer.c:1835
+#: ../src/updates-viewer/gpk-update-viewer.c:1922
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "Esta notificación emitióse en %s y anovóse per cabera vegada en %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/updates-viewer/gpk-update-viewer.c:1842
+#: ../src/updates-viewer/gpk-update-viewer.c:1929
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "Esta notificación emitióse en %s"
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1860
+#: ../src/updates-viewer/gpk-update-viewer.c:1947
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3919,7 +3965,7 @@ msgstr[1] ""
 "Pa obtener más información tocante al anovamientu visita les páxines web:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1867
+#: ../src/updates-viewer/gpk-update-viewer.c:1954
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3934,7 +3980,7 @@ msgstr[1] ""
 "anovamientu visita les páxines web:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1874
+#: ../src/updates-viewer/gpk-update-viewer.c:1961
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3947,7 +3993,7 @@ msgstr[1] ""
 "páxines web:"
 
 #. TRANSLATORS: reboot required
-#: ../src/updates-viewer/gpk-update-viewer.c:1883
+#: ../src/updates-viewer/gpk-update-viewer.c:1970
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -3956,7 +4002,7 @@ msgstr ""
 "faigan efeutu."
 
 #. TRANSLATORS: log out required
-#: ../src/updates-viewer/gpk-update-viewer.c:1887
+#: ../src/updates-viewer/gpk-update-viewer.c:1974
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3965,7 +4011,7 @@ msgstr ""
 "que los cambeos faigan efeutu."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1894
+#: ../src/updates-viewer/gpk-update-viewer.c:1981
 #, fuzzy
 msgid ""
 "The classification of this update is unstable which means it is not designed "
@@ -3975,7 +4021,7 @@ msgstr ""
 "ta diseñáu pa usase en producción."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1898
+#: ../src/updates-viewer/gpk-update-viewer.c:1985
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3984,7 +4030,7 @@ msgstr ""
 "de cualesquier problema o regresión qu'alcuentres."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/updates-viewer/gpk-update-viewer.c:1906
+#: ../src/updates-viewer/gpk-update-viewer.c:1993
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
@@ -3992,79 +4038,85 @@ msgstr ""
 "Van amosase los rexistros del desendolcador yá que nun hai una descripción "
 "disponible pa esti anovamientu:"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1953
+#: ../src/updates-viewer/gpk-update-viewer.c:2040
 #, fuzzy
 msgid "Loading…"
 msgstr "Cargando…"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1956
+#: ../src/updates-viewer/gpk-update-viewer.c:2043
 msgid "No update details available."
 msgstr "Nun hai detalles sobre l'anovamientu disponible."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:1988
-#: ../src/updates-viewer/gpk-update-viewer.c:2086
-#: ../src/updates-viewer/gpk-update-viewer.c:2106
+#: ../src/updates-viewer/gpk-update-viewer.c:2075
+#: ../src/updates-viewer/gpk-update-viewer.c:2173
+#: ../src/updates-viewer/gpk-update-viewer.c:2193
 msgid "Could not get update details"
 msgstr "Nun pudieron obtenese los detalles del anovamientu"
 
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2008
+#: ../src/updates-viewer/gpk-update-viewer.c:2095
 msgid "Could not get package details"
 msgstr "Nun pudieron obtenese los detalles del paquete"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2008
-#: ../src/updates-viewer/gpk-update-viewer.c:2106
+#: ../src/updates-viewer/gpk-update-viewer.c:2095
+#: ../src/updates-viewer/gpk-update-viewer.c:2193
 msgid "No results were returned."
 msgstr "Nun s'atoparon resultaos."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2341
+#: ../src/updates-viewer/gpk-update-viewer.c:2428
 msgid "Select all"
 msgstr "Seleicionar too"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2349
+#: ../src/updates-viewer/gpk-update-viewer.c:2436
 msgid "Unselect all"
 msgstr "Deseleicionar too"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2356
+#: ../src/updates-viewer/gpk-update-viewer.c:2443
 msgid "Select security updates"
 msgstr "Seleicionar anovamientos de seguridá"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/updates-viewer/gpk-update-viewer.c:2362
+#: ../src/updates-viewer/gpk-update-viewer.c:2449
 msgid "Ignore this update"
 msgstr "Inorar esti anovamientu"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2469
+#: ../src/updates-viewer/gpk-update-viewer.c:2556
+#: ../src/updates-viewer/gpk-update-viewer.c:2759
 msgid "Could not get updates"
 msgstr "Nun pudieron obtenese los anovamientos"
 
 #. TRANSLATORS: this is the header
-#: ../src/updates-viewer/gpk-update-viewer.c:2607
+#: ../src/updates-viewer/gpk-update-viewer.c:2693
+#: ../src/updates-viewer/gpk-update-viewer.c:2790
 #, fuzzy
 msgid "Checking for updates…"
 msgstr "Comprobando si hai anovamientos…"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2885
+#: ../src/updates-viewer/gpk-update-viewer.c:3062
 msgid "Could not get list of distribution upgrades"
 msgstr "Nun pudo obtenese la llista d'anovamientos de la distribución"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/updates-viewer/gpk-update-viewer.c:2915
+#: ../src/updates-viewer/gpk-update-viewer.c:3092
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "Hai disponible un anovamientu nuevu «%s» de la distribución"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:3173
+#: ../src/updates-viewer/gpk-update-viewer.c:3355
 #, fuzzy
 msgid "Update Packages"
 msgstr "Paquetes anovaos"
+
+#, fuzzy
+#~ msgid "Software is up to date"
+#~ msgstr "Anovamientu de software"
 
 #, fuzzy
 #~ msgid "Check for Updates"
