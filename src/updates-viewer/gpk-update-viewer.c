@@ -47,6 +47,7 @@
 #include "gpk-cell-renderer-restart.h"
 #include "gpk-cell-renderer-size.h"
 
+#define SECONDS_IN_AN_MINUTE (60)
 #define SECONDS_IN_AN_HOUR (60 * 60)
 
 #define GPK_UPDATE_VIEWER_AUTO_QUIT_TIMEOUT	10 /* seconds */
@@ -74,6 +75,7 @@ static	GtkWidget		*info_mobile_label = NULL;
 static	GtkApplication		*application = NULL;
 static	PkBitfield		 roles = 0;
 guint				 last_resfreh_ago;
+guint				 last_refresh_id;
 
 enum {
 	GPK_UPDATES_COLUMN_TEXT,
@@ -1317,6 +1319,36 @@ gpk_update_viewer_update_global_state (void)
 	}
 }
 
+
+static gboolean
+gpk_updates_viewer_validate_cache_timeout (gpointer data)
+{
+	g_debug ("Must update last checked label");
+
+	gpk_updates_viewer_validate_cache ();
+
+	return G_SOURCE_CONTINUE;
+}
+
+static void
+gpk_updates_viewer_stop_validate_cache (void)
+{
+	if (last_refresh_id == 0)
+		return;
+
+	g_source_remove (last_refresh_id);
+	last_refresh_id = 0;
+}
+
+static void
+gpk_updates_viewer_start_validate_cache (void)
+{
+	last_refresh_id
+		= g_timeout_add_seconds (SECONDS_IN_AN_MINUTE,
+		                         gpk_updates_viewer_validate_cache_timeout,
+		                         NULL);
+}
+
 /**
  * gpk_update_viewer_empty_stack_message:
  **/
@@ -1343,6 +1375,9 @@ gpk_update_viewer_empty_stack_message (const gchar *title,
 	gtk_widget_hide (widget);
 
 	if (updated) {
+		gpk_updates_viewer_stop_validate_cache ();
+		gpk_updates_viewer_start_validate_cache ();
+
 		gpk_updates_viewer_validate_cache ();
 	}
 
@@ -1433,6 +1468,8 @@ gpk_update_viewer_reconsider_info (void)
 			goto out;
 		}
 	}
+
+	gpk_updates_viewer_stop_validate_cache ();
 
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "stack"));
 	gtk_stack_set_visible_child_name (GTK_STACK (widget), "updates");
@@ -3348,6 +3385,8 @@ main (int argc, char *argv[])
 
 	/* we might have visual stuff running, close it down */
 	g_cancellable_cancel (cancellable);
+
+	gpk_updates_viewer_stop_validate_cache ();
 
 	if (update_array != NULL)
 		g_ptr_array_unref (update_array);
