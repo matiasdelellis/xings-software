@@ -45,7 +45,7 @@
                     <property name="can-focus">False</property>
                     <property name="margin-top">20</property>
                     <property name="margin-bottom">15</property>
-                    <property name="label" translatable="yes">Software is up to date</property>
+                    <property name="label" translatable="yes">All packages are up to date</property>
                     <attributes>
                       <attribute name="scale" value="1.4399999999999999"/>
                     </attributes>
@@ -60,7 +60,7 @@
                   <object class="GtkLabel" id="label_empty_detail">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
-                    <property name="label" translatable="yes">Last checked: Today, 10 : 46 PM</property>
+                    <property name="label" translatable="yes">There are no package updates available for your computer at this time.</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
@@ -69,6 +69,45 @@
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="label_empty_checked">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="margin-top">6</property>
+                    <property name="label">Last checked: 28 minutes ago</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="button_check">
+                    <property name="label" translatable="yes">Check for updates</property>
+                    <property name="use-action-appearance">False</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="can-default">True</property>
+                    <property name="has-default">True</property>
+                    <property name="receives-default">True</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">20</property>
+                    <property name="margin-bottom">15</property>
+                    <property name="use-underline">True</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">4</property>
                   </packing>
                 </child>
               </object>

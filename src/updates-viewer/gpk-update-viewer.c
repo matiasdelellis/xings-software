@@ -47,6 +47,8 @@
 #include "gpk-cell-renderer-restart.h"
 #include "gpk-cell-renderer-size.h"
 
+#define SECONDS_IN_AN_HOUR (60 * 60)
+
 #define GPK_UPDATE_VIEWER_AUTO_QUIT_TIMEOUT	10 /* seconds */
 #define GPK_UPDATE_VIEWER_AUTO_RESTART_TIMEOUT	60 /* seconds */
 #define GPK_UPDATE_VIEWER_MOBILE_SMALL_SIZE	512*1024 /* bytes */
@@ -71,6 +73,7 @@ static	GtkWidget		*info_mobile = NULL;
 static	GtkWidget		*info_mobile_label = NULL;
 static	GtkApplication		*application = NULL;
 static	PkBitfield		 roles = 0;
+guint				 last_resfreh_ago;
 
 enum {
 	GPK_UPDATES_COLUMN_TEXT,
@@ -91,9 +94,11 @@ enum {
 	GPK_UPDATES_COLUMN_LAST
 };
 
-static void gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message);
+static void gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message, gboolean updated);
 
 static gboolean gpk_update_viewer_get_new_update_array (void);
+static void gpk_update_viewer_refresh_cache (void);
+static void gpk_updates_viewer_validate_cache (void);
 
 static gboolean
 _g_strzero (const gchar *text)
@@ -478,13 +483,15 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 			/* TRANSLATORS: title: all updates installed okay */
 			_("Updates installed"),
 			/* TRANSLATORS: title: all updates for the machine installed okay */
-			_("All updates were installed successfully."));
+			_("All updates were installed successfully."),
+			TRUE);
 	} else {
 		gpk_update_viewer_empty_stack_message (
 			/* TRANSLATORS: title: all updates installed okay */
 			_("Updates installed"),
 			/* TRANSLATORS: title: all the selected updates installed okay */
-			_("The selected updates were installed successfully."));
+			_("The selected updates were installed successfully."),
+			TRUE);
 	}
 
 out:
@@ -1187,6 +1194,16 @@ gpk_update_viewer_button_install_cb (GtkWidget *widget, gpointer user_data)
 }
 
 /**
+ * gpk_update_viewer_button_refresh_cb:
+ **/
+static void
+gpk_update_viewer_button_refresh_cb (GtkWidget *widget, gpointer user_data)
+{
+	g_debug ("doing the package refresh...");
+	gpk_update_viewer_refresh_cache ();
+}
+
+/**
  * gpk_update_viewer_button_upgrade_cb:
  **/
 static void
@@ -1304,7 +1321,9 @@ gpk_update_viewer_update_global_state (void)
  * gpk_update_viewer_empty_stack_message:
  **/
 static void
-gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message)
+gpk_update_viewer_empty_stack_message (const gchar *title,
+                                       const gchar *message,
+                                       gboolean     updated)
 {
 	GtkWidget *widget;
 
@@ -1317,8 +1336,37 @@ gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message)
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_detail"));
 	gtk_label_set_text (GTK_LABEL (widget), message);
 
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_checked"));
+	gtk_label_set_text (GTK_LABEL (widget), "");
+
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_check"));
+	gtk_widget_hide (widget);
+
+	if (updated) {
+		gpk_updates_viewer_validate_cache ();
+	}
+
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "stack"));
 	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty");
+}
+
+static void
+gpk_updates_viewer_refresh_cache_done (void)
+{
+	GtkWidget *widget;
+	gchar *label = NULL, *time = NULL;
+
+	time = gpk_time_ago_to_localised_string (last_resfreh_ago);
+
+	label = g_strdup_printf(_("Last checked: %s"), time);
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_checked"));
+	gtk_label_set_text (GTK_LABEL (widget), label);
+
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_check"));
+	gtk_widget_show (widget);
+
+	g_free (label);
+	g_free (time);
 }
 
 /**
@@ -1350,7 +1398,8 @@ gpk_update_viewer_reconsider_info (void)
 			/* TRANSLATORS: title: nothing to do */
 			_("No updates are available"),
 			/* TRANSLATORS: no network connection, according to PackageKit */
-			_("No network connection was detected."));
+			_("No network connection was detected."),
+			FALSE);
 		goto out;
 	}
 
@@ -1376,10 +1425,11 @@ gpk_update_viewer_reconsider_info (void)
 		if (len == 0) {
 			g_debug ("no updates");
 			gpk_update_viewer_empty_stack_message (
-					/* TRANSLATORS: title: nothing to do */
-					_("All packages are up to date"),
-					/* TRANSLATORS: tell the user the problem */
-					_("There are no package updates available for your computer at this time."));
+				/* TRANSLATORS: title: nothing to do */
+				_("All packages are up to date"),
+				/* TRANSLATORS: tell the user the problem */
+				_("There are no package updates available for your computer at this time."),
+				TRUE);
 			goto out;
 		}
 	}
@@ -2594,7 +2644,6 @@ static gboolean
 gpk_update_viewer_get_new_update_array (void)
 {
 	gboolean ret;
-	GtkWidget *widget;
 	gchar *text = NULL;
 	PkBitfield filter = PK_FILTER_ENUM_NONE;
 
@@ -2602,12 +2651,11 @@ gpk_update_viewer_get_new_update_array (void)
 	gtk_tree_store_clear (array_store_updates);
 	gtk_text_buffer_set_text (text_buffer, "", -1);
 
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_title"));
-	/* TRANSLATORS: this is the header */
-	gtk_label_set_label (GTK_LABEL(widget), _("Checking for updates…"));
-
-	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_empty_detail"));
-	gtk_label_set_label (GTK_LABEL(widget), "");
+	gpk_update_viewer_empty_stack_message (
+		/* TRANSLATORS: this is the header */
+		_("Checking for updates…"),
+		NULL,
+		FALSE);
 
 	/* only show newest updates? */
 	ret = g_settings_get_boolean (settings, GPK_SETTINGS_ONLY_NEWEST);
@@ -2622,6 +2670,98 @@ gpk_update_viewer_get_new_update_array (void)
 				     (GAsyncReadyCallback) gpk_update_viewer_get_updates_cb, NULL);
 	g_free (text);
 	return ret;
+}
+
+
+
+static void
+gpk_updates_viewer_validate_cache_cb (GObject      *object,
+                                      GAsyncResult *res,
+                                      gpointer      user_data)
+{
+	last_resfreh_ago = pk_control_get_time_since_action_finish (control, res, NULL);
+
+	gpk_updates_viewer_refresh_cache_done ();
+}
+
+/**
+ * gpk_updates_viewer_validate_cache
+ **/
+static void
+gpk_updates_viewer_validate_cache (void)
+{
+	/* get the time since the last refresh */
+	pk_control_get_time_since_action_async (control,
+	                                        PK_ROLE_ENUM_REFRESH_CACHE,
+	                                        NULL,
+	                                        (GAsyncReadyCallback) gpk_updates_viewer_validate_cache_cb,
+	                                        NULL);
+}
+
+/**
+ * gpk_update_viewer_refresh_cache_cb
+ **/
+static void
+gpk_update_viewer_refresh_cache_cb (GObject      *object,
+                                    GAsyncResult *res,
+                                    gpointer      user_data)
+{
+	GtkWindow *window;
+	PkResults *results;
+	GError *error = NULL;
+	PkError *error_code = NULL;
+
+	/* get the results */
+	results = pk_client_generic_finish (PK_CLIENT(object), res, &error);
+	if (results == NULL) {
+		if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			g_error_free (error);
+			return;
+		}
+		/* TRANSLATORS: the PackageKit request did not complete, and it did not send an error */
+		gpk_update_viewer_error_dialog (_("Could not get updates"), NULL, error->message);
+		g_warning ("failed to refresh the cache: %s", error->message);
+		g_error_free (error);
+		return;
+	}
+
+	/* check error code */
+	error_code = pk_results_get_error_code (results);
+	if (error_code != NULL) {
+		g_warning ("failed to refresh the cache: %s, %s",
+		           pk_error_enum_to_string (pk_error_get_code (error_code)),
+		           pk_error_get_details (error_code));
+
+		window = GTK_WINDOW(gtk_builder_get_object (builder, "dialog_updates"));
+		gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
+					gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
+		return;
+	}
+
+	g_debug ("cache was updated.");
+	gpk_update_viewer_get_new_update_array ();
+}
+
+/**
+ * gpk_update_viewer_refresh_cache
+ **/
+static void
+gpk_update_viewer_refresh_cache (void)
+{
+	gpk_update_viewer_empty_stack_message (
+		/* TRANSLATORS: this is the header */
+		_("Checking for updates…"),
+		NULL,
+		FALSE);
+
+	/* Does not update unless at least an hour has passed */
+	pk_client_set_cache_age (PK_CLIENT(task), SECONDS_IN_AN_HOUR);
+
+	pk_client_refresh_cache_async (PK_CLIENT(task),
+	                               FALSE,
+	                               cancellable,
+	                               (PkProgressCallback) gpk_update_viewer_progress_cb, NULL,
+	                               (GAsyncReadyCallback) gpk_update_viewer_refresh_cache_cb, NULL);
 }
 
 /**
@@ -3111,6 +3251,11 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_upgrade"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_update_viewer_button_upgrade_cb), NULL);
+
+	/* check for updates buttons*/
+	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_check"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (gpk_update_viewer_button_refresh_cb), NULL);
 
 	/* tall, but not so tall as to look ridiculous on large monitors */
 	ret = gpk_window_set_size_request (GTK_WINDOW(main_window), 800, 600);

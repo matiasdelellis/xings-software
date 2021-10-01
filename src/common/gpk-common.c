@@ -469,6 +469,62 @@ out:
 }
 
 /**
+ * gpk_time_ago_to_localised_string:
+ * @seconds_ago: The time value to convert in seconds
+ *
+ * Converts a time to a string such as "5 minutes ago" or "2 weeks ago"
+ *
+ * Returns: (transfer full): the time string
+ **/
+gchar *
+gpk_time_ago_to_localised_string (guint seconds_ago)
+{
+	gint minutes_ago, hours_ago, days_ago;
+	gint weeks_ago, months_ago, years_ago;
+
+	minutes_ago = (gint) (seconds_ago / 60);
+	hours_ago = (gint) (minutes_ago / 60);
+	days_ago = (gint) (hours_ago / 24);
+	weeks_ago = days_ago / 7;
+	months_ago = days_ago / 30;
+	years_ago = weeks_ago / 52;
+
+	if (minutes_ago < 5) {
+		/* TRANSLATORS: something happened less than 5 minutes ago */
+		return g_strdup (_("Just now"));
+	} else if (hours_ago < 1)
+		return g_strdup_printf (ngettext ("%d minute ago",
+		                                  "%d minutes ago",
+		                                  minutes_ago),
+		                        minutes_ago);
+	else if (days_ago < 1)
+		return g_strdup_printf (ngettext ("%d hour ago",
+		                                  "%d hours ago",
+		                                  hours_ago),
+		                        hours_ago);
+	else if (days_ago < 15)
+		return g_strdup_printf (ngettext ("%d day ago",
+		                                  "%d days ago",
+		                                  days_ago),
+		                        days_ago);
+	else if (weeks_ago < 8)
+		return g_strdup_printf (ngettext ("%d week ago",
+		                                  "%d weeks ago",
+		                                  weeks_ago),
+		                        weeks_ago);
+	else if (years_ago < 1)
+		return g_strdup_printf (ngettext ("%d month ago",
+		                                  "%d months ago",
+		                                  months_ago),
+		                        months_ago);
+	else
+		return g_strdup_printf (ngettext ("%d year ago",
+		                                  "%d years ago",
+		                                  years_ago),
+		                        years_ago);
+}
+
+/**
  * gpk_strv_join_locale:
  *
  * Return value: "dave" or "dave and john" or "dave, john and alice",
