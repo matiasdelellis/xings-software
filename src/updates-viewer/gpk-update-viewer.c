@@ -2046,6 +2046,30 @@ gpk_packages_treeview_clicked_cb (GtkTreeSelection *selection, gpointer user_dat
 	g_free (package_id);
 }
 
+
+static gboolean
+gpk_packages_treeview_dont_select_headings (GtkTreeSelection *selection,
+                                            GtkTreeModel     *model,
+                                            GtkTreePath      *path,
+                                            gboolean          selected,
+                                            gpointer          data)
+{
+	GtkTreeIter iter;
+	gchar *package_id = NULL;
+	gboolean ret = FALSE;
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter,
+	                    GPK_UPDATES_COLUMN_ID, &package_id,
+	                    -1);
+
+	ret = (package_id != NULL);
+
+	g_free (package_id);
+
+	return ret;
+}
+
 /**
  * gpk_update_viewer_get_details_cb:
  **/
@@ -3267,6 +3291,10 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_BROWSE);
 	g_signal_connect (selection, "changed",
 			  G_CALLBACK (gpk_packages_treeview_clicked_cb), NULL);
+	gtk_tree_selection_set_select_function (selection,
+	                                        gpk_packages_treeview_dont_select_headings,
+	                                        NULL,
+	                                        NULL);
 
 	/* bottom UI */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "progressbar_progress"));
