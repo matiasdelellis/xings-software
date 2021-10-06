@@ -1363,10 +1363,9 @@ gpk_update_viewer_empty_stack_message (const gchar *title,
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "button_check"));
 	gtk_widget_hide (widget);
 
+	gpk_updates_viewer_stop_validate_cache ();
 	if (updated) {
-		gpk_updates_viewer_stop_validate_cache ();
 		gpk_updates_viewer_start_validate_cache ();
-
 		gpk_updates_viewer_validate_cache ();
 	}
 
