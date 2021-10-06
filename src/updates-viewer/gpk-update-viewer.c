@@ -39,10 +39,6 @@
 #include <common/gpk-task.h>
 #include <common/gpk-debug.h>
 
-#ifdef HAVE_SYSTEMD
-#include <common/systemd-proxy.h>
-#endif
-
 #include "gpk-cell-renderer-info.h"
 #include "gpk-cell-renderer-restart.h"
 #include "gpk-cell-renderer-size.h"
@@ -58,9 +54,7 @@ static	gboolean		 ignore_updates_changed = FALSE;
 static	guint			 size_selected = 0;
 static	guint			 number_selected = 0;
 static	PkRestartEnum		 restart_worst = 0;
-#ifdef HAVE_SYSTEMD
-static  SystemdProxy		*proxy = NULL;
-#endif
+static	GpkSession		*session = NULL;
 static	GCancellable		*cancellable = NULL;
 static	GSettings		*settings = NULL;
 static	GPtrArray		*update_array = NULL;
@@ -236,11 +230,7 @@ gpk_update_viewer_check_restart (void)
 	/* check to see if restart is possible */
 	if (restart_update == PK_RESTART_ENUM_SYSTEM ||
 	    restart_update == PK_RESTART_ENUM_SECURITY_SYSTEM) {
-#ifdef HAVE_SYSTEMD
-		systemd_proxy_can_restart (proxy, &show_button, NULL);
-#else
-		show_button = FALSE;
-#endif
+		gpk_session_can_reboot (session, &show_button, NULL);
 	}
 
 	/* only show the button if we can do the action */
@@ -260,20 +250,19 @@ gpk_update_viewer_check_restart (void)
 
 	/* do the action */
 	if (restart_update == PK_RESTART_ENUM_SYSTEM) {
-#ifdef HAVE_SYSTEMD
-		ret = systemd_proxy_restart (proxy, &error);
+		ret = gpk_session_reboot (session, &error);
 		if (!ret) {
 			/* TRANSLATORS: the PackageKit request did not complete, and it did not send an error */
 			gpk_update_viewer_error_dialog (_("Could not restart"), NULL, error->message);
 			g_error_free (error);
 		}
-#endif
 	} else if (restart_update == PK_RESTART_ENUM_SESSION) {
-		GpkSession *session;
-		session = gpk_session_new ();
-		/* use gnome-session to log out */
-		gpk_session_logout (session);
-		g_object_unref (session);
+		ret = gpk_session_logout (session, &error);
+		if (!ret) {
+			/* TRANSLATORS: the PackageKit request did not complete, and it did not send an error */
+			gpk_update_viewer_error_dialog (_("Could not log out"), NULL, error->message);
+			g_error_free (error);
+		}
 	}
 out:
 	return ret;
@@ -3205,9 +3194,7 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	restart_update = PK_RESTART_ENUM_NONE;
 
 	settings = g_settings_new (GPK_SETTINGS_SCHEMA);
-#ifdef HAVE_SYSTEMD
-	proxy = systemd_proxy_new ();
-#endif
+	session = gpk_session_new ();
 	cancellable = g_cancellable_new ();
 
 	control = pk_control_new ();
@@ -3424,10 +3411,8 @@ main (int argc, char *argv[])
 		g_object_unref (builder);
 	if (cancellable != NULL)
 		g_object_unref (cancellable);
-#ifdef HAVE_SYSTEMD
-	if (proxy != NULL)
-		systemd_proxy_free (proxy);
-#endif
+	if (session != NULL)
+		g_object_unref (session);
 	if (control != NULL)
 		g_object_unref (control);
 	if (settings != NULL)

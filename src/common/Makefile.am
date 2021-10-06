@@ -47,6 +47,10 @@ libgpk_common_a_SOURCES =				\
 	gpk-helper-chooser.h				\
 	gpk-gnome.c					\
 	gpk-gnome.h					\
+	gpk-gnome-proxy.c				\
+	gpk-gnome-proxy.h				\
+	gpk-xfce-proxy.c				\
+	gpk-xfce-proxy.h				\
 	gpk-common.c					\
 	gpk-common.h					\
 	gpk-task.c					\

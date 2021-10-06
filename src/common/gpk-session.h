@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2008-2009 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2021 Matias De lellis <mati86dl@gmail.com>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -33,24 +33,25 @@ G_DECLARE_DERIVABLE_TYPE (GpkSession, gpk_session, GPK, SESSION, GObject)
 struct _GpkSessionClass
 {
 	GObjectClass	parent_class;
-	void		(* idle_changed)		(GpkSession	*session,
-							 gboolean	 is_idle);
-	void		(* inhibited_changed)		(GpkSession	*session,
-							 gboolean	 is_inhibited);
-	/* just exit */
-	void		(* stop)			(GpkSession	*session);
-	/* reply with EndSessionResponse */
-	void		(* query_end_session)		(GpkSession	*session,
-							 guint		 flags);
-	/* reply with EndSessionResponse */
-	void		(* end_session)			(GpkSession	*session,
-							 guint		 flags);
-	void		(* cancel_end_session)		(GpkSession	*session);
 };
 
 GpkSession	*gpk_session_new			(void);
 
-gboolean	 gpk_session_logout			(GpkSession	*session);
+gboolean	 gpk_session_logout			(GpkSession	*session,
+                                                         GError		**error);
+gboolean	 gpk_session_reboot			(GpkSession	*session,
+                                                         GError		**error);
+gboolean	 gpk_session_can_reboot			(GpkSession	*session,
+                                                         gboolean	*can_reboot,
+                                                         GError		**error);
+
+GDBusProxy *
+gpk_session_get_proxy_if_service_present (GDBusConnection *connection,
+                                          GDBusProxyFlags  flags,
+                                          const char      *bus_name,
+                                          const char      *object_path,
+                                          const char      *interface,
+                                          GError         **error);
 
 G_END_DECLS
 

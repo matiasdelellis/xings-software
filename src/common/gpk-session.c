@@ -21,199 +21,151 @@
 
 #include "config.h"
 
-#include <string.h>
 #include <glib.h>
-#include <glib/gi18n.h>
-#include <dbus/dbus-glib.h>
+#include <gio/gio.h>
+
+#include "gpk-gnome-proxy.h"
+#include "gpk-xfce-proxy.h"
+
+#ifdef HAVE_SYSTEMD
+#include "systemd-proxy.h"
+#endif
 
 #include "gpk-session.h"
-#include "gpk-common.h"
 
 static void     gpk_session_finalize   (GObject		*object);
 
-#define GPK_SESSION_MANAGER_SERVICE			"org.gnome.SessionManager"
-#define GPK_SESSION_MANAGER_PATH			"/org/gnome/SessionManager"
-#define GPK_SESSION_MANAGER_INTERFACE			"org.gnome.SessionManager"
-#define GPK_SESSION_MANAGER_PRESENCE_PATH		"/org/gnome/SessionManager/Presence"
-#define GPK_SESSION_MANAGER_PRESENCE_INTERFACE		"org.gnome.SessionManager.Presence"
-#define GPK_SESSION_MANAGER_CLIENT_PRIVATE_INTERFACE	"org.gnome.SessionManager.ClientPrivate"
-#define GPK_DBUS_PROPERTIES_INTERFACE			"org.freedesktop.DBus.Properties"
+#define GPK_GNOME_SESSION_MANAGER_SERVICE		"org.gnome.SessionManager"
+#define GPK_GNOME_SESSION_MANAGER_PATH			"/org/gnome/SessionManager"
+#define GPK_GNOME_SESSION_MANAGER_INTERFACE		"org.gnome.SessionManager"
+#define GPK_GNOME_SESSION_LOGOUT_METHOD			"Logout"
+#define GPK_GNOME_SESSION_LOGOUT_ARGUMENTS		g_variant_new ("(u)", 1)
+#define GPK_GNOME_SESSION_REBOOT_METHOD		"Reboot"
+#define GPK_GNOME_SESSION_REBOOT_ARGUMENTS		NULL
 
-typedef enum {
-	GPK_SESSION_STATUS_ENUM_AVAILABLE = 0,
-	GPK_SESSION_STATUS_ENUM_INVISIBLE,
-	GPK_SESSION_STATUS_ENUM_BUSY,
-	GPK_SESSION_STATUS_ENUM_IDLE,
-	GPK_SESSION_STATUS_ENUM_UNKNOWN
-} GpkSessionStatusEnum;
 
-typedef enum {
-	GPK_SESSION_INHIBIT_MASK_LOGOUT = 1,
-	GPK_SESSION_INHIBIT_MASK_SWITCH = 2,
-	GPK_SESSION_INHIBIT_MASK_SUSPEND = 4,
-	GPK_SESSION_INHIBIT_MASK_IDLE = 8
-} GpkSessionInhibitMask;
+static gpointer gpk_session_object = NULL;
 
 typedef struct
 {
-	DBusGProxy		*proxy;
-	DBusGProxy		*proxy_presence;
-	DBusGProxy		*proxy_client_private;
-	DBusGProxy		*proxy_prop;
-	gboolean		 is_idle_old;
-	gboolean		 is_inhibited_old;
+	GpkGnomeProxy	*gnome_proxy;
+	GpkXfceProxy	*xfce_proxy;
+#ifdef HAVE_SYSTEMD
+	SystemdProxy	*systemd_proxy;
+#endif
 } GpkSessionPrivate;
 
-enum {
-	IDLE_CHANGED,
-	INHIBITED_CHANGED,
-	STOP,
-	QUERY_END_SESSION,
-	END_SESSION,
-	CANCEL_END_SESSION,
-	LAST_SIGNAL
-};
-
-static guint signals [LAST_SIGNAL] = { 0 };
-static gpointer gpk_session_object = NULL;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GpkSession, gpk_session, G_TYPE_OBJECT)
+
 
 /**
  * gpk_session_logout:
  **/
 gboolean
-gpk_session_logout (GpkSession *session)
+gpk_session_reboot (GpkSession *session, GError **error)
 {
+	gboolean ret = FALSE;
+
 	GpkSessionPrivate *priv;
 
 	g_return_val_if_fail (GPK_IS_SESSION (session), FALSE);
 
 	priv = gpk_session_get_instance_private (GPK_SESSION (session));
 
-	/* no gnome-session */
-	if (priv->proxy == NULL) {
-		g_warning ("no gnome-session");
-		return FALSE;
+	if (gpk_gnome_proxy_is_conected (priv->gnome_proxy)) {
+		ret = gpk_gnome_proxy_reboot (priv->gnome_proxy, error);
+	} else if (gpk_xfce_proxy_is_conected (priv->xfce_proxy)) {
+		ret = gpk_xfce_proxy_reboot (priv->xfce_proxy, error);
+	} else {
+#ifdef HAVE_SYSTEMD
+		ret = systemd_proxy_restart (priv->systemd_proxy, error);
+#endif
 	}
 
-	/* we have to use no reply, as the SM calls into g-p-m to get the can_suspend property */
-	dbus_g_proxy_call_no_reply (priv->proxy, "Logout",
-				    G_TYPE_UINT, 1, /* no confirmation, but use inhibitors */
-				    G_TYPE_INVALID);
+	return ret;
+}
+
+gboolean
+gpk_session_can_reboot (GpkSession  *session,
+                        gboolean    *can_reboot,
+                        GError     **error)
+{
+	GpkSessionPrivate *priv;
+	g_return_val_if_fail (GPK_IS_SESSION (session), FALSE);
+	priv = gpk_session_get_instance_private (GPK_SESSION (session));
+#ifdef HAVE_SYSTEMD
+	return systemd_proxy_can_restart (priv->systemd_proxy, can_reboot, error);
+#else
+	// TODO: Get from session manager
+	*can_reboot = TRUE;
 	return TRUE;
+#endif
 }
 
 /**
- * gpk_session_presence_status_changed_cb:
+ * gpk_session_logout:
  **/
-static void
-gpk_session_presence_status_changed_cb (DBusGProxy *proxy, guint status, GpkSession *session)
+gboolean
+gpk_session_logout (GpkSession *session, GError **error)
 {
+	gboolean ret = FALSE;
+
 	GpkSessionPrivate *priv;
-	gboolean is_idle;
+
+	g_return_val_if_fail (GPK_IS_SESSION (session), FALSE);
 
 	priv = gpk_session_get_instance_private (GPK_SESSION (session));
 
-	is_idle = (status == GPK_SESSION_STATUS_ENUM_IDLE);
-	if (is_idle != priv->is_idle_old) {
-		g_debug ("emitting idle-changed : (%i)", is_idle);
-		priv->is_idle_old = is_idle;
-		g_signal_emit (session, signals [IDLE_CHANGED], 0, is_idle);
+	if (gpk_gnome_proxy_is_conected (priv->gnome_proxy)) {
+		ret = gpk_gnome_proxy_logout (priv->gnome_proxy, error);
 	}
+
+	if (gpk_xfce_proxy_is_conected (priv->xfce_proxy)) {
+		ret = gpk_xfce_proxy_logout (priv->xfce_proxy, error);
+	}
+	return ret;
 }
 
-/**
- * gpk_session_is_idle:
- **/
-static gboolean
-gpk_session_is_idle (GpkSession *session)
-{
-	GpkSessionPrivate *priv;
-	gboolean ret;
-	gboolean is_idle = FALSE;
-	GError *error = NULL;
-	GValue *value;
-
-	priv = gpk_session_get_instance_private (GPK_SESSION (session));
-
-	/* no gnome-session */
-	if (priv->proxy_prop == NULL) {
-		g_warning ("no gnome-session");
-		goto out;
-	}
-
-	value = g_new0(GValue, 1);
-	/* find out if this change altered the inhibited state */
-	ret = dbus_g_proxy_call (priv->proxy_prop, "Get", &error,
-				 G_TYPE_STRING, GPK_SESSION_MANAGER_PRESENCE_INTERFACE,
-				 G_TYPE_STRING, "status",
-				 G_TYPE_INVALID,
-				 G_TYPE_VALUE, value,
-				 G_TYPE_INVALID);
-	if (!ret) {
-		g_warning ("failed to get idle status: %s", error->message);
-		g_error_free (error);
-		is_idle = FALSE;
-		goto out;
-	}
-	is_idle = (g_value_get_uint (value) == GPK_SESSION_STATUS_ENUM_IDLE);
-	g_free (value);
-out:
-	return is_idle;
-}
 
 /**
- * gpk_session_is_inhibited:
+ * gpk_session_get_proxy_if_service_present:
+ *
  **/
-static gboolean
-gpk_session_is_inhibited (GpkSession *session)
+GDBusProxy *
+gpk_session_get_proxy_if_service_present (GDBusConnection *connection,
+                                          GDBusProxyFlags  flags,
+                                          const char      *bus_name,
+                                          const char      *object_path,
+                                          const char      *interface,
+                                          GError         **error)
 {
-	GpkSessionPrivate *priv;
-	gboolean ret;
-	gboolean is_inhibited = FALSE;
-	GError *error = NULL;
+	GDBusProxy *proxy;
+	char *owner;
 
-	priv = gpk_session_get_instance_private (GPK_SESSION (session));
+	proxy = g_dbus_proxy_new_sync (connection,
+	                               flags,
+	                               NULL,
+	                               bus_name,
+	                               object_path,
+	                               interface,
+	                               NULL,
+	                               error);
 
-	/* no gnome-session */
-	if (priv->proxy == NULL) {
-		g_warning ("no gnome-session");
-		goto out;
+	if (!proxy)
+		return NULL;
+
+	/* is there anyone actually providing the service? */
+	owner = g_dbus_proxy_get_name_owner (proxy);
+	if (owner == NULL) {
+		g_clear_object (&proxy);
+		g_set_error (error, G_DBUS_ERROR, G_DBUS_ERROR_NAME_HAS_NO_OWNER,
+		             "The name %s is not owned", bus_name);
 	}
+	else
+		g_free (owner);
 
-	/* find out if this change altered the inhibited state */
-	ret = dbus_g_proxy_call (priv->proxy, "IsInhibited", &error,
-				 G_TYPE_UINT, GPK_SESSION_INHIBIT_MASK_IDLE,
-				 G_TYPE_INVALID,
-				 G_TYPE_BOOLEAN, &is_inhibited,
-				 G_TYPE_INVALID);
-	if (!ret) {
-		g_warning ("failed to get inhibit status: %s", error->message);
-		g_error_free (error);
-		is_inhibited = FALSE;
-	}
-out:
-	return is_inhibited;
-}
-
-/**
- * gpk_session_inhibit_changed_cb:
- **/
-static void
-gpk_session_inhibit_changed_cb (DBusGProxy *proxy, const gchar *id, GpkSession *session)
-{
-	GpkSessionPrivate *priv;
-	gboolean is_inhibited;
-
-	priv = gpk_session_get_instance_private (GPK_SESSION (session));
-
-	is_inhibited = gpk_session_is_inhibited (session);
-	if (is_inhibited != priv->is_inhibited_old) {
-		g_debug ("emitting inhibited-changed : (%i)", is_inhibited);
-		priv->is_inhibited_old = is_inhibited;
-		g_signal_emit (session, signals [INHIBITED_CHANGED], 0, is_inhibited);
-	}
+	return proxy;
 }
 
 /**
@@ -225,49 +177,6 @@ gpk_session_class_init (GpkSessionClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 	object_class->finalize = gpk_session_finalize;
-
-	signals [IDLE_CHANGED] =
-		g_signal_new ("idle-changed",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GpkSessionClass, idle_changed),
-			      NULL, NULL, g_cclosure_marshal_VOID__BOOLEAN,
-			      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
-	signals [INHIBITED_CHANGED] =
-		g_signal_new ("inhibited-changed",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GpkSessionClass, inhibited_changed),
-			      NULL, NULL, g_cclosure_marshal_VOID__BOOLEAN,
-			      G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
-	signals [STOP] =
-		g_signal_new ("stop",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GpkSessionClass, stop),
-			      NULL, NULL, g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE, 0);
-	signals [QUERY_END_SESSION] =
-		g_signal_new ("query-end-session",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GpkSessionClass, query_end_session),
-			      NULL, NULL, g_cclosure_marshal_VOID__UINT,
-			      G_TYPE_NONE, 1, G_TYPE_UINT);
-	signals [END_SESSION] =
-		g_signal_new ("end-session",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GpkSessionClass, end_session),
-			      NULL, NULL, g_cclosure_marshal_VOID__UINT,
-			      G_TYPE_NONE, 1, G_TYPE_UINT);
-	signals [CANCEL_END_SESSION] =
-		g_signal_new ("cancel-end-session",
-			      G_TYPE_FROM_CLASS (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GpkSessionClass, cancel_end_session),
-			      NULL, NULL, g_cclosure_marshal_VOID__VOID,
-			      G_TYPE_NONE, 0);
 }
 
 /**
@@ -278,62 +187,14 @@ static void
 gpk_session_init (GpkSession *session)
 {
 	GpkSessionPrivate *priv;
-	DBusGConnection *connection;
-	GError *error = NULL;
 
 	priv = gpk_session_get_instance_private (GPK_SESSION (session));
-	priv->is_idle_old = FALSE;
-	priv->is_inhibited_old = FALSE;
-	priv->proxy_client_private = NULL;
 
-	connection = dbus_g_bus_get (DBUS_BUS_SESSION, NULL);
-
-	/* get org.gnome.Session interface */
-	priv->proxy = dbus_g_proxy_new_for_name_owner (connection, GPK_SESSION_MANAGER_SERVICE,
-								GPK_SESSION_MANAGER_PATH,
-								GPK_SESSION_MANAGER_INTERFACE, &error);
-	if (priv->proxy == NULL) {
-		g_warning ("DBUS error: %s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	/* get org.gnome.Session.Presence interface */
-	priv->proxy_presence = dbus_g_proxy_new_for_name_owner (connection, GPK_SESSION_MANAGER_SERVICE,
-									 GPK_SESSION_MANAGER_PRESENCE_PATH,
-									 GPK_SESSION_MANAGER_PRESENCE_INTERFACE, &error);
-	if (priv->proxy_presence == NULL) {
-		g_warning ("DBUS error: %s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	/* get properties interface */
-	priv->proxy_prop = dbus_g_proxy_new_for_name_owner (connection, GPK_SESSION_MANAGER_SERVICE,
-								     GPK_SESSION_MANAGER_PRESENCE_PATH,
-								     GPK_DBUS_PROPERTIES_INTERFACE, &error);
-	if (priv->proxy_prop == NULL) {
-		g_warning ("DBUS error: %s", error->message);
-		g_error_free (error);
-		return;
-	}
-
-	/* get StatusChanged */
-	dbus_g_proxy_add_signal (priv->proxy_presence, "StatusChanged", G_TYPE_UINT, G_TYPE_INVALID);
-	dbus_g_proxy_connect_signal (priv->proxy_presence, "StatusChanged", G_CALLBACK (gpk_session_presence_status_changed_cb), session, NULL);
-
-	/* get InhibitorAdded */
-	dbus_g_proxy_add_signal (priv->proxy, "InhibitorAdded", DBUS_TYPE_G_OBJECT_PATH, G_TYPE_INVALID);
-	dbus_g_proxy_connect_signal (priv->proxy, "InhibitorAdded", G_CALLBACK (gpk_session_inhibit_changed_cb), session, NULL);
-
-	/* get InhibitorRemoved */
-	dbus_g_proxy_add_signal (priv->proxy, "InhibitorRemoved", DBUS_TYPE_G_OBJECT_PATH, G_TYPE_INVALID);
-	dbus_g_proxy_connect_signal (priv->proxy, "InhibitorRemoved", G_CALLBACK (gpk_session_inhibit_changed_cb), session, NULL);
-
-	/* coldplug */
-	priv->is_inhibited_old = gpk_session_is_inhibited (session);
-	priv->is_idle_old = gpk_session_is_idle (session);
-	g_debug ("idle: %i, inhibited: %i", priv->is_idle_old, priv->is_inhibited_old);
+	priv->gnome_proxy = gpk_gnome_proxy_new ();
+	priv->xfce_proxy = gpk_xfce_proxy_new ();
+#ifdef HAVE_SYSTEMD
+	priv->systemd_proxy = systemd_proxy_new ();
+#endif
 }
 
 /**
@@ -350,11 +211,15 @@ gpk_session_finalize (GObject *object)
 
 	priv = gpk_session_get_instance_private (GPK_SESSION (object));
 
-	g_object_unref (priv->proxy);
-	g_object_unref (priv->proxy_presence);
-	if (priv->proxy_client_private != NULL)
-		g_object_unref (priv->proxy_client_private);
-	g_object_unref (priv->proxy_prop);
+	if (priv->gnome_proxy)
+		g_clear_object (&priv->gnome_proxy);
+	if (priv->xfce_proxy)
+		g_clear_object (&priv->xfce_proxy);
+
+	if (priv->systemd_proxy) {
+		systemd_proxy_free (priv->systemd_proxy);
+		priv->systemd_proxy = NULL;
+	}
 
 	G_OBJECT_CLASS (gpk_session_parent_class)->finalize (object);
 }
