@@ -2788,7 +2788,6 @@ gpk_update_viewer_refresh_cache_cb (GObject      *object,
 	}
 
 	g_debug ("cache was updated.");
-	gpk_update_viewer_get_new_update_array ();
 }
 
 /**
