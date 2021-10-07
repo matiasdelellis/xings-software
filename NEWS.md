@@ -1,3 +1,16 @@
+Version 0.3.2
+~~~~~~~~~~~~~
+Released: 2021-09-30
+
+* New Features:
+ - Add a button to check again when it says there are no updates.
+ - Add support to control session with xfce4 session manager.
+
+Bug fixes:
+ - Remove some unused variable warnings.
+ - Dont select the title headers.
+ - Take into account the download size to know if the update is downloaded.
+
 Version 0.3.1
 ~~~~~~~~~~~~~
 Released: 2021-09-30
