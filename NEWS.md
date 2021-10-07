@@ -1,25 +1,26 @@
-Version 0.3.2
-~~~~~~~~~~~~~
-Released: 2021-09-30
+# Changelog
 
-* New Features:
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Version 0.3.2] - 2021-10-07
+### Added
  - Add a button to check again when it says there are no updates.
  - Add support to control session with xfce4 session manager.
 
-Bug fixes:
+### Fixed
  - Remove some unused variable warnings.
  - Dont select the title headers.
  - Take into account the download size to know if the update is downloaded.
 
-Version 0.3.1
-~~~~~~~~~~~~~
-Released: 2021-09-30
-
-* New Features:
+## [0.3.1] - 2021-09-30
+### Added
  - Add and friendly empty page instead a annoying modal dialog when updating.
  - Add the option to check for updates even on mobile connections.
 
-Bug fixes:
+### Fixed
  - Remove unused icons with conflict with gnome-packagekit.
  - Center the windows and reduce its size by default.
  - Fix xfce4-settings and mate-control-center integration.
@@ -27,33 +28,27 @@ Bug fixes:
  - Remove some unused code.
  - Fix some ghost package in the listing when updating with some backends.
 
-Version 0.3.0
-~~~~~~~~~~~~~
-Released: 2021-09-28
-
-* New Features:
+## [0.3.0] - 2021-09-28
+### Added
  - Add a user service that update the repository and checks for updates.
  - It can automatically download updates to install when shutdown the computer.
  - Show "Software Settings" in xfce4-settings-manager and mate-control-center.
 
-Bug fixes:
+### Fixed
  - Fix run and select apps dialogs.
  - Fix systemd logind integration to restart. Although it is not currently used.
  - Fix use without initialization that caused a segmentation fault.
  - Rename packageKit service to avoid conflict with gnome-software.
 
-Version 0.2.0
-~~~~~~~~~~~~~
-Released: 2021-06-18
-
-* New Features:
+## [0.2.0] - 2021-06-18
+### Added
  - Revert "Remove the gpk-install-package-name binary", and now it's called
    "xings-install-package-name".
  - Revert "Do not use PkDesktop" and port run the new installed package to pure
    PackageKit.
  - Remove animations from dialogs.
 
-Bug fixes:
+### Fixed
  - Application: update application ID to match .desktop file.
  - Fix an use of deprecated g_time_val_from_iso8601() function.
  - Update .gitignore files to new brands
@@ -67,7 +62,7 @@ Bug fixes:
  - Fix last usage of deprecated functions.
  - Fix make distcheck.
 
-* Backports:
+### Backports
  - Consider available packages as updatable.
  - Use gtk_text_buffer_insert_markup() from GTK+.
  - Remove the markdown parsing module.
@@ -87,15 +82,12 @@ Bug fixes:
  - Ensure to escape package and vendor name.
  - Update the UI files to GTK 3.18 and adhere to the GNOME 3 UI guidelines.
 
-Version 0.1.0
-~~~~~~~~~~~~~
-Released: 2021-06-16
-
-* New Features:
+## [0.1.0] - 2021-06-16
+### Added
  - The first public release as xings-packagekit.
 
-Previous versions
-~~~~~~~~~~~~~~~~~
+## Previous versions
+
 This project is based on gnome-packagekit v3.14. Observe their NEWS if you are
 interested:
 * https://gitlab.gnome.org/GNOME/gnome-packagekit/-/blob/gnome-3-14/NEWS
