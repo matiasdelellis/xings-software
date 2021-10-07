@@ -2069,6 +2069,9 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 	GPtrArray *array = NULL;
 	PkDetails *item;
 	guint i;
+#if PK_CHECK_VERSION(1,2,4)
+	guint64 download_size;
+#endif
 	guint64 size;
 	gchar *package_id = NULL;
 	GtkWidget *widget;
@@ -2117,8 +2120,11 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 		/* get data */
 		g_object_get (item,
 			      "package-id", &package_id,
-			      "size", &size,
-			      NULL);
+		              "size", &size,
+#if PK_CHECK_VERSION(1,2,4)
+		              "download-size",  &download_size,
+#endif
+		              NULL);
 
 		path = gpk_update_viewer_model_get_path (model, package_id);
 		if (path == NULL) {
@@ -2132,7 +2138,11 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 					    GPK_UPDATES_COLUMN_SIZE_DISPLAY, (gint)size,
 					    -1);
 			/* in cache */
+#if PK_CHECK_VERSION(1,2,4)
+			if (size > 0 && download_size == 0)
+#else
 			if (size == 0)
+#endif
 				gtk_tree_store_set (array_store_updates, &iter,
 						    GPK_UPDATES_COLUMN_STATUS, GPK_INFO_ENUM_DOWNLOADED, -1);
 		}
