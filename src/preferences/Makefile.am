@@ -18,7 +18,7 @@ AM_CPPFLAGS =						\
 	-DLOCALEDIR=\""$(localedir)"\"			\
 	-DVERSION="\"$(VERSION)\"" 			\
 	-DPKGDATADIR=\"$(pkgdatadir)\"			\
-	-DG_LOG_DOMAIN=\"XingsPackageKit\"
+	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
 bin_PROGRAMS =						\
 	xings-packagekit-preferences

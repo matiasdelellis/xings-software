@@ -1,6 +1,6 @@
 AC_PREREQ(2.65)
 
-AC_INIT([xings-packagekit],[0.3.2])
+AC_INIT([xings-software],[0.3.5])
 AC_CONFIG_SRCDIR(src)
 AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz tar-ustar])
 AC_CONFIG_HEADERS([config.h])
@@ -217,8 +217,8 @@ src/common/Makefile
 src/helpers/Makefile
 src/history/Makefile
 src/packagekit-service/Makefile
-src/packages/Makefile
 src/preferences/Makefile
+src/software/Makefile
 src/updates-service/Makefile
 src/updates-viewer/Makefile
 man/Makefile
@@ -248,7 +248,7 @@ AC_OUTPUT
 
 dnl ==========================================================================
 echo "
-                    xings-packagekit $VERSION
+                    xings-software v$VERSION
                   =============================
 
         prefix:                    ${prefix}

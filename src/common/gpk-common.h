@@ -30,7 +30,7 @@
 
 G_BEGIN_DECLS
 
-#define GPK_SETTINGS_SCHEMA				"org.xings.packagekit"
+#define GPK_SETTINGS_SCHEMA				"org.xings.software"
 #define GPK_SETTINGS_CATEGORY_GROUPS			"category-groups"
 #define GPK_SETTINGS_DBUS_DEFAULT_INTERACTION		"dbus-default-interaction"
 #define GPK_SETTINGS_DBUS_ENFORCED_INTERACTION		"dbus-enforced-interaction"

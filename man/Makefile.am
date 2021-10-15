@@ -1,5 +1,5 @@
 EXTRA_DIST =						\
-	xings-packages.sgml				\
+	xings-software.sgml				\
 	xings-packagekit-service.sgml			\
 	xings-install-local-package.sgml		\
 	xings-install-package-name.sgml			\
@@ -9,7 +9,7 @@ EXTRA_DIST =						\
 
 if HAVE_DOCBOOK2MAN
 man_MANS =						\
-	xings-packages.1				\
+	xings-software.1				\
 	xings-packagekit-service.1			\
 	xings-install-local-package.1			\
 	xings-install-package-name.1			\
@@ -19,7 +19,7 @@ man_MANS =						\
 endif
 
 if HAVE_DOCBOOK2MAN
-xings-packages.1: xings-packages.sgml
+xings-software.1: xings-software.sgml
 	$(AM_V_GEN) docbook2man $? > /dev/null
 xings-install-local-package.1: xings-install-local-package.sgml
 	$(AM_V_GEN) docbook2man $? > /dev/null

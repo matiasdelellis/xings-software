@@ -24,12 +24,12 @@
     &date;
   </refentryinfo>
   <refmeta>
-    <refentrytitle>xings-packages</refentrytitle>
+    <refentrytitle>xings-software</refentrytitle>
     <manvolnum>1</manvolnum>
   </refmeta>
   <refnamediv>
     <refname>&package;</refname>
-    <refpurpose>Xings PackageKit Packages</refpurpose>
+    <refpurpose>Xings Software</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>

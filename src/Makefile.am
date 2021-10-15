@@ -3,7 +3,7 @@ SUBDIRS =						\
 	helpers						\
 	history						\
 	packagekit-service				\
-	packages					\
 	preferences					\
+	software					\
 	updates-service					\
 	updates-viewer

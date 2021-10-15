@@ -2,7 +2,7 @@
 _Name=Software
 _Comment=Add or remove software installed on the system
 Icon=system-software-install
-Exec=xings-packages
+Exec=xings-software
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;System;PackageManager;

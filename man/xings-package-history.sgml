@@ -48,7 +48,7 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
-    <para>xings-packages (1).</para>
+    <para>xings-software (1).</para>
     <para>xings-package-history (2).</para>
     <para>xings-packagekit-service (3).</para>
     <para>xings-package-updates (4).</para>

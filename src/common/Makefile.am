@@ -16,7 +16,7 @@ AM_CPPFLAGS =						\
 	-DLOCALEDIR=\""$(localedir)"\"			\
 	-DVERSION="\"$(VERSION)\"" 			\
 	-DPKGDATADIR=\"$(pkgdatadir)\"			\
-	-DG_LOG_DOMAIN=\"XingsPackageKit\"
+	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
 noinst_LIBRARIES = libgpk-common.a
 

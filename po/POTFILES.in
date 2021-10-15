@@ -1,9 +1,9 @@
 [encoding: UTF-8]
 # List of source files containing translatable strings.
 # Please keep this file sorted alphabetically.
-data/appdata/xings-packages.appdata.xml.in
+data/appdata/xings-software.appdata.xml.in
 data/appdata/xings-package-updates.appdata.xml.in
-data/xings-packages.desktop.in
+data/xings-software.desktop.in
 [type: gettext/glade]data/gpk-application.ui
 [type: gettext/glade]data/gpk-client.ui
 data/xings-packagekit-service.desktop.in
@@ -18,7 +18,7 @@ data/xings-packagekit-preferences.desktop.in
 data/xings-package-updates.desktop.in
 data/xings-updates-service.desktop.in
 [type: gettext/glade]data/gpk-update-viewer.ui
-data/org.xings.packagekit.gschema.xml
+data/org.xings.software.gschema.xml
 src/common/gpk-common.c
 src/common/gpk-debug.c
 src/common/gpk-dialog.c
@@ -33,8 +33,8 @@ src/helpers/gpk-install-package-name.c
 src/history/gpk-log.c
 src/packagekit-service/gpk-dbus-service.c
 src/packagekit-service/gpk-dbus-task.c
-src/packages/gpk-application.c
 src/preferences/gpk-prefs.c
+src/software/gpk-application.c
 src/updates-service/gpk-updates-manager.c
 src/updates-service/gpk-updates-notification.c
 src/updates-service/gpk-updates-service.c

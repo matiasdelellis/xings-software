@@ -18,15 +18,15 @@ AM_CPPFLAGS =						\
 	-DLOCALEDIR=\""$(localedir)"\"			\
 	-DVERSION="\"$(VERSION)\"" 			\
 	-DPKGDATADIR=\"$(pkgdatadir)\"			\
-	-DG_LOG_DOMAIN=\"XingsPackageKit\"
+	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
 bin_PROGRAMS =						\
-	xings-packages
+	xings-software
 
-xings_packages_SOURCES =				\
+xings_software_SOURCES =				\
 	gpk-application.c
 
-xings_packages_LDADD =					\
+xings_software_LDADD =					\
 	$(top_builddir)/src/common/libgpk-common.a	\
 	$(GLIB_LIBS)					\
 	$(GIO_LIBS)					\
@@ -37,5 +37,5 @@ xings_packages_LDADD =					\
 	$(PACKAGEKIT_LIBS)				\
 	$(X11_LIBS)
 
-xings_packages_CFLAGS =					\
+xings_software_CFLAGS =					\
 	$(WARN_CFLAGS)

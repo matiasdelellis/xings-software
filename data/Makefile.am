@@ -8,7 +8,7 @@ desktop_in_files =					\
 	xings-install-local-package.desktop.in		\
 	xings-packagekit-service.desktop.in		\
 	xings-packagekit-preferences.desktop.in		\
-	xings-packages.desktop.in			\
+	xings-software.desktop.in			\
 	xings-package-updates.desktop.in		\
 	xings-package-history.desktop.in		\
 	$(NULL)
@@ -43,7 +43,7 @@ $(service_DATA): $(service_in_files) Makefile
 	@sed -e "s|\@servicedir\@|$(bindir)|" $< > $@
 
 @GSETTINGS_RULES@
-gsettings_SCHEMAS = org.xings.packagekit.gschema.xml
+gsettings_SCHEMAS = org.xings.software.gschema.xml
 
 EXTRA_DIST =						\
 	$(gsettings_SCHEMAS)				\
@@ -59,7 +59,7 @@ DISTCLEANFILES =					\
 	xings-install-local-package.desktop		\
 	xings-packagekit-service.desktop		\
 	xings-package-history.desktop			\
-	xings-packages.desktop				\
+	xings-software.desktop				\
 	xings-updates-service.desktop			\
 	org.xings.PackageKit.service		\
 	$(NULL)
