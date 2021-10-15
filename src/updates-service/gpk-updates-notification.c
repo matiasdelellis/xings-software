@@ -177,14 +177,14 @@ gpk_updates_notification_show (GpkUpdatesNotification *notification,
 	                                                icon_name);
 
 	notify_notification_set_app_name (notification_updates,
-	                                  _("Software Updates"));
+	                                  _("Software Update"));
 	notify_notification_set_timeout (notification_updates,
 	                                 15000);
 	notify_notification_set_urgency (notification_updates,
 	                                 NOTIFY_URGENCY_CRITICAL);
 	notify_notification_set_hint_string (notification_updates,
 	                                     "desktop-entry",
-	                                     "xings-package-updates");
+	                                     "xings-software-update");
 
 	notify_notification_add_action (notification_updates,
 	                                "ignore",
