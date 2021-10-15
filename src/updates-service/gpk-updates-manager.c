@@ -87,7 +87,7 @@ gpk_updates_notififier_launch_update_viewer (GpkUpdatesManager *manager)
 	gboolean ret;
 	GError *error = NULL;
 
-	ret = g_spawn_command_line_async (BINDIR "/xings-package-updates",
+	ret = g_spawn_command_line_async (BINDIR "/xings-software-update",
 	                                  &error);
 
 	if (!ret) {
@@ -352,7 +352,7 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 
 	/* Check if starts the update viewer to hide the icon. */
 	manager->dbus_watch_id = g_bus_watch_name (G_BUS_TYPE_SESSION,
-	                                            "org.xings.PackageUpdates",
+	                                            "org.xings.SoftwareUpdate",
 	                                            G_BUS_NAME_WATCHER_FLAGS_NONE,
 	                                            gpk_updates_viewer_appeared_cb,
 	                                            gpk_updates_viewer_vanished_cb,
