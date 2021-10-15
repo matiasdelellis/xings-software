@@ -16,7 +16,7 @@ data/xings-software-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui
 [type: gettext/glade]data/gpk-signature.ui
 data/xings-software-update.desktop.in
-data/xings-updates-service.desktop.in
+data/xings-software-service.desktop.in
 [type: gettext/glade]data/gpk-update-viewer.ui
 data/org.xings.software.gschema.xml
 src/common/gpk-common.c
@@ -35,7 +35,7 @@ src/packagekit-service/gpk-dbus-service.c
 src/packagekit-service/gpk-dbus-task.c
 src/preferences/gpk-prefs.c
 src/software/gpk-application.c
-src/updates-service/gpk-updates-manager.c
-src/updates-service/gpk-updates-notification.c
-src/updates-service/gpk-updates-service.c
+src/software-service/gpk-updates-manager.c
+src/software-service/gpk-updates-notification.c
+src/software-service/gpk-updates-service.c
 src/software-update/gpk-update-viewer.c

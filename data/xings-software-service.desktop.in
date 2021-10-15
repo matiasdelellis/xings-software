@@ -1,0 +1,9 @@
+[Desktop Entry]
+_Name=Software Service
+_Comment=Keeps repositories up-to-date and checks for software updates
+Icon=software-update-available
+Exec=xings-software-service
+Type=Application
+Terminal=false
+NotShowIn=GNOME;KDE;Unity;
+Hidden=false

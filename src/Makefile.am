@@ -5,5 +5,5 @@ SUBDIRS =						\
 	packagekit-service				\
 	preferences					\
 	software					\
-	updates-service					\
+	software-service				\
 	software-update

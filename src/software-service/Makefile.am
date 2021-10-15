@@ -20,9 +20,9 @@ AM_CPPFLAGS =						\
 	-DPKGDATADIR=\"$(pkgdatadir)\"			\
 	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
-bin_PROGRAMS = xings-updates-service
+bin_PROGRAMS = xings-software-service
 
-xings_updates_service_SOURCES =				\
+xings_software_service_SOURCES =				\
 	gpk-updates-checker.c				\
 	gpk-updates-checker.h				\
 	gpk-updates-download.c				\
@@ -37,7 +37,7 @@ xings_updates_service_SOURCES =				\
 	gpk-updates-shared.h				\
 	gpk-updates-service.c
 
-xings_updates_service_LDADD =				\
+xings_software_service_LDADD =				\
 	$(top_builddir)/src/common/libgpk-common.a	\
 	$(PACKAGEKIT_LIBS)				\
 	$(STATUSNOTIFIER_LIBS)				\
@@ -47,6 +47,6 @@ xings_updates_service_LDADD =				\
 	$(NOTIFY_LIBS)					\
 	$(X11_LIBS)
 
-xings_updates_services_CFLAGS = 			\
+xings_software_services_CFLAGS = 			\
 	$(STATUSNOTIFIER_CFLAGS)			\
 	$(WARN_CFLAGS)

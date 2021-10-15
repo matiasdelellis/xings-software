@@ -219,7 +219,7 @@ src/history/Makefile
 src/packagekit-service/Makefile
 src/preferences/Makefile
 src/software/Makefile
-src/updates-service/Makefile
+src/software-service/Makefile
 src/software-update/Makefile
 man/Makefile
 po/Makefile.in

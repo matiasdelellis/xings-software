@@ -1,9 +1,0 @@
-[Desktop Entry]
-_Name=Software Update Service
-_Comment=Checks for system updates when start session
-Icon=software-update-available
-Exec=xings-updates-service
-Type=Application
-Terminal=false
-NotShowIn=GNOME;KDE;Unity;
-Hidden=false

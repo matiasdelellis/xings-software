@@ -18,7 +18,7 @@ desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 autostartdir = $(sysconfdir)/xdg/autostart
 autostart_in_files =					\
-	xings-updates-service.desktop.in
+	xings-software-service.desktop.in
 
 autostart_DATA = $(autostart_in_files:.desktop.in=.desktop)
 
@@ -60,7 +60,7 @@ DISTCLEANFILES =					\
 	xings-software-history.desktop			\
 	xings-software-preferences.desktop		\
 	xings-software-update.desktop			\
-	xings-updates-service.desktop			\
+	xings-software-service.desktop			\
 	org.xings.PackageKit.service		\
 	$(NULL)
 

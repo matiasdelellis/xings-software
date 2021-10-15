@@ -69,12 +69,13 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-	notify_init (_("Software Update Service"));
+	notify_init (_("Software Service"));
 
 	/* TRANSLATORS: program name, a session wide daemon to watch for updates */
-	g_set_application_name (_("Software Update Service"));
+	g_set_application_name (_("Software Service"));
+
 	context = g_option_context_new (NULL);
-	g_option_context_set_summary (context, _("Software Update Service with PackageKit"));
+	g_option_context_set_summary (context, _("Keeps repositories up-to-date and checks for software updates"));
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	g_option_context_parse (context, &argc, &argv, NULL);
 	g_option_context_free (context);
