@@ -65,7 +65,7 @@ static const PkEnumMatch enum_status_icon_name[] = {
 	{PK_STATUS_ENUM_UNKNOWN,		"help-browser"},	/* fall though value */
 	{PK_STATUS_ENUM_CANCEL,			"xings-package-cleanup"}, /* TODO: need better icon */
 	{PK_STATUS_ENUM_CLEANUP,		"xings-package-cleanup"},
-	{PK_STATUS_ENUM_COMMIT,			"xings-setup"}, /* TODO: need better icon */
+	{PK_STATUS_ENUM_COMMIT,			"xings-package-setup"}, /* TODO: need better icon */
 	{PK_STATUS_ENUM_DEP_RESOLVE,		"xings-package-info"}, /* TODO: need better icon */
 	{PK_STATUS_ENUM_DOWNLOAD_CHANGELOG,	"xings-refresh-cache"},
 	{PK_STATUS_ENUM_DOWNLOAD_FILELIST,	"xings-refresh-cache"},
@@ -87,19 +87,19 @@ static const PkEnumMatch enum_status_icon_name[] = {
 	{PK_STATUS_ENUM_REMOVE,			"xings-package-delete"},
 	{PK_STATUS_ENUM_REPACKAGING,		"xings-package-cleanup"},
 	{PK_STATUS_ENUM_REQUEST,		"xings-package-search"},
-	{PK_STATUS_ENUM_RUNNING,		"xings-setup"},
+	{PK_STATUS_ENUM_RUNNING,		"xings-package-ssetup"},
 	{PK_STATUS_ENUM_SCAN_APPLICATIONS,	"xings-package-search"}, /* TODO: need better icon */
-	{PK_STATUS_ENUM_SETUP,			"xings-setup"},
+	{PK_STATUS_ENUM_SETUP,			"xings-package-setup"},
 	{PK_STATUS_ENUM_SIG_CHECK,		"xings-package-info"}, /* TODO: need better icon */
 	{PK_STATUS_ENUM_TEST_COMMIT,		"xings-package-info"}, /* TODO: need better icon */
 	{PK_STATUS_ENUM_UPDATE,			"xings-package-update"},
-	{PK_STATUS_ENUM_WAIT,			"xings-wait"},
+	{PK_STATUS_ENUM_WAIT,			"xings-package-wait"},
 	{PK_STATUS_ENUM_SCAN_PROCESS_LIST,	"xings-package-info"},
 	{PK_STATUS_ENUM_CHECK_EXECUTABLE_FILES,	"xings-package-info"},
 	{PK_STATUS_ENUM_CHECK_LIBRARIES,	"xings-package-info"},
 	{PK_STATUS_ENUM_COPY_FILES,		"xings-package-info"},
 #if PK_CHECK_VERSION(1,1,6)
-	{PK_STATUS_ENUM_RUN_HOOK,		"xings-setup"},
+	{PK_STATUS_ENUM_RUN_HOOK,		"xings-package-setup"},
 #endif
 	{0, NULL}
 };

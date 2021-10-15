@@ -2,7 +2,7 @@
 _Name=Software Preferences
 _Comment=Change software update preferences and enable or disable software sources
 Icon=xings-software-preferences
-Exec=xings-packagekit-preferences
+Exec=xings-software-preferences
 Terminal=false
 Type=Application
 Categories=Settings;System;X-GNOME-SystemSettings;X-XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;

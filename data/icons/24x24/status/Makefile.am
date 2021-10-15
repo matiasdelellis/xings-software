@@ -26,14 +26,13 @@ icons_DATA = 				\
 	xings-update-normal.png		\
 	xings-update-security.png	\
 	xings-refresh-cache.png		\
-	xings-setup.png			\
-	xings-wait.png
+	xings-package-setup.png		\
+	xings-package-wait.png
 
 install-data-hook:
 	mkdir -p $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps;
-	ln -fs $(iconsdir)/xings-package-sources.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-repo.png;
-	ln -fs $(iconsdir)/xings-package-info.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-software-history.png;
-	ln -fs $(iconsdir)/xings-update-high.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-software-preferences.png;
+	ln -fs $(iconsdir)/xings-package-sources.svg $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-software-preferences.svg;
+	ln -fs $(iconsdir)/xings-package-info.svg $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-software-history.svg
 
 EXTRA_DIST =				\
 	$(icons_DATA)

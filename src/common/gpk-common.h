@@ -56,13 +56,13 @@ G_BEGIN_DECLS
 #define GPK_SETTINGS_FREQUENCY_UPDATES_NOTIFICATION	"frequency-updates-notification"
 #define GPK_SETTINGS_LAST_UPDATES_NOTIFICATION		"last-updates-notification"
 
-#define GPK_ICON_SOFTWARE_UPDATE		"system-software-update"
-#define GPK_ICON_UPDATES_NORMAL			"software-update-available-symbolic"
-#define GPK_ICON_UPDATES_URGENT			"software-update-urgent-symbolic"
-#define GPK_ICON_SOFTWARE_SOURCES		"gpk-repo"
-#define GPK_ICON_SOFTWARE_INSTALLER		"system-software-install"
-#define GPK_ICON_SOFTWARE_LOG			"gpk-log"
-#define GPK_ICON_SOFTWARE_UPDATE_PREFS		"gpk-prefs"
+#define GPK_ICON_SOFTWARE_INSTALLER			"system-software-install"
+#define GPK_ICON_SOFTWARE_UPDATE			"system-software-update"
+#define GPK_ICON_SOFTWARE_PREFERENCES			"xings-software-preferences"
+#define GPK_ICON_SOFTWARE_HISTORY			"xings-software-history"
+
+#define GPK_ICON_UPDATES_NORMAL				"software-update-available-symbolic"
+#define GPK_ICON_UPDATES_URGENT				"software-update-urgent-symbolic"
 
 /* any status that is slower than this will not be shown in the UI */
 #define GPK_UI_STATUS_SHOW_DELAY		750 /* ms */

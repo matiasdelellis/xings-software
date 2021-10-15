@@ -686,7 +686,7 @@ gpk_log_startup_cb (GtkApplication *application, gpointer user_data)
 
 	window = GTK_WINDOW (gtk_builder_get_object (builder, "dialog_simple"));
 	gtk_window_set_position (window, GTK_WIN_POS_CENTER);
-	gtk_window_set_icon_name (window, GPK_ICON_SOFTWARE_LOG);
+	gtk_window_set_icon_name (window, GPK_ICON_SOFTWARE_HISTORY);
 	gtk_window_set_application (window, application);
 
 	/* set a size, as the screen allows */
