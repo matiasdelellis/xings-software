@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.or\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-01 20:07-0300\n"
+"POT-Creation-Date: 2021-10-15 15:41-0300\n"
 "PO-Revision-Date: 2013-05-09 23:43+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
@@ -25,57 +25,60 @@ msgstr ""
 "\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: ../data/appdata/xings-packages.appdata.xml.in.h:1
-#, fuzzy
-msgid "Packages"
-msgstr "ପ୍ଯାକେଜ"
+#: ../data/appdata/xings-software.appdata.xml.in.h:1
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:10
+#: ../src/software/gpk-application.c:2536
+msgid "Software"
+msgstr "ସଫ୍ଟୱେର"
 
-#: ../data/appdata/xings-packages.appdata.xml.in.h:2
+#: ../data/appdata/xings-software.appdata.xml.in.h:2
+#: ../data/xings-software.desktop.in.h:2
+msgid "Add or remove software installed on the system"
+msgstr "ତନ୍ତ୍ରରେ ସ୍ଥାପିତ ସଫ୍ଟୱେରରେ ଯୋଗକରନ୍ତୁ କିମ୍ବା କାଢ଼ି ଦିଅନ୍ତୁ"
+
+#: ../data/appdata/xings-software.appdata.xml.in.h:3
 msgid ""
-"Packages allows you to install and remove packages on your system. You can "
+"Software allows you to install and remove packages on your system. You can "
 "view and search packages by name, details or even file name and also see "
 "dependencies of one package on other packages. Searching by groups is "
 "possible and is an easy way to find software in your favorite desktop "
 "environment."
 msgstr ""
 
-#: ../data/appdata/xings-packages.appdata.xml.in.h:3
+#: ../data/appdata/xings-software.appdata.xml.in.h:4
 msgid ""
-"Packages uses PackageKit and can work on any distribution using the native "
+"Software uses PackageKit and can work on any distribution using the native "
 "package management framework."
 msgstr ""
 
 #. TRANSLATORS: title to pass to the user if there are not enough privs
-#: ../data/appdata/xings-package-updates.appdata.xml.in.h:1
+#: ../data/appdata/xings-software-update.appdata.xml.in.h:1
+#: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/updates-viewer/gpk-update-viewer.c:3372
-#, fuzzy
-msgid "Package Updater"
-msgstr "ପ୍ୟାକେଜ ପରିଚାଳକ"
+#: ../src/software-service/gpk-updates-notification.c:180
+#: ../src/software-update/gpk-update-viewer.c:3442
+msgid "Software Update"
+msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ"
 
-#: ../data/appdata/xings-package-updates.appdata.xml.in.h:2
+#: ../data/appdata/xings-software-update.appdata.xml.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
+msgid "Update software installed on the system"
+msgstr "ତନ୍ତ୍ରରେ ସ୍ଥାପନ କରାଯାଇଥିବା ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
+
+#: ../data/appdata/xings-software-update.appdata.xml.in.h:3
 msgid ""
-"Package Updater allows you to update packages on your system without "
+"Software Update allows you to update packages on your system without "
 "rebooting. You can view details about each update and choose which updates "
 "to apply."
 msgstr ""
 
-#: ../data/appdata/xings-package-updates.appdata.xml.in.h:3
+#: ../data/appdata/xings-software-update.appdata.xml.in.h:4
 msgid ""
-"Package Updater uses PackageKit and can work on any distribution using the "
+"Software Update uses PackageKit and can work on any distribution using the "
 "native package management framework."
 msgstr ""
 
-#: ../data/xings-packages.desktop.in.h:1 ../data/gpk-application.ui.h:10
-#: ../src/packages/gpk-application.c:2536
-msgid "Software"
-msgstr "ସଫ୍ଟୱେର"
-
-#: ../data/xings-packages.desktop.in.h:2
-msgid "Add or remove software installed on the system"
-msgstr "ତନ୍ତ୍ରରେ ସ୍ଥାପିତ ସଫ୍ଟୱେରରେ ଯୋଗକରନ୍ତୁ କିମ୍ବା କାଢ଼ି ଦିଅନ୍ତୁ"
-
-#: ../data/xings-packages.desktop.in.h:3
+#: ../data/xings-software.desktop.in.h:3
 msgid "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;"
 msgstr "ଅଦ୍ୟତନ;ଉନ୍ନୟନ;ଉତ୍ସ;ରେପୋଜିଟୋରୀ;ପସନ୍ଦ;ସ୍ଥାପନ;ସଂରକ୍ଷଣ ସ୍ଥାନ;"
 
@@ -83,7 +86,8 @@ msgstr "ଅଦ୍ୟତନ;ଉନ୍ନୟନ;ଉତ୍ସ;ରେପୋଜିଟ
 msgid "License"
 msgstr "ଅନୁମତି ପତ୍ର"
 
-#: ../data/gpk-application.ui.h:2
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:2 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "ଉତ୍ସ"
 
@@ -150,19 +154,21 @@ msgstr ""
 "ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ସଙ୍ଗେ ସଙ୍ଗେ ପ୍ରୟୋଗ କରାଯାଇନଥାଏ, ଏହି ବଟନ ସମସ୍ତ ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ପ୍ରୟୋଗ କରିଥାଏ"
 
 #: ../data/gpk-application.ui.h:15
-msgid "Refresh Package Lists"
-msgstr "ପ୍ୟାକେଜ ତାଲିକାଗୁଡ଼ିକୁ ସତେଜ କରନ୍ତୁ"
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ"
 
 #: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Package Sources"
-msgstr "ପ୍ୟାକେଜ ସଂଗ୍ରହ"
+msgid "Software Sources"
+msgstr "ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ"
 
-#: ../data/gpk-application.ui.h:17 ../data/xings-package-history.desktop.in.h:1
-#: ../data/gpk-log.ui.h:2
+#. are we running privileged
+#: ../data/gpk-application.ui.h:17
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:2
+#: ../src/history/gpk-log.c:785 ../src/history/gpk-log.c:793
 #, fuzzy
-msgid "Package Log"
-msgstr "ପ୍ଯାକେଜ"
+msgid "Software History"
+msgstr "ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ"
 
 #: ../data/gpk-application.ui.h:18
 msgid "Only Newest Versions"
@@ -232,7 +238,7 @@ msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ କରନ୍ତୁ"
 msgid "Install selected packages on the system"
 msgstr "ତନ୍ତ୍ରରେ ବଚ୍ଛିତ ସଫ୍ଟୱେର ସ୍ଥାପନ କରନ୍ତୁ"
 
-#: ../data/xings-package-history.desktop.in.h:2
+#: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
 msgstr "ଅତିତର ପ୍ୟାକେଜ ପରିଚାଳନା କାର୍ଯ୍ୟକୁ ଦେଖନ୍ତୁ"
 
@@ -240,13 +246,12 @@ msgstr "ଅତିତର ପ୍ୟାକେଜ ପରିଚାଳନା କାର
 msgid "Filter"
 msgstr "ଛାଣକ"
 
-#. TRANSLATORS: program name, an application to add and remove software repositories
-#: ../data/xings-packagekit-preferences.desktop.in.h:1
-#: ../src/preferences/gpk-prefs.c:748
-msgid "Software Settings"
-msgstr "ସଫ୍ଟୱେର ବିନ୍ୟାସ"
+#: ../data/xings-software-preferences.desktop.in.h:1
+#, fuzzy
+msgid "Software Preferences"
+msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ ପସନ୍ଦଗୁଡ଼ିକ"
 
-#: ../data/xings-packagekit-preferences.desktop.in.h:2
+#: ../data/xings-software-preferences.desktop.in.h:2
 msgid ""
 "Change software update preferences and enable or disable software sources"
 msgstr ""
@@ -282,7 +287,7 @@ msgstr "ଅଦ୍ୟତନ ସୂଚନା ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/updates-service/gpk-updates-notification.c:304
+#: ../src/software-service/gpk-updates-notification.c:304
 #, fuzzy
 msgid "Updates"
 msgstr "ଅଦ୍ୟତନ କରନ୍ତୁ"
@@ -290,7 +295,7 @@ msgstr "ଅଦ୍ୟତନ କରନ୍ତୁ"
 #: ../data/gpk-prefs.ui.h:7
 #, fuzzy
 msgid ""
-"A package source contains packages that can be installed on this computer."
+"A software source contains packages that can be installed on this computer."
 msgstr "ଏହି କମ୍ପୁଟରରେ ସ୍ଥାପିତ ହୋଇପାରୁଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଏକ ସଫ୍ଟୱେର ଉତ୍ସ ଧାରଣ କରିଥାଏ।"
 
 #. shows extra -source, -debuginfo, and -devel sources
@@ -334,45 +339,37 @@ msgstr "ପ୍ଯାକେଜ"
 msgid "Do you recognize the user and trust this key?"
 msgstr "ଆପଣ ଏହି ଚାଳକକୁ ଚିହ୍ନିପାରୁଛନ୍ତି କି ଏବଂ ଏହି କି କୁ ବିଶ୍ୱାସକରୁଛନ୍ତି କି?"
 
-#: ../data/xings-package-updates.desktop.in.h:1
-msgid "Software Update"
-msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ"
-
-#: ../data/xings-package-updates.desktop.in.h:2
-msgid "Update software installed on the system"
-msgstr "ତନ୍ତ୍ରରେ ସ୍ଥାପନ କରାଯାଇଥିବା ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates
-#: ../data/xings-updates-service.desktop.in.h:1
-#: ../src/updates-service/gpk-updates-service.c:72
-#: ../src/updates-service/gpk-updates-service.c:75
+#: ../data/xings-software-service.desktop.in.h:1
+#: ../src/software-service/gpk-updates-service.c:72
+#: ../src/software-service/gpk-updates-service.c:75
 #, fuzzy
-msgid "Software Update Service"
-msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ ପସନ୍ଦଗୁଡ଼ିକ"
+msgid "Software Service"
+msgstr "ସଫ୍ଟୱେର ଉତ୍ସ"
 
-#: ../data/xings-updates-service.desktop.in.h:2
-#, fuzzy
-msgid "Checks for system updates when start session"
-msgstr "ମୋବାଇଲ ବ୍ରୋଡବ୍ୟାଣ୍ଡ ବ୍ୟବହାର କରି ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରନ୍ତୁ"
+#: ../data/xings-software-service.desktop.in.h:2
+#: ../src/software-service/gpk-updates-service.c:78
+msgid "Keeps repositories up-to-date and checks for software updates"
+msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/updates-viewer/gpk-update-viewer.c:1464
+#: ../src/software-update/gpk-update-viewer.c:1459
 #, fuzzy
-msgid "All packages are up to date"
-msgstr "ସମସ୍ତ ସଫ୍ଟୱେର ଅଦ୍ୟତିତ ଅଛି"
+msgid "All software is up to date"
+msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/updates-viewer/gpk-update-viewer.c:1466
+#: ../src/software-update/gpk-update-viewer.c:1461
 #, fuzzy
-msgid "There are no package updates available for your computer at this time."
+msgid "There are no updates available for your computer at this time."
 msgstr "ଆପଣଙ୍କ କମ୍ପୁଟର ପାଇଁ ବର୍ତ୍ତମାନ କୌଣସି ସଫ୍ଟୱେର ଅଦ୍ୟତନଗୁଡ଼ିକ ଉପଲବ୍ଧ ନାହିଁ।"
 
 #: ../data/gpk-update-viewer.ui.h:4
 #, fuzzy
 msgid ""
-"Package updates correct errors, eliminate security vulnerabilities, and "
+"Software updates correct errors, eliminate security vulnerabilities, and "
 "provide new features."
 msgstr ""
 " ସଫଟ୍‌ଉଏର୍‌ ଅପ୍‌ଡେଟ୍ ଗୁଡିକ ତୃଟି ସଂଶୋଧନ କରନ୍ତି ,ସୁରକ୍ଷା ଦୋଷପୂର୍ଣ୍ଣତା ଗୁଡିକୁ ବିଲୋପ କରନ୍ତି ଏବଂ ନୂତନ "
@@ -391,11 +388,11 @@ msgstr "ବିବରଣୀ"
 msgid "_Install Updates"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ସ୍ଥାପନକରନ୍ତୁ (_I)"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:1
+#: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
 msgstr "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଅବ୍ୟବହୃତ ନିର୍ଭୋରୋକମାନଙ୍କୁ ବାହାର କରନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:2
+#: ../data/org.xings.software.gschema.xml.h:2
 msgid ""
 "When removing a package, also remove those dependencies that are not "
 "required by other packages."
@@ -403,53 +400,53 @@ msgstr ""
 "ପ୍ୟାକେଜ ବାହାର କରିବା ସମୟରେ, ନିର୍ଭୋରୋକମାନଙ୍କୁ ମଧ୍ଯ ବାହାର କରନ୍ତୁ ଯାହାକି ଅନ୍ୟ ପ୍ୟାକେଜମାନଙ୍କ "
 "ପାଇଁ ଆବଶ୍ୟକ ହୋଇନଥାଏ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:3
+#: ../data/org.xings.software.gschema.xml.h:3
 msgid "Ask the user if additional packages should be installed"
 msgstr "ଯଦି ଅତିରିକ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ସ୍ଥାପନ କରିବା ଉଚିତ ତେବେ ଚାଳକଙ୍କୁ ପଚାରନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:4
+#: ../data/org.xings.software.gschema.xml.h:4
 msgid "Ask the user if additional packages should be installed."
 msgstr "ଯଦି ଅତିରିକ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ସ୍ଥାପନ କରିବା ଉଚିତ ତେବେ ଚାଳକଙ୍କୁ ପଚାରନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:5
+#: ../data/org.xings.software.gschema.xml.h:5
 msgid "Filter using basename in gpk-application"
 msgstr "gpk-ପ୍ରୟୋଗରେ ଆଧାରନାମ ବ୍ୟବହାରକରି ଛାଣନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:6
+#: ../data/org.xings.software.gschema.xml.h:6
 msgid "Filter package lists using basename in gpk-application."
 msgstr "gpk-ପ୍ରୟୋଗରେ ଆଧାରନାମ ବ୍ୟବହାରକରି ପ୍ୟାକେଜ ତାଲିକା ଛାଣନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:7
+#: ../data/org.xings.software.gschema.xml.h:7
 msgid "Only show the newest packages in the file lists"
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକରେ କେବଳ ନୂତନ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:8
+#: ../data/org.xings.software.gschema.xml.h:8
 msgid "Only show the newest packages in the file lists."
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକରେ କେବଳ ନୂତନ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:9
+#: ../data/org.xings.software.gschema.xml.h:9
 msgid "Only show supported packages in the file lists"
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକରେ କେବଳ ସହାୟତାପ୍ରାପ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:10
+#: ../data/org.xings.software.gschema.xml.h:10
 msgid "Only show supported packages in the file lists."
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକରେ କେବଳ ସହ୍ୟତାପ୍ରାପ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:11
+#: ../data/org.xings.software.gschema.xml.h:11
 msgid "Only show native packages in the file lists"
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକରେ କେବଳ ସ୍ଥାନୀୟ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:12
+#: ../data/org.xings.software.gschema.xml.h:12
 msgid ""
 "Only show native packages matching the machine architecture in the file "
 "lists."
 msgstr "ଯନ୍ତ୍ର ସଂରଚନା ସହିତ ମେଳଖାଉଥିବା ସ୍ଥାନିୟ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଫାଇଲ ତ୍ରଲିକାରେ ଦର୍ଶାନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:13
+#: ../data/org.xings.software.gschema.xml.h:13
 msgid "Show the category group menu"
 msgstr "ଶ୍ରେଣୀ ବିଭାଗ ତାଲିକା ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:14
+#: ../data/org.xings.software.gschema.xml.h:14
 msgid ""
 "Show the category group menu. This is more complete and custom to the "
 "distribution, but takes longer to populate."
@@ -457,11 +454,11 @@ msgstr ""
 "ଶ୍ରେଣୀ ବିଭାଗ ତାଲିକା ଦର୍ଶାନ୍ତୁ। ଏହା ଅଧିକ ସମ୍ପୂର୍ଣ୍ଣ ଏବଂ ବଣ୍ଟନ ପାଇଁ ଇଚ୍ଛାରୂପଣ, କିନ୍ତୁ ପ୍ରଚଳିତ ହେବା "
 "ପାଇଁ ଅଧିକ ସମୟ ନିଏ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:15
+#: ../data/org.xings.software.gschema.xml.h:15
 msgid "Show the 'All Packages' group menu"
 msgstr "'ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ' ଶ୍ରେଣୀ ବିଭାଗ ତାଲିକା ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:16
+#: ../data/org.xings.software.gschema.xml.h:16
 msgid ""
 "Show the all packages menu item. This takes a long time to populate on most "
 "backends and is not generally required by end users."
@@ -469,11 +466,11 @@ msgstr ""
 "ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକର ତାଲିକା ବସ୍ତୁକୁ ଦର୍ଶାନ୍ତୁ। ଏହା ଅଧିକାଂଶ ପୃଷ୍ଠଭୂମିରେ ଲୋକପ୍ରିୟ ହେବା ପାଇଁ ଅଧିକ "
 "ସମୟ ନେଇଥାଏ ଏବଂ ସାଧାରଣତଃ ଚାଳକମାନଙ୍କ ଦ୍ୱାରା ଆବଶ୍ୟକ ହୋଇନଥାଏ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:17
+#: ../data/org.xings.software.gschema.xml.h:17
 msgid "The search mode used by default"
 msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ବ୍ୟବହୃତ ସନ୍ଧାନ ଧାରା"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:18
+#: ../data/org.xings.software.gschema.xml.h:18
 msgid ""
 "The search mode used by default. Options are \"name\", \"details\", or \"file"
 "\"."
@@ -481,21 +478,21 @@ msgstr ""
 "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଭାବରେ ବ୍ୟବହୃତ ସନ୍ଧାନ ଧାରା। ବିକଳ୍ପଗୁଡ଼ିକ ହେଉଛି \"name\", \"details\", କିମ୍ବା "
 "\"file\""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:19
+#: ../data/org.xings.software.gschema.xml.h:19
 #, fuzzy
 msgid "Show all repositories in the package source viewer"
 msgstr "ସମସ୍ତ ସଂଗ୍ରହାଳୟଗୁଡ଼ିକୁ ସଫ୍ଟୱେର ଉତ୍ସ ପ୍ରଦର୍ଶକରେ ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:20
+#: ../data/org.xings.software.gschema.xml.h:20
 #, fuzzy
 msgid "Show all repositories in the package source viewer."
 msgstr "ସମସ୍ତ ସଂଗ୍ରହାଳୟଗୁଡ଼ିକୁ ସଫ୍ଟୱେର ଉତ୍ସ ପ୍ରଦର୍ଶକରେ ଦର୍ଶାନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:21
+#: ../data/org.xings.software.gschema.xml.h:21
 msgid "Only show the newest updates in the list"
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକରେ କେବଳ ନୂତନ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:22
+#: ../data/org.xings.software.gschema.xml.h:22
 msgid ""
 "Only show the newest packages in the update list, and filter out older "
 "updates that are still available."
@@ -503,30 +500,30 @@ msgstr ""
 "ଅଦ୍ୟତନ ତାଲିକାରେ କେବଳ ନୂତନତମ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ, ଏବଂ ପୁରୁଣା ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଛାଣନ୍ତୁ ଯାହାକି "
 "ଏପର୍ଯ୍ୟନ୍ତ ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:23
+#: ../data/org.xings.software.gschema.xml.h:23
 msgid "Scroll to packages as they are downloaded"
 msgstr "ଆହରଣ କରାଯାଉଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକୁ ସ୍କ୍ରଲ କରନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:24
+#: ../data/org.xings.software.gschema.xml.h:24
 msgid ""
 "Scroll to packages in the update list as they are downloaded or installed."
 msgstr ""
 "ଅଦ୍ୟତନ ତାଲିକାରେ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ସ୍କ୍ରଲ କରନ୍ତୁ ଯେପରି ସେମାନଙ୍କୁ ଆହରଣ କରାଯାଇଛି ଅଥବା ସ୍ଥାପନ "
 "କରାଯାଇଛି।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:25
+#: ../data/org.xings.software.gschema.xml.h:25
 msgid "Allow applications to invoke the font installer"
 msgstr "ପ୍ରୟୋଗଗୁଡ଼ିକୁ ଅକ୍ଷରରୂପ ସ୍ଥାପକକୁ ଆମନ୍ତ୍ରିତ କରିବାକୁ ଅନୁମତି ଦିଅନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:26
+#: ../data/org.xings.software.gschema.xml.h:26
 msgid "Allow applications to invoke the font installer."
 msgstr "ପ୍ରୟୋଗଗୁଡ଼ିକୁ ଅକ୍ଷରରୂପ ସ୍ଥାପକକୁ ଆମନ୍ତ୍ରିତ କରିବାକୁ ଅନୁମତି ଦିଅନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:27
+#: ../data/org.xings.software.gschema.xml.h:27
 msgid "Programs that should be ignored when they issue session D-Bus requests"
 msgstr "ଅଧିବେଶନ D-Bus ଅନୁରୋଧକୁ ନ୍ୟସ୍ତ କରିବା ସମୟରେ ଅଗ୍ରାହ୍ୟ କରାଯାଉଥିବା ପ୍ରଗ୍ରାମଗୁଡ଼ିକ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:28
+#: ../data/org.xings.software.gschema.xml.h:28
 msgid ""
 "Programs that should be ignored when they issue session D-Bus requests, "
 "separated by commas."
@@ -534,23 +531,23 @@ msgstr ""
 "କୋମା ଦ୍ୱାରା ପୃଥକ, ଅଧିବେଶନ D-Bus ଅନୁରୋଧକୁ ନ୍ୟସ୍ତ କରିବା ସମୟରେ ଅଗ୍ରାହ୍ୟ କରାଯାଉଥିବା "
 "ପ୍ରଗ୍ରାମଗୁଡ଼ିକ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:29
+#: ../data/org.xings.software.gschema.xml.h:29
 msgid "Allow applications to invoke the codec installer"
 msgstr "ପ୍ରୟୋଗଗୁଡ଼ିକୁ ସାଙ୍କେତିକରଣ ସ୍ଥାପକକୁ ଆମନ୍ତ୍ରିତ କରିବାକୁ ଅନୁମତି ଦିଅନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:30
+#: ../data/org.xings.software.gschema.xml.h:30
 msgid "Allow applications to invoke the codec installer."
 msgstr "ପ୍ରୟୋଗଗୁଡ଼ିକୁ ସାଙ୍କେତିକରଣ ସ୍ଥାପକକୁ ଆମନ୍ତ୍ରିତ କରିବାକୁ ଅନୁମତି ଦିଅନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:31
+#: ../data/org.xings.software.gschema.xml.h:31
 msgid "Allow applications to invoke the mime type installer"
 msgstr "ପ୍ରୟୋଗଗୁଡ଼ିକୁ ମାଇମ ପ୍ରକାର ସ୍ଥାପକକୁ ଆମନ୍ତ୍ରିତ କରିବାକୁ ଅନୁମତି ଦିଅନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:32
+#: ../data/org.xings.software.gschema.xml.h:32
 msgid "Allow applications to invoke the mime type installer."
 msgstr "ପ୍ରୟୋଗଗୁଡ଼ିକୁ ମାଇମ ପ୍ରକାର ସ୍ଥାପକକୁ ଆମନ୍ତ୍ରିତ କରିବାକୁ ଅନୁମତି ଦିଅନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:33
+#: ../data/org.xings.software.gschema.xml.h:33
 msgid ""
 "When displaying UI from a session D-Bus request, automatically use these "
 "options by default."
@@ -558,58 +555,58 @@ msgstr ""
 "ଅଧିବେଶ D-Bus ଅନୁରୋଧରୁ UI କୁ ଦର୍ଶାଇବା ସମୟରେ, ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଏହି ବିକଳ୍ପଗୁଡ଼ିକୁ ପୂର୍ବନିର୍ଦ୍ଧାରିତ "
 "ଭାବରେ ବ୍ୟବାହର କରନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:34
+#: ../data/org.xings.software.gschema.xml.h:34
 msgid ""
 "When displaying UI from a session D-Bus request, force these options to be "
 "turned on."
 msgstr ""
 "ଅଧିବେଶ D-Bus ଅନୁରୋଧରୁ UI କୁ ଦର୍ଶାଇବା ସମୟରେ, ଏହି ବିକଳ୍ପଗୁଡ଼ିକୁ ଅନ କରିବା ପାଇଁ ବାଧ୍ଯ କରନ୍ତୁ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:35
+#: ../data/org.xings.software.gschema.xml.h:35
 #, fuzzy
 msgid "Check for updates even on a mobile connection"
 msgstr "ବ୍ୟାଟେରୀ ଶକ୍ତି ଉପରେ ଅଦ୍ୟତନ ପାଇଁ ଯାଞ୍ଚକରନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:36
+#: ../data/org.xings.software.gschema.xml.h:36
 #, fuzzy
 msgid ""
 "Use mobile broadband connections such as GSM and CDMA to check for updates."
 msgstr ""
 "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରିବା ପାଇଁ GSM ଏବଂ CDMA ପରି ମୋବାଇଲ ବ୍ରୋଡବ୍ୟାଣ୍ଡ ସଂଯୋଗଗୁଡ଼ିକୁ ବ୍ୟବହାର କରନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:37
+#: ../data/org.xings.software.gschema.xml.h:37
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:38
+#: ../data/org.xings.software.gschema.xml.h:38
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:39
+#: ../data/org.xings.software.gschema.xml.h:39
 msgid "How often to check for updates"
 msgstr "କେତେଥର ଅଦ୍ୟତନଗୁଡ଼ିକ ପାଇଁ ଯାଞ୍ଚ କରିବା ଉଚିତ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:40
+#: ../data/org.xings.software.gschema.xml.h:40
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:41
+#: ../data/org.xings.software.gschema.xml.h:41
 msgid "How often to refresh the package cache"
 msgstr "କେତେଥର ପ୍ୟାକେଜ କେଶକୁ ସତେଜ କରିବା ଉଚିତ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:42
+#: ../data/org.xings.software.gschema.xml.h:42
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr "କେତେଥର ପ୍ୟାକେଜ କେଶକୁ ସତେଜ କରିବା ଉଚିତ। ମୂଲ୍ୟ ସେକଣ୍ଡରେ।"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:43
+#: ../data/org.xings.software.gschema.xml.h:43
 #, fuzzy
 msgid "How often to notify the user that non-critical updates are available"
 msgstr "ସୁରକ୍ଷା ଅଦ୍ୟତନଗୁଡ଼ିକ ଉପଲବ୍ଧ ହେବା ସମୟରେ ଚାଳକକୁ ବିଜ୍ଞପ୍ତି ଦିଅନ୍ତୁ"
 
-#: ../data/org.xings.packagekit.gschema.xml.h:44
+#: ../data/org.xings.software.gschema.xml.h:44
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -617,11 +614,11 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:45
+#: ../data/org.xings.software.gschema.xml.h:45
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.packagekit.gschema.xml.h:46
+#: ../data/org.xings.software.gschema.xml.h:46
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
@@ -818,8 +815,8 @@ msgstr "ଏକାଧିକ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 #. TRANSLATORS: column for package name
 #. TRANSLATORS: column for group name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/packages/gpk-application.c:2018
-#: ../src/packages/gpk-application.c:2040
+#: ../src/software/gpk-application.c:2018
+#: ../src/software/gpk-application.c:2040
 msgid "Name"
 msgstr "ନାମ"
 
@@ -1937,7 +1934,7 @@ msgstr "ଅବରୂଦ୍ଧ ଅଦ୍ୟତନ"
 #. TRANSLATORS: The action of the package, in past tense
 #. TRANSLATORS: column for installed status
 #: ../src/common/gpk-enum.c:1058 ../src/common/gpk-enum.c:1153
-#: ../src/packages/gpk-application.c:2002
+#: ../src/software/gpk-application.c:2002
 msgid "Installed"
 msgstr "ସ୍ଥାପିତ"
 
@@ -2620,8 +2617,8 @@ msgstr "ନିମ୍ନଲିଖିତ ସଫ୍ଟୱେରଗୁଡ଼ିକ�
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/updates-service/gpk-updates-notification.c:236
-#: ../src/updates-service/gpk-updates-notification.c:272
+#: ../src/software-service/gpk-updates-notification.c:236
+#: ../src/software-service/gpk-updates-notification.c:272
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2812,15 +2809,6 @@ msgstr "ଏହି ମୂଲ୍ଯ ପାଇଁ ଛାଣକ ସେଟ କରନ�
 #: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
 msgid "Set the parent window to make this modal"
 msgstr "ଏହାକୁ ଶୈଳୀ-ବିଶେଷ କରିବା ପାଇଁ ମୂଖ୍ୟ ୱିଣ୍ଡୋକୁ ସେଟ କରନ୍ତୁ"
-
-#: ../src/history/gpk-log.c:785
-msgid "Software Log Viewer"
-msgstr "ସଫ୍ଟୱେର ଲଗ ପ୍ରଦର୍ଶକ"
-
-#. are we running privileged
-#: ../src/history/gpk-log.c:793
-msgid "Log viewer"
-msgstr "ଲଗ ପ୍ରଦର୍ଶକ"
 
 #: ../src/packagekit-service/gpk-dbus-service.c:127
 msgid "Do not exit after the request has been processed"
@@ -3295,282 +3283,6 @@ msgid_plural "A program wants to remove files"
 msgstr[0] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଏକ ଫାଇଲକୁ କାଢ଼ିବାକୁ ଚାହୁଁଅଛି"
 msgstr[1] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଫାଇଲଗୁଡ଼ିକୁ କାଢ଼ିବାକୁ ଚାହୁଁଅଛି"
 
-#. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/packages/gpk-application.c:347
-msgid "Pending"
-msgstr "ବାକି ଅଛି"
-
-#. TRANSLATORS: title: how many files are installed by the application
-#: ../src/packages/gpk-application.c:593
-#, fuzzy, c-format
-msgid "%u file installed by %s"
-msgid_plural "%u files installed by %s"
-msgstr[0] "%i ଫାଇଲ %s ଦ୍ୱାରା ସ୍ଥାପିତ"
-msgstr[1] "%i ଫାଇଲଗୁଡ଼ିକ %s ଦ୍ୱାରା ସ୍ଥାପିତ"
-
-#. TRANSLATORS: no packages returned
-#: ../src/packages/gpk-application.c:893 ../src/packages/gpk-application.c:1022
-msgid "No packages"
-msgstr "କୌଣସି ପ୍ୟାକେଜ ନାହିଁ"
-
-#. TRANSLATORS: this package is not required by any others
-#: ../src/packages/gpk-application.c:895
-#, fuzzy
-msgid "No other packages require this package"
-msgstr "ଅନ୍ୟକୌଣସି ପ୍ୟାକେଜ ଆବଶ୍ୟକ କରେନାହିଁ"
-
-#. TRANSLATORS: title: how many packages require this package
-#: ../src/packages/gpk-application.c:902
-#, fuzzy, c-format
-msgid "%u package requires %s"
-msgid_plural "%u packages require %s"
-msgstr[0] "%i ପ୍ୟାକେଜ %s ଆବଶ୍ୟକ କରେ"
-msgstr[1] "%i ପ୍ୟାକେଜମାନ %s ଆବଶ୍ୟକ କରେ"
-
-#. TRANSLATORS: show a array of packages for the package
-#: ../src/packages/gpk-application.c:907
-#, fuzzy, c-format
-msgid "Packages listed below require %s to function correctly."
-msgid_plural "Packages listed below require %s to function correctly."
-msgstr[0] ""
-"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
-msgstr[1] ""
-"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
-
-#. TRANSLATORS: this package does not depend on any others
-#: ../src/packages/gpk-application.c:1024
-#, fuzzy
-msgid "This package does not depend on any others"
-msgstr "ଏହି ସଫ୍ଟୱେର ଅନ୍ୟ କାହା ଉପରେ ନିର୍ଭର କରେନାହିଁ"
-
-#. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/packages/gpk-application.c:1031
-#, fuzzy, c-format
-msgid "%u additional package is required for %s"
-msgid_plural "%u additional packages are required for %s"
-msgstr[0] "%i ଅତିରିକ୍ତ ପ୍ୟାକେଜ %s ପାଇଁ ଆବଶ୍ୟକ ହୁଏ"
-msgstr[1] "%i ଅତିରିକ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ଆବଶ୍ୟକ ହୁଏ"
-
-#. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/packages/gpk-application.c:1036
-#, c-format
-msgid "Packages listed below are required for %s to function correctly."
-msgid_plural "Packages listed below are required for %s to function correctly."
-msgstr[0] ""
-"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
-msgstr[1] ""
-"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
-
-#. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/packages/gpk-application.c:1107
-msgid "Invalid"
-msgstr "ଅବୈଧ"
-
-#. TRANSLATORS: no results were found for this search
-#: ../src/packages/gpk-application.c:1246
-msgid "No results were found."
-msgstr "କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ."
-
-#. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/packages/gpk-application.c:1254
-#, fuzzy
-msgid "Try entering a package name in the search bar."
-msgstr "ସନ୍ଧାନ ପଟିରେ ଗୋଟିଏ ନାମ ଭରଣ କରି ଚେଷ୍ଟାକରନ୍ତୁ।"
-
-#. TRANSLATORS: nothing in the package queue
-#: ../src/packages/gpk-application.c:1257
-#, fuzzy
-msgid "There are no packages queued to be installed or removed."
-msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ କିମ୍ବା କାଢ଼ିବା ପାଇଁ କୌଣସି ସଫ୍ଟୱେର୍‌ ଧାଡ଼ିରେ ନାହିଁ।"
-
-#. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/packages/gpk-application.c:1262
-#, fuzzy
-msgid ""
-"Try searching package descriptions by clicking the icon next to the search "
-"text."
-msgstr "ଖୋଜିବାକୁ ଥିବା ପାଠ୍ୟ ପରବର୍ତ୍ତୀ ଚିତ୍ରସଂକେତ ସଫ୍ଟୱେର୍‌ ବର୍ଣ୍ଣନାଗୁଡ଼ିକୁ ଖୋଜିବାକୁ ଚେଷ୍ଟାକରନ୍ତୁ।"
-
-#. TRANSLATORS: tell the user to try harder
-#: ../src/packages/gpk-application.c:1265
-msgid "Try again with a different search term."
-msgstr "ଅନ୍ୟ ଏକ ସନ୍ଧାନ ବସ୍ତୁ ସହିତ ପୁଣିଥରେ ଚେଷ୍ଟାକରନ୍ତୁ."
-
-#. TRANSLATORS: title: invalid text in the search bar
-#: ../src/packages/gpk-application.c:1529
-msgid "Invalid search text"
-msgstr "ଅବୈଧ ସନ୍ଧାନ ପାଠ୍ୟ"
-
-#. TRANSLATORS: message: tell the user that's not allowed
-#: ../src/packages/gpk-application.c:1531
-msgid "The search text contains invalid characters"
-msgstr "ସନ୍ଧାନ ପାଠ୍ୟ ଅବୈଧ ଅକ୍ଷରଗୁଡ଼ିକୁ ଧାରଣକରିଥାଏ"
-
-#. TRANSLATORS: title: we failed to execute the method
-#: ../src/packages/gpk-application.c:1572
-msgid "The search could not be completed"
-msgstr "ସନ୍ଧାନଟି ସମ୍ପୂର୍ଣ୍ଣ ହୋଇପାରିବ ନାହିଁ"
-
-#. TRANSLATORS: low level failure, details to follow
-#: ../src/packages/gpk-application.c:1574
-msgid "Running the transaction failed"
-msgstr "କାରବାରଟିକୁ ଚଲାଇବାରେ ବିଫଳ"
-
-#. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/packages/gpk-application.c:1703
-msgid "Changes not applied"
-msgstr "ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ପ୍ରୟୋଗକରାଯାଇପାରିବ ନାହିଁ"
-
-#: ../src/packages/gpk-application.c:1704
-msgid "Close _Anyway"
-msgstr "ଯେକୌଣସି ପ୍ରକାରେ ବନ୍ଦକରନ୍ତୁ (_A)"
-
-#. TRANSLATORS: tell the user the problem
-#: ../src/packages/gpk-application.c:1708
-msgid "You have made changes that have not yet been applied."
-msgstr "ଆପଣ କରିଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ଏପର୍ଯ୍ୟନ୍ତ ପ୍ରୟୋଗ କରାଯାଇନାହିଁ."
-
-#: ../src/packages/gpk-application.c:1709
-msgid "These changes will be lost if you close this window."
-msgstr "ଯଦି ଆପଣ ଏହି ୱିଣ୍ଡୋକୁ ବନ୍ଦକରନ୍ତି ତେବେ ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ନଷ୍ଟହୋଇଯିବ."
-
-#. TRANSLATORS: the size of the meta package
-#: ../src/packages/gpk-application.c:2204
-msgid "Size"
-msgstr "ଆକାର"
-
-#. TRANSLATORS: the installed size in bytes of the package
-#: ../src/packages/gpk-application.c:2207
-msgid "Installed size"
-msgstr "ସ୍ଥାପିତ ଆକାର"
-
-#. TRANSLATORS: the download size of the package
-#: ../src/packages/gpk-application.c:2210
-msgid "Download size"
-msgstr "ଆକାର ଆହରଣ କରନ୍ତୁ"
-
-#. TRANSLATORS: entry tooltip: basic search
-#: ../src/packages/gpk-application.c:2385
-msgid "Searching by name"
-msgstr "ନାମ ମାଧ୍ଯମରେ ଖୋଜୁଅଛି"
-
-#. TRANSLATORS: entry tooltip: detailed search
-#: ../src/packages/gpk-application.c:2411
-msgid "Searching by description"
-msgstr "ବର୍ଣ୍ଣନା ମାଧ୍ଯମରେ ଖୋଜୁଅଛି"
-
-#. TRANSLATORS: entry tooltip: file search
-#: ../src/packages/gpk-application.c:2437
-msgid "Searching by file"
-msgstr "ଫାଇଲ ମାଧ୍ଯମରେ ଖୋଜୁଅଛି"
-
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/packages/gpk-application.c:2460
-msgid "Search by name"
-msgstr "ନାମ ମାଧ୍ଯମରେ ଖୋଜନ୍ତୁ"
-
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/packages/gpk-application.c:2468
-msgid "Search by description"
-msgstr "ବର୍ଣ୍ଣନା ମାଧ୍ଯମରେ ଖୋଜନ୍ତୁ"
-
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/packages/gpk-application.c:2476
-msgid "Search by file name"
-msgstr "ଫାଇଲ ନାମ ମାଧ୍ଯମରେ ଖୋଜନ୍ତୁ"
-
-#: ../src/packages/gpk-application.c:2505
-msgid "Licensed under the GNU General Public License Version 2"
-msgstr "GNU General Public License Version 2 ଅନ୍ତର୍ଗତରେ ଅନୁମତି ପ୍ରାପ୍ତ"
-
-#: ../src/packages/gpk-application.c:2506
-msgid ""
-"PackageKit is free software; you can redistribute it and/or modify it under "
-"the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
-"any later version."
-msgstr ""
-"PackageKit is free software; you can redistribute it and/or modify it under "
-"the terms of the GNU General Public License as published by the Free "
-"Software Foundation; either version 2 of the License, or (at your option) "
-"any later version."
-
-#: ../src/packages/gpk-application.c:2510
-msgid ""
-"PackageKit is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details."
-msgstr ""
-"PackageKit is distributed in the hope that it will be useful, but WITHOUT "
-"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
-"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
-"more details."
-
-#: ../src/packages/gpk-application.c:2514
-msgid ""
-"You should have received a copy of the GNU General Public License along with "
-"this program; if not, write to the Free Software Foundation, Inc., 51 "
-"Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
-msgstr ""
-"You should have received a copy of the GNU General Public License along with "
-"this program; if not, write to the Free Software Foundation, Inc., 51 "
-"Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
-
-#. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/packages/gpk-application.c:2520
-msgid "translator-credits"
-msgstr "ମନୋଜ କୁମାର ଗିରି <mgiri@redhat.com>"
-
-#: ../src/packages/gpk-application.c:2541
-msgid "PackageKit Website"
-msgstr "PackageKit ୱେବସାଇଟ"
-
-#. TRANSLATORS: description of NULL, gpk-application that is
-#: ../src/packages/gpk-application.c:2544
-msgid "Package Manager"
-msgstr "ପ୍ୟାକେଜ ପରିଚାଳକ"
-
-#. TRANSLATORS: welcome text if we can click the group array
-#: ../src/packages/gpk-application.c:2736
-msgid "Enter a search word or click a category to get started."
-msgstr "ସନ୍ଧାନ ଶବ୍ଦ ଭରଣକରନ୍ତୁ ଏବଂ  କିମ୍ବା ଆରମ୍ଭ କରିବା ପାଇଁ ଗୋଟିଏ ଶ୍ରେଣୀକୁ ଦବାନ୍ତୁ।"
-
-#. TRANSLATORS: welcome text if we have to search by name
-#: ../src/packages/gpk-application.c:2739
-msgid "Enter a search word to get started."
-msgstr "ଆରମ୍ଭ କରିବା ପାଇଁ ସନ୍ଧାନ ଶବ୍ଦ ଭରଣ କରନ୍ତୁ।"
-
-#. TRANSLATORS: daemon is broken
-#: ../src/packages/gpk-application.c:2966
-msgid "Exiting as properties could not be retrieved"
-msgstr "ପୃଷ୍ଠଭୂମି ବିବରଣୀ ପ୍ରଦର୍ଶକରୁ ପ୍ରସ୍ଥାନ କରିବାକୁ ପୁନରୁଦ୍ଧାର କରିହେବ ନାହିଁ"
-
-#. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/packages/gpk-application.c:3009
-msgid "All packages"
-msgstr "ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
-
-#. TRANSLATORS: tooltip: all packages
-#: ../src/packages/gpk-application.c:3011
-msgid "Show all packages"
-msgstr "ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ"
-
-#. TRANSLATORS: show the program version
-#: ../src/packages/gpk-application.c:3396
-#: ../src/updates-viewer/gpk-update-viewer.c:3342
-msgid "Show the program version and exit"
-msgstr "ପ୍ରଗ୍ରାମ ସଂସ୍କରଣକୁ ଦର୍ଶାନ୍ତୁ ଏବଂ ପ୍ରସ୍ଥାନକରନ୍ତୁ"
-
-#: ../src/packages/gpk-application.c:3410
-msgid "Install Software"
-msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ କରନ୍ତୁ"
-
-#. are we running privileged
-#: ../src/packages/gpk-application.c:3426
-msgid "Package installer"
-msgstr "ପ୍ୟାକେଜ ସ୍ଥାପକ"
-
 #. TRANSLATORS: check once an hour
 #: ../src/preferences/gpk-prefs.c:62
 msgid "Hourly"
@@ -3601,12 +3313,6 @@ msgstr "ସ୍ଥିତି ପରିବର୍ତ୍ତନ କରିବାରେ 
 msgid "Enabled"
 msgstr "ସକ୍ରିୟ"
 
-#. TRANSLATORS: column for the source description
-#: ../src/preferences/gpk-prefs.c:395
-#, fuzzy
-msgid "Package Source"
-msgstr "ପ୍ଯାକେଜ"
-
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -3614,7 +3320,7 @@ msgstr "ଉତ୍ସଗୁଡ଼ିକର ତାଲିକା ଗ୍ରହଣ କ
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/updates-viewer/gpk-update-viewer.c:3126
+#: ../src/software-update/gpk-update-viewer.c:3180
 msgid "Exiting as backend details could not be retrieved"
 msgstr "ପୃଷ୍ଠଭୂମି ବିବରଣୀ ପ୍ରଦର୍ଶକରୁ ପ୍ରସ୍ଥାନ କରିବାକୁ ପୁନରୁଦ୍ଧାର କରିହେବ ନାହିଁ"
 
@@ -3625,32 +3331,309 @@ msgstr "ସଫ୍ଟୱେର ଉତ୍ସ ତାଲିକା ପାଇବା �
 
 #. TRANSLATORS: we can display updates or repsository tab by default
 #: ../src/preferences/gpk-prefs.c:739
-msgid "Set the startup page: either ‘updates’or ‘repositories’"
+msgid "Set the startup page: either ‘updates’or ‘sources’"
 msgstr ""
 
-#: ../src/updates-service/gpk-updates-notification.c:180
-#: ../src/updates-service/gpk-updates-notification.c:411
-msgid "Software Updates"
-msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନଗୁଡ଼ିକ"
+#. TRANSLATORS: program name, an application to add and remove software repositories
+#: ../src/preferences/gpk-prefs.c:748
+msgid "Software Settings"
+msgstr "ସଫ୍ଟୱେର ବିନ୍ୟାସ"
+
+#. TRANSLATORS: this is a menu group of packages in the queue
+#: ../src/software/gpk-application.c:347
+msgid "Pending"
+msgstr "ବାକି ଅଛି"
+
+#. TRANSLATORS: title: how many files are installed by the application
+#: ../src/software/gpk-application.c:593
+#, fuzzy, c-format
+msgid "%u file installed by %s"
+msgid_plural "%u files installed by %s"
+msgstr[0] "%i ଫାଇଲ %s ଦ୍ୱାରା ସ୍ଥାପିତ"
+msgstr[1] "%i ଫାଇଲଗୁଡ଼ିକ %s ଦ୍ୱାରା ସ୍ଥାପିତ"
+
+#. TRANSLATORS: no packages returned
+#: ../src/software/gpk-application.c:893 ../src/software/gpk-application.c:1022
+msgid "No packages"
+msgstr "କୌଣସି ପ୍ୟାକେଜ ନାହିଁ"
+
+#. TRANSLATORS: this package is not required by any others
+#: ../src/software/gpk-application.c:895
+#, fuzzy
+msgid "No other packages require this package"
+msgstr "ଅନ୍ୟକୌଣସି ପ୍ୟାକେଜ ଆବଶ୍ୟକ କରେନାହିଁ"
+
+#. TRANSLATORS: title: how many packages require this package
+#: ../src/software/gpk-application.c:902
+#, fuzzy, c-format
+msgid "%u package requires %s"
+msgid_plural "%u packages require %s"
+msgstr[0] "%i ପ୍ୟାକେଜ %s ଆବଶ୍ୟକ କରେ"
+msgstr[1] "%i ପ୍ୟାକେଜମାନ %s ଆବଶ୍ୟକ କରେ"
+
+#. TRANSLATORS: show a array of packages for the package
+#: ../src/software/gpk-application.c:907
+#, fuzzy, c-format
+msgid "Packages listed below require %s to function correctly."
+msgid_plural "Packages listed below require %s to function correctly."
+msgstr[0] ""
+"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
+msgstr[1] ""
+"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
+
+#. TRANSLATORS: this package does not depend on any others
+#: ../src/software/gpk-application.c:1024
+#, fuzzy
+msgid "This package does not depend on any others"
+msgstr "ଏହି ସଫ୍ଟୱେର ଅନ୍ୟ କାହା ଉପରେ ନିର୍ଭର କରେନାହିଁ"
+
+#. TRANSLATORS: title: show the number of other packages we depend on
+#: ../src/software/gpk-application.c:1031
+#, fuzzy, c-format
+msgid "%u additional package is required for %s"
+msgid_plural "%u additional packages are required for %s"
+msgstr[0] "%i ଅତିରିକ୍ତ ପ୍ୟାକେଜ %s ପାଇଁ ଆବଶ୍ୟକ ହୁଏ"
+msgstr[1] "%i ଅତିରିକ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ଆବଶ୍ୟକ ହୁଏ"
+
+#. TRANSLATORS: message: show the array of dependent packages for this package
+#: ../src/software/gpk-application.c:1036
+#, c-format
+msgid "Packages listed below are required for %s to function correctly."
+msgid_plural "Packages listed below are required for %s to function correctly."
+msgstr[0] ""
+"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
+msgstr[1] ""
+"ନିମ୍ନରେ ତାଲିକାଭୁକ୍ତ କରାଯାଇଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ %s ପାଇଁ ସଠିକ ଭାବରେ କାର୍ଯ୍ୟ କରିବାକୁ ଆବଶ୍ୟକ ହୁଏ."
+
+#. TRANSLATORS: the repo name is invalid or not found, fall back to this
+#: ../src/software/gpk-application.c:1107
+msgid "Invalid"
+msgstr "ଅବୈଧ"
+
+#. TRANSLATORS: no results were found for this search
+#: ../src/software/gpk-application.c:1246
+msgid "No results were found."
+msgstr "କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ."
+
+#. TRANSLATORS: be helpful, but this shouldn't happen
+#: ../src/software/gpk-application.c:1254
+#, fuzzy
+msgid "Try entering a package name in the search bar."
+msgstr "ସନ୍ଧାନ ପଟିରେ ଗୋଟିଏ ନାମ ଭରଣ କରି ଚେଷ୍ଟାକରନ୍ତୁ।"
+
+#. TRANSLATORS: nothing in the package queue
+#: ../src/software/gpk-application.c:1257
+#, fuzzy
+msgid "There are no packages queued to be installed or removed."
+msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ କିମ୍ବା କାଢ଼ିବା ପାଇଁ କୌଣସି ସଫ୍ଟୱେର୍‌ ଧାଡ଼ିରେ ନାହିଁ।"
+
+#. TRANSLATORS: tell the user to switch to details search mode
+#: ../src/software/gpk-application.c:1262
+#, fuzzy
+msgid ""
+"Try searching package descriptions by clicking the icon next to the search "
+"text."
+msgstr "ଖୋଜିବାକୁ ଥିବା ପାଠ୍ୟ ପରବର୍ତ୍ତୀ ଚିତ୍ରସଂକେତ ସଫ୍ଟୱେର୍‌ ବର୍ଣ୍ଣନାଗୁଡ଼ିକୁ ଖୋଜିବାକୁ ଚେଷ୍ଟାକରନ୍ତୁ।"
+
+#. TRANSLATORS: tell the user to try harder
+#: ../src/software/gpk-application.c:1265
+msgid "Try again with a different search term."
+msgstr "ଅନ୍ୟ ଏକ ସନ୍ଧାନ ବସ୍ତୁ ସହିତ ପୁଣିଥରେ ଚେଷ୍ଟାକରନ୍ତୁ."
+
+#. TRANSLATORS: title: invalid text in the search bar
+#: ../src/software/gpk-application.c:1529
+msgid "Invalid search text"
+msgstr "ଅବୈଧ ସନ୍ଧାନ ପାଠ୍ୟ"
+
+#. TRANSLATORS: message: tell the user that's not allowed
+#: ../src/software/gpk-application.c:1531
+msgid "The search text contains invalid characters"
+msgstr "ସନ୍ଧାନ ପାଠ୍ୟ ଅବୈଧ ଅକ୍ଷରଗୁଡ଼ିକୁ ଧାରଣକରିଥାଏ"
+
+#. TRANSLATORS: title: we failed to execute the method
+#: ../src/software/gpk-application.c:1572
+msgid "The search could not be completed"
+msgstr "ସନ୍ଧାନଟି ସମ୍ପୂର୍ଣ୍ଣ ହୋଇପାରିବ ନାହିଁ"
+
+#. TRANSLATORS: low level failure, details to follow
+#: ../src/software/gpk-application.c:1574
+msgid "Running the transaction failed"
+msgstr "କାରବାରଟିକୁ ଚଲାଇବାରେ ବିଫଳ"
+
+#. TRANSLATORS: title: warn the user they are quitting with unapplied changes
+#: ../src/software/gpk-application.c:1703
+msgid "Changes not applied"
+msgstr "ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ପ୍ରୟୋଗକରାଯାଇପାରିବ ନାହିଁ"
+
+#: ../src/software/gpk-application.c:1704
+msgid "Close _Anyway"
+msgstr "ଯେକୌଣସି ପ୍ରକାରେ ବନ୍ଦକରନ୍ତୁ (_A)"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software/gpk-application.c:1708
+msgid "You have made changes that have not yet been applied."
+msgstr "ଆପଣ କରିଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ଏପର୍ଯ୍ୟନ୍ତ ପ୍ରୟୋଗ କରାଯାଇନାହିଁ."
+
+#: ../src/software/gpk-application.c:1709
+msgid "These changes will be lost if you close this window."
+msgstr "ଯଦି ଆପଣ ଏହି ୱିଣ୍ଡୋକୁ ବନ୍ଦକରନ୍ତି ତେବେ ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ନଷ୍ଟହୋଇଯିବ."
+
+#. TRANSLATORS: the size of the meta package
+#: ../src/software/gpk-application.c:2204
+msgid "Size"
+msgstr "ଆକାର"
+
+#. TRANSLATORS: the installed size in bytes of the package
+#: ../src/software/gpk-application.c:2207
+msgid "Installed size"
+msgstr "ସ୍ଥାପିତ ଆକାର"
+
+#. TRANSLATORS: the download size of the package
+#: ../src/software/gpk-application.c:2210
+msgid "Download size"
+msgstr "ଆକାର ଆହରଣ କରନ୍ତୁ"
+
+#. TRANSLATORS: entry tooltip: basic search
+#: ../src/software/gpk-application.c:2385
+msgid "Searching by name"
+msgstr "ନାମ ମାଧ୍ଯମରେ ଖୋଜୁଅଛି"
+
+#. TRANSLATORS: entry tooltip: detailed search
+#: ../src/software/gpk-application.c:2411
+msgid "Searching by description"
+msgstr "ବର୍ଣ୍ଣନା ମାଧ୍ଯମରେ ଖୋଜୁଅଛି"
+
+#. TRANSLATORS: entry tooltip: file search
+#: ../src/software/gpk-application.c:2437
+msgid "Searching by file"
+msgstr "ଫାଇଲ ମାଧ୍ଯମରେ ଖୋଜୁଅଛି"
+
+#. TRANSLATORS: context menu item for the search type icon
+#: ../src/software/gpk-application.c:2460
+msgid "Search by name"
+msgstr "ନାମ ମାଧ୍ଯମରେ ଖୋଜନ୍ତୁ"
+
+#. TRANSLATORS: context menu item for the search type icon
+#: ../src/software/gpk-application.c:2468
+msgid "Search by description"
+msgstr "ବର୍ଣ୍ଣନା ମାଧ୍ଯମରେ ଖୋଜନ୍ତୁ"
+
+#. TRANSLATORS: context menu item for the search type icon
+#: ../src/software/gpk-application.c:2476
+msgid "Search by file name"
+msgstr "ଫାଇଲ ନାମ ମାଧ୍ଯମରେ ଖୋଜନ୍ତୁ"
+
+#: ../src/software/gpk-application.c:2505
+msgid "Licensed under the GNU General Public License Version 2"
+msgstr "GNU General Public License Version 2 ଅନ୍ତର୍ଗତରେ ଅନୁମତି ପ୍ରାପ୍ତ"
+
+#: ../src/software/gpk-application.c:2506
+msgid ""
+"PackageKit is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 2 of the License, or (at your option) "
+"any later version."
+msgstr ""
+"PackageKit is free software; you can redistribute it and/or modify it under "
+"the terms of the GNU General Public License as published by the Free "
+"Software Foundation; either version 2 of the License, or (at your option) "
+"any later version."
+
+#: ../src/software/gpk-application.c:2510
+msgid ""
+"PackageKit is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+msgstr ""
+"PackageKit is distributed in the hope that it will be useful, but WITHOUT "
+"ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
+"FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
+"more details."
+
+#: ../src/software/gpk-application.c:2514
+msgid ""
+"You should have received a copy of the GNU General Public License along with "
+"this program; if not, write to the Free Software Foundation, Inc., 51 "
+"Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+msgstr ""
+"You should have received a copy of the GNU General Public License along with "
+"this program; if not, write to the Free Software Foundation, Inc., 51 "
+"Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
+
+#. TRANSLATORS: put your own name here -- you deserve credit!
+#: ../src/software/gpk-application.c:2520
+msgid "translator-credits"
+msgstr "ମନୋଜ କୁମାର ଗିରି <mgiri@redhat.com>"
+
+#: ../src/software/gpk-application.c:2541
+msgid "PackageKit Website"
+msgstr "PackageKit ୱେବସାଇଟ"
+
+#. TRANSLATORS: description of NULL, gpk-application that is
+#: ../src/software/gpk-application.c:2544
+msgid "Package Manager"
+msgstr "ପ୍ୟାକେଜ ପରିଚାଳକ"
+
+#. TRANSLATORS: welcome text if we can click the group array
+#: ../src/software/gpk-application.c:2736
+msgid "Enter a search word or click a category to get started."
+msgstr "ସନ୍ଧାନ ଶବ୍ଦ ଭରଣକରନ୍ତୁ ଏବଂ  କିମ୍ବା ଆରମ୍ଭ କରିବା ପାଇଁ ଗୋଟିଏ ଶ୍ରେଣୀକୁ ଦବାନ୍ତୁ।"
+
+#. TRANSLATORS: welcome text if we have to search by name
+#: ../src/software/gpk-application.c:2739
+msgid "Enter a search word to get started."
+msgstr "ଆରମ୍ଭ କରିବା ପାଇଁ ସନ୍ଧାନ ଶବ୍ଦ ଭରଣ କରନ୍ତୁ।"
+
+#. TRANSLATORS: daemon is broken
+#: ../src/software/gpk-application.c:2966
+msgid "Exiting as properties could not be retrieved"
+msgstr "ପୃଷ୍ଠଭୂମି ବିବରଣୀ ପ୍ରଦର୍ଶକରୁ ପ୍ରସ୍ଥାନ କରିବାକୁ ପୁନରୁଦ୍ଧାର କରିହେବ ନାହିଁ"
+
+#. TRANSLATORS: title: all of the packages on the system and available in sources
+#: ../src/software/gpk-application.c:3009
+msgid "All packages"
+msgstr "ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
+
+#. TRANSLATORS: tooltip: all packages
+#: ../src/software/gpk-application.c:3011
+msgid "Show all packages"
+msgstr "ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଦର୍ଶାନ୍ତୁ"
+
+#. TRANSLATORS: show the program version
+#: ../src/software/gpk-application.c:3396
+#: ../src/software-update/gpk-update-viewer.c:3412
+msgid "Show the program version and exit"
+msgstr "ପ୍ରଗ୍ରାମ ସଂସ୍କରଣକୁ ଦର୍ଶାନ୍ତୁ ଏବଂ ପ୍ରସ୍ଥାନକରନ୍ତୁ"
+
+#: ../src/software/gpk-application.c:3410
+msgid "Install Software"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ କରନ୍ତୁ"
+
+#. are we running privileged
+#: ../src/software/gpk-application.c:3426
+#, fuzzy
+msgid "Software installer"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/updates-service/gpk-updates-notification.c:192
+#: ../src/software-service/gpk-updates-notification.c:192
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/updates-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:199
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/updates-service/gpk-updates-notification.c:207
+#: ../src/software-service/gpk-updates-notification.c:207
 #, fuzzy
 msgid "Restart & Install"
 msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/updates-service/gpk-updates-notification.c:239
+#: ../src/software-service/gpk-updates-notification.c:239
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3658,7 +3641,7 @@ msgstr[0] "ସେଠାରେ କୌଣସି ଅଦ୍ୟତନ ଉପଲବ୍
 msgstr[1] "ସେଠାରେ କୌଣସି ଅଦ୍ୟତନ ଉପଲବ୍ଧ ନାହିଁ"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/updates-service/gpk-updates-notification.c:275
+#: ../src/software-service/gpk-updates-notification.c:275
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3667,23 +3650,22 @@ msgstr[1] "କୌଣସି  ଅଦ୍ୟତନ ବିବରଣୀ  ଉପଲବ�
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/updates-service/gpk-updates-notification.c:308
+#: ../src/software-service/gpk-updates-notification.c:308
 #, fuzzy
 msgid "Unable to access software updates"
 msgstr "ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକୁ ସକ୍ରିୟ କିମ୍ବା ନିଷ୍କ୍ରିୟ କରନ୍ତୁ"
 
-#: ../src/updates-service/gpk-updates-service.c:77
-#, fuzzy
-msgid "Software Update Service with PackageKit"
-msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ ପ୍ରଦର୍ଶକ"
+#: ../src/software-service/gpk-updates-notification.c:411
+msgid "Software Updates"
+msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/updates-viewer/gpk-update-viewer.c:175
+#: ../src/software-update/gpk-update-viewer.c:171
 msgid "Failed to process request."
 msgstr "ଅନୁରୋଧ କୁ ସଂସାଧନ କରିବା ପାଇଁ ଅସମର୍ଥ।"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:203
+#: ../src/software-update/gpk-update-viewer.c:199
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3692,20 +3674,20 @@ msgstr ""
 "ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:205
-#: ../src/updates-viewer/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:201
+#: ../src/software-update/gpk-update-viewer.c:207
 msgid "Restart Computer"
 msgstr "କମ୍ପୁଟରକୁ ପୁନର୍ଚାଳନ କରନ୍ତୁ"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/updates-viewer/gpk-update-viewer.c:209
+#: ../src/software-update/gpk-update-viewer.c:205
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
 msgstr "ସ୍ଥାପିତ ହୋଇଥିବା କିଛି ଅଦ୍ୟତନଗୁଡ଼ିକରେ ସୁରକ୍ଷିତ ରହିବା ପାଇଁ କମ୍ପୁଟରକୁ ପୁନର୍ଚାଳନ କରିବା ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:215
+#: ../src/software-update/gpk-update-viewer.c:211
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3714,13 +3696,13 @@ msgstr ""
 "ପୁଣି ଲଗଇନ ହେବା ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:217
-#: ../src/updates-viewer/gpk-update-viewer.c:223
+#: ../src/software-update/gpk-update-viewer.c:213
+#: ../src/software-update/gpk-update-viewer.c:219
 msgid "Log Out"
 msgstr "ଲଗଆଉଟ କରନ୍ତୁ"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/updates-viewer/gpk-update-viewer.c:221
+#: ../src/software-update/gpk-update-viewer.c:217
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3729,86 +3711,93 @@ msgstr ""
 "ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:267
+#: ../src/software-update/gpk-update-viewer.c:258
 msgid "Could not restart"
 msgstr "ପୁନଃଚାଳନ କରିପାରିଲା ନାହିଁ"
 
+#. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
+#: ../src/software-update/gpk-update-viewer.c:265
+#, fuzzy
+msgid "Could not log out"
+msgstr "ଅଦ୍ୟନତଗୁଡ଼ିକ ମିଳିଲା ନାହିଁ"
+
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/updates-viewer/gpk-update-viewer.c:337
+#: ../src/software-update/gpk-update-viewer.c:328
 msgid "Some updates were not installed"
 msgstr "କିଛି ଅଦ୍ୟତନଗୁଡ଼ିକ ସ୍ଥାପିତ ହୋଇନାହିଁ"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:404
-#: ../src/updates-viewer/gpk-update-viewer.c:415
-msgid "Could not update packages"
-msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ଅଦ୍ୟତନ କରିପାରିଲା ନାହିଁ"
+#: ../src/software-update/gpk-update-viewer.c:395
+#: ../src/software-update/gpk-update-viewer.c:406
+#, fuzzy
+msgid "Could not install updates"
+msgstr "ଅଦ୍ୟନତଗୁଡ଼ିକ ମିଳିଲା ନାହିଁ"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:476
-#: ../src/updates-viewer/gpk-update-viewer.c:486
-#: ../src/updates-viewer/gpk-update-viewer.c:493
+#: ../src/software-update/gpk-update-viewer.c:467
+#: ../src/software-update/gpk-update-viewer.c:477
+#: ../src/software-update/gpk-update-viewer.c:484
 msgid "Updates installed"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକ ସ୍ଥାପିତ ହୋଇଛି"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:488
+#: ../src/software-update/gpk-update-viewer.c:479
 msgid "All updates were installed successfully."
 msgstr "ସମସ୍ତ ଅଦ୍ୟତନଗୁଡ଼ିକ ସଫଳତାର ସହିତ ସ୍ଥାପିତ ହୋଇସାରିଛି।"
 
 #. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/updates-viewer/gpk-update-viewer.c:495
+#: ../src/software-update/gpk-update-viewer.c:486
 msgid "The selected updates were installed successfully."
 msgstr "ବଚ୍ଛିତ ଅଦ୍ୟତନଗୁଡ଼ିକ ସଫଳତାର ସହିତ ସ୍ଥାପିତ ହୋଇସାରିଛି।"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:703
+#: ../src/software-update/gpk-update-viewer.c:694
 msgid "Trivial updates"
 msgstr "ଛୋଟ ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:707
+#: ../src/software-update/gpk-update-viewer.c:698
 msgid "Important updates"
 msgstr "ଦରକାରୀ ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:711
+#: ../src/software-update/gpk-update-viewer.c:702
 msgid "Security updates"
 msgstr "ସୁରକ୍ଷା ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:715
+#: ../src/software-update/gpk-update-viewer.c:706
 msgid "Bug fix updates"
 msgstr "ତ୍ରୁଟି ନିବାରଣ ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:719
+#: ../src/software-update/gpk-update-viewer.c:710
 msgid "Enhancement updates"
 msgstr "ଉନ୍ନତିମୂଳକ  ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The type of update
-#: ../src/updates-viewer/gpk-update-viewer.c:723
+#: ../src/software-update/gpk-update-viewer.c:714
 msgid "Blocked updates"
 msgstr "ଅବରୂଦ୍ଧ ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/updates-viewer/gpk-update-viewer.c:727
+#: ../src/software-update/gpk-update-viewer.c:718
 msgid "Other updates"
 msgstr "ଅନ୍ୟାନ୍ୟ ଅଦ୍ୟତନଗୁଡ଼ିକ"
 
 #. TRANSLATORS: querying update array
-#: ../src/updates-viewer/gpk-update-viewer.c:984
+#: ../src/software-update/gpk-update-viewer.c:975
 msgid "Getting the list of updates"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକର ତାଲିକା ଗ୍ରହଣକରୁଅଛି"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:1220
+#: ../src/software-update/gpk-update-viewer.c:1211
 msgid "Could not run upgrade script"
 msgstr "ସ୍କ୍ରିପ୍ଟ୍‌ ଉନ୍ନୟନକୁ ଚଲାଇ ପାରିଲା ନାହିଁ"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/updates-viewer/gpk-update-viewer.c:1251
+#: ../src/software-update/gpk-update-viewer.c:1242
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3822,29 +3811,29 @@ msgstr[1] ""
 "ସଂଯୋଜକତା ବେତାର ବ୍ରୋଡବ୍ୟାଣ୍ଡ ଦ୍ୱାରା ପ୍ରଦତ୍ତ, ଏବଂ ଏହି ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଅଦ୍ୟତନ କରିବା ମୂଲ୍ୟବାନ "
 "ହୋଇପାରେ।"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1396
+#: ../src/software-update/gpk-update-viewer.c:1391
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/updates-viewer/gpk-update-viewer.c:1434
+#: ../src/software-update/gpk-update-viewer.c:1429
 msgid "No updates are available"
 msgstr "କୌଣସି  ଅଦ୍ୟତନ ଉପଲବ୍ଧ ନାହିଁ"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/updates-viewer/gpk-update-viewer.c:1436
+#: ../src/software-update/gpk-update-viewer.c:1431
 msgid "No network connection was detected."
 msgstr "କୌଣସି ନେଟୱର୍କ ସଂଯୋଗ ଉପଲବ୍ଧ ନାହିଁ।"
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/updates-viewer/gpk-update-viewer.c:1454
+#: ../src/software-update/gpk-update-viewer.c:1449
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "ଅଦ୍ୟତନକୁ ସ୍ଥାପନକରନ୍ତୁ (_I)"
 msgstr[1] "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ସ୍ଥାପନକରନ୍ତୁ (_I)"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:1499
+#: ../src/software-update/gpk-update-viewer.c:1494
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3852,7 +3841,7 @@ msgstr[0] "ସେଠାରେ %i ଟି ଅଦ୍ୟତନ ଉପଲବ୍ଧ �
 msgstr[1] "ସେଠାରେ %i ଟି ଅଦ୍ୟତନ ଉପଲବ୍ଧ ଅଛି"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/updates-viewer/gpk-update-viewer.c:1511
+#: ../src/software-update/gpk-update-viewer.c:1506
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3860,7 +3849,7 @@ msgstr[0] "%i ଟି ଅଦ୍ୟତନକୁ ବଛାହୋଇଛି"
 msgstr[1] "%i ଟି ଅଦ୍ୟତନଗୁଡ଼ିକୁ ବଛାହୋଇଛି"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/updates-viewer/gpk-update-viewer.c:1520
+#: ../src/software-update/gpk-update-viewer.c:1515
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3868,50 +3857,50 @@ msgstr[0] "%i ଟି ଅଦ୍ୟତନ ବଛାହୋଇଛି (%s)"
 msgstr[1] "%i ଟି ଅଦ୍ୟତନ ବଛାହୋଇଛି (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/updates-viewer/gpk-update-viewer.c:1716
+#: ../src/software-update/gpk-update-viewer.c:1711
 msgid "Status"
 msgstr "ଅବସ୍ଥିତି"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1894
+#: ../src/software-update/gpk-update-viewer.c:1889
 msgid "This update will add new features and expand functionality."
 msgstr "ଏହି ଅଦ୍ୟତନଟି ନୂତନ ବିଶେଷତା ଯୋଗ କରିବ ଏବଂ କାର୍ଯ୍ୟକାରିତାକୁ ବୃଦ୍ଧି କରିବ।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1898
+#: ../src/software-update/gpk-update-viewer.c:1893
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "ଏହି ଅଦ୍ୟତନଟି ତ୍ରୁଟି ଏବଂ ଅନ୍ୟାନ୍ୟ ଗୁରୁତ୍ତ୍ୱପୂର୍ଣ୍ଣ ସମସ୍ୟାକୁ ସମାଧାନ କରିବ।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1902
+#: ../src/software-update/gpk-update-viewer.c:1897
 msgid "This update is important as it may solve critical problems."
 msgstr "ଏହି ଅଦ୍ୟତନଟି ଦରକାରୀ କାରଣ ଏହା ଗୁରୁତ୍ତ୍ୱପୂର୍ଣ୍ଣ ସମସ୍ୟାଗୁଡ଼ିକୁ ସମାଧାନ କରିପାରିବ।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1906
+#: ../src/software-update/gpk-update-viewer.c:1901
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "ଏହି ଅଦ୍ୟତନଟି ଏହି ପ୍ୟାକେଜ ସହିତ ଗୋଟିଏ ସୁରକ୍ଷା ଭେଦ୍ୟତାକୁ ସମାଧାନ କରିବା ପାଇଁ ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/updates-viewer/gpk-update-viewer.c:1910
+#: ../src/software-update/gpk-update-viewer.c:1905
 msgid "This update is blocked."
 msgstr "ଏହି ଅଦ୍ୟତନକୁ ବ୍ଲକ ହୋଇଛି।"
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/updates-viewer/gpk-update-viewer.c:1922
+#: ../src/software-update/gpk-update-viewer.c:1917
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "ଏହି ବିଜ୍ଞପ୍ତିକୁ %s ରେ ପ୍ରଦାନ କରାଯାଇଥିଲା ଏବଂ ଶେଷଥର %s ରେ ଅଦ୍ୟତନ କରାହୋଇଥିଲା।"
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/updates-viewer/gpk-update-viewer.c:1929
+#: ../src/software-update/gpk-update-viewer.c:1924
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "ଏହି ବିଜ୍ଞପ୍ତିକୁ %s ରେ ପ୍ରଦାନ କରାଯାଇଥିଲା।"
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1947
+#: ../src/software-update/gpk-update-viewer.c:1942
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3919,7 +3908,7 @@ msgstr[0] "ଏହି ଅଦ୍ୟତନ ବିଷୟରେ ଅଧିକ ତଥ�
 msgstr[1] "ଏହି ଅଦ୍ୟତନ ବିଷୟରେ ଅଧିକ ତଥ୍ୟ ପାଇଁ ଦୟାକରି ଏହି ୱେବସାଇଟଗୁଡ଼ିକୁ ପରିଦର୍ଶନ କରନ୍ତୁ:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1954
+#: ../src/software-update/gpk-update-viewer.c:1949
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3934,7 +3923,7 @@ msgstr[1] ""
 "ପରିଦର୍ଶନ କରନ୍ତୁ:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/updates-viewer/gpk-update-viewer.c:1961
+#: ../src/software-update/gpk-update-viewer.c:1956
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3943,7 +3932,7 @@ msgstr[0] "ଏହି ସୁରକ୍ଷା ଅଦ୍ୟତନ ବିଷୟରେ
 msgstr[1] "ଏହି ସୁରକ୍ଷା ଅଦ୍ୟତନ ବିଷୟରେ ଅଧିକ ତଥ୍ୟ ପାଇଁ ଦୟାକରି ଏହି ୱେବସାଇଟଗୁଡ଼ିକୁ ପରିଦର୍ଶନ କରନ୍ତୁ:"
 
 #. TRANSLATORS: reboot required
-#: ../src/updates-viewer/gpk-update-viewer.c:1970
+#: ../src/software-update/gpk-update-viewer.c:1965
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -3951,7 +3940,7 @@ msgstr ""
 "ଅଦ୍ୟତନ କରିସାରିବା ପରେ ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ପ୍ରଭାବ ପକାଇବା ପାଇଁ କମ୍ପୁଟରକୁ ପୁନଃଚାଳନ କରିବାକୁ ହେବ।"
 
 #. TRANSLATORS: log out required
-#: ../src/updates-viewer/gpk-update-viewer.c:1974
+#: ../src/software-update/gpk-update-viewer.c:1969
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3960,7 +3949,7 @@ msgstr ""
 "ଲଗଇନ କରିବା ଆବଶ୍ୟକ"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1981
+#: ../src/software-update/gpk-update-viewer.c:1976
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -3968,7 +3957,7 @@ msgstr ""
 "ଏହି ଅଦ୍ୟତନର ଶ୍ରେଣୀବିଭାଗଟି ଅସ୍ଥାୟୀ ଯାହା ଅର୍ଥ ହେଉଛି ଏହା ଉତ୍ପାଦନ ପାଇଁ ସଂରଚନା କରାଯାଇନାହିଁ।"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/updates-viewer/gpk-update-viewer.c:1985
+#: ../src/software-update/gpk-update-viewer.c:1980
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3977,89 +3966,147 @@ msgstr ""
 "ଆପଣ ସମ୍ମୁଖୀନ ହେଉଥିବା ଯେକୌଣସି ସମସ୍ୟାକୁ ଖବର କରନ୍ତୁ।"
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/updates-viewer/gpk-update-viewer.c:1993
+#: ../src/software-update/gpk-update-viewer.c:1988
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "ବିକାଶକାରୀଙ୍କ ଲଗଗୁଡ଼ିକୁ ଦର୍ଶାଯାଇଛି ଯେହେତୁ ଏହି ଅଦ୍ୟତନ ପାଇଁ କୌଣସି ବର୍ଣ୍ଣନା ଉପଲବ୍ଧ ନାହିଁ:"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2040
+#: ../src/software-update/gpk-update-viewer.c:2035
 msgid "Loading…"
 msgstr "ଧାରଣ କରୁଅଛି..."
 
-#: ../src/updates-viewer/gpk-update-viewer.c:2043
+#: ../src/software-update/gpk-update-viewer.c:2038
 msgid "No update details available."
 msgstr "କୌଣସି  ଅଦ୍ୟତନ ବିବରଣୀ  ଉପଲବ୍ଧ ନାହିଁ।"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2075
-#: ../src/updates-viewer/gpk-update-viewer.c:2173
-#: ../src/updates-viewer/gpk-update-viewer.c:2193
+#. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
+#. TRANSLATORS: PackageKit did not send any results for the query...
+#: ../src/software-update/gpk-update-viewer.c:2098
+#: ../src/software-update/gpk-update-viewer.c:2118
+#: ../src/software-update/gpk-update-viewer.c:2228
+#: ../src/software-update/gpk-update-viewer.c:2248
 msgid "Could not get update details"
 msgstr "ଅଦ୍ୟତନ ବିବରଣୀ ପାଇ ନାହିଁ"
 
-#. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/updates-viewer/gpk-update-viewer.c:2095
-msgid "Could not get package details"
-msgstr "ପ୍ୟାକେଜ ବିବରଣୀ ପାଇ ନାହିଁ"
-
-#: ../src/updates-viewer/gpk-update-viewer.c:2095
-#: ../src/updates-viewer/gpk-update-viewer.c:2193
+#: ../src/software-update/gpk-update-viewer.c:2118
+#: ../src/software-update/gpk-update-viewer.c:2248
 msgid "No results were returned."
 msgstr "କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ।"
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2428
+#: ../src/software-update/gpk-update-viewer.c:2483
 msgid "Select all"
 msgstr "ସମସ୍ତଙ୍କୁ ଚୟନକରନ୍ତୁ"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2436
+#: ../src/software-update/gpk-update-viewer.c:2491
 msgid "Unselect all"
 msgstr "ସମସ୍ତଙ୍କୁ ଅବଛା କରନ୍ତୁ"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/updates-viewer/gpk-update-viewer.c:2443
+#: ../src/software-update/gpk-update-viewer.c:2498
 msgid "Select security updates"
 msgstr "ସୁରକ୍ଷା ଅଦ୍ୟତନଗୁଡ଼ିକୁ ବାଛନ୍ତୁ"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/updates-viewer/gpk-update-viewer.c:2449
+#: ../src/software-update/gpk-update-viewer.c:2504
 msgid "Ignore this update"
 msgstr "ଏହି ଅଦ୍ୟତନକୁ ଅଗ୍ରାହ୍ୟ କରନ୍ତୁ"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:2556
-#: ../src/updates-viewer/gpk-update-viewer.c:2759
+#: ../src/software-update/gpk-update-viewer.c:2611
+#: ../src/software-update/gpk-update-viewer.c:2814
 msgid "Could not get updates"
 msgstr "ଅଦ୍ୟନତଗୁଡ଼ିକ ମିଳିଲା ନାହିଁ"
 
 #. TRANSLATORS: this is the header
-#: ../src/updates-viewer/gpk-update-viewer.c:2693
-#: ../src/updates-viewer/gpk-update-viewer.c:2790
+#: ../src/software-update/gpk-update-viewer.c:2748
+#: ../src/software-update/gpk-update-viewer.c:2844
 msgid "Checking for updates…"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକ ପାଇଁ ଯାଞ୍ଚକରୁଅଛି…"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/updates-viewer/gpk-update-viewer.c:3062
+#: ../src/software-update/gpk-update-viewer.c:3116
 msgid "Could not get list of distribution upgrades"
 msgstr "ବଣ୍ଟିତ ଅଦ୍ୟତନଗୁଡ଼ିକର ତାଲିକା ପାଇ ନାହିଁ"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/updates-viewer/gpk-update-viewer.c:3092
+#: ../src/software-update/gpk-update-viewer.c:3146
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "ନୂତନ ବଣ୍ଟନ ଉନ୍ନୟନ ପ୍ରକାଶନ '%s' ଉପଲବ୍ଧ"
 
-#: ../src/updates-viewer/gpk-update-viewer.c:3355
-#, fuzzy
-msgid "Update Packages"
-msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
+#: ../src/software-update/gpk-update-viewer.c:3425
+msgid "Update Software"
+msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
+
+#~ msgid "Software Log"
+#~ msgstr "ସଫ୍ଟୱେର ଲଗ"
+
+#~ msgid "Refresh Package Lists"
+#~ msgstr "ପ୍ୟାକେଜ ତାଲିକାଗୁଡ଼ିକୁ ସତେଜ କରନ୍ତୁ"
 
 #, fuzzy
-#~ msgid "Software is up to date"
-#~ msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ"
+#~ msgid "Package Sources"
+#~ msgstr "ପ୍ୟାକେଜ ସଂଗ୍ରହ"
+
+#, fuzzy
+#~ msgid "Package Log"
+#~ msgstr "ପ୍ଯାକେଜ"
+
+#, fuzzy
+#~ msgid "All packages are up to date"
+#~ msgstr "ସମସ୍ତ ସଫ୍ଟୱେର ଅଦ୍ୟତିତ ଅଛି"
+
+#, fuzzy
+#~ msgid "Package Source"
+#~ msgstr "ପ୍ଯାକେଜ"
+
+#~ msgid "Could not update packages"
+#~ msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ଅଦ୍ୟତନ କରିପାରିଲା ନାହିଁ"
+
+#~ msgid "Could not get package details"
+#~ msgstr "ପ୍ୟାକେଜ ବିବରଣୀ ପାଇ ନାହିଁ"
+
+#, fuzzy
+#~ msgid "Software Histroy"
+#~ msgstr "ସଫ୍ଟୱେର ଲଗ"
+
+#, fuzzy
+#~ msgid "Packages"
+#~ msgstr "ପ୍ଯାକେଜ"
+
+#, fuzzy
+#~ msgid "Package Updater"
+#~ msgstr "ପ୍ୟାକେଜ ପରିଚାଳକ"
+
+#, fuzzy
+#~ msgid "Software Update Service"
+#~ msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ ପସନ୍ଦଗୁଡ଼ିକ"
+
+#, fuzzy
+#~ msgid "Checks for system updates when start session"
+#~ msgstr "ମୋବାଇଲ ବ୍ରୋଡବ୍ୟାଣ୍ଡ ବ୍ୟବହାର କରି ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରନ୍ତୁ"
+
+#~ msgid "Software Log Viewer"
+#~ msgstr "ସଫ୍ଟୱେର ଲଗ ପ୍ରଦର୍ଶକ"
+
+#~ msgid "Log viewer"
+#~ msgstr "ଲଗ ପ୍ରଦର୍ଶକ"
+
+#~ msgid "Package installer"
+#~ msgstr "ପ୍ୟାକେଜ ସ୍ଥାପକ"
+
+#, fuzzy
+#~ msgid "Software Update Service with PackageKit"
+#~ msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ ପ୍ରଦର୍ଶକ"
+
+#, fuzzy
+#~ msgid "Update Packages"
+#~ msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #~ msgid "Check for Updates"
 #~ msgstr "ଅଦ୍ୟତନ ପାଇଁ ଯାଞ୍ଚକରନ୍ତୁ"
@@ -4077,10 +4124,6 @@ msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 #, fuzzy
 #~ msgid "Software Packages"
 #~ msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ କରନ୍ତୁ"
-
-#, fuzzy
-#~ msgid "Software preferences"
-#~ msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ ପସନ୍ଦଗୁଡ଼ିକ"
 
 #~ msgid "Ask the user if files should be copied to a non-private directory"
 #~ msgstr ""
@@ -4121,12 +4164,6 @@ msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #~ msgid "Required Packages"
 #~ msgstr "ଆବଶ୍ୟକୀୟ ପ୍ଯାକେଜଗୁଡ଼ିକ"
-
-#~ msgid "Software Sources"
-#~ msgstr "ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ"
-
-#~ msgid "Software Log"
-#~ msgstr "ସଫ୍ଟୱେର ଲଗ"
 
 #~ msgid "Help"
 #~ msgstr "ସହାୟତା"
@@ -4494,9 +4531,6 @@ msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 #~ msgid "Upgraded system"
 #~ msgstr "ଅଦ୍ୟତିତ ତନ୍ତ୍ର"
 
-#~ msgid "Software sources"
-#~ msgstr "ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ"
-
 #~ msgid "Catalogs files to install"
 #~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ତାଲିକା ଫାଇଲ"
 
@@ -4544,9 +4578,6 @@ msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #~ msgid "Nothing"
 #~ msgstr "କିଛିନୁହଁ"
-
-#~ msgid "Software Source"
-#~ msgstr "ସଫ୍ଟୱେର ଉତ୍ସ"
 
 #, c-format
 #~ msgid "Could not find any packages named '%s'"
@@ -4605,9 +4636,6 @@ msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #~ msgid "Set the default output directory"
 #~ msgstr "ପୂର୍ବନିର୍ଦ୍ଧାରିତ ଫଳାଫଳ ଡ଼ିରେକ୍ଟୋରୀ ସେଟକରନ୍ତୁ"
-
-#~ msgid "Update Software"
-#~ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 
 #~ msgid "The action could not be completed"
 #~ msgstr "ଏହି କାର୍ଯ୍ୟଟି ସମ୍ପୂର୍ଣ୍ଣ ହୋଇପାରିଲା ନାହିଁ"
