@@ -135,12 +135,12 @@ main (int argc, char *argv[])
 	textdomain (GETTEXT_PACKAGE);
 
 	dbus_g_thread_init ();
-	notify_init (_("Software Install"));
+	notify_init (_("PackageKit Session Service"));
 
 	/* TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state */
-	g_set_application_name (_("Software Install"));
+	g_set_application_name (_("PackageKit Session Service"));
 	context = g_option_context_new (NULL);
-	g_option_context_set_summary (context, _("Session D-Bus service for PackageKit"));
+	g_option_context_set_summary (context, _("Session D-Bus Service for PackageKit"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));

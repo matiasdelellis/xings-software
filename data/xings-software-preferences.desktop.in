@@ -5,6 +5,7 @@ Icon=xings-software-preferences
 Exec=xings-software-preferences
 Terminal=false
 Type=Application
+_Keywords=Install;Uninstall;Updates;Upgrade;Sources;Repositories;Preferences;Program;Software;App;Store;
 Categories=Settings;System;X-GNOME-SystemSettings;X-XFCE;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
 NotShowIn=GNOME;KDE;Unity;
 StartupNotify=true
