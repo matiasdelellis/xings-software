@@ -24,12 +24,12 @@
     &date;
   </refentryinfo>
   <refmeta>
-    <refentrytitle>xings-packagekit-preferences</refentrytitle>
+    <refentrytitle>xings-software-preferences</refentrytitle>
     <manvolnum>1</manvolnum>
   </refmeta>
   <refnamediv>
     <refname>&package;</refname>
-    <refpurpose>Xings PackageKit Update Preferences</refpurpose>
+    <refpurpose>Xings Software Preferences</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>

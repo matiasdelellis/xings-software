@@ -21,12 +21,12 @@ AM_CPPFLAGS =						\
 	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
 bin_PROGRAMS =						\
-	xings-packagekit-preferences
+	xings-software-preferences
 
-xings_packagekit_preferences_SOURCES =			\
+xings_software_preferences_SOURCES =			\
 	gpk-prefs.c
 
-xings_packagekit_preferences_LDADD =			\
+xings_software_preferences_LDADD =			\
 	$(top_builddir)/src/common/libgpk-common.a	\
 	$(GLIB_LIBS)					\
 	$(GIO_LIBS)					\
@@ -38,5 +38,5 @@ xings_packagekit_preferences_LDADD =			\
 	$(X11_LIBS)					\
 	-lm
 
-xings_packagekit_preferences_CFLAGS =			\
+xings_software_preferences_CFLAGS =			\
 	$(WARN_CFLAGS)

@@ -1,7 +1,7 @@
 [Desktop Entry]
-_Name=Software Settings
+_Name=Software Preferences
 _Comment=Change software update preferences and enable or disable software sources
-Icon=xings-packagekit-preferences
+Icon=xings-software-preferences
 Exec=xings-packagekit-preferences
 Terminal=false
 Type=Application

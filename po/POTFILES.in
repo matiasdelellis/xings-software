@@ -12,7 +12,7 @@ data/xings-packagekit-service.desktop.in
 data/xings-install-local-package.desktop.in
 data/xings-software-history.desktop.in
 [type: gettext/glade]data/gpk-log.ui
-data/xings-packagekit-preferences.desktop.in
+data/xings-software-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui
 [type: gettext/glade]data/gpk-signature.ui
 data/xings-software-update.desktop.in
