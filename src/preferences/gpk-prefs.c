@@ -703,6 +703,7 @@ gpk_pack_startup_cb (GtkApplication *application, GpkPrefsPrivate *priv)
 
 	main_window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_prefs"));
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
+	gtk_window_set_icon_name (GTK_WINDOW(main_window), GPK_ICON_SOFTWARE_PREFERENCES);
 
 	gtk_application_add_window (application, GTK_WINDOW (main_window));
 
