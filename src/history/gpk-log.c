@@ -59,6 +59,16 @@ enum
 	GPK_LOG_COLUMN_LAST
 };
 
+static gboolean
+_g_strzero (const gchar *text)
+{
+	if (text == NULL)
+		return TRUE;
+	if (text[0] == '\0')
+		return TRUE;
+	return FALSE;
+}
+
 /**
  * gpk_log_find_iter_model_cb:
  **/
@@ -234,6 +244,11 @@ gpk_log_get_details_localised (const gchar *timespec, const gchar *data)
 	if (text != NULL)
 		g_string_append (string, text);
 	g_free (text);
+	text = gpk_log_get_type_line (array, PK_INFO_ENUM_DOWNLOADING);
+	if (text != NULL)
+		g_string_append (string, text);
+	g_free (text);
+
 	g_strfreev (array);
 
 	/* remove last \n */
@@ -429,16 +444,16 @@ static void
 gpk_log_add_item (PkTransactionPast *item)
 {
 	GtkTreeIter iter;
-	gchar *details;
-	gchar *date;
-	const gchar *icon_name;
-	const gchar *role_text;
+	gchar *details = NULL;
+	gchar *date = NULL;
+	const gchar *icon_name = NULL;
+	const gchar *role_text = NULL;
 	const gchar *username = NULL;
-	const gchar *tool;
+	const gchar *tool = NULL;
 	static guint count;
 	struct passwd *pw;
-	gchar *tid;
-	gchar *timespec;
+	gchar *tid = NULL;
+	gchar *timespec = NULL;
 	gboolean succeeded;
 	guint duration;
 	gchar *cmdline;
@@ -459,6 +474,10 @@ gpk_log_add_item (PkTransactionPast *item)
 		      "uid", &uid,
 		      "data", &data,
 		      NULL);
+
+	/* downloads updates that were already downloaded are reported as empty.*/
+	if (_g_strzero(data) && role == PK_ROLE_ENUM_UPDATE_PACKAGES)
+		goto out;
 
 	/* put formatted text into treeview */
 	details = gpk_log_get_details_localised (timespec, data);
@@ -519,6 +538,7 @@ gpk_log_add_item (PkTransactionPast *item)
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
 
+out:
 	g_free (tid);
 	g_free (timespec);
 	g_free (cmdline);
