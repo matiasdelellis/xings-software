@@ -2568,7 +2568,7 @@ gpk_application_activate_sources_cb (GSimpleAction *action,
 	window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
 	xid = gdk_x11_window_get_xid (gtk_widget_get_window (window));
 
-	command = g_strdup_printf ("%s/xings-software-preferences --parent-window %u --startup-page repositories", BINDIR, xid);
+	command = g_strdup_printf ("%s/xings-software-preferences --parent-window %u --startup-page sources", BINDIR, xid);
 	g_debug ("running: %s", command);
 	ret = g_spawn_command_line_async (command, NULL);
 	if (!ret) {

@@ -392,7 +392,7 @@ gpk_treeview_add_columns (GpkPrefsPrivate *priv, GtkTreeView *treeview)
 	/* column for text */
 	renderer = gtk_cell_renderer_text_new ();
 	/* TRANSLATORS: column for the source description */
-	column = gtk_tree_view_column_new_with_attributes (_("Package Source"), renderer,
+	column = gtk_tree_view_column_new_with_attributes (_("Source"), renderer,
 							   "markup", GPK_COLUMN_TEXT,
 							   NULL);
 	gtk_tree_view_column_set_sort_column_id (column, GPK_COLUMN_TEXT);
@@ -736,7 +736,7 @@ gpm_prefs_commandline_cb (GApplication *application,
 		  _("Set the parent window to make this modal"), NULL },
 		{ "startup-page", 's', 0, G_OPTION_ARG_STRING, &startup_page,
 		  /* TRANSLATORS: we can display updates or repsository tab by default */
-		  _("Set the startup page: either ‘updates’or ‘repositories’"), NULL },
+		  _("Set the startup page: either ‘updates’or ‘sources’"), NULL },
 		{ NULL}
 	};
 
@@ -763,7 +763,7 @@ gpm_prefs_commandline_cb (GApplication *application,
 
 	if (startup_page != NULL) {
 		if ((g_strcmp0 (startup_page, "updates") == 0) ||
-		    (g_strcmp0 (startup_page, "repositories") == 0)) {
+		    (g_strcmp0 (startup_page, "sources") == 0)) {
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "prefs-stack"));
 			gtk_stack_set_visible_child_name (GTK_STACK(widget), startup_page);
 			g_warning ("Set startup page to '%s'", startup_page);

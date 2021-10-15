@@ -392,7 +392,7 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 		/* not a PK error */
 		if (error->domain != PK_CLIENT_ERROR) {
 			/* TRANSLATORS: the PackageKit request did not complete, and it did not send an error */
-			gpk_update_viewer_error_dialog (_("Could not update packages"), NULL, error->message);
+			gpk_update_viewer_error_dialog (_("Could not install updates"), NULL, error->message);
 		} else if (error->code == PK_CLIENT_ERROR_DECLINED_SIMULATION) {
 			g_debug ("ignoring the declined-simulation error");
 		} else if (error->code > PK_CLIENT_ERROR_LAST) {
@@ -403,7 +403,7 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 							error->message);
 		} else {
 			/* TRANSLATORS: the PackageKit request did not complete, and it did not send an error */
-			gpk_update_viewer_error_dialog (_("Could not update packages"), NULL, error->message);
+			gpk_update_viewer_error_dialog (_("Could not install updates"), NULL, error->message);
 		}
 		g_error_free (error);
 
@@ -1456,9 +1456,9 @@ gpk_update_viewer_reconsider_info (void)
 			g_debug ("no updates");
 			gpk_update_viewer_empty_stack_message (
 				/* TRANSLATORS: title: nothing to do */
-				_("All packages are up to date"),
+				_("All software is up to date"),
 				/* TRANSLATORS: tell the user the problem */
-				_("There are no package updates available for your computer at this time."),
+				_("There are no updates available for your computer at this time."),
 				TRUE);
 			goto out;
 		}
@@ -2115,7 +2115,7 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 	array = pk_results_get_details_array (results);
 	if (array->len == 0) {
 		/* TRANSLATORS: PackageKit did not send any results for the query... */
-		gpk_update_viewer_error_dialog (_("Could not get package details"), _("No results were returned."), NULL);
+		gpk_update_viewer_error_dialog (_("Could not get update details"), _("No results were returned."), NULL);
 		goto out;
 	}
 

@@ -433,15 +433,15 @@
   <menu id="primary_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Refresh Package Lists</attribute>
+        <attribute name="label" translatable="yes">Update Software Sources</attribute>
         <attribute name="action">app.refresh</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Package Sources</attribute>
+        <attribute name="label" translatable="yes">Software Sources</attribute>
         <attribute name="action">app.sources</attribute>
       </item>
       <item>
-        <attribute name="label" translatable="yes">Package Log</attribute>
+        <attribute name="label" translatable="yes">Software History</attribute>
         <attribute name="action">app.log</attribute>
       </item>
     </section>

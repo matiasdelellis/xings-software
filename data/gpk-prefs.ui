@@ -167,7 +167,7 @@
                 <property name="can-focus">False</property>
                 <property name="halign">start</property>
                 <property name="margin-bottom">12</property>
-                <property name="label" translatable="yes">A package source contains packages that can be installed on this computer.</property>
+                <property name="label" translatable="yes">A software source contains packages that can be installed on this computer.</property>
                 <property name="wrap">True</property>
                 <property name="max-width-chars">60</property>
                 <property name="xalign">0</property>
@@ -266,8 +266,8 @@
             </child>
           </object>
           <packing>
-            <property name="name">repositories</property>
-            <property name="title" translatable="yes">Package Sources</property>
+            <property name="name">sources</property>
+            <property name="title" translatable="yes">Software Sources</property>
             <property name="position">1</property>
           </packing>
         </child>

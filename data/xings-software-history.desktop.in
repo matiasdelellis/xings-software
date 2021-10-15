@@ -1,5 +1,5 @@
 [Desktop Entry]
-_Name=Software Log
+_Name=Software History
 _Comment=View past package management tasks
 Icon=xings-software-history
 Exec=xings-software-history
