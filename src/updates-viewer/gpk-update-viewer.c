@@ -54,6 +54,7 @@ static	gboolean		 ignore_updates_changed = FALSE;
 static	guint			 size_selected = 0;
 static	guint			 number_selected = 0;
 static	PkRestartEnum		 restart_worst = 0;
+static	gboolean		 all_prepared = FALSE;
 static	GpkSession		*session = NULL;
 static	GCancellable		*cancellable = NULL;
 static	GSettings		*settings = NULL;
@@ -79,6 +80,7 @@ enum {
 	GPK_UPDATES_COLUMN_SENSITIVE,
 	GPK_UPDATES_COLUMN_CLICKABLE,
 	GPK_UPDATES_COLUMN_RESTART,
+	GPK_UPDATES_COLUMN_PREPARED,
 	GPK_UPDATES_COLUMN_SIZE,
 	GPK_UPDATES_COLUMN_SIZE_DISPLAY,
 	GPK_UPDATES_COLUMN_PERCENTAGE,
@@ -1252,7 +1254,7 @@ gpk_update_viewer_check_mobile_broadband (void)
 static void
 gpk_update_viewer_update_global_state_recursive (GtkTreeModel *model, GtkTreeIter *iter)
 {
-	gboolean selected;
+	gboolean selected, prepared;
 	PkRestartEnum restart;
 	guint size;
 	gchar *package_id = NULL;
@@ -1260,16 +1262,20 @@ gpk_update_viewer_update_global_state_recursive (GtkTreeModel *model, GtkTreeIte
 	GtkTreeIter child_iter;
 
 	gtk_tree_model_get (model, iter,
-			    GPK_UPDATES_COLUMN_SELECT, &selected,
-			    GPK_UPDATES_COLUMN_RESTART, &restart,
-			    GPK_UPDATES_COLUMN_SIZE, &size,
-			    GPK_UPDATES_COLUMN_ID, &package_id,
-			    -1);
+	                    GPK_UPDATES_COLUMN_SELECT, &selected,
+	                    GPK_UPDATES_COLUMN_RESTART, &restart,
+	                    GPK_UPDATES_COLUMN_PREPARED, &prepared,
+	                    GPK_UPDATES_COLUMN_SIZE, &size,
+	                    GPK_UPDATES_COLUMN_ID, &package_id,
+	                    -1);
+
 	if (selected && package_id != NULL) {
 		size_selected += size;
 		number_selected++;
 		if (restart > restart_worst)
 			restart_worst = restart;
+		if (all_prepared)
+			all_prepared = prepared;
 	}
 
 	/* child entries */
@@ -1296,6 +1302,7 @@ gpk_update_viewer_update_global_state (void)
 	size_selected = 0;
 	number_selected = 0;
 	restart_worst = PK_RESTART_ENUM_NONE;
+	all_prepared = TRUE;
 
 	treeview = GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_updates"));
 	model = gtk_tree_view_get_model (treeview);
@@ -2082,6 +2089,7 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 	GtkTreeIter iter;
 	PkError *error_code = NULL;
 	GtkWindow *window;
+	GStrv prepared_ids = NULL;
 
 	/* get the results */
 	results = pk_client_generic_finish (client, res, &error);
@@ -2149,6 +2157,27 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 		g_free (package_id);
 	}
 
+	prepared_ids = pk_offline_get_prepared_ids (&error);
+	if (error != NULL) {
+		g_warning ("failed to get prepared updates: %s", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	for (i = 0; prepared_ids[i] != NULL; i++) {
+		g_debug ("prepared update: %s", prepared_ids[i]);
+		path = gpk_update_viewer_model_get_path (model, prepared_ids[i]);
+		if (path == NULL) {
+			g_warning ("not found ID for prepared update");
+			continue;
+		}
+
+		gtk_tree_model_get_iter (model, &iter, path);
+		gtk_tree_store_set (array_store_updates, &iter,
+		                    GPK_UPDATES_COLUMN_PREPARED, TRUE, -1);
+		gtk_tree_path_free (path);
+	}
+
 	/* select the first entry in the updates array now we've got data */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "treeview_updates"));
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW(widget));
@@ -2159,6 +2188,7 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 
 	/* set info */
 	gpk_update_viewer_reconsider_info ();
+
 out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
@@ -2166,6 +2196,9 @@ out:
 		g_ptr_array_unref (array);
 	if (results != NULL)
 		g_object_unref (results);
+	if (prepared_ids)
+		g_strfreev (prepared_ids);
+
 }
 
 /**
@@ -3239,10 +3272,24 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	gtk_application_add_window (application, GTK_WINDOW(main_window));
 
 	/* create array stores */
-	array_store_updates = gtk_tree_store_new (GPK_UPDATES_COLUMN_LAST, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_INT,
-						 G_TYPE_BOOLEAN, G_TYPE_BOOLEAN, G_TYPE_BOOLEAN,
-						 G_TYPE_UINT, G_TYPE_UINT, G_TYPE_UINT, G_TYPE_UINT,
-						 G_TYPE_UINT, G_TYPE_POINTER, G_TYPE_POINTER, G_TYPE_INT, G_TYPE_BOOLEAN);
+	array_store_updates = gtk_tree_store_new (GPK_UPDATES_COLUMN_LAST,
+	                                          G_TYPE_STRING,   // GPK_UPDATES_COLUMN_TEXT
+	                                          G_TYPE_STRING,   // GPK_UPDATES_COLUMN_ID
+	                                          G_TYPE_INT,      // GPK_UPDATES_COLUMN_INFO
+	                                          G_TYPE_BOOLEAN,  // GPK_UPDATES_COLUMN_SELECT
+	                                          G_TYPE_BOOLEAN,  // GPK_UPDATES_COLUMN_SENSITIVE
+	                                          G_TYPE_BOOLEAN,  // GPK_UPDATES_COLUMN_CLICKABLE
+	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_RESTART
+	                                          G_TYPE_BOOLEAN,  // GPK_UPDATES_COLUMN_PREPARED
+	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_SIZE
+	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_SIZE_DISPLAY
+	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_PERCENTAGE
+	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_STATUS
+	                                          G_TYPE_POINTER,  // GPK_UPDATES_COLUMN_DETAILS_OBJ
+	                                          G_TYPE_POINTER,  // GPK_UPDATES_COLUMN_UPDATE_DETAIL_OBJ
+	                                          G_TYPE_INT,      // GPK_UPDATES_COLUMN_PULSE
+	                                          G_TYPE_BOOLEAN); // GPK_UPDATES_COLUMN_VISIBLE
+
 	text_buffer = gtk_text_buffer_new (NULL);
 	gtk_text_buffer_create_tag (text_buffer, "para",
 				    "pixels_above_lines", 5,
