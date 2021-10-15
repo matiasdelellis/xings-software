@@ -432,13 +432,6 @@ gpk_helper_run_init (GpkHelperRun *helper)
 	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "entry_package"));
 	gtk_widget_hide (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "button_filter"));
-	gtk_widget_hide (widget);
-
-	/* hide the refresh button */
-	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "button_refresh"));
-	gtk_widget_hide (widget);
-
 	/* set icon name */
 	widget = GTK_WIDGET (gtk_builder_get_object (helper->builder, "dialog_simple"));
 	gtk_window_set_icon_name (GTK_WINDOW (widget), GPK_ICON_SOFTWARE_INSTALLER);

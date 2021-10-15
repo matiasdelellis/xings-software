@@ -277,13 +277,6 @@ gpk_helper_chooser_init (GpkHelperChooser *helper)
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_package"));
 	gtk_widget_hide (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_filter"));
-	gtk_widget_hide (widget);
-
-	/* hide the refresh button */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_refresh"));
-	gtk_widget_hide (widget);
-
 	/* create list stores */
 	priv->list_store = gtk_list_store_new (GPK_CHOOSER_COLUMN_LAST, G_TYPE_STRING,
 						       G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING);

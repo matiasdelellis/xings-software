@@ -599,7 +599,9 @@ gpk_log_get_old_transactions_cb (GObject *object, GAsyncResult *res, gpointer us
 	if (transactions != NULL)
 		g_ptr_array_unref (transactions);
 	transactions = pk_results_get_transaction_array (results);
+
 	gpk_log_refilter ();
+
 out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
@@ -608,43 +610,12 @@ out:
 }
 
 /**
- * gpk_log_refresh
- **/
-static void
-gpk_log_refresh (void)
-{
-	/* get the list async */
-	pk_client_get_old_transactions_async (client, 0, NULL, NULL, NULL,
-					      (GAsyncReadyCallback) gpk_log_get_old_transactions_cb, NULL);
-}
-
-/**
- * gpk_log_button_refresh_cb:
- **/
-static void
-gpk_log_button_refresh_cb (GtkWidget *widget, gpointer data)
-{
-	/* refresh */
-	gpk_log_refresh ();
-}
-
-/**
- * gpk_log_button_filter_cb:
- **/
-static void
-gpk_log_button_filter_cb (GtkWidget *widget2, gpointer data)
-{
-	gpk_log_refilter ();
-}
-
-/**
  * gpk_log_entry_filter_cb:
  **/
-static gboolean
-gpk_log_entry_filter_cb (GtkWidget *widget, GdkEventKey *event, gpointer user_data)
+static void
+gpk_log_entry_filter_cb (GtkSearchEntry *widget, gpointer user_data)
 {
 	gpk_log_refilter ();
-	return FALSE;
 }
 
 /**
@@ -698,18 +669,9 @@ gpk_log_startup_cb (GtkApplication *application, gpointer user_data)
 		gtk_entry_set_text (GTK_ENTRY(widget), filter);
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_refresh"));
-	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_log_button_refresh_cb), NULL);
-	gtk_widget_hide (widget);
-	widget = GTK_WIDGET (gtk_builder_get_object (builder, "button_filter"));
-	g_signal_connect (widget, "clicked", G_CALLBACK (gpk_log_button_filter_cb), NULL);
-
 	/* hit enter in the search box for filter */
 	widget = GTK_WIDGET (gtk_builder_get_object (builder, "entry_package"));
-	g_signal_connect (widget, "activate", G_CALLBACK (gpk_log_button_filter_cb), NULL);
-
-	/* autocompletion can be turned off as it's slow */
-	g_signal_connect (widget, "key-release-event", G_CALLBACK (gpk_log_entry_filter_cb), NULL);
+	g_signal_connect (widget, "search-changed", G_CALLBACK (gpk_log_entry_filter_cb), NULL);
 
 	/* create list stores */
 	list_store = gtk_list_store_new (GPK_LOG_COLUMN_LAST, G_TYPE_STRING, G_TYPE_STRING,
@@ -742,7 +704,9 @@ gpk_log_startup_cb (GtkApplication *application, gpointer user_data)
 	}
 
 	/* get the update list */
-	gpk_log_refresh ();
+	pk_client_get_old_transactions_async (client, 0, NULL, NULL, NULL,
+	                                     (GAsyncReadyCallback) gpk_log_get_old_transactions_cb, NULL);
+
 out:
 	g_object_unref (list_store);
 	g_object_unref (client);
