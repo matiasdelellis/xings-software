@@ -49,10 +49,10 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
+    <para>xings-software (1).</para>
     <para>xings-software-update (1).</para>
-    <para>xings-software (2).</para>
-    <para>xings-package-history (3).</para>
-    <para>xings-install-catalog (4).</para>
+    <para>xings-install-local-package (1).</para>
+    <para>xings-install-package-name (1).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

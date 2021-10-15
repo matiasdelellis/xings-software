@@ -10,7 +10,7 @@ desktop_in_files =					\
 	xings-packagekit-preferences.desktop.in		\
 	xings-software.desktop.in			\
 	xings-software-update.desktop.in		\
-	xings-package-history.desktop.in		\
+	xings-software-history.desktop.in		\
 	$(NULL)
 
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
@@ -58,7 +58,7 @@ DISTCLEANFILES =					\
 	xings-software-update.desktop			\
 	xings-install-local-package.desktop		\
 	xings-packagekit-service.desktop		\
-	xings-package-history.desktop			\
+	xings-software-history.desktop			\
 	xings-software.desktop				\
 	xings-updates-service.desktop			\
 	org.xings.PackageKit.service		\

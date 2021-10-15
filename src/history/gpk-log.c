@@ -782,7 +782,7 @@ main (int argc, char *argv[])
 	gtk_init (&argc, &argv);
 
 	context = g_option_context_new (NULL);
-	g_option_context_set_summary (context, _("Software Log Viewer"));
+	g_option_context_set_summary (context, _("Software Histroy"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
@@ -790,7 +790,7 @@ main (int argc, char *argv[])
 	g_option_context_free (context);
 
 	/* are we running privileged */
-	ret = gpk_check_privileged_user (_("Log viewer"), TRUE);
+	ret = gpk_check_privileged_user (_("Software History"), TRUE);
 	if (!ret)
 		goto out;
 
@@ -799,7 +799,7 @@ main (int argc, char *argv[])
 					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* are we already activated? */
-	application = gtk_application_new ("org.xings.PackageHistory", 0);
+	application = gtk_application_new ("org.xings.SoftwareHistory", 0);
 	g_signal_connect (application, "startup",
 			  G_CALLBACK (gpk_log_startup_cb), NULL);
 	g_signal_connect (application, "activate",

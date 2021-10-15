@@ -21,12 +21,12 @@ AM_CPPFLAGS =						\
 	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
 bin_PROGRAMS =						\
-	xings-package-history
+	xings-software-history
 
-xings_package_history_SOURCES =				\
+xings_software_history_SOURCES =				\
 	gpk-log.c
 
-xings_package_history_LDADD =				\
+xings_software_history_LDADD =				\
 	$(top_builddir)/src/common/libgpk-common.a	\
 	$(GLIB_LIBS)					\
 	$(GIO_LIBS)					\
@@ -37,5 +37,5 @@ xings_package_history_LDADD =				\
 	$(PACKAGEKIT_LIBS)				\
 	$(X11_LIBS)
 
-xings_package_history_CFLAGS =				\
+xings_software_history_CFLAGS =				\
 	$(WARN_CFLAGS)

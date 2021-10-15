@@ -24,12 +24,12 @@
     &date;
   </refentryinfo>
   <refmeta>
-    <refentrytitle>xings-package-history</refentrytitle>
+    <refentrytitle>xings-software-history</refentrytitle>
     <manvolnum>1</manvolnum>
   </refmeta>
   <refnamediv>
     <refname>&package;</refname>
-    <refpurpose>Xings PackageKit Software Log Viewer</refpurpose>
+    <refpurpose>Xings Software Log Viewer</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
@@ -49,9 +49,9 @@
   <refsect1>
     <title>SEE ALSO</title>
     <para>xings-software (1).</para>
-    <para>xings-package-history (2).</para>
-    <para>xings-packagekit-service (3).</para>
-    <para>xings-software-update (4).</para>
+    <para>xings-software-update (2).</para>
+    <para>xings-software-preferences (3).</para>
+    <para>xings-packagekit-service (4).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

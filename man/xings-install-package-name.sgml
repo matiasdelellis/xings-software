@@ -49,6 +49,7 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
+    <para>xings-packagekit-service (1).</para>
     <para>xings-install-local-package (1).</para>
   </refsect1>
   <refsect1>

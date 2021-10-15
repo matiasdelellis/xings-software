@@ -50,8 +50,8 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
+    <para>xings-packagekit-service (1).</para>
     <para>xings-install-package-name (1).</para>
-    <para>xings-install-provide-file (2).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

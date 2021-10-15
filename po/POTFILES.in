@@ -10,7 +10,7 @@ data/xings-packagekit-service.desktop.in
 [type: gettext/glade]data/gpk-error.ui
 [type: gettext/glade]data/gpk-eula.ui
 data/xings-install-local-package.desktop.in
-data/xings-package-history.desktop.in
+data/xings-software-history.desktop.in
 [type: gettext/glade]data/gpk-log.ui
 data/xings-packagekit-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui

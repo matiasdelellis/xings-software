@@ -49,9 +49,9 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
-    <para>xings-packagekit-service (1).</para>
-    <para>xings-software-update (2).</para>
-    <para>xings-software (3).</para>
+    <para>xings-software (1).</para>
+    <para>xings-software-update (1).</para>
+    <para>xings-software-history (1).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

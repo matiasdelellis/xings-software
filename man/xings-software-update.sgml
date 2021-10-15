@@ -50,8 +50,8 @@
   <refsect1>
     <title>SEE ALSO</title>
     <para>xings-software (1).</para>
-    <para>xings-package-history (2).</para>
-    <para>xings-install-catalog (3).</para>
+    <para>xings-software-history (1).</para>
+    <para>xings-packagekit-service (1).</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

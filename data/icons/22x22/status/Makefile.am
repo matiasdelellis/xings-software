@@ -32,7 +32,7 @@ icons_DATA = 				\
 install-data-hook:
 	mkdir -p $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps;
 	ln -fs $(iconsdir)/xings-package-sources.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-repo.png;
-	ln -fs $(iconsdir)/xings-package-info.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-package-history.png;
+	ln -fs $(iconsdir)/xings-package-info.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-software-history.png;
 	ln -fs $(iconsdir)/xings-update-high.png $(DESTDIR)$(DATADIR)/icons/hicolor/$(size)/apps/xings-packagekit-preferences.png;
 
 EXTRA_DIST =				\

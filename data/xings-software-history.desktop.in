@@ -1,8 +1,8 @@
 [Desktop Entry]
-_Name=Package Log
+_Name=Software Log
 _Comment=View past package management tasks
-Icon=xings-package-history
-Exec=xings-package-history
+Icon=xings-software-history
+Exec=xings-software-history
 Terminal=false
 Type=Application
 NoDisplay=true
