@@ -2,7 +2,7 @@
 _Name=Software Update
 _Comment=Update software installed on the system
 Icon=system-software-update
-Exec=xings-software-updates
+Exec=xings-software-update
 Terminal=false
 Type=Application
 Categories=GNOME;GTK;System;
