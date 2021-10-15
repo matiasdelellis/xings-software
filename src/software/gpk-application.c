@@ -3423,14 +3423,14 @@ main (int argc, char *argv[])
 	}
 
 	/* are we running privileged */
-	ret = gpk_check_privileged_user (_("Package installer"), TRUE);
+	ret = gpk_check_privileged_user (_("Software installer"), TRUE);
 	if (!ret)
 		return 1;
 
 	priv = g_new0 (GpkApplicationPrivate, 1);
 
 	/* are we already activated? */
-	priv->application = gtk_application_new ("org.xings.Packages", 0);
+	priv->application = gtk_application_new ("org.xings.Software", 0);
 	g_signal_connect (priv->application, "startup",
 			  G_CALLBACK (gpk_application_startup_cb), priv);
 	g_signal_connect (priv->application, "activate",
