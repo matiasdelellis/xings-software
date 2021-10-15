@@ -220,7 +220,7 @@ src/packagekit-service/Makefile
 src/preferences/Makefile
 src/software/Makefile
 src/updates-service/Makefile
-src/updates-viewer/Makefile
+src/software-update/Makefile
 man/Makefile
 po/Makefile.in
 data/Makefile

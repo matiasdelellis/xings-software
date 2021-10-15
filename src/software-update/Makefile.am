@@ -21,9 +21,9 @@ AM_CPPFLAGS =						\
 	-DG_LOG_DOMAIN=\"XingsSoftware\"
 
 bin_PROGRAMS =						\
-	xings-package-updates
+	xings-software-update
 
-xings_package_updates_SOURCES =				\
+xings_software_update_SOURCES =				\
 	gpk-update-viewer.c				\
 	gpk-cell-renderer-size.c			\
 	gpk-cell-renderer-size.h			\
@@ -32,7 +32,7 @@ xings_package_updates_SOURCES =				\
 	gpk-cell-renderer-restart.c			\
 	gpk-cell-renderer-restart.h
 
-xings_package_updates_LDADD =				\
+xings_software_update_LDADD =				\
 	$(top_builddir)/src/common/libgpk-common.a	\
 	$(GLIB_LIBS)					\
 	$(GIO_LIBS)					\
@@ -43,5 +43,5 @@ xings_package_updates_LDADD =				\
 	$(PACKAGEKIT_LIBS)				\
 	$(X11_LIBS)
 
-xings_package_updates_CFLAGS =				\
+xings_software_update_CFLAGS =				\
 	$(WARN_CFLAGS)

@@ -24,12 +24,12 @@
     &date;
   </refentryinfo>
   <refmeta>
-    <refentrytitle>xings-package-updates</refentrytitle>
+    <refentrytitle>xings-software-update</refentrytitle>
     <manvolnum>1</manvolnum>
   </refmeta>
   <refnamediv>
     <refname>&package;</refname>
-    <refpurpose>Xings PackageKit Update Viewer</refpurpose>
+    <refpurpose>Xings Software Update</refpurpose>
   </refnamediv>
   <refsynopsisdiv>
     <cmdsynopsis>
@@ -49,7 +49,7 @@
   </refsect1>
   <refsect1>
     <title>SEE ALSO</title>
-    <para>xings-packagekit-service (1).</para>
+    <para>xings-software (1).</para>
     <para>xings-package-history (2).</para>
     <para>xings-install-catalog (3).</para>
   </refsect1>

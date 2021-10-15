@@ -6,4 +6,4 @@ SUBDIRS =						\
 	preferences					\
 	software					\
 	updates-service					\
-	updates-viewer
+	software-update

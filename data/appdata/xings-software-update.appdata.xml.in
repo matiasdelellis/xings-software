@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2021 Matias De lellis <mati86dl@gmail.com> -->
 <component>
-  <id>org.xings.packages</id>
-  <launchable type="desktop-id">xings-package-updates.desktop</launchable>
+  <id>org.xings.SoftwareUpdate</id>
+  <launchable type="desktop-id">xings-software-update.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
-  <_name>Package Updater</_name>
+  <_name>Software Update</_name>
   <_summary>Update software installed on the system</_summary>
   <description>
     <_p>
-      Package Updater allows you to update packages on your system without
+      Software Update allows you to update packages on your system without
       rebooting.
       You can view details about each update and choose which updates to apply.
     </_p>
     <_p>
-      Package Updater uses PackageKit and can work on any distribution using
+      Software Update uses PackageKit and can work on any distribution using
       the native package management framework.
     </_p>
   </description>

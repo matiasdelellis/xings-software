@@ -3422,7 +3422,7 @@ main (int argc, char *argv[])
 	gtk_init (&argc, &argv);
 
 	context = g_option_context_new (NULL);
-	g_option_context_set_summary (context, _("Update Packages"));
+	g_option_context_set_summary (context, _("Update Software"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
@@ -3439,12 +3439,12 @@ main (int argc, char *argv[])
 					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 
 	/* TRANSLATORS: title to pass to the user if there are not enough privs */
-	ret = gpk_check_privileged_user (_("Package Updater"), TRUE);
+	ret = gpk_check_privileged_user (_("Software Update"), TRUE);
 	if (!ret)
 		return 1;
 
 	/* are we already activated? */
-	application = gtk_application_new ("org.xings.PackageUpdates", 0);
+	application = gtk_application_new ("org.xings.SoftwareUpdate", 0);
 	g_signal_connect (application, "startup",
 			  G_CALLBACK (gpk_update_viewer_application_startup_cb), NULL);
 	g_signal_connect (application, "activate",

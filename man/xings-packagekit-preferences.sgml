@@ -50,7 +50,7 @@
   <refsect1>
     <title>SEE ALSO</title>
     <para>xings-packagekit-service (1).</para>
-    <para>xings-package-updates (2).</para>
+    <para>xings-software-update (2).</para>
     <para>xings-software (3).</para>
   </refsect1>
   <refsect1>

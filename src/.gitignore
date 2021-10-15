@@ -17,7 +17,7 @@ org.freedesktop.PackageKit*.h
 xings-install-local-package
 xings-install-package-name
 xings-package-history
-xings-package-updates
+xings-software-update
 xings-packagekit-service
 xings-software
 xings-packagekit-preferences
