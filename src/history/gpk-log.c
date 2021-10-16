@@ -222,7 +222,7 @@ gpk_log_get_type_line (gchar **array, PkInfoEnum info)
  * gpk_log_get_details_localised:
  **/
 static gchar *
-gpk_log_get_details_localised (const gchar *timespec, const gchar *data)
+gpk_log_get_details_localised (const gchar *data)
 {
 	GString *string;
 	gchar *text;
@@ -244,10 +244,14 @@ gpk_log_get_details_localised (const gchar *timespec, const gchar *data)
 	if (text != NULL)
 		g_string_append (string, text);
 	g_free (text);
-	text = gpk_log_get_type_line (array, PK_INFO_ENUM_DOWNLOADING);
-	if (text != NULL)
-		g_string_append (string, text);
-	g_free (text);
+
+	/* dont handle downloads when they are installed or updated in same transaction */
+	if (string->len == 0) {
+		text = gpk_log_get_type_line (array, PK_INFO_ENUM_DOWNLOADING);
+		if (text != NULL)
+			g_string_append (string, text);
+		g_free (text);
+	}
 
 	g_strfreev (array);
 
@@ -480,7 +484,7 @@ gpk_log_add_item (PkTransactionPast *item)
 		goto out;
 
 	/* put formatted text into treeview */
-	details = gpk_log_get_details_localised (timespec, data);
+	details = gpk_log_get_details_localised (data);
 	date = gpk_log_get_localised_date (timespec);
 
 	icon_name = gpk_role_enum_to_icon_name (role);
