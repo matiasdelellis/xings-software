@@ -433,55 +433,8 @@
         <property name="title" translatable="yes">Software</property>
         <property name="show-close-button">True</property>
         <child>
-          <object class="GtkButton" id="button_clear">
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="has-tooltip">True</property>
-            <property name="tooltip-markup" translatable="yes">Clear current selection</property>
-            <property name="tooltip-text" translatable="yes">Clear current selection</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="icon-name">edit-clear-symbolic</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_cancel">
-            <property name="label">gtk-cancel</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="has-tooltip">True</property>
-            <property name="tooltip-markup" translatable="yes">Cancel search</property>
-            <property name="tooltip-text" translatable="yes">Cancel search</property>
-            <property name="use-stock">True</property>
-          </object>
-          <packing>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_apply">
-            <property name="label" translatable="yes">Apply Changes</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Changes are not applied instantly, this button applies all changes</property>
-            <style>
-              <class name="suggested-action"/>
-            </style>
-          </object>
-          <packing>
-            <property name="pack-type">end</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkMenuButton" id="menu_button">
+            <property name="menu_model">primary_menu</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
@@ -496,10 +449,117 @@
           </object>
           <packing>
             <property name="pack-type">end</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <child>
+              <object class="GtkButton" id="button_pending">
+                <property name="label" translatable="yes">Pending Changes</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Review pending changes before applying them</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_apply">
+                <property name="label" translatable="yes">Apply Changes</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="tooltip-text" translatable="yes">Apply pending changes</property>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+            <style>
+              <class name="linked"/>
+            </style>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_cancel">
+            <property name="label">Cancel</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="has-tooltip">True</property>
+            <property name="tooltip-markup" translatable="yes">Cancel search</property>
+            <property name="tooltip-text" translatable="yes">Cancel search</property>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="button_clear">
+            <property name="label" translatable="yes">Cancel</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="tooltip-text" translatable="yes">Cancel pending changes</property>
+          </object>
+          <packing>
             <property name="position">3</property>
           </packing>
         </child>
       </object>
     </child>
   </object>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Update Software Sources</attribute>
+        <attribute name="action">app.refresh</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Software Sources</attribute>
+        <attribute name="action">app.sources</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Software History</attribute>
+        <attribute name="action">app.log</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Only Newest Versions</attribute>
+        <attribute name="action">app.filter-newest</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Only Native Packages</attribute>
+        <attribute name="action">app.filter-arch</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">About</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+        <attribute name="accel">&lt;Primary&gt;q</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>

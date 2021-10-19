@@ -398,12 +398,16 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 		gtk_widget_show (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
 		gtk_widget_show (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
+		gtk_widget_show (widget);
 		gpk_application_group_add_selected (priv);
 	} else {
 		priv->action = GPK_ACTION_NONE;
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 		gtk_widget_hide (widget);
 		gpk_application_group_remove_selected (priv);
 	}
@@ -1504,9 +1508,6 @@ static void
 gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 {
 	GtkEntry *entry;
-	GtkWindow *window;
-	GError *error = NULL;
-	gboolean ret;
 	gchar **searches = NULL;
 
 	entry = GTK_ENTRY (gtk_builder_get_object (priv->builder, "entry_text"));
@@ -1519,18 +1520,6 @@ gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 		goto out;
 	}
 
-	ret = !_g_strzero (priv->search_text);
-	if (!ret) {
-		g_debug ("invalid input text, will fail");
-		/* TODO - make the dialog turn red... */
-		window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-		gpk_error_dialog_modal (window,
-					/* TRANSLATORS: title: invalid text in the search bar */
-					_("Invalid search text"),
-					/* TRANSLATORS: message: tell the user that's not allowed */
-					_("The search text contains invalid characters"), NULL);
-		goto out;
-	}
 	g_debug ("find %s", priv->search_text);
 
 	/* mark find button insensitive */
@@ -1565,16 +1554,6 @@ gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 		goto out;
 	}
 
-	if (!ret) {
-		window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-		gpk_error_dialog_modal (window,
-					/* TRANSLATORS: title: we failed to execute the method */
-					_("The search could not be completed"),
-					/* TRANSLATORS: low level failure, details to follow */
-					_("Running the transaction failed"), error->message);
-		g_error_free (error);
-		goto out;
-	}
 out:
 	g_strfreev (searches);
 }
@@ -1962,6 +1941,8 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		gtk_widget_set_visible (widget, FALSE);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
 		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
+		gtk_widget_set_visible (widget, FALSE);
 
 	} else if (priv->action == GPK_ACTION_REMOVE) {
 		autoremove = g_settings_get_boolean (priv->settings, GPK_SETTINGS_ENABLE_AUTOREMOVE);
@@ -1980,9 +1961,34 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		gtk_widget_set_visible (widget, FALSE);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
 		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
+		gtk_widget_set_visible (widget, FALSE);
 	}
 	g_strfreev (package_ids);
 	return;
+}
+
+/**
+ * gpk_application_button_pending_cb:
+ **/
+static void
+gpk_application_button_pending_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
+{
+	GtkWidget *entry;
+
+	g_debug ("pendings button..");
+
+	/* clear the search text if we clicked the group array */
+	entry = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
+	gtk_entry_set_text (GTK_ENTRY(entry), "");
+
+	/* hide details */
+	gpk_application_clear_details (priv);
+	gpk_application_clear_packages (priv);
+
+	/* actually do the search */
+	priv->search_mode = GPK_MODE_SELECTED;
+	gpk_application_perform_search (priv);
 }
 
 static void
@@ -3258,11 +3264,17 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_clear_cb), priv);
 
+	/* pending */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (gpk_application_button_pending_cb), priv);
+
 	/* install */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_apply_cb), priv);
 
+	/* detail buttons */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_homepage_cb), priv);
