@@ -2495,7 +2495,11 @@ gpk_application_activate_about_cb (GSimpleAction *action,
 {
 	GpkApplicationPrivate *priv = user_data;
 	GtkWidget *main_window;
+	const gchar copyright[] =
+		"Copyright \xc2\xa9 2021 Matias De lellis\n"
+		"Copyright \xc2\xa9 2007-2009 Richard Hughes";
 	const char *authors[] = {
+		"Matias De lellis <mati86dl@gmail.com>",
 		"Richard Hughes <richard@hughsie.com>",
 		NULL};
 	const char *artists[] = {
@@ -2533,20 +2537,20 @@ gpk_application_activate_about_cb (GSimpleAction *action,
 
 	gtk_window_set_default_icon_name (GPK_ICON_SOFTWARE_INSTALLER);
 	gtk_show_about_dialog (GTK_WINDOW (main_window),
-                               "program-name", _("Software"),
-			       "version", PACKAGE_VERSION,
-			       "copyright", "Copyright \xc2\xa9 2007-2009 Richard Hughes",
-			       "license", license_trans,
-			       "wrap-license", TRUE,
-			       "website-label", _("PackageKit Website"),
-			       "website", "http://www.packagekit.org",
-				/* TRANSLATORS: description of NULL, gpk-application that is */
-			       "comments", _("Package Manager"),
-			       "authors", authors,
-			       "artists", artists,
-			       "translator-credits", translators,
-			       "logo-icon-name", GPK_ICON_SOFTWARE_INSTALLER,
-			       NULL);
+	                       "program-name", _("Software"),
+	                       "version", PACKAGE_VERSION,
+	                       "copyright", copyright,
+	                       "license", license_trans,
+	                       "wrap-license", TRUE,
+	                       "website-label", _("Xings Software Website"),
+	                       "website", "https://github.com/matiasdelellis/xings-software",
+	                       /* TRANSLATORS: description of NULL, gpk-application that is */
+	                       "comments", _("Add or remove software installed on the system"),
+	                       "authors", authors,
+	                       "artists", artists,
+	                       "translator-credits", translators,
+	                       "logo-icon-name", GPK_ICON_SOFTWARE_INSTALLER,
+	                       NULL);
 	g_free (license_trans);
 }
 
