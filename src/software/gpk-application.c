@@ -504,10 +504,10 @@ out:
 }
 
 /**
- * gpk_application_menu_homepage_cb:
+ * gpk_application_button_homepage_cb:
  **/
 static void
-gpk_application_menu_homepage_cb (GtkAction *action, GpkApplicationPrivate *priv)
+gpk_application_button_homepage_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
 	gpk_gnome_open (priv->homepage_url);
 }
@@ -723,10 +723,10 @@ out:
 }
 
 /**
- * gpk_application_menu_files_cb:
+ * gpk_application_button_files_cb:
  **/
 static void
-gpk_application_menu_files_cb (GtkAction *action, GpkApplicationPrivate *priv)
+gpk_application_button_files_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
 	gboolean ret;
 	gchar **package_ids = NULL;
@@ -817,19 +817,19 @@ out:
 }
 
 /**
- * gpk_application_menu_install_cb:
+ * gpk_application_button_install_cb:
  **/
 static void
-gpk_application_menu_install_cb (GtkAction *action, GpkApplicationPrivate *priv)
+gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
 	gpk_application_install (priv);
 }
 
 /**
- * gpk_application_menu_remove_cb:
+ * gpk_application_button_remove_cb:
  **/
 static void
-gpk_application_menu_remove_cb (GtkAction *action, GpkApplicationPrivate *priv)
+gpk_application_button_remove_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
 	gpk_application_remove (priv);
 }
@@ -930,10 +930,10 @@ out:
 }
 
 /**
- * gpk_application_menu_requires_cb:
+ * gpk_application_button_requires_cb:
  **/
 static void
-gpk_application_menu_requires_cb (GtkAction *action, GpkApplicationPrivate *priv)
+gpk_application_button_requires_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
 	gboolean ret;
 	gchar **package_ids = NULL;
@@ -1059,10 +1059,10 @@ out:
 }
 
 /**
- * gpk_application_menu_depends_cb:
+ * gpk_application_button_depends_cb:
  **/
 static void
-gpk_application_menu_depends_cb (GtkAction *_action, GpkApplicationPrivate *priv)
+gpk_application_button_depends_cb (GtkAction *_action, GpkApplicationPrivate *priv)
 {
 	gboolean ret;
 	gchar **package_ids = NULL;
@@ -3265,27 +3265,27 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_menu_homepage_cb), priv);
+			  G_CALLBACK (gpk_application_button_homepage_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_files"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_menu_files_cb), priv);
+			  G_CALLBACK (gpk_application_button_files_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_menu_install_cb), priv);
+			  G_CALLBACK (gpk_application_button_install_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_menu_remove_cb), priv);
+			  G_CALLBACK (gpk_application_button_remove_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_depends"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_menu_depends_cb), priv);
+			  G_CALLBACK (gpk_application_button_depends_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_requires"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_menu_requires_cb), priv);
+			  G_CALLBACK (gpk_application_button_requires_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
 	gtk_widget_hide (widget);
