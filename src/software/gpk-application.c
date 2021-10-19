@@ -2118,7 +2118,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gchar *url = NULL;
 	PkGroupEnum group;
 	gchar *license = NULL;
-	gchar *description = NULL;
+	gchar *summary = NULL, *package_pretty = NULL, *description = NULL;
 	guint64 size;
 
 	/* get the results */
@@ -2163,6 +2163,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 		      "url", &url,
 		      "group", &group,
 		      "license", &license,
+		      "summary", &summary,
 		      "description", &description,
 		      "size", &size,
 		      NULL);
@@ -2190,6 +2191,15 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence"));
 		gtk_widget_hide (widget);
 	}
+
+	/* set the summary */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_summary"));
+	gtk_label_set_label (GTK_LABEL (widget), summary);
+
+	/* set the package detail */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_package_desc"));
+	package_pretty = gpk_package_id_format_pretty (package_id);
+	gtk_label_set_label (GTK_LABEL (widget), package_pretty);
 
 	/* set the description */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
@@ -2232,6 +2242,8 @@ out:
 	g_free (package_id);
 	g_free (url);
 	g_free (license);
+	g_free (summary);
+	g_free (package_pretty);
 	g_free (description);
 	g_strfreev (split);
 	if (error_code != NULL)

@@ -292,6 +292,41 @@ gpk_package_id_format_oneline (const gchar *package_id, const gchar *summary)
 }
 
 /**
+ * gpk_package_id_format_pretty:
+ *
+ * Return value: "gtk2-2.12.2 (i386)"
+ **/
+gchar *
+gpk_package_id_format_pretty (const gchar *package_id)
+{
+	gchar *text = NULL;
+	GString *string;
+	gchar **split = NULL;
+	const gchar *arch;
+
+	g_return_val_if_fail (package_id != NULL, NULL);
+
+	/* optional */
+	split = pk_package_id_split (package_id);
+	if (split == NULL) {
+		g_warning ("could not parse %s", package_id);
+		return NULL;
+	}
+
+	string = g_string_new (split[PK_PACKAGE_ID_NAME]);
+	if (split[PK_PACKAGE_ID_VERSION][0] != '\0')
+		g_string_append_printf (string, "-%s", split[PK_PACKAGE_ID_VERSION]);
+	arch = gpk_get_pretty_arch (split[PK_PACKAGE_ID_ARCH]);
+	if (arch != NULL)
+		g_string_append_printf (string, " (%s)", arch);
+	text = g_string_free (string, FALSE);
+
+	g_strfreev (split);
+
+	return text;
+}
+
+/**
  * gpk_check_privileged_user
  **/
 gboolean
