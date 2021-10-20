@@ -679,8 +679,7 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
 			gtk_widget_hide (widget);
 
-			if ((role == PK_ROLE_ENUM_INSTALL_PACKAGES) ||
-			    (role == PK_ROLE_ENUM_REMOVE_PACKAGES)) {
+			if (priv->action == GPK_ACTION_NONE) {
 				widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
 				gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 			}
