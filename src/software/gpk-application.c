@@ -370,17 +370,12 @@ static void
 gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
+	guint packages_selected;
+	gchar *text = NULL;
 
 	/* show and hide the action widgets */
-	if (pk_package_sack_get_size (priv->package_sack) > 0) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-		gtk_widget_show (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-		gtk_widget_show (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-		gtk_widget_show (widget);
-		gpk_application_group_add_selected (priv);
-	} else {
+	packages_selected = pk_package_sack_get_size (priv->package_sack);
+	if (packages_selected == 0) {
 		priv->action = GPK_ACTION_NONE;
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
 		gtk_widget_hide (widget);
@@ -388,8 +383,41 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
+		gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
+
 		gpk_application_group_remove_selected (priv);
+
+		return;
 	}
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
+	gtk_widget_show (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
+	gtk_widget_show (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
+	gtk_widget_show (widget);
+
+	if (priv->action == GPK_ACTION_INSTALL) {
+		/* TRANSLATORS: how many updates are selected in the UI */
+		text = g_strdup_printf (ngettext ("%u package to be installed",
+			                          "%u packages to be installed",
+			                          packages_selected),
+			                packages_selected);
+	}
+	else if (priv->action == GPK_ACTION_REMOVE) {
+		/* TRANSLATORS: how many updates are selected in the UI */
+		text = g_strdup_printf (ngettext ("%u package to be removed",
+			                          "%u packages to be removed",
+			                          packages_selected),
+			                packages_selected);
+	}
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
+	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
+
+	gpk_application_group_add_selected (priv);
+
+	g_free (text);
 }
 
 /**
@@ -612,19 +640,22 @@ gpk_application_status_changed_timeout_cb (GpkApplicationPrivate *priv)
 static void
 gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkApplicationPrivate *priv)
 {
+	PkRoleEnum role;
 	PkStatusEnum status;
 	gint percentage;
 	gboolean allow_cancel;
 	GtkWidget *widget;
 
 	g_object_get (progress,
+		      "role", &role,
 		      "status", &status,
 		      "percentage", &percentage,
 		      "allow-cancel", &allow_cancel,
 		      NULL);
 
 	if (type == PK_PROGRESS_TYPE_STATUS) {
-		g_debug ("now %s", pk_status_enum_to_string (status));
+		g_debug ("role now %s", pk_role_enum_to_string (role));
+		g_debug ("status now %s", pk_status_enum_to_string (status));
 
 		if (status == PK_STATUS_ENUM_FINISHED) {
 			/* re-enable UI */
@@ -645,10 +676,15 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 				priv->status_id = 0;
 			}
 
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
 			gtk_widget_hide (widget);
+
+			if ((role == PK_ROLE_ENUM_INSTALL_PACKAGES) ||
+			    (role == PK_ROLE_ENUM_REMOVE_PACKAGES)) {
+				widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
+				gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
+			}
+
 			goto out;
 		}
 
