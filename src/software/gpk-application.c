@@ -104,8 +104,6 @@ enum {
 enum {
 	PACKAGES_COLUMN_IMAGE,
 	PACKAGES_COLUMN_STATE,  /* state of the item */
-	PACKAGES_COLUMN_CHECKBOX,  /* what we show in the checkbox */
-	PACKAGES_COLUMN_CHECKBOX_VISIBLE, /* visible */
 	PACKAGES_COLUMN_TEXT,
 	PACKAGES_COLUMN_ID,
 	PACKAGES_COLUMN_SUMMARY,
@@ -237,10 +235,10 @@ gpk_application_allow_remove_selection (GpkApplicationPrivate *priv,
 }
 
 /**
- * gpk_application_invert_selection_checkbox:
+ * gpk_application_invert_selection_state:
  **/
 static void
-gpk_application_invert_selection_checkbox (GpkApplicationPrivate *priv)
+gpk_application_invert_selection_state (GpkApplicationPrivate *priv)
 {
 	GtkTreeView *treeview;
 	GtkTreeModel *model;
@@ -270,29 +268,9 @@ gpk_application_invert_selection_checkbox (GpkApplicationPrivate *priv)
 	/* set new value */
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_CHECKBOX, gpk_application_state_get_checkbox (state),
 			    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
 			    -1);
 	g_free (package_id);
-}
-
-/**
- * gpk_application_get_checkbox_enable:
- **/
-static gboolean
-gpk_application_get_checkbox_enable (GpkApplicationPrivate *priv, PkBitfield state)
-{
-	gboolean enable_installed = TRUE;
-	gboolean enable_available = TRUE;
-
-	if (priv->action == GPK_ACTION_INSTALL)
-		enable_installed = FALSE;
-	else if (priv->action == GPK_ACTION_REMOVE)
-		enable_available = FALSE;
-
-	if (pk_bitfield_contain (state, GPK_STATE_INSTALLED))
-		return enable_installed;
-	return enable_available;
 }
 
 /**
@@ -392,13 +370,6 @@ static void
 gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
-	GtkTreeView *treeview;
-	gboolean valid;
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	PkBitfield state;
-	gboolean enabled;
-	gchar *package_id;
 
 	/* show and hide the action widgets */
 	if (pk_package_sack_get_size (priv->package_sack) > 0) {
@@ -418,31 +389,6 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 		gtk_widget_hide (widget);
 		gpk_application_group_remove_selected (priv);
-	}
-
-	/* correct the enabled state */
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-	model = gtk_tree_view_get_model (treeview);
-	valid = gtk_tree_model_get_iter_first (model, &iter);
-
-	/* for all current items, reset the state if in the array */
-	while (valid) {
-		gtk_tree_model_get (model, &iter,
-				    PACKAGES_COLUMN_STATE, &state,
-				    PACKAGES_COLUMN_ID, &package_id,
-				    -1);
-
-		/* we never show the checkbox for the search helper */
-		if (package_id == NULL) {
-			enabled = FALSE;
-		} else {
-			enabled = gpk_application_get_checkbox_enable (priv, state);
-		}
-		g_free (package_id);
-
-		/* set visible */
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter, PACKAGES_COLUMN_CHECKBOX_VISIBLE, enabled, -1);
-		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 }
 
@@ -473,7 +419,7 @@ gpk_application_try_mark_to_install (GpkApplicationPrivate *priv)
 			/* correct buttons */
 			gpk_application_allow_install_selection (priv, FALSE, FALSE);
 			gpk_application_allow_remove_selection (priv, TRUE, FALSE);
-			gpk_application_invert_selection_checkbox (priv);
+			gpk_application_invert_selection_state (priv);
 			ret = TRUE;
 			goto out;
 		}
@@ -507,7 +453,7 @@ gpk_application_try_mark_to_install (GpkApplicationPrivate *priv)
 	/* correct buttons */
 	gpk_application_allow_install_selection (priv, FALSE, FALSE);
 	gpk_application_allow_remove_selection (priv, TRUE, TRUE);
-	gpk_application_invert_selection_checkbox (priv);
+	gpk_application_invert_selection_state (priv);
 
 out:
 	/* add the selected group if there are any packages in the queue */
@@ -794,7 +740,7 @@ gpk_application_try_mark_to_remove (GpkApplicationPrivate *priv)
 			/* correct buttons */
 			gpk_application_allow_install_selection (priv, TRUE, FALSE);
 			gpk_application_allow_remove_selection (priv, FALSE, FALSE);
-			gpk_application_invert_selection_checkbox (priv);
+			gpk_application_invert_selection_state (priv);
 			goto out;
 		}
 		g_warning ("wrong mode and not in array");
@@ -822,7 +768,7 @@ gpk_application_try_mark_to_remove (GpkApplicationPrivate *priv)
 	/* correct buttons */
 	gpk_application_allow_install_selection (priv, TRUE, TRUE);
 	gpk_application_allow_remove_selection (priv, FALSE, FALSE);
-	gpk_application_invert_selection_checkbox (priv);
+	gpk_application_invert_selection_state (priv);
 
 out:
 	/* add the selected group if there are any packages in the queue */
@@ -1189,7 +1135,6 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	gchar *text;
 	gboolean in_queue;
 	gboolean installed;
-	gboolean enabled;
 	PkBitfield state = 0;
 	static guint package_cnt = 0;
 	PkInfoEnum info;
@@ -1226,14 +1171,9 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 					      package_id,
 					      summary);
 
-	/* can we modify this? */
-	enabled = gpk_application_get_checkbox_enable (priv, state);
-
 	gtk_list_store_append (priv->packages_store, &iter);
 	gtk_list_store_set (priv->packages_store, &iter,
 			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_CHECKBOX, gpk_application_state_get_checkbox (state),
-			    PACKAGES_COLUMN_CHECKBOX_VISIBLE, enabled,
 			    PACKAGES_COLUMN_TEXT, text,
 			    PACKAGES_COLUMN_SUMMARY, summary,
 			    PACKAGES_COLUMN_ID, package_id,
@@ -1285,8 +1225,6 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	gtk_list_store_append (priv->packages_store, &iter);
 	gtk_list_store_set (priv->packages_store, &iter,
 			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_CHECKBOX, FALSE,
-			    PACKAGES_COLUMN_CHECKBOX_VISIBLE, FALSE,
 			    PACKAGES_COLUMN_TEXT, text,
 			    PACKAGES_COLUMN_IMAGE, "system-search",
 			    PACKAGES_COLUMN_ID, NULL,
@@ -1780,7 +1718,6 @@ gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate
 {
 	GtkTreeView *treeview;
 	gboolean valid;
-	gboolean checkbox;
 	GtkTreeIter iter;
 	GtkTreeModel *model;
 	GtkTreeSelection *selection;
@@ -1801,12 +1738,10 @@ gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate
 			pk_bitfield_remove (state, GPK_STATE_IN_LIST);
 			/* get the new icon */
 			icon = gpk_application_state_get_icon (state);
-			checkbox = gpk_application_state_get_checkbox (state);
 
 			/* set new value */
 			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 					    PACKAGES_COLUMN_STATE, state,
-					    PACKAGES_COLUMN_CHECKBOX, checkbox,
 					    PACKAGES_COLUMN_IMAGE, icon,
 					    -1);
 		}
@@ -2016,12 +1951,6 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	renderer = gtk_cell_renderer_toggle_new ();
 	g_signal_connect (renderer, "toggled",
 	                  G_CALLBACK (gpk_application_packages_installed_state_toggled_cb), priv);
-
-	/* TRANSLATORS: column for installed status */
-	column = gtk_tree_view_column_new_with_attributes (_("Installed"), renderer,
-							   "active", PACKAGES_COLUMN_CHECKBOX,
-							   "visible", PACKAGES_COLUMN_CHECKBOX_VISIBLE, NULL);
-	gtk_tree_view_append_column (treeview, column);
 
 	/* column for images */
 	column = gtk_tree_view_column_new ();
@@ -2782,8 +2711,6 @@ gpk_application_add_welcome (GpkApplicationPrivate *priv)
 	}
 	gtk_list_store_set (priv->packages_store, &iter,
 			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_CHECKBOX, FALSE,
-			    PACKAGES_COLUMN_CHECKBOX_VISIBLE, FALSE,
 			    PACKAGES_COLUMN_TEXT, welcome,
 			    PACKAGES_COLUMN_IMAGE, "system-search",
 			    PACKAGES_COLUMN_SUMMARY, NULL,
@@ -3216,8 +3143,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	priv->packages_store = gtk_list_store_new (PACKAGES_COLUMN_LAST,
 					      G_TYPE_STRING,
 					      G_TYPE_UINT64,
-					      G_TYPE_BOOLEAN,
-					      G_TYPE_BOOLEAN,
 					      G_TYPE_STRING,
 					      G_TYPE_STRING,
 					      G_TYPE_STRING);
