@@ -117,6 +117,7 @@
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="label" translatable="yes">Update software installed on the system</property>
+                                <property name="ellipsize">end</property>
                                 <attributes>
                                   <attribute name="scale" value="1.4399999999999999"/>
                                 </attributes>
@@ -133,6 +134,7 @@
                                 <property name="can-focus">False</property>
                                 <property name="halign">start</property>
                                 <property name="label" translatable="yes">xings-software-update-0.3.5-1 (x86-64)</property>
+                                <property name="ellipsize">end</property>
                                 <style>
                                   <class name="dim-label"/>
                                 </style>
@@ -157,7 +159,7 @@
                             <property name="layout-style">start</property>
                             <child>
                               <object class="GtkButton" id="button_install">
-                                <property name="label" translatable="yes">Install</property>
+                                <property name="label" translatable="yes">Select to Install…</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
@@ -173,7 +175,7 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="button_remove">
-                                <property name="label" translatable="yes">Remove</property>
+                                <property name="label" translatable="yes">Select to Remove…</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>

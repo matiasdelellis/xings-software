@@ -210,22 +210,30 @@ gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
  * gpk_application_allow_install_selection:
  **/
 static void
-gpk_application_allow_install_selection (GpkApplicationPrivate *priv, gboolean allow)
+gpk_application_allow_install_selection (GpkApplicationPrivate *priv,
+                                         gboolean               allow,
+                                         gboolean               to_restore)
 {
 	GtkWidget *widget;
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
-	gtk_widget_set_visible (widget, allow);
+	gtk_button_set_label (GTK_BUTTON(widget),
+	                      to_restore ? _("Cancel Removal") : _("Select to Install…"));
+	gtk_widget_set_sensitive (widget, allow);
 }
 
 /**
  * gpk_application_allow_remove_selection:
  **/
 static void
-gpk_application_allow_remove_selection (GpkApplicationPrivate *priv, gboolean allow)
+gpk_application_allow_remove_selection (GpkApplicationPrivate *priv,
+                                        gboolean               allow,
+                                        gboolean               to_restore)
 {
 	GtkWidget *widget;
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
-	gtk_widget_set_visible (widget, allow);
+	gtk_button_set_label (GTK_BUTTON(widget),
+	                      to_restore ? _("Cancel Installation") : _("Select to Remove…"));
+	gtk_widget_set_sensitive (widget, allow);
 }
 
 /**
@@ -463,8 +471,8 @@ gpk_application_try_mark_to_install (GpkApplicationPrivate *priv)
 			g_debug ("removed %s from package array", package_id_selected);
 
 			/* correct buttons */
-			gpk_application_allow_install_selection (priv, FALSE);
-			gpk_application_allow_remove_selection (priv, TRUE);
+			gpk_application_allow_install_selection (priv, FALSE, FALSE);
+			gpk_application_allow_remove_selection (priv, TRUE, FALSE);
 			gpk_application_invert_selection_checkbox (priv);
 			ret = TRUE;
 			goto out;
@@ -494,9 +502,11 @@ gpk_application_try_mark_to_install (GpkApplicationPrivate *priv)
 	pk_package_sack_add_package (priv->package_sack, package);
 	g_object_unref (package);
 
+	g_debug ("added %s to package array", package_id_selected);
+
 	/* correct buttons */
-	gpk_application_allow_install_selection (priv, FALSE);
-	gpk_application_allow_remove_selection (priv, TRUE);
+	gpk_application_allow_install_selection (priv, FALSE, FALSE);
+	gpk_application_allow_remove_selection (priv, TRUE, TRUE);
 	gpk_application_invert_selection_checkbox (priv);
 
 out:
@@ -782,8 +792,8 @@ gpk_application_try_mark_to_remove (GpkApplicationPrivate *priv)
 			g_debug ("removed %s from package array", package_id_selected);
 
 			/* correct buttons */
-			gpk_application_allow_install_selection (priv, TRUE);
-			gpk_application_allow_remove_selection (priv, FALSE);
+			gpk_application_allow_install_selection (priv, TRUE, FALSE);
+			gpk_application_allow_remove_selection (priv, FALSE, FALSE);
 			gpk_application_invert_selection_checkbox (priv);
 			goto out;
 		}
@@ -807,10 +817,11 @@ gpk_application_try_mark_to_remove (GpkApplicationPrivate *priv)
 		      NULL);
 	pk_package_sack_add_package (priv->package_sack, package);
 	g_object_unref (package);
+	g_debug ("added %s to package array", package_id_selected);
 
 	/* correct buttons */
-	gpk_application_allow_install_selection (priv, TRUE);
-	gpk_application_allow_remove_selection (priv, FALSE);
+	gpk_application_allow_install_selection (priv, TRUE, TRUE);
+	gpk_application_allow_remove_selection (priv, FALSE, FALSE);
 	gpk_application_invert_selection_checkbox (priv);
 
 out:
@@ -1759,7 +1770,7 @@ gpk_application_packages_installed_state_toggled_cb (GtkCellRendererToggle *cell
 	gtk_tree_path_free (path);
 }
 
-static void gpk_application_packages_treeview_clicked_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv);
+static void gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv);
 
 /**
  * gpk_application_button_clear_cb:
@@ -1807,7 +1818,7 @@ gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate
 
 	/* force a button refresh */
 	selection = gtk_tree_view_get_selection (treeview);
-	gpk_application_packages_treeview_clicked_cb (selection, priv);
+	gpk_application_package_selection_changed_cb (selection, priv);
 
 	priv->action = GPK_ACTION_NONE;
 	gpk_application_change_queue_status (priv);
@@ -2263,16 +2274,17 @@ out:
 }
 
 /**
- * gpk_application_packages_treeview_clicked_cb:
+ * gpk_application_package_selection_changed_cb:
  **/
 static void
-gpk_application_packages_treeview_clicked_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv)
+gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gboolean show_install = TRUE;
 	gboolean show_remove = TRUE;
+	gboolean to_restore = FALSE;
 	PkBitfield state;
 	gchar **package_ids = NULL;
 	gchar *package_id = NULL;
@@ -2287,8 +2299,8 @@ gpk_application_packages_treeview_clicked_cb (GtkTreeSelection *selection, GpkAp
 		g_debug ("no row selected");
 
 		/* we cannot now add it */
-		gpk_application_allow_install_selection (priv, FALSE);
-		gpk_application_allow_remove_selection (priv, FALSE);
+		gpk_application_allow_install_selection (priv, FALSE, FALSE);
+		gpk_application_allow_remove_selection (priv, FALSE, FALSE);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
 		gtk_widget_hide (widget);
 
@@ -2314,17 +2326,23 @@ gpk_application_packages_treeview_clicked_cb (GtkTreeSelection *selection, GpkAp
 
 	show_install = (state == 0 ||
 			state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_IN_LIST, -1));
-	show_remove = (state == pk_bitfield_value (GPK_STATE_INSTALLED) ||
-		       state == pk_bitfield_value (GPK_STATE_IN_LIST));
-
-	if (priv->action == GPK_ACTION_INSTALL && !pk_bitfield_contain (state, GPK_STATE_IN_LIST))
-		show_remove = FALSE;
 	if (priv->action == GPK_ACTION_REMOVE && !pk_bitfield_contain (state, GPK_STATE_IN_LIST))
 		show_install = FALSE;
 
+	show_remove = (state == pk_bitfield_value (GPK_STATE_INSTALLED) ||
+		       state == pk_bitfield_value (GPK_STATE_IN_LIST));
+	if (priv->action == GPK_ACTION_INSTALL && !pk_bitfield_contain (state, GPK_STATE_IN_LIST))
+		show_remove = FALSE;
+
+	to_restore =
+		(state == pk_bitfield_value (GPK_STATE_IN_LIST) ||
+		 state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_IN_LIST, -1) ||
+		 state == pk_bitfield_from_enums (GPK_STATE_IN_LIST, GPK_STATE_INSTALLED, GPK_STATE_COLLECTION, -1) ||
+		 state == pk_bitfield_from_enums (GPK_STATE_IN_LIST, GPK_STATE_COLLECTION, -1));
+
 	/* only show buttons if we are in the correct mode */
-	gpk_application_allow_install_selection (priv, show_install);
-	gpk_application_allow_remove_selection (priv, show_remove);
+	gpk_application_allow_install_selection (priv, show_install, to_restore);
+	gpk_application_allow_remove_selection (priv, show_remove, to_restore);
 
 	/* clear the description text */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
@@ -3352,7 +3370,7 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
 	g_signal_connect (selection, "changed",
-			  G_CALLBACK (gpk_application_packages_treeview_clicked_cb), priv);
+			  G_CALLBACK (gpk_application_package_selection_changed_cb), priv);
 
 	/* add columns to the tree view */
 	gpk_application_packages_add_columns (priv);
