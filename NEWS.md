@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Version 0.3.5] - 2021-10-22
+### Added
+ - Hoping for a better future, we called the project Xings Software.
+ - First attempt to modernize the software installation application.
+ - Add pending button to review changes before applying them.
+ - Show update downloads in history dialog.
+ - Add --enable-offline-updates to build configuration disabled by default.
+
+### Fixed
+ - Modernize appstream metadata. Issue #1
+ - Add man page xings-software-service. Issue #1
+ - Add some keywords to desktops file, and descriptions improvements. Issue #1
+ - Adhered to keepachangelog/semantic versioning and fix date of last release.
+ - Fix icon of history and preferences.
+ - Don't search on paste. It is quite confusing.
+
 ## [Version 0.3.2] - 2021-10-07
 ### Added
  - Add a button to check again when it says there are no updates.
