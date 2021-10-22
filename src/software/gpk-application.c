@@ -3328,8 +3328,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	g_signal_connect (widget, "activate",
 			  G_CALLBACK (gpk_application_find_cb), priv);
-	g_signal_connect (widget, "paste-clipboard",
-			  G_CALLBACK (gpk_application_find_cb), priv);
 	g_signal_connect (widget, "icon-press",
 			  G_CALLBACK (gpk_application_entry_text_icon_press_cb), priv);
 
