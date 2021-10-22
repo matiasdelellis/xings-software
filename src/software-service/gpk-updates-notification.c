@@ -27,6 +27,9 @@
 #endif
 
 #include <common/gpk-common.h>
+#ifdef BUILD_OFFLINE_UPDATES
+#include <common/gpk-session.h>
+#endif
 
 #include "gpk-updates-shared.h"
 
@@ -37,6 +40,10 @@ struct _GpkUpdatesNotification
 	GObject			_parent;
 
 	NotifyNotification	*notification_updates;
+
+#ifdef BUILD_OFFLINE_UPDATES
+	GpkSession		*session;
+#endif
 
 #ifdef HAVE_STATUSNOTIFIER
 	StatusNotifierItem	*status_notifier;
@@ -159,10 +166,10 @@ gpk_updates_notification_show (GpkUpdatesNotification *notification,
                                const gchar            *title,
                                const gchar            *message,
                                const gchar            *icon_name,
-                               gboolean                need_restart)
+                               gboolean                downloaded)
 {
 	NotifyNotification *notification_updates;
-	gboolean ret;
+	gboolean ret, can_reboot = FALSE;
 	GError *error = NULL;
 
 	if (notification->notification_updates != NULL) {
@@ -200,14 +207,19 @@ gpk_updates_notification_show (GpkUpdatesNotification *notification,
 	                                gpk_updates_notification_response_action,
 	                                notification, NULL);
 
-	if (need_restart) {
-		notify_notification_add_action (notification_updates,
-		                                "reboot-system",
-		                                /* TRANSLATORS: install available updates */
-		                                _("Restart & Install"),
-		                                gpk_updates_notification_response_action,
-		                                notification, NULL);
+#ifdef BUILD_OFFLINE_UPDATES
+	if (downloaded) {
+		gpk_session_can_reboot (notification->session, &can_reboot, NULL);
+		if (can_reboot) {
+			notify_notification_add_action (notification_updates,
+			                                "reboot-system",
+			                                /* TRANSLATORS: install available updates */
+			                                _("Restart & Install"),
+			                                gpk_updates_notification_response_action,
+			                                notification, NULL);
+		}
 	}
+#endif
 
 	g_signal_connect (notification_updates, "closed",
 	                  G_CALLBACK (gpk_updates_notification_closed), NULL);
@@ -226,7 +238,7 @@ gpk_updates_notification_show (GpkUpdatesNotification *notification,
 
 static void
 gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notification,
-                                                gboolean                need_restart,
+                                                gboolean                downloaded,
                                                 gint                    updates_count)
 {
 	const gchar *message;
@@ -245,7 +257,7 @@ gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notifica
 	                               title,
 	                               message,
 	                               GPK_ICON_UPDATES_URGENT,
-	                               need_restart);
+	                               downloaded);
 
 #ifdef HAVE_STATUSNOTIFIER
 	gpk_updates_notification_show_applet (notification,
@@ -259,7 +271,7 @@ gpk_updates_notification_show_critical_updates (GpkUpdatesNotification *notifica
 
 static void
 gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *notification,
-                                                    gboolean                need_restart,
+                                                    gboolean                downloaded,
                                                     gint                    updates_count)
 {
 	const gchar *message;
@@ -281,7 +293,7 @@ gpk_updates_notification_maybe_show_normal_updates (GpkUpdatesNotification *noti
 	                               title,
 	                               message,
 	                               GPK_ICON_UPDATES_NORMAL,
-	                               need_restart);
+	                               downloaded);
 
 #ifdef HAVE_STATUSNOTIFIER
 	gpk_updates_notification_show_applet (notification,
@@ -323,17 +335,17 @@ gpk_updates_notification_show_failed (GpkUpdatesNotification *notification)
 
 void
 gpk_updates_notification_should_notify_updates (GpkUpdatesNotification *notification,
-                                                gboolean                need_restart,
+                                                gboolean                downloaded,
                                                 guint                   updates_count,
                                                 guint                   important_count)
 {
 	if (important_count) {
 		gpk_updates_notification_show_critical_updates (notification,
-		                                                need_restart,
+		                                                downloaded,
 		                                                important_count);
 	} else {
 		gpk_updates_notification_maybe_show_normal_updates (notification,
-		                                                    need_restart,
+		                                                    downloaded,
 		                                                    updates_count);
 	}
 }
@@ -343,6 +355,8 @@ static void
 gpk_updates_notification_applet_icon_activate_cb (GpkUpdatesNotification *notification)
 {
 	g_debug ("applet activated");
+	gpk_updates_notification_hide_applet (notification);
+	g_signal_emit (notification, signals [SHOW_UPDATE_VIEWER], 0);
 }
 #endif
 
@@ -358,6 +372,10 @@ gpk_updates_notification_dispose (GObject *object)
 	notification = GPK_UPDATES_NOTIFICATION (object);
 
 	g_debug ("Stopping updates notification");
+
+#ifdef BUILD_OFFLINE_UPDATES
+	g_clear_object (&notification->session);
+#endif
 
 #ifdef HAVE_STATUSNOTIFIER
 	g_clear_object (&notification->status_notifier);
@@ -402,6 +420,10 @@ gpk_updates_notification_init (GpkUpdatesNotification *notification)
 	g_debug ("Starting updates notification");
 
 	notification->shared = gpk_updates_shared_get ();
+
+#ifdef BUILD_OFFLINE_UPDATES
+	notification->session = gpk_session_new ();
+#endif
 
 #ifdef HAVE_STATUSNOTIFIER
 	notification->status_notifier = g_object_new (STATUS_NOTIFIER_TYPE_ITEM,

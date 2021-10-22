@@ -45,6 +45,7 @@ xings_software_service_LDADD =				\
 	$(GIO_LIBS)					\
 	$(DBUS_LIBS)					\
 	$(NOTIFY_LIBS)					\
+	$(SYSTEMD_LIBS)					\
 	$(X11_LIBS)
 
 xings_software_services_CFLAGS = 			\

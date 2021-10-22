@@ -19,10 +19,8 @@
 
 #include "config.h"
 
-#include <glib/gi18n.h>
-#include <packagekit-glib2/packagekit.h>
-
 #include <common/gpk-common.h>
+#include <common/gpk-session.h>
 
 #include "gpk-updates-notification.h"
 
@@ -102,14 +100,14 @@ gpk_updates_notififier_launch_update_viewer (GpkUpdatesManager *manager)
  */
 
 static void
-gpk_updates_manager_notify_updates (GpkUpdatesManager *manager, gboolean need_restart)
+gpk_updates_manager_notify_updates (GpkUpdatesManager *manager, gboolean downloaded)
 {
 	guint updates_count = 0, important_packages = 0;
 
 	updates_count = gpk_updates_checker_get_updates_count (manager->checker);
 	important_packages = gpk_updates_checker_get_important_updates_count (manager->checker);
 
-	gpk_updates_notification_should_notify_updates (manager->notification, need_restart, updates_count, important_packages);
+	gpk_updates_notification_should_notify_updates (manager->notification, downloaded, updates_count, important_packages);
 }
 
 static void
@@ -251,6 +249,14 @@ gpk_updates_manager_notification_ignore_updates_cb (GpkUpdatesNotification *noti
 	g_debug ("User just ignore updates from notification...");
 }
 
+static void
+gpk_updates_manager_notification_reboot_system_cb (GpkUpdatesNotification *notification,
+                                                   GpkUpdatesManager      *manager)
+{
+	GpkSession *session = gpk_session_new ();
+	gpk_session_reboot (session, NULL);
+	g_object_unref (session);
+}
 
 /**
  *  GpkUpdatesManager:
@@ -337,6 +343,8 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	                  G_CALLBACK (gpk_updates_manager_notification_show_update_viewer_cb), manager);
 	g_signal_connect (manager->notification, "ignore-updates",
 	                  G_CALLBACK (gpk_updates_manager_notification_ignore_updates_cb), manager);
+	g_signal_connect (manager->notification, "reboot-system",
+	                  G_CALLBACK (gpk_updates_manager_notification_reboot_system_cb), manager);
 
 	/* we have to consider the network connection before looking for updates */
 

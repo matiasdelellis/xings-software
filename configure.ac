@@ -171,6 +171,18 @@ AC_SUBST(STATUSNOTIFIER_CFLAGS)
 AC_SUBST(STATUSNOTIFIER_LIBS)
 
 dnl ---------------------------------------------------------------------------
+dnl - Enable offline updates
+dnl ---------------------------------------------------------------------------
+AC_ARG_ENABLE([offline_updates],
+              AS_HELP_STRING([--enable-offline-updates], [Prefer Offline Updates]),
+              [with_offline_updates=$enableval],
+              [with_offline_updates=no])
+
+if test x$with_offline_updates = xyes ; then
+	AC_DEFINE(BUILD_OFFLINE_UPDATES, 1, [Define if is targered an environment that can reboot to install updates])
+fi
+
+dnl ---------------------------------------------------------------------------
 dnl - Enable small form factor code
 dnl ---------------------------------------------------------------------------
 AC_ARG_ENABLE(small_form_factor, AS_HELP_STRING([--enable-small-form-factor],[enable small form factor code]),
@@ -256,6 +268,8 @@ echo "
         cflags:                    ${CFLAGS}
         cppflags:                  ${CPPFLAGS}
 
-        systemd integrations       ${have_systemd}
+        Prefer Offline Updates     ${with_offline_updates}
+        Systemd Integrations       ${have_systemd}
+
         Status Notifier:           ${enable_statusnotifier}
 "
