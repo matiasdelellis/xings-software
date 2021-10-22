@@ -1770,6 +1770,8 @@ gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate
 	PkBitfield state;
 	gboolean ret;
 
+	g_debug ("clear package selection...");
+
 	/* get the first iter in the array */
 	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
 	model = gtk_tree_view_get_model (treeview);
@@ -1805,6 +1807,30 @@ gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate
 }
 
 /**
+ * gpk_application_button_pending_cb:
+ **/
+static void
+gpk_application_button_pending_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
+{
+	g_debug ("see pendings changes...");
+
+	/* clear the search text if we clicked the group array */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
+	gtk_entry_set_text (GTK_ENTRY(widget), "");
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
+	gtk_widget_hide (widget);
+
+	/* hide details */
+	gpk_application_clear_details (priv);
+	gpk_application_clear_packages (priv);
+
+	/* actually do the search */
+	priv->search_mode = GPK_MODE_SELECTED;
+	gpk_application_perform_search (priv);
+}
+
+/**
  * gpk_application_install_packages_cb:
  **/
 static void
@@ -1815,6 +1841,8 @@ gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplica
 	PkError *error_code = NULL;
 	GtkWindow *window;
 	guint idle_id;
+
+	g_debug ("installing packages...");
 
 	/* get the results */
 	results = pk_task_generic_finish (task, res, &error);
@@ -1868,6 +1896,8 @@ gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicat
 	GtkWindow *window;
 	guint idle_id;
 
+	g_debug ("removing packages...");
+
 	/* get the results */
 	results = pk_task_generic_finish (task, res, &error);
 	if (results == NULL) {
@@ -1914,6 +1944,8 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 	gchar **package_ids = NULL;
 	gboolean autoremove;
 
+	g_debug ("apply changes...");
+
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
 
@@ -1936,6 +1968,10 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 		gtk_widget_set_visible (widget, FALSE);
 
+		/* hide details */
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
+		gtk_widget_hide (widget);
+
 	} else if (priv->action == GPK_ACTION_REMOVE) {
 		autoremove = g_settings_get_boolean (priv->settings, GPK_SETTINGS_ENABLE_AUTOREMOVE);
 
@@ -1955,32 +1991,13 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		gtk_widget_set_visible (widget, FALSE);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 		gtk_widget_set_visible (widget, FALSE);
+
+		/* hide details */
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
+		gtk_widget_hide (widget);
 	}
 	g_strfreev (package_ids);
 	return;
-}
-
-/**
- * gpk_application_button_pending_cb:
- **/
-static void
-gpk_application_button_pending_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
-{
-	GtkWidget *entry;
-
-	g_debug ("pendings button..");
-
-	/* clear the search text if we clicked the group array */
-	entry = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	gtk_entry_set_text (GTK_ENTRY(entry), "");
-
-	/* hide details */
-	gpk_application_clear_details (priv);
-	gpk_application_clear_packages (priv);
-
-	/* actually do the search */
-	priv->search_mode = GPK_MODE_SELECTED;
-	gpk_application_perform_search (priv);
 }
 
 static void
