@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.kn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-15 15:41-0300\n"
+"POT-Creation-Date: 2021-10-22 10:24-0300\n"
 "PO-Revision-Date: 2014-09-18 15:01+0530\n"
 "Last-Translator: Shankar Prasad <svenkate AT redhat Dot com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -20,14 +20,15 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:10
-#: ../src/software/gpk-application.c:2536
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
+#: ../src/software/gpk-application.c:2572
 #, fuzzy
 msgid "Software"
 msgstr "ತಂತ್ರಾಂಶ ದಾಖಲೆ"
 
+#. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
 msgid "Add or remove software installed on the system"
 msgstr "ಗಣಕಕ್ಕೆ ತಂತ್ರಾಂಶವನ್ನು ಸೇರಿಸು ಅಥವ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿರುವುದನ್ನು ತೆಗೆದು ಹಾಕು"
 
@@ -59,13 +60,13 @@ msgstr ""
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/software-service/gpk-updates-notification.c:180
+#: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3442
 msgid "Software Update"
 msgstr "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್‌"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "ಗಣಕದಲ್ಲಿ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿರುವ ತಂತ್ರಾಂಶವನ್ನು ಅಪ್ಡೇಟ್ ಮಾಡು"
 
@@ -90,110 +91,114 @@ msgstr ""
 "ಅನ್ನು ಬಳಸಿಕೊಂಡು ಯಾವುದೆ ವಿತರಣೆಯಲ್ಲಿ ಕೆಲಸ ಮಾಡಬಲ್ಲದು."
 
 #: ../data/xings-software.desktop.in.h:3
-msgid "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;"
+#, fuzzy
+msgid ""
+"Install;Uninstall;Program;Software;App;Sources;Repositories;Preferences;"
+"Store;"
 msgstr "ಅಪ್‌ಡೇಟ್‌ಗಳು;ನವೀಕರಣಗಳು;ಆಕರಗಳು;ರೆಪೊಸಿಟರಿಗಳು;ಆದ್ಯತೆಗಳು;ಅನುಸ್ಥಾಪನೆ;ಶೇಖರಣೆ;"
 
-#: ../data/gpk-application.ui.h:1
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#, fuzzy
+msgid "Select to Install…"
+msgstr "ಅನುಸ್ಥಾಪಿಸ ಬೇಕಿರುವ ಕಡತಗಳು"
+
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
+msgid "Select to Remove…"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:4
 msgid "License"
 msgstr "ಪರವಾನಗಿ"
 
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:2 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "ಆಕರ"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:3 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "ಅನುಸ್ಥಾಪಿಸು"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:4 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "ತೆಗೆದು ಹಾಕು"
-
-#: ../data/gpk-application.ui.h:5
+#: ../data/gpk-application.ui.h:6
 msgid "Homepage"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:6
+#: ../data/gpk-application.ui.h:7
 msgid "Visit home page for selected package"
 msgstr "ಆಯ್ಕೆ ಮಾಡಲಾದ ಪ್ಯಾಕೇಜಿನ ನೆಲೆ ಪುಟಕ್ಕೆ ಭೇಟಿ ನೀಡು"
 
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:8
 msgid "Files"
 msgstr "ಕಡತಗಳು"
 
-#: ../data/gpk-application.ui.h:8
+#: ../data/gpk-application.ui.h:9
 #, fuzzy
 msgid "Required"
 msgstr "ಲಾಕ್‌ನ ಅಗತ್ಯವಿದೆ"
 
-#: ../data/gpk-application.ui.h:9
+#: ../data/gpk-application.ui.h:10
 #, fuzzy
 msgid "Dependent"
 msgstr "ಅವಲಂಬಿತ ಪ್ಯಾಕೇಜುಗಳು"
 
-#: ../data/gpk-application.ui.h:11
-msgid "Clear current selection"
-msgstr "ಪ್ರಸಕ್ತ ಆಯ್ಕೆಯನ್ನು ಅಳಿಸು"
-
 #: ../data/gpk-application.ui.h:12
-msgid "Cancel search"
-msgstr "ಹುಡುಕನ್ನು ರದ್ದುಗೊಳಿಸು"
+#, fuzzy
+msgid "Pending Changes"
+msgstr "ಬದಲಾವಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ"
 
 #: ../data/gpk-application.ui.h:13
+msgid "Review pending changes before applying them"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:14
 msgid "Apply Changes"
 msgstr "ಬದಲಾವನೆಗಳನ್ನು ಅನ್ವಯಿಸು"
 
-#: ../data/gpk-application.ui.h:14
-msgid "Changes are not applied instantly, this button applies all changes"
-msgstr ""
-"ಬದಲಾವಣೆಗಳು ತಕ್ಷಣ ಕಾರ್ಯರೂಪಕ್ಕೆ ಬರುವುದಿಲ್ಲ, ಈ ಗುಂಡಿಯು ಎಲ್ಲಾ ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸುತ್ತದೆ"
-
 #: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Apply pending changes"
+msgstr "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../data/gpk-application.ui.h:16
+msgid "Cancel search"
+msgstr "ಹುಡುಕನ್ನು ರದ್ದುಗೊಳಿಸು"
+
+#: ../data/gpk-application.ui.h:17
+#, fuzzy
+msgid "Cancel"
+msgstr "ರದ್ದು ಮಾಡಲಾಗಿದೆ"
+
+#: ../data/gpk-application.ui.h:18
+#, fuzzy
+msgid "Cancel pending changes"
+msgstr "ಬದಲಾವಣೆಗಳನ್ನು ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ"
+
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
 
-#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
 msgid "Software Sources"
 msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:17
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:2
-#: ../src/history/gpk-log.c:785 ../src/history/gpk-log.c:793
+#: ../data/gpk-application.ui.h:21
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
+#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
 
-#: ../data/gpk-application.ui.h:18
+#: ../data/gpk-application.ui.h:22
 msgid "Only Newest Versions"
 msgstr "ಕೇವಲ ಹೊಸ ಆವೃತ್ತಿಗಳು ಮಾತ್ರ"
 
-#: ../data/gpk-application.ui.h:19
+#: ../data/gpk-application.ui.h:23
 msgid "Only Native Packages"
 msgstr "ಕೇವಲ ಸ್ಥಳೀಯ ಪ್ಯಾಕೇಜುಗಳು ಮಾತ್ರ"
 
-#: ../data/gpk-application.ui.h:20
+#: ../data/gpk-application.ui.h:24
 msgid "About"
 msgstr "ಕುರಿತು"
 
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:25
 msgid "_Quit"
 msgstr "ನಿರ್ಗಮಿಸು (_Q)"
 
@@ -201,21 +206,19 @@ msgstr "ನಿರ್ಗಮಿಸು (_Q)"
 msgid "Install Package"
 msgstr "ಪ್ಯಾಕೇಜನ್ನು ಅನುಸ್ಥಾಪಿಸು"
 
-#. TRANSLATORS: program name: application to install a package to provide a file
-#. TRANSLATORS: program name: installs a package (or packages) by name
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
-#: ../src/helpers/gpk-install-local-file.c:67
-#: ../src/helpers/gpk-install-package-name.c:63
 #: ../src/packagekit-service/gpk-dbus-service.c:138
 #: ../src/packagekit-service/gpk-dbus-service.c:141
-#: ../src/packagekit-service/gpk-dbus-task.c:3197
-msgid "Software Install"
-msgstr "ತಂತ್ರಾಂಶ ಅನುಸ್ಥಾಪನೆ"
+#, fuzzy
+msgid "PackageKit Session Service"
+msgstr "PackageKit ಜಾಲತಾಣ"
 
 #: ../data/xings-packagekit-service.desktop.in.h:2
-msgid "Install selected software on the system"
-msgstr "ಆರಿಸಲಾದ ತಂತ್ರಾಂಶವನ್ನು ಗಣಕದಲ್ಲಿ ಅನುಸ್ಥಾಪಿಸು"
+#: ../src/packagekit-service/gpk-dbus-service.c:143
+#, fuzzy
+msgid "Session D-Bus Service for PackageKit"
+msgstr "PackageKit ಗಾಗಿ ಅಧಿವೇಶನ D-Bus ಸೇವೆ"
 
 #: ../data/gpk-error.ui.h:1
 msgid "More details"
@@ -251,10 +254,6 @@ msgstr "ಆರಿಸಲಾದ ಪ್ಯಾಕೇಜನ್ನು ವ್ಯವಸ�
 msgid "View past package management tasks"
 msgstr "ಈ ಹಿಂದಿನ ಪ್ಯಾಕೇಜ್ ವ್ಯವಸ್ಥಾಪನಾ ಕಾರ್ಯಗಳನ್ನು ನೋಡು"
 
-#: ../data/gpk-log.ui.h:1
-msgid "Filter"
-msgstr "ಸೋಸುಕ (ಫಿಲ್ಟರ್)"
-
 #: ../data/xings-software-preferences.desktop.in.h:1
 #, fuzzy
 msgid "Software Preferences"
@@ -266,6 +265,13 @@ msgid ""
 msgstr ""
 "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್ ಆದ್ಯತೆಗಳನ್ನು ಬದಲಾಯಿಸು ಮತ್ತು ತಂತ್ರಾಂಶ ಮೂಲಗಳನ್ನು ಸಕ್ರಿಯ ಅಥವ "
 "ನಿಷ್ಕ್ರಿಯಗೊಳಿಸು"
+
+#: ../data/xings-software-preferences.desktop.in.h:3
+#, fuzzy
+msgid ""
+"Install;Uninstall;Updates;Upgrade;Sources;Repositories;Preferences;Program;"
+"Software;App;Store;"
+msgstr "ಅಪ್‌ಡೇಟ್‌ಗಳು;ನವೀಕರಣಗಳು;ಆಕರಗಳು;ರೆಪೊಸಿಟರಿಗಳು;ಆದ್ಯತೆಗಳು;ಅನುಸ್ಥಾಪನೆ;ಶೇಖರಣೆ;"
 
 #: ../data/gpk-prefs.ui.h:1
 #, fuzzy
@@ -297,7 +303,7 @@ msgstr "ಅಪ್‌ಡೇಟ್ ಮಾಹಿತಿಯನ್ನು ಇಳಿಸ�
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:304
+#: ../src/software-service/gpk-updates-notification.c:316
 #, fuzzy
 msgid "Updates"
 msgstr "ಅಪ್‌ಡೇಟ್"
@@ -348,6 +354,11 @@ msgstr "ಪ್ಯಾಕೇಜ್"
 msgid "Do you recognize the user and trust this key?"
 msgstr "ನೀವು ಈ ಬಳಕೆದಾರನನ್ನು ಗುರುತಿಸುತ್ತೀರಾ ಹಾಗು ಈ ಕೀಲಿಯನ್ನು ನಂಬುತ್ತೀರಾ?"
 
+#: ../data/xings-software-update.desktop.in.h:3
+#, fuzzy
+msgid "Updates;Upgrade;Software;App;Store;"
+msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
+
 #. TRANSLATORS: program name, a session wide daemon to watch for updates
 #: ../data/xings-software-service.desktop.in.h:1
 #: ../src/software-service/gpk-updates-service.c:72
@@ -389,7 +400,7 @@ msgid "_Upgrade"
 msgstr "ನವೀಕರಣ(_U)"
 
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
 msgid "Details"
 msgstr "ವಿವರಣೆಗಳು"
 
@@ -644,23 +655,23 @@ msgid "64-bit"
 msgstr "64-ಬಿಟ್"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:313
+#: ../src/common/gpk-common.c:348
 msgid "This application is running as a privileged user"
 msgstr "ಈ ಅನ್ವಯವು ಒಬ್ಬ ಸವಲತ್ತುಳ್ಳ ಬಳಕೆದಾರನಾಗಿ ಚಲಾಯಿತಗೊಳ್ಳುತ್ತಿದೆ"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:316
+#: ../src/common/gpk-common.c:351
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s ವು ಒಬ್ಬ ಸವಲತ್ತುಳ್ಳ ಬಳಕೆದಾರನಾಗಿ ಚಲಾಯಿತಗೊಳ್ಳುತ್ತಿದೆ"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:319
+#: ../src/common/gpk-common.c:354
 msgid "Package management applications are security sensitive."
 msgstr "ಪ್ಯಾಕೇಜ್ ನಿರ್ವಹಣಾ ಅನ್ವಯಗಳು ಸುರಕ್ಷತಾ ಸಂವೇದಿ ಆಗಿರುತ್ತವೆ."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:321
+#: ../src/common/gpk-common.c:356
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -669,18 +680,18 @@ msgstr ""
 "ದೃಷ್ಟಿಯಿಂದ ಒಳ್ಳೆಯದಲ್ಲ."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:327
+#: ../src/common/gpk-common.c:362
 msgid "Continue _Anyway"
 msgstr "ಪರವಾಗಿಲ್ಲ ಮುಂದುವರೆ(_A)"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:365 ../src/common/gpk-common.c:415
+#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
 #, c-format
 msgid "Now"
 msgstr "ಈಗ"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:375 ../src/common/gpk-common.c:425
+#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -688,7 +699,7 @@ msgstr[0] "%i ಸೆಕೆಂಡು"
 msgstr[1] "%i ಸೆಕೆಂಡುಗಳು"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:385 ../src/common/gpk-common.c:438
+#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -696,7 +707,7 @@ msgstr[0] "%i ನಿಮಿಷ"
 msgstr[1] "%i ನಿಮಿಷಗಳು"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:391 ../src/common/gpk-common.c:457
+#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -707,71 +718,71 @@ msgstr[1] "%i ಗಂಟೆಗಳು"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:444 ../src/common/gpk-common.c:463
+#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:445 ../src/common/gpk-common.c:465
+#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "ನಿಮಿಷ"
 msgstr[1] "ನಿಮಿಷಗಳು"
 
-#: ../src/common/gpk-common.c:446
+#: ../src/common/gpk-common.c:481
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "ಸೆಕೆಂಡು"
 msgstr[1] "ಸೆಕೆಂಡುಗಳು"
 
-#: ../src/common/gpk-common.c:464
+#: ../src/common/gpk-common.c:499
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ಗಂಟೆ"
 msgstr[1] "ಗಂಟೆಗಳು"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:494
+#: ../src/common/gpk-common.c:529
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i ನಿಮಿಷ"
 
-#: ../src/common/gpk-common.c:496
+#: ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%i ನಿಮಿಷ"
 msgstr[1] "%i ನಿಮಿಷಗಳು"
 
-#: ../src/common/gpk-common.c:501
+#: ../src/common/gpk-common.c:536
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%i ಗಂಟೆ"
 msgstr[1] "%i ಗಂಟೆಗಳು"
 
-#: ../src/common/gpk-common.c:506
+#: ../src/common/gpk-common.c:541
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:511
+#: ../src/common/gpk-common.c:546
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:516
+#: ../src/common/gpk-common.c:551
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:521
+#: ../src/common/gpk-common.c:556
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -779,25 +790,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:548
+#: ../src/common/gpk-common.c:583
 #, c-format
 msgid "%s and %s"
 msgstr "%s ಹಾಗು %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:552
+#: ../src/common/gpk-common.c:587
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s ಹಾಗು %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:591
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s ಹಾಗು %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:561
+#: ../src/common/gpk-common.c:596
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s ಹಾಗು %s"
@@ -824,8 +835,8 @@ msgstr "ಹಲವಾರು ಪ್ಯಾಕೇಜುಗಳು"
 #. TRANSLATORS: column for package name
 #. TRANSLATORS: column for group name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2018
-#: ../src/software/gpk-application.c:2040
+#: ../src/software/gpk-application.c:2028
+#: ../src/software/gpk-application.c:2050
 msgid "Name"
 msgstr "ಹೆಸರು"
 
@@ -1942,9 +1953,7 @@ msgstr "ನಿರ್ಬಂಧಿಸಲಾದ ಅಪ್‌ಡೇಟ್"
 
 #. TRANSLATORS: The state of a package
 #. TRANSLATORS: The action of the package, in past tense
-#. TRANSLATORS: column for installed status
 #: ../src/common/gpk-enum.c:1058 ../src/common/gpk-enum.c:1153
-#: ../src/software/gpk-application.c:2002
 msgid "Installed"
 msgstr "ಅನುಸ್ಥಾಪಿತಗೊಂಡಿದೆ"
 
@@ -2546,12 +2555,12 @@ msgid "Install package"
 msgstr "ಅನುಸ್ಥಾಪನಾ ಪ್ಯಾಕೇಜ್"
 
 #. TRANSLATORS: window title: do we want to execute a program we just installed?
-#: ../src/common/gpk-helper-run.c:446
+#: ../src/common/gpk-helper-run.c:439
 msgid "Run new application?"
 msgstr "ಹೊಸ ಅನ್ವಯವನ್ನು ಚಲಾಯಿಸಬೇಕೆ?"
 
 #. add run button
-#: ../src/common/gpk-helper-run.c:449
+#: ../src/common/gpk-helper-run.c:442
 msgid "_Run"
 msgstr "ಚಲಾಯಿಸು(_R)"
 
@@ -2612,10 +2621,31 @@ msgstr "ಮುಂದುವರೆ"
 msgid "The following software also needs to be installed"
 msgstr "ಈ ಕೆಳಗಿನ ತಂತ್ರಾಂಶವನ್ನೂ ಸಹ ಅನುಸ್ಥಾಪಿಸುವ ಅಗತ್ಯವಿರುತ್ತದೆ"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "ಅನುಸ್ಥಾಪಿಸು"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "ಈ ಕೆಳಗಿನ ತಂತ್ರಾಂಶವನ್ನೂ ಸಹ ತೆಗೆದುಹಾಕುವ ಅಗತ್ಯವಿರುತ್ತದೆ"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "ತೆಗೆದು ಹಾಕು"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2624,8 +2654,8 @@ msgstr "ಈ ಕೆಳಗಿನ ತಂತ್ರಾಂಶವನ್ನೂ ಸಹ �
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/software-service/gpk-updates-notification.c:236
-#: ../src/software-service/gpk-updates-notification.c:272
+#: ../src/software-service/gpk-updates-notification.c:248
+#: ../src/software-service/gpk-updates-notification.c:284
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2709,6 +2739,14 @@ msgstr ""
 msgid "Files to install"
 msgstr "ಅನುಸ್ಥಾಪಿಸ ಬೇಕಿರುವ ಕಡತಗಳು"
 
+#. TRANSLATORS: program name: application to install a package to provide a file
+#. TRANSLATORS: program name: installs a package (or packages) by name
+#: ../src/helpers/gpk-install-local-file.c:67
+#: ../src/helpers/gpk-install-package-name.c:63
+#: ../src/packagekit-service/gpk-dbus-task.c:3197
+msgid "Software Install"
+msgstr "ತಂತ್ರಾಂಶ ಅನುಸ್ಥಾಪನೆ"
+
 #: ../src/helpers/gpk-install-local-file.c:69
 msgid "PackageKit File Installer"
 msgstr "PackageKit ಕಡತ ಅನುಸ್ಥಾಪಕ"
@@ -2749,82 +2787,78 @@ msgid "You need to specify the name of the software to install"
 msgstr "ಅನುಸ್ಥಾಪಿಸಬೇಕಿರುವ ತಂತ್ರಾಂಶದ ಹೆಸರನ್ನು ನೀವು ಸೂಚಿಸಬೇಕಾಗುತ್ತದೆ"
 
 #. TRANSLATORS: strftime formatted please
-#: ../src/history/gpk-log.c:157
+#: ../src/history/gpk-log.c:167
 msgid "%d %B %Y"
 msgstr "%d %B %Y"
 
 #. TRANSLATORS: column for the date
-#: ../src/history/gpk-log.c:273
+#: ../src/history/gpk-log.c:292
 msgid "Date"
 msgstr "ದಿನಾಂಕ"
 
 #. TRANSLATORS: column for what was done, e.g. update-system
-#: ../src/history/gpk-log.c:282
+#: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "ಕಾರ್ಯ"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
-#: ../src/history/gpk-log.c:315
+#: ../src/history/gpk-log.c:334
 msgid "User name"
 msgstr "ಬಳಕೆದಾರ ಹೆಸರು"
 
 #. TRANSLATORS: column for the application used for the install, e.g. Add/Remove Programs
-#: ../src/history/gpk-log.c:322
+#: ../src/history/gpk-log.c:341
 msgid "Application"
 msgstr "ಅನ್ವಯ"
 
 #. TRANSLATORS: user-friendly name for pkcon
-#: ../src/history/gpk-log.c:482
+#: ../src/history/gpk-log.c:505
 msgid "Command line client"
 msgstr "ಆಜ್ಞಾ ಸಾಲಿನ ಕ್ಲೈಂಟ್‌"
 
 #. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:485
+#: ../src/history/gpk-log.c:508
 msgid "GNOME Packages"
 msgstr "GNOME ಪ್ಯಾಕೇಜುಗಳು"
 
 #. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:488
+#: ../src/history/gpk-log.c:511
 msgid "GNOME Package Updater"
 msgstr "Gnome ಪ್ಯಾಕೇಜ್‌ ಅಪ್‌ಡೇಟರ್"
 
 #. TRANSLATORS: user-friendly name for gpk-update-icon, which used to exist
-#: ../src/history/gpk-log.c:491
+#: ../src/history/gpk-log.c:514
 msgid "Update Icon"
 msgstr "ಅಪ್‌ಡೇಟ್‌ ಚಿಹ್ನೆ"
 
 #. TRANSLATORS: user-friendly name for the command not found plugin
-#: ../src/history/gpk-log.c:494
+#: ../src/history/gpk-log.c:517
 msgid "Bash – Command Not Found"
 msgstr "Bash - ಆದೇಶವು ಕಂಡುಬಂದಿಲ್ಲ"
 
 #. TRANSLATORS: user-friendly name for gnome-settings-daemon, which used to handle updates
-#: ../src/history/gpk-log.c:497
+#: ../src/history/gpk-log.c:520
 msgid "GNOME Session"
 msgstr "GNOME ಅಧಿವೇಶನ"
 
 #. TRANSLATORS: user-friendly name for gnome-software
-#: ../src/history/gpk-log.c:500
+#: ../src/history/gpk-log.c:523
 msgid "GNOME Software"
 msgstr "GNOME ತಂತ್ರಾಂಶ"
 
 #. TRANSLATORS: preset the GtktextBox with this filter text
-#: ../src/history/gpk-log.c:769
+#: ../src/history/gpk-log.c:757
 msgid "Set the filter to this value"
 msgstr "ಸೋಸುಕವನ್ನು ಈ ಮೌಲ್ಯಕ್ಕೆ ಹೊಂದಿಸು"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
+#: ../src/history/gpk-log.c:760 ../src/preferences/gpk-prefs.c:737
 msgid "Set the parent window to make this modal"
 msgstr "ಇದನ್ನು ಮೋಡಲ್ ಮಾಡುವಂತೆ ಮೂಲ ವಿಂಡೊವನ್ನು ಹೊಂದಿಸು"
 
 #: ../src/packagekit-service/gpk-dbus-service.c:127
 msgid "Do not exit after the request has been processed"
 msgstr "ಮನವಿಯನ್ನು ಸಂಸ್ಕರಿಸಿದ ನಂತರ ನಿರ್ಗಮಿಸಬೇಡಿ"
-
-#: ../src/packagekit-service/gpk-dbus-service.c:143
-msgid "Session D-Bus service for PackageKit"
-msgstr "PackageKit ಗಾಗಿ ಅಧಿವೇಶನ D-Bus ಸೇವೆ"
 
 #. TRANSLATORS: we failed to install
 #: ../src/packagekit-service/gpk-dbus-task.c:240
@@ -3332,22 +3366,48 @@ msgid "Getting package source list not supported by backend"
 msgstr "ಪ್ಯಾಕೇಜ್‌ ಆಕರ ಪಟ್ಟಿಯನ್ನು ಪಡೆದುಕೊಳ್ಳುವುದಕ್ಕೆ ಬ್ಯಾಕೆಂಡಿನಿಂದ ಬೆಂಬಲವಿಲ್ಲ"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
-#: ../src/preferences/gpk-prefs.c:739
+#: ../src/preferences/gpk-prefs.c:740
 msgid "Set the startup page: either ‘updates’or ‘sources’"
 msgstr ""
 
 #. TRANSLATORS: program name, an application to add and remove software repositories
-#: ../src/preferences/gpk-prefs.c:748
+#: ../src/preferences/gpk-prefs.c:749
 msgid "Software Settings"
 msgstr "ತಂತ್ರಾಂಶ ಸಿದ್ಧತೆಗಳು"
 
+#: ../src/software/gpk-application.c:218
+#, fuzzy
+msgid "Cancel Removal"
+msgstr "ಹುಡುಕನ್ನು ರದ್ದುಗೊಳಿಸು"
+
+#: ../src/software/gpk-application.c:238
+#, fuzzy
+msgid "Cancel Installation"
+msgstr "ಪ್ಯಾಕೇಜ್ ಅನುಸ್ಥಾಪನೆ"
+
 #. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:347
+#: ../src/software/gpk-application.c:343
 msgid "Pending"
 msgstr "ಬಾಕಿ ಇರುವ"
 
+#. TRANSLATORS: how many updates are selected in the UI
+#: ../src/software/gpk-application.c:413
+#, fuzzy, c-format
+msgid "%u package to be installed"
+msgid_plural "%u packages to be installed"
+msgstr[0] "ಅನುಸ್ಥಾಪಿಸಲು ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಲ್ಲ"
+msgstr[1] "ಅನುಸ್ಥಾಪಿಸಲು ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಲ್ಲ"
+
+#. TRANSLATORS: how many updates are selected in the UI
+#: ../src/software/gpk-application.c:420
+#, fuzzy, c-format
+msgid "%u package to be removed"
+msgid_plural "%u packages to be removed"
+msgstr[0] "ಪ್ಯಾಕೇಜನ್ನು ತೆಗೆದುಹಾಕುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+msgstr[1] "ಪ್ಯಾಕೇಜನ್ನು ತೆಗೆದುಹಾಕುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
+
 #. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:593
+#: ../src/software/gpk-application.c:592
 #, fuzzy, c-format
 msgid "%u file installed by %s"
 msgid_plural "%u files installed by %s"
@@ -3355,17 +3415,17 @@ msgstr[0] "%i ಕಡತವು %s ಇಂದ ಅನುಸ್ಥಾಪಿಸಲ್�
 msgstr[1] "%i ಕಡತಗಳು %s ಇಂದ ಅನುಸ್ಥಾಪಿಸಲ್ಪಟ್ಟಿವೆ"
 
 #. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:893 ../src/software/gpk-application.c:1022
+#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
 msgid "No packages"
 msgstr "ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಲ್ಲ"
 
 #. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:895
+#: ../src/software/gpk-application.c:902
 msgid "No other packages require this package"
 msgstr "ಬೇರೆ ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಗೆ ಈ ಪ್ಯಾಕೇಜಿನ ಅಗತ್ಯವಿಲ್ಲ"
 
 #. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:902
+#: ../src/software/gpk-application.c:909
 #, fuzzy, c-format
 msgid "%u package requires %s"
 msgid_plural "%u packages require %s"
@@ -3373,7 +3433,7 @@ msgstr[0] "%i ಪ್ಯಾಕೇಜಿಗೆ %s ಅಗತ್ಯವಿದೆ"
 msgstr[1] "%i ಪ್ಯಾಕೇಜುಗಳಿಗೆ %s ಅಗತ್ಯವಿದೆ"
 
 #. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:907
+#: ../src/software/gpk-application.c:914
 #, c-format
 msgid "Packages listed below require %s to function correctly."
 msgid_plural "Packages listed below require %s to function correctly."
@@ -3383,12 +3443,12 @@ msgstr[1] ""
 "ಈ ಕೆಳಗೆ ಸೂಚಿಸಲಾದ ಪ್ಯಾಕೇಜುಗಳಿಗಾಗಿ %s ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡುವುದು ಅಗತ್ಯವಾಗಿರುತ್ತದೆ."
 
 #. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1024
+#: ../src/software/gpk-application.c:1031
 msgid "This package does not depend on any others"
 msgstr "ಈ ಪ್ಯಾಕೇಜ್‌ ಬೇರಾವುದರ ಮೇಲೂ ಅವಲಂಬಿತವಾಗಿಲ್ಲ"
 
 #. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1031
+#: ../src/software/gpk-application.c:1038
 #, fuzzy, c-format
 msgid "%u additional package is required for %s"
 msgid_plural "%u additional packages are required for %s"
@@ -3396,7 +3456,7 @@ msgstr[0] "%i ಹೆಚ್ಚಿನ ಪ್ಯಾಕೇಜಿನ (%s ಗಾಗಿ
 msgstr[1] "%i ಹೆಚ್ಚಿನ ಪ್ಯಾಕೇಜುಗಳ (%s ಗಾಗಿ) ಅಗತ್ಯವಿದೆ"
 
 #. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1036
+#: ../src/software/gpk-application.c:1043
 #, c-format
 msgid "Packages listed below are required for %s to function correctly."
 msgid_plural "Packages listed below are required for %s to function correctly."
@@ -3406,27 +3466,27 @@ msgstr[1] ""
 "ಈ ಕೆಳಗೆ ಸೂಚಿಸಲಾದ ಪ್ಯಾಕೇಜುಗಳಿಗಾಗಿ %s ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡುವುದು ಅಗತ್ಯವಾಗಿರುತ್ತದೆ."
 
 #. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1107
+#: ../src/software/gpk-application.c:1114
 msgid "Invalid"
 msgstr "ಅಮಾನ್ಯ"
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1246
+#: ../src/software/gpk-application.c:1247
 msgid "No results were found."
 msgstr "ಯಾವುದೆ ಫಲಿತಾಂಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ."
 
 #. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1254
+#: ../src/software/gpk-application.c:1255
 msgid "Try entering a package name in the search bar."
 msgstr "ಹುಡುಕು ಪಟ್ಟಿಯಲ್ಲಿ ಒಂದು ಹೆಸರನ್ನು ನಮೂದಿಸಲು ಪ್ರಯತ್ನಿಸಿ."
 
 #. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1257
+#: ../src/software/gpk-application.c:1258
 msgid "There are no packages queued to be installed or removed."
 msgstr "ಅನುಸ್ಥಾಪಿಸಲು ಅಥವ ತೆಗೆದುಹಾಕಲು ಸರತಿಯಲ್ಲಿ ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಲ್ಲ."
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1262
+#: ../src/software/gpk-application.c:1263
 msgid ""
 "Try searching package descriptions by clicking the icon next to the search "
 "text."
@@ -3435,98 +3495,78 @@ msgstr ""
 "ಪ್ರಯತ್ನಿಸಿ."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1265
+#: ../src/software/gpk-application.c:1266
 msgid "Try again with a different search term."
 msgstr "ಬೇರೊಂದು ಹುಡುಕು ಪದದೊಂದಿಗೆ ಇನ್ನೊಮ್ಮೆ ಪ್ರಯತ್ನಿಸಿ ನೋಡಿ."
 
-#. TRANSLATORS: title: invalid text in the search bar
-#: ../src/software/gpk-application.c:1529
-msgid "Invalid search text"
-msgstr "ಅಮಾನ್ಯವಾದ ಹುಡುಕು ಪಠ್ಯ"
-
-#. TRANSLATORS: message: tell the user that's not allowed
-#: ../src/software/gpk-application.c:1531
-msgid "The search text contains invalid characters"
-msgstr "ಹುಡುಕಲಾಗುತ್ತಿರುವ ಪಠ್ಯವು ಅಮಾನ್ಯವಾದ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿದೆ"
-
-#. TRANSLATORS: title: we failed to execute the method
-#: ../src/software/gpk-application.c:1572
-msgid "The search could not be completed"
-msgstr "ಹುಡುಕನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗಿಲ್ಲ"
-
-#. TRANSLATORS: low level failure, details to follow
-#: ../src/software/gpk-application.c:1574
-msgid "Running the transaction failed"
-msgstr "ವ್ಯವಹಾರವನ್ನು ಚಲಾಯಿಸುವಾಗ ವಿಫಲಗೊಂಡಿದೆ"
-
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1703
+#: ../src/software/gpk-application.c:1677
 msgid "Changes not applied"
 msgstr "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲಾಗಿಲ್ಲ"
 
-#: ../src/software/gpk-application.c:1704
+#: ../src/software/gpk-application.c:1678
 msgid "Close _Anyway"
 msgstr "ಪರವಾಗಿಲ್ಲ ಮುಚ್ಚು(_A)"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1708
+#: ../src/software/gpk-application.c:1682
 msgid "You have made changes that have not yet been applied."
 msgstr "ನೀವು ಕೆಲವು ಬದಲಾವಣೆಗಳನ್ನು ಮಾಡಿದ್ದೀರಿ ಹಾಗು ಅವನ್ನು ಇನ್ನೂ ಸಹ ಅನ್ವಯಿಸಲಾಗಿಲ್ಲ."
 
-#: ../src/software/gpk-application.c:1709
+#: ../src/software/gpk-application.c:1683
 msgid "These changes will be lost if you close this window."
 msgstr "ಈ ವಿಂಡೋವನ್ನು ನೀವು ಮುಚ್ಚಿದರೆ ಈ ಎಲ್ಲಾ ಬದಲಾವಣೆಗಳು ನಾಶಗೊಳ್ಳುತ್ತವೆ."
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2204
+#: ../src/software/gpk-application.c:2224
 msgid "Size"
 msgstr "ಗಾತ್ರ"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2207
+#: ../src/software/gpk-application.c:2227
 msgid "Installed size"
 msgstr "ಅನುಸ್ಥಾಪಿಸಲಾದ ಗಾತ್ರ"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2210
+#: ../src/software/gpk-application.c:2230
 msgid "Download size"
 msgstr "ಇಳಿಸಿಕೊಂಡ ಗಾತ್ರ"
 
 #. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2385
+#: ../src/software/gpk-application.c:2417
 msgid "Searching by name"
 msgstr "ಹೆಸರಿನ ಆಧಾರದ ಮೇಲೆ ಹುಡುಕಲಾಗುತ್ತಿದೆ"
 
 #. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2411
+#: ../src/software/gpk-application.c:2443
 msgid "Searching by description"
 msgstr "ವಿವರಣೆಯ ಆಧಾರದ ಮೇಲೆ ಹುಡುಕಲಾಗುತ್ತಿದೆ"
 
 #. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2437
+#: ../src/software/gpk-application.c:2469
 msgid "Searching by file"
 msgstr "ಕಡತದ ಆಧಾರದ ಮೇಲೆ ಹುಡುಕು"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2460
+#: ../src/software/gpk-application.c:2492
 msgid "Search by name"
 msgstr "ಹೆಸರಿನ ಆಧಾರದ ಮೇಲೆ ಹುಡುಕು"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2468
+#: ../src/software/gpk-application.c:2500
 msgid "Search by description"
 msgstr "ವಿವರಣೆಯ ಆಧಾರದ ಮೇಲೆ ಹುಡುಕು"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2476
+#: ../src/software/gpk-application.c:2508
 msgid "Search by file name"
 msgstr "ಕಡತದ ಹೆಸರಿನ ಆಧಾರದ ಮೇಲೆ ಹುಡುಕು"
 
-#: ../src/software/gpk-application.c:2505
+#: ../src/software/gpk-application.c:2541
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Licensed under the GNU General Public License Version 2"
 
-#: ../src/software/gpk-application.c:2506
+#: ../src/software/gpk-application.c:2542
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3538,7 +3578,7 @@ msgstr ""
 "Software Foundation; either version 2 of the License, or (at your option) "
 "any later version."
 
-#: ../src/software/gpk-application.c:2510
+#: ../src/software/gpk-application.c:2546
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3550,7 +3590,7 @@ msgstr ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 
-#: ../src/software/gpk-application.c:2514
+#: ../src/software/gpk-application.c:2550
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3561,79 +3601,74 @@ msgstr ""
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2520
+#: ../src/software/gpk-application.c:2556
 msgid "translator-credits"
 msgstr "ಶಂಕರ್ ಪ್ರಸಾದ್ ಎಂ. ವಿ. <svenkate@redhat.com>"
 
-#: ../src/software/gpk-application.c:2541
-msgid "PackageKit Website"
-msgstr "PackageKit ಜಾಲತಾಣ"
-
-#. TRANSLATORS: description of NULL, gpk-application that is
-#: ../src/software/gpk-application.c:2544
+#: ../src/software/gpk-application.c:2577
 #, fuzzy
-msgid "Package Manager"
-msgstr "GNOME ಗಾಗಿ ಪ್ಯಾಕೇಜ್ ವ್ಯವಸ್ಥಾಪಕ"
+msgid "Xings Software Website"
+msgstr "ತಂತ್ರಾಂಶ ಆಕರ"
 
 #. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2736
+#: ../src/software/gpk-application.c:2772
 msgid "Enter a search word or click a category to get started."
 msgstr "ಪ್ರಾರಂಭಿಸಲು ಒಂದು ಹುಡುಕು ಪದವನ್ನು ನಮೂದಿಸಿ ಅಥವ ಒಂದು ವರ್ಗವನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ."
 
 #. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2739
+#: ../src/software/gpk-application.c:2775
 msgid "Enter a search word to get started."
 msgstr "ಪ್ರಾರಂಭಿಸಲು ಒಂದು ಹುಡುಕು ಪದವನ್ನು ನಮೂದಿಸಿ."
 
 #. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:2966
+#: ../src/software/gpk-application.c:3000
 msgid "Exiting as properties could not be retrieved"
 msgstr "ಗುಣಗಳನ್ನು ಪಡೆಯಲು ಸಾಧ್ಯವಾಗಿಲ್ಲದ ಕಾರಣ ನಿರ್ಗಮಿಸಲಾಗುತ್ತಿದೆ"
 
 #. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3009
+#: ../src/software/gpk-application.c:3043
 msgid "All packages"
 msgstr "ಎಲ್ಲಾ ಪ್ಯಾಕೇಜುಗಳು"
 
 #. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3011
+#: ../src/software/gpk-application.c:3045
 msgid "Show all packages"
 msgstr "ಎಲ್ಲಾ ಪ್ಯಾಕೇಜುಗಳನ್ನು ತೋರಿಸು"
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3396
+#: ../src/software/gpk-application.c:3432
 #: ../src/software-update/gpk-update-viewer.c:3412
 msgid "Show the program version and exit"
 msgstr "ಪ್ರೊಗ್ರಾಂ ಆವೃತ್ತಿಯನ್ನು ತೋರಿಸಿ ನಿರ್ಗಮಿಸು"
 
-#: ../src/software/gpk-application.c:3410
+#: ../src/software/gpk-application.c:3446
 msgid "Install Software"
 msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅನುಸ್ಥಾಪಿಸಿ"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3426
+#: ../src/software/gpk-application.c:3462
 #, fuzzy
 msgid "Software installer"
 msgstr "ತಂತ್ರಾಂಶ ಅನುಸ್ಥಾಪನೆ"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/software-service/gpk-updates-notification.c:192
+#: ../src/software-service/gpk-updates-notification.c:199
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/software-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:206
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/software-service/gpk-updates-notification.c:207
+#: ../src/software-service/gpk-updates-notification.c:217
 #, fuzzy
 msgid "Restart & Install"
 msgstr "ತಂತ್ರಾಂಶ ಅನುಸ್ಥಾಪನೆ"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/software-service/gpk-updates-notification.c:239
+#: ../src/software-service/gpk-updates-notification.c:251
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3641,7 +3676,7 @@ msgstr[0] "ಯಾವುದೆ ಅಪ್‌ಡೇಟ್‌ಗಳು ಲಭ್ಯ�
 msgstr[1] "ಯಾವುದೆ ಅಪ್‌ಡೇಟ್‌ಗಳು ಲಭ್ಯವಿಲ್ಲ"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/software-service/gpk-updates-notification.c:275
+#: ../src/software-service/gpk-updates-notification.c:287
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3650,11 +3685,11 @@ msgstr[1] "ಯಾವುದೆ ಅಪ್‌ಡೇಟ್‌ ವಿವರಗಳು 
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/software-service/gpk-updates-notification.c:308
+#: ../src/software-service/gpk-updates-notification.c:320
 msgid "Unable to access software updates"
 msgstr ""
 
-#: ../src/software-service/gpk-updates-notification.c:411
+#: ../src/software-service/gpk-updates-notification.c:433
 #, fuzzy
 msgid "Software Updates"
 msgstr "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್‌"
@@ -4050,6 +4085,36 @@ msgstr "ಹೊಸ ವಿತರಣಾ ನವೀಕರಣ ಬಿಡುಗಡೆ '%
 msgid "Update Software"
 msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡು"
 
+#~ msgid "Clear current selection"
+#~ msgstr "ಪ್ರಸಕ್ತ ಆಯ್ಕೆಯನ್ನು ಅಳಿಸು"
+
+#~ msgid "Changes are not applied instantly, this button applies all changes"
+#~ msgstr ""
+#~ "ಬದಲಾವಣೆಗಳು ತಕ್ಷಣ ಕಾರ್ಯರೂಪಕ್ಕೆ ಬರುವುದಿಲ್ಲ, ಈ ಗುಂಡಿಯು ಎಲ್ಲಾ ಬದಲಾವಣೆಗಳನ್ನು "
+#~ "ಅನ್ವಯಿಸುತ್ತದೆ"
+
+#~ msgid "Install selected software on the system"
+#~ msgstr "ಆರಿಸಲಾದ ತಂತ್ರಾಂಶವನ್ನು ಗಣಕದಲ್ಲಿ ಅನುಸ್ಥಾಪಿಸು"
+
+#~ msgid "Filter"
+#~ msgstr "ಸೋಸುಕ (ಫಿಲ್ಟರ್)"
+
+#~ msgid "Invalid search text"
+#~ msgstr "ಅಮಾನ್ಯವಾದ ಹುಡುಕು ಪಠ್ಯ"
+
+#~ msgid "The search text contains invalid characters"
+#~ msgstr "ಹುಡುಕಲಾಗುತ್ತಿರುವ ಪಠ್ಯವು ಅಮಾನ್ಯವಾದ ಅಕ್ಷರಗಳನ್ನು ಹೊಂದಿದೆ"
+
+#~ msgid "The search could not be completed"
+#~ msgstr "ಹುಡುಕನ್ನು ಪೂರ್ಣಗೊಳಿಸಲಾಗಿಲ್ಲ"
+
+#~ msgid "Running the transaction failed"
+#~ msgstr "ವ್ಯವಹಾರವನ್ನು ಚಲಾಯಿಸುವಾಗ ವಿಫಲಗೊಂಡಿದೆ"
+
+#, fuzzy
+#~ msgid "Package Manager"
+#~ msgstr "GNOME ಗಾಗಿ ಪ್ಯಾಕೇಜ್ ವ್ಯವಸ್ಥಾಪಕ"
+
 #, fuzzy
 #~ msgid "Software Log"
 #~ msgstr "ತಂತ್ರಾಂಶ ದಾಖಲೆ"
@@ -4143,10 +4208,6 @@ msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾ�
 
 #~ msgid "Required Packages"
 #~ msgstr "ಅಗತ್ಯವಿರುವ ಪ್ಯಾಕೇಜುಗಳು"
-
-#~| msgid "Package installer"
-#~ msgid "Package Install"
-#~ msgstr "ಪ್ಯಾಕೇಜ್ ಅನುಸ್ಥಾಪನೆ"
 
 #~| msgid "Enabled repository"
 #~ msgid "Enable or disable package repositories"
@@ -4317,9 +4378,6 @@ msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾ�
 #~ msgid "Could not process catalog"
 #~ msgstr "ಕೆಟಲಾಗ್ ಅನ್ನು ಸಂಸ್ಕರಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"
 
-#~ msgid "No packages need to be installed"
-#~ msgstr "ಅನುಸ್ಥಾಪಿಸಲು ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಲ್ಲ"
-
 #~ msgid "Install packages in catalog?"
 #~ msgstr "ಸೂಚಿಯಲ್ಲಿನ ಪ್ಯಾಕೇಜುಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸಬೇಕೆ?"
 
@@ -4463,9 +4521,6 @@ msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾ�
 
 #~ msgid "Confirmation"
 #~ msgstr "ಖಚಿತಪಡಿಕೆ"
-
-#~ msgid "Applying changes"
-#~ msgstr "ಬದಲಾವಣೆಗಳನ್ನು ಅನ್ವಯಿಸಲಾಗುತ್ತಿದೆ"
 
 #~ msgid "Cannot perform operating system upgrade"
 #~ msgstr "ಕಾರ್ಯವ್ಯವಸ್ಥೆಯ ನವೀಕರಣವನ್ನು ಮಾಡಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ"

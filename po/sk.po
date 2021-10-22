@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-15 15:41-0300\n"
+"POT-Creation-Date: 2021-10-22 10:24-0300\n"
 "PO-Revision-Date: 2014-09-09 21:25+0100\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
@@ -20,15 +20,16 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:10
-#: ../src/software/gpk-application.c:2536
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
+#: ../src/software/gpk-application.c:2572
 #, fuzzy
 msgid "Software"
 msgstr "Softvér prostredia GNOME"
 
 # desktop entry comment
+#. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
 msgid "Add or remove software installed on the system"
 msgstr "Pridáva alebo odstraňuje softvér nainštalovaný v systéme"
 
@@ -60,7 +61,7 @@ msgstr ""
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/software-service/gpk-updates-notification.c:180
+#: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3442
 #, fuzzy
 msgid "Software Update"
@@ -68,7 +69,7 @@ msgstr "Inštalátor softvéru"
 
 # desktop entry comment
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Aktualizuje softvér nainštalovaný v systéme"
 
@@ -94,125 +95,129 @@ msgstr ""
 
 # desktop entry keywords
 #: ../data/xings-software.desktop.in.h:3
-msgid "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;"
+#, fuzzy
+msgid ""
+"Install;Uninstall;Program;Software;App;Sources;Repositories;Preferences;"
+"Store;"
 msgstr ""
 "Aktualizácie;Aktualizovať;Inštalovať;Nainštalovať;Zdroje;Repozitáre;Úložisko;"
 "Nastavenia;Nová verzia;Novú verziu;"
 
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#, fuzzy
+msgid "Select to Install…"
+msgstr "Súbory, ktoré sa majú inštalovať"
+
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
+msgid "Select to Remove…"
+msgstr ""
+
 # GtkLabel label
-#: ../data/gpk-application.ui.h:1
+#: ../data/gpk-application.ui.h:4
 msgid "License"
 msgstr "Licencia"
 
 # GtkLabel label
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:2 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "Zdroj"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:3 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "Nainštalovať"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:4 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "Odstrániť"
-
-#: ../data/gpk-application.ui.h:5
+#: ../data/gpk-application.ui.h:6
 msgid "Homepage"
 msgstr ""
 
 # GtkButon tooltip
-#: ../data/gpk-application.ui.h:6
+#: ../data/gpk-application.ui.h:7
 msgid "Visit home page for selected package"
 msgstr "Navštívi domovskú stránku označeného balíka"
 
 # GtkButon label
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:8
 msgid "Files"
 msgstr "Súbory"
 
-#: ../data/gpk-application.ui.h:8
+#: ../data/gpk-application.ui.h:9
 #, fuzzy
 msgid "Required"
 msgstr "Je potrebný zámok"
 
 # GtkButon label
-#: ../data/gpk-application.ui.h:9
+#: ../data/gpk-application.ui.h:10
 #, fuzzy
 msgid "Dependent"
 msgstr "Závislé balíky"
 
-# GtkButton tooltip
-#: ../data/gpk-application.ui.h:11
-msgid "Clear current selection"
-msgstr "Vyčistí aktuálny výber"
-
-# GtkButton tooltip
 #: ../data/gpk-application.ui.h:12
-msgid "Cancel search"
-msgstr "Zruší hľadanie"
+#, fuzzy
+msgid "Pending Changes"
+msgstr "Testujú sa zmeny"
+
+#: ../data/gpk-application.ui.h:13
+msgid "Review pending changes before applying them"
+msgstr ""
 
 # GtkButton
-#: ../data/gpk-application.ui.h:13
+#: ../data/gpk-application.ui.h:14
 msgid "Apply Changes"
 msgstr "Aplikovať zmeny"
 
-# GtkButton tooltip
-#: ../data/gpk-application.ui.h:14
-msgid "Changes are not applied instantly, this button applies all changes"
-msgstr "Zmeny sa nepoužijú okamžite, toto tlačidlo aplikuje všetky zmeny"
-
+# GtkButton
 #: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Apply pending changes"
+msgstr "Aplikovať zmeny"
+
+# GtkButton tooltip
+#: ../data/gpk-application.ui.h:16
+msgid "Cancel search"
+msgstr "Zruší hľadanie"
+
+#: ../data/gpk-application.ui.h:17
+#, fuzzy
+msgid "Cancel"
+msgstr "Zrušené"
+
+#: ../data/gpk-application.ui.h:18
+#, fuzzy
+msgid "Cancel pending changes"
+msgstr "Testujú sa zmeny"
+
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "Softvér prostredia GNOME"
 
 # GtkDialog title
-#: ../data/gpk-application.ui.h:16 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
 #, fuzzy
 msgid "Software Sources"
 msgstr "Vyžaduje sa podpísanie softvéru"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:17
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:2
-#: ../src/history/gpk-log.c:785 ../src/history/gpk-log.c:793
+#: ../data/gpk-application.ui.h:21
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
+#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "Inštalátor softvéru"
 
 # menu item
-#: ../data/gpk-application.ui.h:18
+#: ../data/gpk-application.ui.h:22
 msgid "Only Newest Versions"
 msgstr "Iba najnovšie verzie"
 
 # menu item
-#: ../data/gpk-application.ui.h:19
+#: ../data/gpk-application.ui.h:23
 msgid "Only Native Packages"
 msgstr "Iba natívne balíky"
 
-#: ../data/gpk-application.ui.h:20
+#: ../data/gpk-application.ui.h:24
 msgid "About"
 msgstr "O programe"
 
 # menu item
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:25
 msgid "_Quit"
 msgstr "_Ukončiť"
 
@@ -221,22 +226,20 @@ msgstr "_Ukončiť"
 msgid "Install Package"
 msgstr "Nainštalovať balík"
 
-#. TRANSLATORS: program name: application to install a package to provide a file
-#. TRANSLATORS: program name: installs a package (or packages) by name
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
-#: ../src/helpers/gpk-install-local-file.c:67
-#: ../src/helpers/gpk-install-package-name.c:63
 #: ../src/packagekit-service/gpk-dbus-service.c:138
 #: ../src/packagekit-service/gpk-dbus-service.c:141
-#: ../src/packagekit-service/gpk-dbus-task.c:3197
-msgid "Software Install"
-msgstr "Inštalátor softvéru"
+#, fuzzy
+msgid "PackageKit Session Service"
+msgstr "Webové stránky PackageKit"
 
-#  desktop entry comment
+# cmd desc
 #: ../data/xings-packagekit-service.desktop.in.h:2
-msgid "Install selected software on the system"
-msgstr "Inštaluje do systému vybrané balíky"
+#: ../src/packagekit-service/gpk-dbus-service.c:143
+#, fuzzy
+msgid "Session D-Bus Service for PackageKit"
+msgstr "Služba relácie DBus pre PackageKit"
 
 # GtkExpander
 #: ../data/gpk-error.ui.h:1
@@ -278,11 +281,6 @@ msgstr "Inštaluje do systému vybrané balíky"
 msgid "View past package management tasks"
 msgstr "Zobrazuje predchádzajúce úlohy vykonané pri správe balíkov"
 
-# GtkButton label
-#: ../data/gpk-log.ui.h:1
-msgid "Filter"
-msgstr "Filtrovať"
-
 # desktop entry name
 #: ../data/xings-software-preferences.desktop.in.h:1
 #, fuzzy
@@ -293,6 +291,16 @@ msgstr "Prehliadač softvérových záznamov"
 msgid ""
 "Change software update preferences and enable or disable software sources"
 msgstr ""
+
+# desktop entry keywords
+#: ../data/xings-software-preferences.desktop.in.h:3
+#, fuzzy
+msgid ""
+"Install;Uninstall;Updates;Upgrade;Sources;Repositories;Preferences;Program;"
+"Software;App;Store;"
+msgstr ""
+"Aktualizácie;Aktualizovať;Inštalovať;Nainštalovať;Zdroje;Repozitáre;Úložisko;"
+"Nastavenia;Nová verzia;Novú verziu;"
 
 # GtkButton label
 #: ../data/gpk-prefs.ui.h:1
@@ -327,7 +335,7 @@ msgstr "Preberajú sa aktualizačné informácie"
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:304
+#: ../src/software-service/gpk-updates-notification.c:316
 #, fuzzy
 msgid "Updates"
 msgstr "Aktualizovať"
@@ -388,6 +396,11 @@ msgstr "Balík"
 msgid "Do you recognize the user and trust this key?"
 msgstr "Poznáte používateľa a dôverujete tomuto kľúču?"
 
+#: ../data/xings-software-update.desktop.in.h:3
+#, fuzzy
+msgid "Updates;Upgrade;Software;App;Store;"
+msgstr "Softvér prostredia GNOME"
+
 # GtkDialog title
 #. TRANSLATORS: program name, a session wide daemon to watch for updates
 #: ../data/xings-software-service.desktop.in.h:1
@@ -434,7 +447,7 @@ msgstr "_Aktualizovať"
 
 # GtkLabel label
 #. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:309
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
 msgid "Details"
 msgstr "Podrobnosti"
 
@@ -731,24 +744,24 @@ msgid "64-bit"
 msgstr "64-bitový"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:313
+#: ../src/common/gpk-common.c:348
 msgid "This application is running as a privileged user"
 msgstr "Táto aplikácia beží pod privilegovaným používateľom"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:316
+#: ../src/common/gpk-common.c:351
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s beží pod privilegovaným používateľom"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:319
+#: ../src/common/gpk-common.c:354
 msgid "Package management applications are security sensitive."
 msgstr "Aplikácie na správu balíkov sú citlivé na bezpečnosť."
 
 # Originál je neosobný, t.j. nepoužíva ekvivalent "by ste sa mali".
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:321
+#: ../src/common/gpk-common.c:356
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -757,18 +770,18 @@ msgstr ""
 "aplikácií pod privilegovaným používateľom."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:327
+#: ../src/common/gpk-common.c:362
 msgid "Continue _Anyway"
 msgstr "_Napriek tomu pokračovať"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:365 ../src/common/gpk-common.c:415
+#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
 #, c-format
 msgid "Now"
 msgstr "Teraz"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:375 ../src/common/gpk-common.c:425
+#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -777,7 +790,7 @@ msgstr[1] "%i sekunda"
 msgstr[2] "%i sekundy"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:385 ../src/common/gpk-common.c:438
+#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -786,7 +799,7 @@ msgstr[1] "%i minúta"
 msgstr[2] "%i minúty"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:391 ../src/common/gpk-common.c:457
+#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -798,26 +811,26 @@ msgstr[2] "%i hodiny"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:444 ../src/common/gpk-common.c:463
+#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:445 ../src/common/gpk-common.c:465
+#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minút"
 msgstr[1] "minúta"
 msgstr[2] "minúty"
 
-#: ../src/common/gpk-common.c:446
+#: ../src/common/gpk-common.c:481
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekúnd"
 msgstr[1] "sekunda"
 msgstr[2] "sekundy"
 
-#: ../src/common/gpk-common.c:464
+#: ../src/common/gpk-common.c:499
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hodín"
@@ -825,12 +838,12 @@ msgstr[1] "hodina"
 msgstr[2] "hodiny"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:494
+#: ../src/common/gpk-common.c:529
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i minút"
 
-#: ../src/common/gpk-common.c:496
+#: ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -838,7 +851,7 @@ msgstr[0] "%i minút"
 msgstr[1] "%i minúta"
 msgstr[2] "%i minúty"
 
-#: ../src/common/gpk-common.c:501
+#: ../src/common/gpk-common.c:536
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -846,7 +859,7 @@ msgstr[0] "%i hodín"
 msgstr[1] "%i hodina"
 msgstr[2] "%i hodiny"
 
-#: ../src/common/gpk-common.c:506
+#: ../src/common/gpk-common.c:541
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -854,7 +867,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../src/common/gpk-common.c:511
+#: ../src/common/gpk-common.c:546
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -862,7 +875,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../src/common/gpk-common.c:516
+#: ../src/common/gpk-common.c:551
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -870,7 +883,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: ../src/common/gpk-common.c:521
+#: ../src/common/gpk-common.c:556
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -879,25 +892,25 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:548
+#: ../src/common/gpk-common.c:583
 #, c-format
 msgid "%s and %s"
 msgstr "%s a %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:552
+#: ../src/common/gpk-common.c:587
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s a %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:591
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s a %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:561
+#: ../src/common/gpk-common.c:596
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s a %s"
@@ -924,8 +937,8 @@ msgstr "mnohé balíky"
 #. TRANSLATORS: column for package name
 #. TRANSLATORS: column for group name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2018
-#: ../src/software/gpk-application.c:2040
+#: ../src/software/gpk-application.c:2028
+#: ../src/software/gpk-application.c:2050
 msgid "Name"
 msgstr "Názov"
 
@@ -2060,9 +2073,7 @@ msgstr "Zablokovaná aktualizácia"
 
 #. TRANSLATORS: The state of a package
 #. TRANSLATORS: The action of the package, in past tense
-#. TRANSLATORS: column for installed status
 #: ../src/common/gpk-enum.c:1058 ../src/common/gpk-enum.c:1153
-#: ../src/software/gpk-application.c:2002
 msgid "Installed"
 msgstr "Nainštalovaný"
 
@@ -2665,12 +2676,12 @@ msgid "Install package"
 msgstr "Nainštaluje balík"
 
 #. TRANSLATORS: window title: do we want to execute a program we just installed?
-#: ../src/common/gpk-helper-run.c:446
+#: ../src/common/gpk-helper-run.c:439
 msgid "Run new application?"
 msgstr "Spustiť novú aplikáciu?"
 
 #. add run button
-#: ../src/common/gpk-helper-run.c:449
+#: ../src/common/gpk-helper-run.c:442
 msgid "_Run"
 msgstr "_Spustiť"
 
@@ -2731,10 +2742,31 @@ msgstr "Pokračovať"
 msgid "The following software also needs to be installed"
 msgstr "Je potrebné nainštalovať aj nasledovný softvér"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "Nainštalovať"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Je potrebné odstrániť aj nasledovný softvér"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "Odstrániť"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2743,8 +2775,8 @@ msgstr "Je potrebné aktualizovať aj nasledovný softvér"
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/software-service/gpk-updates-notification.c:236
-#: ../src/software-service/gpk-updates-notification.c:272
+#: ../src/software-service/gpk-updates-notification.c:248
+#: ../src/software-service/gpk-updates-notification.c:284
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2836,6 +2868,14 @@ msgstr "Spracovanie tejto transakcie vyžaduje aj zmenu ďalšieho softvéru."
 msgid "Files to install"
 msgstr "Súbory, ktoré sa majú inštalovať"
 
+#. TRANSLATORS: program name: application to install a package to provide a file
+#. TRANSLATORS: program name: installs a package (or packages) by name
+#: ../src/helpers/gpk-install-local-file.c:67
+#: ../src/helpers/gpk-install-package-name.c:63
+#: ../src/packagekit-service/gpk-dbus-task.c:3197
+msgid "Software Install"
+msgstr "Inštalátor softvéru"
+
 # PM: inde sa používa názov Package Manager asi treba nahlásiť bug
 #: ../src/helpers/gpk-install-local-file.c:69
 msgid "PackageKit File Installer"
@@ -2881,74 +2921,74 @@ msgid "You need to specify the name of the software to install"
 msgstr "Musíte uviesť súbor, ktorý chcete nainštalovať"
 
 #. TRANSLATORS: strftime formatted please
-#: ../src/history/gpk-log.c:157
+#: ../src/history/gpk-log.c:167
 msgid "%d %B %Y"
 msgstr "%e. %B %Y"
 
 #. TRANSLATORS: column for the date
-#: ../src/history/gpk-log.c:273
+#: ../src/history/gpk-log.c:292
 msgid "Date"
 msgstr "Dátum"
 
 #. TRANSLATORS: column for what was done, e.g. update-system
-#: ../src/history/gpk-log.c:282
+#: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Operácia"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
-#: ../src/history/gpk-log.c:315
+#: ../src/history/gpk-log.c:334
 msgid "User name"
 msgstr "Meno používateľa"
 
 #. TRANSLATORS: column for the application used for the install, e.g. Add/Remove Programs
-#: ../src/history/gpk-log.c:322
+#: ../src/history/gpk-log.c:341
 msgid "Application"
 msgstr "Aplikácia"
 
 #. TRANSLATORS: user-friendly name for pkcon
-#: ../src/history/gpk-log.c:482
+#: ../src/history/gpk-log.c:505
 msgid "Command line client"
 msgstr "Klient príkazového riadka"
 
 #. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:485
+#: ../src/history/gpk-log.c:508
 msgid "GNOME Packages"
 msgstr "Balíky prostredia GNOME"
 
 #. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:488
+#: ../src/history/gpk-log.c:511
 msgid "GNOME Package Updater"
 msgstr "Aktualizátor balíkov prostredia GNOME"
 
 #. TRANSLATORS: user-friendly name for gpk-update-icon, which used to exist
-#: ../src/history/gpk-log.c:491
+#: ../src/history/gpk-log.c:514
 msgid "Update Icon"
 msgstr "Ikona aktualizácie"
 
 # PM: no nie som si celkom istý či preklad hovorí to isté čo originál viď popis
 #. TRANSLATORS: user-friendly name for the command not found plugin
-#: ../src/history/gpk-log.c:494
+#: ../src/history/gpk-log.c:517
 msgid "Bash – Command Not Found"
 msgstr "Bash - Príkaz nenájdený"
 
 #. TRANSLATORS: user-friendly name for gnome-settings-daemon, which used to handle updates
-#: ../src/history/gpk-log.c:497
+#: ../src/history/gpk-log.c:520
 msgid "GNOME Session"
 msgstr "Relácia GNOME"
 
 #. TRANSLATORS: user-friendly name for gnome-software
-#: ../src/history/gpk-log.c:500
+#: ../src/history/gpk-log.c:523
 msgid "GNOME Software"
 msgstr "Softvér prostredia GNOME"
 
 # cmd desc
 #. TRANSLATORS: preset the GtktextBox with this filter text
-#: ../src/history/gpk-log.c:769
+#: ../src/history/gpk-log.c:757
 msgid "Set the filter to this value"
 msgstr "Nastaví filter na túto hodnotu"
 
 #. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:772 ../src/preferences/gpk-prefs.c:736
+#: ../src/history/gpk-log.c:760 ../src/preferences/gpk-prefs.c:737
 msgid "Set the parent window to make this modal"
 msgstr "Nastaví rodičovské okno aby bol tento dialóg modálny"
 
@@ -2956,11 +2996,6 @@ msgstr "Nastaví rodičovské okno aby bol tento dialóg modálny"
 #: ../src/packagekit-service/gpk-dbus-service.c:127
 msgid "Do not exit after the request has been processed"
 msgstr "Neskončí po spracovaní požiadavky"
-
-# cmd desc
-#: ../src/packagekit-service/gpk-dbus-service.c:143
-msgid "Session D-Bus service for PackageKit"
-msgstr "Služba relácie DBus pre PackageKit"
 
 #. TRANSLATORS: we failed to install
 #: ../src/packagekit-service/gpk-dbus-task.c:240
@@ -3513,23 +3548,52 @@ msgid "Getting package source list not supported by backend"
 msgstr "Balíkovací systém nepodporuje zisťovanie zoznamu zdrojov balíkov"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
-#: ../src/preferences/gpk-prefs.c:739
+#: ../src/preferences/gpk-prefs.c:740
 msgid "Set the startup page: either ‘updates’or ‘sources’"
 msgstr ""
 
 #. TRANSLATORS: program name, an application to add and remove software repositories
-#: ../src/preferences/gpk-prefs.c:748
+#: ../src/preferences/gpk-prefs.c:749
 #, fuzzy
 msgid "Software Settings"
 msgstr "Inštalátor softvéru"
 
+# GtkButton tooltip
+#: ../src/software/gpk-application.c:218
+#, fuzzy
+msgid "Cancel Removal"
+msgstr "Zruší hľadanie"
+
+#: ../src/software/gpk-application.c:238
+#, fuzzy
+msgid "Cancel Installation"
+msgstr "Inštalátor balíkov"
+
 #. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:347
+#: ../src/software/gpk-application.c:343
 msgid "Pending"
 msgstr "Čakajúce"
 
+#. TRANSLATORS: how many updates are selected in the UI
+#: ../src/software/gpk-application.c:413
+#, fuzzy, c-format
+msgid "%u package to be installed"
+msgid_plural "%u packages to be installed"
+msgstr[0] "Zdrojové balíky nemožno nainštalovať"
+msgstr[1] "Zdrojové balíky nemožno nainštalovať"
+msgstr[2] "Zdrojové balíky nemožno nainštalovať"
+
+#. TRANSLATORS: how many updates are selected in the UI
+#: ../src/software/gpk-application.c:420
+#, fuzzy, c-format
+msgid "%u package to be removed"
+msgid_plural "%u packages to be removed"
+msgstr[0] "Odstránenie balíka zlyhalo"
+msgstr[1] "Odstránenie balíka zlyhalo"
+msgstr[2] "Odstránenie balíka zlyhalo"
+
 #. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:593
+#: ../src/software/gpk-application.c:592
 #, fuzzy, c-format
 msgid "%u file installed by %s"
 msgid_plural "%u files installed by %s"
@@ -3538,17 +3602,17 @@ msgstr[1] "%i súbor nainštalovaný aplikáciou %s"
 msgstr[2] "%i súbory nainštalované aplikáciou %s"
 
 #. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:893 ../src/software/gpk-application.c:1022
+#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
 msgid "No packages"
 msgstr "Žiadne balíky"
 
 #. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:895
+#: ../src/software/gpk-application.c:902
 msgid "No other packages require this package"
 msgstr "Žiadne ďalšie balíky nevyžadujú tento balík."
 
 #. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:902
+#: ../src/software/gpk-application.c:909
 #, fuzzy, c-format
 msgid "%u package requires %s"
 msgid_plural "%u packages require %s"
@@ -3557,7 +3621,7 @@ msgstr[1] "%i balík požaduje %s"
 msgstr[2] "%i balíky požadujú %s"
 
 #. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:907
+#: ../src/software/gpk-application.c:914
 #, c-format
 msgid "Packages listed below require %s to function correctly."
 msgid_plural "Packages listed below require %s to function correctly."
@@ -3566,12 +3630,12 @@ msgstr[1] "Nižšie uvedený balík vyžaduje na správne fungovanie %s."
 msgstr[2] "Nižšie uvedené balíky vyžadujú na správne fungovanie %s."
 
 #. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1024
+#: ../src/software/gpk-application.c:1031
 msgid "This package does not depend on any others"
 msgstr "Tento balík nezávisí na žiadnom inom balíku"
 
 #. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1031
+#: ../src/software/gpk-application.c:1038
 #, fuzzy, c-format
 msgid "%u additional package is required for %s"
 msgid_plural "%u additional packages are required for %s"
@@ -3580,7 +3644,7 @@ msgstr[1] "%i ďalší balík je potrebný pre %s"
 msgstr[2] "%i ďalšie balíky sú potrebné pre %s"
 
 #. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1036
+#: ../src/software/gpk-application.c:1043
 #, c-format
 msgid "Packages listed below are required for %s to function correctly."
 msgid_plural "Packages listed below are required for %s to function correctly."
@@ -3589,27 +3653,27 @@ msgstr[1] "Nižšie uvedený balík vyžaduje na správne fungovanie %s."
 msgstr[2] "Nižšie uvedené balíky vyžadujú na správne fungovanie %s."
 
 #. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1107
+#: ../src/software/gpk-application.c:1114
 msgid "Invalid"
 msgstr "Neplatný"
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1246
+#: ../src/software/gpk-application.c:1247
 msgid "No results were found."
 msgstr "Neboli nájdené žiadne výsledky."
 
 #. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1254
+#: ../src/software/gpk-application.c:1255
 msgid "Try entering a package name in the search bar."
 msgstr "Skúste do vyhľadávacieho poľa zadať názov balíka."
 
 #. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1257
+#: ../src/software/gpk-application.c:1258
 msgid "There are no packages queued to be installed or removed."
 msgstr "Na nainštalovanie alebo odstránenie nečakajú žiadne balíky."
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1262
+#: ../src/software/gpk-application.c:1263
 msgid ""
 "Try searching package descriptions by clicking the icon next to the search "
 "text."
@@ -3617,99 +3681,79 @@ msgstr ""
 "Skúste hľadať popisy balíka kliknutím na ikonu vedľa textu vyhľadávania."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1265
+#: ../src/software/gpk-application.c:1266
 msgid "Try again with a different search term."
 msgstr "Skúste hľadať znova s inými kľúčovými slovami."
 
-#. TRANSLATORS: title: invalid text in the search bar
-#: ../src/software/gpk-application.c:1529
-msgid "Invalid search text"
-msgstr "Neplatný text hľadania"
-
-#. TRANSLATORS: message: tell the user that's not allowed
-#: ../src/software/gpk-application.c:1531
-msgid "The search text contains invalid characters"
-msgstr "Text hľadania obsahuje neplatné znaky"
-
-#. TRANSLATORS: title: we failed to execute the method
-#: ../src/software/gpk-application.c:1572
-msgid "The search could not be completed"
-msgstr "Nepodarilo sa dokončiť hľadanie"
-
-#. TRANSLATORS: low level failure, details to follow
-#: ../src/software/gpk-application.c:1574
-msgid "Running the transaction failed"
-msgstr "Spustenie transakcie zlyhalo"
-
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1703
+#: ../src/software/gpk-application.c:1677
 msgid "Changes not applied"
 msgstr "Zmeny neboli aplikované"
 
 # Button
-#: ../src/software/gpk-application.c:1704
+#: ../src/software/gpk-application.c:1678
 msgid "Close _Anyway"
 msgstr "_Napriek tomu zavrieť"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1708
+#: ../src/software/gpk-application.c:1682
 msgid "You have made changes that have not yet been applied."
 msgstr "Vykonali ste zmeny, ktoré zatiaľ neboli aplikované."
 
-#: ../src/software/gpk-application.c:1709
+#: ../src/software/gpk-application.c:1683
 msgid "These changes will be lost if you close this window."
 msgstr "Tieto zmeny sa po zatvorení tohto okna stratia."
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2204
+#: ../src/software/gpk-application.c:2224
 msgid "Size"
 msgstr "Veľkosť"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2207
+#: ../src/software/gpk-application.c:2227
 msgid "Installed size"
 msgstr "Veľkosť po nainštalovaní"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2210
+#: ../src/software/gpk-application.c:2230
 msgid "Download size"
 msgstr "Veľkosť na prevzatie"
 
 #. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2385
+#: ../src/software/gpk-application.c:2417
 msgid "Searching by name"
 msgstr "Hľadá sa podľa názvu"
 
 #. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2411
+#: ../src/software/gpk-application.c:2443
 msgid "Searching by description"
 msgstr "Hľadá sa podľa popisu"
 
 #. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2437
+#: ../src/software/gpk-application.c:2469
 msgid "Searching by file"
 msgstr "Hľadá sa podľa súboru"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2460
+#: ../src/software/gpk-application.c:2492
 msgid "Search by name"
 msgstr "Hľadanie podľa názvu"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2468
+#: ../src/software/gpk-application.c:2500
 msgid "Search by description"
 msgstr "Hľadanie podľa popisu"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2476
+#: ../src/software/gpk-application.c:2508
 msgid "Search by file name"
 msgstr "Hľadanie podľa názvu súboru"
 
-#: ../src/software/gpk-application.c:2505
+#: ../src/software/gpk-application.c:2541
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Zverejnené s licenciou GNU General Public License verzia 2"
 
-#: ../src/software/gpk-application.c:2506
+#: ../src/software/gpk-application.c:2542
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3722,7 +3766,7 @@ msgstr ""
 "verzie tejto licencie, alebo (podľa vášho uváženia) ktorejkoľvek neskoršej "
 "verzie."
 
-#: ../src/software/gpk-application.c:2510
+#: ../src/software/gpk-application.c:2546
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3734,7 +3778,7 @@ msgstr ""
 "VHODNOSTI NA URČITÝ ÚČEL. Ďalšie podrobnosti hľadajte v licencii GNU General "
 "Public License."
 
-#: ../src/software/gpk-application.c:2514
+#: ../src/software/gpk-application.c:2550
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3745,81 +3789,77 @@ msgstr ""
 "Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA"
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2520
+#: ../src/software/gpk-application.c:2556
 msgid "translator-credits"
 msgstr "Ivan Masár <helix84@centrum.sk>"
 
-#: ../src/software/gpk-application.c:2541
-msgid "PackageKit Website"
-msgstr "Webové stránky PackageKit"
-
-#. TRANSLATORS: description of NULL, gpk-application that is
-#: ../src/software/gpk-application.c:2544
+# GtkDialog title
+#: ../src/software/gpk-application.c:2577
 #, fuzzy
-msgid "Package Manager"
-msgstr "Správca balíkov pre prostredie GNOME"
+msgid "Xings Software Website"
+msgstr "Vyžaduje sa podpísanie softvéru"
 
 #. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2736
+#: ../src/software/gpk-application.c:2772
 msgid "Enter a search word or click a category to get started."
 msgstr "Začnite zadaním hľadaného slova alebo kliknutím na kategóriu"
 
 #. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2739
+#: ../src/software/gpk-application.c:2775
 msgid "Enter a search word to get started."
 msgstr "Začnite zadaním hľadaného slova."
 
 #. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:2966
+#: ../src/software/gpk-application.c:3000
 msgid "Exiting as properties could not be retrieved"
 msgstr "Ukončuje sa, lebo sa nepodarilo získať vlastnosti"
 
 #. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3009
+#: ../src/software/gpk-application.c:3043
 msgid "All packages"
 msgstr "Všetky balíky"
 
 #. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3011
+#: ../src/software/gpk-application.c:3045
 msgid "Show all packages"
 msgstr "Zobrazí všetky balíky"
 
 # cmd desc
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3396
+#: ../src/software/gpk-application.c:3432
 #: ../src/software-update/gpk-update-viewer.c:3412
 msgid "Show the program version and exit"
 msgstr "Zobrazí verziu programu a skončí"
 
 # cmd desc
-#: ../src/software/gpk-application.c:3410
+#: ../src/software/gpk-application.c:3446
 msgid "Install Software"
 msgstr "Inštalovanie softvéru"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3426
+#: ../src/software/gpk-application.c:3462
 #, fuzzy
 msgid "Software installer"
 msgstr "Inštalátor softvéru"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/software-service/gpk-updates-notification.c:192
+#: ../src/software-service/gpk-updates-notification.c:199
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/software-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:206
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/software-service/gpk-updates-notification.c:207
+#: ../src/software-service/gpk-updates-notification.c:217
 #, fuzzy
 msgid "Restart & Install"
 msgstr "Inštalátor softvéru"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/software-service/gpk-updates-notification.c:239
+#: ../src/software-service/gpk-updates-notification.c:251
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3828,7 +3868,7 @@ msgstr[1] "Žiadne aktualizácie nie sú dostupné"
 msgstr[2] "Žiadne aktualizácie nie sú dostupné"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/software-service/gpk-updates-notification.c:275
+#: ../src/software-service/gpk-updates-notification.c:287
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3838,11 +3878,11 @@ msgstr[2] "Nie sú dostupné žiadne podrobnosti o aktualizácii."
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/software-service/gpk-updates-notification.c:308
+#: ../src/software-service/gpk-updates-notification.c:320
 msgid "Unable to access software updates"
 msgstr ""
 
-#: ../src/software-service/gpk-updates-notification.c:411
+#: ../src/software-service/gpk-updates-notification.c:433
 #, fuzzy
 msgid "Software Updates"
 msgstr "Získané aktualizácie"
@@ -4261,6 +4301,38 @@ msgstr "Je dostupná nová aktualizácia distribúcie „%s“"
 msgid "Update Software"
 msgstr "Softvér prostredia GNOME"
 
+# GtkButton tooltip
+#~ msgid "Clear current selection"
+#~ msgstr "Vyčistí aktuálny výber"
+
+# GtkButton tooltip
+#~ msgid "Changes are not applied instantly, this button applies all changes"
+#~ msgstr "Zmeny sa nepoužijú okamžite, toto tlačidlo aplikuje všetky zmeny"
+
+#  desktop entry comment
+#~ msgid "Install selected software on the system"
+#~ msgstr "Inštaluje do systému vybrané balíky"
+
+# GtkButton label
+#~ msgid "Filter"
+#~ msgstr "Filtrovať"
+
+#~ msgid "Invalid search text"
+#~ msgstr "Neplatný text hľadania"
+
+#~ msgid "The search text contains invalid characters"
+#~ msgstr "Text hľadania obsahuje neplatné znaky"
+
+#~ msgid "The search could not be completed"
+#~ msgstr "Nepodarilo sa dokončiť hľadanie"
+
+#~ msgid "Running the transaction failed"
+#~ msgstr "Spustenie transakcie zlyhalo"
+
+#, fuzzy
+#~ msgid "Package Manager"
+#~ msgstr "Správca balíkov pre prostredie GNOME"
+
 #, fuzzy
 #~ msgid "Software Log"
 #~ msgstr "Softvér prostredia GNOME"
@@ -4345,9 +4417,6 @@ msgstr "Softvér prostredia GNOME"
 # GtkButon label
 #~ msgid "Required Packages"
 #~ msgstr "Požadované balíky"
-
-#~ msgid "Package Install"
-#~ msgstr "Inštalátor balíkov"
 
 #~ msgid "Enable or disable package repositories"
 #~ msgstr "Umožňuje povoliť alebo zakázať zdroje balíkov"
