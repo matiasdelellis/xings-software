@@ -1653,7 +1653,6 @@ gpk_application_find_cb (GtkWidget *button_widget, GpkApplicationPrivate *priv)
 
 /**
  * gpk_application_quit:
- * @event: The event type, unused.
  **/
 static gboolean
 gpk_application_quit (GpkApplicationPrivate *priv)
@@ -1693,6 +1692,21 @@ gpk_application_quit (GpkApplicationPrivate *priv)
 	/* we might have visual stuff running, close them down */
 	g_cancellable_cancel (priv->cancellable);
 	g_application_release (G_APPLICATION (priv->application));
+
+	return TRUE;
+}
+
+/**
+ * gpk_application_wm_close:
+ * @event: The event type, unused.
+ **/
+static gboolean
+gpk_application_wm_close (GtkWidget             *widget,
+                          GdkEvent              *event,
+                          GpkApplicationPrivate *priv)
+{
+	gpk_application_quit (priv);
+	/* never destroy de main_window, since is managed by GtkApplication */
 	return TRUE;
 }
 
@@ -3247,10 +3261,13 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	}
 
 	main_window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
-	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 
 	gtk_application_add_window (application, GTK_WINDOW (main_window));
 	gtk_window_set_application (GTK_WINDOW (main_window), application);
+
+	/* prvent close by windows manager */
+	g_signal_connect (G_OBJECT(main_window), "delete_event",
+	                  G_CALLBACK(gpk_application_wm_close), priv);
 
 	/* setup the application menu */
 	menu = G_MENU_MODEL (gtk_builder_get_object (priv->builder, "appmenu"));
@@ -3340,6 +3357,7 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	/* set a size, as much as the screen allows */
 	gtk_window_set_default_size (GTK_WINDOW (main_window), 1000, 600);
+	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 	gtk_widget_show (GTK_WIDGET(main_window));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
