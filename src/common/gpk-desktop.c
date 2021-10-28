@@ -55,6 +55,7 @@ gpk_desktop_get_files_for_package (PkClient *client, const gchar *package, GErro
 	GPtrArray *array = NULL, *desktops_array = NULL;
 	const gchar *to_array[] = { NULL, NULL };
 	gchar **fns = NULL;
+	guint i = 0, j = 0;
 
 	to_array[0] = package;
 
@@ -80,10 +81,10 @@ gpk_desktop_get_files_for_package (PkClient *client, const gchar *package, GErro
 	}
 
 	desktops_array = g_ptr_array_new ();
-	for (guint i = 0; i < array->len; i++) {
+	for (i = 0; i < array->len; i++) {
 		item = g_ptr_array_index (array, i);
 		fns = pk_files_get_files (item);
-		for (guint j = 0; fns[j] != NULL; j++) {
+		for (j = 0; fns[j] != NULL; j++) {
 			if (g_str_has_prefix (fns[j], "/usr/share/applications/") &&
 			    g_str_has_suffix (fns[j], ".desktop")) {
 				g_ptr_array_add(desktops_array, g_strdup(fns[j]));
