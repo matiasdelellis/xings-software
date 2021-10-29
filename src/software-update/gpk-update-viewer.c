@@ -2244,8 +2244,7 @@ gpk_update_viewer_get_update_detail_cb (PkClient *client, GAsyncResult *res, gpo
 	/* get data */
 	array = pk_results_get_update_detail_array (results);
 	if (array->len == 0) {
-		/* TRANSLATORS: PackageKit did not send any results for the query... */
-		gpk_update_viewer_error_dialog (_("Could not get update details"), _("No results were returned."), NULL);
+		g_warning("could not get update details.");
 		goto out;
 	}
 
