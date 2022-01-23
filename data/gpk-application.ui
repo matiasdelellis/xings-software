@@ -544,16 +544,6 @@
     </section>
     <section>
       <item>
-        <attribute name="label" translatable="yes">Only Newest Versions</attribute>
-        <attribute name="action">app.filter-newest</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Only Native Packages</attribute>
-        <attribute name="action">app.filter-arch</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
         <attribute name="label" translatable="yes">About</attribute>
         <attribute name="action">app.about</attribute>
       </item>

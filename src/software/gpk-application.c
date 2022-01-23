@@ -84,7 +84,6 @@ typedef struct {
 	GtkTreeStore		*groups_store;
 	guint			 details_event_id;
 	guint			 status_id;
-	PkBitfield		 filters_current;
 	PkBitfield		 groups;
 	PkBitfield		 roles;
 	PkControl		*control;
@@ -1526,16 +1525,20 @@ gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 	searches = g_strsplit (priv->search_text, " ", -1);
 	if (priv->search_type == GPK_SEARCH_NAME) {
 		pk_task_search_names_async (priv->task,
-					     priv->filters_current,
-					     searches, priv->cancellable,
-					     (PkProgressCallback) gpk_application_progress_cb, priv,
-					     (GAsyncReadyCallback) gpk_application_search_cb, priv);
+		                            pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+		                                                    PK_FILTER_ENUM_ARCH,
+		                                                    -1),
+		                            searches, priv->cancellable,
+		                            (PkProgressCallback) gpk_application_progress_cb, priv,
+		                            (GAsyncReadyCallback) gpk_application_search_cb, priv);
 	} else if (priv->search_type == GPK_SEARCH_DETAILS) {
 		pk_task_search_details_async (priv->task,
-					     priv->filters_current,
-					     searches, priv->cancellable,
-					     (PkProgressCallback) gpk_application_progress_cb, priv,
-					     (GAsyncReadyCallback) gpk_application_search_cb, priv);
+		                              pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+		                                                      PK_FILTER_ENUM_ARCH,
+		                                                      -1),
+		                              searches, priv->cancellable,
+		                              (PkProgressCallback) gpk_application_progress_cb, priv,
+		                              (GAsyncReadyCallback) gpk_application_search_cb, priv);
 	} else {
 		g_warning ("invalid search type");
 		goto out;
@@ -1561,15 +1564,21 @@ gpk_application_perform_search_others (GpkApplicationPrivate *priv)
 	if (priv->search_mode == GPK_MODE_GROUP) {
 		search_groups = g_strsplit (priv->search_group, " ", -1);
 		pk_client_search_groups_async (PK_CLIENT(priv->task),
-					       priv->filters_current, search_groups, priv->cancellable,
-					       (PkProgressCallback) gpk_application_progress_cb, priv,
-					       (GAsyncReadyCallback) gpk_application_search_cb, priv);
+		                               pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+		                                                       PK_FILTER_ENUM_ARCH,
+		                                                       -1),
+		                               search_groups, priv->cancellable,
+		                               (PkProgressCallback) gpk_application_progress_cb, priv,
+		                               (GAsyncReadyCallback) gpk_application_search_cb, priv);
 		g_strfreev (search_groups);
 	} else {
 		pk_client_get_packages_async (PK_CLIENT(priv->task),
-					      priv->filters_current, priv->cancellable,
-					      (PkProgressCallback) gpk_application_progress_cb, priv,
-					      (GAsyncReadyCallback) gpk_application_search_cb, priv);
+		                              pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+		                                                      PK_FILTER_ENUM_ARCH,
+		                                                      -1),
+		                              priv->cancellable,
+		                              (PkProgressCallback) gpk_application_progress_cb, priv,
+		                              (GAsyncReadyCallback) gpk_application_search_cb, priv);
 	}
 }
 
@@ -2935,20 +2944,6 @@ gpk_application_key_changed_cb (GSettings *settings, const gchar *key, GpkApplic
 			gpk_application_create_group_array_categories (priv);
 		else
 			gpk_application_create_group_array_enum (priv);
-	} else if (g_strcmp0 (key, "filter-newest") == 0) {
-		/* refresh the search results */
-		if (g_settings_get_boolean (priv->settings, key))
-			pk_bitfield_add (priv->filters_current, PK_FILTER_ENUM_NEWEST);
-		else
-			pk_bitfield_remove (priv->filters_current, PK_FILTER_ENUM_NEWEST);
-		gpk_application_perform_search (priv);
-	} else if (g_strcmp0 (key, "filter-arch") == 0) {
-		/* refresh the search results */
-		if (g_settings_get_boolean (priv->settings, key))
-			pk_bitfield_add (priv->filters_current, PK_FILTER_ENUM_ARCH);
-		else
-			pk_bitfield_remove (priv->filters_current, PK_FILTER_ENUM_ARCH);
-		gpk_application_perform_search (priv);
 	}
 }
 
@@ -3150,7 +3145,6 @@ gpk_application_activate_cb (GtkApplication *_application, GpkApplicationPrivate
 static void
 gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *priv)
 {
-	GAction *action;
 	GError *error = NULL;
 	GMenuModel *menu;
 	GtkTreeSelection *selection;
@@ -3220,10 +3214,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	/* setup the application menu */
 	menu = G_MENU_MODEL (gtk_builder_get_object (priv->builder, "appmenu"));
 	gtk_application_set_app_menu (priv->application, menu);
-	action = g_settings_create_action (priv->settings, "filter-newest");
-	g_action_map_add_action (G_ACTION_MAP (priv->application), action);
-	action = g_settings_create_action (priv->settings, "filter-arch");
-	g_action_map_add_action (G_ACTION_MAP (priv->application), action);
 
 	/* helpers */
 	priv->helper_run = gpk_helper_run_new ();
@@ -3354,10 +3344,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	/* set current action */
 	priv->action = GPK_ACTION_NONE;
 	gpk_application_change_queue_status (priv);
-
-	/* sync toggles */
-	gpk_application_key_changed_cb (priv->settings, "filter-newest", priv);
-	gpk_application_key_changed_cb (priv->settings, "filter-arch", priv);
 
 	/* hide details */
 	gpk_application_clear_details (priv);

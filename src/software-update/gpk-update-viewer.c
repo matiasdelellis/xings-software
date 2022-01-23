@@ -94,7 +94,7 @@ enum {
 
 static void gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message, gboolean updated);
 
-static gboolean gpk_update_viewer_get_new_update_array (void);
+static void gpk_update_viewer_get_new_update_array (void);
 static void gpk_update_viewer_refresh_cache (void);
 static void gpk_updates_viewer_validate_cache (void);
 
@@ -2731,10 +2731,9 @@ out:
 /**
  * gpk_update_viewer_get_new_update_array
  **/
-static gboolean
+static void
 gpk_update_viewer_get_new_update_array (void)
 {
-	gboolean ret;
 	gchar *text = NULL;
 	PkBitfield filter = PK_FILTER_ENUM_NONE;
 
@@ -2753,7 +2752,6 @@ gpk_update_viewer_get_new_update_array (void)
 				     (PkProgressCallback) gpk_update_viewer_progress_cb, NULL,
 				     (GAsyncReadyCallback) gpk_update_viewer_get_updates_cb, NULL);
 	g_free (text);
-	return ret;
 }
 
 
