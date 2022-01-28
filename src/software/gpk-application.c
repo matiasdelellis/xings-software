@@ -3192,6 +3192,10 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	                        AS_STORE_LOAD_FLAG_APP_INFO_SYSTEM,
 	                        priv->cancellable,
 	                        &error);
+	if (!retval) {
+		g_warning ("Failed to load appstream store: %s", error->message);
+		g_clear_error (&error);
+	}
 
 	/* watch gnome-packagekit keys */
 	g_signal_connect (priv->settings, "changed", G_CALLBACK (gpk_application_key_changed_cb), priv);
