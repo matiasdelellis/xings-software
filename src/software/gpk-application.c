@@ -35,6 +35,8 @@
 #include <string.h>
 #include <unistd.h>
 
+#include <appstream-glib.h>
+
 #include <common/gpk-common.h>
 #include <common/gpk-dialog.h>
 #include <common/gpk-enum.h>
@@ -66,6 +68,7 @@ typedef enum {
 } GpkActionMode;
 
 typedef struct {
+	AsStore			*appsstore;
 	gboolean		 has_package;
 	gboolean		 search_in_progress;
 	GCancellable		*cancellable;
@@ -191,13 +194,20 @@ static void
 gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
 {
 	GtkTextBuffer *buffer;
+	GtkTextIter iter;
+	gchar *as_markup = NULL;
+
 	buffer = gtk_text_buffer_new (NULL);
+
+	/* no information */
+	gtk_text_buffer_set_text (buffer, "", -1);
+
 	/* ITS4: ignore, not used for allocation */
 	if (_g_strzero (text) == FALSE) {
-		gtk_text_buffer_set_text (buffer, text, -1);
-	} else {
-		/* no information */
-		gtk_text_buffer_set_text (buffer, "", -1);
+		gtk_text_buffer_get_start_iter (buffer, &iter);
+		as_markup = as_markup_convert_simple (text, NULL);
+		gtk_text_buffer_insert_markup (buffer, &iter, as_markup, -1);
+		g_free (as_markup);
 	}
 	gtk_text_view_set_buffer (GTK_TEXT_VIEW (widget), buffer);
 }
@@ -2129,6 +2139,7 @@ static void
 gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
 	PkResults *results;
+	AsApp *as_app = NULL;
 	GError *error = NULL;
 	PkError *error_code = NULL;
 	GPtrArray *array = NULL;
@@ -2136,12 +2147,11 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	GtkWidget *widget;
 	gchar *value;
 	const gchar *repo_name;
-	gboolean installed;
 	gchar **split = NULL;
 	GtkWindow *window;
 	gchar *package_id = NULL;
+	gchar *package_name = NULL;
 	gchar *url = NULL;
-	PkGroupEnum group;
 	gchar *license = NULL;
 	gchar *summary = NULL, *package_pretty = NULL, *description = NULL;
 	guint64 size;
@@ -2183,26 +2193,26 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gtk_widget_show (widget);
 
 	/* get data */
-	g_object_get (item,
-		      "package-id", &package_id,
-		      "url", &url,
-		      "group", &group,
-		      "license", &license,
-		      "summary", &summary,
-		      "description", &description,
-		      "size", &size,
-		      NULL);
-
+	g_object_get (item, "package-id", &package_id, NULL);
 	split = pk_package_id_split (package_id);
-	installed = g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed");
+
+	package_name = split[PK_PACKAGE_ID_NAME];
+	as_app = as_store_get_app_by_pkgname (priv->appsstore, package_name);
+	if (as_app != NULL) {
+		summary = g_strdup(as_app_get_name (as_app, NULL));
+		package_pretty = g_strdup(as_app_get_comment (as_app, NULL));
+		description = g_strdup(as_app_get_description (as_app, NULL));
+	}
 
 	/* homepage */
+	g_object_get (item, "url", &url, NULL);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
 	g_free (priv->homepage_url);
 	priv->homepage_url = g_strdup (url);
 	gtk_widget_set_visible (widget, url != NULL);
 
 	/* licence */
+	g_object_get (item, "license", &license, NULL);
 	if (license != NULL) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence_title"));
 		gtk_widget_show (widget);
@@ -2218,26 +2228,35 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	}
 
 	/* set the summary */
+	if (!summary) {
+		g_object_get (item, "summary", &summary, NULL);
+	}
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_summary"));
 	gtk_label_set_label (GTK_LABEL (widget), summary);
 
 	/* set the package detail */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_package_desc"));
-	package_pretty = gpk_package_id_format_pretty (package_id);
+	if (!package_pretty) {
+		package_pretty = gpk_package_id_format_pretty (package_id);
+	}
 	gtk_label_set_label (GTK_LABEL (widget), package_pretty);
 
 	/* set the description */
+	if (!description) {
+		g_object_get (item,"description", &description, NULL);
+	}
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
 	gpk_application_set_text_buffer (widget, description);
 
 	/* if non-zero, set the size */
+	g_object_get (item, "size", &size, NULL);
 	if (size > 0) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_size_title"));
 		/* set the size */
 		if (g_strcmp0 (split[PK_PACKAGE_ID_DATA], "meta") == 0) {
 			/* TRANSLATORS: the size of the meta package */
 			gtk_label_set_label (GTK_LABEL (widget), _("Size"));
-		} else if (installed) {
+		} else if (g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed")) {
 			/* TRANSLATORS: the installed size in bytes of the package */
 			gtk_label_set_label (GTK_LABEL (widget), _("Installed size"));
 		} else {
@@ -3157,6 +3176,12 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	priv->cancellable = g_cancellable_new ();
 	priv->repos = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
+	priv->appsstore = as_store_new ();
+	retval = as_store_load (priv->appsstore,
+	                        AS_STORE_LOAD_FLAG_APP_INFO_SYSTEM,
+	                        priv->cancellable,
+	                        &error);
+
 	/* watch gnome-packagekit keys */
 	g_signal_connect (priv->settings, "changed", G_CALLBACK (gpk_application_key_changed_cb), priv);
 
@@ -3435,6 +3460,8 @@ main (int argc, char *argv[])
 	if (priv->details_event_id > 0)
 		g_source_remove (priv->details_event_id);
 
+	if (priv->appsstore != NULL)
+		g_object_unref (priv->appsstore);
 	if (priv->packages_store != NULL)
 		g_object_unref (priv->packages_store);
 	if (priv->control != NULL)
@@ -3455,6 +3482,7 @@ main (int argc, char *argv[])
 		g_hash_table_destroy (priv->repos);
 	if (priv->status_id > 0)
 		g_source_remove (priv->status_id);
+
 	g_free (priv->homepage_url);
 	g_free (priv->search_group);
 	g_free (priv->search_text);

@@ -28,6 +28,7 @@ xings_software_SOURCES =				\
 
 xings_software_LDADD =					\
 	$(top_builddir)/src/common/libgpk-common.a	\
+	$(APPSTREAM_LIBS)				\
 	$(GLIB_LIBS)					\
 	$(GIO_LIBS)					\
 	$(DBUS_LIBS)					\
@@ -38,4 +39,5 @@ xings_software_LDADD =					\
 	$(X11_LIBS)
 
 xings_software_CFLAGS =					\
+	$(APPSTREAM_CFLAGS)				\
 	$(WARN_CFLAGS)
