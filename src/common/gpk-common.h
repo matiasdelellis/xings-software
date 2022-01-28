@@ -64,8 +64,11 @@ G_BEGIN_DECLS
 /* any status that is slower than this will not be shown in the UI */
 #define GPK_UI_STATUS_SHOW_DELAY		750 /* ms */
 
-gchar		*gpk_package_id_format_twoline		(GtkStyleContext *style,
-							 const gchar 	*package_id,
+gchar		*gpk_package_id_get_name		(const gchar    *package_id);
+
+gchar		*gpk_common_format_twoline		(const gchar   *header,
+							 const gchar   *subtitle);
+gchar		*gpk_package_id_format_twoline		(const gchar 	*package_id,
 							 const gchar	*summary);
 gchar		*gpk_package_id_format_oneline		(const gchar 	*package_id,
 							 const gchar	*summary);

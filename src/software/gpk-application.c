@@ -46,6 +46,8 @@
 #include <common/gpk-task.h>
 #include <common/gpk-debug.h>
 
+#include "gpk-package-list.h"
+
 typedef enum {
 	GPK_SEARCH_NAME,
 	GPK_SEARCH_DETAILS,
@@ -100,15 +102,6 @@ enum {
 	GPK_STATE_IN_LIST,
 	GPK_STATE_COLLECTION,
 	GPK_STATE_UNKNOWN
-};
-
-enum {
-	PACKAGES_COLUMN_IMAGE,
-	PACKAGES_COLUMN_STATE,  /* state of the item */
-	PACKAGES_COLUMN_TEXT,
-	PACKAGES_COLUMN_ID,
-	PACKAGES_COLUMN_SUMMARY,
-	PACKAGES_COLUMN_LAST
 };
 
 enum {
@@ -204,8 +197,8 @@ gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
 
 	/* ITS4: ignore, not used for allocation */
 	if (_g_strzero (text) == FALSE) {
-		gtk_text_buffer_get_start_iter (buffer, &iter);
 		as_markup = as_markup_convert_simple (text, NULL);
+		gtk_text_buffer_get_start_iter (buffer, &iter);
 		gtk_text_buffer_insert_markup (buffer, &iter, as_markup, -1);
 		g_free (as_markup);
 	}
@@ -1184,6 +1177,7 @@ gpk_application_clear_packages (GpkApplicationPrivate *priv)
 static void
 gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *item)
 {
+	AsApp *as_app = NULL;
 	GtkTreeIter iter;
 	gchar *text;
 	gboolean in_queue;
@@ -1192,8 +1186,8 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	static guint package_cnt = 0;
 	PkInfoEnum info;
 	gchar *package_id = NULL;
+	gchar *package_name = NULL;
 	gchar *summary = NULL;
-	GtkWidget *widget;
 
 	/* get data */
 	g_object_get (item,
@@ -1218,20 +1212,33 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	if (info == PK_INFO_ENUM_COLLECTION_INSTALLED || info == PK_INFO_ENUM_COLLECTION_AVAILABLE)
 		pk_bitfield_add (state, GPK_STATE_COLLECTION);
 
-	/* use two lines */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
-	text = gpk_package_id_format_twoline (gtk_widget_get_style_context (widget),
-					      package_id,
-					      summary);
-
 	gtk_list_store_append (priv->packages_store, &iter);
-	gtk_list_store_set (priv->packages_store, &iter,
-			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_TEXT, text,
-			    PACKAGES_COLUMN_SUMMARY, summary,
-			    PACKAGES_COLUMN_ID, package_id,
-			    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
-			    -1);
+
+	package_name = gpk_package_id_get_name (package_id);
+	as_app = as_store_get_app_by_pkgname (priv->appsstore, package_name);
+	if (as_app) {
+		text = gpk_common_format_twoline (as_app_get_name (as_app, NULL),
+		                                  as_app_get_comment (as_app, NULL));
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_TEXT, text,
+		                    PACKAGES_COLUMN_SUMMARY, summary,
+		                    PACKAGES_COLUMN_STATE, state,
+		                    PACKAGES_COLUMN_ID, package_id,
+		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
+		                    PACKAGES_COLUMN_APP_NAME, as_app_get_name (as_app, NULL),
+		                    -1);
+	} else {
+		text = gpk_package_id_format_twoline (package_id,
+		                                      summary);
+
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_TEXT, text,
+		                    PACKAGES_COLUMN_SUMMARY, summary,
+		                    PACKAGES_COLUMN_ID, package_id,
+		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
+		                    PACKAGES_COLUMN_APP_NAME, NULL,
+		                    -1);
+	}
 
 	/* only process every n events else we re-order too many times */
 	if (package_cnt++ % 200 == 0) {
@@ -1240,6 +1247,7 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	}
 
 	g_free (package_id);
+	g_free (package_name);
 	g_free (summary);
 	g_free (text);
 }
@@ -1280,6 +1288,7 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 			    PACKAGES_COLUMN_TEXT, text,
 			    PACKAGES_COLUMN_IMAGE, "system-search",
 			    PACKAGES_COLUMN_ID, NULL,
+			    PACKAGES_COLUMN_APP_NAME, NULL,
 			    -1);
 	g_free (text);
 }
@@ -2781,6 +2790,7 @@ gpk_application_add_welcome (GpkApplicationPrivate *priv)
 			    PACKAGES_COLUMN_IMAGE, "system-search",
 			    PACKAGES_COLUMN_SUMMARY, NULL,
 			    PACKAGES_COLUMN_ID, NULL,
+			    PACKAGES_COLUMN_APP_NAME, NULL,
 			    -1);
 }
 
@@ -3158,6 +3168,7 @@ gpk_application_activate_cb (GtkApplication *_application, GpkApplicationPrivate
 	gtk_window_present (window);
 }
 
+
 /**
  * gpk_application_startup_cb:
  **/
@@ -3186,12 +3197,8 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	g_signal_connect (priv->settings, "changed", G_CALLBACK (gpk_application_key_changed_cb), priv);
 
 	/* create array stores */
-	priv->packages_store = gtk_list_store_new (PACKAGES_COLUMN_LAST,
-					      G_TYPE_STRING,
-					      G_TYPE_UINT64,
-					      G_TYPE_STRING,
-					      G_TYPE_STRING,
-					      G_TYPE_STRING);
+	priv->packages_store = gpk_package_list_store_new ();
+
 	priv->groups_store = gtk_tree_store_new (GROUPS_COLUMN_LAST,
 					   G_TYPE_STRING,
 					   G_TYPE_STRING,
@@ -3327,10 +3334,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
 	g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
 			  G_CALLBACK (gpk_application_package_row_activated_cb), priv);
-
-	/* sorted */
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (priv->packages_store),
-					      PACKAGES_COLUMN_ID, GTK_SORT_ASCENDING);
 
 	/* create package tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));

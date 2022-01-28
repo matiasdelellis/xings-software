@@ -868,9 +868,7 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 		if (path == NULL) {
 			g_debug ("Not found %s", package_id);
 
-			text = gpk_package_id_format_twoline (gtk_widget_get_style_context (GTK_WIDGET (treeview)),
-							      package_id,
-							      summary);
+			text = gpk_package_id_format_twoline (package_id, summary);
 			g_debug ("adding: id=%s, text=%s", package_id, text);
 
 			/* add to model */
@@ -2642,9 +2640,7 @@ gpk_update_viewer_get_updates_cb (PkClient *client, GAsyncResult *res, gpointer 
 		gpk_update_viewer_get_parent_for_info (info, &parent);
 
 		/* add to array store */
-		text = gpk_package_id_format_twoline (gtk_widget_get_style_context (widget),
-						      package_id,
-						      summary);
+		text = gpk_package_id_format_twoline (package_id, summary);
 		g_debug ("adding: id=%s, text=%s", package_id, text);
 		selected = (info != PK_INFO_ENUM_BLOCKED);
 
