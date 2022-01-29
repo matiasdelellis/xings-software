@@ -2498,7 +2498,7 @@ gpk_application_key_changed_cb (GSettings *settings, const gchar *key, GpkApplic
 		ret = g_settings_get_boolean (priv->settings, key);
 		gtk_tree_store_clear (priv->groups_store);
 		if (ret)
-			gpk_application_append_distro_categories_cb (priv);
+			gpk_application_append_distro_categories (priv);
 		else {
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
 			gpk_groups_list_append_enumerated (priv->groups_store,
@@ -2562,7 +2562,7 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 	/* simple array or category tree? */
 	ret = g_settings_get_boolean (priv->settings, GPK_SETTINGS_CATEGORY_GROUPS);
 	if (ret && pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_CATEGORIES))
-		gpk_application_append_distro_categories_cb (priv);
+		gpk_application_append_distro_categories (priv);
 	else {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
 		gpk_groups_list_append_enumerated (priv->groups_store,
