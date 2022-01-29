@@ -46,7 +46,8 @@
 #include <common/gpk-task.h>
 #include <common/gpk-debug.h>
 
-#include "gpk-package-list.h"
+#include "gpk-groups-list.h"
+#include "gpk-packages-list.h"
 
 typedef enum {
 	GPK_SEARCH_NAME,
@@ -103,14 +104,6 @@ enum {
 	GPK_STATE_UNKNOWN
 };
 
-enum {
-	GROUPS_COLUMN_ICON,
-	GROUPS_COLUMN_NAME,
-	GROUPS_COLUMN_SUMMARY,
-	GROUPS_COLUMN_ID,
-	GROUPS_COLUMN_ACTIVE,
-	GROUPS_COLUMN_LAST
-};
 
 static void gpk_application_perform_search (GpkApplicationPrivate *priv);
 
@@ -318,60 +311,6 @@ out:
 }
 
 /**
- * gpk_application_group_add_selected:
- **/
-static void
-gpk_application_group_add_selected (GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar *id = NULL;
-	GtkTreeIter iter;
-
-	ret = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->groups_store), &iter);
-	if (!ret)
-		goto out;
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->groups_store), &iter,
-			    GROUPS_COLUMN_ID, &id,
-			    -1);
-	if (g_strcmp0 (id, "selected") == 0)
-		goto out;
-	gtk_tree_store_insert (priv->groups_store, &iter, NULL, 0);
-	gtk_tree_store_set (priv->groups_store, &iter,
-			    /* TRANSLATORS: this is a menu group of packages in the queue */
-			    GROUPS_COLUMN_NAME, _("Pending"),
-			    GROUPS_COLUMN_SUMMARY, NULL,
-			    GROUPS_COLUMN_ID, "selected",
-			    GROUPS_COLUMN_ICON, "edit-find",
-			    GROUPS_COLUMN_ACTIVE, TRUE,
-			    -1);
-out:
-	g_free (id);
-}
-
-/**
- * gpk_application_group_remove_selected:
- **/
-static void
-gpk_application_group_remove_selected (GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar *id = NULL;
-	GtkTreeIter iter;
-
-	ret = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->groups_store), &iter);
-	if (!ret)
-		goto out;
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->groups_store), &iter,
-			    GROUPS_COLUMN_ID, &id,
-			    -1);
-	if (g_strcmp0 (id, "selected") != 0)
-		goto out;
-	gtk_tree_store_remove (priv->groups_store, &iter);
-out:
-	g_free (id);
-}
-
-/**
  * gpk_application_change_queue_status:
  **/
 static void
@@ -394,7 +333,7 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
 		gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 
-		gpk_application_group_remove_selected (priv);
+		gpk_groups_list_remove_pending (priv->groups_store);
 
 		return;
 	}
@@ -423,7 +362,7 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
 	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
 
-	gpk_application_group_add_selected (priv);
+	gpk_groups_list_add_pending (priv->groups_store);
 
 	g_free (text);
 }
@@ -1659,30 +1598,6 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	gtk_tree_view_append_column (treeview, column);
 }
 
-static void
-gpk_application_groups_add_columns (GtkTreeView *treeview)
-{
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-
-	column = gtk_tree_view_column_new ();
-	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
-	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-	gtk_tree_view_column_add_attribute (column, renderer, "icon-name", GROUPS_COLUMN_ICON);
-	gtk_tree_view_append_column (treeview, column);
-
-	/* column for name */
-	renderer = gtk_cell_renderer_text_new ();
-	/* TRANSLATORS: column for group name */
-	column = gtk_tree_view_column_new_with_attributes (_("Name"), renderer,
-							   "text", GROUPS_COLUMN_NAME,
-							   NULL);
-	gtk_tree_view_column_set_sort_column_id (column, GROUPS_COLUMN_NAME);
-	gtk_tree_view_append_column (treeview, column);
-
-}
-
 /**
  * gpk_application_groups_treeview_changed_cb:
  **/
@@ -2075,29 +1990,6 @@ gpk_application_notify_network_state_cb (PkControl *_control, GParamSpec *pspec,
 }
 
 /**
- * gpk_application_group_add_data:
- **/
-static void
-gpk_application_group_add_data (GpkApplicationPrivate *priv, PkGroupEnum group)
-{
-	GtkTreeIter iter;
-	const gchar *icon_name;
-	const gchar *text;
-
-	gtk_tree_store_append (priv->groups_store, &iter, NULL);
-
-	text = gpk_group_enum_to_localised_text (group);
-	icon_name = gpk_group_enum_to_icon_name (group);
-	gtk_tree_store_set (priv->groups_store, &iter,
-			    GROUPS_COLUMN_NAME, text,
-			    GROUPS_COLUMN_SUMMARY, NULL,
-			    GROUPS_COLUMN_ID, pk_group_enum_to_string (group),
-			    GROUPS_COLUMN_ICON, icon_name,
-			    GROUPS_COLUMN_ACTIVE, TRUE,
-			    -1);
-}
-
-/**
  * gpk_application_menu_search_by_name:
  **/
 static void
@@ -2455,35 +2347,10 @@ gpk_application_add_welcome (GpkApplicationPrivate *priv)
 }
 
 /**
- * gpk_application_create_group_array_enum:
- **/
-static void
-gpk_application_create_group_array_enum (GpkApplicationPrivate *priv)
-{
-	GtkWidget *widget;
-	guint i;
-
-	/* set to no indent */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
-	gtk_tree_view_set_show_expanders (GTK_TREE_VIEW (widget), FALSE);
-	gtk_tree_view_set_level_indentation  (GTK_TREE_VIEW (widget), 0);
-
-	/* create group tree view if we can search by group */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_GROUP)) {
-		/* add all the groups supported (except collections, which we handled above */
-		for (i=0; i<PK_GROUP_ENUM_LAST; i++) {
-			if (pk_bitfield_contain (priv->groups, i) &&
-			    i != PK_GROUP_ENUM_COLLECTIONS && i != PK_GROUP_ENUM_NEWEST)
-				gpk_application_group_add_data (priv, i);
-		}
-	}
-}
-
-/**
  * gpk_application_get_categories_cb:
  **/
 static void
-gpk_application_get_categories_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
+gpk_application_append_distro_categories_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
 	PkResults *results;
 	GError *error = NULL;
@@ -2602,10 +2469,10 @@ out:
 }
 
 /**
- * gpk_application_create_group_array_categories:
+ * gpk_application_append_distro_categories_cb:
  **/
 static void
-gpk_application_create_group_array_categories (GpkApplicationPrivate *priv)
+gpk_application_append_distro_categories (GpkApplicationPrivate *priv)
 {
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
@@ -2613,7 +2480,7 @@ gpk_application_create_group_array_categories (GpkApplicationPrivate *priv)
 	/* get categories supported */
 	pk_client_get_categories_async (PK_CLIENT(priv->task), priv->cancellable,
 				        (PkProgressCallback) gpk_application_progress_cb, priv,
-				        (GAsyncReadyCallback) gpk_application_get_categories_cb, priv);
+				        (GAsyncReadyCallback) gpk_application_append_distro_categories_cb, priv);
 }
 
 /**
@@ -2624,15 +2491,21 @@ gpk_application_create_group_array_categories (GpkApplicationPrivate *priv)
 static void
 gpk_application_key_changed_cb (GSettings *settings, const gchar *key, GpkApplicationPrivate *priv)
 {
+	GtkWidget *widget;
 	gboolean ret;
 
 	if (g_strcmp0 (key, GPK_SETTINGS_CATEGORY_GROUPS) == 0) {
 		ret = g_settings_get_boolean (priv->settings, key);
 		gtk_tree_store_clear (priv->groups_store);
 		if (ret)
-			gpk_application_create_group_array_categories (priv);
-		else
-			gpk_application_create_group_array_enum (priv);
+			gpk_application_append_distro_categories_cb (priv);
+		else {
+			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
+			gpk_groups_list_append_enumerated (priv->groups_store,
+			                                   GTK_TREE_VIEW (widget),
+			                                   priv->groups,
+			                                   priv->roles);
+		}
 	}
 }
 
@@ -2648,7 +2521,6 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 	gboolean ret;
 	PkBitfield filters;
 	GtkTreeIter iter;
-	const gchar *icon_name;
 
 	/* get the result */
 	ret = pk_control_get_properties_finish (control, res, &error);
@@ -2678,25 +2550,6 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 		gtk_widget_hide (widget);
 	}
 
-	/* add an "all" entry if we can GetPackages */
-	ret = g_settings_get_boolean (priv->settings, GPK_SETTINGS_SHOW_ALL_PACKAGES);
-	if (ret && pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_PACKAGES)) {
-		gtk_tree_store_append (priv->groups_store, &iter, NULL);
-		icon_name = gpk_role_enum_to_icon_name (PK_ROLE_ENUM_GET_PACKAGES);
-		gtk_tree_store_set (priv->groups_store, &iter,
-				    /* TRANSLATORS: title: all of the packages on the system and available in sources */
-				    GROUPS_COLUMN_NAME, _("All packages"),
-				    /* TRANSLATORS: tooltip: all packages */
-				    GROUPS_COLUMN_SUMMARY, _("Show all packages"),
-				    GROUPS_COLUMN_ID, "all-packages",
-				    GROUPS_COLUMN_ACTIVE, TRUE,
-				    GROUPS_COLUMN_ICON, icon_name, -1);
-	}
-
-	/* add these at the top of the array */
-	if (pk_bitfield_contain (priv->groups, PK_GROUP_ENUM_COLLECTIONS))
-		gpk_application_group_add_data (priv, PK_GROUP_ENUM_COLLECTIONS);
-
 	/* add a separator */
 	gtk_tree_store_append (priv->groups_store, &iter, NULL);
 	gtk_tree_store_set (priv->groups_store, &iter,
@@ -2709,9 +2562,14 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 	/* simple array or category tree? */
 	ret = g_settings_get_boolean (priv->settings, GPK_SETTINGS_CATEGORY_GROUPS);
 	if (ret && pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_CATEGORIES))
-		gpk_application_create_group_array_categories (priv);
-	else
-		gpk_application_create_group_array_enum (priv);
+		gpk_application_append_distro_categories_cb (priv);
+	else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
+		gpk_groups_list_append_enumerated (priv->groups_store,
+		                                   GTK_TREE_VIEW (widget),
+		                                   priv->groups,
+		                                   priv->roles);
+	}
 
 	/* set the search mode */
 	priv->search_type = g_settings_get_enum (priv->settings, GPK_SETTINGS_SEARCH_MODE);
@@ -2828,6 +2686,8 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	GtkTreeSelection *selection;
 	GtkWidget *main_window;
 	GtkWidget *widget;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
 	guint retval;
 
 	priv->package_sack = pk_package_sack_new ();
@@ -2849,14 +2709,11 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	g_signal_connect (priv->settings, "changed", G_CALLBACK (gpk_application_key_changed_cb), priv);
 
 	/* create array stores */
-	priv->packages_store = gpk_package_list_store_new ();
 
-	priv->groups_store = gtk_tree_store_new (GROUPS_COLUMN_LAST,
-					   G_TYPE_STRING,
-					   G_TYPE_STRING,
-					   G_TYPE_STRING,
-					   G_TYPE_STRING,
-					   G_TYPE_BOOLEAN);
+	priv->groups_store = gpk_groups_list_store_new ();
+
+	priv->packages_store = gpk_packages_list_store_new ();
+
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
@@ -2986,7 +2843,20 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
 
 	/* add columns to the tree view */
-	gpk_application_groups_add_columns (GTK_TREE_VIEW (widget));
+	column = gtk_tree_view_column_new ();
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
+	gtk_tree_view_column_pack_start (column, renderer, FALSE);
+	gtk_tree_view_column_add_attribute (column, renderer, "icon-name", GROUPS_COLUMN_ICON);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (widget), column);
+
+	renderer = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Name"), renderer,
+	                                                   "text", GROUPS_COLUMN_NAME,
+	                                                   NULL);
+	gtk_tree_view_column_set_sort_column_id (column, GROUPS_COLUMN_NAME);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (widget), column);
+
 	gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (widget), GROUPS_COLUMN_SUMMARY);
 	gtk_tree_view_set_show_expanders (GTK_TREE_VIEW (widget), FALSE);
 	gtk_tree_view_set_level_indentation  (GTK_TREE_VIEW (widget), 9);

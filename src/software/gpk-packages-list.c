@@ -24,13 +24,13 @@
 #include <glib.h>
 #include <gio/gio.h>
 
-#include "gpk-package-list.h"
+#include "gpk-packages-list.h"
 
 static gint
-gpk_package_list_column_sort_func (GtkTreeModel *model,
-                                   GtkTreeIter  *a,
-                                   GtkTreeIter  *b,
-                                   gpointer      user_data)
+gpk_packages_list_column_sort_func (GtkTreeModel *model,
+                                    GtkTreeIter  *a,
+                                    GtkTreeIter  *b,
+                                    gpointer      user_data)
 {
 	gchar *app_name_a, *app_name_b;
 	gchar *package_id_a, *package_id_b;
@@ -64,7 +64,7 @@ gpk_package_list_column_sort_func (GtkTreeModel *model,
 }
 
 GtkListStore *
-gpk_package_list_store_new (void)
+gpk_packages_list_store_new (void)
 {
 	GtkListStore *store = gtk_list_store_new (PACKAGES_COLUMN_LAST,
 	                                          G_TYPE_STRING,
@@ -76,7 +76,7 @@ gpk_package_list_store_new (void)
 
 	gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (store),
 	                                 PACKAGES_COLUMN_ID,
-	                                 gpk_package_list_column_sort_func,
+	                                 gpk_packages_list_column_sort_func,
 	                                 NULL, NULL);
 
 	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (store),

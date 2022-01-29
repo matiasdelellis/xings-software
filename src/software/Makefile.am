@@ -24,8 +24,10 @@ bin_PROGRAMS =						\
 	xings-software
 
 xings_software_SOURCES =				\
-	gpk-package-list.c				\
-	gpk-package-list.h				\
+	gpk-groups-list.c				\
+	gpk-groups-list.h				\
+	gpk-packages-list.c				\
+	gpk-packages-list.h				\
 	gpk-application.c
 
 xings_software_LDADD =					\

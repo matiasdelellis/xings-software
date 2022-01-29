@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2021 Matias De lellis <mati86dl@gmail.com>
+ * Copyright (C) 2022 Matias De lellis <mati86dl@gmail.com>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __GPK_PACKAGE_LIST_H
-#define __GPK_PACKAGE_LIST_H
+#ifndef __GPK_PACKAGES_LIST_H
+#define __GPK_PACKAGES_LIST_H
 
 #include <gtk/gtk.h>
 #include <glib-object.h>
@@ -38,8 +38,8 @@ enum {
 };
 
 GtkListStore *
-gpk_package_list_store_new (void);
+gpk_packages_list_store_new (void);
 
 G_END_DECLS
 
-#endif	/* __GPK_PACKAGE_LIST_H */
+#endif	/* __GPK_PACKAGES_LIST_H */
