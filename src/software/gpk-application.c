@@ -74,7 +74,6 @@ typedef struct {
 	gboolean		 has_package;
 	gboolean		 search_in_progress;
 	GCancellable		*cancellable;
-	gchar			*homepage_url;
 	gchar			*search_group;
 	gchar			*search_text;
 	GHashTable		*repos;
@@ -115,8 +114,6 @@ enum {
 
 static void gpk_application_perform_search (GpkApplicationPrivate *priv);
 
-static void gpk_application_get_requires_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv);
-static void gpk_application_get_depends_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv);
 
 static gboolean
 _g_strzero (const gchar *text)
@@ -504,121 +501,6 @@ out:
 }
 
 /**
- * gpk_application_button_homepage_cb:
- **/
-static void
-gpk_application_button_homepage_cb (GtkAction *action, GpkApplicationPrivate *priv)
-{
-	gpk_gnome_open (priv->homepage_url);
-}
-
-/**
- * gpk_application_strcmp_indirect:
- **/
-static gint
-gpk_application_strcmp_indirect (gchar **a, gchar **b)
-{
-	return strcmp (*a, *b);
-}
-
-/**
- * gpk_application_get_files_cb:
- **/
-static void
-gpk_application_get_files_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **files = NULL;
-	gchar *package_id_selected = NULL;
-	gchar **split = NULL;
-	gchar *title = NULL;
-	GError *error = NULL;
-	GPtrArray *array = NULL;
-	GPtrArray *array_sort = NULL;
-	GtkWidget *dialog;
-	GtkWindow *window;
-	PkError *error_code = NULL;
-	PkFiles *item;
-	PkResults *results;
-
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get files: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get files: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* get data */
-	array = pk_results_get_files_array (results);
-	if (array->len != 1)
-		goto out;
-
-	/* assume only one option */
-	item = g_ptr_array_index (array, 0);
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* get data */
-	g_object_get (item,
-		      "files", &files,
-		      NULL);
-
-	/* convert to pointer array */
-	array_sort = pk_strv_to_ptr_array (files);
-	g_ptr_array_sort (array_sort, (GCompareFunc) gpk_application_strcmp_indirect);
-
-	/* title */
-	split = pk_package_id_split (package_id_selected);
-	/* TRANSLATORS: title: how many files are installed by the application */
-	title = g_strdup_printf (ngettext ("%u file installed by %s",
-					   "%u files installed by %s",
-					   array_sort->len), array_sort->len, split[PK_PACKAGE_ID_NAME]);
-
-	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-	dialog = gtk_message_dialog_new (window, GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", title);
-	gpk_dialog_embed_file_list_widget (GTK_DIALOG (dialog), array_sort);
-	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
-	gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 250);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-out:
-	g_free (title);
-	g_strfreev (files);
-	g_strfreev (split);
-	g_free (package_id_selected);
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (array_sort != NULL)
-		g_ptr_array_unref (array_sort);
-	if (results != NULL)
-		g_object_unref (results);
-}
-
-/**
  * gpk_application_status_changed_timeout_cb:
  **/
 static gboolean
@@ -730,36 +612,6 @@ out:
 }
 
 /**
- * gpk_application_button_files_cb:
- **/
-static void
-gpk_application_button_files_cb (GtkAction *action, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **package_ids = NULL;
-	gchar *package_id_selected = NULL;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	/* set correct view */
-	package_ids = pk_package_ids_from_id (package_id_selected);
-	pk_client_get_files_async (PK_CLIENT (priv->task), package_ids, priv->cancellable,
-				   (PkProgressCallback) gpk_application_progress_cb, priv,
-				   (GAsyncReadyCallback) gpk_application_get_files_cb, priv);
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-}
-
-/**
  * gpk_application_remove:
  **/
 static void
@@ -840,264 +692,6 @@ static void
 gpk_application_button_remove_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
 	gpk_application_try_mark_to_remove (priv);
-}
-
-/**
- * gpk_application_get_requires_cb:
- **/
-static void
-gpk_application_get_requires_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-	GPtrArray *array = NULL;
-	GtkWindow *window;
-	gchar *name = NULL;
-	gchar *title = NULL;
-	gchar *message = NULL;
-	gchar **package_ids = NULL;
-	GtkWidget *dialog;
-	gchar *package_id_selected = NULL;
-	gboolean ret;
-
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get requires: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get requires: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* get data */
-	array = pk_results_get_package_array (results);
-
-	/* empty array */
-	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-	if (array->len == 0) {
-		gpk_error_dialog_modal (window,
-					/* TRANSLATORS: no packages returned */
-					_("No packages"),
-					/* TRANSLATORS: this package is not required by any others */
-					_("No other packages require this package"), NULL);
-		goto out;
-	}
-
-	package_ids = pk_package_ids_from_id (package_id_selected);
-	name = gpk_dialog_package_id_name_join_locale (package_ids);
-	/* TRANSLATORS: title: how many packages require this package */
-	title = g_strdup_printf (ngettext ("%u package requires %s",
-					   "%u packages require %s",
-					   array->len), array->len, name);
-
-	/* TRANSLATORS: show a array of packages for the package */
-	message = g_strdup_printf (ngettext ("Packages listed below require %s to function correctly.",
-					     "Packages listed below require %s to function correctly.",
-					     array->len), name);
-
-	dialog = gtk_message_dialog_new (window, GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", title);
-	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog), "%s", message);
-	gpk_dialog_embed_package_list_widget (GTK_DIALOG (dialog), array);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-	g_free (name);
-	g_free (title);
-	g_free (message);
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (results != NULL)
-		g_object_unref (results);
-}
-
-/**
- * gpk_application_button_requires_cb:
- **/
-static void
-gpk_application_button_requires_cb (GtkAction *action, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **package_ids = NULL;
-	gchar *package_id_selected = NULL;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	/* get the requires */
-	package_ids = pk_package_ids_from_id (package_id_selected);
-
-	pk_client_depends_on_async (PK_CLIENT (priv->task),
-				    pk_bitfield_value (PK_FILTER_ENUM_NONE),
-				    package_ids, TRUE, priv->cancellable,
-				    (PkProgressCallback) gpk_application_progress_cb, priv,
-				    (GAsyncReadyCallback) gpk_application_get_depends_cb, priv);
-
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-}
-
-/**
- * gpk_application_get_depends_cb:
- **/
-static void
-gpk_application_get_depends_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-	GPtrArray *array = NULL;
-	GtkWindow *window;
-	gchar *name = NULL;
-	gchar *title = NULL;
-	gchar *message = NULL;
-	gchar **package_ids = NULL;
-	GtkWidget *dialog;
-	gchar *package_id_selected = NULL;
-	gboolean ret;
-
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get depends: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get depends: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* get data */
-	array = pk_results_get_package_array (results);
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* empty array */
-	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-	if (array->len == 0) {
-		gpk_error_dialog_modal (window,
-					/* TRANSLATORS: no packages returned */
-					_("No packages"),
-					/* TRANSLATORS: this package does not depend on any others */
-					_("This package does not depend on any others"), NULL);
-		goto out;
-	}
-
-	package_ids = pk_package_ids_from_id (package_id_selected);
-	name = gpk_dialog_package_id_name_join_locale (package_ids);
-	/* TRANSLATORS: title: show the number of other packages we depend on */
-	title = g_strdup_printf (ngettext ("%u additional package is required for %s",
-					   "%u additional packages are required for %s",
-					   array->len), array->len, name);
-
-	/* TRANSLATORS: message: show the array of dependent packages for this package */
-	message = g_strdup_printf (ngettext ("Packages listed below are required for %s to function correctly.",
-					     "Packages listed below are required for %s to function correctly.",
-					     array->len), name);
-
-	dialog = gtk_message_dialog_new (window, GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", title);
-	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog), "%s", message);
-	gpk_dialog_embed_package_list_widget (GTK_DIALOG (dialog), array);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-out:
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (results != NULL)
-		g_object_unref (results);
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-	g_free (name);
-	g_free (title);
-	g_free (message);
-}
-
-/**
- * gpk_application_button_depends_cb:
- **/
-static void
-gpk_application_button_depends_cb (GtkAction *_action, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **package_ids = NULL;
-	gchar *package_id_selected = NULL;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	/* get the depends */
-	package_ids = pk_package_ids_from_id (package_id_selected);
-
-	pk_client_required_by_async (PK_CLIENT (priv->task),
-				     pk_bitfield_value (PK_FILTER_ENUM_NONE),
-				     package_ids, TRUE, priv->cancellable,
-				     (PkProgressCallback) gpk_application_progress_cb, priv,
-				     (GAsyncReadyCallback) gpk_application_get_requires_cb, priv);
-
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
 }
 
 /**
@@ -2162,7 +1756,8 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gchar *package_name = NULL;
 	gchar *url = NULL;
 	gchar *license = NULL;
-	gchar *summary = NULL, *package_pretty = NULL, *description = NULL;
+	gchar *summary = NULL, *package_pretty = NULL, *description = NULL, *escape_url = NULL;
+	gchar *donation = NULL, *translate = NULL, *report = NULL;
 	guint64 size;
 
 	/* get the results */
@@ -2211,29 +1806,9 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 		summary = g_strdup(as_app_get_name (as_app, NULL));
 		package_pretty = g_strdup(as_app_get_comment (as_app, NULL));
 		description = g_strdup(as_app_get_description (as_app, NULL));
-	}
-
-	/* homepage */
-	g_object_get (item, "url", &url, NULL);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
-	g_free (priv->homepage_url);
-	priv->homepage_url = g_strdup (url);
-	gtk_widget_set_visible (widget, url != NULL);
-
-	/* licence */
-	g_object_get (item, "license", &license, NULL);
-	if (license != NULL) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence_title"));
-		gtk_widget_show (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence"));
-		gtk_label_set_label (GTK_LABEL (widget), license);
-		gtk_label_set_line_wrap (GTK_LABEL (widget), TRUE);
-		gtk_widget_show (widget);
-	} else {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence_title"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence"));
-		gtk_widget_hide (widget);
+		donation = as_app_get_url_item (as_app, AS_URL_KIND_DONATION);
+		translate = as_app_get_url_item (as_app, AS_URL_KIND_TRANSLATE);
+		report = as_app_get_url_item (as_app, AS_URL_KIND_BUGTRACKER);
 	}
 
 	/* set the summary */
@@ -2256,6 +1831,91 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	}
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
 	gpk_application_set_text_buffer (widget, description);
+
+	/* Show homepage */
+	g_object_get (item, "url", &url, NULL);
+	if (url) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", url, url, _("Visit the app's website"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* Show donation */
+	if (donation) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", donation, donation, _("Make a donation"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* Show bugtracking */
+	if (report) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", report, report, _("Report a problem"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* Show translations */
+	if (translate) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", translate, translate, _("Translate into your language"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* licence */
+	g_object_get (item, "license", &license, NULL);
+	if (license != NULL) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license_title"));
+		gtk_widget_show (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license"));
+		gtk_label_set_label (GTK_LABEL (widget), license);
+		gtk_label_set_line_wrap (GTK_LABEL (widget), TRUE);
+		gtk_widget_show (widget);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license_title"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license"));
+		gtk_widget_hide (widget);
+	}
 
 	/* if non-zero, set the size */
 	g_object_get (item, "size", &size, NULL);
@@ -3011,18 +2671,6 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow2"));
 		gtk_widget_hide (widget);
 	}
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_FILES) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_files"));
-		gtk_widget_hide (widget);
-	}
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_DEPENDS_ON) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_depends"));
-		gtk_widget_hide (widget);
-	}
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_REQUIRED_BY) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_requires"));
-		gtk_widget_hide (widget);
-	}
 
 	/* hide the group selector if we don't support search-groups */
 	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_GROUP) == FALSE) {
@@ -3275,15 +2923,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_apply_cb), priv);
 
-	/* detail buttons */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_homepage_cb), priv);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_files"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_files_cb), priv);
-
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_install_cb), priv);
@@ -3291,14 +2930,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_remove_cb), priv);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_depends"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_depends_cb), priv);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_requires"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_requires_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
 	gtk_widget_hide (widget);
@@ -3490,7 +3121,6 @@ main (int argc, char *argv[])
 	if (priv->status_id > 0)
 		g_source_remove (priv->status_id);
 
-	g_free (priv->homepage_url);
 	g_free (priv->search_group);
 	g_free (priv->search_text);
 	g_free (priv);
