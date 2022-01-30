@@ -182,17 +182,19 @@ gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
 
 	buffer = gtk_text_buffer_new (NULL);
 
-	/* no information */
 	gtk_text_buffer_set_text (buffer, "", -1);
-
-	/* ITS4: ignore, not used for allocation */
-	if (_g_strzero (text) == FALSE) {
-		as_markup = as_markup_convert_simple (text, NULL);
-		gtk_text_buffer_get_start_iter (buffer, &iter);
-		gtk_text_buffer_insert_markup (buffer, &iter, as_markup, -1);
-		g_free (as_markup);
-	}
 	gtk_text_view_set_buffer (GTK_TEXT_VIEW (widget), buffer);
+
+	if (_g_strzero (text))
+		return;
+
+	as_markup = as_markup_convert_simple (text, NULL);
+	if (!as_markup)
+		return;
+
+	gtk_text_buffer_get_start_iter (buffer, &iter);
+	gtk_text_buffer_insert_markup (buffer, &iter, as_markup, -1);
+	g_free (as_markup);
 }
 
 /**
@@ -767,6 +769,7 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
 		                    PACKAGES_COLUMN_SUMMARY, summary,
+		                    PACKAGES_COLUMN_STATE, state,
 		                    PACKAGES_COLUMN_ID, package_id,
 		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
 		                    PACKAGES_COLUMN_APP_NAME, NULL,
