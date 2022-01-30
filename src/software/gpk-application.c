@@ -718,7 +718,6 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	gboolean in_queue;
 	gboolean installed;
 	PkBitfield state = 0;
-	static guint package_cnt = 0;
 	PkInfoEnum info;
 	gchar *package_id = NULL;
 	gchar *package_name = NULL;
@@ -774,12 +773,6 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
 		                    PACKAGES_COLUMN_APP_NAME, NULL,
 		                    -1);
-	}
-
-	/* only process every n events else we re-order too many times */
-	if (package_cnt++ % 200 == 0) {
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
 	}
 
 	g_free (package_id);
@@ -1006,12 +999,18 @@ gpk_application_search_cb (PkClient *client, GAsyncResult *res, GpkApplicationPr
 		goto out;
 	}
 
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
+	gtk_tree_view_set_model (GTK_TREE_VIEW (widget), NULL);
+
 	/* get data */
 	array = pk_results_get_package_array (results);
-	for (i=0; i<array->len; i++) {
+	for (i = 0; i < array->len; i++) {
 		item = g_ptr_array_index (array, i);
 		gpk_application_add_item_to_results (priv, item);
 	}
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
+	                         GTK_TREE_MODEL (priv->packages_store));
 
 	/* were there no entries found? */
 	if (!priv->has_package)
