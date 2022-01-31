@@ -877,6 +877,16 @@ gpk_application_select_exact_match (GpkApplicationPrivate *priv, const gchar *te
 		g_free (package_id);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
+
+	if (!selection) {
+		selection = gtk_tree_view_get_selection (treeview);
+		gtk_tree_model_get_iter_first (model, &iter);
+		gtk_tree_selection_select_iter (selection, &iter);
+
+		path = gtk_tree_model_get_path (model, &iter);
+		gtk_tree_view_scroll_to_cell (treeview, path, NULL, FALSE, 0.0f, 0.0f);
+		gtk_tree_path_free (path);
+	}
 }
 
 /**
