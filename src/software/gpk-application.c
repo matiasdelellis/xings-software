@@ -58,7 +58,6 @@ typedef enum {
 typedef enum {
 	GPK_MODE_NAME_DETAILS_FILE,
 	GPK_MODE_GROUP,
-	GPK_MODE_ALL_PACKAGES,
 	GPK_MODE_SELECTED,
 	GPK_MODE_UNKNOWN
 } GpkSearchMode;
@@ -794,8 +793,7 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	gchar *text;
 	PkBitfield state = 0;
 
-	if (priv->search_mode == GPK_MODE_GROUP ||
-	    priv->search_mode == GPK_MODE_ALL_PACKAGES) {
+	if (priv->search_mode == GPK_MODE_GROUP) {
 		/* TRANSLATORS: be helpful, but this shouldn't happen */
 		message = _("Try entering a package name in the search bar.");
 	}  else if (priv->search_mode == GPK_MODE_SELECTED) {
@@ -1196,8 +1194,7 @@ gpk_application_perform_search (GpkApplicationPrivate *priv)
 
 	if (priv->search_mode == GPK_MODE_NAME_DETAILS_FILE) {
 		gpk_application_perform_search_name_details_file (priv);
-	} else if (priv->search_mode == GPK_MODE_GROUP ||
-		   priv->search_mode == GPK_MODE_ALL_PACKAGES) {
+	} else if (priv->search_mode == GPK_MODE_GROUP) {
 		gpk_application_perform_search_others (priv);
 	} else if (priv->search_mode == GPK_MODE_SELECTED) {
 		gpk_application_populate_selected (priv);
@@ -1650,8 +1647,6 @@ gpk_application_groups_treeview_changed_cb (GtkTreeSelection *selection, GpkAppl
 		}
 
 		/* GetPackages? */
-		if (g_strcmp0 (priv->search_group, "all-packages") == 0)
-			priv->search_mode = GPK_MODE_ALL_PACKAGES;
 		else if (g_strcmp0 (priv->search_group, "selected") == 0)
 			priv->search_mode = GPK_MODE_SELECTED;
 		else
@@ -2378,15 +2373,17 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 
 	/* get values */
 	g_object_get (control,
-		      "roles", &priv->roles,
-		      "filters", &filters,
-		      "groups", &priv->groups,
-		      NULL);
+	              "roles", &priv->roles,
+	              "filters", &filters,
+	              "groups", &priv->groups,
+	              NULL);
 
 	/* Remove description/file array if needed. */
 	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_DETAILS) == FALSE) {
+		g_error ("The backend is useless. Not support looking up package details");
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow2"));
 		gtk_widget_hide (widget);
+		// TODO: We should close the application right now...
 	}
 
 	/* Add groups array or hide the group selector if we don't support search-groups */
