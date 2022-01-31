@@ -217,17 +217,21 @@ out:
  * Return value: "<b>GTK Toolkit</b>\ngtk2-2.12.2 (i386)"
  **/
 gchar *
-gpk_common_format_twoline (const gchar *header,
-                           const gchar *subtitle)
+gpk_common_format_details (const gchar *summary,
+                           const gchar *details,
+                           gboolean     twoline)
 {
 	gchar *text = NULL;
 
-	g_return_val_if_fail (header != NULL, NULL);
+	g_return_val_if_fail (summary != NULL, NULL);
 
-	if (subtitle) {
-		text = g_markup_printf_escaped ("%s\n<span weight=\"light\">%s</span>", header, subtitle);
+	if (details) {
+		text = g_markup_printf_escaped ("%s%s<span weight=\"light\">%s</span>",
+		                                summary,
+		                                twoline ? "\n" : " - ",
+		                                details);
 	} else {
-		text =  g_markup_printf_escaped ("%s", header);
+		text =  g_markup_printf_escaped ("%s", summary);
 	}
 
 	return text;
@@ -240,8 +244,9 @@ gpk_common_format_twoline (const gchar *header,
  * Return value: "<b>GTK Toolkit</b>\ngtk2-2.12.2 (i386)"
  **/
 gchar *
-gpk_package_id_format_twoline (const gchar *package_id,
-                               const gchar *summary)
+gpk_package_id_format_details (const gchar *package_id,
+                               const gchar *summary,
+                               gboolean      twoline)
 {
 	gchar *summary_safe = NULL;
 	gchar *text = NULL;
@@ -281,8 +286,9 @@ gpk_package_id_format_twoline (const gchar *package_id,
 	if (arch != NULL)
 		g_string_append_printf (string, " (%s)", arch);
 
-	text = gpk_common_format_twoline (summary_safe,
-	                                  g_string_free (string, FALSE));
+	text = gpk_common_format_details (summary_safe,
+	                                  g_string_free (string, FALSE),
+	                                  twoline);
 
 out:
 	g_free (summary_safe);

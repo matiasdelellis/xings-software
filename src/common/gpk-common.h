@@ -62,10 +62,12 @@ G_BEGIN_DECLS
 
 gchar		*gpk_package_id_get_name		(const gchar    *package_id);
 
-gchar		*gpk_common_format_twoline		(const gchar   *header,
-							 const gchar   *subtitle);
-gchar		*gpk_package_id_format_twoline		(const gchar 	*package_id,
-							 const gchar	*summary);
+gchar		*gpk_common_format_details		(const gchar   *summary,
+							 const gchar   *details,
+							 gboolean       twoline);
+gchar		*gpk_package_id_format_details		(const gchar 	*package_id,
+							 const gchar	*summary,
+							 gboolean	 twoline);
 gchar		*gpk_package_id_format_oneline		(const gchar 	*package_id,
 							 const gchar	*summary);
 gchar		*gpk_package_id_format_pretty		(const gchar	*package_id);

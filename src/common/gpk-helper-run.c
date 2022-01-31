@@ -274,7 +274,7 @@ gpk_helper_run_add_desktop_file (GpkHelperRun *helper, const gchar *package_id, 
 	/* put formatted text into treeview */
 	gtk_list_store_append (helper->list_store, &iter);
 	joint = g_strdup_printf ("%s - %s", name, summary);
-	fulltext = gpk_package_id_format_twoline (package_id, joint);
+	fulltext = gpk_package_id_format_details (package_id, joint, TRUE);
 
 	gtk_list_store_set (helper->list_store, &iter,
 			    GPK_CHOOSER_COLUMN_TEXT, fulltext,

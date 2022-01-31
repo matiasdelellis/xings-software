@@ -750,8 +750,9 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	package_name = gpk_package_id_get_name (package_id);
 	as_app = as_store_get_app_by_pkgname (priv->appsstore, package_name);
 	if (as_app) {
-		text = gpk_common_format_twoline (as_app_get_name (as_app, NULL),
-		                                  as_app_get_comment (as_app, NULL));
+		text = gpk_common_format_details (as_app_get_name (as_app, NULL),
+		                                  as_app_get_comment (as_app, NULL),
+		                                  TRUE);
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
 		                    PACKAGES_COLUMN_SUMMARY, summary,
@@ -761,8 +762,9 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		                    PACKAGES_COLUMN_APP_NAME, as_app_get_name (as_app, NULL),
 		                    -1);
 	} else {
-		text = gpk_package_id_format_twoline (package_id,
-		                                      summary);
+		text = gpk_package_id_format_details (package_id,
+		                                      summary,
+		                                      TRUE);
 
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
@@ -1678,7 +1680,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gchar *package_name = NULL;
 	gchar *url = NULL;
 	gchar *license = NULL;
-	gchar *summary = NULL, *package_pretty = NULL, *description = NULL, *escape_url = NULL;
+	gchar *summary = NULL, *package_details = NULL, *package_pretty = NULL, *description = NULL, *escape_url = NULL;
 	gchar *donation = NULL, *translate = NULL, *report = NULL;
 	guint64 size;
 
@@ -1726,7 +1728,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	as_app = as_store_get_app_by_pkgname (priv->appsstore, package_name);
 	if (as_app != NULL) {
 		summary = g_strdup(as_app_get_name (as_app, NULL));
-		package_pretty = g_strdup(as_app_get_comment (as_app, NULL));
+		package_details = g_strdup(as_app_get_comment (as_app, NULL));
 		description = g_strdup(as_app_get_description (as_app, NULL));
 		donation = as_app_get_url_item (as_app, AS_URL_KIND_DONATION);
 		translate = as_app_get_url_item (as_app, AS_URL_KIND_TRANSLATE);
@@ -1735,17 +1737,21 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 
 	/* set the summary */
 	if (!summary) {
-		g_object_get (item, "summary", &summary, NULL);
+		summary = g_strdup (_("Distribution package"));
 	}
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_summary"));
 	gtk_label_set_label (GTK_LABEL (widget), summary);
 
 	/* set the package detail */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_package_desc"));
-	if (!package_pretty) {
-		package_pretty = gpk_package_id_format_pretty (package_id);
+	if (!package_details) {
+		g_object_get (item, "summary", &package_details, NULL);
 	}
-	gtk_label_set_label (GTK_LABEL (widget), package_pretty);
+	gtk_label_set_markup (GTK_LABEL (widget), package_details);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_package"));
+	package_pretty = gpk_package_id_format_pretty (package_id);
+	gtk_label_set_markup (GTK_LABEL (widget), package_pretty);
 
 	/* set the description */
 	if (!description) {
@@ -1878,6 +1884,7 @@ out:
 	g_free (url);
 	g_free (license);
 	g_free (summary);
+	g_free (package_details);
 	g_free (package_pretty);
 	g_free (description);
 	g_strfreev (split);
