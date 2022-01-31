@@ -1396,8 +1396,8 @@ gpk_application_button_pending_cb (GtkWidget *widget, GpkApplicationPrivate *pri
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
 	gtk_entry_set_text (GTK_ENTRY(widget), "");
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-	gtk_widget_hide (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_empty");
 
 	/* hide details */
 	gpk_application_clear_details (priv);
@@ -1547,8 +1547,8 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		gtk_widget_set_visible (widget, FALSE);
 
 		/* hide details */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+		gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_empty");
 
 	} else if (priv->action == GPK_ACTION_REMOVE) {
 		autoremove = g_settings_get_boolean (priv->settings, GPK_SETTINGS_ENABLE_AUTOREMOVE);
@@ -1571,8 +1571,8 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		gtk_widget_set_visible (widget, FALSE);
 
 		/* hide details */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+		gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_empty");
 	}
 	g_strfreev (package_ids);
 	return;
@@ -1925,8 +1925,9 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 		/* we cannot now add it */
 		gpk_application_allow_install_selection (priv, FALSE, FALSE);
 		gpk_application_allow_remove_selection (priv, FALSE, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-		gtk_widget_hide (widget);
+
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+		gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_empty");
 
 		/* hide details */
 		gpk_application_clear_details (priv);
@@ -1945,8 +1946,8 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	}
 
 	/* show the menu item */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-	gtk_widget_show (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_package");
 
 	/* only show buttons if we are in the correct mode */
 	show_install = (state == 0 ||
@@ -2622,8 +2623,8 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_remove_cb), priv);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-	gtk_widget_hide (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_empty");
 
 	/* search cancel button */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
