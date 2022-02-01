@@ -1729,6 +1729,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 		summary = g_strdup(as_component_get_name (component));
 		package_details = g_strdup(as_component_get_summary (component));
 		description = g_strdup(as_component_get_description (component));
+		license = g_strdup(as_component_get_project_license(component));
 		url = g_strdup(as_component_get_url (component, AS_URL_KIND_HOMEPAGE));
 		donation = g_strdup(as_component_get_url (component, AS_URL_KIND_DONATION));
 		translate = g_strdup(as_component_get_url (component, AS_URL_KIND_TRANSLATE));
@@ -1832,7 +1833,9 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	}
 
 	/* licence */
-	g_object_get (item, "license", &license, NULL);
+	if (!license) {
+		g_object_get (item, "license", &license, NULL);
+	}
 	if (license != NULL) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license_title"));
 		gtk_widget_show (widget);
