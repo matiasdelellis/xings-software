@@ -147,8 +147,8 @@ dnl ---------------------------------------------------------------------------
 dnl - Appstream integration
 dnl ---------------------------------------------------------------------------
 
-APPSTREAM_PKG=appstream-glib
-APPSTREAM_REQUIRED=0.7.14
+APPSTREAM_PKG=appstream
+APPSTREAM_REQUIRED=0.12.5
 AC_ARG_ENABLE([appstream],
         AS_HELP_STRING([--enable-appstream[=@<:@no/auto/yes@:>@]],[Build support for appstream]),
                        [enable_appstream=$enableval],

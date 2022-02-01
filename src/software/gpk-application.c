@@ -35,8 +35,6 @@
 #include <string.h>
 #include <unistd.h>
 
-#include <appstream-glib.h>
-
 #include <common/gpk-common.h>
 #include <common/gpk-dialog.h>
 #include <common/gpk-enum.h>
@@ -48,6 +46,7 @@
 
 #include "gpk-groups-list.h"
 #include "gpk-packages-list.h"
+#include "gpk-as-store.h"
 
 typedef enum {
 	GPK_SEARCH_NAME,
@@ -70,7 +69,7 @@ typedef enum {
 } GpkActionMode;
 
 typedef struct {
-	AsStore			*appsstore;
+	GpkAsStore		*as_store;
 	gboolean		 has_package;
 	gboolean		 search_in_progress;
 	GCancellable		*cancellable;
@@ -711,7 +710,7 @@ gpk_application_clear_packages (GpkApplicationPrivate *priv)
 static void
 gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *item)
 {
-	AsApp *as_app = NULL;
+	AsComponent *component = NULL;
 	GtkTreeIter iter;
 	gchar *text;
 	gboolean in_queue;
@@ -748,10 +747,10 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	gtk_list_store_append (priv->packages_store, &iter);
 
 	package_name = gpk_package_id_get_name (package_id);
-	as_app = as_store_get_app_by_pkgname (priv->appsstore, package_name);
-	if (as_app) {
-		text = gpk_common_format_details (as_app_get_name (as_app, NULL),
-		                                  as_app_get_comment (as_app, NULL),
+	component = gpk_as_store_get_component_by_pkgname (priv->as_store, package_name);
+	if (component) {
+		text = gpk_common_format_details (as_component_get_name (component),
+		                                  as_component_get_summary (component),
 		                                  TRUE);
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
@@ -759,7 +758,7 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		                    PACKAGES_COLUMN_STATE, state,
 		                    PACKAGES_COLUMN_ID, package_id,
 		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
-		                    PACKAGES_COLUMN_APP_NAME, as_app_get_name (as_app, NULL),
+		                    PACKAGES_COLUMN_APP_NAME, as_component_get_name (component),
 		                    -1);
 	} else {
 		text = gpk_package_id_format_details (package_id,
@@ -1666,7 +1665,7 @@ static void
 gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
 	PkResults *results;
-	AsApp *as_app = NULL;
+	AsComponent *component = NULL;
 	GError *error = NULL;
 	PkError *error_code = NULL;
 	GPtrArray *array = NULL;
@@ -1725,14 +1724,15 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	split = pk_package_id_split (package_id);
 
 	package_name = split[PK_PACKAGE_ID_NAME];
-	as_app = as_store_get_app_by_pkgname (priv->appsstore, package_name);
-	if (as_app != NULL) {
-		summary = g_strdup(as_app_get_name (as_app, NULL));
-		package_details = g_strdup(as_app_get_comment (as_app, NULL));
-		description = g_strdup(as_app_get_description (as_app, NULL));
-		donation = as_app_get_url_item (as_app, AS_URL_KIND_DONATION);
-		translate = as_app_get_url_item (as_app, AS_URL_KIND_TRANSLATE);
-		report = as_app_get_url_item (as_app, AS_URL_KIND_BUGTRACKER);
+	component = gpk_as_store_get_component_by_pkgname (priv->as_store, package_name);
+	if (component != NULL) {
+		summary = g_strdup(as_component_get_name (component));
+		package_details = g_strdup(as_component_get_summary (component));
+		description = g_strdup(as_component_get_description (component));
+		url = g_strdup(as_component_get_url (component, AS_URL_KIND_HOMEPAGE));
+		donation = g_strdup(as_component_get_url (component, AS_URL_KIND_DONATION));
+		translate = g_strdup(as_component_get_url (component, AS_URL_KIND_TRANSLATE));
+		report = g_strdup(as_component_get_url (component, AS_URL_KIND_BUGTRACKER));
 	}
 
 	/* set the summary */
@@ -1761,7 +1761,9 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gpk_application_set_text_buffer (widget, description);
 
 	/* Show homepage */
-	g_object_get (item, "url", &url, NULL);
+	if (!url) {
+		g_object_get (item, "url", &url, NULL);
+	}
 	if (url) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage_title"));
 		gtk_widget_set_visible (widget, TRUE);
@@ -2530,11 +2532,11 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	priv->cancellable = g_cancellable_new ();
 	priv->repos = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 
-	priv->appsstore = as_store_new ();
-	retval = as_store_load (priv->appsstore,
-	                        AS_STORE_LOAD_FLAG_APP_INFO_SYSTEM,
-	                        priv->cancellable,
-	                        &error);
+	priv->as_store = gpk_as_store_new ();
+	retval = gpk_as_store_load (priv->as_store,
+	                            priv->cancellable,
+	                            &error);
+
 	if (!retval) {
 		g_warning ("Failed to load appstream store: %s", error->message);
 		g_clear_error (&error);
@@ -2803,8 +2805,8 @@ main (int argc, char *argv[])
 	if (priv->details_event_id > 0)
 		g_source_remove (priv->details_event_id);
 
-	if (priv->appsstore != NULL)
-		g_object_unref (priv->appsstore);
+	if (priv->as_store != NULL)
+		g_object_unref (priv->as_store);
 	if (priv->packages_store != NULL)
 		g_object_unref (priv->packages_store);
 	if (priv->control != NULL)
