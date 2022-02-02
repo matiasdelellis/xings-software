@@ -38,7 +38,11 @@ gboolean
 gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error);
 
 AsComponent *
-gpk_as_store_get_component_by_pkgname (GpkAsStore *store, gchar *pkgname);
+gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname);
+
+gchar **
+gpk_as_store_search_pkgnames (GpkAsStore *store, const gchar *search);
+
 
 G_END_DECLS
 

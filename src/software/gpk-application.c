@@ -49,8 +49,8 @@
 #include "gpk-as-store.h"
 
 typedef enum {
-	GPK_SEARCH_NAME,
-	GPK_SEARCH_DETAILS,
+	GPK_SEARCH_APP,
+	GPK_SEARCH_PKGNAME,
 	GPK_SEARCH_UNKNOWN
 } GpkSearchType;
 
@@ -801,7 +801,7 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 		/* TRANSLATORS: nothing in the package queue */
 		message = _("There are no packages queued to be installed or removed.");
 	} else {
-		if (priv->search_type == GPK_SEARCH_NAME)
+		if (priv->search_type == GPK_SEARCH_PKGNAME)
 			/* TRANSLATORS: tell the user to switch to details search mode */
 			message = _("Try searching package descriptions by clicking the icon next to the search text.");
 		else
@@ -1056,6 +1056,40 @@ out:
 		g_object_unref (results);
 }
 
+static void
+gpk_application_search_app (GpkApplicationPrivate *priv, gchar *search_text)
+{
+	gchar **packages = NULL;
+
+	packages = gpk_as_store_search_pkgnames (priv->as_store, search_text);
+	pk_task_resolve_async (priv->task,
+	                       pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+	                                               PK_FILTER_ENUM_ARCH,
+	                                               -1),
+	                       packages, priv->cancellable,
+	                       (PkProgressCallback) gpk_application_progress_cb, priv,
+	                       (GAsyncReadyCallback) gpk_application_search_cb, priv);
+
+	g_strfreev (packages);
+}
+
+static void
+gpk_application_search_pkgname (GpkApplicationPrivate *priv, gchar *search_text)
+{
+	gchar **tokens = NULL;
+	tokens = g_strsplit (search_text, " ", -1);
+
+	pk_task_search_names_async (priv->task,
+	                            pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+	                                                    PK_FILTER_ENUM_ARCH,
+	                                                    -1),
+	                            tokens, priv->cancellable,
+	                            (PkProgressCallback) gpk_application_progress_cb, priv,
+	                            (GAsyncReadyCallback) gpk_application_search_cb, priv);
+
+	g_strfreev (tokens);
+}
+
 /**
  * gpk_application_perform_search_name_details_file:
  **/
@@ -1063,7 +1097,6 @@ static void
 gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 {
 	GtkEntry *entry;
-	gchar **searches = NULL;
 
 	entry = GTK_ENTRY (gtk_builder_get_object (priv->builder, "entry_text"));
 	g_free (priv->search_text);
@@ -1072,7 +1105,7 @@ gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 	/* have we got input? */
 	if (_g_strzero (priv->search_text)) {
 		g_debug ("no input");
-		goto out;
+		return;
 	}
 
 	g_debug ("find %s", priv->search_text);
@@ -1085,30 +1118,13 @@ gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 	g_cancellable_reset (priv->cancellable);
 
 	/* do the search */
-	searches = g_strsplit (priv->search_text, " ", -1);
-	if (priv->search_type == GPK_SEARCH_NAME) {
-		pk_task_search_names_async (priv->task,
-		                            pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
-		                                                    PK_FILTER_ENUM_ARCH,
-		                                                    -1),
-		                            searches, priv->cancellable,
-		                            (PkProgressCallback) gpk_application_progress_cb, priv,
-		                            (GAsyncReadyCallback) gpk_application_search_cb, priv);
-	} else if (priv->search_type == GPK_SEARCH_DETAILS) {
-		pk_task_search_details_async (priv->task,
-		                              pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
-		                                                      PK_FILTER_ENUM_ARCH,
-		                                                      -1),
-		                              searches, priv->cancellable,
-		                              (PkProgressCallback) gpk_application_progress_cb, priv,
-		                              (GAsyncReadyCallback) gpk_application_search_cb, priv);
+	if (priv->search_type == GPK_SEARCH_APP) {
+		gpk_application_search_app (priv, priv->search_text);
+	} else if (priv->search_type == GPK_SEARCH_PKGNAME) {
+		gpk_application_search_pkgname (priv, priv->search_text);
 	} else {
 		g_warning ("invalid search type");
-		goto out;
 	}
-
-out:
-	g_strfreev (searches);
 }
 
 /**
@@ -2010,55 +2026,55 @@ gpk_application_notify_network_state_cb (PkControl *_control, GParamSpec *pspec,
 }
 
 /**
- * gpk_application_menu_search_by_name:
+ * gpk_application_menu_search_by_pkgname:
  **/
 static void
-gpk_application_menu_search_by_name (GtkMenuItem *item, GpkApplicationPrivate *priv)
+gpk_application_menu_search_by_pkgname (GtkMenuItem *item, GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
 
 	/* change type */
-	priv->search_type = GPK_SEARCH_NAME;
+	priv->search_type = GPK_SEARCH_PKGNAME;
 	g_debug ("set search type=%u", priv->search_type);
 
 	/* save default to GSettings */
 	g_settings_set_enum (priv->settings,
-			     GPK_SETTINGS_SEARCH_MODE,
-			     priv->search_type);
+	                     GPK_SETTINGS_SEARCH_MODE,
+	                     priv->search_type);
 
 	/* set the new icon */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	/* TRANSLATORS: entry tooltip: basic search */
-	gtk_widget_set_tooltip_text (widget, _("Searching by name"));
+	/* TRANSLATORS: entry tooltip: basic search by package name */
+	gtk_widget_set_tooltip_text (widget, _("Searching for distribution packages"));
 	gtk_entry_set_icon_from_icon_name (GTK_ENTRY (widget),
-					   GTK_ENTRY_ICON_PRIMARY,
-					   "edit-find");
+	                                   GTK_ENTRY_ICON_PRIMARY,
+	                                   "edit-find-replace");
 }
 
 /**
- * gpk_application_menu_search_by_description:
+ * gpk_application_menu_search_for_application:
  **/
 static void
-gpk_application_menu_search_by_description (GtkMenuItem *item, GpkApplicationPrivate *priv)
+gpk_application_menu_search_for_application (GtkMenuItem *item, GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
 
 	/* set type */
-	priv->search_type = GPK_SEARCH_DETAILS;
+	priv->search_type = GPK_SEARCH_APP;
 	g_debug ("set search type=%u", priv->search_type);
 
 	/* save default to GSettings */
 	g_settings_set_enum (priv->settings,
-			     GPK_SETTINGS_SEARCH_MODE,
-			     priv->search_type);
+	                     GPK_SETTINGS_SEARCH_MODE,
+	                     priv->search_type);
 
 	/* set the new icon */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	/* TRANSLATORS: entry tooltip: detailed search */
-	gtk_widget_set_tooltip_text (widget, _("Searching by description"));
+	/* TRANSLATORS: entry tooltip: applications search */
+	gtk_widget_set_tooltip_text (widget, _("Searching for applications"));
 	gtk_entry_set_icon_from_icon_name (GTK_ENTRY (widget),
-					   GTK_ENTRY_ICON_PRIMARY,
-					   "edit-find-replace");
+	                                   GTK_ENTRY_ICON_PRIMARY,
+	                                   "edit-find");
 }
 
 
@@ -2077,19 +2093,17 @@ gpk_application_entry_text_icon_press_cb (GtkEntry *entry, GtkEntryIconPosition 
 
 	g_debug ("icon_pos=%u", icon_pos);
 
+	/* TRANSLATORS: context menu item for the search type icon */
+	item = gtk_menu_item_new_with_mnemonic (_("Search for apps"));
+	g_signal_connect (G_OBJECT (item), "activate",
+	                  G_CALLBACK (gpk_application_menu_search_for_application), priv);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
+
 	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_NAME)) {
 		/* TRANSLATORS: context menu item for the search type icon */
-		item = gtk_menu_item_new_with_mnemonic (_("Search by name"));
+		item = gtk_menu_item_new_with_mnemonic (_("Search for distribution packages"));
 		g_signal_connect (G_OBJECT (item), "activate",
-				  G_CALLBACK (gpk_application_menu_search_by_name), priv);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-	}
-
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_DETAILS)) {
-		/* TRANSLATORS: context menu item for the search type icon */
-		item = gtk_menu_item_new_with_mnemonic (_("Search by description"));
-		g_signal_connect (G_OBJECT (item), "activate",
-				  G_CALLBACK (gpk_application_menu_search_by_description), priv);
+				  G_CALLBACK (gpk_application_menu_search_by_pkgname), priv);
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	}
 
@@ -2414,23 +2428,20 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 	/* set the search mode */
 	priv->search_type = g_settings_get_enum (priv->settings, GPK_SETTINGS_SEARCH_MODE);
 
-	/* search by name */
-	if (priv->search_type == GPK_SEARCH_NAME) {
-		gpk_application_menu_search_by_name (NULL, priv);
-
-	/* set to details if we can we do the action? */
-	} else if (priv->search_type == GPK_SEARCH_DETAILS) {
-		if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_DETAILS)) {
-			gpk_application_menu_search_by_description (NULL, priv);
+	if (priv->search_type == GPK_SEARCH_APP) {
+		if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_RESOLVE)) {
+			gpk_application_menu_search_for_application (NULL, priv);
 		} else {
 			g_warning ("cannot use mode %u as not capable, using name", priv->search_type);
-			gpk_application_menu_search_by_name (NULL, priv);
+			gpk_application_menu_search_by_pkgname (NULL, priv);
 		}
 
+	} else if (priv->search_type == GPK_SEARCH_PKGNAME) {
+		gpk_application_menu_search_by_pkgname (NULL, priv);
 	/* mode not recognized */
 	} else {
 		g_warning ("cannot recognize mode %u, using name", priv->search_type);
-		gpk_application_menu_search_by_name (NULL, priv);
+		gpk_application_menu_search_by_pkgname (NULL, priv);
 	}
 
 	/* welcome */

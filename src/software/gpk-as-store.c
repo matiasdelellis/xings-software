@@ -79,9 +79,33 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 }
 
 AsComponent *
-gpk_as_store_get_component_by_pkgname (GpkAsStore *store, gchar *pkgname)
+gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname)
 {
 	return g_hash_table_lookup (store->packages_components, pkgname);
+}
+
+gchar **
+gpk_as_store_search_pkgnames (GpkAsStore *store, const gchar *search)
+{
+	GPtrArray *pkgname_list = NULL, *components = NULL;
+	AsComponent *component = NULL;
+	const gchar *pkgname = NULL;
+	guint i = 0;
+
+	pkgname_list = g_ptr_array_new ();
+
+	components = as_pool_search (store->as_pool, search);
+	for (i = 0; i < components->len; i++) {
+		component = AS_COMPONENT (g_ptr_array_index (components, i));
+		pkgname = as_component_get_pkgname (component);
+		if (pkgname) {
+			g_ptr_array_add (pkgname_list, g_strdup(pkgname));
+		}
+	}
+
+	g_ptr_array_add (pkgname_list, NULL);
+
+	return (char **) g_ptr_array_free (pkgname_list, FALSE);
 }
 
 static void
