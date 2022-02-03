@@ -19,34 +19,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __GPK_AS_STORE_H
-#define __GPK_AS_STORE_H
+#ifndef __GPK_CATEGORIES_H
+#define __GPK_CATEGORIES_H
 
 #include <glib-object.h>
 
-#include <appstream.h>
+#include "gpk-category.h"
 
 G_BEGIN_DECLS
 
-#define GPK_TYPE_AS_STORE (gpk_as_store_get_type())
-G_DECLARE_FINAL_TYPE (GpkAsStore, gpk_as_store, GPK, AS_STORE, GObject)
+#define GPK_TYPE_CATEGORIES (gpk_categories_get_type())
+G_DECLARE_FINAL_TYPE (GpkCategories, gpk_categories, GPK, CATEGORIES, GObject)
 
-GpkAsStore*
-gpk_as_store_new (void);
+GpkCategory *
+gpk_categories_get_by_id (GpkCategories *categories, const gchar *id);
+
+GPtrArray *
+gpk_categories_get_principals (GpkCategories *categories);
 
 gboolean
-gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error);
+gpk_categories_load (GpkCategories *categories, GError **error);
 
-AsComponent *
-gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname);
-
-gchar **
-gpk_as_store_search_pkgnames_by_categories (GpkAsStore *store, gchar **categories);
-
-gchar **
-gpk_as_store_search_pkgnames (GpkAsStore *store, const gchar *search);
-
+GpkCategories *
+gpk_categories_new (void);
 
 G_END_DECLS
 
-#endif /* __GPK_AS_STORE_H */
+#endif /* __GPK_CATEGORIES_H */

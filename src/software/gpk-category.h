@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2022 Matias De lellis <mati86dl@gmail.com>
+ * Copyright (C) 2022 Matias De lellis <matias@delellis.com.ar>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -19,42 +19,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __GPK_GROUPS_LIST_H
-#define __GPK_GROUPS_LIST_H
+#ifndef __GPK_CATEGORY_H
+#define __GPK_CATEGORY_H
 
-#include <gtk/gtk.h>
 #include <glib-object.h>
-
-#include <common/gpk-enum.h>
 
 G_BEGIN_DECLS
 
-enum {
-	GROUPS_COLUMN_ICON,
-	GROUPS_COLUMN_NAME,
-	GROUPS_COLUMN_SUMMARY,
-	GROUPS_COLUMN_ID,
-	GROUPS_COLUMN_ACTIVE,
-	GROUPS_COLUMN_LAST
-};
+#define GPK_TYPE_CATEGORY (gpk_category_get_type())
+G_DECLARE_FINAL_TYPE (GpkCategory, gpk_category, GPK, CATEGORY, GObject)
 
-void
-gpk_groups_list_add_pending (GtkTreeStore *store);
-void
-gpk_groups_list_remove_pending (GtkTreeStore *store);
+gchar *
+gpk_category_get_id (GpkCategory *category);
 
-void
-gpk_groups_list_append (GtkTreeStore *store, PkGroupEnum group);
+gchar *
+gpk_category_get_name (GpkCategory *category);
 
-void
-gpk_groups_list_append_enumerated (GtkTreeStore *store,
-                                   GtkTreeView  *view,
-                                   PkBitfield    groups,
-                                   PkBitfield    roles);
+gchar *
+gpk_category_get_icon (GpkCategory *category);
 
-GtkTreeStore *
-gpk_groups_list_store_new (void);
+gchar *
+gpk_category_get_comment (GpkCategory *category);
+
+gchar **
+gpk_category_get_categories (GpkCategory *category);
+
+GpkCategory *
+gpk_category_new (void);
+
+gboolean
+gpk_category_load (GpkCategory *category, const gchar *file, GError **error);
 
 G_END_DECLS
 
-#endif	/* __GPK_GROUPS_LIST_H */
+#endif /* __GPK_CATEGORY_H */

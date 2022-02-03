@@ -26,8 +26,10 @@ bin_PROGRAMS =						\
 xings_software_SOURCES =				\
 	gpk-as-store.c					\
 	gpk-as-store.h					\
-	gpk-groups-list.c				\
-	gpk-groups-list.h				\
+	gpk-categories.c				\
+	gpk-categories.h				\
+	gpk-category.c					\
+	gpk-category.h					\
 	gpk-packages-list.c				\
 	gpk-packages-list.h				\
 	gpk-application.c

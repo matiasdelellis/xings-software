@@ -72,7 +72,8 @@ gpk_packages_list_store_new (void)
 	                                          G_TYPE_STRING,
 	                                          G_TYPE_STRING,
 	                                          G_TYPE_STRING,
-	                                          G_TYPE_STRING);
+	                                          G_TYPE_STRING,
+	                                          G_TYPE_BOOLEAN);
 
 	gtk_tree_sortable_set_sort_func (GTK_TREE_SORTABLE (store),
 	                                 PACKAGES_COLUMN_ID,

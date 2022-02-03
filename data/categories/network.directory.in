@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Directory
+Icon=applications-internet
+Include=Network;P2P;
+_Name=Internet
+_Comment=Applications for Internet access

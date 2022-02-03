@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Directory
+Icon=applications-graphics
+Include=2DGraphics;3DGraphics;Graphics;ImageProcessing;Photography;RasterGraphics;VectorGraphics;
+_Name=Graphics
+_Comment=Graphics creation and manipulation applications
