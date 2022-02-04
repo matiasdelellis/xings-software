@@ -60,6 +60,8 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 // FIXME: The debian buster package segfault with this code.
 #if 1//AS_CHECK_VERSION(0,12,6)
 		pkgnames = as_component_get_pkgnames (component);
+		if (pkgnames == NULL)
+			continue;
 		for (p = 0; pkgnames[p] != NULL; p++) {
 			pkgname = pkgnames[p];
 #else
@@ -67,7 +69,7 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 		if (pkgname) {
 #endif
 			g_hash_table_insert (store->packages_components,
-			                     pkgname,
+			                     g_strdup(pkgname),
 			                     g_object_ref (component));
 		}
 	}
