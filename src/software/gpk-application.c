@@ -164,6 +164,7 @@ gpk_application_state_get_checkbox (PkBitfield state)
 	if (state_local == pk_bitfield_value (GPK_STATE_INSTALLED) ||
 	    state_local == pk_bitfield_value (GPK_STATE_IN_LIST))
 		return TRUE;
+
 	return FALSE;
 }
 
@@ -173,14 +174,7 @@ gpk_application_state_get_checkbox (PkBitfield state)
 static void
 gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
 {
-	GtkTextBuffer *buffer;
-	GtkTextIter iter;
-	gchar *as_markup = NULL;
-
-	buffer = gtk_text_buffer_new (NULL);
-
-	gtk_text_buffer_set_text (buffer, "", -1);
-	gtk_text_view_set_buffer (GTK_TEXT_VIEW (widget), buffer);
+	gchar *as_markup = NULL, *as_markup_scaped = NULL;
 
 	if (_g_strzero (text))
 		return;
@@ -189,9 +183,12 @@ gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
 	if (!as_markup)
 		return;
 
-	gtk_text_buffer_get_start_iter (buffer, &iter);
-	gtk_text_buffer_insert_markup (buffer, &iter, as_markup, -1);
+	as_markup_scaped = g_markup_escape_text (as_markup, -1);
+
+	gtk_label_set_markup (GTK_LABEL (widget), as_markup_scaped);
+
 	g_free (as_markup);
+	g_free (as_markup_scaped);
 }
 
 /**
@@ -240,6 +237,7 @@ gpk_application_allow_remove_selection (GpkApplicationPrivate *priv,
 static void
 gpk_application_invert_selection_state (GpkApplicationPrivate *priv)
 {
+	GtkWidget *widget;
 	GtkTreeView *treeview;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -270,6 +268,12 @@ gpk_application_invert_selection_state (GpkApplicationPrivate *priv)
 			    PACKAGES_COLUMN_STATE, state,
 			    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
 			    -1);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_details_package"));
+	gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+	                              gpk_application_state_get_icon (state),
+	                              GTK_ICON_SIZE_DIALOG);
+
 	g_free (package_id);
 }
 
@@ -662,12 +666,6 @@ gpk_application_get_full_repo_name (GpkApplicationPrivate *priv, const gchar *da
 static gboolean
 gpk_application_clear_details_cb (GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget;
-
-	/* hide dead widgets */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "grid_details"));
-	gtk_widget_hide (widget);
-
 	/* never repeat */
 	priv->details_event_id = 0;
 	return FALSE;
@@ -1057,8 +1055,6 @@ gpk_application_search_cb (PkClient *client, GAsyncResult *res, GpkApplicationPr
 	gtk_widget_grab_focus (widget);
 
 	/* reset UI */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
-	gtk_widget_set_sensitive (widget, TRUE);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
 	gtk_widget_set_sensitive (widget, TRUE);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
@@ -1715,10 +1711,6 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	/* only choose the first item */
 	item = g_ptr_array_index (array, 0);
 
-	/* show to start */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "grid_details"));
-	gtk_widget_show (widget);
-
 	/* get data */
 	g_object_get (item, "package-id", &package_id, NULL);
 	split = pk_package_id_split (package_id);
@@ -1758,7 +1750,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	if (!description) {
 		g_object_get (item,"description", &description, NULL);
 	}
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_description"));
 	gpk_application_set_text_buffer (widget, description);
 
 	/* Show homepage */
@@ -1998,8 +1990,13 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	gpk_application_allow_remove_selection (priv, show_remove, remove_inhibited);
 
 	/* clear the description text */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_description"));
 	gpk_application_set_text_buffer (widget, NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_details_package"));
+	gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+	                              gpk_application_state_get_icon (state),
+	                              GTK_ICON_SIZE_DIALOG);
 
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
@@ -2009,6 +2006,7 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	pk_client_get_details_async (PK_CLIENT(priv->task), package_ids, priv->cancellable,
 				     (PkProgressCallback) gpk_application_progress_cb, priv,
 				     (GAsyncReadyCallback) gpk_application_get_details_cb, priv);
+
 out:
 	g_free (package_id);
 	g_free (summary);
@@ -2408,7 +2406,6 @@ gpk_application_key_changed_cb (GSettings *settings, const gchar *key, GpkApplic
 static void
 pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget;
 	GError *error = NULL;
 	PkControl *control = PK_CONTROL(object);
 	gboolean ret;
@@ -2432,8 +2429,6 @@ pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkAppl
 	/* Remove description/file array if needed. */
 	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_DETAILS) == FALSE) {
 		g_error ("The backend is useless. Not support looking up package details");
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow2"));
-		gtk_widget_hide (widget);
 		// TODO: We should close the application right now...
 	}
 
