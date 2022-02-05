@@ -21,7 +21,7 @@
             <property name="position">250</property>
             <property name="position-set">True</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="box_package_selection">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="margin-end">12</property>
@@ -199,7 +199,7 @@
                     <property name="valign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
-                      <object class="GtkImage">
+                      <object class="GtkImage" id="icon_empty">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="valign">start</property>
@@ -233,7 +233,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label_empty_detail">
+                      <object class="GtkLabel" id="label_empty_subtitle">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="label" translatable="yes">Add or remove software installed on the system</property>
@@ -247,9 +247,22 @@
                         <property name="position">2</property>
                       </packing>
                     </child>
+                    <child>
+                      <object class="GtkSpinner" id="spinner_empty">
+                        <property name="height-request">30</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-top">20</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
                   </object>
                   <packing>
-                    <property name="name">details_empty</property>
+                    <property name="name">empty_page</property>
                   </packing>
                 </child>
                 <child>
@@ -709,7 +722,6 @@ Software uses PackageKit and can work on any distribution using the native packa
         <property name="show-close-button">True</property>
         <child>
           <object class="GtkMenuButton" id="menu_button">
-            <property name="menu_model">primary_menu</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
@@ -800,31 +812,4 @@ Software uses PackageKit and can work on any distribution using the native packa
       </object>
     </child>
   </object>
-  <menu id="primary_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Update Software Sources</attribute>
-        <attribute name="action">app.refresh</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Software Sources</attribute>
-        <attribute name="action">app.sources</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Software History</attribute>
-        <attribute name="action">app.log</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">About</attribute>
-        <attribute name="action">app.about</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_Quit</attribute>
-        <attribute name="action">app.quit</attribute>
-        <attribute name="accel">&lt;Primary&gt;q</attribute>
-      </item>
-    </section>
-  </menu>
 </interface>
