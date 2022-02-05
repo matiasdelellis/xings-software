@@ -59,8 +59,10 @@ gpk_backend_open_threaded (GTask        *task,
                            GCancellable *cancellable)
 {
 	GpkBackend *backend = NULL;
+	PkControl *control = NULL;
 	PkResults *results = NULL;
 	PkRepoDetail *item = NULL;
+	PkBitfield roles = PK_ROLE_ENUM_UNKNOWN;
 	GPtrArray *array = NULL;
 	GError *error = NULL;
 	gchar *repo_id = NULL;
@@ -69,6 +71,33 @@ gpk_backend_open_threaded (GTask        *task,
 
 	backend = GPK_BACKEND (source_object);
 
+	/* get backend properties to known if meet requirements */
+	control = pk_control_new ();
+	if (!pk_control_get_properties (control, cancellable, &error)) {
+		goto out;
+	}
+
+	g_object_get (control, "roles", &roles, NULL);
+
+	if (!pk_bitfield_contain (roles, PK_ROLE_ENUM_GET_DETAILS)) {
+		error = g_error_new (PK_CONTROL_ERROR,
+		                     PK_ERROR_ENUM_NOT_SUPPORTED,
+		                     _("The backend does not support some features necessary for the application to work."));
+		goto out;
+	}
+	if (!pk_bitfield_contain (roles, PK_ROLE_ENUM_SEARCH_NAME)) {
+		error = g_error_new (PK_CONTROL_ERROR,
+		                     PK_ERROR_ENUM_NOT_SUPPORTED,
+		                     _("The backend does not support some features necessary for the application to work."));
+		goto out;
+	}
+	if (!pk_bitfield_contain (roles, PK_ROLE_ENUM_RESOLVE)) {
+		error = g_error_new (PK_CONTROL_ERROR,
+		                     PK_ERROR_ENUM_NOT_SUPPORTED,
+		                     _("The backend does not support some features necessary for the application to work."));
+		goto out;
+	}
+
 	/* get repos, so we can show the full name in the package source box */
 	results = pk_client_get_repo_list (PK_CLIENT (backend->task),
 	                                   pk_bitfield_value (PK_FILTER_ENUM_NONE),
@@ -76,10 +105,8 @@ gpk_backend_open_threaded (GTask        *task,
 	                                   NULL, NULL,
 	                                   &error);
 
-	if (error) {
-		g_task_return_error (task, g_steal_pointer (&error));
-		return;
-	}
+	if (error)
+		goto out;
 
 	array = pk_results_get_repo_detail_array (results);
 	for (i = 0; i < array->len; i++) {
@@ -89,7 +116,6 @@ gpk_backend_open_threaded (GTask        *task,
 		             "description", &description,
 		             NULL);
 
-		g_debug ("repo loaded = %s:%s", repo_id, description);
 		/* no problem, just no point adding as we will fallback to the repo_id */
 		if (description != NULL)
 			g_hash_table_insert (backend->repos, g_strdup (repo_id), g_strdup (description));
@@ -98,13 +124,21 @@ gpk_backend_open_threaded (GTask        *task,
 		g_free (description);
 	}
 
+out:
 	// FIXME: Remove fake wait to test...
 	sleep (2);
 
-	g_ptr_array_unref (array);
-	g_object_unref (results);
+	if (array)
+		g_ptr_array_unref (array);
+	if (results)
+		g_object_unref (results);
+	if (control)
+		g_object_unref (control);
 
-	g_task_return_boolean (task, TRUE);
+	if (error)
+		g_task_return_error (task, error);
+	else
+		g_task_return_boolean (task, TRUE);
 }
 
 const gchar *

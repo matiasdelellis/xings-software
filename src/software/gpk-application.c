@@ -88,8 +88,6 @@ typedef struct {
 	GtkListStore		*packages_store;
 	guint			 details_event_id;
 	guint			 status_id;
-	PkBitfield		 roles;
-	PkControl		*control;
 	PkPackageSack		*package_sack;
 	PkStatusEnum		 status_last;
 } GpkApplicationPrivate;
@@ -2054,13 +2052,11 @@ gpk_application_entry_text_icon_press_cb (GtkEntry *entry, GtkEntryIconPosition 
 	                  G_CALLBACK (gpk_application_menu_search_for_application), priv);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_NAME)) {
-		/* TRANSLATORS: context menu item for the search type icon */
-		item = gtk_menu_item_new_with_mnemonic (_("Search for distribution packages"));
-		g_signal_connect (G_OBJECT (item), "activate",
-				  G_CALLBACK (gpk_application_menu_search_by_pkgname), priv);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-	}
+	/* TRANSLATORS: context menu item for the search type icon */
+	item = gtk_menu_item_new_with_mnemonic (_("Search for distribution packages"));
+	g_signal_connect (G_OBJECT (item), "activate",
+	                  G_CALLBACK (gpk_application_menu_search_by_pkgname), priv);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	gtk_widget_show_all (GTK_WIDGET (menu));
 	gtk_menu_popup_at_widget(GTK_MENU (menu), gtk_widget_get_parent(GTK_WIDGET (entry)),
@@ -2360,63 +2356,6 @@ gpk_application_key_changed_cb (GSettings *settings, const gchar *key, GpkApplic
 }
 
 /**
- * pk_backend_status_get_properties_cb:
- **/
-static void
-pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	GError *error = NULL;
-	PkControl *control = PK_CONTROL(object);
-	gboolean ret;
-	PkBitfield filters;
-
-	/* get the result */
-	ret = pk_control_get_properties_finish (control, res, &error);
-	if (!ret) {
-		/* TRANSLATORS: daemon is broken */
-		g_print ("%s: %s\n", _("Exiting as properties could not be retrieved"), error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* get values */
-	g_object_get (control,
-	              "roles", &priv->roles,
-	              "filters", &filters,
-	              NULL);
-
-	/* Remove description/file array if needed. */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_DETAILS) == FALSE) {
-		g_error ("The backend is useless. Not support looking up package details");
-		// TODO: We should close the application right now...
-	}
-
-	/* set the search mode */
-	priv->search_type = g_settings_get_enum (priv->settings, GPK_SETTINGS_SEARCH_MODE);
-
-	if (priv->search_type == GPK_SEARCH_APP) {
-		if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_RESOLVE)) {
-			gpk_application_menu_search_for_application (NULL, priv);
-		} else {
-			g_warning ("cannot use mode %u as not capable, using name", priv->search_type);
-			gpk_application_menu_search_by_pkgname (NULL, priv);
-		}
-
-	} else if (priv->search_type == GPK_SEARCH_PKGNAME) {
-		gpk_application_menu_search_by_pkgname (NULL, priv);
-	/* mode not recognized */
-	} else {
-		g_warning ("cannot recognize mode %u, using name", priv->search_type);
-		gpk_application_menu_search_by_pkgname (NULL, priv);
-	}
-
-	gpk_application_show_categories (priv);
-
-out:
-	return;
-}
-
-/**
  * gpk_application_open_backend_ready:
  **/
 static void
@@ -2429,9 +2368,31 @@ gpk_application_open_backend_ready (GpkBackend            *backend,
 
 	if (!gpk_backend_open_finish (backend, res, &error)) {
 		g_critical ("Failed to open backend: %s", error->message);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
+		gpk_error_dialog_modal (GTK_WINDOW (widget),
+		                        _("Software"),
+		                        _("There was an error starting the application"),
+		                        error->message);
 		g_clear_error (&error);
+		gpk_application_quit (priv);
 		return;
 	}
+
+	/* configure app */
+	priv->search_type = g_settings_get_enum (priv->settings, GPK_SETTINGS_SEARCH_MODE);
+
+	if (priv->search_type == GPK_SEARCH_APP) {
+		gpk_application_menu_search_for_application (NULL, priv);
+	} else if (priv->search_type == GPK_SEARCH_PKGNAME) {
+		gpk_application_menu_search_by_pkgname (NULL, priv);
+	/* mode not recognized */
+	} else {
+		g_warning ("cannot recognize mode %u, using name", priv->search_type);
+		gpk_application_menu_search_by_pkgname (NULL, priv);
+	}
+
+	/* finally open main gui */
+	gpk_application_show_categories (priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
 	gtk_spinner_stop (GTK_SPINNER (widget));
@@ -2502,8 +2463,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
 					   "/usr/share/PackageKit/icons");
-
-	priv->control = pk_control_new ();
 
 	/* get UI */
 	priv->builder = gtk_builder_new ();
@@ -2624,11 +2583,7 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
 	gtk_widget_show (GTK_WIDGET(main_window));
 
-	/* get backend properties to know its capabilities */
-	pk_control_get_properties_async (priv->control, NULL,
-	                                 (GAsyncReadyCallback) pk_backend_status_get_properties_cb,
-	                                 priv);
-
+	/* Open backend and wait... s*/
 	gpk_backend_open (priv->backend,
 	                  priv->cancellable,
 	                  (GAsyncReadyCallback)  gpk_application_open_backend_ready,
@@ -2736,8 +2691,6 @@ main (int argc, char *argv[])
 		g_object_unref (priv->categories);
 	if (priv->packages_store != NULL)
 		g_object_unref (priv->packages_store);
-	if (priv->control != NULL)
-		g_object_unref (priv->control);
 	if (priv->settings != NULL)
 		g_object_unref (priv->settings);
 	if (priv->builder != NULL)
