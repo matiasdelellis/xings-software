@@ -27,6 +27,7 @@
 
 #include <common/gpk-task.h>
 
+#include "gpk-as-store.h"
 #include "gpk-backend.h"
 
 static gboolean
@@ -46,7 +47,8 @@ struct _GpkBackend
 	GObject			 parent;
 
 	PkTask			*task;
-
+	GpkAsStore		*as_store;
+	GpkCategories		*categories;
 	GHashTable		*repos;
 };
 
@@ -98,6 +100,16 @@ gpk_backend_open_threaded (GTask        *task,
 		goto out;
 	}
 
+	/* load appstream store */
+	if (!gpk_as_store_load (backend->as_store, cancellable, &error)) {
+		goto out;
+	}
+
+	/* load categories store */
+	if (gpk_categories_load (backend->categories, &error)) {
+		goto out;
+	}
+
 	/* get repos, so we can show the full name in the package source box */
 	results = pk_client_get_repo_list (PK_CLIENT (backend->task),
 	                                   pk_bitfield_value (PK_FILTER_ENUM_NONE),
@@ -105,8 +117,9 @@ gpk_backend_open_threaded (GTask        *task,
 	                                   NULL, NULL,
 	                                   &error);
 
-	if (error)
+	if (error) {
 		goto out;
+	}
 
 	array = pk_results_get_repo_detail_array (results);
 	for (i = 0; i < array->len; i++) {
@@ -125,9 +138,6 @@ gpk_backend_open_threaded (GTask        *task,
 	}
 
 out:
-	// FIXME: Remove fake wait to test...
-	sleep (2);
-
 	if (array)
 		g_ptr_array_unref (array);
 	if (results)
@@ -145,6 +155,8 @@ const gchar *
 gpk_backend_get_full_repo_name (GpkBackend *backend, const gchar *repo_id)
 {
 	const gchar *repo_name;
+
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
 
 	if (_g_strzero (repo_id)) {
 		/* TRANSLATORS: the repo name is invalid or not found, fall back to this */
@@ -165,12 +177,46 @@ gpk_backend_get_full_repo_name (GpkBackend *backend, const gchar *repo_id)
 	return repo_name;
 }
 
+AsComponent *
+gpk_backend_get_component_by_pkgname (GpkBackend *backend, const gchar *pkgname)
+{
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
+	return gpk_as_store_get_component_by_pkgname (backend->as_store, pkgname);
+}
+
+GpkCategory *
+gpk_backend_get_category_by_id (GpkBackend *backend, const gchar *id)
+{
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
+	return gpk_categories_get_by_id (backend->categories, id);
+}
+
+GPtrArray *
+gpk_backend_get_principals_categories (GpkBackend *backend)
+{
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
+	return gpk_categories_get_principals (backend->categories);
+}
+
+gchar **
+gpk_backend_search_pkgnames_with_component (GpkBackend *backend, const gchar *search)
+{
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
+	return gpk_as_store_search_pkgnames (backend->as_store, search);
+}
+
+gchar **
+gpk_backend_search_pkgnames_by_categories (GpkBackend *backend, gchar **categories)
+{
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
+	return gpk_as_store_search_pkgnames_by_categories (backend->as_store, categories);
+}
+
 PkTask *
 gpk_backend_get_task (GpkBackend *backend)
 {
 	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
 	return backend->task;
-
 }
 
 gboolean
@@ -213,6 +259,12 @@ gpk_backend_finalize (GObject *object)
 	if (backend->task != NULL)
 		g_object_unref (backend->task);
 
+	if (backend->as_store != NULL)
+		g_object_unref (backend->as_store);
+
+	if (backend->categories != NULL)
+		g_object_unref (backend->categories);
+
 	if (backend->repos != NULL)
 		g_hash_table_destroy (backend->repos);
 
@@ -227,6 +279,10 @@ gpk_backend_init (GpkBackend *backend)
 	g_object_set (backend->task,
 	              "background", FALSE,
 	              NULL);
+
+	backend->as_store = gpk_as_store_new ();
+
+	backend->categories = gpk_categories_new ();
 
 	backend->repos = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
 }

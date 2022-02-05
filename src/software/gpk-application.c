@@ -70,8 +70,6 @@ typedef enum {
 } GpkActionMode;
 
 typedef struct {
-	GpkAsStore		*as_store;
-	GpkCategories		*categories;
 	GpkBackend		*backend;
 	gboolean		 has_package;
 	gboolean		 search_in_progress;
@@ -710,7 +708,7 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	gtk_list_store_append (priv->packages_store, &iter);
 
 	package_name = gpk_package_id_get_name (package_id);
-	component = gpk_as_store_get_component_by_pkgname (priv->as_store, package_name);
+	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
 	if (component) {
 		text = gpk_common_format_details (as_component_get_name (component),
 		                                  as_component_get_summary (component),
@@ -1049,7 +1047,7 @@ gpk_application_search_app (GpkApplicationPrivate *priv, gchar *search_text)
 
 	g_debug ("Searching appstream app: %s", search_text);
 
-	packages = gpk_as_store_search_pkgnames (priv->as_store, search_text);
+	packages = gpk_backend_search_pkgnames_with_component (priv->backend, search_text);
 	pk_task_resolve_async (gpk_backend_get_task (priv->backend),
 	                       pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
 	                                               PK_FILTER_ENUM_ARCH,
@@ -1072,7 +1070,7 @@ gpk_application_search_categories (GpkApplicationPrivate *priv, gchar **categori
 		g_debug (" - category: %s", categories[i]);
 	}
 
-	packages = gpk_as_store_search_pkgnames_by_categories (priv->as_store, categories);
+	packages = gpk_backend_search_pkgnames_by_categories (priv->backend, categories);
 	pk_task_resolve_async (gpk_backend_get_task (priv->backend),
 	                       pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
 	                                               PK_FILTER_ENUM_ARCH,
@@ -1686,7 +1684,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	split = pk_package_id_split (package_id);
 
 	package_name = split[PK_PACKAGE_ID_NAME];
-	component = gpk_as_store_get_component_by_pkgname (priv->as_store, package_name);
+	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
 	if (component != NULL) {
 		summary = g_strdup(as_component_get_name (component));
 		package_details = g_strdup(as_component_get_summary (component));
@@ -1918,7 +1916,7 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 
 	if (is_category) {
 		g_debug ("category %s selected...", package_id);
-		category = gpk_categories_get_by_id (priv->categories, package_id);
+		category = gpk_backend_get_category_by_id (priv->backend, package_id);
 
 		gpk_application_clear_details (priv);
 		gpk_application_clear_packages (priv);
@@ -2316,7 +2314,7 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 
 	gtk_list_store_append (priv->packages_store, &iter);
 
-	categories = gpk_categories_get_principals (priv->categories);
+	categories = gpk_backend_get_principals_categories (priv->backend);
 	for (i = 0; i < categories->len; i++) {
 		category = GPK_CATEGORY (g_ptr_array_index (categories, i));
 		id = gpk_category_get_id (category);
@@ -2431,25 +2429,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	priv->cancellable = g_cancellable_new ();
 
 	priv->backend = gpk_backend_new ();
-
-	priv->as_store = gpk_as_store_new ();
-	retval = gpk_as_store_load (priv->as_store,
-	                            priv->cancellable,
-	                            &error);
-
-	if (!retval) {
-		g_warning ("Failed to load appstream store: %s", error->message);
-		g_clear_error (&error);
-	}
-
-	priv->categories = gpk_categories_new ();
-	retval = gpk_categories_load (priv->categories,
-	                              &error);
-
-	if (!retval) {
-		g_warning ("Failed to load system categories: %s", error->message);
-		g_clear_error (&error);
-	}
 
 	/* watch gnome-packagekit keys */
 	g_signal_connect (priv->settings, "changed", G_CALLBACK (gpk_application_key_changed_cb), priv);
@@ -2685,10 +2664,6 @@ main (int argc, char *argv[])
 
 	if (priv->backend != NULL)
 		g_object_unref (priv->backend);
-	if (priv->as_store != NULL)
-		g_object_unref (priv->as_store);
-	if (priv->categories != NULL)
-		g_object_unref (priv->categories);
 	if (priv->packages_store != NULL)
 		g_object_unref (priv->packages_store);
 	if (priv->settings != NULL)

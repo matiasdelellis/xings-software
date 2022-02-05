@@ -23,12 +23,29 @@
 #define __GPK_BACKEND_H
 
 #include <glib-object.h>
+#include <appstream.h>
+
+#include "gpk-categories.h"
 
 G_BEGIN_DECLS
 
 #define GPK_TYPE_BACKEND (gpk_backend_get_type())
 G_DECLARE_FINAL_TYPE (GpkBackend, gpk_backend, GPK, BACKEND, GObject)
 
+AsComponent *
+gpk_backend_get_component_by_pkgname (GpkBackend *backend, const gchar *pkgname);
+
+GpkCategory *
+gpk_backend_get_category_by_id (GpkBackend *backend, const gchar *id);
+
+GPtrArray *
+gpk_backend_get_principals_categories (GpkBackend *backend);
+
+gchar **
+gpk_backend_search_pkgnames_with_component (GpkBackend *backend, const gchar *search);
+
+gchar **
+gpk_backend_search_pkgnames_by_categories (GpkBackend *backend, gchar **categories);
 
 const gchar *
 gpk_backend_get_full_repo_name (GpkBackend *backend, const gchar *repo_id);
