@@ -744,20 +744,6 @@ Software uses PackageKit and can work on any distribution using the native packa
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <child>
-              <object class="GtkButton" id="button_pending">
-                <property name="label" translatable="yes">Pending Changes</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="tooltip-text" translatable="yes">Review pending changes before applying them</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkButton" id="button_apply">
                 <property name="label" translatable="yes">Apply Changes</property>
                 <property name="visible">True</property>

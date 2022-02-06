@@ -58,7 +58,6 @@ typedef enum {
 typedef enum {
 	GPK_MODE_NAME_DETAILS_FILE,
 	GPK_MODE_GROUP,
-	GPK_MODE_SELECTED,
 	GPK_MODE_UNKNOWN
 } GpkSearchMode;
 
@@ -142,26 +141,6 @@ gpk_application_state_get_icon (PkBitfield state)
 		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLING); // need new icon
 
 	return NULL;
-}
-
-/**
- * gpk_application_state_get_checkbox:
- **/
-static gboolean
-gpk_application_state_get_checkbox (PkBitfield state)
-{
-	PkBitfield state_local;
-
-	/* remove any we don't care about */
-	state_local = state;
-	pk_bitfield_remove (state_local, GPK_STATE_COLLECTION);
-
-	/* installed or in array */
-	if (state_local == pk_bitfield_value (GPK_STATE_INSTALLED) ||
-	    state_local == pk_bitfield_value (GPK_STATE_IN_LIST))
-		return TRUE;
-
-	return FALSE;
 }
 
 /**
@@ -327,8 +306,6 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
 		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-		gtk_widget_hide (widget);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
 		gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 
@@ -338,8 +315,6 @@ gpk_application_change_queue_status (GpkApplicationPrivate *priv)
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
 	gtk_widget_show (widget);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-	gtk_widget_show (widget);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 	gtk_widget_show (widget);
 
 	if (priv->action == GPK_ACTION_INSTALL) {
@@ -758,9 +733,6 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	if (priv->search_mode == GPK_MODE_GROUP) {
 		/* TRANSLATORS: be helpful, but this shouldn't happen */
 		message = _("Try entering a package name in the search bar.");
-	}  else if (priv->search_mode == GPK_MODE_SELECTED) {
-		/* TRANSLATORS: nothing in the package queue */
-		message = _("There are no packages queued to be installed or removed.");
 	} else {
 		if (priv->search_type == GPK_SEARCH_PKGNAME)
 			/* TRANSLATORS: tell the user to switch to details search mode */
@@ -1171,36 +1143,6 @@ gpk_application_perform_search_others (GpkApplicationPrivate *priv)
 }
 
 /**
- * gpk_application_populate_selected:
- **/
-static gboolean
-gpk_application_populate_selected (GpkApplicationPrivate *priv)
-{
-	guint i;
-	PkPackage *package;
-	GPtrArray *array;
-
-	/* get size */
-	array = pk_package_sack_get_array (priv->package_sack);
-
-	/* nothing in queue */
-	if (array->len == 0) {
-		gpk_application_suggest_better_search (priv);
-		goto out;
-	}
-
-	/* dump queue to package window */
-	for (i=0; i<array->len; i++) {
-		package = g_ptr_array_index (array, i);
-		gpk_application_add_item_to_results (priv, package);
-	}
-
-out:
-	g_ptr_array_unref (array);
-	return TRUE;
-}
-
-/**
  * gpk_application_perform_search:
  **/
 static void
@@ -1222,8 +1164,6 @@ gpk_application_perform_search (GpkApplicationPrivate *priv)
 		gpk_application_perform_search_name_details_file (priv);
 	} else if (priv->search_mode == GPK_MODE_GROUP) {
 		gpk_application_perform_search_others (priv);
-	} else if (priv->search_mode == GPK_MODE_SELECTED) {
-		gpk_application_populate_selected (priv);
 	} else {
 		g_debug ("doing nothing");
 	}
@@ -1363,30 +1303,6 @@ gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate
 }
 
 /**
- * gpk_application_button_pending_cb:
- **/
-static void
-gpk_application_button_pending_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
-{
-	g_debug ("see pendings changes...");
-
-	/* clear the search text if we clicked the group array */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	gtk_entry_set_text (GTK_ENTRY(widget), "");
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
-	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
-
-	/* hide details */
-	gpk_application_clear_details (priv);
-	gpk_application_clear_packages (priv);
-
-	/* actually do the search */
-	priv->search_mode = GPK_MODE_SELECTED;
-	gpk_application_perform_search (priv);
-}
-
-/**
  * gpk_application_install_packages_cb:
  **/
 static void
@@ -1521,8 +1437,6 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		gtk_widget_set_visible (widget, FALSE);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
 		gtk_widget_set_visible (widget, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-		gtk_widget_set_visible (widget, FALSE);
 
 		/* hide details */
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
@@ -1544,8 +1458,6 @@ gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
 		gtk_widget_set_visible (widget, FALSE);
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-		gtk_widget_set_visible (widget, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
 		gtk_widget_set_visible (widget, FALSE);
 
 		/* hide details */
@@ -2390,11 +2302,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_clear_cb), priv);
-
-	/* pending */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_pending_cb), priv);
 
 	/* install */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
