@@ -2204,54 +2204,6 @@ gpk_application_activate_refresh_cb (GSimpleAction *action,
 }
 
 /**
- * gpk_application_package_row_activated_cb:
- **/
-static void
-gpk_application_package_row_activated_cb (GtkTreeView *treeview, GtkTreePath *path,
-					  GtkTreeViewColumn *col, GpkApplicationPrivate *priv)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	gboolean ret;
-	PkBitfield state;
-	gchar *package_id = NULL;
-	gboolean is_category = FALSE;
-
-	/* get selection */
-	model = gtk_tree_view_get_model (treeview);
-	ret = gtk_tree_model_get_iter (model, &iter, path);
-	if (!ret) {
-		g_warning ("failed to get selection");
-		return;
-	}
-
-	/* get data */
-	gtk_tree_model_get (model, &iter,
-	                    PACKAGES_COLUMN_STATE, &state,
-	                    PACKAGES_COLUMN_ID, &package_id,
-	                    PACKAGES_COLUMN_IS_CATEGORY, &is_category,
-	                    -1);
-
-	if (is_category) {
-		g_debug ("ignoring category double click");
-		goto out;
-	}
-
-	/* check we aren't a help line */
-	if (package_id == NULL) {
-		g_debug ("ignoring help click");
-		goto out;
-	}
-
-	if (gpk_application_state_get_checkbox (state))
-		gpk_application_try_mark_to_remove (priv);
-	else
-		gpk_application_try_mark_to_install (priv);
-out:
-	g_free (package_id);
-}
-
-/**
  * gpk_application_show_categories:
  **/
 static void
@@ -2495,8 +2447,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
-	g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
-			  G_CALLBACK (gpk_application_package_row_activated_cb), priv);
 
 	/* create package tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
