@@ -1309,41 +1309,6 @@ gpk_application_text_changed_cb (GtkEntry *entry, GpkApplicationPrivate *priv)
 	return FALSE;
 }
 
-/**
- * gpk_application_packages_installed_state_toggled_cb:
- **/
-static void
-gpk_application_packages_installed_state_toggled_cb (GtkCellRendererToggle *cell, gchar *path_str, GpkApplicationPrivate *priv)
-{
-	GtkTreeView *treeview;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GtkTreePath *path;
-	GtkTreeSelection *selection;
-	PkBitfield state;
-
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-	model = gtk_tree_view_get_model (treeview);
-	path = gtk_tree_path_new_from_string (path_str);
-
-	/* get toggled iter */
-	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_model_get (model, &iter,
-			    PACKAGES_COLUMN_STATE, &state,
-			    -1);
-
-	/* enforce the selection in case we just fire at the checkbox without selecting */
-	selection = gtk_tree_view_get_selection (treeview);
-	gtk_tree_selection_select_iter (selection, &iter);
-
-	if (gpk_application_state_get_checkbox (state)) {
-		gpk_application_try_mark_to_remove (priv);
-	} else {
-		gpk_application_try_mark_to_install (priv);
-	}
-	gtk_tree_path_free (path);
-}
-
 static void gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv);
 
 /**
@@ -1599,11 +1564,6 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	GtkTreeView *treeview;
 
 	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-
-	/* column for installed toggles */
-	renderer = gtk_cell_renderer_toggle_new ();
-	g_signal_connect (renderer, "toggled",
-	                  G_CALLBACK (gpk_application_packages_installed_state_toggled_cb), priv);
 
 	/* column for images */
 	column = gtk_tree_view_column_new ();
