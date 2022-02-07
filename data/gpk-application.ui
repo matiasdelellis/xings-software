@@ -344,7 +344,7 @@
                             <property name="layout-style">start</property>
                             <child>
                               <object class="GtkButton" id="button_install">
-                                <property name="label" translatable="yes">Select to Install…</property>
+                                <property name="label" translatable="yes">Install</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
@@ -360,7 +360,7 @@
                             </child>
                             <child>
                               <object class="GtkButton" id="button_remove">
-                                <property name="label" translatable="yes">Select to Remove…</property>
+                                <property name="label" translatable="yes">Remove</property>
                                 <property name="visible">True</property>
                                 <property name="can-focus">True</property>
                                 <property name="receives-default">True</property>
@@ -719,7 +719,16 @@ Software uses PackageKit and can work on any distribution using the native packa
         <property name="visible">True</property>
         <property name="can-focus">False</property>
         <property name="title" translatable="yes">Software</property>
+        <property name="spacing">0</property>
         <property name="show-close-button">True</property>
+        <child>
+          <object class="GtkButton" id="button_cancel">
+            <property name="label">Cancel</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+        </child>
         <child>
           <object class="GtkMenuButton" id="menu_button">
             <property name="visible">True</property>
@@ -737,62 +746,6 @@ Software uses PackageKit and can work on any distribution using the native packa
           <packing>
             <property name="pack-type">end</property>
             <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <child>
-              <object class="GtkButton" id="button_apply">
-                <property name="label" translatable="yes">Apply Changes</property>
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
-                <property name="receives-default">True</property>
-                <property name="tooltip-text" translatable="yes">Apply pending changes</property>
-                <style>
-                  <class name="suggested-action"/>
-                </style>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
-            </child>
-            <style>
-              <class name="linked"/>
-            </style>
-          </object>
-          <packing>
-            <property name="pack-type">end</property>
-            <property name="position">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_cancel">
-            <property name="label">Cancel</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="has-tooltip">True</property>
-            <property name="tooltip-markup" translatable="yes">Cancel search</property>
-            <property name="tooltip-text" translatable="yes">Cancel search</property>
-          </object>
-          <packing>
-            <property name="position">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkButton" id="button_clear">
-            <property name="label" translatable="yes">Cancel</property>
-            <property name="visible">True</property>
-            <property name="can-focus">True</property>
-            <property name="receives-default">True</property>
-            <property name="tooltip-text" translatable="yes">Cancel pending changes</property>
-          </object>
-          <packing>
-            <property name="position">3</property>
           </packing>
         </child>
       </object>
