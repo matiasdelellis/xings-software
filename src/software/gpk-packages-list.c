@@ -68,7 +68,6 @@ gpk_packages_list_store_new (void)
 {
 	GtkListStore *store = gtk_list_store_new (PACKAGES_COLUMN_LAST,
 	                                          G_TYPE_STRING,
-	                                          G_TYPE_UINT64,
 	                                          G_TYPE_STRING,
 	                                          G_TYPE_STRING,
 	                                          G_TYPE_STRING,

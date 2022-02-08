@@ -112,39 +112,6 @@ _g_strzero (const gchar *text)
 }
 
 /**
- * gpk_application_state_get_icon:
- **/
-static const gchar *
-gpk_application_state_get_icon (PkBitfield state)
-{
-	if (state == 0)
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_AVAILABLE);
-
-	if (state == pk_bitfield_value (GPK_STATE_INSTALLED))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLED);
-
-	if (state == pk_bitfield_value (GPK_STATE_IN_LIST))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLING);
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_IN_LIST, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_REMOVING);
-
-	if (state == pk_bitfield_value (GPK_STATE_COLLECTION))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_COLLECTION_AVAILABLE);
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_COLLECTION, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_COLLECTION_INSTALLED);
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_IN_LIST, GPK_STATE_INSTALLED, GPK_STATE_COLLECTION, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_REMOVING); // need new icon
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_IN_LIST, GPK_STATE_COLLECTION, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLING); // need new icon
-
-	return NULL;
-}
-
-/**
  * gpk_application_set_text_buffer:
  **/
 static void
@@ -437,8 +404,6 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	AsComponent *component = NULL;
 	GtkTreeIter iter;
 	gchar *text;
-	gboolean installed;
-	PkBitfield state = 0;
 	PkInfoEnum info;
 	gchar *package_id = NULL;
 	gchar *package_name = NULL;
@@ -455,14 +420,6 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	priv->has_package = TRUE;
 
 	/* are we in the package array? */
-	installed = (info == PK_INFO_ENUM_INSTALLED) || (info == PK_INFO_ENUM_COLLECTION_INSTALLED);
-
-	if (installed)
-		pk_bitfield_add (state, GPK_STATE_INSTALLED);
-
-	/* special icon */
-	if (info == PK_INFO_ENUM_COLLECTION_INSTALLED || info == PK_INFO_ENUM_COLLECTION_AVAILABLE)
-		pk_bitfield_add (state, GPK_STATE_COLLECTION);
 
 	gtk_list_store_append (priv->packages_store, &iter);
 
@@ -475,9 +432,8 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
 		                    PACKAGES_COLUMN_SUMMARY, summary,
-		                    PACKAGES_COLUMN_STATE, state,
 		                    PACKAGES_COLUMN_ID, package_id,
-		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
+		                    PACKAGES_COLUMN_IMAGE, gpk_info_enum_to_icon_name (info),
 		                    PACKAGES_COLUMN_APP_NAME, as_component_get_name (component),
 		                    -1);
 	} else {
@@ -488,9 +444,8 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
 		                    PACKAGES_COLUMN_SUMMARY, summary,
-		                    PACKAGES_COLUMN_STATE, state,
 		                    PACKAGES_COLUMN_ID, package_id,
-		                    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
+		                    PACKAGES_COLUMN_IMAGE, gpk_info_enum_to_icon_name (info),
 		                    PACKAGES_COLUMN_APP_NAME, NULL,
 		                    -1);
 	}
@@ -512,7 +467,6 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	const gchar *title = _("No results were found.");
 	GtkTreeIter iter;
 	gchar *text;
-	PkBitfield state = 0;
 
 	if (priv->search_type == GPK_SEARCH_APP) {
 		/* TRANSLATORS: tell the user to switch to details search mode */
@@ -525,7 +479,6 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	text = g_strdup_printf ("%s\n%s", title, message);
 	gtk_list_store_append (priv->packages_store, &iter);
 	gtk_list_store_set (priv->packages_store, &iter,
-			    PACKAGES_COLUMN_STATE, state,
 			    PACKAGES_COLUMN_TEXT, text,
 			    PACKAGES_COLUMN_IMAGE, "system-search",
 			    PACKAGES_COLUMN_ID, NULL,
@@ -1165,6 +1118,19 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
 	gtk_widget_set_visible (widget, installed && desktop_id != NULL);
 
+	/* only show buttons if we are in the correct mode */
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
+	gtk_widget_set_visible (widget, !installed);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
+	gtk_widget_set_visible (widget, installed);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_details_package"));
+	gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+	                              gpk_info_enum_to_icon_name (installed ? PK_INFO_ENUM_INSTALLED : PK_INFO_ENUM_AVAILABLE),
+	                              GTK_ICON_SIZE_DIALOG);
+
 	g_free (priv->desktop_id);
 	priv->desktop_id = g_strdup(desktop_id);
 
@@ -1325,7 +1291,6 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	PkBitfield state;
 	gchar **package_ids = NULL, **split = NULL;
 	gchar *package_id = NULL, *summary = NULL;
 	gboolean is_category = FALSE;
@@ -1345,7 +1310,6 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 
 	/* check we aren't a help line */
 	gtk_tree_model_get (model, &iter,
-	                    PACKAGES_COLUMN_STATE, &state,
 	                    PACKAGES_COLUMN_ID, &package_id,
 	                    PACKAGES_COLUMN_APP_NAME, &summary,
 	                    PACKAGES_COLUMN_IS_CATEGORY, &is_category,
@@ -1372,23 +1336,6 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	/* show the menu item */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
 	gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_package");
-
-	/* only show buttons if we are in the correct mode */
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
-	gtk_widget_set_visible (widget, !pk_bitfield_contain (state, GPK_STATE_INSTALLED));
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
-	gtk_widget_set_visible (widget, pk_bitfield_contain (state, GPK_STATE_INSTALLED));
-
-	/* clear the description text */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_description"));
-	gpk_application_set_text_buffer (widget, NULL);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_details_package"));
-	gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-	                              gpk_application_state_get_icon (state),
-	                              GTK_ICON_SIZE_DIALOG);
 
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
