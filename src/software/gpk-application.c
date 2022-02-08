@@ -34,6 +34,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <gio/gdesktopappinfo.h>
 
 #include <common/gpk-common.h>
 #include <common/gpk-dialog.h>
@@ -77,9 +78,8 @@ typedef struct {
 
 	GpkPackageView		 package_view;
 	gchar			*selection_id;
+	gchar			*desktop_id;
 
-	GpkHelperRun		*helper_run;
-	guint			 details_event_id;
 	guint			 status_id;
 	PkStatusEnum		 status_last;
 	GSettings		*settings;
@@ -308,6 +308,25 @@ out:
 	return;
 }
 
+/**
+ * gpk_application_button_open_cb:
+ **/
+static void
+gpk_application_button_open_cb (GtkAction *action, GpkApplicationPrivate *priv)
+{
+	GDesktopAppInfo *appinfo = NULL;
+	GdkAppLaunchContext *context = NULL;
+	GError *error = NULL;
+
+	appinfo = g_desktop_app_info_new (priv->desktop_id);
+	context = gdk_display_get_app_launch_context (gdk_display_get_default ());
+
+	if (!g_app_info_launch (G_APP_INFO(appinfo), NULL, G_APP_LAUNCH_CONTEXT(context), &error))
+		g_warning ("Failed to launch: %s", error->message);
+
+	g_object_unref (appinfo);
+	g_object_unref (context);
+}
 
 /**
  * gpk_application_button_install_cb:
@@ -580,50 +599,6 @@ gpk_application_select_exact_match (GpkApplicationPrivate *priv, const gchar *te
 		gtk_tree_view_scroll_to_cell (treeview, path, NULL, FALSE, 0.0f, 0.0f);
 		gtk_tree_path_free (path);
 	}
-}
-
-/**
- * gpk_application_run_installed:
- **/
-static void
-gpk_application_run_installed (GpkApplicationPrivate *priv, PkResults *results)
-{
-	guint i;
-	GPtrArray *array;
-	PkPackage *item;
-	GPtrArray *package_ids_array;
-	gchar **package_ids = NULL;
-	PkInfoEnum info;
-	gchar *package_id = NULL;
-
-	/* get the package array and filter on INSTALLED */
-	package_ids_array = g_ptr_array_new_with_free_func (g_free);
-	array = pk_results_get_package_array (results);
-	for (i=0; i<array->len; i++) {
-		item = g_ptr_array_index (array, i);
-		g_object_get (item,
-			      "info", &info,
-			      "package-id", &package_id,
-			      NULL);
-		if (info == PK_INFO_ENUM_INSTALLING)
-			g_ptr_array_add (package_ids_array, g_strdup (package_id));
-		g_free (package_id);
-	}
-
-	/* nothing to show */
-	if (package_ids_array->len == 0) {
-		g_debug ("nothing to do");
-		goto out;
-	}
-
-	/* this is async */
-	package_ids = pk_ptr_array_to_strv (package_ids_array);
-	gpk_helper_run_show (priv->helper_run, package_ids);
-
-out:
-	g_strfreev (package_ids);
-	g_ptr_array_unref (package_ids_array);
-	g_ptr_array_unref (array);
 }
 
 /**
@@ -1003,9 +978,6 @@ gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplica
 	idle_id = g_idle_add ((GSourceFunc) gpk_application_perform_search_idle_cb, priv);
 	g_source_set_name_by_id (idle_id, "[GpkApplication] search");
 
-	/* find applications that were installed, and offer to run them */
-	gpk_application_run_installed (priv, results);
-
 out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
@@ -1099,19 +1071,21 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 static void
 gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
+	GtkWindow *window;
+	GtkWidget *widget;
 	PkResults *results;
+	PkDetails *item;
 	AsComponent *component = NULL;
 	GError *error = NULL;
 	PkError *error_code = NULL;
 	GPtrArray *array = NULL;
-	PkDetails *item;
-	GtkWidget *widget;
-	gchar *value;
+	gboolean installed = FALSE;
 	const gchar *repo_name;
 	gchar **split = NULL;
-	GtkWindow *window;
+	gchar *value;
 	gchar *package_id = NULL;
 	gchar *package_name = NULL;
+	gchar *desktop_id = NULL;
 	gchar *url = NULL;
 	gchar *license = NULL;
 	gchar *summary = NULL, *package_details = NULL, *package_pretty = NULL, *description = NULL, *escape_url = NULL;
@@ -1184,6 +1158,15 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_package"));
 	package_pretty = gpk_package_id_format_pretty (package_id);
 	gtk_label_set_markup (GTK_LABEL (widget), package_pretty);
+
+	/* open button */
+	installed = g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed");
+	desktop_id = gpk_as_component_get_desktop_id (component);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
+	gtk_widget_set_visible (widget, installed && desktop_id != NULL);
+
+	g_free (priv->desktop_id);
+	priv->desktop_id = g_strdup(desktop_id);
 
 	/* set the description */
 	if (!description) {
@@ -1289,7 +1272,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 		if (g_strcmp0 (split[PK_PACKAGE_ID_DATA], "meta") == 0) {
 			/* TRANSLATORS: the size of the meta package */
 			gtk_label_set_label (GTK_LABEL (widget), _("Size"));
-		} else if (g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed")) {
+		} else if (installed) {
 			/* TRANSLATORS: the installed size in bytes of the package */
 			gtk_label_set_label (GTK_LABEL (widget), _("Installed size"));
 		} else {
@@ -1317,6 +1300,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 
 out:
 	g_free (package_id);
+	g_free (desktop_id);
 	g_free (url);
 	g_free (license);
 	g_free (summary);
@@ -1878,14 +1862,15 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	menu = G_MENU_MODEL (gtk_builder_get_object (priv->builder, "appmenu"));
 	gtk_application_set_app_menu (priv->application, menu);
 
-	/* helpers */
-	priv->helper_run = gpk_helper_run_new ();
-	gpk_helper_run_set_parent (priv->helper_run, GTK_WINDOW (main_window));
-
 	/* Hide window first so that the dialogue resizes itself without redrawing */
 	gtk_widget_hide (main_window);
 	gtk_window_set_icon_name (GTK_WINDOW (main_window), GPK_ICON_SOFTWARE_INSTALLER);
 	gtk_window_set_default_icon_name (GPK_ICON_SOFTWARE_INSTALLER);
+
+	/* open */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
+	g_signal_connect (widget, "clicked",
+			  G_CALLBACK (gpk_application_button_open_cb), priv);
 
 	/* install */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
@@ -2063,9 +2048,6 @@ main (int argc, char *argv[])
 	status = g_application_run (G_APPLICATION (priv->application), argc, argv);
 	g_object_unref (priv->application);
 
-	if (priv->details_event_id > 0)
-		g_source_remove (priv->details_event_id);
-
 	if (priv->backend != NULL)
 		g_object_unref (priv->backend);
 	if (priv->packages_store != NULL)
@@ -2074,8 +2056,6 @@ main (int argc, char *argv[])
 		g_object_unref (priv->settings);
 	if (priv->builder != NULL)
 		g_object_unref (priv->builder);
-	if (priv->helper_run != NULL)
-		g_object_unref (priv->helper_run);
 	if (priv->cancellable != NULL)
 		g_object_unref (priv->cancellable);
 	if (priv->status_id > 0)

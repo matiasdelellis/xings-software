@@ -37,6 +37,9 @@ gpk_as_store_new (void);
 gboolean
 gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error);
 
+gchar *
+gpk_as_component_get_desktop_id (AsComponent *component);
+
 AsComponent *
 gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname);
 

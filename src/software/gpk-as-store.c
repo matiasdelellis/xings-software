@@ -80,6 +80,23 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 	return TRUE;
 }
 
+gchar *
+gpk_as_component_get_desktop_id (AsComponent *component)
+{
+	AsLaunchable *launch;
+	GPtrArray *entries;
+
+	launch = as_component_get_launchable (component, AS_LAUNCHABLE_KIND_DESKTOP_ID);
+	if (launch == NULL)
+		return NULL;
+
+	entries = as_launchable_get_entries (launch);
+	if (entries->len <= 0)
+		return NULL;
+
+	return g_strdup((const gchar*) g_ptr_array_index (entries, 0));
+}
+
 AsComponent *
 gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname)
 {
