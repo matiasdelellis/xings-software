@@ -1086,6 +1086,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	if (component != NULL) {
 		summary = g_strdup(as_component_get_name (component));
 		package_details = g_strdup(as_component_get_summary (component));
+		desktop_id = gpk_as_component_get_desktop_id (component);
 		description = g_strdup(as_component_get_description (component));
 		license = g_strdup(as_component_get_project_license(component));
 		url = g_strdup(as_component_get_url (component, AS_URL_KIND_HOMEPAGE));
@@ -1114,7 +1115,6 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 
 	/* open button */
 	installed = g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed");
-	desktop_id = gpk_as_component_get_desktop_id (component);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
 	gtk_widget_set_visible (widget, installed && desktop_id != NULL);
 
@@ -1909,7 +1909,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	                  priv->cancellable,
 	                  (GAsyncReadyCallback)  gpk_application_open_backend_ready,
 	                  priv);
-
 }
 
 static void
