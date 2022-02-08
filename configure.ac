@@ -90,6 +90,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Check library dependencies
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(PACKAGEKIT, packagekit-glib2 >= 0.9.1)
+PKG_CHECK_MODULES(APPSTREAM, appstream >= 0.12.5)
 PKG_CHECK_MODULES(GLIB, \
  glib-2.0 >= 2.32.0
  gobject-2.0
@@ -141,34 +142,6 @@ AC_SUBST(SYSTEMD_CFLAGS)
 AC_SUBST(SYSTEMD_LIBS)
 
 AM_CONDITIONAL(WITH_SYSTEMD, [test "$with_systemd" = "yes"], [Using systemd])
-
-
-dnl ---------------------------------------------------------------------------
-dnl - Appstream integration
-dnl ---------------------------------------------------------------------------
-
-APPSTREAM_PKG=appstream
-APPSTREAM_REQUIRED=0.12.5
-AC_ARG_ENABLE([appstream],
-        AS_HELP_STRING([--enable-appstream[=@<:@no/auto/yes@:>@]],[Build support for appstream]),
-                       [enable_appstream=$enableval],
-                       [enable_appstream="auto"])
-
-if test "x$enable_appstream" = "xauto"; then
-        PKG_CHECK_EXISTS($APPSTREAM_PKG >= $APPSTREAM_REQUIRED,
-                         [enable_appstream="yes"],
-                         [enable_appstream="no"])
-fi
-
-if test "x$enable_appstream" = "xyes"; then
-        PKG_CHECK_MODULES(APPSTREAM,
-                          [$APPSTREAM_PKG >= $APPSTREAM_REQUIRED],
-                          [AC_DEFINE(HAVE_APPSTREAM, 1, [Have Appstream])])
-fi
-
-AM_CONDITIONAL(HAVE_APPSTREAM, test "x$enable_appstream" = "xyes")
-AC_SUBST(APPSTREAM_CFLAGS)
-AC_SUBST(APPSTREAM_LIBS)
 
 
 dnl ---------------------------------------------------------------------------
@@ -300,7 +273,6 @@ echo "
         Prefer Offline Updates:    ${with_offline_updates}
 
         Systemd Integrations:      ${have_systemd}
-        Appstream Integration:     ${enable_appstream}
 
         Status Notifier:           ${enable_statusnotifier}
 "

@@ -41,15 +41,12 @@ G_DEFINE_TYPE (GpkAsStore, gpk_as_store, G_TYPE_OBJECT)
 gboolean
 gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 {
-// FIXME: The debian buster package segfault with this code.
-#if 1//AS_CHECK_VERSION(0,12,6)
 	gchar **pkgnames = NULL;
-	guint p = 0;
-#endif
 	GPtrArray *components = NULL;
 	AsComponent *component = NULL;
 	const gchar *pkgname = NULL;
-	guint i = 0;
+	guint i = 0, p = 0;
+
 
 	if (!as_pool_load (store->as_pool, cancellable, error))
 		return FALSE;
@@ -57,17 +54,11 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 	components = as_pool_get_components (store->as_pool);
 	for (i = 0; i < components->len; i++) {
 		component = AS_COMPONENT (g_ptr_array_index (components, i));
-// FIXME: The debian buster package segfault with this code.
-#if 1//AS_CHECK_VERSION(0,12,6)
 		pkgnames = as_component_get_pkgnames (component);
 		if (pkgnames == NULL)
 			continue;
 		for (p = 0; pkgnames[p] != NULL; p++) {
 			pkgname = pkgnames[p];
-#else
-		pkgname = as_component_get_pkgname (component);
-		if (pkgname) {
-#endif
 			g_hash_table_insert (store->packages_components,
 			                     g_strdup(pkgname),
 			                     g_object_ref (component));
