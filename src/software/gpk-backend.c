@@ -106,7 +106,7 @@ gpk_backend_open_threaded (GTask        *task,
 	}
 
 	/* load categories store */
-	if (gpk_categories_load (backend->categories, &error)) {
+	if (!gpk_categories_load (backend->categories, &error)) {
 		goto out;
 	}
 
