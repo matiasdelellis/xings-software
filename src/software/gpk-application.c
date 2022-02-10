@@ -82,15 +82,10 @@ typedef struct {
 
 	guint			 status_id;
 	PkStatusEnum		 status_last;
+
 	GSettings		*settings;
 } GpkApplicationPrivate;
 
-enum {
-	GPK_STATE_INSTALLED,
-	GPK_STATE_IN_LIST,
-	GPK_STATE_COLLECTION,
-	GPK_STATE_UNKNOWN
-};
 
 static void gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv);
 static void gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv);
@@ -176,25 +171,73 @@ out:
 static gboolean
 gpk_application_status_changed_timeout_cb (GpkApplicationPrivate *priv)
 {
-	const gchar *text;
 	GtkWidget *widget;
 
-	/* set the text and show */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-	text = gpk_status_enum_to_localised_text (priv->status_last);
-	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
+	gtk_label_set_label (GTK_LABEL (widget),
+		gpk_status_enum_to_localised_text (priv->status_last));
 
-	/* show cancel button */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
-	gtk_widget_show (widget);
+	priv->status_id = 0;
 
-	/* show progressbar */
+	return FALSE;
+}
+
+/**
+ * gpk_application_start_progress_acction:
+ **/
+static void
+gpk_application_start_progress_acction (GpkApplicationPrivate *priv,
+                                        PkStatusEnum             status)
+{
+	GtkWidget *widget = NULL;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_empty"));
+	g_object_set (widget, "icon-name", gpk_status_enum_to_icon_name (status), NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	gtk_widget_set_sensitive (widget, FALSE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_title"));
+	gtk_label_set_label (GTK_LABEL (widget), gpk_status_enum_to_localised_text (status));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Please, be patient"));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
+
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
 	gtk_widget_show (widget);
 
-	/* never repeat */
-	priv->status_id = 0;
-	return FALSE;
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
+	gtk_spinner_start (GTK_SPINNER (widget));
+}
+
+/**
+ * gpk_application_stop_progress_acction:
+ **/
+static void
+gpk_application_stop_progress_acction (GpkApplicationPrivate *priv)
+{
+	GtkWidget *widget = NULL;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_empty"));
+	g_object_set (widget, "icon-name", GPK_ICON_SOFTWARE_INSTALLER, NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
+	gtk_widget_hide (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
+	gtk_spinner_stop (GTK_SPINNER (widget));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	gtk_widget_set_sensitive (widget, TRUE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_title"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Software"));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Browse available software using the categories"));
 }
 
 /**
@@ -221,10 +264,6 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 		g_debug ("status now %s", pk_status_enum_to_string (status));
 
 		if (status == PK_STATUS_ENUM_FINISHED) {
-			/* re-enable UI */
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
-			gtk_widget_set_sensitive (widget, TRUE);
-
 			/* hide the cancel button */
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
 			gtk_widget_hide (widget);
@@ -234,12 +273,6 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 				g_source_remove (priv->status_id);
 				priv->status_id = 0;
 			}
-
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
-			gtk_widget_hide (widget);
-
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-			gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 
 			goto out;
 		}
@@ -253,8 +286,7 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 			g_timeout_add (GPK_UI_STATUS_SHOW_DELAY,
 				       (GSourceFunc) gpk_application_status_changed_timeout_cb,
 				       priv);
-		g_source_set_name_by_id (priv->status_id,
-					 "[GpkApplication] status-changed");
+		g_source_set_name_by_id (priv->status_id, "[GpkApplication] status-changed");
 
 		/* save for the callback */
 		priv->status_last = status;
@@ -264,12 +296,13 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 		if (percentage > 0) {
 			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), (gfloat) percentage / 100.0f);
 		} else {
-			gtk_widget_hide (widget);
+			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), 0.0f);
 		}
 
 	} else if (type == PK_PROGRESS_TYPE_ALLOW_CANCEL) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
-		gtk_widget_set_sensitive (widget, allow_cancel);
+		// TODO: flickers a lot in some transactions..
+		gtk_widget_set_visible (widget, allow_cancel);
 	}
 out:
 	return;
@@ -301,7 +334,6 @@ gpk_application_button_open_cb (GtkAction *action, GpkApplicationPrivate *priv)
 static void
 gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget;
 	gchar *package_id_selected = NULL, *summary_selected = NULL;
 	gchar **package_ids = NULL;
 
@@ -311,6 +343,8 @@ gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *pri
 		g_warning ("no package selected to install");
 		return;
 	}
+
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_INSTALL);
 
 	package_ids = g_new0 (gchar *, 2);
 	package_ids[0] = g_strdup (package_id_selected);
@@ -323,15 +357,6 @@ gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *pri
 	                                (PkProgressCallback) gpk_application_progress_cb, priv,
 	                                (GAsyncReadyCallback) gpk_application_install_packages_cb, priv);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
-	gtk_widget_hide (widget);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
-	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
-	gtk_spinner_start (GTK_SPINNER (widget));
-
 	g_free (package_id_selected);
 	g_free (summary_selected);
 	g_strfreev (package_ids);
@@ -343,7 +368,6 @@ gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *pri
 static void
 gpk_application_button_remove_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget;
 	gchar *package_id_selected = NULL, *summary_selected = NULL;
 	gchar **package_ids = NULL;
 	gboolean autoremove;
@@ -358,6 +382,8 @@ gpk_application_button_remove_cb (GtkAction *action, GpkApplicationPrivate *priv
 	package_ids = g_new0 (gchar *, 2);
 	package_ids[0] = g_strdup (package_id_selected);
 
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_REMOVE);
+
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
 
@@ -367,16 +393,6 @@ gpk_application_button_remove_cb (GtkAction *action, GpkApplicationPrivate *priv
 	pk_task_remove_packages_async (gpk_backend_get_task (priv->backend), package_ids, TRUE, autoremove, priv->cancellable,
 	                               (PkProgressCallback) gpk_application_progress_cb, priv,
 	                               (GAsyncReadyCallback) gpk_application_remove_packages_cb, priv);
-
-	/* hide details */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
-	gtk_widget_hide (GTK_WIDGET(widget));
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
-	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
-	gtk_spinner_start (GTK_SPINNER (widget));
 
 	g_free (package_id_selected);
 	g_free (summary_selected);
@@ -890,14 +906,13 @@ static void gpk_application_package_selection_changed_cb (GtkTreeSelection *sele
 static void
 gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget = NULL;
 	PkResults *results;
 	GError *error = NULL;
 	PkError *error_code = NULL;
 	GtkWindow *window;
 	guint idle_id;
 
-	g_debug ("installing packages...");
+	g_debug ("install package finished...");
 
 	/* get the results */
 	results = pk_task_generic_finish (task, res, &error);
@@ -918,20 +933,15 @@ gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplica
 			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
 						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
 		}
-		goto out;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
-	gtk_spinner_stop (GTK_SPINNER (widget));
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
-	gtk_widget_show (GTK_WIDGET(widget));
+out:
+	gpk_application_stop_progress_acction (priv);
 
 	/* idle add in the background */
 	idle_id = g_idle_add ((GSourceFunc) gpk_application_perform_search_idle_cb, priv);
 	g_source_set_name_by_id (idle_id, "[GpkApplication] search");
 
-out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
 	if (results != NULL)
@@ -944,14 +954,13 @@ out:
 static void
 gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget = NULL;
 	PkResults *results;
 	GError *error = NULL;
 	PkError *error_code = NULL;
 	GtkWindow *window;
 	guint idle_id;
 
-	g_debug ("removing packages...");
+	g_debug ("remove package finished...");
 
 	/* get the results */
 	results = pk_task_generic_finish (task, res, &error);
@@ -972,20 +981,15 @@ gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicat
 			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
 						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
 		}
-		goto out;
 	}
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
-	gtk_spinner_stop (GTK_SPINNER (widget));
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
-	gtk_widget_show (GTK_WIDGET(widget));
+out:
+	gpk_application_stop_progress_acction (priv);
 
 	/* idle add in the background */
 	idle_id = g_idle_add ((GSourceFunc) gpk_application_perform_search_idle_cb, priv);
 	g_source_set_name_by_id (idle_id, "[GpkApplication] search");
 
-out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
 	if (results != NULL)
@@ -1734,14 +1738,11 @@ gpk_application_open_backend_ready (GpkBackend            *backend,
 	/* finally open main gui */
 	gpk_application_show_categories (priv);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
-	gtk_spinner_stop (GTK_SPINNER (widget));
+	gpk_application_stop_progress_acction (priv);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
-	gtk_widget_hide (widget);
-
+	/* explicit show categories.. */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
-	gtk_widget_show (GTK_WIDGET(widget));
+	gtk_widget_show (widget);
 }
 
 /**
@@ -1882,10 +1883,8 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	/* Show empty page */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
-	gtk_widget_hide (GTK_WIDGET(widget));
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
-	gtk_spinner_start (GTK_SPINNER (widget));
+	gtk_widget_hide (widget);
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_QUERY);
 
 	/* set a size, as much as the screen allows */
 	gtk_window_set_default_size (GTK_WINDOW (main_window), 1000, 600);
@@ -2008,6 +2007,9 @@ main (int argc, char *argv[])
 		g_source_remove (priv->status_id);
 
 	g_free (priv->search_text);
+	g_free (priv->selection_id);
+	g_free (priv->desktop_id);
+
 	g_free (priv);
 
 	return status;

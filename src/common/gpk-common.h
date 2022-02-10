@@ -49,7 +49,7 @@ G_BEGIN_DECLS
 #define GPK_SETTINGS_FREQUENCY_UPDATES_NOTIFICATION	"frequency-updates-notification"
 #define GPK_SETTINGS_LAST_UPDATES_NOTIFICATION		"last-updates-notification"
 
-#define GPK_ICON_SOFTWARE_INSTALLER			"system-software-install"
+#define GPK_ICON_SOFTWARE_INSTALLER			"system-software-installer"
 #define GPK_ICON_SOFTWARE_UPDATE			"system-software-update"
 #define GPK_ICON_SOFTWARE_PREFERENCES			"xings-software-preferences"
 #define GPK_ICON_SOFTWARE_HISTORY			"xings-software-history"

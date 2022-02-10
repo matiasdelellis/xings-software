@@ -236,7 +236,7 @@
                       <object class="GtkLabel" id="label_empty_subtitle">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Add or remove software installed on the system</property>
+                        <property name="label" translatable="yes">Browse available software using the categories</property>
                         <style>
                           <class name="dim-label"/>
                         </style>
