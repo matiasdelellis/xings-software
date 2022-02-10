@@ -1590,9 +1590,11 @@ gpk_application_refresh_cache_cb (PkClient *client, GAsyncResult *res, GpkApplic
 			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
 						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
 		}
-		goto out;
 	}
+
 out:
+	gpk_application_stop_progress_acction (priv);
+
 	if (error_code != NULL)
 		g_object_unref (error_code);
 	if (results != NULL)
@@ -1608,6 +1610,8 @@ gpk_application_activate_refresh_cb (GSimpleAction *action,
 				     gpointer user_data)
 {
 	GpkApplicationPrivate *priv = user_data;
+
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_DOWNLOAD_REPOSITORY);
 
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
