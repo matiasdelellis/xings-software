@@ -5,7 +5,7 @@
   <object class="GtkSizeGroup" id="sizegroup_left"/>
   <object class="GtkApplicationWindow" id="window_manager">
     <property name="can-focus">False</property>
-    <property name="border-width">18</property>
+    <property name="border-width">12</property>
     <property name="icon-name">gtk-info</property>
     <child>
       <object class="GtkBox">
@@ -24,9 +24,9 @@
               <object class="GtkBox" id="box_package_selection">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="margin-end">12</property>
+                <property name="margin-end">8</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
+                <property name="spacing">6</property>
                 <child>
                   <object class="GtkStack" id="stack_search_categories">
                     <property name="visible">True</property>
@@ -745,6 +745,7 @@ Software uses PackageKit and can work on any distribution using the native packa
         </child>
         <child>
           <object class="GtkMenuButton" id="menu_button">
+            <property name="menu_model">primary_menu</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">False</property>
@@ -765,4 +766,31 @@ Software uses PackageKit and can work on any distribution using the native packa
       </object>
     </child>
   </object>
+  <menu id="primary_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Update Software Sources</attribute>
+        <attribute name="action">app.refresh</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Software Sources</attribute>
+        <attribute name="action">app.sources</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Software History</attribute>
+        <attribute name="action">app.log</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">About</attribute>
+        <attribute name="action">app.about</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">_Quit</attribute>
+        <attribute name="action">app.quit</attribute>
+        <attribute name="accel">&lt;Primary&gt;q</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
