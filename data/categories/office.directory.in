@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Directory
+Icon=applications-office
+Include=Office;Presentation;Publishing;Spreadsheet;WordProcessor;
+_Name=Office
+_Comment=Office and productivity applications

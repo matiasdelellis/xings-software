@@ -783,7 +783,7 @@ gpk_dbus_task_progress_cb (PkProgress *progress, PkProgressType type, GpkDbusTas
 	} else if (type == PK_PROGRESS_TYPE_REMAINING_TIME) {
 		gpk_modal_dialog_set_remaining (dtask->dialog, remaining_time);
 	} else if (type == PK_PROGRESS_TYPE_PACKAGE_ID) {
-		text = gpk_package_id_format_twoline (NULL, package_id, NULL); //TODO: need summary
+		text = gpk_package_id_format_details (package_id, NULL, TRUE); //TODO: need summary
 		gpk_modal_dialog_set_message (dtask->dialog, text);
 		g_free (text);
 	}

@@ -647,8 +647,7 @@ gpk_modal_dialog_set_package_list (GpkModalDialog *dialog, const GPtrArray *list
 			      "summary", &summary,
 			      NULL);
 
-		text = gpk_package_id_format_twoline (gtk_widget_get_style_context (widget),
-						      package_id, summary);
+		text = gpk_package_id_format_details (package_id, summary, TRUE);
 
 		/* get the icon */
 		split = pk_package_id_split (package_id);

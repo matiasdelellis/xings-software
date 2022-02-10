@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Directory
+Icon=applications-multimedia
+Include=Audio;AudioVideo;Music;Tuner;TV;Video;
+_Name=Multimedia
+_Comment=Audio and video players and editors

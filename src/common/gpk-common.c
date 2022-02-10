@@ -164,6 +164,25 @@ gpk_window_set_parent_xid (GtkWindow *window, guint32 xid)
 	return TRUE;
 }
 
+static gchar *
+gpk_package_id_get_part (const gchar *package_id, guint part)
+{
+	gchar **split = NULL;
+	gchar *string_part = NULL;
+
+	split = pk_package_id_split (package_id);
+	string_part = g_strdup(split[part]);
+	g_strfreev (split);
+
+	return string_part;
+}
+
+gchar *
+gpk_package_id_get_name (const gchar *package_id)
+{
+	return gpk_package_id_get_part (package_id, PK_PACKAGE_ID_NAME);
+}
+
 /**
  * gpk_get_pretty_arch:
  **/
@@ -198,32 +217,44 @@ out:
  * Return value: "<b>GTK Toolkit</b>\ngtk2-2.12.2 (i386)"
  **/
 gchar *
-gpk_package_id_format_twoline (GtkStyleContext *style,
-			       const gchar *package_id,
-			       const gchar *summary)
+gpk_common_format_details (const gchar *summary,
+                           const gchar *details,
+                           gboolean     twoline)
+{
+	gchar *text = NULL;
+
+	g_return_val_if_fail (summary != NULL, NULL);
+
+	if (details) {
+		text = g_markup_printf_escaped ("%s%s<span weight=\"light\">%s</span>",
+		                                summary,
+		                                twoline ? "\n" : " - ",
+		                                details);
+	} else {
+		text =  g_markup_printf_escaped ("%s", summary);
+	}
+
+	return text;
+}
+
+
+/**
+ * gpk_package_id_format_twoline:
+ *
+ * Return value: "<b>GTK Toolkit</b>\ngtk2-2.12.2 (i386)"
+ **/
+gchar *
+gpk_package_id_format_details (const gchar *package_id,
+                               const gchar *summary,
+                               gboolean      twoline)
 {
 	gchar *summary_safe = NULL;
 	gchar *text = NULL;
 	GString *string;
 	gchar **split = NULL;
-	gchar *color;
 	const gchar *arch;
-	GdkRGBA inactive;
 
 	g_return_val_if_fail (package_id != NULL, NULL);
-
-	/* get style color */
-	if (style != NULL) {
-		gtk_style_context_get_color (style,
-					     GTK_STATE_FLAG_INSENSITIVE,
-					     &inactive);
-		color = g_strdup_printf ("#%02x%02x%02x",
-					 (guint) (inactive.red * 255.0f),
-					 (guint) (inactive.green * 255.0f),
-					 (guint) (inactive.blue * 255.0f));
-	} else {
-		color = g_strdup ("gray");
-	}
 
 	/* optional */
 	split = pk_package_id_split (package_id);
@@ -245,22 +276,24 @@ gpk_package_id_format_twoline (GtkStyleContext *style,
 	}
 
 	/* name and summary */
-	string = g_string_new ("");
 	summary_safe = g_markup_escape_text (summary, -1);
-	g_string_append_printf (string, "%s\n", summary_safe);
-	g_string_append_printf (string, "<span color=\"%s\">", color);
+
+	string = g_string_new ("");
 	g_string_append (string, split[PK_PACKAGE_ID_NAME]);
 	if (split[PK_PACKAGE_ID_VERSION][0] != '\0')
 		g_string_append_printf (string, "-%s", split[PK_PACKAGE_ID_VERSION]);
 	arch = gpk_get_pretty_arch (split[PK_PACKAGE_ID_ARCH]);
 	if (arch != NULL)
 		g_string_append_printf (string, " (%s)", arch);
-	g_string_append (string, "</span>");
-	text = g_string_free (string, FALSE);
+
+	text = gpk_common_format_details (summary_safe,
+	                                  g_string_free (string, FALSE),
+	                                  twoline);
+
 out:
 	g_free (summary_safe);
-	g_free (color);
 	g_strfreev (split);
+
 	return text;
 }
 

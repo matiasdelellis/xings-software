@@ -24,10 +24,21 @@ bin_PROGRAMS =						\
 	xings-software
 
 xings_software_SOURCES =				\
+	gpk-as-store.c					\
+	gpk-as-store.h					\
+	gpk-backend.c					\
+	gpk-backend.h					\
+	gpk-categories.c				\
+	gpk-categories.h				\
+	gpk-category.c					\
+	gpk-category.h					\
+	gpk-packages-list.c				\
+	gpk-packages-list.h				\
 	gpk-application.c
 
 xings_software_LDADD =					\
 	$(top_builddir)/src/common/libgpk-common.a	\
+	$(APPSTREAM_LIBS)				\
 	$(GLIB_LIBS)					\
 	$(GIO_LIBS)					\
 	$(DBUS_LIBS)					\
@@ -38,4 +49,5 @@ xings_software_LDADD =					\
 	$(X11_LIBS)
 
 xings_software_CFLAGS =					\
+	$(APPSTREAM_CFLAGS)				\
 	$(WARN_CFLAGS)

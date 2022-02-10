@@ -90,6 +90,7 @@ dnl ---------------------------------------------------------------------------
 dnl - Check library dependencies
 dnl ---------------------------------------------------------------------------
 PKG_CHECK_MODULES(PACKAGEKIT, packagekit-glib2 >= 0.9.1)
+PKG_CHECK_MODULES(APPSTREAM, appstream >= 0.12.5)
 PKG_CHECK_MODULES(GLIB, \
  glib-2.0 >= 2.32.0
  gobject-2.0
@@ -237,6 +238,7 @@ man/Makefile
 po/Makefile.in
 data/Makefile
 data/appdata/Makefile
+data/categories/Makefile
 docs/Makefile
 docs/dbus/Makefile
 data/icons/Makefile
@@ -268,8 +270,9 @@ echo "
         cflags:                    ${CFLAGS}
         cppflags:                  ${CPPFLAGS}
 
-        Prefer Offline Updates     ${with_offline_updates}
-        Systemd Integrations       ${have_systemd}
+        Prefer Offline Updates:    ${with_offline_updates}
+
+        Systemd Integrations:      ${have_systemd}
 
         Status Notifier:           ${enable_statusnotifier}
 "

@@ -161,9 +161,7 @@ gpk_helper_chooser_show (GpkHelperChooser *helper, GPtrArray *list)
 
 		/* put formatted text into treeview */
 		gtk_list_store_append (priv->list_store, &iter);
-		text = gpk_package_id_format_twoline (gtk_widget_get_style_context (widget),
-						      package_id,
-						      summary);
+		text = gpk_package_id_format_details (package_id, summary, TRUE);
 
 		/* get the icon */
 		split = pk_package_id_split (package_id);

@@ -1,6 +1,6 @@
 NULL =
 
-SUBDIRS = appdata icons
+SUBDIRS = appdata categories icons
 
 @INTLTOOL_DESKTOP_RULE@
 desktopdir = $(datadir)/applications

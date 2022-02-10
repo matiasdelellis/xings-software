@@ -34,93 +34,67 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <gio/gdesktopappinfo.h>
 
 #include <common/gpk-common.h>
 #include <common/gpk-dialog.h>
 #include <common/gpk-enum.h>
 #include <common/gpk-error.h>
-#include <common/gpk-gnome.h>
 #include <common/gpk-helper-run.h>
 #include <common/gpk-task.h>
 #include <common/gpk-debug.h>
 
+#include "gpk-as-store.h"
+#include "gpk-backend.h"
+#include "gpk-categories.h"
+#include "gpk-packages-list.h"
+
 typedef enum {
-	GPK_SEARCH_NAME,
-	GPK_SEARCH_DETAILS,
+	GPK_SEARCH_APP,
+	GPK_SEARCH_PKGNAME,
 	GPK_SEARCH_UNKNOWN
 } GpkSearchType;
 
 typedef enum {
-	GPK_MODE_NAME_DETAILS_FILE,
-	GPK_MODE_GROUP,
-	GPK_MODE_ALL_PACKAGES,
-	GPK_MODE_SELECTED,
-	GPK_MODE_UNKNOWN
-} GpkSearchMode;
-
-typedef enum {
-	GPK_ACTION_NONE,
-	GPK_ACTION_INSTALL,
-	GPK_ACTION_REMOVE,
-	GPK_ACTION_UNKNOWN
-} GpkActionMode;
+	GPK_VIEW_SEARCH,
+	GPK_VIEW_CATEGORIES,
+	GPK_VIEW_UNKNOWN
+} GpkPackageView;
 
 typedef struct {
-	gboolean		 has_package;
-	gboolean		 search_in_progress;
-	GCancellable		*cancellable;
-	gchar			*homepage_url;
-	gchar			*search_group;
-	gchar			*search_text;
-	GHashTable		*repos;
-	GpkActionMode		 action;
-	GpkHelperRun		*helper_run;
-	GpkSearchMode		 search_mode;
-	GpkSearchType		 search_type;
 	GtkApplication		*application;
-	GSettings		*settings;
+
 	GtkBuilder		*builder;
+
+	GpkBackend		*backend;
+	GCancellable		*cancellable;
+
+	gboolean		 has_package;
 	GtkListStore		*packages_store;
-	GtkTreeStore		*groups_store;
-	guint			 details_event_id;
+
+	gchar			*search_text;
+	gboolean		 search_in_progress;
+	GpkSearchType		 search_type;
+
+	GpkPackageView		 package_view;
+	gchar			*selection_id;
+	gchar			*desktop_id;
+
 	guint			 status_id;
-	PkBitfield		 groups;
-	PkBitfield		 roles;
-	PkControl		*control;
-	PkPackageSack		*package_sack;
 	PkStatusEnum		 status_last;
-	PkTask			*task;
+
+	GSettings		*settings;
 } GpkApplicationPrivate;
 
-enum {
-	GPK_STATE_INSTALLED,
-	GPK_STATE_IN_LIST,
-	GPK_STATE_COLLECTION,
-	GPK_STATE_UNKNOWN
-};
 
-enum {
-	PACKAGES_COLUMN_IMAGE,
-	PACKAGES_COLUMN_STATE,  /* state of the item */
-	PACKAGES_COLUMN_TEXT,
-	PACKAGES_COLUMN_ID,
-	PACKAGES_COLUMN_SUMMARY,
-	PACKAGES_COLUMN_LAST
-};
-
-enum {
-	GROUPS_COLUMN_ICON,
-	GROUPS_COLUMN_NAME,
-	GROUPS_COLUMN_SUMMARY,
-	GROUPS_COLUMN_ID,
-	GROUPS_COLUMN_ACTIVE,
-	GROUPS_COLUMN_LAST
-};
+static void gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv);
+static void gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv);
 
 static void gpk_application_perform_search (GpkApplicationPrivate *priv);
-
-static void gpk_application_get_requires_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv);
-static void gpk_application_get_depends_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv);
+static void gpk_application_show_category (GpkApplicationPrivate *priv,
+                                           const gchar           *category_id);
+static void gpk_application_show_categories (GpkApplicationPrivate *priv);
+static void gpk_application_restore_search (GpkApplicationPrivate *priv);
 
 static gboolean
 _g_strzero (const gchar *text)
@@ -133,152 +107,26 @@ _g_strzero (const gchar *text)
 }
 
 /**
- * gpk_application_state_get_icon:
- **/
-static const gchar *
-gpk_application_state_get_icon (PkBitfield state)
-{
-	if (state == 0)
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_AVAILABLE);
-
-	if (state == pk_bitfield_value (GPK_STATE_INSTALLED))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLED);
-
-	if (state == pk_bitfield_value (GPK_STATE_IN_LIST))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLING);
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_IN_LIST, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_REMOVING);
-
-	if (state == pk_bitfield_value (GPK_STATE_COLLECTION))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_COLLECTION_AVAILABLE);
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_COLLECTION, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_COLLECTION_INSTALLED);
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_IN_LIST, GPK_STATE_INSTALLED, GPK_STATE_COLLECTION, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_REMOVING); // need new icon
-
-	if (state == pk_bitfield_from_enums (GPK_STATE_IN_LIST, GPK_STATE_COLLECTION, -1))
-		return gpk_info_enum_to_icon_name (PK_INFO_ENUM_INSTALLING); // need new icon
-
-	return NULL;
-}
-
-/**
- * gpk_application_state_get_checkbox:
- **/
-static gboolean
-gpk_application_state_get_checkbox (PkBitfield state)
-{
-	PkBitfield state_local;
-
-	/* remove any we don't care about */
-	state_local = state;
-	pk_bitfield_remove (state_local, GPK_STATE_COLLECTION);
-
-	/* installed or in array */
-	if (state_local == pk_bitfield_value (GPK_STATE_INSTALLED) ||
-	    state_local == pk_bitfield_value (GPK_STATE_IN_LIST))
-		return TRUE;
-	return FALSE;
-}
-
-/**
  * gpk_application_set_text_buffer:
  **/
 static void
 gpk_application_set_text_buffer (GtkWidget *widget, const gchar *text)
 {
-	GtkTextBuffer *buffer;
-	buffer = gtk_text_buffer_new (NULL);
-	/* ITS4: ignore, not used for allocation */
-	if (_g_strzero (text) == FALSE) {
-		gtk_text_buffer_set_text (buffer, text, -1);
-	} else {
-		/* no information */
-		gtk_text_buffer_set_text (buffer, "", -1);
-	}
-	gtk_text_view_set_buffer (GTK_TEXT_VIEW (widget), buffer);
-}
+	gchar *as_markup = NULL, *as_markup_scaped = NULL;
 
-/**
- * gpk_application_allow_install_selection:
- **/
-static void
-gpk_application_allow_install_selection (GpkApplicationPrivate *priv,
-                                         gboolean               allow,
-                                         gboolean               inhibited)
-{
-	GtkWidget *widget;
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
-	if (priv->action == GPK_ACTION_REMOVE) {
-		gtk_button_set_label (GTK_BUTTON(widget), _("Cancel Removal"));
-	}
-	else {
-		gtk_button_set_label (GTK_BUTTON(widget), _("Select to Install…"));
-	}
-	gtk_widget_set_visible (widget, allow);
-	gtk_widget_set_sensitive (widget, !inhibited);
-}
-
-/**
- * gpk_application_allow_remove_selection:
- **/
-static void
-gpk_application_allow_remove_selection (GpkApplicationPrivate *priv,
-                                        gboolean               allow,
-                                        gboolean               inhibited)
-{
-	GtkWidget *widget;
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
-	if (priv->action == GPK_ACTION_INSTALL) {
-		gtk_button_set_label (GTK_BUTTON(widget), _("Cancel Installation"));
-	}
-	else {
-		gtk_button_set_label (GTK_BUTTON(widget), _("Select to Remove…"));
-	}
-	gtk_widget_set_visible (widget, allow);
-	gtk_widget_set_sensitive (widget, !inhibited);
-}
-
-/**
- * gpk_application_invert_selection_state:
- **/
-static void
-gpk_application_invert_selection_state (GpkApplicationPrivate *priv)
-{
-	GtkTreeView *treeview;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GtkTreeSelection *selection;
-	PkBitfield state;
-	gboolean ret;
-	gchar *package_id = NULL;
-
-	/* get the selection and add */
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-	selection = gtk_tree_view_get_selection (treeview);
-	ret = gtk_tree_selection_get_selected (selection, &model, &iter);
-	if (!ret) {
-		g_warning ("no selection");
+	if (_g_strzero (text))
 		return;
-	}
 
-	gtk_tree_model_get (model, &iter,
-			    PACKAGES_COLUMN_STATE, &state,
-			    PACKAGES_COLUMN_ID, &package_id,
-			    -1);
+	as_markup = as_markup_convert_simple (text, NULL);
+	if (!as_markup)
+		return;
 
-	/* do something with the value */
-	pk_bitfield_invert (state, GPK_STATE_IN_LIST);
+	as_markup_scaped = g_markup_escape_text (as_markup, -1);
 
-	/* set new value */
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
-			    -1);
-	g_free (package_id);
+	gtk_label_set_markup (GTK_LABEL (widget), as_markup_scaped);
+
+	g_free (as_markup);
+	g_free (as_markup_scaped);
 }
 
 /**
@@ -318,328 +166,78 @@ out:
 }
 
 /**
- * gpk_application_group_add_selected:
- **/
-static void
-gpk_application_group_add_selected (GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar *id = NULL;
-	GtkTreeIter iter;
-
-	ret = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->groups_store), &iter);
-	if (!ret)
-		goto out;
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->groups_store), &iter,
-			    GROUPS_COLUMN_ID, &id,
-			    -1);
-	if (g_strcmp0 (id, "selected") == 0)
-		goto out;
-	gtk_tree_store_insert (priv->groups_store, &iter, NULL, 0);
-	gtk_tree_store_set (priv->groups_store, &iter,
-			    /* TRANSLATORS: this is a menu group of packages in the queue */
-			    GROUPS_COLUMN_NAME, _("Pending"),
-			    GROUPS_COLUMN_SUMMARY, NULL,
-			    GROUPS_COLUMN_ID, "selected",
-			    GROUPS_COLUMN_ICON, "edit-find",
-			    GROUPS_COLUMN_ACTIVE, TRUE,
-			    -1);
-out:
-	g_free (id);
-}
-
-/**
- * gpk_application_group_remove_selected:
- **/
-static void
-gpk_application_group_remove_selected (GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar *id = NULL;
-	GtkTreeIter iter;
-
-	ret = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (priv->groups_store), &iter);
-	if (!ret)
-		goto out;
-	gtk_tree_model_get (GTK_TREE_MODEL (priv->groups_store), &iter,
-			    GROUPS_COLUMN_ID, &id,
-			    -1);
-	if (g_strcmp0 (id, "selected") != 0)
-		goto out;
-	gtk_tree_store_remove (priv->groups_store, &iter);
-out:
-	g_free (id);
-}
-
-/**
- * gpk_application_change_queue_status:
- **/
-static void
-gpk_application_change_queue_status (GpkApplicationPrivate *priv)
-{
-	GtkWidget *widget;
-	guint packages_selected;
-	gchar *text = NULL;
-
-	/* show and hide the action widgets */
-	packages_selected = pk_package_sack_get_size (priv->package_sack);
-	if (packages_selected == 0) {
-		priv->action = GPK_ACTION_NONE;
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-		gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
-
-		gpk_application_group_remove_selected (priv);
-
-		return;
-	}
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-	gtk_widget_show (widget);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-	gtk_widget_show (widget);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-	gtk_widget_show (widget);
-
-	if (priv->action == GPK_ACTION_INSTALL) {
-		/* TRANSLATORS: how many updates are selected in the UI */
-		text = g_strdup_printf (ngettext ("%u package to be installed",
-			                          "%u packages to be installed",
-			                          packages_selected),
-			                packages_selected);
-	}
-	else if (priv->action == GPK_ACTION_REMOVE) {
-		/* TRANSLATORS: how many updates are selected in the UI */
-		text = g_strdup_printf (ngettext ("%u package to be removed",
-			                          "%u packages to be removed",
-			                          packages_selected),
-			                packages_selected);
-	}
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
-
-	gpk_application_group_add_selected (priv);
-
-	g_free (text);
-}
-
-/**
- * gpk_application_try_mark_to_install:
- **/
-static gboolean
-gpk_application_try_mark_to_install (GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar *package_id_selected = NULL;
-	gchar *summary_selected = NULL;
-	PkPackage *package;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, &summary_selected);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* changed mind, or wrong mode */
-	if (priv->action == GPK_ACTION_REMOVE) {
-		ret = pk_package_sack_remove_package_by_id (priv->package_sack, package_id_selected);
-		if (ret) {
-			g_debug ("removed %s from package array", package_id_selected);
-
-			/* correct buttons */
-			gpk_application_allow_install_selection (priv, FALSE, FALSE);
-			gpk_application_allow_remove_selection (priv, TRUE, FALSE);
-			gpk_application_invert_selection_state (priv);
-			ret = TRUE;
-			goto out;
-		}
-		g_warning ("wrong mode and not in array");
-		ret = FALSE;
-		goto out;
-	}
-
-	/* already added */
-	package = pk_package_sack_find_by_id (priv->package_sack, package_id_selected);
-	if (package != NULL) {
-		g_warning ("already added");
-		goto out;
-	}
-
-	/* set mode */
-	priv->action = GPK_ACTION_INSTALL;
-
-	/* add to array */
-	package = pk_package_new ();
-	pk_package_set_id (package, package_id_selected, NULL);
-	g_object_set (package,
-		      "info", PK_INFO_ENUM_AVAILABLE,
-		      "summary", summary_selected,
-		      NULL);
-	pk_package_sack_add_package (priv->package_sack, package);
-	g_object_unref (package);
-
-	g_debug ("added %s to package array", package_id_selected);
-
-	/* correct buttons */
-	gpk_application_allow_install_selection (priv, FALSE, FALSE);
-	gpk_application_allow_remove_selection (priv, TRUE, FALSE);
-	gpk_application_invert_selection_state (priv);
-
-out:
-	/* add the selected group if there are any packages in the queue */
-	gpk_application_change_queue_status (priv);
-
-	g_free (package_id_selected);
-	g_free (summary_selected);
-	return ret;
-}
-
-/**
- * gpk_application_button_homepage_cb:
- **/
-static void
-gpk_application_button_homepage_cb (GtkAction *action, GpkApplicationPrivate *priv)
-{
-	gpk_gnome_open (priv->homepage_url);
-}
-
-/**
- * gpk_application_strcmp_indirect:
- **/
-static gint
-gpk_application_strcmp_indirect (gchar **a, gchar **b)
-{
-	return strcmp (*a, *b);
-}
-
-/**
- * gpk_application_get_files_cb:
- **/
-static void
-gpk_application_get_files_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **files = NULL;
-	gchar *package_id_selected = NULL;
-	gchar **split = NULL;
-	gchar *title = NULL;
-	GError *error = NULL;
-	GPtrArray *array = NULL;
-	GPtrArray *array_sort = NULL;
-	GtkWidget *dialog;
-	GtkWindow *window;
-	PkError *error_code = NULL;
-	PkFiles *item;
-	PkResults *results;
-
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get files: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get files: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* get data */
-	array = pk_results_get_files_array (results);
-	if (array->len != 1)
-		goto out;
-
-	/* assume only one option */
-	item = g_ptr_array_index (array, 0);
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* get data */
-	g_object_get (item,
-		      "files", &files,
-		      NULL);
-
-	/* convert to pointer array */
-	array_sort = pk_strv_to_ptr_array (files);
-	g_ptr_array_sort (array_sort, (GCompareFunc) gpk_application_strcmp_indirect);
-
-	/* title */
-	split = pk_package_id_split (package_id_selected);
-	/* TRANSLATORS: title: how many files are installed by the application */
-	title = g_strdup_printf (ngettext ("%u file installed by %s",
-					   "%u files installed by %s",
-					   array_sort->len), array_sort->len, split[PK_PACKAGE_ID_NAME]);
-
-	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-	dialog = gtk_message_dialog_new (window, GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", title);
-	gpk_dialog_embed_file_list_widget (GTK_DIALOG (dialog), array_sort);
-	gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
-	gtk_window_set_default_size (GTK_WINDOW (dialog), 600, 250);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-out:
-	g_free (title);
-	g_strfreev (files);
-	g_strfreev (split);
-	g_free (package_id_selected);
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (array_sort != NULL)
-		g_ptr_array_unref (array_sort);
-	if (results != NULL)
-		g_object_unref (results);
-}
-
-/**
  * gpk_application_status_changed_timeout_cb:
  **/
 static gboolean
 gpk_application_status_changed_timeout_cb (GpkApplicationPrivate *priv)
 {
-	const gchar *text;
 	GtkWidget *widget;
 
-	/* set the text and show */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-	text = gpk_status_enum_to_localised_text (priv->status_last);
-	gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), text);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
+	gtk_label_set_label (GTK_LABEL (widget),
+		gpk_status_enum_to_localised_text (priv->status_last));
 
-	/* show cancel button */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
-	gtk_widget_show (widget);
+	priv->status_id = 0;
 
-	/* show progressbar */
+	return FALSE;
+}
+
+/**
+ * gpk_application_start_progress_acction:
+ **/
+static void
+gpk_application_start_progress_acction (GpkApplicationPrivate *priv,
+                                        PkStatusEnum             status)
+{
+	GtkWidget *widget = NULL;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_empty"));
+	g_object_set (widget, "icon-name", gpk_status_enum_to_icon_name (status), NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	gtk_widget_set_sensitive (widget, FALSE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_title"));
+	gtk_label_set_label (GTK_LABEL (widget), gpk_status_enum_to_localised_text (status));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Please, be patient"));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
+
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
 	gtk_widget_show (widget);
 
-	/* never repeat */
-	priv->status_id = 0;
-	return FALSE;
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
+	gtk_spinner_start (GTK_SPINNER (widget));
+}
+
+/**
+ * gpk_application_stop_progress_acction:
+ **/
+static void
+gpk_application_stop_progress_acction (GpkApplicationPrivate *priv)
+{
+	GtkWidget *widget = NULL;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_empty"));
+	g_object_set (widget, "icon-name", GPK_ICON_SOFTWARE_INSTALLER, NULL);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
+	gtk_widget_hide (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
+	gtk_spinner_stop (GTK_SPINNER (widget));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	gtk_widget_set_sensitive (widget, TRUE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_title"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Software"));
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Browse available software using the categories"));
 }
 
 /**
@@ -666,30 +264,14 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 		g_debug ("status now %s", pk_status_enum_to_string (status));
 
 		if (status == PK_STATUS_ENUM_FINISHED) {
-			/* re-enable UI */
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
-			gtk_widget_set_sensitive (widget, TRUE);
-
 			/* hide the cancel button */
 			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
 			gtk_widget_hide (widget);
-
-			/* make apply button sensitive */
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-			gtk_widget_set_sensitive (widget, TRUE);
 
 			/* we've not yet shown, so don't bother */
 			if (priv->status_id > 0) {
 				g_source_remove (priv->status_id);
 				priv->status_id = 0;
-			}
-
-			widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
-			gtk_widget_hide (widget);
-
-			if (priv->action == GPK_ACTION_NONE) {
-				widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "headerbar"));
-				gtk_header_bar_set_subtitle (GTK_HEADER_BAR(widget), NULL);
 			}
 
 			goto out;
@@ -704,8 +286,7 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 			g_timeout_add (GPK_UI_STATUS_SHOW_DELAY,
 				       (GSourceFunc) gpk_application_status_changed_timeout_cb,
 				       priv);
-		g_source_set_name_by_id (priv->status_id,
-					 "[GpkApplication] status-changed");
+		g_source_set_name_by_id (priv->status_id, "[GpkApplication] status-changed");
 
 		/* save for the callback */
 		priv->status_last = status;
@@ -715,110 +296,36 @@ gpk_application_progress_cb (PkProgress *progress, PkProgressType type, GpkAppli
 		if (percentage > 0) {
 			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), (gfloat) percentage / 100.0f);
 		} else {
-			gtk_widget_hide (widget);
+			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), 0.0f);
 		}
 
 	} else if (type == PK_PROGRESS_TYPE_ALLOW_CANCEL) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
-		gtk_widget_set_sensitive (widget, allow_cancel);
+		// TODO: flickers a lot in some transactions..
+		gtk_widget_set_visible (widget, allow_cancel);
 	}
 out:
 	return;
 }
 
 /**
- * gpk_application_button_files_cb:
+ * gpk_application_button_open_cb:
  **/
 static void
-gpk_application_button_files_cb (GtkAction *action, GpkApplicationPrivate *priv)
+gpk_application_button_open_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
-	gboolean ret;
-	gchar **package_ids = NULL;
-	gchar *package_id_selected = NULL;
+	GDesktopAppInfo *appinfo = NULL;
+	GdkAppLaunchContext *context = NULL;
+	GError *error = NULL;
 
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
+	appinfo = g_desktop_app_info_new (priv->desktop_id);
+	context = gdk_display_get_app_launch_context (gdk_display_get_default ());
 
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
+	if (!g_app_info_launch (G_APP_INFO(appinfo), NULL, G_APP_LAUNCH_CONTEXT(context), &error))
+		g_warning ("Failed to launch: %s", error->message);
 
-	/* set correct view */
-	package_ids = pk_package_ids_from_id (package_id_selected);
-	pk_client_get_files_async (PK_CLIENT (priv->task), package_ids, priv->cancellable,
-				   (PkProgressCallback) gpk_application_progress_cb, priv,
-				   (GAsyncReadyCallback) gpk_application_get_files_cb, priv);
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-}
-
-/**
- * gpk_application_remove:
- **/
-static void
-gpk_application_try_mark_to_remove (GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar *package_id_selected = NULL;
-	gchar *summary_selected = NULL;
-	PkPackage *package;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, &summary_selected);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* changed mind, or wrong mode */
-	if (priv->action == GPK_ACTION_INSTALL) {
-		ret = pk_package_sack_remove_package_by_id (priv->package_sack, package_id_selected);
-		if (ret) {
-			g_debug ("removed %s from package array", package_id_selected);
-
-			/* correct buttons */
-			gpk_application_allow_install_selection (priv, TRUE, FALSE);
-			gpk_application_allow_remove_selection (priv, FALSE, FALSE);
-			gpk_application_invert_selection_state (priv);
-			goto out;
-		}
-		g_warning ("wrong mode and not in array");
-		goto out;
-	}
-
-	/* already added */
-	ret = (pk_package_sack_find_by_id (priv->package_sack, package_id_selected) == NULL);
-	if (!ret) {
-		g_warning ("already added");
-		goto out;
-	}
-
-	priv->action = GPK_ACTION_REMOVE;
-	package = pk_package_new ();
-	pk_package_set_id (package, package_id_selected, NULL);
-	g_object_set (package,
-		      "info", PK_INFO_ENUM_INSTALLED,
-		      "summary", summary_selected,
-		      NULL);
-	pk_package_sack_add_package (priv->package_sack, package);
-	g_object_unref (package);
-	g_debug ("added %s to package array", package_id_selected);
-
-	/* correct buttons */
-	gpk_application_allow_install_selection (priv, TRUE, FALSE);
-	gpk_application_allow_remove_selection (priv, FALSE, FALSE);
-	gpk_application_invert_selection_state (priv);
-
-out:
-	/* add the selected group if there are any packages in the queue */
-	gpk_application_change_queue_status (priv);
-
-	g_free (package_id_selected);
-	g_free (summary_selected);
+	g_object_unref (appinfo);
+	g_object_unref (context);
 }
 
 /**
@@ -827,7 +334,32 @@ out:
 static void
 gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
-	gpk_application_try_mark_to_install (priv);
+	gchar *package_id_selected = NULL, *summary_selected = NULL;
+	gchar **package_ids = NULL;
+
+	g_debug ("apply changes...");
+
+	if (!gpk_application_get_selected_package (priv, &package_id_selected, &summary_selected)) {
+		g_warning ("no package selected to install");
+		return;
+	}
+
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_INSTALL);
+
+	package_ids = g_new0 (gchar *, 2);
+	package_ids[0] = g_strdup (package_id_selected);
+
+	/* ensure new action succeeds */
+	g_cancellable_reset (priv->cancellable);
+
+	/* install */
+	pk_task_install_packages_async (gpk_backend_get_task (priv->backend), package_ids, priv->cancellable,
+	                                (PkProgressCallback) gpk_application_progress_cb, priv,
+	                                (GAsyncReadyCallback) gpk_application_install_packages_cb, priv);
+
+	g_free (package_id_selected);
+	g_free (summary_selected);
+	g_strfreev (package_ids);
 }
 
 /**
@@ -836,326 +368,37 @@ gpk_application_button_install_cb (GtkAction *action, GpkApplicationPrivate *pri
 static void
 gpk_application_button_remove_cb (GtkAction *action, GpkApplicationPrivate *priv)
 {
-	gpk_application_try_mark_to_remove (priv);
-}
-
-/**
- * gpk_application_get_requires_cb:
- **/
-static void
-gpk_application_get_requires_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-	GPtrArray *array = NULL;
-	GtkWindow *window;
-	gchar *name = NULL;
-	gchar *title = NULL;
-	gchar *message = NULL;
+	gchar *package_id_selected = NULL, *summary_selected = NULL;
 	gchar **package_ids = NULL;
-	GtkWidget *dialog;
-	gchar *package_id_selected = NULL;
-	gboolean ret;
+	gboolean autoremove;
 
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get requires: %s", error->message);
-		g_error_free (error);
-		goto out;
+	g_debug ("apply changes...");
+
+	if (!gpk_application_get_selected_package (priv, &package_id_selected, &summary_selected)) {
+		g_warning ("no package selected to remove");
+		return;
 	}
 
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get requires: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
+	package_ids = g_new0 (gchar *, 2);
+	package_ids[0] = g_strdup (package_id_selected);
 
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* get data */
-	array = pk_results_get_package_array (results);
-
-	/* empty array */
-	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-	if (array->len == 0) {
-		gpk_error_dialog_modal (window,
-					/* TRANSLATORS: no packages returned */
-					_("No packages"),
-					/* TRANSLATORS: this package is not required by any others */
-					_("No other packages require this package"), NULL);
-		goto out;
-	}
-
-	package_ids = pk_package_ids_from_id (package_id_selected);
-	name = gpk_dialog_package_id_name_join_locale (package_ids);
-	/* TRANSLATORS: title: how many packages require this package */
-	title = g_strdup_printf (ngettext ("%u package requires %s",
-					   "%u packages require %s",
-					   array->len), array->len, name);
-
-	/* TRANSLATORS: show a array of packages for the package */
-	message = g_strdup_printf (ngettext ("Packages listed below require %s to function correctly.",
-					     "Packages listed below require %s to function correctly.",
-					     array->len), name);
-
-	dialog = gtk_message_dialog_new (window, GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", title);
-	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog), "%s", message);
-	gpk_dialog_embed_package_list_widget (GTK_DIALOG (dialog), array);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-	g_free (name);
-	g_free (title);
-	g_free (message);
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (results != NULL)
-		g_object_unref (results);
-}
-
-/**
- * gpk_application_button_requires_cb:
- **/
-static void
-gpk_application_button_requires_cb (GtkAction *action, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **package_ids = NULL;
-	gchar *package_id_selected = NULL;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_REMOVE);
 
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
 
-	/* get the requires */
-	package_ids = pk_package_ids_from_id (package_id_selected);
+	autoremove = g_settings_get_boolean (priv->settings, GPK_SETTINGS_ENABLE_AUTOREMOVE);
 
-	pk_client_depends_on_async (PK_CLIENT (priv->task),
-				    pk_bitfield_value (PK_FILTER_ENUM_NONE),
-				    package_ids, TRUE, priv->cancellable,
-				    (PkProgressCallback) gpk_application_progress_cb, priv,
-				    (GAsyncReadyCallback) gpk_application_get_depends_cb, priv);
+	/* remove */
+	pk_task_remove_packages_async (gpk_backend_get_task (priv->backend), package_ids, TRUE, autoremove, priv->cancellable,
+	                               (PkProgressCallback) gpk_application_progress_cb, priv,
+	                               (GAsyncReadyCallback) gpk_application_remove_packages_cb, priv);
 
-out:
 	g_free (package_id_selected);
+	g_free (summary_selected);
 	g_strfreev (package_ids);
 }
 
-/**
- * gpk_application_get_depends_cb:
- **/
-static void
-gpk_application_get_depends_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-	GPtrArray *array = NULL;
-	GtkWindow *window;
-	gchar *name = NULL;
-	gchar *title = NULL;
-	gchar *message = NULL;
-	gchar **package_ids = NULL;
-	GtkWidget *dialog;
-	gchar *package_id_selected = NULL;
-	gboolean ret;
-
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get depends: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get depends: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* get data */
-	array = pk_results_get_package_array (results);
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* empty array */
-	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-	if (array->len == 0) {
-		gpk_error_dialog_modal (window,
-					/* TRANSLATORS: no packages returned */
-					_("No packages"),
-					/* TRANSLATORS: this package does not depend on any others */
-					_("This package does not depend on any others"), NULL);
-		goto out;
-	}
-
-	package_ids = pk_package_ids_from_id (package_id_selected);
-	name = gpk_dialog_package_id_name_join_locale (package_ids);
-	/* TRANSLATORS: title: show the number of other packages we depend on */
-	title = g_strdup_printf (ngettext ("%u additional package is required for %s",
-					   "%u additional packages are required for %s",
-					   array->len), array->len, name);
-
-	/* TRANSLATORS: message: show the array of dependent packages for this package */
-	message = g_strdup_printf (ngettext ("Packages listed below are required for %s to function correctly.",
-					     "Packages listed below are required for %s to function correctly.",
-					     array->len), name);
-
-	dialog = gtk_message_dialog_new (window, GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_INFO, GTK_BUTTONS_OK, "%s", title);
-	gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog), "%s", message);
-	gpk_dialog_embed_package_list_widget (GTK_DIALOG (dialog), array);
-
-	gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-out:
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (results != NULL)
-		g_object_unref (results);
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-	g_free (name);
-	g_free (title);
-	g_free (message);
-}
-
-/**
- * gpk_application_button_depends_cb:
- **/
-static void
-gpk_application_button_depends_cb (GtkAction *_action, GpkApplicationPrivate *priv)
-{
-	gboolean ret;
-	gchar **package_ids = NULL;
-	gchar *package_id_selected = NULL;
-
-	/* get selection */
-	ret = gpk_application_get_selected_package (priv, &package_id_selected, NULL);
-	if (!ret) {
-		g_warning ("no package selected");
-		goto out;
-	}
-
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	/* get the depends */
-	package_ids = pk_package_ids_from_id (package_id_selected);
-
-	pk_client_required_by_async (PK_CLIENT (priv->task),
-				     pk_bitfield_value (PK_FILTER_ENUM_NONE),
-				     package_ids, TRUE, priv->cancellable,
-				     (PkProgressCallback) gpk_application_progress_cb, priv,
-				     (GAsyncReadyCallback) gpk_application_get_requires_cb, priv);
-
-out:
-	g_free (package_id_selected);
-	g_strfreev (package_ids);
-}
-
-/**
- * gpk_application_get_full_repo_name:
- **/
-static const gchar *
-gpk_application_get_full_repo_name (GpkApplicationPrivate *priv, const gchar *data)
-{
-	const gchar *repo_name;
-
-	/* if no data, we can't look up in the hash table */
-	if (_g_strzero (data)) {
-		g_warning ("no ident data");
-		/* TRANSLATORS: the repo name is invalid or not found, fall back to this */
-		return _("Invalid");
-	}
-
-	/* trim prefix */
-	if (g_str_has_prefix (data, "installed:"))
-		data += 10;
-
-	/* try to find in cached repo array */
-	repo_name = (const gchar *) g_hash_table_lookup (priv->repos, data);
-	if (repo_name == NULL) {
-		g_warning ("no repo name, falling back to %s", data);
-		return data;
-	}
-	return repo_name;
-}
-
-/**
- * gpk_application_clear_details_cb:
- **/
-static gboolean
-gpk_application_clear_details_cb (GpkApplicationPrivate *priv)
-{
-	GtkWidget *widget;
-
-	/* hide dead widgets */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "grid_details"));
-	gtk_widget_hide (widget);
-
-	/* never repeat */
-	priv->details_event_id = 0;
-	return FALSE;
-}
-
-/**
- * gpk_application_clear_details:
- **/
-static void
-gpk_application_clear_details (GpkApplicationPrivate *priv)
-{
-	/* only clear the last data if it takes a little while, else we flicker the display */
-	if (priv->details_event_id > 0)
-		g_source_remove (priv->details_event_id);
-	priv->details_event_id =
-		g_timeout_add (200, (GSourceFunc) gpk_application_clear_details_cb, priv);
-	g_source_set_name_by_id (priv->details_event_id,
-				 "[GpkApplication] clear-details");
-}
 
 /**
  * gpk_application_clear_packages:
@@ -1174,16 +417,13 @@ gpk_application_clear_packages (GpkApplicationPrivate *priv)
 static void
 gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *item)
 {
+	AsComponent *component = NULL;
 	GtkTreeIter iter;
 	gchar *text;
-	gboolean in_queue;
-	gboolean installed;
-	PkBitfield state = 0;
-	static guint package_cnt = 0;
 	PkInfoEnum info;
 	gchar *package_id = NULL;
+	gchar *package_name = NULL;
 	gchar *summary = NULL;
-	GtkWidget *widget;
 
 	/* get data */
 	g_object_get (item,
@@ -1196,40 +436,38 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	priv->has_package = TRUE;
 
 	/* are we in the package array? */
-	in_queue = (pk_package_sack_find_by_id (priv->package_sack, package_id) != NULL);
-	installed = (info == PK_INFO_ENUM_INSTALLED) || (info == PK_INFO_ENUM_COLLECTION_INSTALLED);
-
-	if (installed)
-		pk_bitfield_add (state, GPK_STATE_INSTALLED);
-	if (in_queue)
-		pk_bitfield_add (state, GPK_STATE_IN_LIST);
-
-	/* special icon */
-	if (info == PK_INFO_ENUM_COLLECTION_INSTALLED || info == PK_INFO_ENUM_COLLECTION_AVAILABLE)
-		pk_bitfield_add (state, GPK_STATE_COLLECTION);
-
-	/* use two lines */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
-	text = gpk_package_id_format_twoline (gtk_widget_get_style_context (widget),
-					      package_id,
-					      summary);
 
 	gtk_list_store_append (priv->packages_store, &iter);
-	gtk_list_store_set (priv->packages_store, &iter,
-			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_TEXT, text,
-			    PACKAGES_COLUMN_SUMMARY, summary,
-			    PACKAGES_COLUMN_ID, package_id,
-			    PACKAGES_COLUMN_IMAGE, gpk_application_state_get_icon (state),
-			    -1);
 
-	/* only process every n events else we re-order too many times */
-	if (package_cnt++ % 200 == 0) {
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
+	package_name = gpk_package_id_get_name (package_id);
+	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
+	if (component) {
+		text = gpk_common_format_details (as_component_get_name (component),
+		                                  as_component_get_summary (component),
+		                                  TRUE);
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_TEXT, text,
+		                    PACKAGES_COLUMN_SUMMARY, summary,
+		                    PACKAGES_COLUMN_ID, package_id,
+		                    PACKAGES_COLUMN_IMAGE, gpk_info_enum_to_icon_name (info),
+		                    PACKAGES_COLUMN_APP_NAME, as_component_get_name (component),
+		                    -1);
+	} else {
+		text = gpk_package_id_format_details (package_id,
+		                                      summary,
+		                                      TRUE);
+
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_TEXT, text,
+		                    PACKAGES_COLUMN_SUMMARY, summary,
+		                    PACKAGES_COLUMN_ID, package_id,
+		                    PACKAGES_COLUMN_IMAGE, gpk_info_enum_to_icon_name (info),
+		                    PACKAGES_COLUMN_APP_NAME, NULL,
+		                    -1);
 	}
 
 	g_free (package_id);
+	g_free (package_name);
 	g_free (summary);
 	g_free (text);
 }
@@ -1245,31 +483,22 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	const gchar *title = _("No results were found.");
 	GtkTreeIter iter;
 	gchar *text;
-	PkBitfield state = 0;
 
-	if (priv->search_mode == GPK_MODE_GROUP ||
-	    priv->search_mode == GPK_MODE_ALL_PACKAGES) {
-		/* TRANSLATORS: be helpful, but this shouldn't happen */
-		message = _("Try entering a package name in the search bar.");
-	}  else if (priv->search_mode == GPK_MODE_SELECTED) {
-		/* TRANSLATORS: nothing in the package queue */
-		message = _("There are no packages queued to be installed or removed.");
+	if (priv->search_type == GPK_SEARCH_APP) {
+		/* TRANSLATORS: tell the user to switch to details search mode */
+		message = _("Try searching package distributions by clicking the icon next to the search text.");
 	} else {
-		if (priv->search_type == GPK_SEARCH_NAME)
-			/* TRANSLATORS: tell the user to switch to details search mode */
-			message = _("Try searching package descriptions by clicking the icon next to the search text.");
-		else
-			/* TRANSLATORS: tell the user to try harder */
-			message = _("Try again with a different search term.");
+		/* TRANSLATORS: tell the user to try harder */
+		message = _("Try again with a different search term.");
 	}
 
 	text = g_strdup_printf ("%s\n%s", title, message);
 	gtk_list_store_append (priv->packages_store, &iter);
 	gtk_list_store_set (priv->packages_store, &iter,
-			    PACKAGES_COLUMN_STATE, state,
 			    PACKAGES_COLUMN_TEXT, text,
 			    PACKAGES_COLUMN_IMAGE, "system-search",
 			    PACKAGES_COLUMN_ID, NULL,
+			    PACKAGES_COLUMN_APP_NAME, NULL,
 			    -1);
 	g_free (text);
 }
@@ -1280,7 +509,7 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 static gboolean
 gpk_application_perform_search_idle_cb (GpkApplicationPrivate *priv)
 {
-	gpk_application_perform_search (priv);
+	gpk_application_restore_search (priv);
 	return FALSE;
 }
 
@@ -1329,65 +558,17 @@ gpk_application_select_exact_match (GpkApplicationPrivate *priv, const gchar *te
 		g_free (package_id);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
-}
 
-/**
- * gpk_application_run_installed:
- **/
-static void
-gpk_application_run_installed (GpkApplicationPrivate *priv, PkResults *results)
-{
-	guint i;
-	GPtrArray *array;
-	PkPackage *item;
-	GPtrArray *package_ids_array;
-	gchar **package_ids = NULL;
-	PkInfoEnum info;
-	gchar *package_id = NULL;
+	if (!selection) {
+		selection = gtk_tree_view_get_selection (treeview);
+		gtk_tree_model_get_iter_first (model, &iter);
+		gtk_tree_selection_select_iter (selection, &iter);
 
-	/* get the package array and filter on INSTALLED */
-	package_ids_array = g_ptr_array_new_with_free_func (g_free);
-	array = pk_results_get_package_array (results);
-	for (i=0; i<array->len; i++) {
-		item = g_ptr_array_index (array, i);
-		g_object_get (item,
-			      "info", &info,
-			      "package-id", &package_id,
-			      NULL);
-		if (info == PK_INFO_ENUM_INSTALLING)
-			g_ptr_array_add (package_ids_array, g_strdup (package_id));
-		g_free (package_id);
+		path = gtk_tree_model_get_path (model, &iter);
+		gtk_tree_view_scroll_to_cell (treeview, path, NULL, FALSE, 0.0f, 0.0f);
+		gtk_tree_path_free (path);
 	}
-
-	/* nothing to show */
-	if (package_ids_array->len == 0) {
-		g_debug ("nothing to do");
-		goto out;
-	}
-
-	/* this is async */
-	package_ids = pk_ptr_array_to_strv (package_ids_array);
-	gpk_helper_run_show (priv->helper_run, package_ids);
-
-out:
-	g_strfreev (package_ids);
-	g_ptr_array_unref (package_ids_array);
-	g_ptr_array_unref (array);
 }
-
-#if 0
-/**
- * gpk_application_finished_cb:
- **/
-static void
-gpk_application_finished_cb (PkClient *client, PkExitEnum exit_enum, guint runtime, GpkApplicationPrivate *priv)
-{
-
-//	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_progress"));
-//	gtk_widget_hide (widget);
-
-}
-#endif
 
 /**
  * gpk_application_cancel_cb:
@@ -1396,9 +577,6 @@ static void
 gpk_application_cancel_cb (GtkWidget *button_widget, GpkApplicationPrivate *priv)
 {
 	g_cancellable_cancel (priv->cancellable);
-
-	/* switch buttons around */
-	priv->search_mode = GPK_MODE_UNKNOWN;
 }
 
 /**
@@ -1413,6 +591,35 @@ gpk_application_set_button_find_sensitivity (GpkApplicationPrivate *priv)
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
 	gtk_widget_set_sensitive (widget, !priv->search_in_progress);
 }
+
+/**
+ * gpk_application_show_search_entry:
+ **/
+static void
+gpk_application_show_search_entry (GtkWidget *button_widget, GpkApplicationPrivate *priv)
+{
+	GtkWidget *widget;
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "stack_search_categories"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "show_search");
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
+	gtk_entry_set_text (GTK_ENTRY(widget), "");
+	gtk_widget_grab_focus (widget);
+}
+
+/**
+ * gpk_application_show_categories_entry:
+ **/
+static void
+gpk_application_show_categories_entry (GtkWidget *button_widget, GpkApplicationPrivate *priv)
+{
+	GtkWidget *widget;
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "stack_search_categories"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "show_categories");
+
+	gpk_application_show_categories (priv);
+}
+
 
 /**
  * gpk_application_search_cb:
@@ -1451,39 +658,39 @@ gpk_application_search_cb (PkClient *client, GAsyncResult *res, GpkApplicationPr
 		goto out;
 	}
 
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
+	gtk_tree_view_set_model (GTK_TREE_VIEW (widget), NULL);
+
 	/* get data */
 	array = pk_results_get_package_array (results);
-	for (i=0; i<array->len; i++) {
+	for (i = 0; i < array->len; i++) {
 		item = g_ptr_array_index (array, i);
 		gpk_application_add_item_to_results (priv, item);
 	}
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
+	                         GTK_TREE_MODEL (priv->packages_store));
 
 	/* were there no entries found? */
 	if (!priv->has_package)
 		gpk_application_suggest_better_search (priv);
 
 	/* if there is an exact match, select it */
-	gpk_application_select_exact_match (priv, priv->search_text);
+	if (!_g_strzero (priv->selection_id)) {
+		gpk_application_select_exact_match (priv, priv->selection_id);
+	} else {
+		gpk_application_select_exact_match (priv, priv->search_text);
+	}
 
 	/* focus back to the text extry */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
+	gtk_widget_set_sensitive (widget, TRUE);
 	gtk_widget_grab_focus (widget);
 
-	/* reset UI */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
-	gtk_widget_set_sensitive (widget, TRUE);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
-	gtk_widget_set_sensitive (widget, TRUE);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	gtk_widget_set_sensitive (widget, TRUE);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-	gtk_widget_set_sensitive (widget, TRUE);
 out:
 	/* mark find button sensitive */
 	priv->search_in_progress = FALSE;
 	gpk_application_set_button_find_sensitivity (priv);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_groups"));
-	gtk_widget_set_sensitive (widget, TRUE);
 
 	if (error_code != NULL)
 		g_object_unref (error_code);
@@ -1493,23 +700,89 @@ out:
 		g_object_unref (results);
 }
 
+static void
+gpk_application_search_app (GpkApplicationPrivate *priv, gchar *search_text)
+{
+	gchar **packages = NULL;
+
+	g_debug ("Searching appstream app: %s", search_text);
+
+	packages = gpk_backend_search_pkgnames_with_component (priv->backend, search_text);
+	pk_task_resolve_async (gpk_backend_get_task (priv->backend),
+	                       pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+	                                               PK_FILTER_ENUM_ARCH,
+	                                               -1),
+	                       packages, priv->cancellable,
+	                       (PkProgressCallback) gpk_application_progress_cb, priv,
+	                       (GAsyncReadyCallback) gpk_application_search_cb, priv);
+
+	g_strfreev (packages);
+}
+
+static void
+gpk_application_search_categories (GpkApplicationPrivate *priv, gchar **categories)
+{
+	guint i = 0;
+	gchar **packages = NULL;
+
+	g_debug ("Searching appstream categories:");
+	for (i = 0; categories[i] != NULL; i++) {
+		g_debug (" - category: %s", categories[i]);
+	}
+
+	packages = gpk_backend_search_pkgnames_by_categories (priv->backend, categories);
+	pk_task_resolve_async (gpk_backend_get_task (priv->backend),
+	                       pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+	                                               PK_FILTER_ENUM_ARCH,
+	                                               -1),
+	                       packages, priv->cancellable,
+	                       (PkProgressCallback) gpk_application_progress_cb, priv,
+	                       (GAsyncReadyCallback) gpk_application_search_cb, priv);
+
+	g_strfreev (packages);
+}
+
+static void
+gpk_application_search_pkgname (GpkApplicationPrivate *priv, gchar *search_text)
+{
+	gchar **tokens = NULL;
+	tokens = g_strsplit (search_text, " ", -1);
+
+	pk_task_search_names_async (gpk_backend_get_task (priv->backend),
+	                            pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+	                                                    PK_FILTER_ENUM_ARCH,
+	                                                    -1),
+	                            tokens, priv->cancellable,
+	                            (PkProgressCallback) gpk_application_progress_cb, priv,
+	                            (GAsyncReadyCallback) gpk_application_search_cb, priv);
+
+	g_strfreev (tokens);
+}
+
 /**
- * gpk_application_perform_search_name_details_file:
+ * gpk_application_perform_search:
  **/
 static void
-gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
+gpk_application_perform_search (GpkApplicationPrivate *priv)
 {
 	GtkEntry *entry;
-	gchar **searches = NULL;
+
+	/*if we are in the middle of a search, just return */
+	if (priv->search_in_progress == TRUE)
+		return;
+
+	g_debug ("CLEAR search");
+	gpk_application_clear_packages (priv);
 
 	entry = GTK_ENTRY (gtk_builder_get_object (priv->builder, "entry_text"));
 	g_free (priv->search_text);
 	priv->search_text = g_strdup (gtk_entry_get_text (entry));
+	priv->package_view = GPK_VIEW_SEARCH;
 
 	/* have we got input? */
 	if (_g_strzero (priv->search_text)) {
 		g_debug ("no input");
-		goto out;
+		return;
 	}
 
 	g_debug ("find %s", priv->search_text);
@@ -1522,133 +795,41 @@ gpk_application_perform_search_name_details_file (GpkApplicationPrivate *priv)
 	g_cancellable_reset (priv->cancellable);
 
 	/* do the search */
-	searches = g_strsplit (priv->search_text, " ", -1);
-	if (priv->search_type == GPK_SEARCH_NAME) {
-		pk_task_search_names_async (priv->task,
-		                            pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
-		                                                    PK_FILTER_ENUM_ARCH,
-		                                                    -1),
-		                            searches, priv->cancellable,
-		                            (PkProgressCallback) gpk_application_progress_cb, priv,
-		                            (GAsyncReadyCallback) gpk_application_search_cb, priv);
-	} else if (priv->search_type == GPK_SEARCH_DETAILS) {
-		pk_task_search_details_async (priv->task,
-		                              pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
-		                                                      PK_FILTER_ENUM_ARCH,
-		                                                      -1),
-		                              searches, priv->cancellable,
-		                              (PkProgressCallback) gpk_application_progress_cb, priv,
-		                              (GAsyncReadyCallback) gpk_application_search_cb, priv);
+	if (priv->search_type == GPK_SEARCH_APP) {
+		gpk_application_search_app (priv, priv->search_text);
+	} else if (priv->search_type == GPK_SEARCH_PKGNAME) {
+		gpk_application_search_pkgname (priv, priv->search_text);
 	} else {
 		g_warning ("invalid search type");
-		goto out;
 	}
-
-out:
-	g_strfreev (searches);
 }
 
 /**
- * gpk_application_perform_search_others:
+ * gpk_application_restore_filter:
  **/
 static void
-gpk_application_perform_search_others (GpkApplicationPrivate *priv)
+gpk_application_restore_search (GpkApplicationPrivate *priv)
 {
-	gchar **search_groups;
-
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	priv->search_in_progress = TRUE;
-
-	if (priv->search_mode == GPK_MODE_GROUP) {
-		search_groups = g_strsplit (priv->search_group, " ", -1);
-		pk_client_search_groups_async (PK_CLIENT(priv->task),
-		                               pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
-		                                                       PK_FILTER_ENUM_ARCH,
-		                                                       -1),
-		                               search_groups, priv->cancellable,
-		                               (PkProgressCallback) gpk_application_progress_cb, priv,
-		                               (GAsyncReadyCallback) gpk_application_search_cb, priv);
-		g_strfreev (search_groups);
-	} else {
-		pk_client_get_packages_async (PK_CLIENT(priv->task),
-		                              pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
-		                                                      PK_FILTER_ENUM_ARCH,
-		                                                      -1),
-		                              priv->cancellable,
-		                              (PkProgressCallback) gpk_application_progress_cb, priv,
-		                              (GAsyncReadyCallback) gpk_application_search_cb, priv);
+	gchar *restore_search = NULL;
+	if (priv->package_view == GPK_VIEW_SEARCH) {
+		gpk_application_perform_search (priv);
+	} else if (priv->package_view == GPK_VIEW_CATEGORIES) {
+		if (_g_strzero (priv->search_text)) {
+			gpk_application_show_categories (priv);
+		} else {
+			restore_search = g_strdup(priv->search_text);
+			gpk_application_show_category (priv, restore_search);
+			g_free (restore_search);
+		}
 	}
 }
 
 /**
- * gpk_application_populate_selected:
- **/
-static gboolean
-gpk_application_populate_selected (GpkApplicationPrivate *priv)
-{
-	guint i;
-	PkPackage *package;
-	GPtrArray *array;
-
-	/* get size */
-	array = pk_package_sack_get_array (priv->package_sack);
-
-	/* nothing in queue */
-	if (array->len == 0) {
-		gpk_application_suggest_better_search (priv);
-		goto out;
-	}
-
-	/* dump queue to package window */
-	for (i=0; i<array->len; i++) {
-		package = g_ptr_array_index (array, i);
-		gpk_application_add_item_to_results (priv, package);
-	}
-
-out:
-	g_ptr_array_unref (array);
-	return TRUE;
-}
-
-/**
- * gpk_application_perform_search:
+ * gpk_application_search_entry_activated:
  **/
 static void
-gpk_application_perform_search (GpkApplicationPrivate *priv)
+gpk_application_search_entry_activated (GtkWidget *button_widget, GpkApplicationPrivate *priv)
 {
-	/*if we are in the middle of a search, just return*/
-	if (priv->search_in_progress == TRUE)
-		return;
-
-	/* just shown the welcome screen */
-	if (priv->search_mode == GPK_MODE_UNKNOWN)
-		return;
-
-	g_debug ("CLEAR search");
-	gpk_application_clear_details (priv);
-	gpk_application_clear_packages (priv);
-
-	if (priv->search_mode == GPK_MODE_NAME_DETAILS_FILE) {
-		gpk_application_perform_search_name_details_file (priv);
-	} else if (priv->search_mode == GPK_MODE_GROUP ||
-		   priv->search_mode == GPK_MODE_ALL_PACKAGES) {
-		gpk_application_perform_search_others (priv);
-	} else if (priv->search_mode == GPK_MODE_SELECTED) {
-		gpk_application_populate_selected (priv);
-	} else {
-		g_debug ("doing nothing");
-	}
-}
-
-/**
- * gpk_application_find_cb:
- **/
-static void
-gpk_application_find_cb (GtkWidget *button_widget, GpkApplicationPrivate *priv)
-{
-	priv->search_mode = GPK_MODE_NAME_DETAILS_FILE;
 	gpk_application_perform_search (priv);
 }
 
@@ -1658,17 +839,12 @@ gpk_application_find_cb (GtkWidget *button_widget, GpkApplicationPrivate *priv)
 static gboolean
 gpk_application_quit (GpkApplicationPrivate *priv)
 {
-	GPtrArray *array;
-	gint len;
 	GtkResponseType result;
 	GtkWindow *window;
 	GtkWidget *dialog;
+	gint len = 0; // TODO
 
 	/* do we have any items queued for removal or installation? */
-	array = pk_package_sack_get_array (priv->package_sack);
-	len = array->len;
-	g_ptr_array_unref (array);
-
 	if (len != 0) {
 		window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
 		dialog = gtk_message_dialog_new (window, GTK_DIALOG_MODAL,
@@ -1717,133 +893,12 @@ gpk_application_wm_close (GtkWidget             *widget,
 static gboolean
 gpk_application_text_changed_cb (GtkEntry *entry, GpkApplicationPrivate *priv)
 {
-	GtkTreeView *treeview;
-	GtkTreeSelection *selection;
-
-	/* clear group selection if we have the tab */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_GROUP) &&
-	    gtk_entry_get_text_length (entry) > 0) {
-		treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_groups"));
-		selection = gtk_tree_view_get_selection (treeview);
-		gtk_tree_selection_unselect_all (selection);
-	}
-
 	/* mark find button sensitive */
 	gpk_application_set_button_find_sensitivity (priv);
 	return FALSE;
 }
 
-/**
- * gpk_application_packages_installed_state_toggled_cb:
- **/
-static void
-gpk_application_packages_installed_state_toggled_cb (GtkCellRendererToggle *cell, gchar *path_str, GpkApplicationPrivate *priv)
-{
-	GtkTreeView *treeview;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GtkTreePath *path;
-	GtkTreeSelection *selection;
-	PkBitfield state;
-
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-	model = gtk_tree_view_get_model (treeview);
-	path = gtk_tree_path_new_from_string (path_str);
-
-	/* get toggled iter */
-	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_model_get (model, &iter,
-			    PACKAGES_COLUMN_STATE, &state,
-			    -1);
-
-	/* enforce the selection in case we just fire at the checkbox without selecting */
-	selection = gtk_tree_view_get_selection (treeview);
-	gtk_tree_selection_select_iter (selection, &iter);
-
-	if (gpk_application_state_get_checkbox (state)) {
-		gpk_application_try_mark_to_remove (priv);
-	} else {
-		gpk_application_try_mark_to_install (priv);
-	}
-	gtk_tree_path_free (path);
-}
-
 static void gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv);
-
-/**
- * gpk_application_button_clear_cb:
- **/
-static void
-gpk_application_button_clear_cb (GtkWidget *widget_button, GpkApplicationPrivate *priv)
-{
-	GtkTreeView *treeview;
-	gboolean valid;
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	GtkTreeSelection *selection;
-	const gchar *icon;
-	PkBitfield state;
-	gboolean ret;
-
-	g_debug ("clear package selection...");
-
-	/* get the first iter in the array */
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-	model = gtk_tree_view_get_model (treeview);
-	valid = gtk_tree_model_get_iter_first (model, &iter);
-
-	/* for all current items, reset the state if in the array */
-	while (valid) {
-		gtk_tree_model_get (model, &iter, PACKAGES_COLUMN_STATE, &state, -1);
-		ret = pk_bitfield_contain (state, GPK_STATE_IN_LIST);
-		if (ret) {
-			pk_bitfield_remove (state, GPK_STATE_IN_LIST);
-			/* get the new icon */
-			icon = gpk_application_state_get_icon (state);
-
-			/* set new value */
-			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-					    PACKAGES_COLUMN_STATE, state,
-					    PACKAGES_COLUMN_IMAGE, icon,
-					    -1);
-		}
-		valid = gtk_tree_model_iter_next (model, &iter);
-	}
-
-	/* clear queue */
-	pk_package_sack_clear (priv->package_sack);
-
-	/* force a button refresh */
-	selection = gtk_tree_view_get_selection (treeview);
-	gpk_application_package_selection_changed_cb (selection, priv);
-
-	priv->action = GPK_ACTION_NONE;
-	gpk_application_change_queue_status (priv);
-}
-
-/**
- * gpk_application_button_pending_cb:
- **/
-static void
-gpk_application_button_pending_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
-{
-	g_debug ("see pendings changes...");
-
-	/* clear the search text if we clicked the group array */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	gtk_entry_set_text (GTK_ENTRY(widget), "");
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-	gtk_widget_hide (widget);
-
-	/* hide details */
-	gpk_application_clear_details (priv);
-	gpk_application_clear_packages (priv);
-
-	/* actually do the search */
-	priv->search_mode = GPK_MODE_SELECTED;
-	gpk_application_perform_search (priv);
-}
 
 /**
  * gpk_application_install_packages_cb:
@@ -1857,7 +912,7 @@ gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplica
 	GtkWindow *window;
 	guint idle_id;
 
-	g_debug ("installing packages...");
+	g_debug ("install package finished...");
 
 	/* get the results */
 	results = pk_task_generic_finish (task, res, &error);
@@ -1878,21 +933,15 @@ gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplica
 			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
 						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
 		}
-		goto out;
 	}
+
+out:
+	gpk_application_stop_progress_acction (priv);
 
 	/* idle add in the background */
 	idle_id = g_idle_add ((GSourceFunc) gpk_application_perform_search_idle_cb, priv);
 	g_source_set_name_by_id (idle_id, "[GpkApplication] search");
 
-	/* find applications that were installed, and offer to run them */
-	gpk_application_run_installed (priv, results);
-
-	/* clear if success */
-	pk_package_sack_clear (priv->package_sack);
-	priv->action = GPK_ACTION_NONE;
-	gpk_application_change_queue_status (priv);
-out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
 	if (results != NULL)
@@ -1911,7 +960,7 @@ gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicat
 	GtkWindow *window;
 	guint idle_id;
 
-	g_debug ("removing packages...");
+	g_debug ("remove package finished...");
 
 	/* get the results */
 	results = pk_task_generic_finish (task, res, &error);
@@ -1932,87 +981,19 @@ gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicat
 			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
 						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
 		}
-		goto out;
 	}
+
+out:
+	gpk_application_stop_progress_acction (priv);
 
 	/* idle add in the background */
 	idle_id = g_idle_add ((GSourceFunc) gpk_application_perform_search_idle_cb, priv);
 	g_source_set_name_by_id (idle_id, "[GpkApplication] search");
 
-	/* clear if success */
-	pk_package_sack_clear (priv->package_sack);
-	priv->action = GPK_ACTION_NONE;
-	gpk_application_change_queue_status (priv);
-out:
 	if (error_code != NULL)
 		g_object_unref (error_code);
 	if (results != NULL)
 		g_object_unref (results);
-}
-
-/**
- * gpk_application_button_apply_cb:
- **/
-static void
-gpk_application_button_apply_cb (GtkWidget *widget, GpkApplicationPrivate *priv)
-{
-	gchar **package_ids = NULL;
-	gboolean autoremove;
-
-	g_debug ("apply changes...");
-
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	package_ids = pk_package_sack_get_ids (priv->package_sack);
-	if (priv->action == GPK_ACTION_INSTALL) {
-		/* install */
-		pk_task_install_packages_async (priv->task, package_ids, priv->cancellable,
-						(PkProgressCallback) gpk_application_progress_cb, priv,
-						(GAsyncReadyCallback) gpk_application_install_packages_cb, priv);
-
-		/* make package array insensitive */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
-		gtk_widget_set_sensitive (widget, FALSE);
-
-		/* make apply button insensitive */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-		gtk_widget_set_visible (widget, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-		gtk_widget_set_visible (widget, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-		gtk_widget_set_visible (widget, FALSE);
-
-		/* hide details */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-		gtk_widget_hide (widget);
-
-	} else if (priv->action == GPK_ACTION_REMOVE) {
-		autoremove = g_settings_get_boolean (priv->settings, GPK_SETTINGS_ENABLE_AUTOREMOVE);
-
-		/* remove */
-		pk_task_remove_packages_async (priv->task, package_ids, TRUE, autoremove, priv->cancellable,
-					       (PkProgressCallback) gpk_application_progress_cb, priv,
-					       (GAsyncReadyCallback) gpk_application_remove_packages_cb, priv);
-
-		/* make package array insensitive */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
-		gtk_widget_set_sensitive (widget, FALSE);
-
-		/* make apply button insensitive */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-		gtk_widget_set_visible (widget, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
-		gtk_widget_set_visible (widget, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-		gtk_widget_set_visible (widget, FALSE);
-
-		/* hide details */
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-		gtk_widget_hide (widget);
-	}
-	g_strfreev (package_ids);
-	return;
 }
 
 static void
@@ -2023,11 +1004,6 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	GtkTreeView *treeview;
 
 	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_packages"));
-
-	/* column for installed toggles */
-	renderer = gtk_cell_renderer_toggle_new ();
-	g_signal_connect (renderer, "toggled",
-	                  G_CALLBACK (gpk_application_packages_installed_state_toggled_cb), priv);
 
 	/* column for images */
 	column = gtk_tree_view_column_new ();
@@ -2046,110 +1022,37 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	gtk_tree_view_append_column (treeview, column);
 }
 
-static void
-gpk_application_groups_add_columns (GtkTreeView *treeview)
-{
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-
-	column = gtk_tree_view_column_new ();
-	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_LARGE_TOOLBAR, NULL);
-	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-	gtk_tree_view_column_add_attribute (column, renderer, "icon-name", GROUPS_COLUMN_ICON);
-	gtk_tree_view_append_column (treeview, column);
-
-	/* column for name */
-	renderer = gtk_cell_renderer_text_new ();
-	/* TRANSLATORS: column for group name */
-	column = gtk_tree_view_column_new_with_attributes (_("Name"), renderer,
-							   "text", GROUPS_COLUMN_NAME,
-							   NULL);
-	gtk_tree_view_column_set_sort_column_id (column, GROUPS_COLUMN_NAME);
-	gtk_tree_view_append_column (treeview, column);
-
-}
-
-/**
- * gpk_application_groups_treeview_changed_cb:
- **/
-static void
-gpk_application_groups_treeview_changed_cb (GtkTreeSelection *selection, GpkApplicationPrivate *priv)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GtkEntry *entry;
-	GtkTreePath *path;
-	gboolean active;
-
-	/* hide details */
-	g_debug ("CLEAR tv changed");
-	gpk_application_clear_details (priv);
-	gpk_application_clear_packages (priv);
-
-	/* This will only work in single or browse selection mode! */
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		/* clear the search text if we clicked the group array */
-		entry = GTK_ENTRY (gtk_builder_get_object (priv->builder, "entry_text"));
-		gtk_entry_set_text (entry, "");
-
-		g_free (priv->search_group);
-		gtk_tree_model_get (model, &iter,
-				    GROUPS_COLUMN_ID, &priv->search_group,
-				    GROUPS_COLUMN_ACTIVE, &active, -1);
-		g_debug ("selected row is: %s (%i)", priv->search_group, active);
-
-		/* don't search parent groups */
-		if (!active) {
-			path = gtk_tree_model_get_path (model, &iter);
-
-			/* select the parent group */
-			gtk_tree_selection_select_path (selection, path);
-			gtk_tree_path_free (path);
-			return;
-		}
-
-		/* GetPackages? */
-		if (g_strcmp0 (priv->search_group, "all-packages") == 0)
-			priv->search_mode = GPK_MODE_ALL_PACKAGES;
-		else if (g_strcmp0 (priv->search_group, "selected") == 0)
-			priv->search_mode = GPK_MODE_SELECTED;
-		else
-			priv->search_mode = GPK_MODE_GROUP;
-
-		/* actually do the search */
-		gpk_application_perform_search (priv);
-	}
-}
-
 /**
  * gpk_application_get_details_cb:
  **/
 static void
 gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
 {
+	GtkWindow *window;
+	GtkWidget *widget;
 	PkResults *results;
+	PkDetails *item;
+	AsComponent *component = NULL;
 	GError *error = NULL;
 	PkError *error_code = NULL;
 	GPtrArray *array = NULL;
-	PkDetails *item;
-	GtkWidget *widget;
-	gchar *value;
+	gboolean installed = FALSE;
 	const gchar *repo_name;
-	gboolean installed;
 	gchar **split = NULL;
-	GtkWindow *window;
+	gchar *value;
 	gchar *package_id = NULL;
+	gchar *package_name = NULL;
+	gchar *desktop_id = NULL;
 	gchar *url = NULL;
-	PkGroupEnum group;
 	gchar *license = NULL;
-	gchar *summary = NULL, *package_pretty = NULL, *description = NULL;
+	gchar *summary = NULL, *package_details = NULL, *package_pretty = NULL, *description = NULL, *escape_url = NULL;
+	gchar *donation = NULL, *translate = NULL, *report = NULL;
 	guint64 size;
 
 	/* get the results */
 	results = pk_client_generic_finish (client, res, &error);
 	if (results == NULL) {
-		g_warning ("failed to get list of categories: %s", error->message);
+		g_warning ("failed to get list of details: %s", error->message);
 		g_error_free (error);
 		goto out;
 	}
@@ -2178,59 +1081,161 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	/* only choose the first item */
 	item = g_ptr_array_index (array, 0);
 
-	/* show to start */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "grid_details"));
-	gtk_widget_show (widget);
-
 	/* get data */
-	g_object_get (item,
-		      "package-id", &package_id,
-		      "url", &url,
-		      "group", &group,
-		      "license", &license,
-		      "summary", &summary,
-		      "description", &description,
-		      "size", &size,
-		      NULL);
-
+	g_object_get (item, "package-id", &package_id, NULL);
 	split = pk_package_id_split (package_id);
-	installed = g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed");
 
-	/* homepage */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
-	g_free (priv->homepage_url);
-	priv->homepage_url = g_strdup (url);
-	gtk_widget_set_visible (widget, url != NULL);
-
-	/* licence */
-	if (license != NULL) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence_title"));
-		gtk_widget_show (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence"));
-		gtk_label_set_label (GTK_LABEL (widget), license);
-		gtk_label_set_line_wrap (GTK_LABEL (widget), TRUE);
-		gtk_widget_show (widget);
-	} else {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence_title"));
-		gtk_widget_hide (widget);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_licence"));
-		gtk_widget_hide (widget);
+	package_name = split[PK_PACKAGE_ID_NAME];
+	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
+	if (component != NULL) {
+		summary = g_strdup(as_component_get_name (component));
+		package_details = g_strdup(as_component_get_summary (component));
+		desktop_id = gpk_as_component_get_desktop_id (component);
+		description = g_strdup(as_component_get_description (component));
+		license = g_strdup(as_component_get_project_license(component));
+		url = g_strdup(as_component_get_url (component, AS_URL_KIND_HOMEPAGE));
+		donation = g_strdup(as_component_get_url (component, AS_URL_KIND_DONATION));
+		translate = g_strdup(as_component_get_url (component, AS_URL_KIND_TRANSLATE));
+		report = g_strdup(as_component_get_url (component, AS_URL_KIND_BUGTRACKER));
 	}
 
 	/* set the summary */
+	if (!summary) {
+		summary = g_strdup (_("Distribution package"));
+	}
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_summary"));
 	gtk_label_set_label (GTK_LABEL (widget), summary);
 
 	/* set the package detail */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_details_package_desc"));
+	if (!package_details) {
+		g_object_get (item, "summary", &package_details, NULL);
+	}
+	gtk_label_set_markup (GTK_LABEL (widget), package_details);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_package"));
 	package_pretty = gpk_package_id_format_pretty (package_id);
-	gtk_label_set_label (GTK_LABEL (widget), package_pretty);
+	gtk_label_set_markup (GTK_LABEL (widget), package_pretty);
+
+	/* open button */
+	installed = g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed");
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
+	gtk_widget_set_visible (widget, installed && desktop_id != NULL);
+
+	/* only show buttons if we are in the correct mode */
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
+	gtk_widget_set_visible (widget, !installed);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
+	gtk_widget_set_visible (widget, installed);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_details_package"));
+	gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+	                              gpk_info_enum_to_icon_name (installed ? PK_INFO_ENUM_INSTALLED : PK_INFO_ENUM_AVAILABLE),
+	                              GTK_ICON_SIZE_DIALOG);
+
+	g_free (priv->desktop_id);
+	priv->desktop_id = g_strdup(desktop_id);
 
 	/* set the description */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
+	if (!description) {
+		g_object_get (item,"description", &description, NULL);
+	}
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_description"));
 	gpk_application_set_text_buffer (widget, description);
 
+	/* Show homepage */
+	if (!url) {
+		g_object_get (item, "url", &url, NULL);
+	}
+	if (url) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", url, url, _("Visit the app's website"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_homepage"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* Show donation */
+	if (donation) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", donation, donation, _("Make a donation"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_donate"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* Show bugtracking */
+	if (report) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", report, report, _("Report a problem"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_report"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* Show translations */
+	if (translate) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate_title"));
+		gtk_widget_set_visible (widget, TRUE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate"));
+		gtk_widget_set_visible (widget, TRUE);
+
+		escape_url = g_markup_printf_escaped ("<a href=\"%s\" title=\"%s\">%s</a>", translate, translate, _("Translate into your language"));
+		gtk_label_set_markup (GTK_LABEL (widget), escape_url);
+		g_free (escape_url);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate_title"));
+		gtk_widget_set_visible (widget, FALSE);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_translate"));
+		gtk_widget_set_visible (widget, FALSE);
+	}
+
+	/* licence */
+	if (!license) {
+		g_object_get (item, "license", &license, NULL);
+	}
+	if (license != NULL) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license_title"));
+		gtk_widget_show (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license"));
+		gtk_label_set_label (GTK_LABEL (widget), license);
+		gtk_label_set_line_wrap (GTK_LABEL (widget), TRUE);
+		gtk_widget_show (widget);
+	} else {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license_title"));
+		gtk_widget_hide (widget);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_license"));
+		gtk_widget_hide (widget);
+	}
+
 	/* if non-zero, set the size */
+	g_object_get (item, "size", &size, NULL);
 	if (size > 0) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_size_title"));
 		/* set the size */
@@ -2260,14 +1265,16 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	/* set the repo text */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_source"));
 	/* get the full name of the repo from the repo_id */
-	repo_name = gpk_application_get_full_repo_name (priv, split[PK_PACKAGE_ID_DATA]);
+	repo_name = gpk_backend_get_full_repo_name (priv->backend, split[PK_PACKAGE_ID_DATA]);
 	gtk_label_set_label (GTK_LABEL (widget), repo_name);
 
 out:
 	g_free (package_id);
+	g_free (desktop_id);
 	g_free (url);
 	g_free (license);
 	g_free (summary);
+	g_free (package_details);
 	g_free (package_pretty);
 	g_free (description);
 	g_strfreev (split);
@@ -2288,14 +1295,9 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	gboolean show_install = TRUE;
-	gboolean install_inhibited = FALSE;
-	gboolean show_remove = TRUE;
-	gboolean remove_inhibited = FALSE;
-	PkBitfield state;
-	gchar **package_ids = NULL;
-	gchar *package_id = NULL;
-	gchar *summary = NULL;
+	gchar **package_ids = NULL, **split = NULL;
+	gchar *package_id = NULL, *summary = NULL;
+	gboolean is_category = FALSE;
 
 	/* ignore selection changed if we've just cleared the package list */
 	if (!priv->has_package)
@@ -2305,66 +1307,50 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		g_debug ("no row selected");
 
-		/* we cannot now add it */
-		gpk_application_allow_install_selection (priv, FALSE, FALSE);
-		gpk_application_allow_remove_selection (priv, FALSE, FALSE);
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-		gtk_widget_hide (widget);
-
-		/* hide details */
-		gpk_application_clear_details (priv);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+		gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
 		goto out;
 	}
 
 	/* check we aren't a help line */
 	gtk_tree_model_get (model, &iter,
-			    PACKAGES_COLUMN_STATE, &state,
-			    PACKAGES_COLUMN_ID, &package_id,
-			    PACKAGES_COLUMN_SUMMARY, &summary,
-			    -1);
+	                    PACKAGES_COLUMN_ID, &package_id,
+	                    PACKAGES_COLUMN_APP_NAME, &summary,
+	                    PACKAGES_COLUMN_IS_CATEGORY, &is_category,
+	                   -1);
+
 	if (package_id == NULL) {
 		g_debug ("ignoring help click");
 		goto out;
 	}
 
+	if (is_category) {
+		g_debug ("category %s selected...", package_id);
+		gpk_application_show_category (priv, package_id);
+		goto out;
+	}
+
+	/* Save selection to allow restore...*/
+	g_free (priv->selection_id);
+
+	split = pk_package_id_split (package_id);
+	priv->selection_id = g_strdup (split[PK_PACKAGE_ID_NAME]);
+	g_strfreev (split);
+
 	/* show the menu item */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-	gtk_widget_show (widget);
-
-	/* only show buttons if we are in the correct mode */
-	show_install = (state == 0 ||
-	                state == pk_bitfield_from_enums (GPK_STATE_INSTALLED, GPK_STATE_IN_LIST, -1));
-	if (priv->action == GPK_ACTION_REMOVE && !pk_bitfield_contain (state, GPK_STATE_IN_LIST))
-		show_install = FALSE;
-	if (priv->action == GPK_ACTION_INSTALL && pk_bitfield_contain (state, GPK_STATE_INSTALLED)) {
-		show_install = TRUE;
-		install_inhibited = TRUE;
-	}
-	gpk_application_allow_install_selection (priv, show_install, install_inhibited);
-
-	/* only show buttons if we are in the correct mode */
-	show_remove = (state == pk_bitfield_value (GPK_STATE_INSTALLED) ||
-	               state == pk_bitfield_value (GPK_STATE_IN_LIST));
-	if (priv->action == GPK_ACTION_INSTALL && !pk_bitfield_contain (state, GPK_STATE_IN_LIST))
-		show_remove = FALSE;
-	if (priv->action == GPK_ACTION_REMOVE && !pk_bitfield_contain (state, GPK_STATE_INSTALLED)) {
-		show_remove = TRUE;
-		remove_inhibited = TRUE;
-	}
-	gpk_application_allow_remove_selection (priv, show_remove, remove_inhibited);
-
-	/* clear the description text */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "textview_description"));
-	gpk_application_set_text_buffer (widget, NULL);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "details_package");
 
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
 
 	/* get the details */
 	package_ids = pk_package_ids_from_id (package_id);
-	pk_client_get_details_async (PK_CLIENT(priv->task), package_ids, priv->cancellable,
+	pk_client_get_details_async (PK_CLIENT(gpk_backend_get_task (priv->backend)),
+				     package_ids, priv->cancellable,
 				     (PkProgressCallback) gpk_application_progress_cb, priv,
 				     (GAsyncReadyCallback) gpk_application_get_details_cb, priv);
+
 out:
 	g_free (package_id);
 	g_free (summary);
@@ -2372,93 +1358,49 @@ out:
 }
 
 /**
- * gpk_application_notify_network_state_cb:
+ * gpk_application_menu_search_by_pkgname:
  **/
 static void
-gpk_application_notify_network_state_cb (PkControl *_control, GParamSpec *pspec, GpkApplicationPrivate *priv)
-{
-	PkNetworkEnum state;
-
-	/* show icon? */
-	g_object_get (priv->control,
-		      "network-state", &state,
-		      NULL);
-	g_debug ("state=%u", state);
-}
-
-/**
- * gpk_application_group_add_data:
- **/
-static void
-gpk_application_group_add_data (GpkApplicationPrivate *priv, PkGroupEnum group)
-{
-	GtkTreeIter iter;
-	const gchar *icon_name;
-	const gchar *text;
-
-	gtk_tree_store_append (priv->groups_store, &iter, NULL);
-
-	text = gpk_group_enum_to_localised_text (group);
-	icon_name = gpk_group_enum_to_icon_name (group);
-	gtk_tree_store_set (priv->groups_store, &iter,
-			    GROUPS_COLUMN_NAME, text,
-			    GROUPS_COLUMN_SUMMARY, NULL,
-			    GROUPS_COLUMN_ID, pk_group_enum_to_string (group),
-			    GROUPS_COLUMN_ICON, icon_name,
-			    GROUPS_COLUMN_ACTIVE, TRUE,
-			    -1);
-}
-
-/**
- * gpk_application_menu_search_by_name:
- **/
-static void
-gpk_application_menu_search_by_name (GtkMenuItem *item, GpkApplicationPrivate *priv)
+gpk_application_menu_search_by_pkgname (GtkMenuItem *item, GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
 
 	/* change type */
-	priv->search_type = GPK_SEARCH_NAME;
+	priv->search_type = GPK_SEARCH_PKGNAME;
 	g_debug ("set search type=%u", priv->search_type);
 
 	/* save default to GSettings */
 	g_settings_set_enum (priv->settings,
-			     GPK_SETTINGS_SEARCH_MODE,
-			     priv->search_type);
+	                     GPK_SETTINGS_SEARCH_MODE,
+	                     priv->search_type);
 
 	/* set the new icon */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	/* TRANSLATORS: entry tooltip: basic search */
-	gtk_widget_set_tooltip_text (widget, _("Searching by name"));
-	gtk_entry_set_icon_from_icon_name (GTK_ENTRY (widget),
-					   GTK_ENTRY_ICON_PRIMARY,
-					   "edit-find");
+	/* TRANSLATORS: entry tooltip: basic search by package name */
+	gtk_widget_set_tooltip_text (widget, _("Searching for distribution packages"));
 }
 
 /**
- * gpk_application_menu_search_by_description:
+ * gpk_application_menu_search_for_application:
  **/
 static void
-gpk_application_menu_search_by_description (GtkMenuItem *item, GpkApplicationPrivate *priv)
+gpk_application_menu_search_for_application (GtkMenuItem *item, GpkApplicationPrivate *priv)
 {
 	GtkWidget *widget;
 
 	/* set type */
-	priv->search_type = GPK_SEARCH_DETAILS;
+	priv->search_type = GPK_SEARCH_APP;
 	g_debug ("set search type=%u", priv->search_type);
 
 	/* save default to GSettings */
 	g_settings_set_enum (priv->settings,
-			     GPK_SETTINGS_SEARCH_MODE,
-			     priv->search_type);
+	                     GPK_SETTINGS_SEARCH_MODE,
+	                     priv->search_type);
 
 	/* set the new icon */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
-	/* TRANSLATORS: entry tooltip: detailed search */
-	gtk_widget_set_tooltip_text (widget, _("Searching by description"));
-	gtk_entry_set_icon_from_icon_name (GTK_ENTRY (widget),
-					   GTK_ENTRY_ICON_PRIMARY,
-					   "edit-find-replace");
+	/* TRANSLATORS: entry tooltip: applications search */
+	gtk_widget_set_tooltip_text (widget, _("Searching for applications"));
 }
 
 
@@ -2477,24 +1419,20 @@ gpk_application_entry_text_icon_press_cb (GtkEntry *entry, GtkEntryIconPosition 
 
 	g_debug ("icon_pos=%u", icon_pos);
 
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_NAME)) {
-		/* TRANSLATORS: context menu item for the search type icon */
-		item = gtk_menu_item_new_with_mnemonic (_("Search by name"));
-		g_signal_connect (G_OBJECT (item), "activate",
-				  G_CALLBACK (gpk_application_menu_search_by_name), priv);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-	}
+	/* TRANSLATORS: context menu item for the search type icon */
+	item = gtk_menu_item_new_with_mnemonic (_("Search for apps"));
+	g_signal_connect (G_OBJECT (item), "activate",
+	                  G_CALLBACK (gpk_application_menu_search_for_application), priv);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_DETAILS)) {
-		/* TRANSLATORS: context menu item for the search type icon */
-		item = gtk_menu_item_new_with_mnemonic (_("Search by description"));
-		g_signal_connect (G_OBJECT (item), "activate",
-				  G_CALLBACK (gpk_application_menu_search_by_description), priv);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-	}
+	/* TRANSLATORS: context menu item for the search type icon */
+	item = gtk_menu_item_new_with_mnemonic (_("Search for distribution packages"));
+	g_signal_connect (G_OBJECT (item), "activate",
+	                  G_CALLBACK (gpk_application_menu_search_by_pkgname), priv);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	gtk_widget_show_all (GTK_WIDGET (menu));
-	gtk_menu_popup_at_widget(GTK_MENU (menu), GTK_WIDGET (entry),
+	gtk_menu_popup_at_widget(GTK_MENU (menu), gtk_widget_get_parent(GTK_WIDGET (entry)),
 				GDK_GRAVITY_SOUTH_WEST, GDK_GRAVITY_NORTH_WEST,
 				(GdkEvent *)event);
 }
@@ -2652,9 +1590,11 @@ gpk_application_refresh_cache_cb (PkClient *client, GAsyncResult *res, GpkApplic
 			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
 						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
 		}
-		goto out;
 	}
+
 out:
+	gpk_application_stop_progress_acction (priv);
+
 	if (error_code != NULL)
 		g_object_unref (error_code);
 	if (results != NULL)
@@ -2671,263 +1611,101 @@ gpk_application_activate_refresh_cb (GSimpleAction *action,
 {
 	GpkApplicationPrivate *priv = user_data;
 
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_DOWNLOAD_REPOSITORY);
+
 	/* ensure new action succeeds */
 	g_cancellable_reset (priv->cancellable);
 
-	pk_task_refresh_cache_async (priv->task, TRUE, priv->cancellable,
+	pk_task_refresh_cache_async (gpk_backend_get_task (priv->backend),
+				     TRUE, priv->cancellable,
 				     (PkProgressCallback) gpk_application_progress_cb, priv,
 				     (GAsyncReadyCallback) gpk_application_refresh_cache_cb, priv);
 }
 
 /**
- * gpk_application_package_row_activated_cb:
- **/
+ * gpk_application_show_category
+ */
 static void
-gpk_application_package_row_activated_cb (GtkTreeView *treeview, GtkTreePath *path,
-					  GtkTreeViewColumn *col, GpkApplicationPrivate *priv)
+gpk_application_show_category (GpkApplicationPrivate *priv,
+                               const gchar           *category_id)
 {
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	gboolean ret;
-	PkBitfield state;
-	gchar *package_id = NULL;
+	GtkWidget *widget = NULL;
+	GpkCategory *category = NULL;
+	gchar **categories;
+	gchar *category_name = NULL;
 
-	/* get selection */
-	model = gtk_tree_view_get_model (treeview);
-	ret = gtk_tree_model_get_iter (model, &iter, path);
-	if (!ret) {
-		g_warning ("failed to get selection");
-		return;
-	}
-
-	/* get data */
-	gtk_tree_model_get (model, &iter,
-			    PACKAGES_COLUMN_STATE, &state,
-			    PACKAGES_COLUMN_ID, &package_id,
-			    -1);
-
-	/* check we aren't a help line */
-	if (package_id == NULL) {
-		g_debug ("ignoring help click");
-		goto out;
-	}
-
-	if (gpk_application_state_get_checkbox (state))
-		gpk_application_try_mark_to_remove (priv);
-	else
-		gpk_application_try_mark_to_install (priv);
-out:
-	g_free (package_id);
-}
-
-/**
- * gpk_application_group_row_separator_func:
- **/
-static gboolean
-gpk_application_group_row_separator_func (GtkTreeModel *model, GtkTreeIter *iter, GpkApplicationPrivate *priv)
-{
-	gchar *name = NULL;
-	gboolean ret;
-	gtk_tree_model_get (model, iter, GROUPS_COLUMN_ID, &name, -1);
-	ret = g_strcmp0 (name, "separator") == 0;
-	g_free (name);
-	return ret;
-}
-
-/**
- * gpk_application_add_welcome:
- **/
-static void
-gpk_application_add_welcome (GpkApplicationPrivate *priv)
-{
-	GtkTreeIter iter;
-	const gchar *welcome;
-	PkBitfield state = 0;
-
-	g_debug ("CLEAR welcome");
 	gpk_application_clear_packages (priv);
-	gtk_list_store_append (priv->packages_store, &iter);
 
-	/* enter something nice */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_GROUP)) {
-		/* TRANSLATORS: welcome text if we can click the group array */
-		welcome = _("Enter a search word or click a category to get started.");
-	} else {
-		/* TRANSLATORS: welcome text if we have to search by name */
-		welcome = _("Enter a search word to get started.");
-	}
-	gtk_list_store_set (priv->packages_store, &iter,
-			    PACKAGES_COLUMN_STATE, state,
-			    PACKAGES_COLUMN_TEXT, welcome,
-			    PACKAGES_COLUMN_IMAGE, "system-search",
-			    PACKAGES_COLUMN_SUMMARY, NULL,
-			    PACKAGES_COLUMN_ID, NULL,
-			    -1);
+	category = gpk_backend_get_category_by_id (priv->backend, category_id);
+	category_name = gpk_category_get_name (category);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_category"));
+	gtk_label_set_label (GTK_LABEL (widget), category_name);
+
+	g_free (priv->search_text);
+	priv->search_text = g_strdup (category_id);
+
+	categories = gpk_category_get_categories (category);
+	gpk_application_search_categories (priv, categories);
+
+	g_strfreev (categories);
+	g_free (category_name);
 }
 
 /**
- * gpk_application_create_group_array_enum:
+ * gpk_application_show_categories:
  **/
 static void
-gpk_application_create_group_array_enum (GpkApplicationPrivate *priv)
+gpk_application_show_categories (GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget;
-	guint i;
-
-	/* set to no indent */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
-	gtk_tree_view_set_show_expanders (GTK_TREE_VIEW (widget), FALSE);
-	gtk_tree_view_set_level_indentation  (GTK_TREE_VIEW (widget), 0);
-
-	/* create group tree view if we can search by group */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_GROUP)) {
-		/* add all the groups supported (except collections, which we handled above */
-		for (i=0; i<PK_GROUP_ENUM_LAST; i++) {
-			if (pk_bitfield_contain (priv->groups, i) &&
-			    i != PK_GROUP_ENUM_COLLECTIONS && i != PK_GROUP_ENUM_NEWEST)
-				gpk_application_group_add_data (priv, i);
-		}
-	}
-}
-
-/**
- * gpk_application_get_categories_cb:
- **/
-static void
-gpk_application_get_categories_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-	GPtrArray *array = NULL;
+	GtkWidget *widget = NULL;
+	GPtrArray *categories = NULL;
+	GpkCategory *category = NULL;
 	GtkTreeIter iter;
-	GtkTreeIter iter2;
-	guint i, j;
-	GtkTreeView *treeview;
-	PkCategory *item;
-	PkCategory *item2;
-	GtkWindow *window;
-	gchar *package_id = NULL;
-	gchar *name = NULL;
-	gchar *summary = NULL;
-	gchar *cat_id = NULL;
-	gchar *icon = NULL;
-	gchar *parent_id_tmp = NULL;
-	gchar *name_tmp = NULL;
-	gchar *summary_tmp = NULL;
-	gchar *cat_id_tmp = NULL;
-	gchar *icon_tmp = NULL;
+	gchar *id = NULL, *name = NULL, *comment = NULL, *icon = NULL;
+	gchar *text = NULL;
+	guint i = 0;
 
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get list of categories: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
+	g_debug ("Show categories...");
 
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to get cats: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
+	gpk_application_clear_packages (priv);
 
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_category"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Categories"));
 
-	/* set to expanders with indent */
-	treeview = GTK_TREE_VIEW (gtk_builder_get_object (priv->builder, "treeview_groups"));
-	gtk_tree_view_set_show_expanders (treeview, TRUE);
-	gtk_tree_view_set_level_indentation  (treeview, 3);
+	priv->package_view = GPK_VIEW_CATEGORIES;
+	g_free (priv->search_text);
+	priv->search_text = NULL;
 
-	/* add repos with descriptions */
-	array = pk_results_get_category_array (results);
-	for (i=0; i<array->len; i++) {
-		item = g_ptr_array_index (array, i);
-		g_object_get (item,
-			      "name", &name,
-			      "summary", &summary,
-			      "cat-id", &cat_id,
-			      "icon", &icon,
-			      NULL);
+	categories = gpk_backend_get_principals_categories (priv->backend);
+	for (i = 0; i < categories->len; i++) {
+		category = GPK_CATEGORY (g_ptr_array_index (categories, i));
+		id = gpk_category_get_id (category);
+		name = gpk_category_get_name (category);
+		comment = gpk_category_get_comment (category);
+		text = gpk_common_format_details (name, comment, TRUE);
+		icon = gpk_category_get_icon (category);
 
-		gtk_tree_store_append (priv->groups_store, &iter, NULL);
-		gtk_tree_store_set (priv->groups_store, &iter,
-				    GROUPS_COLUMN_NAME, name,
-				    GROUPS_COLUMN_SUMMARY, summary,
-				    GROUPS_COLUMN_ID, cat_id,
-				    GROUPS_COLUMN_ICON, icon,
-				    GROUPS_COLUMN_ACTIVE, FALSE,
-				    -1);
-		j = 0;
-		do {
-			/* only allows groups two layers deep */
-			item2 = g_ptr_array_index (array, j);
-			g_object_get (item2,
-				      "parent-id", &parent_id_tmp,
-				      "cat-id", &cat_id_tmp,
-				      "name", &name_tmp,
-				      "summary", &summary_tmp,
-				      "icon", &icon_tmp,
-				      NULL);
-			if (g_strcmp0 (parent_id_tmp, cat_id) == 0) {
-				gtk_tree_store_append (priv->groups_store, &iter2, &iter);
-				gtk_tree_store_set (priv->groups_store, &iter2,
-						    GROUPS_COLUMN_NAME, name_tmp,
-						    GROUPS_COLUMN_SUMMARY, summary_tmp,
-						    GROUPS_COLUMN_ID, cat_id_tmp,
-						    GROUPS_COLUMN_ICON, icon_tmp,
-						    GROUPS_COLUMN_ACTIVE, TRUE,
-						    -1);
-				g_ptr_array_remove (array, item2);
-			} else
-				j++;
-			g_free (parent_id_tmp);
-			g_free (name_tmp);
-			g_free (summary_tmp);
-			g_free (cat_id_tmp);
-			g_free (icon_tmp);
-		} while (j < array->len);
+		gtk_list_store_append (priv->packages_store, &iter);
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_TEXT, text,
+		                    PACKAGES_COLUMN_IMAGE, icon,
+		                    PACKAGES_COLUMN_ID, id,
+		                    PACKAGES_COLUMN_APP_NAME, name,
+		                    PACKAGES_COLUMN_IS_CATEGORY, TRUE,
+		                    -1);
 
-		g_free (package_id);
+		g_free (id);
 		g_free (name);
-		g_free (summary);
-		g_free (cat_id);
+		g_free (comment);
 		g_free (icon);
+		g_free (text);
 	}
 
-	/* open all expanders */
-	gtk_tree_view_collapse_all (treeview);
-out:
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (results != NULL)
-		g_object_unref (results);
+	priv->has_package = TRUE;
 }
 
-/**
- * gpk_application_create_group_array_categories:
- **/
-static void
-gpk_application_create_group_array_categories (GpkApplicationPrivate *priv)
-{
-	/* ensure new action succeeds */
-	g_cancellable_reset (priv->cancellable);
-
-	/* get categories supported */
-	pk_client_get_categories_async (PK_CLIENT(priv->task), priv->cancellable,
-				        (PkProgressCallback) gpk_application_progress_cb, priv,
-				        (GAsyncReadyCallback) gpk_application_get_categories_cb, priv);
-}
-
-/**
+/*
  * gpk_application_key_changed_cb:
  *
  * We might have to do things when the keys change; do them here.
@@ -2935,197 +1713,40 @@ gpk_application_create_group_array_categories (GpkApplicationPrivate *priv)
 static void
 gpk_application_key_changed_cb (GSettings *settings, const gchar *key, GpkApplicationPrivate *priv)
 {
-	gboolean ret;
-
-	if (g_strcmp0 (key, GPK_SETTINGS_CATEGORY_GROUPS) == 0) {
-		ret = g_settings_get_boolean (priv->settings, key);
-		gtk_tree_store_clear (priv->groups_store);
-		if (ret)
-			gpk_application_create_group_array_categories (priv);
-		else
-			gpk_application_create_group_array_enum (priv);
-	}
+	// TODO:
 }
 
 /**
- * pk_backend_status_get_properties_cb:
+ * gpk_application_open_backend_ready:
  **/
 static void
-pk_backend_status_get_properties_cb (GObject *object, GAsyncResult *res, GpkApplicationPrivate *priv)
+gpk_application_open_backend_ready (GpkBackend            *backend,
+                                    GAsyncResult          *res,
+                                    GpkApplicationPrivate *priv)
 {
-	GtkWidget *widget;
+	GtkWidget *widget = NULL;
 	GError *error = NULL;
-	PkControl *control = PK_CONTROL(object);
-	gboolean ret;
-	PkBitfield filters;
-	GtkTreeIter iter;
-	const gchar *icon_name;
 
-	/* get the result */
-	ret = pk_control_get_properties_finish (control, res, &error);
-	if (!ret) {
-		/* TRANSLATORS: daemon is broken */
-		g_print ("%s: %s\n", _("Exiting as properties could not be retrieved"), error->message);
-		g_error_free (error);
-		goto out;
+	if (!gpk_backend_open_finish (backend, res, &error)) {
+		g_critical ("Failed to open backend: %s", error->message);
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
+		gpk_error_dialog_modal (GTK_WINDOW (widget),
+		                        _("Software"),
+		                        _("There was an error starting the application"),
+		                        error->message);
+		g_clear_error (&error);
+		gpk_application_quit (priv);
+		return;
 	}
 
-	/* get values */
-	g_object_get (control,
-		      "roles", &priv->roles,
-		      "filters", &filters,
-		      "groups", &priv->groups,
-		      NULL);
+	/* finally open main gui */
+	gpk_application_show_categories (priv);
 
-	/* Remove description/file array if needed. */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_DETAILS) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow2"));
-		gtk_widget_hide (widget);
-	}
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_FILES) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_files"));
-		gtk_widget_hide (widget);
-	}
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_DEPENDS_ON) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_depends"));
-		gtk_widget_hide (widget);
-	}
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_REQUIRED_BY) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_requires"));
-		gtk_widget_hide (widget);
-	}
+	gpk_application_stop_progress_acction (priv);
 
-	/* hide the group selector if we don't support search-groups */
-	if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_GROUP) == FALSE) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_groups"));
-		gtk_widget_hide (widget);
-	}
-
-	/* add an "all" entry if we can GetPackages */
-	ret = g_settings_get_boolean (priv->settings, GPK_SETTINGS_SHOW_ALL_PACKAGES);
-	if (ret && pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_PACKAGES)) {
-		gtk_tree_store_append (priv->groups_store, &iter, NULL);
-		icon_name = gpk_role_enum_to_icon_name (PK_ROLE_ENUM_GET_PACKAGES);
-		gtk_tree_store_set (priv->groups_store, &iter,
-				    /* TRANSLATORS: title: all of the packages on the system and available in sources */
-				    GROUPS_COLUMN_NAME, _("All packages"),
-				    /* TRANSLATORS: tooltip: all packages */
-				    GROUPS_COLUMN_SUMMARY, _("Show all packages"),
-				    GROUPS_COLUMN_ID, "all-packages",
-				    GROUPS_COLUMN_ACTIVE, TRUE,
-				    GROUPS_COLUMN_ICON, icon_name, -1);
-	}
-
-	/* add these at the top of the array */
-	if (pk_bitfield_contain (priv->groups, PK_GROUP_ENUM_COLLECTIONS))
-		gpk_application_group_add_data (priv, PK_GROUP_ENUM_COLLECTIONS);
-
-	/* add a separator */
-	gtk_tree_store_append (priv->groups_store, &iter, NULL);
-	gtk_tree_store_set (priv->groups_store, &iter,
-			    GROUPS_COLUMN_ID, "separator", -1);
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
-	gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (widget),
-					      (GtkTreeViewRowSeparatorFunc) gpk_application_group_row_separator_func,
-					      priv, NULL);
-
-	/* simple array or category tree? */
-	ret = g_settings_get_boolean (priv->settings, GPK_SETTINGS_CATEGORY_GROUPS);
-	if (ret && pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_GET_CATEGORIES))
-		gpk_application_create_group_array_categories (priv);
-	else
-		gpk_application_create_group_array_enum (priv);
-
-	/* set the search mode */
-	priv->search_type = g_settings_get_enum (priv->settings, GPK_SETTINGS_SEARCH_MODE);
-
-	/* search by name */
-	if (priv->search_type == GPK_SEARCH_NAME) {
-		gpk_application_menu_search_by_name (NULL, priv);
-
-	/* set to details if we can we do the action? */
-	} else if (priv->search_type == GPK_SEARCH_DETAILS) {
-		if (pk_bitfield_contain (priv->roles, PK_ROLE_ENUM_SEARCH_DETAILS)) {
-			gpk_application_menu_search_by_description (NULL, priv);
-		} else {
-			g_warning ("cannot use mode %u as not capable, using name", priv->search_type);
-			gpk_application_menu_search_by_name (NULL, priv);
-		}
-
-	/* mode not recognized */
-	} else {
-		g_warning ("cannot recognize mode %u, using name", priv->search_type);
-		gpk_application_menu_search_by_name (NULL, priv);
-	}
-
-	/* welcome */
-	gpk_application_add_welcome (priv);
-out:
-	return;
-}
-
-/**
- * gpk_application_get_repo_list_cb:
- **/
-static void
-gpk_application_get_repo_list_cb (PkClient *client, GAsyncResult *res, GpkApplicationPrivate *priv)
-{
-	PkResults *results;
-	GError *error = NULL;
-	PkError *error_code = NULL;
-	GPtrArray *array = NULL;
-	PkRepoDetail *item;
-	guint i;
-	GtkWindow *window;
-	gchar *repo_id = NULL;
-	gchar *description = NULL;
-
-	/* get the results */
-	results = pk_client_generic_finish (client, res, &error);
-	if (results == NULL) {
-		g_warning ("failed to get list of repos: %s", error->message);
-		g_error_free (error);
-		goto out;
-	}
-
-	/* check error code */
-	error_code = pk_results_get_error_code (results);
-	if (error_code != NULL) {
-		g_warning ("failed to repo list: %s, %s", pk_error_enum_to_string (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-
-		/* if obvious message, don't tell the user */
-		if (pk_error_get_code (error_code) != PK_ERROR_ENUM_TRANSACTION_CANCELLED) {
-			window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
-			gpk_error_dialog_modal (window, gpk_error_enum_to_localised_text (pk_error_get_code (error_code)),
-						gpk_error_enum_to_localised_message (pk_error_get_code (error_code)), pk_error_get_details (error_code));
-		}
-		goto out;
-	}
-
-	/* add repos with descriptions */
-	array = pk_results_get_repo_detail_array (results);
-	for (i=0; i<array->len; i++) {
-		item = g_ptr_array_index (array, i);
-		g_object_get (item,
-			      "repo-id", &repo_id,
-			      "description", &description,
-			      NULL);
-
-		g_debug ("repo = %s:%s", repo_id, description);
-		/* no problem, just no point adding as we will fallback to the repo_id */
-		if (description != NULL)
-			g_hash_table_insert (priv->repos, g_strdup (repo_id), g_strdup (description));
-		g_free (repo_id);
-		g_free (description);
-	}
-
-out:
-	if (error_code != NULL)
-		g_object_unref (error_code);
-	if (array != NULL)
-		g_ptr_array_unref (array);
-	if (results != NULL)
-		g_object_unref (results);
+	/* explicit show categories.. */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	gtk_widget_show (widget);
 }
 
 /**
@@ -3138,6 +1759,7 @@ gpk_application_activate_cb (GtkApplication *_application, GpkApplicationPrivate
 	window = GTK_WINDOW (gtk_builder_get_object (priv->builder, "window_manager"));
 	gtk_window_present (window);
 }
+
 
 /**
  * gpk_application_startup_cb:
@@ -3152,46 +1774,23 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	GtkWidget *widget;
 	guint retval;
 
-	priv->package_sack = pk_package_sack_new ();
 	priv->settings = g_settings_new (GPK_SETTINGS_SCHEMA);
 	priv->cancellable = g_cancellable_new ();
-	priv->repos = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, g_free);
+
+	priv->backend = gpk_backend_new ();
 
 	/* watch gnome-packagekit keys */
 	g_signal_connect (priv->settings, "changed", G_CALLBACK (gpk_application_key_changed_cb), priv);
 
 	/* create array stores */
-	priv->packages_store = gtk_list_store_new (PACKAGES_COLUMN_LAST,
-					      G_TYPE_STRING,
-					      G_TYPE_UINT64,
-					      G_TYPE_STRING,
-					      G_TYPE_STRING,
-					      G_TYPE_STRING);
-	priv->groups_store = gtk_tree_store_new (GROUPS_COLUMN_LAST,
-					   G_TYPE_STRING,
-					   G_TYPE_STRING,
-					   G_TYPE_STRING,
-					   G_TYPE_STRING,
-					   G_TYPE_BOOLEAN);
+
+	priv->packages_store = gpk_packages_list_store_new ();
 
 	/* add application specific icons to search path */
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
 					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
 					   "/usr/share/PackageKit/icons");
-
-	priv->control = pk_control_new ();
-
-	/* this is what we use mainly */
-	priv->task = PK_TASK (gpk_task_new ());
-	g_object_set (priv->task,
-		      "background", FALSE,
-		      NULL);
-
-	/* get properties */
-	pk_control_get_properties_async (priv->control, NULL, (GAsyncReadyCallback) pk_backend_status_get_properties_cb, priv);
-	g_signal_connect (priv->control, "notify::network-state",
-			  G_CALLBACK (gpk_application_notify_network_state_cb), priv);
 
 	/* get UI */
 	priv->builder = gtk_builder_new ();
@@ -3215,57 +1814,28 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	menu = G_MENU_MODEL (gtk_builder_get_object (priv->builder, "appmenu"));
 	gtk_application_set_app_menu (priv->application, menu);
 
-	/* helpers */
-	priv->helper_run = gpk_helper_run_new ();
-	gpk_helper_run_set_parent (priv->helper_run, GTK_WINDOW (main_window));
-
 	/* Hide window first so that the dialogue resizes itself without redrawing */
 	gtk_widget_hide (main_window);
 	gtk_window_set_icon_name (GTK_WINDOW (main_window), GPK_ICON_SOFTWARE_INSTALLER);
 	gtk_window_set_default_icon_name (GPK_ICON_SOFTWARE_INSTALLER);
 
-	/* clear */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_clear"));
+	/* open */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
 	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_clear_cb), priv);
-
-	/* pending */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_pending"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_pending_cb), priv);
+			  G_CALLBACK (gpk_application_button_open_cb), priv);
 
 	/* install */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_apply"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_apply_cb), priv);
-
-	/* detail buttons */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_homepage"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_homepage_cb), priv);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_files"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_files_cb), priv);
-
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_install_cb), priv);
 
+	/* remove */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_remove"));
 	g_signal_connect (widget, "clicked",
 			  G_CALLBACK (gpk_application_button_remove_cb), priv);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_depends"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_depends_cb), priv);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_requires"));
-	g_signal_connect (widget, "clicked",
-			  G_CALLBACK (gpk_application_button_requires_cb), priv);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "hbox_packages"));
-	gtk_widget_hide (widget);
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "empty_page");
 
 	/* search cancel button */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
@@ -3273,39 +1843,35 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 			  G_CALLBACK (gpk_application_cancel_cb), priv);
 	gtk_widget_hide (widget);
 
+	// Categories
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_categories"));
+	g_signal_connect (widget, "clicked",
+	                  G_CALLBACK (gpk_application_show_search_entry), priv);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_categories_home"));
+	g_signal_connect (widget, "clicked",
+	                  G_CALLBACK (gpk_application_show_categories_entry), priv);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_search_home"));
+	g_signal_connect (widget, "clicked",
+	                  G_CALLBACK (gpk_application_show_categories_entry), priv);
+
 	/* the fancy text entry widget */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
 
-	/* set focus on entry text */
-	gtk_widget_grab_focus (widget);
-	gtk_widget_show (widget);
-	gtk_entry_set_icon_sensitive (GTK_ENTRY (widget), GTK_ENTRY_ICON_PRIMARY, TRUE);
-
 	g_signal_connect (widget, "activate",
-			  G_CALLBACK (gpk_application_find_cb), priv);
+			  G_CALLBACK (gpk_application_search_entry_activated), priv);
 	g_signal_connect (widget, "icon-press",
 			  G_CALLBACK (gpk_application_entry_text_icon_press_cb), priv);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "entry_text"));
 	g_signal_connect (GTK_EDITABLE (widget), "changed",
 			  G_CALLBACK (gpk_application_text_changed_cb), priv);
 
 	/* mark find button insensitive */
 	gpk_application_set_button_find_sensitivity (priv);
 
-	/* set a size, as much as the screen allows */
-	gtk_window_set_default_size (GTK_WINDOW (main_window), 1000, 600);
-	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
-	gtk_widget_show (GTK_WIDGET(main_window));
-
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
-	g_signal_connect (GTK_TREE_VIEW (widget), "row-activated",
-			  G_CALLBACK (gpk_application_package_row_activated_cb), priv);
-
-	/* sorted */
-	gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (priv->packages_store),
-					      PACKAGES_COLUMN_ID, GTK_SORT_ASCENDING);
 
 	/* create package tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
@@ -3319,34 +1885,33 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	/* add columns to the tree view */
 	gpk_application_packages_add_columns (priv);
 
-	/* set up the groups checkbox */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_groups"));
+	/* Show empty page */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	gtk_widget_hide (widget);
+	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_QUERY);
 
-	/* add columns to the tree view */
-	gpk_application_groups_add_columns (GTK_TREE_VIEW (widget));
-	gtk_tree_view_set_tooltip_column (GTK_TREE_VIEW (widget), GROUPS_COLUMN_SUMMARY);
-	gtk_tree_view_set_show_expanders (GTK_TREE_VIEW (widget), FALSE);
-	gtk_tree_view_set_level_indentation  (GTK_TREE_VIEW (widget), 9);
-	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
-				 GTK_TREE_MODEL (priv->groups_store));
+	/* set a size, as much as the screen allows */
+	gtk_window_set_default_size (GTK_WINDOW (main_window), 1000, 600);
+	gtk_window_set_position (GTK_WINDOW (main_window), GTK_WIN_POS_CENTER);
+	gtk_widget_show (GTK_WIDGET(main_window));
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (widget));
-	g_signal_connect (selection, "changed",
-			  G_CALLBACK (gpk_application_groups_treeview_changed_cb), priv);
+	/* configure app */
+	priv->search_type = g_settings_get_enum (priv->settings, GPK_SETTINGS_SEARCH_MODE);
+	if (priv->search_type == GPK_SEARCH_APP) {
+		gpk_application_menu_search_for_application (NULL, priv);
+	} else if (priv->search_type == GPK_SEARCH_PKGNAME) {
+		gpk_application_menu_search_by_pkgname (NULL, priv);
+	} else {
+		/* mode not recognized */
+		g_warning ("cannot recognize mode %u, using name", priv->search_type);
+		gpk_application_menu_search_by_pkgname (NULL, priv);
+	}
 
-	/* get repos, so we can show the full name in the package source box */
-	pk_client_get_repo_list_async (PK_CLIENT (priv->task),
-				       pk_bitfield_value (PK_FILTER_ENUM_NONE),
-				       priv->cancellable,
-				       (PkProgressCallback) gpk_application_progress_cb, priv,
-				       (GAsyncReadyCallback) gpk_application_get_repo_list_cb, priv);
-
-	/* set current action */
-	priv->action = GPK_ACTION_NONE;
-	gpk_application_change_queue_status (priv);
-
-	/* hide details */
-	gpk_application_clear_details (priv);
+	/* Open backend and wait... */
+	gpk_backend_open (priv->backend,
+	                  priv->cancellable,
+	                  (GAsyncReadyCallback)  gpk_application_open_backend_ready,
+	                  priv);
 }
 
 static void
@@ -3432,32 +1997,23 @@ main (int argc, char *argv[])
 	status = g_application_run (G_APPLICATION (priv->application), argc, argv);
 	g_object_unref (priv->application);
 
-	if (priv->details_event_id > 0)
-		g_source_remove (priv->details_event_id);
-
+	if (priv->backend != NULL)
+		g_object_unref (priv->backend);
 	if (priv->packages_store != NULL)
 		g_object_unref (priv->packages_store);
-	if (priv->control != NULL)
-		g_object_unref (priv->control);
-	if (priv->task != NULL)
-		g_object_unref (priv->task);
 	if (priv->settings != NULL)
 		g_object_unref (priv->settings);
 	if (priv->builder != NULL)
 		g_object_unref (priv->builder);
-	if (priv->helper_run != NULL)
-		g_object_unref (priv->helper_run);
 	if (priv->cancellable != NULL)
 		g_object_unref (priv->cancellable);
-	if (priv->package_sack != NULL)
-		g_object_unref (priv->package_sack);
-	if (priv->repos != NULL)
-		g_hash_table_destroy (priv->repos);
 	if (priv->status_id > 0)
 		g_source_remove (priv->status_id);
-	g_free (priv->homepage_url);
-	g_free (priv->search_group);
+
 	g_free (priv->search_text);
+	g_free (priv->selection_id);
+	g_free (priv->desktop_id);
+
 	g_free (priv);
 
 	return status;
