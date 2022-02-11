@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
+ * Copyright (C) 2021-2022 Matias De lellis <mati86dl@gmail.com>
  * Copyright (C) 2007-2012 Richard Hughes <richard@hughsie.com>
  *
  * Licensed under the GNU General Public License Version 2
@@ -237,7 +238,7 @@ gpk_application_stop_progress_acction (GpkApplicationPrivate *priv)
 	gtk_label_set_label (GTK_LABEL (widget), _("Software"));
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_subtitle"));
-	gtk_label_set_label (GTK_LABEL (widget), _("Browse available software using the categories"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Browse by categories or search and discover new apps"));
 }
 
 /**
@@ -1448,7 +1449,7 @@ gpk_application_activate_about_cb (GSimpleAction *action,
 	GpkApplicationPrivate *priv = user_data;
 	GtkWidget *main_window;
 	const gchar copyright[] =
-		"Copyright \xc2\xa9 2021 Matias De lellis\n"
+		"Copyright \xc2\xa9 2021-2022 Matias De lellis\n"
 		"Copyright \xc2\xa9 2007-2009 Richard Hughes";
 	const char *authors[] = {
 		"Matias De lellis <mati86dl@gmail.com>",
@@ -1747,6 +1748,9 @@ gpk_application_open_backend_ready (GpkBackend            *backend,
 	/* explicit show categories.. */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
 	gtk_widget_show (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack	"));
+	gtk_widget_grab_focus (widget);
 }
 
 /**

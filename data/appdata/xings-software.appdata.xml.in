@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright 2021 Matias De lellis <mati86dl@gmail.com> -->
+<!-- Copyright 2021-2022 Matias De lellis <mati86dl@gmail.com> -->
 <component>
   <id>org.xings.software</id>
   <launchable type="desktop-id">xings-software.desktop</launchable>
@@ -9,11 +9,11 @@
   <_summary>Add or remove software installed on the system</_summary>
   <description>
     <_p>
-      Software allows you to install and remove packages on your system.
-      You can view and search packages by name, details or even file name
-      and also see dependencies of one package on other packages.
-      Searching by groups is possible and is an easy way to find software in
-      your favorite desktop environment.
+      Software allows you to find and install new applications and remove
+      existing installed applications.
+    </_p>
+    <_p>
+      Browse by categories or search and discover new apps.
     </_p>
     <_p>
       Software uses PackageKit and can work on any distribution using
@@ -35,7 +35,8 @@
       </image>
     </screenshot>
   </screenshots>
-  <url type="homepage">https://github.com/matiasdelellis/xings-packagekit/</url>
   <url type="bugtracker">https://github.com/matiasdelellis/xings-packagekit/issues</url>
   <url type="contact">https://github.com/matiasdelellis</url>
+  <url type="donation">https://www.gnome.org/donate/</url>
+  <url type="homepage">https://github.com/matiasdelellis/xings-packagekit/</url>
 </component>

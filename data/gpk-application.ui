@@ -236,7 +236,7 @@
                       <object class="GtkLabel" id="label_empty_subtitle">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Browse available software using the categories</property>
+                        <property name="label" translatable="yes">Browse by categories or search and discover new apps</property>
                         <style>
                           <class name="dim-label"/>
                         </style>
