@@ -24,7 +24,12 @@
   <screenshots>
     <screenshot type="default">
       <image type="source">
-        https://github.com/matiasdelellis/xings-packagekit/raw/xings/data/appdata/ss-updater.png
+        https://github.com/matiasdelellis/xings-packagekit/raw/xings/data/appdata/ss-update.png
+      </image>
+    </screenshot>
+    <screenshot>
+      <image type="source">
+        https://github.com/matiasdelellis/xings-packagekit/raw/xings/data/appdata/ss-preferences.png
       </image>
     </screenshot>
   </screenshots>
