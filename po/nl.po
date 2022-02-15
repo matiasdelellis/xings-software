@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PackageKit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-22 10:24-0300\n"
+"POT-Creation-Date: 2022-02-15 12:13-0300\n"
 "PO-Revision-Date: 2014-08-12 23:39+0200\n"
 "Last-Translator: Reinout van Schouwen <reinouts@gnome.org>\n"
 "Language-Team: Dutch <vertaling@vrijschrift.org>\n"
@@ -21,34 +21,30 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
-#: ../src/software/gpk-application.c:2572
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:4
+#: ../src/software/gpk-application.c:238 ../src/software/gpk-application.c:1493
+#: ../src/software/gpk-application.c:1735
 #, fuzzy
 msgid "Software"
 msgstr "Softwarelogboek"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1501
 msgid "Add or remove software installed on the system"
 msgstr "Software installeren op, of verwijderen van het systeem"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:3
-#, fuzzy
 msgid ""
-"Software allows you to install and remove packages on your system. You can "
-"view and search packages by name, details or even file name and also see "
-"dependencies of one package on other packages. Searching by groups is "
-"possible and is an easy way to find software in your favorite desktop "
-"environment."
+"Software allows you to find and install new applications and remove existing "
+"installed applications."
 msgstr ""
-"Gnome Pakketinstallatie laat u pakketten op uw systeem installeren en "
-"verwijderen. U kunt pakketten op naam, details of zelfs bestandsnamen "
-"doorzoeken en afhankelijkheden zien van een pakket op andere pakketten. U "
-"kunt zoeken op groep, waarmee het makkelijk is om software voor uw favoriete "
-"grafische werkomgeving te vinden."
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:4
+msgid "Browse by categories or search and discover new apps."
+msgstr ""
+
+#: ../data/appdata/xings-software.appdata.xml.in.h:5
 #, fuzzy
 msgid ""
 "Software uses PackageKit and can work on any distribution using the native "
@@ -62,12 +58,12 @@ msgstr ""
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3442
+#: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "Software bijwerken"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:6 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "De op uw systeem geïnstalleerde software bijwerken"
 
@@ -91,6 +87,91 @@ msgstr ""
 "Het pakketupdateprogramma gebruikt PackageKit and werkt op elke distributie "
 "met gebruikmaking van het oorspronkelijke pakketbeheer-framework."
 
+#: ../data/categories/development.directory.in.h:1
+#, fuzzy
+msgid "Development"
+msgstr "_Ontwikkeling"
+
+#: ../data/categories/development.directory.in.h:2
+#, fuzzy
+msgid "Software development tools"
+msgstr "Gedetailleerde foutgegevens van software"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/education.directory.in.h:1 ../src/common/gpk-enum.c:1497
+msgid "Education"
+msgstr "Educatie"
+
+#: ../data/categories/education.directory.in.h:2
+#, fuzzy
+msgid "Educational software"
+msgstr "%s vereist extra software"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/games.directory.in.h:1 ../src/common/gpk-enum.c:1501
+msgid "Games"
+msgstr "Spelletjes"
+
+#: ../data/categories/games.directory.in.h:2
+msgid "Games, puzzles, and other fun software"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/graphics.directory.in.h:1 ../src/common/gpk-enum.c:1505
+msgid "Graphics"
+msgstr "Grafisch"
+
+#: ../data/categories/graphics.directory.in.h:2
+msgid "Graphics creation and manipulation applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/multimedia.directory.in.h:1 ../src/common/gpk-enum.c:1525
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: ../data/categories/multimedia.directory.in.h:2
+msgid "Audio and video players and editors"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/network.directory.in.h:1 ../src/common/gpk-enum.c:1509
+msgid "Internet"
+msgstr "Internet"
+
+#: ../data/categories/network.directory.in.h:2
+msgid "Applications for Internet access"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/office.directory.in.h:1 ../src/common/gpk-enum.c:1513
+msgid "Office"
+msgstr "Kantoor"
+
+#: ../data/categories/office.directory.in.h:2
+msgid "Office and productivity applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/science.directory.in.h:1 ../src/common/gpk-enum.c:1601
+msgid "Science"
+msgstr "Wetenschap"
+
+#: ../data/categories/science.directory.in.h:2
+#, fuzzy
+msgid "Scientific software"
+msgstr "Software niet gevonden"
+
+#: ../data/categories/settings.directory.in.h:1
+#, fuzzy
+msgid "Settings"
+msgstr "Starten"
+
+#: ../data/categories/settings.directory.in.h:2
+#, fuzzy
+msgid "Desktop and system settings applications"
+msgstr "De lijst met actieve toepassingen bijwerken"
+
 #: ../data/xings-software.desktop.in.h:3
 #, fuzzy
 msgid ""
@@ -100,108 +181,106 @@ msgstr ""
 "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;Opwaardering;"
 "Broncode;Voorkeuren;Installeren;Winkel;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#: ../data/gpk-application.ui.h:1
 #, fuzzy
-msgid "Select to Install…"
-msgstr "Bestanden om te installeren"
+msgid "Show categories"
+msgstr "Categorieën opgehaald"
 
-#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
-msgid "Select to Remove…"
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "Bezig met zoeken naar pakketten..."
+
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:1675
+#, fuzzy
+msgid "Categories"
+msgstr "Categorieën opgehaald"
+
+#: ../data/gpk-application.ui.h:5 ../src/software/gpk-application.c:241
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4
-msgid "License"
-msgstr "Licentie"
+#: ../data/gpk-application.ui.h:7
+msgid "Open"
+msgstr ""
 
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Bron"
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:8 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "Installeren"
 
-#: ../data/gpk-application.ui.h:6
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:9 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: ../data/gpk-application.ui.h:10
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../data/gpk-application.ui.h:7
-msgid "Visit home page for selected package"
-msgstr "Homepage van geselecteerd pakket bezoeken"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Files"
-msgstr "Bestanden"
-
-#: ../data/gpk-application.ui.h:9
-#, fuzzy
-msgid "Required"
-msgstr "Vereist door"
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Dependent"
-msgstr "Is afhankelijk van"
+#: ../data/gpk-application.ui.h:11
+msgid "Donate"
+msgstr ""
 
 #: ../data/gpk-application.ui.h:12
 #, fuzzy
-msgid "Pending Changes"
-msgstr "Bezig met testen van wijzigingen"
+msgid "Report"
+msgstr "Depot"
 
 #: ../data/gpk-application.ui.h:13
-msgid "Review pending changes before applying them"
-msgstr ""
+#, fuzzy
+msgid "Translate"
+msgstr "Transactiefout"
 
 #: ../data/gpk-application.ui.h:14
-msgid "Apply Changes"
-msgstr "Wijzigingen toegepassen"
+msgid "License"
+msgstr "Licentie"
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:15 ../src/software/gpk-application.c:1105
 #, fuzzy
-msgid "Apply pending changes"
-msgstr "Wijzigingen worden toegepast"
+msgid "Distribution package"
+msgstr "Hulpmiddel voor opwaardering van distributie"
 
-#: ../data/gpk-application.ui.h:16
-msgid "Cancel search"
-msgstr "Zoekopdracht annuleren"
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:16 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Bron"
 
 #: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Cancel"
-msgstr "_Annuleren"
-
-#: ../data/gpk-application.ui.h:18
-#, fuzzy
-msgid "Cancel pending changes"
-msgstr "Bezig met testen van wijzigingen"
-
-#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "Softwarebronnen"
 
-#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
 msgid "Software Sources"
 msgstr "Softwarebronnen"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:19
 #: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
 #: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "Softwarebronnen"
 
-#: ../data/gpk-application.ui.h:22
-msgid "Only Newest Versions"
-msgstr "Alleen nieuwste versies"
-
-#: ../data/gpk-application.ui.h:23
-msgid "Only Native Packages"
-msgstr "Alleen architectuureigen pakketten"
-
-#: ../data/gpk-application.ui.h:24
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "Info"
 
-#: ../data/gpk-application.ui.h:25
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "_Afsluiten"
 
@@ -381,14 +460,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1457
 #, fuzzy
 msgid "All software is up to date"
 msgstr "Software bijwerken"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1461
+#: ../src/software-update/gpk-update-viewer.c:1459
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "Er zijn momenteel geen pakket-updates voor uw computer beschikbaar."
@@ -436,124 +515,50 @@ msgid "Ask the user if additional packages should be installed."
 msgstr "De gebruiker vragen of extra pakketten geïnstalleerd moeten worden."
 
 #: ../data/org.xings.software.gschema.xml.h:5
-msgid "Filter using basename in gpk-application"
-msgstr "Filteren met gebruik van basisnaam in gpk-application"
-
-#: ../data/org.xings.software.gschema.xml.h:6
-msgid "Filter package lists using basename in gpk-application."
-msgstr ""
-"Pakketlijsten filteren met gebruikmaking van basisnaam in gpk-application."
-
-#: ../data/org.xings.software.gschema.xml.h:7
-msgid "Only show the newest packages in the file lists"
-msgstr "Alleen de nieuwste pakketten tonen in de bestandslijsten"
-
-#: ../data/org.xings.software.gschema.xml.h:8
-msgid "Only show the newest packages in the file lists."
-msgstr "Alleen de nieuwste pakketten tonen in de bestandslijsten."
-
-#: ../data/org.xings.software.gschema.xml.h:9
-msgid "Only show supported packages in the file lists"
-msgstr "Alleen ondersteunde pakketten tonen in de bestandslijsten"
-
-#: ../data/org.xings.software.gschema.xml.h:10
-msgid "Only show supported packages in the file lists."
-msgstr "Alleen ondersteunde pakketten tonen in de bestandslijsten."
-
-#: ../data/org.xings.software.gschema.xml.h:11
-msgid "Only show native packages in the file lists"
-msgstr "Alleen architectuureigen pakketten tonen in de bestandslijsten"
-
-#: ../data/org.xings.software.gschema.xml.h:12
-msgid ""
-"Only show native packages matching the machine architecture in the file "
-"lists."
-msgstr ""
-"Alleen pakketten die overeenkomen met de machinearchitectuur tonen in de "
-"bestandslijsten."
-
-#: ../data/org.xings.software.gschema.xml.h:13
-msgid "Show the category group menu"
-msgstr "Het categoriegroepmenu tonen"
-
-#: ../data/org.xings.software.gschema.xml.h:14
-msgid ""
-"Show the category group menu. This is more complete and custom to the "
-"distribution, but takes longer to populate."
-msgstr ""
-"Het categoriegroepmenu tonen. Dit is completer en aan de distributie "
-"aangepast, maar kost meer tijd om te vullen."
-
-#: ../data/org.xings.software.gschema.xml.h:15
-msgid "Show the 'All Packages' group menu"
-msgstr "‘Alle pakketten’-groepmenu tonen"
-
-#: ../data/org.xings.software.gschema.xml.h:16
-msgid ""
-"Show the all packages menu item. This takes a long time to populate on most "
-"backends and is not generally required by end users."
-msgstr ""
-"Het menu-item ‘Alle pakketten’ tonen. Dit neemt veel tijd in beslag om te "
-"vullen op de meeste back-ends en is meestal niet nodig voor eindgebruikers."
-
-#: ../data/org.xings.software.gschema.xml.h:17
 msgid "The search mode used by default"
 msgstr "De standaard gebruikte zoekmodus"
 
-#: ../data/org.xings.software.gschema.xml.h:18
-msgid ""
-"The search mode used by default. Options are \"name\", \"details\", or \"file"
-"\"."
+#: ../data/org.xings.software.gschema.xml.h:6
+#, fuzzy
+msgid "The search mode used by default. Options are \"name\", \"details\"."
 msgstr ""
 "De standaard gebruikte zoekmodus. Opties zijn ‘name’, ‘details’ of ‘file’."
 
-#: ../data/org.xings.software.gschema.xml.h:19
+#: ../data/org.xings.software.gschema.xml.h:7
 msgid "Show all repositories in the package source viewer"
 msgstr "Alle installatiebronnen in de pakketbronviewer tonen"
 
-#: ../data/org.xings.software.gschema.xml.h:20
+#: ../data/org.xings.software.gschema.xml.h:8
 msgid "Show all repositories in the package source viewer."
 msgstr "Alle installatiebronnen in de pakketbronviewer tonen."
 
-#: ../data/org.xings.software.gschema.xml.h:21
-msgid "Only show the newest updates in the list"
-msgstr "Alleen de nieuwste updates tonen in de lijst"
-
-#: ../data/org.xings.software.gschema.xml.h:22
-msgid ""
-"Only show the newest packages in the update list, and filter out older "
-"updates that are still available."
-msgstr ""
-"Alleen de nieuwste pakketten tonen in de lijst van updates en oudere, nog "
-"steeds beschikbare updates uitfilteren."
-
-#: ../data/org.xings.software.gschema.xml.h:23
+#: ../data/org.xings.software.gschema.xml.h:9
 msgid "Scroll to packages as they are downloaded"
 msgstr "Doorschuiven naar pakketten terwijl ze gedownload worden"
 
-#: ../data/org.xings.software.gschema.xml.h:24
+#: ../data/org.xings.software.gschema.xml.h:10
 msgid ""
 "Scroll to packages in the update list as they are downloaded or installed."
 msgstr ""
 "Doorschuiven naar pakketten in de updatelijst terwijl ze gedownload of "
 "geïnstalleerd worden."
 
-#: ../data/org.xings.software.gschema.xml.h:25
+#: ../data/org.xings.software.gschema.xml.h:11
 msgid "Allow applications to invoke the font installer"
 msgstr ""
 "Toepassingen toestaan het lettertypeninstallatieprogramma aan te roepen"
 
-#: ../data/org.xings.software.gschema.xml.h:26
+#: ../data/org.xings.software.gschema.xml.h:12
 msgid "Allow applications to invoke the font installer."
 msgstr ""
 "Toepassingen toestaan het lettertypeninstallatieprogamma aan te roepen."
 
-#: ../data/org.xings.software.gschema.xml.h:27
+#: ../data/org.xings.software.gschema.xml.h:13
 msgid "Programs that should be ignored when they issue session D-Bus requests"
 msgstr ""
 "Programma's die genegeerd moeten worden wanneer zij D-Bus-aanvragen versturen"
 
-#: ../data/org.xings.software.gschema.xml.h:28
+#: ../data/org.xings.software.gschema.xml.h:14
 msgid ""
 "Programs that should be ignored when they issue session D-Bus requests, "
 "separated by commas."
@@ -561,23 +566,23 @@ msgstr ""
 "Programma's die genegeerd moeten worden wanneer zij D-Bus-aanvragen "
 "versturen, gescheiden door komma's."
 
-#: ../data/org.xings.software.gschema.xml.h:29
+#: ../data/org.xings.software.gschema.xml.h:15
 msgid "Allow applications to invoke the codec installer"
 msgstr "Toepassingen toestaan het codec-installatieprogamma aan te roepen"
 
-#: ../data/org.xings.software.gschema.xml.h:30
+#: ../data/org.xings.software.gschema.xml.h:16
 msgid "Allow applications to invoke the codec installer."
 msgstr "Toepassingen toestaan het codec-installatieprogamma aan te roepen "
 
-#: ../data/org.xings.software.gschema.xml.h:31
+#: ../data/org.xings.software.gschema.xml.h:17
 msgid "Allow applications to invoke the mime type installer"
 msgstr "Toepassingen toestaan het mimetype-installatieprogramma aan te roepen"
 
-#: ../data/org.xings.software.gschema.xml.h:32
+#: ../data/org.xings.software.gschema.xml.h:18
 msgid "Allow applications to invoke the mime type installer."
 msgstr "Toepassingen toestaan het mimetype-installatieprogramma aan te roepen "
 
-#: ../data/org.xings.software.gschema.xml.h:33
+#: ../data/org.xings.software.gschema.xml.h:19
 msgid ""
 "When displaying UI from a session D-Bus request, automatically use these "
 "options by default."
@@ -585,7 +590,7 @@ msgstr ""
 "Wanneer een UI wordt weergegeven vanwege een DBus-aanvraag vanuit de sessie, "
 "gebruik dan standaard deze opties."
 
-#: ../data/org.xings.software.gschema.xml.h:34
+#: ../data/org.xings.software.gschema.xml.h:20
 msgid ""
 "When displaying UI from a session D-Bus request, force these options to be "
 "turned on."
@@ -593,13 +598,13 @@ msgstr ""
 "Wanneer een UI wordt weergegeven vanwege een DBus-aanvraag vanuit de sessie, "
 "dwing dan af dat deze opties aanstaan."
 
-#: ../data/org.xings.software.gschema.xml.h:35
+#: ../data/org.xings.software.gschema.xml.h:21
 #, fuzzy
 msgid "Check for updates even on a mobile connection"
 msgstr "Controleren op updates terwijl op accustroom"
 
 # Niemand weet wat CDMA is, 3G is een duidelijker voorbeeld
-#: ../data/org.xings.software.gschema.xml.h:36
+#: ../data/org.xings.software.gschema.xml.h:22
 #, fuzzy
 msgid ""
 "Use mobile broadband connections such as GSM and CDMA to check for updates."
@@ -607,41 +612,41 @@ msgstr ""
 "Mobiele breedbandverbindingen zoals 3G gebruiken om te controleren op "
 "herzieningen"
 
-#: ../data/org.xings.software.gschema.xml.h:37
+#: ../data/org.xings.software.gschema.xml.h:23
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:38
+#: ../data/org.xings.software.gschema.xml.h:24
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:39
+#: ../data/org.xings.software.gschema.xml.h:25
 msgid "How often to check for updates"
 msgstr "Hoe vaak controleren op nieuwe herzieningen"
 
-#: ../data/org.xings.software.gschema.xml.h:40
+#: ../data/org.xings.software.gschema.xml.h:26
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:41
+#: ../data/org.xings.software.gschema.xml.h:27
 msgid "How often to refresh the package cache"
 msgstr "Hoe vaak de pakketbuffer verversen"
 
-#: ../data/org.xings.software.gschema.xml.h:42
+#: ../data/org.xings.software.gschema.xml.h:28
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr ""
 "Hoe vaak de pakketbuffer verversen. De waarde is uitgedrukt in seconden."
 
-#: ../data/org.xings.software.gschema.xml.h:43
+#: ../data/org.xings.software.gschema.xml.h:29
 #, fuzzy
 msgid "How often to notify the user that non-critical updates are available"
 msgstr ""
 "De gebruiker informeren wanneer er beveiligingsherzieningen beschikbaar zijn"
 
-#: ../data/org.xings.software.gschema.xml.h:44
+#: ../data/org.xings.software.gschema.xml.h:30
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -649,44 +654,44 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:45
+#: ../data/org.xings.software.gschema.xml.h:31
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:46
+#: ../data/org.xings.software.gschema.xml.h:32
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:181
+#: ../src/common/gpk-common.c:200
 msgid "32-bit"
 msgstr "32-bit"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:188
+#: ../src/common/gpk-common.c:207
 msgid "64-bit"
 msgstr "64-bit"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:348
+#: ../src/common/gpk-common.c:381
 msgid "This application is running as a privileged user"
 msgstr "Deze toepassing wordt uitgevoerd door een gebruiker met extra rechten"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:351
+#: ../src/common/gpk-common.c:384
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s wordt uitgevoerd door een gebruiker met extra rechten"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:354
+#: ../src/common/gpk-common.c:387
 msgid "Package management applications are security sensitive."
 msgstr "Pakketbeheertoepassingen zijn veiligheidsgevoelig."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:356
+#: ../src/common/gpk-common.c:389
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -695,18 +700,18 @@ msgstr ""
 "uit veiligheidsoverwegingen vermeden te worden."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:362
+#: ../src/common/gpk-common.c:395
 msgid "Continue _Anyway"
 msgstr "Toch _doorgaan"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
+#: ../src/common/gpk-common.c:433 ../src/common/gpk-common.c:483
 #, c-format
 msgid "Now"
 msgstr "Nu"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:443 ../src/common/gpk-common.c:493
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -714,7 +719,7 @@ msgstr[0] "%i seconde"
 msgstr[1] "%i seconden"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
+#: ../src/common/gpk-common.c:453 ../src/common/gpk-common.c:506
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -722,7 +727,7 @@ msgstr[0] "%i minuut"
 msgstr[1] "%i minuten"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
+#: ../src/common/gpk-common.c:459 ../src/common/gpk-common.c:525
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -733,50 +738,50 @@ msgstr[1] "%i uur"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
+#: ../src/common/gpk-common.c:512 ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:513 ../src/common/gpk-common.c:533
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuut"
 msgstr[1] "minuten"
 
-#: ../src/common/gpk-common.c:481
+#: ../src/common/gpk-common.c:514
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "seconde"
 msgstr[1] "seconden"
 
-#: ../src/common/gpk-common.c:499
+#: ../src/common/gpk-common.c:532
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "uur"
 msgstr[1] "uren"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:529
+#: ../src/common/gpk-common.c:562
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i minuut"
 
-#: ../src/common/gpk-common.c:531
+#: ../src/common/gpk-common.c:564
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%i minuut"
 msgstr[1] "%i minuten"
 
-#: ../src/common/gpk-common.c:536
+#: ../src/common/gpk-common.c:569
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%d uren en %d minuten geleden"
 msgstr[1] "%d uren en %d minuten geleden"
 
-#: ../src/common/gpk-common.c:541
+#: ../src/common/gpk-common.c:574
 #, fuzzy, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -787,7 +792,7 @@ msgstr[1] ""
 "\n"
 "Voor Het Laatst Gezien: %s geleden"
 
-#: ../src/common/gpk-common.c:546
+#: ../src/common/gpk-common.c:579
 #, fuzzy, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -798,14 +803,14 @@ msgstr[1] ""
 "\n"
 "Voor Het Laatst Gezien: %s geleden"
 
-#: ../src/common/gpk-common.c:551
+#: ../src/common/gpk-common.c:584
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:589
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -813,25 +818,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:583
+#: ../src/common/gpk-common.c:616
 #, c-format
 msgid "%s and %s"
 msgstr "%s en %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:587
+#: ../src/common/gpk-common.c:620
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s en %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:591
+#: ../src/common/gpk-common.c:624
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s en %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:596
+#: ../src/common/gpk-common.c:629
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s en %s"
@@ -856,10 +861,8 @@ msgstr "veel pakketten"
 
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
-#. TRANSLATORS: column for group name
-#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2028
-#: ../src/software/gpk-application.c:2050
+#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
+#: ../src/software/gpk-application.c:1020
 msgid "Name"
 msgstr "Naam"
 
@@ -2416,31 +2419,6 @@ msgid "Accessories"
 msgstr "Hulpmiddelen"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1497
-msgid "Education"
-msgstr "Educatie"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1501
-msgid "Games"
-msgstr "Spelletjes"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1505
-msgid "Graphics"
-msgstr "Grafisch"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1509
-msgid "Internet"
-msgstr "Internet"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1513
-msgid "Office"
-msgstr "Kantoor"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1517 ../src/common/gpk-task.c:426
 msgid "Other"
 msgstr "Overig"
@@ -2449,11 +2427,6 @@ msgstr "Overig"
 #: ../src/common/gpk-enum.c:1521
 msgid "Programming"
 msgstr "Ontwikkeling"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1525
-msgid "Multimedia"
-msgstr "Multimedia"
 
 #. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1529
@@ -2546,11 +2519,6 @@ msgid "Package sources"
 msgstr "Pakketbronnen"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1601
-msgid "Science"
-msgstr "Wetenschap"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1605
 msgid "Documentation"
 msgstr "Documentatie"
@@ -2585,17 +2553,17 @@ msgstr "Onbekende groep"
 msgid "Icon"
 msgstr "Pictogram"
 
-#: ../src/common/gpk-helper-chooser.c:259
+#: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Toepassingen die dit type bestand kunnen openen"
 
 #. TRANSLATORS: button label, install
-#: ../src/common/gpk-helper-chooser.c:265
+#: ../src/common/gpk-helper-chooser.c:263
 msgid "_Install"
 msgstr "I_nstalleren"
 
 #. TRANSLATORS: button tooltip
-#: ../src/common/gpk-helper-chooser.c:269
+#: ../src/common/gpk-helper-chooser.c:267
 msgid "Install package"
 msgstr "Pakket installeren"
 
@@ -2665,31 +2633,10 @@ msgstr "Doorgaan"
 msgid "The following software also needs to be installed"
 msgstr "De volgende software dient ook geïnstalleerd te worden"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "Installeren"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "De volgende software dient ook verwijderd te worden"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "Verwijderen"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -3415,7 +3362,7 @@ msgstr "Opvragen van bronnenlijst mislukt"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3180
+#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Afsluiten, aangezien het niet mogelijk was backend-details op te halen"
 
@@ -3433,197 +3380,110 @@ msgstr ""
 msgid "Software Settings"
 msgstr "Software-instellingen"
 
-#: ../src/software/gpk-application.c:218
-#, fuzzy
-msgid "Cancel Removal"
-msgstr "Zoekopdracht annuleren"
-
-#: ../src/software/gpk-application.c:238
-#, fuzzy
-msgid "Cancel Installation"
-msgstr "Transactie annuleren:"
-
-#. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:343
-msgid "Pending"
-msgstr "In behandeling"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:413
-#, fuzzy, c-format
-msgid "%u package to be installed"
-msgid_plural "%u packages to be installed"
-msgstr[0] "Er hoeven geen pakketten te worden geïnstalleerd"
-msgstr[1] "Er hoeven geen pakketten te worden geïnstalleerd"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:420
-#, fuzzy, c-format
-msgid "%u package to be removed"
-msgid_plural "%u packages to be removed"
-msgstr[0] "Pakket verwijderen is mislukt"
-msgstr[1] "Pakket verwijderen is mislukt"
-
-#. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:592
-#, fuzzy, c-format
-msgid "%u file installed by %s"
-msgid_plural "%u files installed by %s"
-msgstr[0] "%i bestand geïnstalleerd door %s"
-msgstr[1] "%i bestanden geïnstalleerd door %s"
-
-#. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
-msgid "No packages"
-msgstr "Geen pakketten"
-
-#. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:902
-msgid "No other packages require this package"
-msgstr "Er is geen ander pakket die dit nodig heeft."
-
-#. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:909
-#, fuzzy, c-format
-msgid "%u package requires %s"
-msgid_plural "%u packages require %s"
-msgstr[0] "%i pakket vereist %s"
-msgstr[1] "%i pakketten vereisen %s"
-
-#. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:914
-#, c-format
-msgid "Packages listed below require %s to function correctly."
-msgid_plural "Packages listed below require %s to function correctly."
-msgstr[0] "De hieronder vermelde pakketten vereisen %s om goed te werken."
-msgstr[1] "De hieronder vermelde pakketten vereisen %s om goed te werken."
-
-#. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1031
-msgid "This package does not depend on any others"
-msgstr "Dit pakket is niet afhankelijk van andere"
-
-#. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1038
-#, fuzzy, c-format
-msgid "%u additional package is required for %s"
-msgid_plural "%u additional packages are required for %s"
-msgstr[0] "%i extra pakket is vereist voor %s"
-msgstr[1] "%i extra pakketten zijn vereist voor %s"
-
-#. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1043
-#, c-format
-msgid "Packages listed below are required for %s to function correctly."
-msgid_plural "Packages listed below are required for %s to function correctly."
-msgstr[0] ""
-"De hieronder vermelde pakketten zijn nodig voor %s om goed te werken."
-msgstr[1] ""
-"De hieronder vermelde pakketten zijn nodig voor %s om goed te werken."
-
-#. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1114
-msgid "Invalid"
-msgstr "Ongeldig"
+#: ../src/software/gpk-application.c:205
+msgid "Please, be patient"
+msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1247
+#: ../src/software/gpk-application.c:484
 msgid "No results were found."
 msgstr "Geen resultaten gevonden."
 
-#. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1255
-msgid "Try entering a package name in the search bar."
-msgstr "Probeer een pakketnaam op te geven in de zoekbalk."
-
-#. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1258
-msgid "There are no packages queued to be installed or removed."
-msgstr ""
-"Er staan geen pakketten klaar om geïnstalleerd of verwijderd te worden."
-
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1263
+#: ../src/software/gpk-application.c:490
+#, fuzzy
 msgid ""
-"Try searching package descriptions by clicking the icon next to the search "
+"Try searching package distributions by clicking the icon next to the search "
 "text."
 msgstr ""
 "Probeer te zoeken naar pakketbeschrijvingen door te klikken op het pictogram "
 "naast de zoektekst."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1266
+#: ../src/software/gpk-application.c:493
 msgid "Try again with a different search term."
 msgstr "Probeer het nogmaals met een andere zoekterm."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1677
+#: ../src/software/gpk-application.c:854
 msgid "Changes not applied"
 msgstr "Wijzigingen niet toegepast"
 
-#: ../src/software/gpk-application.c:1678
+#: ../src/software/gpk-application.c:855
 msgid "Close _Anyway"
 msgstr "_Toch sluiten"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1682
+#: ../src/software/gpk-application.c:859
 msgid "You have made changes that have not yet been applied."
 msgstr "U hebt wijzigingen aangebracht die nog niet zijn toegepast."
 
-#: ../src/software/gpk-application.c:1683
+#: ../src/software/gpk-application.c:860
 msgid "These changes will be lost if you close this window."
 msgstr "Als u dit venster nu sluit, zullen deze wijzigingen verloren gaan."
 
+#: ../src/software/gpk-application.c:1159
+#, fuzzy
+msgid "Visit the app's website"
+msgstr "Website van het project bezoeken"
+
+#: ../src/software/gpk-application.c:1176
+msgid "Make a donation"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1193
+#, fuzzy
+msgid "Report a problem"
+msgstr "Activeer Server"
+
+#: ../src/software/gpk-application.c:1210
+msgid "Translate into your language"
+msgstr ""
+
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2224
+#: ../src/software/gpk-application.c:1245
 msgid "Size"
 msgstr "Grootte"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2227
+#: ../src/software/gpk-application.c:1248
 msgid "Installed size"
 msgstr "Geïnstalleerde grootte"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2230
+#: ../src/software/gpk-application.c:1251
 msgid "Download size"
 msgstr "Downloadgrootte"
 
-#. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2417
-msgid "Searching by name"
-msgstr "Zoeken op naam"
+#. TRANSLATORS: entry tooltip: basic search by package name
+#: ../src/software/gpk-application.c:1381
+#, fuzzy
+msgid "Searching for distribution packages"
+msgstr "Bezig met zoeken naar pakketten..."
 
-#. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2443
-msgid "Searching by description"
-msgstr "Zoeken op omschrijving"
-
-#. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2469
-msgid "Searching by file"
-msgstr "Zoeken op bestand"
+#. TRANSLATORS: entry tooltip: applications search
+#: ../src/software/gpk-application.c:1404
+#, fuzzy
+msgid "Searching for applications"
+msgstr "Naar plugins zoeken"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2492
-msgid "Search by name"
-msgstr "Zoekopdracht op naam"
+#: ../src/software/gpk-application.c:1424
+#, fuzzy
+msgid "Search for apps"
+msgstr "Naar plugins zoeken"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2500
-msgid "Search by description"
-msgstr "Zoekopdracht op omschrijving"
+#: ../src/software/gpk-application.c:1430
+#, fuzzy
+msgid "Search for distribution packages"
+msgstr "Bezig met zoeken naar pakketten..."
 
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2508
-msgid "Search by file name"
-msgstr "Zoekopdracht op bestandsnaam"
-
-#: ../src/software/gpk-application.c:2541
+#: ../src/software/gpk-application.c:1462
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Uitgebracht onder de GNU General Public License Versie 2"
 
-#: ../src/software/gpk-application.c:2542
+#: ../src/software/gpk-application.c:1463
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3635,7 +3495,7 @@ msgstr ""
 "door de Free Software Foundation; ofwel versie 2 van deze licentie of (zo u "
 "wilt) een latere versie."
 
-#: ../src/software/gpk-application.c:2546
+#: ../src/software/gpk-application.c:1467
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3647,7 +3507,7 @@ msgstr ""
 "VERKOOPBAARHEID of GESCHIKTHEID VOOR EEN BEPAALD DOEL. Zie de GNU General "
 "Public License voor meer details."
 
-#: ../src/software/gpk-application.c:2550
+#: ../src/software/gpk-application.c:1471
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3659,7 +3519,7 @@ msgstr ""
 "02110-1301, VS."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2556
+#: ../src/software/gpk-application.c:1477
 msgid "translator-credits"
 msgstr ""
 "Reinout van Schouwen \n"
@@ -3667,51 +3527,44 @@ msgstr ""
 "\n"
 "Kijk voor meer info op http://nl.gnome.org/"
 
-#: ../src/software/gpk-application.c:2577
+#: ../src/software/gpk-application.c:1498
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "Softwarebron"
 
-#. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2772
-msgid "Enter a search word or click a category to get started."
-msgstr "Voer een zoekwoord in of klik op een categorie om te beginnen."
-
-#. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2775
-msgid "Enter a search word to get started."
-msgstr "Voer een zoekwoord in om te beginnen."
-
-#. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:3000
-msgid "Exiting as properties could not be retrieved"
-msgstr "Afsluiten, aangezien het niet mogelijk is eigenschappen op te vragen"
-
-#. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3043
-msgid "All packages"
-msgstr "Alle pakketten"
-
-#. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3045
-msgid "Show all packages"
-msgstr "Alle pakketten tonen"
+#: ../src/software/gpk-application.c:1736
+#, fuzzy
+msgid "There was an error starting the application"
+msgstr "U dient de toepassing te herstarten."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3432
-#: ../src/software-update/gpk-update-viewer.c:3412
+#: ../src/software/gpk-application.c:1953
+#: ../src/software-update/gpk-update-viewer.c:3398
 msgid "Show the program version and exit"
 msgstr "Programmaversie tonen en sluiten"
 
-#: ../src/software/gpk-application.c:3446
+#: ../src/software/gpk-application.c:1967
 msgid "Install Software"
 msgstr "Software installeren"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3462
+#: ../src/software/gpk-application.c:1983
 #, fuzzy
 msgid "Software installer"
 msgstr "Software-installatie"
+
+#: ../src/software/gpk-backend.c:87 ../src/software/gpk-backend.c:93
+#: ../src/software/gpk-backend.c:99
+#, c-format
+msgid ""
+"The backend does not support some features necessary for the application to "
+"work."
+msgstr ""
+
+#. TRANSLATORS: the repo name is invalid or not found, fall back to this
+#: ../src/software/gpk-backend.c:163
+msgid "Invalid"
+msgstr "Ongeldig"
 
 #. TRANSLATORS: don't install updates now
 #: ../src/software-service/gpk-updates-notification.c:199
@@ -3886,17 +3739,17 @@ msgid "Other updates"
 msgstr "Overige updates"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:975
+#: ../src/software-update/gpk-update-viewer.c:973
 msgid "Getting the list of updates"
 msgstr "Ophalen van lijst met updates"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1211
+#: ../src/software-update/gpk-update-viewer.c:1209
 msgid "Could not run upgrade script"
 msgstr "Kon opwaardeerscript niet uitvoeren"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1242
+#: ../src/software-update/gpk-update-viewer.c:1240
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3910,29 +3763,29 @@ msgstr[1] ""
 "De verbinding is draadloze breedband, het bijwerken van deze pakketten kan "
 "kostbaar zijn."
 
-#: ../src/software-update/gpk-update-viewer.c:1391
+#: ../src/software-update/gpk-update-viewer.c:1389
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1427
 msgid "No updates are available"
 msgstr "Er zijn geen updates beschikbaar"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1431
+#: ../src/software-update/gpk-update-viewer.c:1429
 msgid "No network connection was detected."
 msgstr "Geen netwerkverbinding gedetecteerd."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1449
+#: ../src/software-update/gpk-update-viewer.c:1447
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Update installeren"
 msgstr[1] "_Updates installeren"
 
-#: ../src/software-update/gpk-update-viewer.c:1494
+#: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3940,7 +3793,7 @@ msgstr[0] "Er is %i update beschikbaar"
 msgstr[1] "Er zijn %i updates beschikbaar"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1506
+#: ../src/software-update/gpk-update-viewer.c:1504
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3948,7 +3801,7 @@ msgstr[0] "%i update geselecteerd"
 msgstr[1] "%i updates geselecteerd"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1515
+#: ../src/software-update/gpk-update-viewer.c:1513
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3956,27 +3809,27 @@ msgstr[0] "%i update (%s) geselecteerd"
 msgstr[1] "%i updates (%s) geselecteerd"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1711
+#: ../src/software-update/gpk-update-viewer.c:1709
 msgid "Status"
 msgstr "Status"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1889
+#: ../src/software-update/gpk-update-viewer.c:1887
 msgid "This update will add new features and expand functionality."
 msgstr "Deze update voegt nieuwe functies toe en vergroot de functionaliteit."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1893
+#: ../src/software-update/gpk-update-viewer.c:1891
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "Deze update repareert bugs en andere niet kritische problemen."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1897
+#: ../src/software-update/gpk-update-viewer.c:1895
 msgid "This update is important as it may solve critical problems."
 msgstr "Deze update is belangrijk omdat het ernstige problemen kan oplossen."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1901
+#: ../src/software-update/gpk-update-viewer.c:1899
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
@@ -3984,24 +3837,24 @@ msgstr ""
 "beveiliging te repareren."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1905
+#: ../src/software-update/gpk-update-viewer.c:1903
 msgid "This update is blocked."
 msgstr "Deze update is geblokkeerd."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1917
+#: ../src/software-update/gpk-update-viewer.c:1915
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "Deze melding is op %s uitgegeven en voor het laatst bijgewerkt op %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1924
+#: ../src/software-update/gpk-update-viewer.c:1922
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "Deze melding is op %s uitgegeven."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1942
+#: ../src/software-update/gpk-update-viewer.c:1940
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -4009,7 +3862,7 @@ msgstr[0] "Voor meer informatie over deze update bezoekt u deze website:"
 msgstr[1] "Voor meer informatie over deze update bezoekt u deze websites:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1949
+#: ../src/software-update/gpk-update-viewer.c:1947
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -4024,7 +3877,7 @@ msgstr[1] ""
 "websites:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:1954
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -4035,7 +3888,7 @@ msgstr[1] ""
 "Voor meer informatie over deze beveiligingsupdate bezoekt u deze websites:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1965
+#: ../src/software-update/gpk-update-viewer.c:1963
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -4044,7 +3897,7 @@ msgstr ""
 "toe te passen."
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1969
+#: ../src/software-update/gpk-update-viewer.c:1967
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -4053,7 +3906,7 @@ msgstr ""
 "wijzigingen toe te passen."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1976
+#: ../src/software-update/gpk-update-viewer.c:1974
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -4062,7 +3915,7 @@ msgstr ""
 "is ontworpen voor gebruik in productie."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1980
+#: ../src/software-update/gpk-update-viewer.c:1978
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -4071,7 +3924,7 @@ msgstr ""
 "probleem of regressie die u tegenkomt rapporteren."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1988
+#: ../src/software-update/gpk-update-viewer.c:1986
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
@@ -4079,76 +3932,299 @@ msgstr ""
 "De logs van de ontwikkelaar zullen worden getoond omdat er geen beschrijving "
 "beschikbaar is voor deze update:"
 
-#: ../src/software-update/gpk-update-viewer.c:2035
+#: ../src/software-update/gpk-update-viewer.c:2033
 msgid "Loading…"
 msgstr "Laden…"
 
-#: ../src/software-update/gpk-update-viewer.c:2038
+#: ../src/software-update/gpk-update-viewer.c:2036
 msgid "No update details available."
 msgstr "Er zijn geen details over de update beschikbaar."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/software-update/gpk-update-viewer.c:2098
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2228
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2096
+#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:2226
 msgid "Could not get update details"
 msgstr "Kon de details over de update niet ophalen"
 
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2116
 msgid "No results were returned."
 msgstr "Geen resultaten terug gekregen."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2483
+#: ../src/software-update/gpk-update-viewer.c:2480
 msgid "Select all"
 msgstr "Alles selecteren"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2491
+#: ../src/software-update/gpk-update-viewer.c:2488
 msgid "Unselect all"
 msgstr "Alles deselecteren"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2498
+#: ../src/software-update/gpk-update-viewer.c:2495
 msgid "Select security updates"
 msgstr "Beveiligingsupdates selecteren"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2504
+#: ../src/software-update/gpk-update-viewer.c:2501
 msgid "Ignore this update"
 msgstr "Deze update negeren"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2611
-#: ../src/software-update/gpk-update-viewer.c:2814
+#: ../src/software-update/gpk-update-viewer.c:2608
+#: ../src/software-update/gpk-update-viewer.c:2800
 msgid "Could not get updates"
 msgstr "Kon de updates niet ophalen"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2748
-#: ../src/software-update/gpk-update-viewer.c:2844
+#: ../src/software-update/gpk-update-viewer.c:2742
+#: ../src/software-update/gpk-update-viewer.c:2830
 msgid "Checking for updates…"
 msgstr "Zoeken naar updates…"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3116
+#: ../src/software-update/gpk-update-viewer.c:3102
 msgid "Could not get list of distribution upgrades"
 msgstr "Kon geen lijst met opwaarderingen voor distributie ophalen"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3146
+#: ../src/software-update/gpk-update-viewer.c:3132
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "Nieuwe opwaardeerversie van distributie ‘%s’ is beschikbaar"
 
-#: ../src/software-update/gpk-update-viewer.c:3425
+#: ../src/software-update/gpk-update-viewer.c:3411
 msgid "Update Software"
 msgstr "Software bijwerken"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software allows you to install and remove packages on your system. You "
+#~ "can view and search packages by name, details or even file name and also "
+#~ "see dependencies of one package on other packages. Searching by groups is "
+#~ "possible and is an easy way to find software in your favorite desktop "
+#~ "environment."
+#~ msgstr ""
+#~ "Gnome Pakketinstallatie laat u pakketten op uw systeem installeren en "
+#~ "verwijderen. U kunt pakketten op naam, details of zelfs bestandsnamen "
+#~ "doorzoeken en afhankelijkheden zien van een pakket op andere pakketten. U "
+#~ "kunt zoeken op groep, waarmee het makkelijk is om software voor uw "
+#~ "favoriete grafische werkomgeving te vinden."
+
+#, fuzzy
+#~ msgid "Select to Install…"
+#~ msgstr "Bestanden om te installeren"
+
+#~ msgid "Visit home page for selected package"
+#~ msgstr "Homepage van geselecteerd pakket bezoeken"
+
+#~ msgid "Files"
+#~ msgstr "Bestanden"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Vereist door"
+
+#, fuzzy
+#~ msgid "Dependent"
+#~ msgstr "Is afhankelijk van"
+
+#, fuzzy
+#~ msgid "Pending Changes"
+#~ msgstr "Bezig met testen van wijzigingen"
+
+#~ msgid "Apply Changes"
+#~ msgstr "Wijzigingen toegepassen"
+
+#, fuzzy
+#~ msgid "Apply pending changes"
+#~ msgstr "Wijzigingen worden toegepast"
+
+#~ msgid "Cancel search"
+#~ msgstr "Zoekopdracht annuleren"
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "_Annuleren"
+
+#, fuzzy
+#~ msgid "Cancel pending changes"
+#~ msgstr "Bezig met testen van wijzigingen"
+
+#~ msgid "Only Newest Versions"
+#~ msgstr "Alleen nieuwste versies"
+
+#~ msgid "Only Native Packages"
+#~ msgstr "Alleen architectuureigen pakketten"
+
+#~ msgid "Filter using basename in gpk-application"
+#~ msgstr "Filteren met gebruik van basisnaam in gpk-application"
+
+#~ msgid "Filter package lists using basename in gpk-application."
+#~ msgstr ""
+#~ "Pakketlijsten filteren met gebruikmaking van basisnaam in gpk-application."
+
+#~ msgid "Only show the newest packages in the file lists"
+#~ msgstr "Alleen de nieuwste pakketten tonen in de bestandslijsten"
+
+#~ msgid "Only show the newest packages in the file lists."
+#~ msgstr "Alleen de nieuwste pakketten tonen in de bestandslijsten."
+
+#~ msgid "Only show supported packages in the file lists"
+#~ msgstr "Alleen ondersteunde pakketten tonen in de bestandslijsten"
+
+#~ msgid "Only show supported packages in the file lists."
+#~ msgstr "Alleen ondersteunde pakketten tonen in de bestandslijsten."
+
+#~ msgid "Only show native packages in the file lists"
+#~ msgstr "Alleen architectuureigen pakketten tonen in de bestandslijsten"
+
+#~ msgid ""
+#~ "Only show native packages matching the machine architecture in the file "
+#~ "lists."
+#~ msgstr ""
+#~ "Alleen pakketten die overeenkomen met de machinearchitectuur tonen in de "
+#~ "bestandslijsten."
+
+#~ msgid "Show the category group menu"
+#~ msgstr "Het categoriegroepmenu tonen"
+
+#~ msgid ""
+#~ "Show the category group menu. This is more complete and custom to the "
+#~ "distribution, but takes longer to populate."
+#~ msgstr ""
+#~ "Het categoriegroepmenu tonen. Dit is completer en aan de distributie "
+#~ "aangepast, maar kost meer tijd om te vullen."
+
+#~ msgid "Show the 'All Packages' group menu"
+#~ msgstr "‘Alle pakketten’-groepmenu tonen"
+
+#~ msgid ""
+#~ "Show the all packages menu item. This takes a long time to populate on "
+#~ "most backends and is not generally required by end users."
+#~ msgstr ""
+#~ "Het menu-item ‘Alle pakketten’ tonen. Dit neemt veel tijd in beslag om te "
+#~ "vullen op de meeste back-ends en is meestal niet nodig voor "
+#~ "eindgebruikers."
+
+#~ msgid "Only show the newest updates in the list"
+#~ msgstr "Alleen de nieuwste updates tonen in de lijst"
+
+#~ msgid ""
+#~ "Only show the newest packages in the update list, and filter out older "
+#~ "updates that are still available."
+#~ msgstr ""
+#~ "Alleen de nieuwste pakketten tonen in de lijst van updates en oudere, nog "
+#~ "steeds beschikbare updates uitfilteren."
+
+#, fuzzy
+#~ msgid "Cancel Removal"
+#~ msgstr "Zoekopdracht annuleren"
+
+#, fuzzy
+#~ msgid "Cancel Installation"
+#~ msgstr "Transactie annuleren:"
+
+#~ msgid "Pending"
+#~ msgstr "In behandeling"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be installed"
+#~ msgid_plural "%u packages to be installed"
+#~ msgstr[0] "Er hoeven geen pakketten te worden geïnstalleerd"
+#~ msgstr[1] "Er hoeven geen pakketten te worden geïnstalleerd"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be removed"
+#~ msgid_plural "%u packages to be removed"
+#~ msgstr[0] "Pakket verwijderen is mislukt"
+#~ msgstr[1] "Pakket verwijderen is mislukt"
+
+#, fuzzy, c-format
+#~ msgid "%u file installed by %s"
+#~ msgid_plural "%u files installed by %s"
+#~ msgstr[0] "%i bestand geïnstalleerd door %s"
+#~ msgstr[1] "%i bestanden geïnstalleerd door %s"
+
+#~ msgid "No packages"
+#~ msgstr "Geen pakketten"
+
+#~ msgid "No other packages require this package"
+#~ msgstr "Er is geen ander pakket die dit nodig heeft."
+
+#, fuzzy, c-format
+#~ msgid "%u package requires %s"
+#~ msgid_plural "%u packages require %s"
+#~ msgstr[0] "%i pakket vereist %s"
+#~ msgstr[1] "%i pakketten vereisen %s"
+
+#, c-format
+#~ msgid "Packages listed below require %s to function correctly."
+#~ msgid_plural "Packages listed below require %s to function correctly."
+#~ msgstr[0] "De hieronder vermelde pakketten vereisen %s om goed te werken."
+#~ msgstr[1] "De hieronder vermelde pakketten vereisen %s om goed te werken."
+
+#~ msgid "This package does not depend on any others"
+#~ msgstr "Dit pakket is niet afhankelijk van andere"
+
+#, fuzzy, c-format
+#~ msgid "%u additional package is required for %s"
+#~ msgid_plural "%u additional packages are required for %s"
+#~ msgstr[0] "%i extra pakket is vereist voor %s"
+#~ msgstr[1] "%i extra pakketten zijn vereist voor %s"
+
+#, c-format
+#~ msgid "Packages listed below are required for %s to function correctly."
+#~ msgid_plural ""
+#~ "Packages listed below are required for %s to function correctly."
+#~ msgstr[0] ""
+#~ "De hieronder vermelde pakketten zijn nodig voor %s om goed te werken."
+#~ msgstr[1] ""
+#~ "De hieronder vermelde pakketten zijn nodig voor %s om goed te werken."
+
+#~ msgid "Try entering a package name in the search bar."
+#~ msgstr "Probeer een pakketnaam op te geven in de zoekbalk."
+
+#~ msgid "There are no packages queued to be installed or removed."
+#~ msgstr ""
+#~ "Er staan geen pakketten klaar om geïnstalleerd of verwijderd te worden."
+
+#~ msgid "Searching by name"
+#~ msgstr "Zoeken op naam"
+
+#~ msgid "Searching by description"
+#~ msgstr "Zoeken op omschrijving"
+
+#~ msgid "Searching by file"
+#~ msgstr "Zoeken op bestand"
+
+#~ msgid "Search by name"
+#~ msgstr "Zoekopdracht op naam"
+
+#~ msgid "Search by description"
+#~ msgstr "Zoekopdracht op omschrijving"
+
+#~ msgid "Search by file name"
+#~ msgstr "Zoekopdracht op bestandsnaam"
+
+#~ msgid "Enter a search word or click a category to get started."
+#~ msgstr "Voer een zoekwoord in of klik op een categorie om te beginnen."
+
+#~ msgid "Enter a search word to get started."
+#~ msgstr "Voer een zoekwoord in om te beginnen."
+
+#~ msgid "Exiting as properties could not be retrieved"
+#~ msgstr ""
+#~ "Afsluiten, aangezien het niet mogelijk is eigenschappen op te vragen"
+
+#~ msgid "All packages"
+#~ msgstr "Alle pakketten"
+
+#~ msgid "Show all packages"
+#~ msgstr "Alle pakketten tonen"
 
 #~ msgid "Clear current selection"
 #~ msgstr "Huidige selectie leegmaken"
@@ -4271,9 +4347,6 @@ msgstr "Software bijwerken"
 #~ msgid "Remove Package"
 #~ msgstr "Pakket verwijderen"
 
-#~ msgid "Visit Project Website"
-#~ msgstr "Website van het project bezoeken"
-
 #~ msgid "Required Packages"
 #~ msgstr "Vereiste pakketten"
 
@@ -4359,9 +4432,6 @@ msgstr "Software bijwerken"
 #~ msgid "Software management for GNOME"
 #~ msgstr "Softwarebeheer voor Gnome"
 
-#~ msgid "Software error details"
-#~ msgstr "Gedetailleerde foutgegevens van software"
-
 #~ msgid "You don't have the necessary privileges to perform this action."
 #~ msgstr "U hebt niet de benodigde rechten om deze actie uit te voeren."
 
@@ -4385,9 +4455,6 @@ msgstr "Software bijwerken"
 
 #~ msgid "Additional software is required"
 #~ msgstr "Aanvullende software is vereist"
-
-#~ msgid "%s requires additional software"
-#~ msgstr "%s vereist extra software"
 
 #~ msgid "An application requires additional software"
 #~ msgstr "Een toepassing vereist extra software"
@@ -4739,9 +4806,6 @@ msgstr "Software bijwerken"
 #~ msgid "Cannot get operating system upgrade information."
 #~ msgstr "Kan geen informatie over opwaardering besturingssysteem verkrijgen."
 
-#~ msgid "Distribution Upgrade Tool"
-#~ msgstr "Hulpmiddel voor opwaardering van distributie"
-
 #~ msgid "Catalogs files to install"
 #~ msgstr "Catalogibestanden om te installeren"
 
@@ -4872,9 +4936,6 @@ msgstr "Software bijwerken"
 
 #~ msgid "_Contents"
 #~ msgstr "In_houd"
-
-#~ msgid "_Development"
-#~ msgstr "_Ontwikkeling"
 
 #~ msgid "_Filters"
 #~ msgstr "_Filters"
@@ -5722,9 +5783,6 @@ msgstr "Software bijwerken"
 #~ msgid "Obsoletes"
 #~ msgstr "  --obsoletes     - obsoletes ('verouderd')-tags\n"
 
-#~ msgid "Repository"
-#~ msgstr "Depot"
-
 #~ msgid "Description"
 #~ msgstr "Omschrijving"
 
@@ -6176,10 +6234,6 @@ msgstr "Software bijwerken"
 #, fuzzy
 #~ msgid "Installing local files is not supported"
 #~ msgstr "Het kopiëren van bestanden binnen %1 wordt niet ondersteund."
-
-#, fuzzy
-#~ msgid "Repo Enable:"
-#~ msgstr "Activeer Server"
 
 #, fuzzy
 #~ msgid "Update _Package"

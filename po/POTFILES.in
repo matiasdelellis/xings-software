@@ -3,6 +3,15 @@
 # Please keep this file sorted alphabetically.
 data/appdata/xings-software.appdata.xml.in
 data/appdata/xings-software-update.appdata.xml.in
+data/categories/development.directory.in
+data/categories/education.directory.in
+data/categories/games.directory.in
+data/categories/graphics.directory.in
+data/categories/multimedia.directory.in
+data/categories/network.directory.in
+data/categories/office.directory.in
+data/categories/science.directory.in
+data/categories/settings.directory.in
 data/xings-software.desktop.in
 [type: gettext/glade]data/gpk-application.ui
 [type: gettext/glade]data/gpk-client.ui
@@ -35,6 +44,7 @@ src/packagekit-service/gpk-dbus-service.c
 src/packagekit-service/gpk-dbus-task.c
 src/preferences/gpk-prefs.c
 src/software/gpk-application.c
+src/software/gpk-backend.c
 src/software-service/gpk-updates-manager.c
 src/software-service/gpk-updates-notification.c
 src/software-service/gpk-updates-service.c

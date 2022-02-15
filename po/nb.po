@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit 3.13.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-22 10:24-0300\n"
+"POT-Creation-Date: 2022-02-15 12:13-0300\n"
 "PO-Revision-Date: 2014-07-21 14:35+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian bokmål <i18n-nb@lister.ping.uio.no>\n"
@@ -19,33 +19,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
-#: ../src/software/gpk-application.c:2572
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:4
+#: ../src/software/gpk-application.c:238 ../src/software/gpk-application.c:1493
+#: ../src/software/gpk-application.c:1735
 #, fuzzy
 msgid "Software"
 msgstr "GNOME programvare"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1501
 msgid "Add or remove software installed on the system"
 msgstr "Legg til eller fjern programvare på systemet"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:3
-#, fuzzy
 msgid ""
-"Software allows you to install and remove packages on your system. You can "
-"view and search packages by name, details or even file name and also see "
-"dependencies of one package on other packages. Searching by groups is "
-"possible and is an easy way to find software in your favorite desktop "
-"environment."
+"Software allows you to find and install new applications and remove existing "
+"installed applications."
 msgstr ""
-"Pakker lar deg installere og fjerne pakker på ditt system. Du kan vise og "
-"søke etter pakker ved navn, detaljer eller til og med filnavn og også se "
-"avhengigheter mellom pakker. Du kan søke etter pakkegrupper og dette er en "
-"lettere måte å finne programmer på ditt favorittskrivebord."
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:4
+msgid "Browse by categories or search and discover new apps."
+msgstr ""
+
+#: ../data/appdata/xings-software.appdata.xml.in.h:5
 #, fuzzy
 msgid ""
 "Software uses PackageKit and can work on any distribution using the native "
@@ -59,13 +56,13 @@ msgstr ""
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3442
+#: ../src/software-update/gpk-update-viewer.c:3428
 #, fuzzy
 msgid "Software Update"
 msgstr "Programvareinstallasjon"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:6 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Oppdater programvare som er installert på systemet"
 
@@ -89,6 +86,90 @@ msgstr ""
 "Pakkeoppdatering bruker PackageKit og kan fungere på alle distribusjoner ved "
 "bruk av det innebyggede pakkehåndteringsrammeverket."
 
+#: ../data/categories/development.directory.in.h:1
+msgid "Development"
+msgstr ""
+
+#: ../data/categories/development.directory.in.h:2
+#, fuzzy
+msgid "Software development tools"
+msgstr "Loggvisning for programvare"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/education.directory.in.h:1 ../src/common/gpk-enum.c:1497
+msgid "Education"
+msgstr "Opplæring"
+
+#: ../data/categories/education.directory.in.h:2
+#, fuzzy
+msgid "Educational software"
+msgstr "Klarte ikke å installere programvare"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/games.directory.in.h:1 ../src/common/gpk-enum.c:1501
+msgid "Games"
+msgstr "Spill"
+
+#: ../data/categories/games.directory.in.h:2
+msgid "Games, puzzles, and other fun software"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/graphics.directory.in.h:1 ../src/common/gpk-enum.c:1505
+msgid "Graphics"
+msgstr "Grafikk"
+
+#: ../data/categories/graphics.directory.in.h:2
+msgid "Graphics creation and manipulation applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/multimedia.directory.in.h:1 ../src/common/gpk-enum.c:1525
+msgid "Multimedia"
+msgstr "Multimedia"
+
+#: ../data/categories/multimedia.directory.in.h:2
+msgid "Audio and video players and editors"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/network.directory.in.h:1 ../src/common/gpk-enum.c:1509
+msgid "Internet"
+msgstr "Internett"
+
+#: ../data/categories/network.directory.in.h:2
+msgid "Applications for Internet access"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/office.directory.in.h:1 ../src/common/gpk-enum.c:1513
+msgid "Office"
+msgstr "Kontor"
+
+#: ../data/categories/office.directory.in.h:2
+msgid "Office and productivity applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/science.directory.in.h:1 ../src/common/gpk-enum.c:1601
+msgid "Science"
+msgstr "Vitenskap"
+
+#: ../data/categories/science.directory.in.h:2
+#, fuzzy
+msgid "Scientific software"
+msgstr "Klarte ikke å finne programvare"
+
+#: ../data/categories/settings.directory.in.h:1
+#, fuzzy
+msgid "Settings"
+msgstr "Starter"
+
+#: ../data/categories/settings.directory.in.h:2
+#, fuzzy
+msgid "Desktop and system settings applications"
+msgstr "Oppdaterer liste med kjørende programmer"
+
 #: ../data/xings-software.desktop.in.h:3
 #, fuzzy
 msgid ""
@@ -96,109 +177,106 @@ msgid ""
 "Store;"
 msgstr "Oppdateringer;Oppgradering;Kilder;Lagre;Brukervalg;Installasjon;Lager;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#: ../data/gpk-application.ui.h:1
 #, fuzzy
-msgid "Select to Install…"
-msgstr "Filer som skal installeres"
+msgid "Show categories"
+msgstr "Hentet kategorier"
 
-#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
-msgid "Select to Remove…"
-msgstr ""
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "Søker etter pakker"
 
-#: ../data/gpk-application.ui.h:4
-msgid "License"
-msgstr "Lisens"
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:1675
+#, fuzzy
+msgid "Categories"
+msgstr "Hentet kategorier"
 
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Kilde"
-
-#: ../data/gpk-application.ui.h:6
-msgid "Homepage"
+#: ../data/gpk-application.ui.h:5 ../src/software/gpk-application.c:241
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #: ../data/gpk-application.ui.h:7
-msgid "Visit home page for selected package"
-msgstr "Gå til hjemmesiden for valgt pakke"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Files"
-msgstr "Filer"
-
-#: ../data/gpk-application.ui.h:9
-#, fuzzy
-msgid "Required"
-msgstr "Lås kreves"
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Dependent"
-msgstr "Avhengige pakker"
-
-#: ../data/gpk-application.ui.h:12
-#, fuzzy
-msgid "Pending Changes"
-msgstr "Tester endringer"
-
-#: ../data/gpk-application.ui.h:13
-msgid "Review pending changes before applying them"
+msgid "Open"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:14
-msgid "Apply Changes"
-msgstr "Bruk endringer"
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:8 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "Installer"
 
-#: ../data/gpk-application.ui.h:15
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:9 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../data/gpk-application.ui.h:10
+msgid "Homepage"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:11
+msgid "Donate"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:12
+msgid "Report"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:13
 #, fuzzy
-msgid "Apply pending changes"
-msgstr "Bruk endringer"
+msgid "Translate"
+msgstr "Feil med transaksjon"
 
-#: ../data/gpk-application.ui.h:16
-msgid "Cancel search"
-msgstr "Avbryt søk"
+#: ../data/gpk-application.ui.h:14
+msgid "License"
+msgstr "Lisens"
+
+#: ../data/gpk-application.ui.h:15 ../src/software/gpk-application.c:1105
+#, fuzzy
+msgid "Distribution package"
+msgstr "Det finnes oppgraderinger for distribusjonen"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:16 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Kilde"
 
 #: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Cancel"
-msgstr "Avbrutt"
-
-#: ../data/gpk-application.ui.h:18
-#, fuzzy
-msgid "Cancel pending changes"
-msgstr "Tester endringer"
-
-#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "GNOME programvare"
 
-#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
 #, fuzzy
 msgid "Software Sources"
 msgstr "Programvaresignatur kreves"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:19
 #: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
 #: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "Programvareinstallasjon"
 
-#: ../data/gpk-application.ui.h:22
-msgid "Only Newest Versions"
-msgstr "Kun de nyeste versjonene"
-
-#: ../data/gpk-application.ui.h:23
-msgid "Only Native Packages"
-msgstr "Kun pakker for min maskinarkitektur"
-
-#: ../data/gpk-application.ui.h:24
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "Om"
 
-#: ../data/gpk-application.ui.h:25
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "A_vslutt"
 
@@ -373,14 +451,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1457
 #, fuzzy
 msgid "All software is up to date"
 msgstr "Programvareinstallasjon"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1461
+#: ../src/software-update/gpk-update-viewer.c:1459
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr ""
@@ -429,121 +507,48 @@ msgid "Ask the user if additional packages should be installed."
 msgstr "Spør bruker om ekstra pakker skal installeres."
 
 #: ../data/org.xings.software.gschema.xml.h:5
-msgid "Filter using basename in gpk-application"
-msgstr "Filtrer ved bruk av basisnavn i gpk-application"
-
-#: ../data/org.xings.software.gschema.xml.h:6
-msgid "Filter package lists using basename in gpk-application."
-msgstr "Filtrer pakkelister ved bruk av basenavn i gpk-application."
-
-#: ../data/org.xings.software.gschema.xml.h:7
-msgid "Only show the newest packages in the file lists"
-msgstr "Vis kun de nyeste pakkene i fillistene"
-
-#: ../data/org.xings.software.gschema.xml.h:8
-msgid "Only show the newest packages in the file lists."
-msgstr "Vis kun de nyeste pakkene i fillistene."
-
-#: ../data/org.xings.software.gschema.xml.h:9
-msgid "Only show supported packages in the file lists"
-msgstr "Vis kun støttede pakker fillistene"
-
-#: ../data/org.xings.software.gschema.xml.h:10
-msgid "Only show supported packages in the file lists."
-msgstr "Vis kun støttede pakker i fillistene."
-
-#: ../data/org.xings.software.gschema.xml.h:11
-msgid "Only show native packages in the file lists"
-msgstr ""
-"Vis kun pakker som passer maskinarkitektur for denne maskinen i fillistene"
-
-#: ../data/org.xings.software.gschema.xml.h:12
-msgid ""
-"Only show native packages matching the machine architecture in the file "
-"lists."
-msgstr ""
-"Vis kun pakker som passer maskinarkitektur for denne maskinen i fillistene."
-
-#: ../data/org.xings.software.gschema.xml.h:13
-msgid "Show the category group menu"
-msgstr "Vis gruppemeny for kategori"
-
-#: ../data/org.xings.software.gschema.xml.h:14
-msgid ""
-"Show the category group menu. This is more complete and custom to the "
-"distribution, but takes longer to populate."
-msgstr ""
-"Vis meny for kategorigruppe. Dette er mer fullstendig og tilpasset "
-"distribusjonen, men tar lenger tid å populere."
-
-#: ../data/org.xings.software.gschema.xml.h:15
-msgid "Show the 'All Packages' group menu"
-msgstr "Vis gruppemenyen «Alle pakker»"
-
-#: ../data/org.xings.software.gschema.xml.h:16
-msgid ""
-"Show the all packages menu item. This takes a long time to populate on most "
-"backends and is not generally required by end users."
-msgstr ""
-"Vis alle pakkemenyoppføringene. Det krever mye tid for populering med de "
-"fleste motorer og kreves vanligvis ikke av sluttbrukere."
-
-#: ../data/org.xings.software.gschema.xml.h:17
 msgid "The search mode used by default"
 msgstr "Søkemodus som brukes som forvalg"
 
-#: ../data/org.xings.software.gschema.xml.h:18
-msgid ""
-"The search mode used by default. Options are \"name\", \"details\", or \"file"
-"\"."
+#: ../data/org.xings.software.gschema.xml.h:6
+#, fuzzy
+msgid "The search mode used by default. Options are \"name\", \"details\"."
 msgstr ""
 "Søkemodus som brukes som forvalg. Alternativene er «name», «details» eller "
 "«file»."
 
-#: ../data/org.xings.software.gschema.xml.h:19
+#: ../data/org.xings.software.gschema.xml.h:7
 msgid "Show all repositories in the package source viewer"
 msgstr "Vis alle lagre i visning for pakkekilde"
 
-#: ../data/org.xings.software.gschema.xml.h:20
+#: ../data/org.xings.software.gschema.xml.h:8
 msgid "Show all repositories in the package source viewer."
 msgstr "Vis alle lagre i visning for pakkekilde."
 
-#: ../data/org.xings.software.gschema.xml.h:21
-msgid "Only show the newest updates in the list"
-msgstr "Vis kun de nyeste oppdateringene i listen"
-
-#: ../data/org.xings.software.gschema.xml.h:22
-msgid ""
-"Only show the newest packages in the update list, and filter out older "
-"updates that are still available."
-msgstr ""
-"Vis kun de nyeste pakkene i oppdateringslisten og filtrer ut eldre "
-"oppdateringer som fremdeles er tilgjengelige."
-
-#: ../data/org.xings.software.gschema.xml.h:23
+#: ../data/org.xings.software.gschema.xml.h:9
 msgid "Scroll to packages as they are downloaded"
 msgstr "Rull til pakker etter hvert som de lastes ned"
 
-#: ../data/org.xings.software.gschema.xml.h:24
+#: ../data/org.xings.software.gschema.xml.h:10
 msgid ""
 "Scroll to packages in the update list as they are downloaded or installed."
 msgstr ""
 "Rull til pakkene i oppdateringslisten etter hvert som de lastes ned eller "
 "installeres."
 
-#: ../data/org.xings.software.gschema.xml.h:25
+#: ../data/org.xings.software.gschema.xml.h:11
 msgid "Allow applications to invoke the font installer"
 msgstr "Tillat at programmer starter installasjon av skrift"
 
-#: ../data/org.xings.software.gschema.xml.h:26
+#: ../data/org.xings.software.gschema.xml.h:12
 msgid "Allow applications to invoke the font installer."
 msgstr "Tillat at programmer starter installasjon av skrift."
 
-#: ../data/org.xings.software.gschema.xml.h:27
+#: ../data/org.xings.software.gschema.xml.h:13
 msgid "Programs that should be ignored when they issue session D-Bus requests"
 msgstr "Programmer som skal ignoreres når de sender ut forespørsler via D-Bus"
 
-#: ../data/org.xings.software.gschema.xml.h:28
+#: ../data/org.xings.software.gschema.xml.h:14
 msgid ""
 "Programs that should be ignored when they issue session D-Bus requests, "
 "separated by commas."
@@ -551,23 +556,23 @@ msgstr ""
 "Programmer som skal ignoreres når de sender ut forespørsler via D-Bus. "
 "Adskilt med komma."
 
-#: ../data/org.xings.software.gschema.xml.h:29
+#: ../data/org.xings.software.gschema.xml.h:15
 msgid "Allow applications to invoke the codec installer"
 msgstr "Tillat at programmer starter installasjon av kodek"
 
-#: ../data/org.xings.software.gschema.xml.h:30
+#: ../data/org.xings.software.gschema.xml.h:16
 msgid "Allow applications to invoke the codec installer."
 msgstr "Tillat at programmer starter installasjon av kodek."
 
-#: ../data/org.xings.software.gschema.xml.h:31
+#: ../data/org.xings.software.gschema.xml.h:17
 msgid "Allow applications to invoke the mime type installer"
 msgstr "La programmer starte installasjon etter MIME-type"
 
-#: ../data/org.xings.software.gschema.xml.h:32
+#: ../data/org.xings.software.gschema.xml.h:18
 msgid "Allow applications to invoke the mime type installer."
 msgstr "La programmer starte installasjon etter MIME-type."
 
-#: ../data/org.xings.software.gschema.xml.h:33
+#: ../data/org.xings.software.gschema.xml.h:19
 msgid ""
 "When displaying UI from a session D-Bus request, automatically use these "
 "options by default."
@@ -575,7 +580,7 @@ msgstr ""
 "Bruk disse alternativene som forvalg automatisk når brukergrensesnitt vises "
 "som følge av en D-Bus-forespørsel."
 
-#: ../data/org.xings.software.gschema.xml.h:34
+#: ../data/org.xings.software.gschema.xml.h:20
 msgid ""
 "When displaying UI from a session D-Bus request, force these options to be "
 "turned on."
@@ -583,49 +588,49 @@ msgstr ""
 "Tving disse alternativene til å være på når brukergrensesnitt vises som "
 "følge av en D-Bus-forespørsel."
 
-#: ../data/org.xings.software.gschema.xml.h:35
+#: ../data/org.xings.software.gschema.xml.h:21
 msgid "Check for updates even on a mobile connection"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:36
+#: ../data/org.xings.software.gschema.xml.h:22
 msgid ""
 "Use mobile broadband connections such as GSM and CDMA to check for updates."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:37
+#: ../data/org.xings.software.gschema.xml.h:23
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:38
+#: ../data/org.xings.software.gschema.xml.h:24
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:39
+#: ../data/org.xings.software.gschema.xml.h:25
 #, fuzzy
 msgid "How often to check for updates"
 msgstr "Se etter oppdateringer"
 
-#: ../data/org.xings.software.gschema.xml.h:40
+#: ../data/org.xings.software.gschema.xml.h:26
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:41
+#: ../data/org.xings.software.gschema.xml.h:27
 #, fuzzy
 msgid "How often to refresh the package cache"
 msgstr "Oppdatert mellomlager for pakker"
 
-#: ../data/org.xings.software.gschema.xml.h:42
+#: ../data/org.xings.software.gschema.xml.h:28
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:43
+#: ../data/org.xings.software.gschema.xml.h:29
 msgid "How often to notify the user that non-critical updates are available"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:44
+#: ../data/org.xings.software.gschema.xml.h:30
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -633,44 +638,44 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:45
+#: ../data/org.xings.software.gschema.xml.h:31
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:46
+#: ../data/org.xings.software.gschema.xml.h:32
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:181
+#: ../src/common/gpk-common.c:200
 msgid "32-bit"
 msgstr "32-bit"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:188
+#: ../src/common/gpk-common.c:207
 msgid "64-bit"
 msgstr "64-bit"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:348
+#: ../src/common/gpk-common.c:381
 msgid "This application is running as a privileged user"
 msgstr "Dette programmet kjører som en priviligert bruker"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:351
+#: ../src/common/gpk-common.c:384
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s kjører som en priviligert bruker"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:354
+#: ../src/common/gpk-common.c:387
 msgid "Package management applications are security sensitive."
 msgstr "Pakkehåndteringsprogrammer er sikkerhetssensitive."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:356
+#: ../src/common/gpk-common.c:389
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -679,18 +684,18 @@ msgstr ""
 "sikkerhetsgrunner."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:362
+#: ../src/common/gpk-common.c:395
 msgid "Continue _Anyway"
 msgstr "F_ortsett likevel"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
+#: ../src/common/gpk-common.c:433 ../src/common/gpk-common.c:483
 #, c-format
 msgid "Now"
 msgstr "Nå"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:443 ../src/common/gpk-common.c:493
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -698,7 +703,7 @@ msgstr[0] "%i sekund"
 msgstr[1] "%i sekunder"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
+#: ../src/common/gpk-common.c:453 ../src/common/gpk-common.c:506
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -706,7 +711,7 @@ msgstr[0] "%i minutt"
 msgstr[1] "%i minutter"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
+#: ../src/common/gpk-common.c:459 ../src/common/gpk-common.c:525
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -717,71 +722,71 @@ msgstr[1] "%i timer"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
+#: ../src/common/gpk-common.c:512 ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:513 ../src/common/gpk-common.c:533
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutt"
 msgstr[1] "minutter"
 
-#: ../src/common/gpk-common.c:481
+#: ../src/common/gpk-common.c:514
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "sekund"
 msgstr[1] "sekunder"
 
-#: ../src/common/gpk-common.c:499
+#: ../src/common/gpk-common.c:532
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "time"
 msgstr[1] "timer"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:529
+#: ../src/common/gpk-common.c:562
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i minutt"
 
-#: ../src/common/gpk-common.c:531
+#: ../src/common/gpk-common.c:564
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%i minutt"
 msgstr[1] "%i minutter"
 
-#: ../src/common/gpk-common.c:536
+#: ../src/common/gpk-common.c:569
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%i time"
 msgstr[1] "%i timer"
 
-#: ../src/common/gpk-common.c:541
+#: ../src/common/gpk-common.c:574
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:546
+#: ../src/common/gpk-common.c:579
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:551
+#: ../src/common/gpk-common.c:584
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:589
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -789,25 +794,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:583
+#: ../src/common/gpk-common.c:616
 #, c-format
 msgid "%s and %s"
 msgstr "%s og %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:587
+#: ../src/common/gpk-common.c:620
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s og %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:591
+#: ../src/common/gpk-common.c:624
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s og %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:596
+#: ../src/common/gpk-common.c:629
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s og %s"
@@ -832,10 +837,8 @@ msgstr "mange pakker"
 
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
-#. TRANSLATORS: column for group name
-#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2028
-#: ../src/software/gpk-application.c:2050
+#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
+#: ../src/software/gpk-application.c:1020
 msgid "Name"
 msgstr "Navn"
 
@@ -2370,31 +2373,6 @@ msgid "Accessories"
 msgstr "Tilbehør"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1497
-msgid "Education"
-msgstr "Opplæring"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1501
-msgid "Games"
-msgstr "Spill"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1505
-msgid "Graphics"
-msgstr "Grafikk"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1509
-msgid "Internet"
-msgstr "Internett"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1513
-msgid "Office"
-msgstr "Kontor"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1517 ../src/common/gpk-task.c:426
 msgid "Other"
 msgstr "Annet"
@@ -2403,11 +2381,6 @@ msgstr "Annet"
 #: ../src/common/gpk-enum.c:1521
 msgid "Programming"
 msgstr "Programmering"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1525
-msgid "Multimedia"
-msgstr "Multimedia"
 
 #. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1529
@@ -2500,11 +2473,6 @@ msgid "Package sources"
 msgstr "Pakkekilder"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1601
-msgid "Science"
-msgstr "Vitenskap"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1605
 msgid "Documentation"
 msgstr "Dokumentasjon"
@@ -2539,17 +2507,17 @@ msgstr "Ukjent gruppe"
 msgid "Icon"
 msgstr "Ikon"
 
-#: ../src/common/gpk-helper-chooser.c:259
+#: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Programmer som kan åpne denne type fil"
 
 #. TRANSLATORS: button label, install
-#: ../src/common/gpk-helper-chooser.c:265
+#: ../src/common/gpk-helper-chooser.c:263
 msgid "_Install"
 msgstr "_Installer"
 
 #. TRANSLATORS: button tooltip
-#: ../src/common/gpk-helper-chooser.c:269
+#: ../src/common/gpk-helper-chooser.c:267
 msgid "Install package"
 msgstr "Installer pakke"
 
@@ -2622,31 +2590,10 @@ msgstr "Fortsett"
 msgid "The following software also needs to be installed"
 msgstr "Følgende programvare må også installeres"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "Installer"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Følgende programvare vil måtte fjernes"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "Fjern"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -3362,7 +3309,7 @@ msgstr "Klarte ikke å hente liste med kilder"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3180
+#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Avslutter siden detaljer om motor ikke kunne hentes"
 
@@ -3381,194 +3328,109 @@ msgstr ""
 msgid "Software Settings"
 msgstr "Programvareinstallasjon"
 
-#: ../src/software/gpk-application.c:218
-#, fuzzy
-msgid "Cancel Removal"
-msgstr "Avbryt søk"
-
-#: ../src/software/gpk-application.c:238
-#, fuzzy
-msgid "Cancel Installation"
-msgstr "Pakkeinstallering"
-
-#. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:343
-msgid "Pending"
-msgstr "Utestående"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:413
-#, fuzzy, c-format
-msgid "%u package to be installed"
-msgid_plural "%u packages to be installed"
-msgstr[0] "Kildekodepakken kan ikke installeres"
-msgstr[1] "Kildekodepakken kan ikke installeres"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:420
-#, fuzzy, c-format
-msgid "%u package to be removed"
-msgid_plural "%u packages to be removed"
-msgstr[0] "Feil under fjerning av pakken"
-msgstr[1] "Feil under fjerning av pakken"
-
-#. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:592
-#, fuzzy, c-format
-msgid "%u file installed by %s"
-msgid_plural "%u files installed by %s"
-msgstr[0] "%i fil installert av %s"
-msgstr[1] "%i filer installert av %s"
-
-#. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
-msgid "No packages"
-msgstr "Ingen pakker"
-
-#. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:902
-msgid "No other packages require this package"
-msgstr "Ingen andre pakker krever denne pakken"
-
-#. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:909
-#, fuzzy, c-format
-msgid "%u package requires %s"
-msgid_plural "%u packages require %s"
-msgstr[0] "%i pakke krever %s"
-msgstr[1] "%i pakker krever %s"
-
-#. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:914
-#, c-format
-msgid "Packages listed below require %s to function correctly."
-msgid_plural "Packages listed below require %s to function correctly."
-msgstr[0] "Pakker i listen under krever %s for å fungere korrekt."
-msgstr[1] "Pakker i listen under krever %s for å fungere korrekt."
-
-#. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1031
-msgid "This package does not depend on any others"
-msgstr "Denne pakken er ikke avhengig av noen andre pakker"
-
-#. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1038
-#, fuzzy, c-format
-msgid "%u additional package is required for %s"
-msgid_plural "%u additional packages are required for %s"
-msgstr[0] "%i ekstra pakke kreves for %s"
-msgstr[1] "%i ekstra pakker kreves for %s"
-
-#. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1043
-#, c-format
-msgid "Packages listed below are required for %s to function correctly."
-msgid_plural "Packages listed below are required for %s to function correctly."
-msgstr[0] "Pakker i listen under kreves for at %s skal fungere korrekt."
-msgstr[1] "Pakker i listen under kreves for at %s skal fungere korrekt."
-
-#. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1114
-msgid "Invalid"
-msgstr "Ugyldig"
+#: ../src/software/gpk-application.c:205
+msgid "Please, be patient"
+msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1247
+#: ../src/software/gpk-application.c:484
 msgid "No results were found."
 msgstr "Ingen resultater funnet."
 
-#. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1255
-msgid "Try entering a package name in the search bar."
-msgstr "Prøv å oppgi et pakkenavn i søkelinjen."
-
-#. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1258
-msgid "There are no packages queued to be installed or removed."
-msgstr "Ingen pakker i kø for å installeres eller fjernes."
-
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1263
+#: ../src/software/gpk-application.c:490
+#, fuzzy
 msgid ""
-"Try searching package descriptions by clicking the icon next to the search "
+"Try searching package distributions by clicking the icon next to the search "
 "text."
 msgstr ""
 "Prøv å søke i pakkebeskrivelsen ved å klikke på ikonet ved siden av "
 "søketeksten."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1266
+#: ../src/software/gpk-application.c:493
 msgid "Try again with a different search term."
 msgstr "Prøv igjen med et annet søkebegrep."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1677
+#: ../src/software/gpk-application.c:854
 msgid "Changes not applied"
 msgstr "Endringer ikke tatt i bruk"
 
-#: ../src/software/gpk-application.c:1678
+#: ../src/software/gpk-application.c:855
 msgid "Close _Anyway"
 msgstr "L_ukk likevel"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1682
+#: ../src/software/gpk-application.c:859
 msgid "You have made changes that have not yet been applied."
 msgstr "Du har utført endringer som ikke er i bruk ennå."
 
-#: ../src/software/gpk-application.c:1683
+#: ../src/software/gpk-application.c:860
 msgid "These changes will be lost if you close this window."
 msgstr "Disse endringene vil gå tapt hvis du lukker dette vinduet."
 
+#: ../src/software/gpk-application.c:1159
+#, fuzzy
+msgid "Visit the app's website"
+msgstr "Gå til hjemmesiden for prosjektet"
+
+#: ../src/software/gpk-application.c:1176
+msgid "Make a donation"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1193
+msgid "Report a problem"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1210
+msgid "Translate into your language"
+msgstr ""
+
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2224
+#: ../src/software/gpk-application.c:1245
 msgid "Size"
 msgstr "Størrelse"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2227
+#: ../src/software/gpk-application.c:1248
 msgid "Installed size"
 msgstr "Installert størrelse"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2230
+#: ../src/software/gpk-application.c:1251
 msgid "Download size"
 msgstr "Størrelse på nedlasting"
 
-#. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2417
-msgid "Searching by name"
-msgstr "Søker etter navn"
+#. TRANSLATORS: entry tooltip: basic search by package name
+#: ../src/software/gpk-application.c:1381
+#, fuzzy
+msgid "Searching for distribution packages"
+msgstr "Søker etter pakker"
 
-#. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2443
-msgid "Searching by description"
-msgstr "Søker etter beskrivelse"
-
-#. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2469
-msgid "Searching by file"
-msgstr "Søker etter fil"
+#. TRANSLATORS: entry tooltip: applications search
+#: ../src/software/gpk-application.c:1404
+#, fuzzy
+msgid "Searching for applications"
+msgstr "Søker etter tillegg"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2492
-msgid "Search by name"
-msgstr "Søk etter navn:"
+#: ../src/software/gpk-application.c:1424
+#, fuzzy
+msgid "Search for apps"
+msgstr "Søker etter tillegg"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2500
-msgid "Search by description"
-msgstr "Søk etter beskrivelse"
+#: ../src/software/gpk-application.c:1430
+#, fuzzy
+msgid "Search for distribution packages"
+msgstr "Søker etter pakker"
 
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2508
-msgid "Search by file name"
-msgstr "Søk på filnavn"
-
-#: ../src/software/gpk-application.c:2541
+#: ../src/software/gpk-application.c:1462
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Lisensiert under GNU General Public License Version 2"
 
-#: ../src/software/gpk-application.c:2542
+#: ../src/software/gpk-application.c:1463
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3580,7 +3442,7 @@ msgstr ""
 "av Free Software Foundation; enten versjon 2 av lisensen, eller (hvis du "
 "ønsker det) enhver senere versjon."
 
-#: ../src/software/gpk-application.c:2546
+#: ../src/software/gpk-application.c:1467
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3591,7 +3453,7 @@ msgstr ""
 "GARANTI, ikke engang implisitt garanti om at det er SALGBART eller PASSER ET "
 "BESTEMT FORMÅL. Se GNU General Public License for detaljer."
 
-#: ../src/software/gpk-application.c:2550
+#: ../src/software/gpk-application.c:1471
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3602,57 +3464,50 @@ msgstr ""
 "Foundation, Inc. 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2556
+#: ../src/software/gpk-application.c:1477
 msgid "translator-credits"
 msgstr ""
 "Kjartan Maraas <kmaraas@gnome.org>\n"
 "Torstein Adolf Winterseth <kvikende@fsfe.org>"
 
-#: ../src/software/gpk-application.c:2577
+#: ../src/software/gpk-application.c:1498
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "Programvaresignatur kreves"
 
-#. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2772
-msgid "Enter a search word or click a category to get started."
-msgstr "Oppgi et søkeord eller klikk på en kategori for å komme i gang."
-
-#. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2775
-msgid "Enter a search word to get started."
-msgstr "Oppgi et søkeord for å komme i gang."
-
-#. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:3000
-msgid "Exiting as properties could not be retrieved"
-msgstr "Avslutter siden egenskaper ikke kunne hentes"
-
-#. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3043
-msgid "All packages"
-msgstr "Alle pakker"
-
-#. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3045
-msgid "Show all packages"
-msgstr "Vis alle pakker"
+#: ../src/software/gpk-application.c:1736
+#, fuzzy
+msgid "There was an error starting the application"
+msgstr "Du må starte programmet på nytt."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3432
-#: ../src/software-update/gpk-update-viewer.c:3412
+#: ../src/software/gpk-application.c:1953
+#: ../src/software-update/gpk-update-viewer.c:3398
 msgid "Show the program version and exit"
 msgstr "Vis versjon og avslutt"
 
-#: ../src/software/gpk-application.c:3446
+#: ../src/software/gpk-application.c:1967
 msgid "Install Software"
 msgstr "Installer programvare"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3462
+#: ../src/software/gpk-application.c:1983
 #, fuzzy
 msgid "Software installer"
 msgstr "Programvareinstallasjon"
+
+#: ../src/software/gpk-backend.c:87 ../src/software/gpk-backend.c:93
+#: ../src/software/gpk-backend.c:99
+#, c-format
+msgid ""
+"The backend does not support some features necessary for the application to "
+"work."
+msgstr ""
+
+#. TRANSLATORS: the repo name is invalid or not found, fall back to this
+#: ../src/software/gpk-backend.c:163
+msgid "Invalid"
+msgstr "Ugyldig"
 
 #. TRANSLATORS: don't install updates now
 #: ../src/software-service/gpk-updates-notification.c:199
@@ -3827,17 +3682,17 @@ msgid "Other updates"
 msgstr "Andre oppdateringer"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:975
+#: ../src/software-update/gpk-update-viewer.c:973
 msgid "Getting the list of updates"
 msgstr "Henter liste med oppdateringer"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1211
+#: ../src/software-update/gpk-update-viewer.c:1209
 msgid "Could not run upgrade script"
 msgstr "Kunne kjøre skript for oppgradering"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1242
+#: ../src/software-update/gpk-update-viewer.c:1240
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3851,29 +3706,29 @@ msgstr[1] ""
 "Du er koblet til via trådløst bredbånd, og det kan være dyrt å oppdatere "
 "disse pakkene."
 
-#: ../src/software-update/gpk-update-viewer.c:1391
+#: ../src/software-update/gpk-update-viewer.c:1389
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1427
 msgid "No updates are available"
 msgstr "Ingen oppdateringer er tilgjengelig"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1431
+#: ../src/software-update/gpk-update-viewer.c:1429
 msgid "No network connection was detected."
 msgstr "Nettverkstilkobling ble ikke funnet."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1449
+#: ../src/software-update/gpk-update-viewer.c:1447
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Installer oppdatering"
 msgstr[1] "_Installer oppdateringer"
 
-#: ../src/software-update/gpk-update-viewer.c:1494
+#: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3881,7 +3736,7 @@ msgstr[0] "%i oppdatering tilgjengelig"
 msgstr[1] "%i oppdateringer tilgjengelig"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1506
+#: ../src/software-update/gpk-update-viewer.c:1504
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3889,7 +3744,7 @@ msgstr[0] "%i oppdatering valgt"
 msgstr[1] "%i oppdateringer valgt"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1515
+#: ../src/software-update/gpk-update-viewer.c:1513
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3897,27 +3752,27 @@ msgstr[0] "%i oppdatering valgt (%s)"
 msgstr[1] "%i oppdateringer valgt (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1711
+#: ../src/software-update/gpk-update-viewer.c:1709
 msgid "Status"
 msgstr "Status"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1889
+#: ../src/software-update/gpk-update-viewer.c:1887
 msgid "This update will add new features and expand functionality."
 msgstr "Denne oppdateringen vil legge til ny og utvidet funksjonalitet."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1893
+#: ../src/software-update/gpk-update-viewer.c:1891
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "Denne oppdateringen vil rette feil og andre ikke-kritiske problemer."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1897
+#: ../src/software-update/gpk-update-viewer.c:1895
 msgid "This update is important as it may solve critical problems."
 msgstr "Denne oppdateringen er viktig da den kan løse kritiske problemer."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1901
+#: ../src/software-update/gpk-update-viewer.c:1899
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
@@ -3925,24 +3780,24 @@ msgstr ""
 "denne pakken."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1905
+#: ../src/software-update/gpk-update-viewer.c:1903
 msgid "This update is blocked."
 msgstr "Denne oppdateringen er blokkert."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1917
+#: ../src/software-update/gpk-update-viewer.c:1915
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "Varsling ble gitt på %s og sist oppdatert på %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1924
+#: ../src/software-update/gpk-update-viewer.c:1922
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "Dette varselet ble utsendt %s."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1942
+#: ../src/software-update/gpk-update-viewer.c:1940
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3950,7 +3805,7 @@ msgstr[0] "Besøk dette nettstedet for mer informasjon om denne oppdateringen:"
 msgstr[1] "Besøk disse nettstedene for mer informasjon om denne oppdateringen:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1949
+#: ../src/software-update/gpk-update-viewer.c:1947
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3965,7 +3820,7 @@ msgstr[1] ""
 "nettstedene:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:1954
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3976,14 +3831,14 @@ msgstr[1] ""
 "For mer informasjon om denne sikkerhetsoppdateringen se disse nettstedene:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1965
+#: ../src/software-update/gpk-update-viewer.c:1963
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr "Datamaskinen må startes på nytt for at endringene skal tre i kraft."
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1969
+#: ../src/software-update/gpk-update-viewer.c:1967
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3992,7 +3847,7 @@ msgstr ""
 "kraft."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1976
+#: ../src/software-update/gpk-update-viewer.c:1974
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -4001,7 +3856,7 @@ msgstr ""
 "er ment for bruk på produksjonssystemer."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1980
+#: ../src/software-update/gpk-update-viewer.c:1978
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -4010,7 +3865,7 @@ msgstr ""
 "rapporter eventuelle problemer du møter på."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1988
+#: ../src/software-update/gpk-update-viewer.c:1986
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
@@ -4018,77 +3873,294 @@ msgstr ""
 "Utviklingsloggene vil bli vist da det ikke finnes beskrivelse for denne "
 "oppdateringen:"
 
-#: ../src/software-update/gpk-update-viewer.c:2035
+#: ../src/software-update/gpk-update-viewer.c:2033
 msgid "Loading…"
 msgstr "Laster …"
 
-#: ../src/software-update/gpk-update-viewer.c:2038
+#: ../src/software-update/gpk-update-viewer.c:2036
 msgid "No update details available."
 msgstr "Ingen detaljer om oppdateringer er tilgjengelig."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/software-update/gpk-update-viewer.c:2098
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2228
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2096
+#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:2226
 msgid "Could not get update details"
 msgstr "Kunne ikke hente detaljer om oppdatering"
 
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2116
 msgid "No results were returned."
 msgstr "Ingen resultater ble funnet."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2483
+#: ../src/software-update/gpk-update-viewer.c:2480
 msgid "Select all"
 msgstr "Velg alle"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2491
+#: ../src/software-update/gpk-update-viewer.c:2488
 msgid "Unselect all"
 msgstr "Velg bort alle"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2498
+#: ../src/software-update/gpk-update-viewer.c:2495
 msgid "Select security updates"
 msgstr "Velg sikkerhetsoppdateringer"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2504
+#: ../src/software-update/gpk-update-viewer.c:2501
 msgid "Ignore this update"
 msgstr "Ignorer denne oppdateringen"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2611
-#: ../src/software-update/gpk-update-viewer.c:2814
+#: ../src/software-update/gpk-update-viewer.c:2608
+#: ../src/software-update/gpk-update-viewer.c:2800
 msgid "Could not get updates"
 msgstr "Kunne ikke hente oppdateringer"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2748
-#: ../src/software-update/gpk-update-viewer.c:2844
+#: ../src/software-update/gpk-update-viewer.c:2742
+#: ../src/software-update/gpk-update-viewer.c:2830
 msgid "Checking for updates…"
 msgstr "Ser etter oppdateringer …"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3116
+#: ../src/software-update/gpk-update-viewer.c:3102
 msgid "Could not get list of distribution upgrades"
 msgstr "Fant ikke liste med oppgraderinger for distribusjonen"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3146
+#: ../src/software-update/gpk-update-viewer.c:3132
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "Ny oppgradering for distribusjonen med navn «%s» er tilgjengelig"
 
-#: ../src/software-update/gpk-update-viewer.c:3425
+#: ../src/software-update/gpk-update-viewer.c:3411
 #, fuzzy
 msgid "Update Software"
 msgstr "GNOME programvare"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software allows you to install and remove packages on your system. You "
+#~ "can view and search packages by name, details or even file name and also "
+#~ "see dependencies of one package on other packages. Searching by groups is "
+#~ "possible and is an easy way to find software in your favorite desktop "
+#~ "environment."
+#~ msgstr ""
+#~ "Pakker lar deg installere og fjerne pakker på ditt system. Du kan vise og "
+#~ "søke etter pakker ved navn, detaljer eller til og med filnavn og også se "
+#~ "avhengigheter mellom pakker. Du kan søke etter pakkegrupper og dette er "
+#~ "en lettere måte å finne programmer på ditt favorittskrivebord."
+
+#, fuzzy
+#~ msgid "Select to Install…"
+#~ msgstr "Filer som skal installeres"
+
+#~ msgid "Visit home page for selected package"
+#~ msgstr "Gå til hjemmesiden for valgt pakke"
+
+#~ msgid "Files"
+#~ msgstr "Filer"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Lås kreves"
+
+#, fuzzy
+#~ msgid "Dependent"
+#~ msgstr "Avhengige pakker"
+
+#, fuzzy
+#~ msgid "Pending Changes"
+#~ msgstr "Tester endringer"
+
+#~ msgid "Apply Changes"
+#~ msgstr "Bruk endringer"
+
+#, fuzzy
+#~ msgid "Apply pending changes"
+#~ msgstr "Bruk endringer"
+
+#~ msgid "Cancel search"
+#~ msgstr "Avbryt søk"
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "Avbrutt"
+
+#, fuzzy
+#~ msgid "Cancel pending changes"
+#~ msgstr "Tester endringer"
+
+#~ msgid "Only Newest Versions"
+#~ msgstr "Kun de nyeste versjonene"
+
+#~ msgid "Only Native Packages"
+#~ msgstr "Kun pakker for min maskinarkitektur"
+
+#~ msgid "Filter using basename in gpk-application"
+#~ msgstr "Filtrer ved bruk av basisnavn i gpk-application"
+
+#~ msgid "Filter package lists using basename in gpk-application."
+#~ msgstr "Filtrer pakkelister ved bruk av basenavn i gpk-application."
+
+#~ msgid "Only show the newest packages in the file lists"
+#~ msgstr "Vis kun de nyeste pakkene i fillistene"
+
+#~ msgid "Only show the newest packages in the file lists."
+#~ msgstr "Vis kun de nyeste pakkene i fillistene."
+
+#~ msgid "Only show supported packages in the file lists"
+#~ msgstr "Vis kun støttede pakker fillistene"
+
+#~ msgid "Only show supported packages in the file lists."
+#~ msgstr "Vis kun støttede pakker i fillistene."
+
+#~ msgid "Only show native packages in the file lists"
+#~ msgstr ""
+#~ "Vis kun pakker som passer maskinarkitektur for denne maskinen i fillistene"
+
+#~ msgid ""
+#~ "Only show native packages matching the machine architecture in the file "
+#~ "lists."
+#~ msgstr ""
+#~ "Vis kun pakker som passer maskinarkitektur for denne maskinen i "
+#~ "fillistene."
+
+#~ msgid "Show the category group menu"
+#~ msgstr "Vis gruppemeny for kategori"
+
+#~ msgid ""
+#~ "Show the category group menu. This is more complete and custom to the "
+#~ "distribution, but takes longer to populate."
+#~ msgstr ""
+#~ "Vis meny for kategorigruppe. Dette er mer fullstendig og tilpasset "
+#~ "distribusjonen, men tar lenger tid å populere."
+
+#~ msgid "Show the 'All Packages' group menu"
+#~ msgstr "Vis gruppemenyen «Alle pakker»"
+
+#~ msgid ""
+#~ "Show the all packages menu item. This takes a long time to populate on "
+#~ "most backends and is not generally required by end users."
+#~ msgstr ""
+#~ "Vis alle pakkemenyoppføringene. Det krever mye tid for populering med de "
+#~ "fleste motorer og kreves vanligvis ikke av sluttbrukere."
+
+#~ msgid "Only show the newest updates in the list"
+#~ msgstr "Vis kun de nyeste oppdateringene i listen"
+
+#~ msgid ""
+#~ "Only show the newest packages in the update list, and filter out older "
+#~ "updates that are still available."
+#~ msgstr ""
+#~ "Vis kun de nyeste pakkene i oppdateringslisten og filtrer ut eldre "
+#~ "oppdateringer som fremdeles er tilgjengelige."
+
+#, fuzzy
+#~ msgid "Cancel Removal"
+#~ msgstr "Avbryt søk"
+
+#, fuzzy
+#~ msgid "Cancel Installation"
+#~ msgstr "Pakkeinstallering"
+
+#~ msgid "Pending"
+#~ msgstr "Utestående"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be installed"
+#~ msgid_plural "%u packages to be installed"
+#~ msgstr[0] "Kildekodepakken kan ikke installeres"
+#~ msgstr[1] "Kildekodepakken kan ikke installeres"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be removed"
+#~ msgid_plural "%u packages to be removed"
+#~ msgstr[0] "Feil under fjerning av pakken"
+#~ msgstr[1] "Feil under fjerning av pakken"
+
+#, fuzzy, c-format
+#~ msgid "%u file installed by %s"
+#~ msgid_plural "%u files installed by %s"
+#~ msgstr[0] "%i fil installert av %s"
+#~ msgstr[1] "%i filer installert av %s"
+
+#~ msgid "No packages"
+#~ msgstr "Ingen pakker"
+
+#~ msgid "No other packages require this package"
+#~ msgstr "Ingen andre pakker krever denne pakken"
+
+#, fuzzy, c-format
+#~ msgid "%u package requires %s"
+#~ msgid_plural "%u packages require %s"
+#~ msgstr[0] "%i pakke krever %s"
+#~ msgstr[1] "%i pakker krever %s"
+
+#, c-format
+#~ msgid "Packages listed below require %s to function correctly."
+#~ msgid_plural "Packages listed below require %s to function correctly."
+#~ msgstr[0] "Pakker i listen under krever %s for å fungere korrekt."
+#~ msgstr[1] "Pakker i listen under krever %s for å fungere korrekt."
+
+#~ msgid "This package does not depend on any others"
+#~ msgstr "Denne pakken er ikke avhengig av noen andre pakker"
+
+#, fuzzy, c-format
+#~ msgid "%u additional package is required for %s"
+#~ msgid_plural "%u additional packages are required for %s"
+#~ msgstr[0] "%i ekstra pakke kreves for %s"
+#~ msgstr[1] "%i ekstra pakker kreves for %s"
+
+#, c-format
+#~ msgid "Packages listed below are required for %s to function correctly."
+#~ msgid_plural ""
+#~ "Packages listed below are required for %s to function correctly."
+#~ msgstr[0] "Pakker i listen under kreves for at %s skal fungere korrekt."
+#~ msgstr[1] "Pakker i listen under kreves for at %s skal fungere korrekt."
+
+#~ msgid "Try entering a package name in the search bar."
+#~ msgstr "Prøv å oppgi et pakkenavn i søkelinjen."
+
+#~ msgid "There are no packages queued to be installed or removed."
+#~ msgstr "Ingen pakker i kø for å installeres eller fjernes."
+
+#~ msgid "Searching by name"
+#~ msgstr "Søker etter navn"
+
+#~ msgid "Searching by description"
+#~ msgstr "Søker etter beskrivelse"
+
+#~ msgid "Searching by file"
+#~ msgstr "Søker etter fil"
+
+#~ msgid "Search by name"
+#~ msgstr "Søk etter navn:"
+
+#~ msgid "Search by description"
+#~ msgstr "Søk etter beskrivelse"
+
+#~ msgid "Search by file name"
+#~ msgstr "Søk på filnavn"
+
+#~ msgid "Enter a search word or click a category to get started."
+#~ msgstr "Oppgi et søkeord eller klikk på en kategori for å komme i gang."
+
+#~ msgid "Enter a search word to get started."
+#~ msgstr "Oppgi et søkeord for å komme i gang."
+
+#~ msgid "Exiting as properties could not be retrieved"
+#~ msgstr "Avslutter siden egenskaper ikke kunne hentes"
+
+#~ msgid "All packages"
+#~ msgstr "Alle pakker"
+
+#~ msgid "Show all packages"
+#~ msgstr "Vis alle pakker"
 
 #~ msgid "Clear current selection"
 #~ msgstr "Tøm utvalget"
@@ -4195,9 +4267,6 @@ msgstr "GNOME programvare"
 
 #~ msgid "Remove Package"
 #~ msgstr "Fjern pakke"
-
-#~ msgid "Visit Project Website"
-#~ msgstr "Gå til hjemmesiden for prosjektet"
 
 #~ msgid "Required Packages"
 #~ msgstr "Pakker som kreves"

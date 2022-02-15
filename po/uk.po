@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-22 10:24-0300\n"
+"POT-Creation-Date: 2022-02-15 12:13-0300\n"
 "PO-Revision-Date: 2014-09-18 17:46+0300\n"
 "Last-Translator: Daniel Korostil <ted.korostiled@gmail.com>\n"
 "Language-Team: linux.org.ua\n"
@@ -21,33 +21,30 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
-#: ../src/software/gpk-application.c:2572
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:4
+#: ../src/software/gpk-application.c:238 ../src/software/gpk-application.c:1493
+#: ../src/software/gpk-application.c:1735
 #, fuzzy
 msgid "Software"
 msgstr "Журнал встановлення"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1501
 msgid "Add or remove software installed on the system"
 msgstr "Встановлення та вилучення програм у системі"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:3
-#, fuzzy
 msgid ""
-"Software allows you to install and remove packages on your system. You can "
-"view and search packages by name, details or even file name and also see "
-"dependencies of one package on other packages. Searching by groups is "
-"possible and is an easy way to find software in your favorite desktop "
-"environment."
+"Software allows you to find and install new applications and remove existing "
+"installed applications."
 msgstr ""
-"Пакунки дозволяють установлювати і вилучати пакунки на вашій системі. Можна "
-"переглядати і шукати пакунки за назвою, подробицями або навіть назвою файла "
-"та бачити залежності одного пакунка до інших. Пошук за групами можливий і "
-"простий спосіб знайти програму в улюбленому стільничному середовищі. "
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:4
+msgid "Browse by categories or search and discover new apps."
+msgstr ""
+
+#: ../data/appdata/xings-software.appdata.xml.in.h:5
 #, fuzzy
 msgid ""
 "Software uses PackageKit and can work on any distribution using the native "
@@ -61,12 +58,12 @@ msgstr ""
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3442
+#: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "Оновлення програм"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:6 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Оновлення програм, встановлених у системі"
 
@@ -90,6 +87,91 @@ msgstr ""
 "Оновлення пакунків використовують PackageKit і може працювати з будь-яким "
 "дистрибутивом через рідний модуль керування пакунками."
 
+#: ../data/categories/development.directory.in.h:1
+#, fuzzy
+msgid "Development"
+msgstr "_Розробка"
+
+#: ../data/categories/development.directory.in.h:2
+#, fuzzy
+msgid "Software development tools"
+msgstr "Опис помилки програми"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/education.directory.in.h:1 ../src/common/gpk-enum.c:1497
+msgid "Education"
+msgstr "Освіта"
+
+#: ../data/categories/education.directory.in.h:2
+#, fuzzy
+msgid "Educational software"
+msgstr "%s потребує додаткову програму"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/games.directory.in.h:1 ../src/common/gpk-enum.c:1501
+msgid "Games"
+msgstr "Ігри"
+
+#: ../data/categories/games.directory.in.h:2
+msgid "Games, puzzles, and other fun software"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/graphics.directory.in.h:1 ../src/common/gpk-enum.c:1505
+msgid "Graphics"
+msgstr "Графіка"
+
+#: ../data/categories/graphics.directory.in.h:2
+msgid "Graphics creation and manipulation applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/multimedia.directory.in.h:1 ../src/common/gpk-enum.c:1525
+msgid "Multimedia"
+msgstr "Мультимедіа"
+
+#: ../data/categories/multimedia.directory.in.h:2
+msgid "Audio and video players and editors"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/network.directory.in.h:1 ../src/common/gpk-enum.c:1509
+msgid "Internet"
+msgstr "Інтернет"
+
+#: ../data/categories/network.directory.in.h:2
+msgid "Applications for Internet access"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/office.directory.in.h:1 ../src/common/gpk-enum.c:1513
+msgid "Office"
+msgstr "Офіс"
+
+#: ../data/categories/office.directory.in.h:2
+msgid "Office and productivity applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/science.directory.in.h:1 ../src/common/gpk-enum.c:1601
+msgid "Science"
+msgstr "Наука"
+
+#: ../data/categories/science.directory.in.h:2
+#, fuzzy
+msgid "Scientific software"
+msgstr "Не вдалось знайти програми"
+
+#: ../data/categories/settings.directory.in.h:1
+#, fuzzy
+msgid "Settings"
+msgstr "Запускається"
+
+#: ../data/categories/settings.directory.in.h:2
+#, fuzzy
+msgid "Desktop and system settings applications"
+msgstr "Оновлення списку запущений програм"
+
 #: ../data/xings-software.desktop.in.h:3
 #, fuzzy
 msgid ""
@@ -97,108 +179,105 @@ msgid ""
 "Store;"
 msgstr "Оновлення;Джерело;Сховище;Параметри;Встановити;Зберегти;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#: ../data/gpk-application.ui.h:1
 #, fuzzy
-msgid "Select to Install…"
-msgstr "Список файлів, що встановлюються"
+msgid "Show categories"
+msgstr "Категорії отримано"
 
-#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
-msgid "Select to Remove…"
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "Пошук пакунків"
+
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:1675
+#, fuzzy
+msgid "Categories"
+msgstr "Категорії отримано"
+
+#: ../data/gpk-application.ui.h:5 ../src/software/gpk-application.c:241
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4
-msgid "License"
-msgstr "Ліцензія"
+#: ../data/gpk-application.ui.h:7
+msgid "Open"
+msgstr ""
 
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Джерело"
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:8 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "Встановити"
 
-#: ../data/gpk-application.ui.h:6
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:9 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "Вилучити"
+
+#: ../data/gpk-application.ui.h:10
 msgid "Homepage"
 msgstr "Домашня сторінка"
 
-#: ../data/gpk-application.ui.h:7
-msgid "Visit home page for selected package"
-msgstr "Відвідати домашню сторінку вибраного пакунка"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Files"
-msgstr "Файли"
-
-#: ../data/gpk-application.ui.h:9
-#, fuzzy
-msgid "Required"
-msgstr "Ким вимагається"
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Dependent"
-msgstr "Від чого залежить"
-
-#: ../data/gpk-application.ui.h:12
-#, fuzzy
-msgid "Pending Changes"
-msgstr "Випробування змін"
-
-#: ../data/gpk-application.ui.h:13
-msgid "Review pending changes before applying them"
+#: ../data/gpk-application.ui.h:11
+msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:14
-msgid "Apply Changes"
-msgstr "Внести зміни"
+#: ../data/gpk-application.ui.h:12
+msgid "Report"
+msgstr ""
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:13
 #, fuzzy
-msgid "Apply pending changes"
-msgstr "Застосування змін"
+msgid "Translate"
+msgstr "Помилка транзакції"
 
-#: ../data/gpk-application.ui.h:16
-msgid "Cancel search"
-msgstr "Скасувати пошук"
+#: ../data/gpk-application.ui.h:14
+msgid "License"
+msgstr "Ліцензія"
+
+#: ../data/gpk-application.ui.h:15 ../src/software/gpk-application.c:1105
+#, fuzzy
+msgid "Distribution package"
+msgstr "Засіб оновлення дистрибутива"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:16 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Джерело"
 
 #: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Cancel"
-msgstr "Скасовано"
-
-#: ../data/gpk-application.ui.h:18
-#, fuzzy
-msgid "Cancel pending changes"
-msgstr "Випробування змін"
-
-#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "Джерела програм"
 
-#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
 msgid "Software Sources"
 msgstr "Джерела програм"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:19
 #: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
 #: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "Джерела програм"
 
-#: ../data/gpk-application.ui.h:22
-msgid "Only Newest Versions"
-msgstr "Лише найновіші версії"
-
-#: ../data/gpk-application.ui.h:23
-msgid "Only Native Packages"
-msgstr "Лише рідні пакунки"
-
-#: ../data/gpk-application.ui.h:24
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "Про програму"
 
-#: ../data/gpk-application.ui.h:25
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "Ви_йти"
 
@@ -372,14 +451,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1457
 #, fuzzy
 msgid "All software is up to date"
 msgstr "Оновлення програм"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1461
+#: ../src/software-update/gpk-update-viewer.c:1459
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "Немає доступних оновлень пакунків для вашого комп'ютера на цей момент."
@@ -427,122 +506,49 @@ msgid "Ask the user if additional packages should be installed."
 msgstr "Запитувати користувачів про встановлення додаткових пакунків."
 
 #: ../data/org.xings.software.gschema.xml.h:5
-msgid "Filter using basename in gpk-application"
-msgstr "Фільтрувати за базовою назвою у gpk-application"
-
-#: ../data/org.xings.software.gschema.xml.h:6
-msgid "Filter package lists using basename in gpk-application."
-msgstr "Фільтрувати списки пакунків за основною назвою у gpk-application."
-
-#: ../data/org.xings.software.gschema.xml.h:7
-msgid "Only show the newest packages in the file lists"
-msgstr "Показувати лише новіші пакунки у списках файлів"
-
-#: ../data/org.xings.software.gschema.xml.h:8
-msgid "Only show the newest packages in the file lists."
-msgstr "Показувати лише новіші пакунки у списках файлів."
-
-#: ../data/org.xings.software.gschema.xml.h:9
-msgid "Only show supported packages in the file lists"
-msgstr "Показувати лише підтримувані пакунки у списках файлів"
-
-#: ../data/org.xings.software.gschema.xml.h:10
-msgid "Only show supported packages in the file lists."
-msgstr "Показувати лише підтримуванні пакунки у списках файлів."
-
-#: ../data/org.xings.software.gschema.xml.h:11
-msgid "Only show native packages in the file lists"
-msgstr "Показувати лише рідні пакети у списках файлів"
-
-#: ../data/org.xings.software.gschema.xml.h:12
-msgid ""
-"Only show native packages matching the machine architecture in the file "
-"lists."
-msgstr ""
-"Показувати у списках файлів лише рідні пакунки, які відповідають архітектурі "
-"комп'ютера."
-
-#: ../data/org.xings.software.gschema.xml.h:13
-msgid "Show the category group menu"
-msgstr "Показувати меню груп категорій"
-
-#: ../data/org.xings.software.gschema.xml.h:14
-msgid ""
-"Show the category group menu. This is more complete and custom to the "
-"distribution, but takes longer to populate."
-msgstr ""
-"Показувати меню групи категорій. Більш повне і залежить від дистрибутива, "
-"але займає більше часу для наповнення."
-
-#: ../data/org.xings.software.gschema.xml.h:15
-msgid "Show the 'All Packages' group menu"
-msgstr "Показувати групу «Усі програми»"
-
-#: ../data/org.xings.software.gschema.xml.h:16
-msgid ""
-"Show the all packages menu item. This takes a long time to populate on most "
-"backends and is not generally required by end users."
-msgstr ""
-"Показати всі пакунки пункту меню. Це забирає багато часу для наповнення на "
-"більшості рушії і загалом не потрібне для більшості користувачів."
-
-#: ../data/org.xings.software.gschema.xml.h:17
 msgid "The search mode used by default"
 msgstr "Режим пошуку, що типово використовується"
 
-#: ../data/org.xings.software.gschema.xml.h:18
-msgid ""
-"The search mode used by default. Options are \"name\", \"details\", or \"file"
-"\"."
+#: ../data/org.xings.software.gschema.xml.h:6
+#, fuzzy
+msgid "The search mode used by default. Options are \"name\", \"details\"."
 msgstr ""
 "Режим пошуку, що типово використовується. Можливі параметри: «name», "
 "«details», або «file»"
 
-#: ../data/org.xings.software.gschema.xml.h:19
+#: ../data/org.xings.software.gschema.xml.h:7
 msgid "Show all repositories in the package source viewer"
 msgstr "Показувати всі сховища в огляді списку пакунків"
 
-#: ../data/org.xings.software.gschema.xml.h:20
+#: ../data/org.xings.software.gschema.xml.h:8
 msgid "Show all repositories in the package source viewer."
 msgstr "Показувати всі сховища в огляді списку пакунків."
 
-#: ../data/org.xings.software.gschema.xml.h:21
-msgid "Only show the newest updates in the list"
-msgstr "Показувати лише новіші пакети у списках"
-
-#: ../data/org.xings.software.gschema.xml.h:22
-msgid ""
-"Only show the newest packages in the update list, and filter out older "
-"updates that are still available."
-msgstr ""
-"Показувати лише нові пакети у списку оновлень та фільтрувати старі "
-"оновлення, які досі доступні."
-
-#: ../data/org.xings.software.gschema.xml.h:23
+#: ../data/org.xings.software.gschema.xml.h:9
 msgid "Scroll to packages as they are downloaded"
 msgstr "Прокручувати до пакетів протягом їх завантаження"
 
-#: ../data/org.xings.software.gschema.xml.h:24
+#: ../data/org.xings.software.gschema.xml.h:10
 msgid ""
 "Scroll to packages in the update list as they are downloaded or installed."
 msgstr ""
 "Прокручувати список оновлень до пакетів, які завантажуються або "
 "встановлюються."
 
-#: ../data/org.xings.software.gschema.xml.h:25
+#: ../data/org.xings.software.gschema.xml.h:11
 msgid "Allow applications to invoke the font installer"
 msgstr "Дозволяє програмам викликати встановлення шрифтів"
 
-#: ../data/org.xings.software.gschema.xml.h:26
+#: ../data/org.xings.software.gschema.xml.h:12
 msgid "Allow applications to invoke the font installer."
 msgstr "Дозволяє програмам викликати встановлення шрифтів."
 
-#: ../data/org.xings.software.gschema.xml.h:27
+#: ../data/org.xings.software.gschema.xml.h:13
 msgid "Programs that should be ignored when they issue session D-Bus requests"
 msgstr ""
 "Програми, які слід ігнорувати, коли вони генерують запити на шині D-Bus"
 
-#: ../data/org.xings.software.gschema.xml.h:28
+#: ../data/org.xings.software.gschema.xml.h:14
 msgid ""
 "Programs that should be ignored when they issue session D-Bus requests, "
 "separated by commas."
@@ -550,23 +556,23 @@ msgstr ""
 "Програми, які слід ігнорувати, коли вони генерують запити на шині D-Bus, "
 "розділяються комами."
 
-#: ../data/org.xings.software.gschema.xml.h:29
+#: ../data/org.xings.software.gschema.xml.h:15
 msgid "Allow applications to invoke the codec installer"
 msgstr "Дозволяти програмам викликати встановлення кодеків"
 
-#: ../data/org.xings.software.gschema.xml.h:30
+#: ../data/org.xings.software.gschema.xml.h:16
 msgid "Allow applications to invoke the codec installer."
 msgstr "Дозволяти програмам викликати встановлення кодеків."
 
-#: ../data/org.xings.software.gschema.xml.h:31
+#: ../data/org.xings.software.gschema.xml.h:17
 msgid "Allow applications to invoke the mime type installer"
 msgstr "Дозволяє програмам викликати встановлення типів MIME"
 
-#: ../data/org.xings.software.gschema.xml.h:32
+#: ../data/org.xings.software.gschema.xml.h:18
 msgid "Allow applications to invoke the mime type installer."
 msgstr "Дозволяє програмам викликати встановлення типів MIME."
 
-#: ../data/org.xings.software.gschema.xml.h:33
+#: ../data/org.xings.software.gschema.xml.h:19
 msgid ""
 "When displaying UI from a session D-Bus request, automatically use these "
 "options by default."
@@ -574,7 +580,7 @@ msgstr ""
 "Коли показується інтерфейс запитів сеансів D-Bus, автоматично типово "
 "використовувати ці параметри."
 
-#: ../data/org.xings.software.gschema.xml.h:34
+#: ../data/org.xings.software.gschema.xml.h:20
 msgid ""
 "When displaying UI from a session D-Bus request, force these options to be "
 "turned on."
@@ -582,12 +588,12 @@ msgstr ""
 "Коли показується інтерфейс запитів сеансів D-Bus, примусово вмикати ці "
 "параметри."
 
-#: ../data/org.xings.software.gschema.xml.h:35
+#: ../data/org.xings.software.gschema.xml.h:21
 #, fuzzy
 msgid "Check for updates even on a mobile connection"
 msgstr "Перевірити на оновлення на енергії батареї"
 
-#: ../data/org.xings.software.gschema.xml.h:36
+#: ../data/org.xings.software.gschema.xml.h:22
 #, fuzzy
 msgid ""
 "Use mobile broadband connections such as GSM and CDMA to check for updates."
@@ -595,39 +601,39 @@ msgstr ""
 "Використовувати мобільні широкосмугові з'єднання, такі як GSM та CDMA, для "
 "перевірки оновлень"
 
-#: ../data/org.xings.software.gschema.xml.h:37
+#: ../data/org.xings.software.gschema.xml.h:23
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:38
+#: ../data/org.xings.software.gschema.xml.h:24
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:39
+#: ../data/org.xings.software.gschema.xml.h:25
 msgid "How often to check for updates"
 msgstr "Частота перевірки наявності оновлень"
 
-#: ../data/org.xings.software.gschema.xml.h:40
+#: ../data/org.xings.software.gschema.xml.h:26
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:41
+#: ../data/org.xings.software.gschema.xml.h:27
 msgid "How often to refresh the package cache"
 msgstr "Частота оновлення кешу пакетів"
 
-#: ../data/org.xings.software.gschema.xml.h:42
+#: ../data/org.xings.software.gschema.xml.h:28
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr "Частота оновлення кешу пакетів. Значення у секундах."
 
-#: ../data/org.xings.software.gschema.xml.h:43
+#: ../data/org.xings.software.gschema.xml.h:29
 #, fuzzy
 msgid "How often to notify the user that non-critical updates are available"
 msgstr "Сповіщати про доступність оновлень безпеки"
 
-#: ../data/org.xings.software.gschema.xml.h:44
+#: ../data/org.xings.software.gschema.xml.h:30
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -635,44 +641,44 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:45
+#: ../data/org.xings.software.gschema.xml.h:31
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:46
+#: ../data/org.xings.software.gschema.xml.h:32
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:181
+#: ../src/common/gpk-common.c:200
 msgid "32-bit"
 msgstr "32-ох бітний"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:188
+#: ../src/common/gpk-common.c:207
 msgid "64-bit"
 msgstr "64-ох бітний"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:348
+#: ../src/common/gpk-common.c:381
 msgid "This application is running as a privileged user"
 msgstr "Цю програму запущено від привілейованого користувача"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:351
+#: ../src/common/gpk-common.c:384
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "Програму %s запущено від привілейованого користувача"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:354
+#: ../src/common/gpk-common.c:387
 msgid "Package management applications are security sensitive."
 msgstr "Керування пакунками є чутливим до проблем щодо безпеки системи."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:356
+#: ../src/common/gpk-common.c:389
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -681,18 +687,18 @@ msgstr ""
 "привілейованого користувача."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:362
+#: ../src/common/gpk-common.c:395
 msgid "Continue _Anyway"
 msgstr "_Однаково продовжити"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
+#: ../src/common/gpk-common.c:433 ../src/common/gpk-common.c:483
 #, c-format
 msgid "Now"
 msgstr "Зараз"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:443 ../src/common/gpk-common.c:493
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -702,7 +708,7 @@ msgstr[2] "%i секунд"
 msgstr[3] "%i секунда"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
+#: ../src/common/gpk-common.c:453 ../src/common/gpk-common.c:506
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -712,7 +718,7 @@ msgstr[2] " %i хвилин"
 msgstr[3] " %i хвилина"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
+#: ../src/common/gpk-common.c:459 ../src/common/gpk-common.c:525
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -725,12 +731,12 @@ msgstr[3] "%i година"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
+#: ../src/common/gpk-common.c:512 ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:513 ../src/common/gpk-common.c:533
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвилина"
@@ -738,7 +744,7 @@ msgstr[1] "хвилини"
 msgstr[2] "хвилин"
 msgstr[3] "хвилина"
 
-#: ../src/common/gpk-common.c:481
+#: ../src/common/gpk-common.c:514
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "секунда"
@@ -746,7 +752,7 @@ msgstr[1] "секунди"
 msgstr[2] "секунд"
 msgstr[3] "секунда"
 
-#: ../src/common/gpk-common.c:499
+#: ../src/common/gpk-common.c:532
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "година"
@@ -755,12 +761,12 @@ msgstr[2] "годин"
 msgstr[3] "година"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:529
+#: ../src/common/gpk-common.c:562
 #, fuzzy
 msgid "A moment ago"
 msgstr " %i хвилина"
 
-#: ../src/common/gpk-common.c:531
+#: ../src/common/gpk-common.c:564
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -769,7 +775,7 @@ msgstr[1] " %i хвилини"
 msgstr[2] " %i хвилин"
 msgstr[3] " %i хвилина"
 
-#: ../src/common/gpk-common.c:536
+#: ../src/common/gpk-common.c:569
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -778,7 +784,7 @@ msgstr[1] "%i години"
 msgstr[2] "%i годин"
 msgstr[3] "%i година"
 
-#: ../src/common/gpk-common.c:541
+#: ../src/common/gpk-common.c:574
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -787,7 +793,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../src/common/gpk-common.c:546
+#: ../src/common/gpk-common.c:579
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -796,7 +802,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../src/common/gpk-common.c:551
+#: ../src/common/gpk-common.c:584
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
@@ -805,7 +811,7 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:589
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -815,25 +821,25 @@ msgstr[2] ""
 msgstr[3] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:583
+#: ../src/common/gpk-common.c:616
 #, c-format
 msgid "%s and %s"
 msgstr "%s та %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:587
+#: ../src/common/gpk-common.c:620
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s та %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:591
+#: ../src/common/gpk-common.c:624
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s та %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:596
+#: ../src/common/gpk-common.c:629
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s та %s"
@@ -858,10 +864,8 @@ msgstr "багато пакунків"
 
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
-#. TRANSLATORS: column for group name
-#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2028
-#: ../src/software/gpk-application.c:2050
+#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
+#: ../src/software/gpk-application.c:1020
 msgid "Name"
 msgstr "Назва"
 
@@ -2406,31 +2410,6 @@ msgid "Accessories"
 msgstr "Додаткові"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1497
-msgid "Education"
-msgstr "Освіта"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1501
-msgid "Games"
-msgstr "Ігри"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1505
-msgid "Graphics"
-msgstr "Графіка"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1509
-msgid "Internet"
-msgstr "Інтернет"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1513
-msgid "Office"
-msgstr "Офіс"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1517 ../src/common/gpk-task.c:426
 msgid "Other"
 msgstr "Інше"
@@ -2439,11 +2418,6 @@ msgstr "Інше"
 #: ../src/common/gpk-enum.c:1521
 msgid "Programming"
 msgstr "Програмування"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1525
-msgid "Multimedia"
-msgstr "Мультимедіа"
 
 #. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1529
@@ -2536,11 +2510,6 @@ msgid "Package sources"
 msgstr "Джерела пакунків"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1601
-msgid "Science"
-msgstr "Наука"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1605
 msgid "Documentation"
 msgstr "Документація"
@@ -2575,17 +2544,17 @@ msgstr "Невідома група"
 msgid "Icon"
 msgstr "Піктограма"
 
-#: ../src/common/gpk-helper-chooser.c:259
+#: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Програми, які можуть відкривати файли цього типу"
 
 #. TRANSLATORS: button label, install
-#: ../src/common/gpk-helper-chooser.c:265
+#: ../src/common/gpk-helper-chooser.c:263
 msgid "_Install"
 msgstr "_Встановити"
 
 #. TRANSLATORS: button tooltip
-#: ../src/common/gpk-helper-chooser.c:269
+#: ../src/common/gpk-helper-chooser.c:267
 msgid "Install package"
 msgstr "Встановити пакунок"
 
@@ -2655,31 +2624,10 @@ msgstr "Продовжити"
 msgid "The following software also needs to be installed"
 msgstr "Треба встановити такі програми"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "Встановити"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Треба вилучити такі програми"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "Вилучити"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -3467,7 +3415,7 @@ msgstr "Помилка при отриманні списку джерел"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3180
+#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Закривається, оскільки подробиці про модуль неможливо отримати"
 
@@ -3485,209 +3433,110 @@ msgstr ""
 msgid "Software Settings"
 msgstr "Налаштування програм"
 
-#: ../src/software/gpk-application.c:218
-#, fuzzy
-msgid "Cancel Removal"
-msgstr "Скасувати пошук"
-
-#: ../src/software/gpk-application.c:238
-#, fuzzy
-msgid "Cancel Installation"
-msgstr "Встановлення пакунків"
-
-#. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:343
-msgid "Pending"
-msgstr "Очікування"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:413
-#, fuzzy, c-format
-msgid "%u package to be installed"
-msgid_plural "%u packages to be installed"
-msgstr[0] "Немає пакунків для встановлення"
-msgstr[1] "Немає пакунків для встановлення"
-msgstr[2] "Немає пакунків для встановлення"
-msgstr[3] "Немає пакунків для встановлення"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:420
-#, fuzzy, c-format
-msgid "%u package to be removed"
-msgid_plural "%u packages to be removed"
-msgstr[0] "Помилка при вилученні пакунка"
-msgstr[1] "Помилка при вилученні пакунка"
-msgstr[2] "Помилка при вилученні пакунка"
-msgstr[3] "Помилка при вилученні пакунка"
-
-#. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:592
-#, fuzzy, c-format
-msgid "%u file installed by %s"
-msgid_plural "%u files installed by %s"
-msgstr[0] "%i файл встановлено %s"
-msgstr[1] "%i файли встановлено %s"
-msgstr[2] "%i файлів встановлено %s"
-msgstr[3] "%i файл встановлено %s"
-
-#. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
-msgid "No packages"
-msgstr "Немає пакунків"
-
-#. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:902
-msgid "No other packages require this package"
-msgstr "Жодний інший пакунок не потребує цього пакунка"
-
-#. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:909
-#, fuzzy, c-format
-msgid "%u package requires %s"
-msgid_plural "%u packages require %s"
-msgstr[0] "%i пакунок потребує %s"
-msgstr[1] "%i пакунки потребує %s"
-msgstr[2] "%i пакунків потребує %s"
-msgstr[3] "%i пакунок потребує %s"
-
-#. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:914
-#, c-format
-msgid "Packages listed below require %s to function correctly."
-msgid_plural "Packages listed below require %s to function correctly."
-msgstr[0] "Для належного функціонування пакунок у списку потребує %s."
-msgstr[1] "Для належного функціонування пакунок у списку потребує %s."
-msgstr[2] "Для належного функціонування пакунок у списку потребує %s."
-msgstr[3] "Для нормальної роботи %s потрібен пакунок, перелічені нижче."
-
-#. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1031
-msgid "This package does not depend on any others"
-msgstr "Цей пакунок не залежить від жодного іншого"
-
-#. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1038
-#, fuzzy, c-format
-msgid "%u additional package is required for %s"
-msgid_plural "%u additional packages are required for %s"
-msgstr[0] "%i додатковий пакунок потрібно для %s"
-msgstr[1] "%i додаткових пакунка потрібно для %s"
-msgstr[2] "%i додаткових пакунків потрібно для %s"
-msgstr[3] "Потрібен додатковий пакунок:"
-
-#. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1043
-#, c-format
-msgid "Packages listed below are required for %s to function correctly."
-msgid_plural "Packages listed below are required for %s to function correctly."
-msgstr[0] "Для нормальної роботи %s потрібні пакунок, перелічені нижче."
-msgstr[1] "Для нормальної роботи %s потрібні пакунки, перелічені нижче."
-msgstr[2] "Для нормальної роботи %s потрібні пакунки, перелічені нижче."
-msgstr[3] "Для нормальної роботи %s потрібен пакунок, перелічені нижче."
-
-#. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1114
-msgid "Invalid"
-msgstr "Неправильно"
+#: ../src/software/gpk-application.c:205
+msgid "Please, be patient"
+msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1247
+#: ../src/software/gpk-application.c:484
 msgid "No results were found."
 msgstr "Пошук не дав результатів."
 
-#. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1255
-msgid "Try entering a package name in the search bar."
-msgstr "Спробуйте ввести назву пакунка в панель пошуку."
-
-#. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1258
-msgid "There are no packages queued to be installed or removed."
-msgstr "Немає пакунків у черзі для встановлення або вилучення."
-
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1263
+#: ../src/software/gpk-application.c:490
+#, fuzzy
 msgid ""
-"Try searching package descriptions by clicking the icon next to the search "
+"Try searching package distributions by clicking the icon next to the search "
 "text."
 msgstr ""
 "Спробуйте пошук в описах пакунків, натиснувши на піктограму поряд з текстом "
 "пошуку."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1266
+#: ../src/software/gpk-application.c:493
 msgid "Try again with a different search term."
 msgstr "Спробуйте ще раз з іншим критерієм пошуку."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1677
+#: ../src/software/gpk-application.c:854
 msgid "Changes not applied"
 msgstr "Зміни не застосовано"
 
-#: ../src/software/gpk-application.c:1678
+#: ../src/software/gpk-application.c:855
 msgid "Close _Anyway"
 msgstr "_Однаково закрити"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1682
+#: ../src/software/gpk-application.c:859
 msgid "You have made changes that have not yet been applied."
 msgstr "Внесені зміни ще не застосовано."
 
-#: ../src/software/gpk-application.c:1683
+#: ../src/software/gpk-application.c:860
 msgid "These changes will be lost if you close this window."
 msgstr "Зміни буде втрачено, якщо закрити це вікно."
 
+#: ../src/software/gpk-application.c:1159
+#, fuzzy
+msgid "Visit the app's website"
+msgstr "Відвідати сторінку проекту"
+
+#: ../src/software/gpk-application.c:1176
+msgid "Make a donation"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1193
+msgid "Report a problem"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1210
+msgid "Translate into your language"
+msgstr ""
+
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2224
+#: ../src/software/gpk-application.c:1245
 msgid "Size"
 msgstr "Розмір"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2227
+#: ../src/software/gpk-application.c:1248
 msgid "Installed size"
 msgstr "Розмір на диску"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2230
+#: ../src/software/gpk-application.c:1251
 msgid "Download size"
 msgstr "Розмір звантаження"
 
-#. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2417
-msgid "Searching by name"
-msgstr "Пошук за назвою"
+#. TRANSLATORS: entry tooltip: basic search by package name
+#: ../src/software/gpk-application.c:1381
+#, fuzzy
+msgid "Searching for distribution packages"
+msgstr "Пошук пакунків"
 
-#. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2443
-msgid "Searching by description"
-msgstr "Пошук за описом"
-
-#. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2469
-msgid "Searching by file"
-msgstr "Пошук за файлом"
+#. TRANSLATORS: entry tooltip: applications search
+#: ../src/software/gpk-application.c:1404
+#, fuzzy
+msgid "Searching for applications"
+msgstr "Пошук додатків"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2492
-msgid "Search by name"
-msgstr "Пошук за назвою"
+#: ../src/software/gpk-application.c:1424
+#, fuzzy
+msgid "Search for apps"
+msgstr "Пошук додатків"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2500
-msgid "Search by description"
-msgstr "Пошук за описом"
+#: ../src/software/gpk-application.c:1430
+#, fuzzy
+msgid "Search for distribution packages"
+msgstr "Пошук пакунків"
 
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2508
-msgid "Search by file name"
-msgstr "Пошук за назвою файла"
-
-#: ../src/software/gpk-application.c:2541
+#: ../src/software/gpk-application.c:1462
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr ""
 "Ця програма розповсюджується на умовах GNU General Public License Version 2"
 
-#: ../src/software/gpk-application.c:2542
+#: ../src/software/gpk-application.c:1463
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3698,7 +3547,7 @@ msgstr ""
 "умовах GNU General Public License Version 2, або (на ваш розсуд) будь-якою "
 "подальшою версією."
 
-#: ../src/software/gpk-application.c:2546
+#: ../src/software/gpk-application.c:1467
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3710,7 +3559,7 @@ msgstr ""
 "НЕЯВНИМИ ГАРАНТІЯМИ КОМЕРЦІЙНОЇ ЦІННОСТІ ТА ПРИДАТНОСТІ ДЛЯ ПЕВНОЇ МЕТИ. Для "
 "отримання детальних відомостей зверніться до GNU General Public License."
 
-#: ../src/software/gpk-application.c:2550
+#: ../src/software/gpk-application.c:1471
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3722,57 +3571,50 @@ msgstr ""
 "USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2556
+#: ../src/software/gpk-application.c:1477
 msgid "translator-credits"
 msgstr ""
 "Максим Дзюманенко <dziumanenko@gmail.com>\n"
 "Daniel Korostil <ted.korostiled@gmail.com>"
 
-#: ../src/software/gpk-application.c:2577
+#: ../src/software/gpk-application.c:1498
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "Джерело програм"
 
-#. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2772
-msgid "Enter a search word or click a category to get started."
-msgstr "Введіть слово для пошуку і тоді натисніть на категорію, щоб розпочати."
-
-#. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2775
-msgid "Enter a search word to get started."
-msgstr "Введіть слово для пошуку, щоб розпочати."
-
-#. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:3000
-msgid "Exiting as properties could not be retrieved"
-msgstr "Закривається, оскільки не можливо отримати властивості"
-
-#. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3043
-msgid "All packages"
-msgstr "Усі пакунки"
-
-#. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3045
-msgid "Show all packages"
-msgstr "Показати усі пакунки"
+#: ../src/software/gpk-application.c:1736
+#, fuzzy
+msgid "There was an error starting the application"
+msgstr "Потрібно буде перезапустити цю програму."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3432
-#: ../src/software-update/gpk-update-viewer.c:3412
+#: ../src/software/gpk-application.c:1953
+#: ../src/software-update/gpk-update-viewer.c:3398
 msgid "Show the program version and exit"
 msgstr "Показати версію програми та вийти"
 
-#: ../src/software/gpk-application.c:3446
+#: ../src/software/gpk-application.c:1967
 msgid "Install Software"
 msgstr "Встановити програми"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3462
+#: ../src/software/gpk-application.c:1983
 #, fuzzy
 msgid "Software installer"
 msgstr "Установлення програм"
+
+#: ../src/software/gpk-backend.c:87 ../src/software/gpk-backend.c:93
+#: ../src/software/gpk-backend.c:99
+#, c-format
+msgid ""
+"The backend does not support some features necessary for the application to "
+"work."
+msgstr ""
+
+#. TRANSLATORS: the repo name is invalid or not found, fall back to this
+#: ../src/software/gpk-backend.c:163
+msgid "Invalid"
+msgstr "Неправильно"
 
 #. TRANSLATORS: don't install updates now
 #: ../src/software-service/gpk-updates-notification.c:199
@@ -3950,17 +3792,17 @@ msgid "Other updates"
 msgstr "Інші оновлення"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:975
+#: ../src/software-update/gpk-update-viewer.c:973
 msgid "Getting the list of updates"
 msgstr "Отримання списку усіх оновлень"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1211
+#: ../src/software-update/gpk-update-viewer.c:1209
 msgid "Could not run upgrade script"
 msgstr "Не вдалось запустити скрипт оновлення"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1242
+#: ../src/software-update/gpk-update-viewer.c:1240
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3980,23 +3822,23 @@ msgstr[3] ""
 "Зв'язок' здійснюється через бездротове з'єднання, і завантаження цього "
 "пакунка може дорого коштувати"
 
-#: ../src/software-update/gpk-update-viewer.c:1391
+#: ../src/software-update/gpk-update-viewer.c:1389
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1427
 msgid "No updates are available"
 msgstr "Немає оновлень"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1431
+#: ../src/software-update/gpk-update-viewer.c:1429
 msgid "No network connection was detected."
 msgstr "Немає з'єднання з мережею"
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1449
+#: ../src/software-update/gpk-update-viewer.c:1447
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Встановити оновлення"
@@ -4004,7 +3846,7 @@ msgstr[1] "_Встановити оновлення"
 msgstr[2] "_Встановити оновлення"
 msgstr[3] "_Встановити оновлення"
 
-#: ../src/software-update/gpk-update-viewer.c:1494
+#: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -4014,7 +3856,7 @@ msgstr[2] "Доступні %i оновлень"
 msgstr[3] "Доступне %i оновлення"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1506
+#: ../src/software-update/gpk-update-viewer.c:1504
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -4024,7 +3866,7 @@ msgstr[2] "Вибрано %i оновлень"
 msgstr[3] "Вибрано %i оновлення"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1515
+#: ../src/software-update/gpk-update-viewer.c:1513
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -4034,50 +3876,50 @@ msgstr[2] "Вибрано %i оновлень (%s)"
 msgstr[3] "Вибрано %i оновлення (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1711
+#: ../src/software-update/gpk-update-viewer.c:1709
 msgid "Status"
 msgstr "Стан"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1889
+#: ../src/software-update/gpk-update-viewer.c:1887
 msgid "This update will add new features and expand functionality."
 msgstr "Це оновлення збільшить та розширить можливості програми."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1893
+#: ../src/software-update/gpk-update-viewer.c:1891
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "Це оновлення виправляє вади на інші некритичні проблеми."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1897
+#: ../src/software-update/gpk-update-viewer.c:1895
 msgid "This update is important as it may solve critical problems."
 msgstr "Це оновлення є важливим, оскільки може розв'язувати критичні проблеми."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1901
+#: ../src/software-update/gpk-update-viewer.c:1899
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "Це оновлення виправляє уразливість безпеки пакунка."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1905
+#: ../src/software-update/gpk-update-viewer.c:1903
 msgid "This update is blocked."
 msgstr "Це оновлення заблоковано."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1917
+#: ../src/software-update/gpk-update-viewer.c:1915
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "Це сповіщення видано %s та востаннє оновлено %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1924
+#: ../src/software-update/gpk-update-viewer.c:1922
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "Це сповіщення видано %s."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1942
+#: ../src/software-update/gpk-update-viewer.c:1940
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -4087,7 +3929,7 @@ msgstr[2] "Докладнішу інформацію про оновлення �
 msgstr[3] "Докладнішу інформацію про оновлення шукайте на сайті:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1949
+#: ../src/software-update/gpk-update-viewer.c:1947
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -4100,7 +3942,7 @@ msgstr[2] "Докладнішу інформацію про вади у цьом
 msgstr[3] "Докладнішу інформацію про вади у цьому оновленні шукайте на сайті:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:1954
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -4111,7 +3953,7 @@ msgstr[2] "Докладнішу інформацію про оновлення �
 msgstr[3] "Докладнішу інформацію про оновлення безпеки шукайте на сайті:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1965
+#: ../src/software-update/gpk-update-viewer.c:1963
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -4120,14 +3962,14 @@ msgstr ""
 "чинності."
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1969
+#: ../src/software-update/gpk-update-viewer.c:1967
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
 msgstr "Щоб зміни набрали чинності, після оновлення слід перезапусти сеанс."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1976
+#: ../src/software-update/gpk-update-viewer.c:1974
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -4136,7 +3978,7 @@ msgstr ""
 "промислові системи."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1980
+#: ../src/software-update/gpk-update-viewer.c:1978
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -4145,82 +3987,314 @@ msgstr ""
 "Повідомте про усі виявлені помилки або регресії"
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1988
+#: ../src/software-update/gpk-update-viewer.c:1986
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "Журнали розробника буде показано без опису для цього оновлення:"
 
-#: ../src/software-update/gpk-update-viewer.c:2035
+#: ../src/software-update/gpk-update-viewer.c:2033
 msgid "Loading…"
 msgstr "Завантаження…"
 
-#: ../src/software-update/gpk-update-viewer.c:2038
+#: ../src/software-update/gpk-update-viewer.c:2036
 msgid "No update details available."
 msgstr "Немає подробиць про оновлення."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/software-update/gpk-update-viewer.c:2098
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2228
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2096
+#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:2226
 msgid "Could not get update details"
 msgstr "Не вдалось отримати подробиці про оновлення"
 
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2116
 msgid "No results were returned."
 msgstr "Немає результату."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2483
+#: ../src/software-update/gpk-update-viewer.c:2480
 msgid "Select all"
 msgstr "Вибрати все"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2491
+#: ../src/software-update/gpk-update-viewer.c:2488
 msgid "Unselect all"
 msgstr "Зняти вибір всього"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2498
+#: ../src/software-update/gpk-update-viewer.c:2495
 msgid "Select security updates"
 msgstr "Вибрати оновлення безпеки"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2504
+#: ../src/software-update/gpk-update-viewer.c:2501
 msgid "Ignore this update"
 msgstr "Ігнорувати це оновлення"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2611
-#: ../src/software-update/gpk-update-viewer.c:2814
+#: ../src/software-update/gpk-update-viewer.c:2608
+#: ../src/software-update/gpk-update-viewer.c:2800
 msgid "Could not get updates"
 msgstr "Не вдалось отримати оновлення"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2748
-#: ../src/software-update/gpk-update-viewer.c:2844
+#: ../src/software-update/gpk-update-viewer.c:2742
+#: ../src/software-update/gpk-update-viewer.c:2830
 msgid "Checking for updates…"
 msgstr "Перевіряння на оновлення…"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3116
+#: ../src/software-update/gpk-update-viewer.c:3102
 msgid "Could not get list of distribution upgrades"
 msgstr "Не вдалось отримати список оновлень дистрибутива"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3146
+#: ../src/software-update/gpk-update-viewer.c:3132
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "Доступний новий випуск дистрибутива «%s»"
 
-#: ../src/software-update/gpk-update-viewer.c:3425
+#: ../src/software-update/gpk-update-viewer.c:3411
 msgid "Update Software"
 msgstr "Оновити програми"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software allows you to install and remove packages on your system. You "
+#~ "can view and search packages by name, details or even file name and also "
+#~ "see dependencies of one package on other packages. Searching by groups is "
+#~ "possible and is an easy way to find software in your favorite desktop "
+#~ "environment."
+#~ msgstr ""
+#~ "Пакунки дозволяють установлювати і вилучати пакунки на вашій системі. "
+#~ "Можна переглядати і шукати пакунки за назвою, подробицями або навіть "
+#~ "назвою файла та бачити залежності одного пакунка до інших. Пошук за "
+#~ "групами можливий і простий спосіб знайти програму в улюбленому "
+#~ "стільничному середовищі. "
+
+#, fuzzy
+#~ msgid "Select to Install…"
+#~ msgstr "Список файлів, що встановлюються"
+
+#~ msgid "Visit home page for selected package"
+#~ msgstr "Відвідати домашню сторінку вибраного пакунка"
+
+#~ msgid "Files"
+#~ msgstr "Файли"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "Ким вимагається"
+
+#, fuzzy
+#~ msgid "Dependent"
+#~ msgstr "Від чого залежить"
+
+#, fuzzy
+#~ msgid "Pending Changes"
+#~ msgstr "Випробування змін"
+
+#~ msgid "Apply Changes"
+#~ msgstr "Внести зміни"
+
+#, fuzzy
+#~ msgid "Apply pending changes"
+#~ msgstr "Застосування змін"
+
+#~ msgid "Cancel search"
+#~ msgstr "Скасувати пошук"
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "Скасовано"
+
+#, fuzzy
+#~ msgid "Cancel pending changes"
+#~ msgstr "Випробування змін"
+
+#~ msgid "Only Newest Versions"
+#~ msgstr "Лише найновіші версії"
+
+#~ msgid "Only Native Packages"
+#~ msgstr "Лише рідні пакунки"
+
+#~ msgid "Filter using basename in gpk-application"
+#~ msgstr "Фільтрувати за базовою назвою у gpk-application"
+
+#~ msgid "Filter package lists using basename in gpk-application."
+#~ msgstr "Фільтрувати списки пакунків за основною назвою у gpk-application."
+
+#~ msgid "Only show the newest packages in the file lists"
+#~ msgstr "Показувати лише новіші пакунки у списках файлів"
+
+#~ msgid "Only show the newest packages in the file lists."
+#~ msgstr "Показувати лише новіші пакунки у списках файлів."
+
+#~ msgid "Only show supported packages in the file lists"
+#~ msgstr "Показувати лише підтримувані пакунки у списках файлів"
+
+#~ msgid "Only show supported packages in the file lists."
+#~ msgstr "Показувати лише підтримуванні пакунки у списках файлів."
+
+#~ msgid "Only show native packages in the file lists"
+#~ msgstr "Показувати лише рідні пакети у списках файлів"
+
+#~ msgid ""
+#~ "Only show native packages matching the machine architecture in the file "
+#~ "lists."
+#~ msgstr ""
+#~ "Показувати у списках файлів лише рідні пакунки, які відповідають "
+#~ "архітектурі комп'ютера."
+
+#~ msgid "Show the category group menu"
+#~ msgstr "Показувати меню груп категорій"
+
+#~ msgid ""
+#~ "Show the category group menu. This is more complete and custom to the "
+#~ "distribution, but takes longer to populate."
+#~ msgstr ""
+#~ "Показувати меню групи категорій. Більш повне і залежить від дистрибутива, "
+#~ "але займає більше часу для наповнення."
+
+#~ msgid "Show the 'All Packages' group menu"
+#~ msgstr "Показувати групу «Усі програми»"
+
+#~ msgid ""
+#~ "Show the all packages menu item. This takes a long time to populate on "
+#~ "most backends and is not generally required by end users."
+#~ msgstr ""
+#~ "Показати всі пакунки пункту меню. Це забирає багато часу для наповнення "
+#~ "на більшості рушії і загалом не потрібне для більшості користувачів."
+
+#~ msgid "Only show the newest updates in the list"
+#~ msgstr "Показувати лише новіші пакети у списках"
+
+#~ msgid ""
+#~ "Only show the newest packages in the update list, and filter out older "
+#~ "updates that are still available."
+#~ msgstr ""
+#~ "Показувати лише нові пакети у списку оновлень та фільтрувати старі "
+#~ "оновлення, які досі доступні."
+
+#, fuzzy
+#~ msgid "Cancel Removal"
+#~ msgstr "Скасувати пошук"
+
+#, fuzzy
+#~ msgid "Cancel Installation"
+#~ msgstr "Встановлення пакунків"
+
+#~ msgid "Pending"
+#~ msgstr "Очікування"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be installed"
+#~ msgid_plural "%u packages to be installed"
+#~ msgstr[0] "Немає пакунків для встановлення"
+#~ msgstr[1] "Немає пакунків для встановлення"
+#~ msgstr[2] "Немає пакунків для встановлення"
+#~ msgstr[3] "Немає пакунків для встановлення"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be removed"
+#~ msgid_plural "%u packages to be removed"
+#~ msgstr[0] "Помилка при вилученні пакунка"
+#~ msgstr[1] "Помилка при вилученні пакунка"
+#~ msgstr[2] "Помилка при вилученні пакунка"
+#~ msgstr[3] "Помилка при вилученні пакунка"
+
+#, fuzzy, c-format
+#~ msgid "%u file installed by %s"
+#~ msgid_plural "%u files installed by %s"
+#~ msgstr[0] "%i файл встановлено %s"
+#~ msgstr[1] "%i файли встановлено %s"
+#~ msgstr[2] "%i файлів встановлено %s"
+#~ msgstr[3] "%i файл встановлено %s"
+
+#~ msgid "No packages"
+#~ msgstr "Немає пакунків"
+
+#~ msgid "No other packages require this package"
+#~ msgstr "Жодний інший пакунок не потребує цього пакунка"
+
+#, fuzzy, c-format
+#~ msgid "%u package requires %s"
+#~ msgid_plural "%u packages require %s"
+#~ msgstr[0] "%i пакунок потребує %s"
+#~ msgstr[1] "%i пакунки потребує %s"
+#~ msgstr[2] "%i пакунків потребує %s"
+#~ msgstr[3] "%i пакунок потребує %s"
+
+#, c-format
+#~ msgid "Packages listed below require %s to function correctly."
+#~ msgid_plural "Packages listed below require %s to function correctly."
+#~ msgstr[0] "Для належного функціонування пакунок у списку потребує %s."
+#~ msgstr[1] "Для належного функціонування пакунок у списку потребує %s."
+#~ msgstr[2] "Для належного функціонування пакунок у списку потребує %s."
+#~ msgstr[3] "Для нормальної роботи %s потрібен пакунок, перелічені нижче."
+
+#~ msgid "This package does not depend on any others"
+#~ msgstr "Цей пакунок не залежить від жодного іншого"
+
+#, fuzzy, c-format
+#~ msgid "%u additional package is required for %s"
+#~ msgid_plural "%u additional packages are required for %s"
+#~ msgstr[0] "%i додатковий пакунок потрібно для %s"
+#~ msgstr[1] "%i додаткових пакунка потрібно для %s"
+#~ msgstr[2] "%i додаткових пакунків потрібно для %s"
+#~ msgstr[3] "Потрібен додатковий пакунок:"
+
+#, c-format
+#~ msgid "Packages listed below are required for %s to function correctly."
+#~ msgid_plural ""
+#~ "Packages listed below are required for %s to function correctly."
+#~ msgstr[0] "Для нормальної роботи %s потрібні пакунок, перелічені нижче."
+#~ msgstr[1] "Для нормальної роботи %s потрібні пакунки, перелічені нижче."
+#~ msgstr[2] "Для нормальної роботи %s потрібні пакунки, перелічені нижче."
+#~ msgstr[3] "Для нормальної роботи %s потрібен пакунок, перелічені нижче."
+
+#~ msgid "Try entering a package name in the search bar."
+#~ msgstr "Спробуйте ввести назву пакунка в панель пошуку."
+
+#~ msgid "There are no packages queued to be installed or removed."
+#~ msgstr "Немає пакунків у черзі для встановлення або вилучення."
+
+#~ msgid "Searching by name"
+#~ msgstr "Пошук за назвою"
+
+#~ msgid "Searching by description"
+#~ msgstr "Пошук за описом"
+
+#~ msgid "Searching by file"
+#~ msgstr "Пошук за файлом"
+
+#~ msgid "Search by name"
+#~ msgstr "Пошук за назвою"
+
+#~ msgid "Search by description"
+#~ msgstr "Пошук за описом"
+
+#~ msgid "Search by file name"
+#~ msgstr "Пошук за назвою файла"
+
+#~ msgid "Enter a search word or click a category to get started."
+#~ msgstr ""
+#~ "Введіть слово для пошуку і тоді натисніть на категорію, щоб розпочати."
+
+#~ msgid "Enter a search word to get started."
+#~ msgstr "Введіть слово для пошуку, щоб розпочати."
+
+#~ msgid "Exiting as properties could not be retrieved"
+#~ msgstr "Закривається, оскільки не можливо отримати властивості"
+
+#~ msgid "All packages"
+#~ msgstr "Усі пакунки"
+
+#~ msgid "Show all packages"
+#~ msgstr "Показати усі пакунки"
 
 #~ msgid "Clear current selection"
 #~ msgstr "Очистити поточний вибір"
@@ -4334,9 +4408,6 @@ msgstr "Оновити програми"
 
 #~ msgid "Remove Package"
 #~ msgstr "Вилучити пакунок"
-
-#~ msgid "Visit Project Website"
-#~ msgstr "Відвідати сторінку проекту"
 
 #~ msgid "Required Packages"
 #~ msgstr "Потрібні пакунки"
@@ -4508,9 +4579,6 @@ msgstr "Оновити програми"
 #~ msgid "Software management for GNOME"
 #~ msgstr "Керування програми в GNOME"
 
-#~ msgid "Software error details"
-#~ msgstr "Опис помилки програми"
-
 #~ msgid "You don't have the necessary privileges to perform this action."
 #~ msgstr "У вас бракує прав для виконання цієї дії."
 
@@ -4534,9 +4602,6 @@ msgstr "Оновити програми"
 
 #~ msgid "Additional software is required"
 #~ msgstr "Потрібні додаткові програми"
-
-#~ msgid "%s requires additional software"
-#~ msgstr "%s потребує додаткову програму"
 
 #~ msgid "An application requires additional software"
 #~ msgstr "Програма потребує додаткову програму"
@@ -4698,9 +4763,6 @@ msgstr "Оновити програми"
 
 #~ msgid "Cannot get operating system upgrade information."
 #~ msgstr "Неможливо отримати інформацію про оновлення операційної системи"
-
-#~ msgid "Distribution Upgrade Tool"
-#~ msgstr "Засіб оновлення дистрибутива"
 
 #~ msgid "A mirror is possibly broken"
 #~ msgstr "Можливо, дзеркало пошкоджене"
@@ -4894,9 +4956,6 @@ msgstr "Оновити програми"
 
 #~ msgid "_No Filter"
 #~ msgstr "_Без фільтрів"
-
-#~ msgid "_Development"
-#~ msgstr "_Розробка"
 
 #~ msgid "Only _Development"
 #~ msgstr "Лише для р_озробників"

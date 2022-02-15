@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.ta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-22 10:24-0300\n"
+"POT-Creation-Date: 2022-02-15 12:13-0300\n"
 "PO-Revision-Date: 2014-09-15 13:40+0630\n"
 "Last-Translator: Shantha kumar <shkumar@redhat.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -44,34 +44,30 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
-#: ../src/software/gpk-application.c:2572
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:4
+#: ../src/software/gpk-application.c:238 ../src/software/gpk-application.c:1493
+#: ../src/software/gpk-application.c:1735
 #, fuzzy
 msgid "Software"
 msgstr "மென்பொருள் பதிவு"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1501
 msgid "Add or remove software installed on the system"
 msgstr "கணினியில் நிறுவப்பட்ட மென்பொருளை சேர்க்கவும் அல்லது நீக்கவும்"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:3
-#, fuzzy
 msgid ""
-"Software allows you to install and remove packages on your system. You can "
-"view and search packages by name, details or even file name and also see "
-"dependencies of one package on other packages. Searching by groups is "
-"possible and is an easy way to find software in your favorite desktop "
-"environment."
+"Software allows you to find and install new applications and remove existing "
+"installed applications."
 msgstr ""
-"தொகுப்பு நிறுவி மூலம் நீங்கள் கணினியில் தொகுப்புகளை நிறுவலாம், நீக்கலாம். இதில் நீங்கள் "
-"தொகுப்புகளை பெயரின்படி, விவரங்களின் படி அல்லது கோப்புப் பெயரின் படியும் காணலாம், "
-"தேடலாம்.அதுமட்டுமின்றி நீங்கள் தொகுப்புகளின் ஒன்றுக்கொன்று சார்ந்துள்ள சார்புத் "
-"தொகுப்புகளையும் காணலாம். குழுவாரியாகத் தேடவும் முடியும். இது உங்களுக்குப் பிடித்தமான "
-"பணிமேசை சூழலில் மென்பொருளைக் கண்டறிய எளிய வழி."
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:4
+msgid "Browse by categories or search and discover new apps."
+msgstr ""
+
+#: ../data/appdata/xings-software.appdata.xml.in.h:5
 #, fuzzy
 msgid ""
 "Software uses PackageKit and can work on any distribution using the native "
@@ -85,12 +81,12 @@ msgstr ""
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3442
+#: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "மென்பொருள் மேம்படுத்தல்"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:6 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "கணினியில் நிறுவப்பட்ட மென்பொருளை புதுப்பிக்கவும்"
 
@@ -114,6 +110,91 @@ msgstr ""
 "தொகுப்பு புதுப்பிப்புக் கருவியானது PackageKit ஐப் பயன்படுத்துகிறது, பூர்வீக தொகுப்பு "
 "நிர்வாக சட்டமைப்பைப் பயன்படுத்தும் பதிப்பு விநியோகங்கள் எதிலும் இயங்கும்."
 
+#: ../data/categories/development.directory.in.h:1
+#, fuzzy
+msgid "Development"
+msgstr "வளர்ச்சி (_D)"
+
+#: ../data/categories/development.directory.in.h:2
+#, fuzzy
+msgid "Software development tools"
+msgstr "மென்பொருள் பிழை விவரங்கள்"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/education.directory.in.h:1 ../src/common/gpk-enum.c:1497
+msgid "Education"
+msgstr "கல்வி"
+
+#: ../data/categories/education.directory.in.h:2
+#, fuzzy
+msgid "Educational software"
+msgstr "%s க்கு கூடுதல் மென்பொருள் தேவைப்படுகிறது"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/games.directory.in.h:1 ../src/common/gpk-enum.c:1501
+msgid "Games"
+msgstr "விளையாட்டு"
+
+#: ../data/categories/games.directory.in.h:2
+msgid "Games, puzzles, and other fun software"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/graphics.directory.in.h:1 ../src/common/gpk-enum.c:1505
+msgid "Graphics"
+msgstr "வரைகலைகள்"
+
+#: ../data/categories/graphics.directory.in.h:2
+msgid "Graphics creation and manipulation applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/multimedia.directory.in.h:1 ../src/common/gpk-enum.c:1525
+msgid "Multimedia"
+msgstr "பல்லூடகம்"
+
+#: ../data/categories/multimedia.directory.in.h:2
+msgid "Audio and video players and editors"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/network.directory.in.h:1 ../src/common/gpk-enum.c:1509
+msgid "Internet"
+msgstr "இணையம்"
+
+#: ../data/categories/network.directory.in.h:2
+msgid "Applications for Internet access"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/office.directory.in.h:1 ../src/common/gpk-enum.c:1513
+msgid "Office"
+msgstr "அலுவலகம்"
+
+#: ../data/categories/office.directory.in.h:2
+msgid "Office and productivity applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/science.directory.in.h:1 ../src/common/gpk-enum.c:1601
+msgid "Science"
+msgstr "அறிவியல்"
+
+#: ../data/categories/science.directory.in.h:2
+#, fuzzy
+msgid "Scientific software"
+msgstr "மென்பொருளை தேட முடியவில்லை"
+
+#: ../data/categories/settings.directory.in.h:1
+#, fuzzy
+msgid "Settings"
+msgstr "துவக்குகிறது"
+
+#: ../data/categories/settings.directory.in.h:2
+#, fuzzy
+msgid "Desktop and system settings applications"
+msgstr "இயங்கிக் கொண்டிருக்கும் பயன்பாட்டின்ன் பட்டியலமேம்படுத்துகிறதுது"
+
 #: ../data/xings-software.desktop.in.h:3
 #, fuzzy
 msgid ""
@@ -121,108 +202,105 @@ msgid ""
 "Store;"
 msgstr "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#: ../data/gpk-application.ui.h:1
 #, fuzzy
-msgid "Select to Install…"
-msgstr "நிறுவப்பட வேண்டிய கோப்புகள்"
+msgid "Show categories"
+msgstr "வகைகள் பெறப்பட்டது"
 
-#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
-msgid "Select to Remove…"
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "தொகுப்புகளுக்கு தேடுகிறது"
+
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:1675
+#, fuzzy
+msgid "Categories"
+msgstr "வகைகள் பெறப்பட்டது"
+
+#: ../data/gpk-application.ui.h:5 ../src/software/gpk-application.c:241
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4
-msgid "License"
-msgstr "உரிமம்"
+#: ../data/gpk-application.ui.h:7
+msgid "Open"
+msgstr ""
 
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "மூலம்"
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:8 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "நிறுவல்"
 
-#: ../data/gpk-application.ui.h:6
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:9 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "நீக்கு"
+
+#: ../data/gpk-application.ui.h:10
 msgid "Homepage"
 msgstr "முதன்மை பக்கம்"
 
-#: ../data/gpk-application.ui.h:7
-msgid "Visit home page for selected package"
-msgstr "தேர்ந்தெடுக்கப்பட்ட தொகுப்புக்கு முதன்மை பக்கத்தை பார்வையிடு"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Files"
-msgstr "கோப்புகள்"
-
-#: ../data/gpk-application.ui.h:9
-#, fuzzy
-msgid "Required"
-msgstr "தேவைப்படுபவர்"
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Dependent"
-msgstr "இவற்றை சார்ந்துள்ளது"
-
-#: ../data/gpk-application.ui.h:12
-#, fuzzy
-msgid "Pending Changes"
-msgstr "சோதித்தல் மாற்றங்கள்"
-
-#: ../data/gpk-application.ui.h:13
-msgid "Review pending changes before applying them"
+#: ../data/gpk-application.ui.h:11
+msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:14
-msgid "Apply Changes"
-msgstr "மாற்றங்களை பயன்படுத்து"
+#: ../data/gpk-application.ui.h:12
+msgid "Report"
+msgstr ""
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:13
 #, fuzzy
-msgid "Apply pending changes"
-msgstr "மாற்றங்களை செய்கிறது"
+msgid "Translate"
+msgstr "பரிமாற்ற பிழை"
 
-#: ../data/gpk-application.ui.h:16
-msgid "Cancel search"
-msgstr "தேடுதல் ரத்துசெய்"
+#: ../data/gpk-application.ui.h:14
+msgid "License"
+msgstr "உரிமம்"
+
+#: ../data/gpk-application.ui.h:15 ../src/software/gpk-application.c:1105
+#, fuzzy
+msgid "Distribution package"
+msgstr "விநியோக மேம்படுத்தல் கருவி"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:16 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "மூலம்"
 
 #: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Cancel"
-msgstr "ரத்து செய்யப்பட்டது"
-
-#: ../data/gpk-application.ui.h:18
-#, fuzzy
-msgid "Cancel pending changes"
-msgstr "சோதித்தல் மாற்றங்கள்"
-
-#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "மென்பொருள் மூலங்கள்"
 
-#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
 msgid "Software Sources"
 msgstr "மென்பொருள் மூலங்கள்"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:19
 #: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
 #: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "மென்பொருள் மூலங்கள்"
 
-#: ../data/gpk-application.ui.h:22
-msgid "Only Newest Versions"
-msgstr "புதிய பதிப்புகள் மட்டும்"
-
-#: ../data/gpk-application.ui.h:23
-msgid "Only Native Packages"
-msgstr "சொந்த தொகுப்புகள் மட்டும்"
-
-#: ../data/gpk-application.ui.h:24
+#: ../data/gpk-application.ui.h:20
 msgid "About"
 msgstr "அறிமுகம்"
 
-#: ../data/gpk-application.ui.h:25
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr "வெளியேறு (_Q)"
 
@@ -398,14 +476,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1457
 #, fuzzy
 msgid "All software is up to date"
 msgstr "மென்பொருள் மேம்படுத்தல்"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1461
+#: ../src/software-update/gpk-update-viewer.c:1459
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "இப்போது உங்கள் கணினிக்கு தொகுப்பு புதுப்பிப்புகள் எதுவும் இல்லை."
@@ -452,119 +530,47 @@ msgid "Ask the user if additional packages should be installed."
 msgstr "கூடுதல் தொகுப்புகள் நிறுவப்பட வேண்டுமா என பயனரிடம் கேள்."
 
 #: ../data/org.xings.software.gschema.xml.h:5
-msgid "Filter using basename in gpk-application"
-msgstr "gpk-applicationஇல் அடிப்படை பெயரை பயன்படுத்தி வடித்தல்"
-
-#: ../data/org.xings.software.gschema.xml.h:6
-msgid "Filter package lists using basename in gpk-application."
-msgstr "gpk-application இல் அடிப்படை பெயரை பயன்படுத்தி தொகுப்பு பட்டியல்களை வடிக்கவும்."
-
-#: ../data/org.xings.software.gschema.xml.h:7
-msgid "Only show the newest packages in the file lists"
-msgstr "கோப்பு பட்டியலில் புதிதாக இருக்கும் தொகுப்பை மட்டும் காட்டு"
-
-#: ../data/org.xings.software.gschema.xml.h:8
-msgid "Only show the newest packages in the file lists."
-msgstr "கோப்பு பட்டியலில் புதிதாக இருக்கும் தொகுப்புகளை மட்டும் காட்டு."
-
-#: ../data/org.xings.software.gschema.xml.h:9
-msgid "Only show supported packages in the file lists"
-msgstr "கோப்பு பட்டியல்களில் ஆதரவுள்ள தொகுப்புகளை மட்டும் காட்டு"
-
-#: ../data/org.xings.software.gschema.xml.h:10
-msgid "Only show supported packages in the file lists."
-msgstr "கோப்பு பட்டியல்களில் ஆதரவுள்ள தொகுப்புகளை மட்டும் காட்டு."
-
-#: ../data/org.xings.software.gschema.xml.h:11
-msgid "Only show native packages in the file lists"
-msgstr "கோப்பு பட்டியல்களில் சொந்த தொகுப்பை மட்டும் காட்டு"
-
-#: ../data/org.xings.software.gschema.xml.h:12
-msgid ""
-"Only show native packages matching the machine architecture in the file "
-"lists."
-msgstr ""
-"கோப்பு பட்டியல்களில் கணினி கட்டமைப்புக்குப் பொருந்தும் சொந்த தொகுப்புகளை மட்டும் காட்டு."
-
-#: ../data/org.xings.software.gschema.xml.h:13
-msgid "Show the category group menu"
-msgstr "வகை குழு மெனுவை காட்டாவும்"
-
-#: ../data/org.xings.software.gschema.xml.h:14
-msgid ""
-"Show the category group menu. This is more complete and custom to the "
-"distribution, but takes longer to populate."
-msgstr ""
-"வகை குழு மெனுவை காண்பி. இது விநியோகத்திற்கு மிகவும் சிக்கலானதும் தனிப்பயனம்சம் "
-"கொண்டதும் ஆகும், ஆனால் தயார்ப்படுத்த நீண்ட நேரம் ஆகும்."
-
-#: ../data/org.xings.software.gschema.xml.h:15
-msgid "Show the 'All Packages' group menu"
-msgstr "'அனைத்து தொகுப்புகளின்' குழு மெனுவை காட்டாவும்"
-
-#: ../data/org.xings.software.gschema.xml.h:16
-msgid ""
-"Show the all packages menu item. This takes a long time to populate on most "
-"backends and is not generally required by end users."
-msgstr ""
-"எல்லா தொகுப்புகள் மெனு உருப்படியையும் காட்டு. பெரும்பாலான பின்புல அமைப்புகளில் இதற்கு "
-"நீண்ட நேரம் ஆகலாம், பொதுவாக இறுதிப் பயனர்களுக்கு இது தேவைப்படுவதில்லை."
-
-#: ../data/org.xings.software.gschema.xml.h:17
 msgid "The search mode used by default"
 msgstr "தேடப்பட்ட முறைமை முன்னிருப்பாக பயன்படுத்தப்பட்டது"
 
-#: ../data/org.xings.software.gschema.xml.h:18
-msgid ""
-"The search mode used by default. Options are \"name\", \"details\", or \"file"
-"\"."
+#: ../data/org.xings.software.gschema.xml.h:6
+#, fuzzy
+msgid "The search mode used by default. Options are \"name\", \"details\"."
 msgstr ""
 "முன்னிருப்பாக தேடல் பயன்முறை பயன்படுத்தப்படும். \"பெயர்\", \"விவரங்கள்\" அல்லது \"கோப்பு"
 "\" ஆகியவை விருப்பங்களாகும்."
 
-#: ../data/org.xings.software.gschema.xml.h:19
+#: ../data/org.xings.software.gschema.xml.h:7
 msgid "Show all repositories in the package source viewer"
 msgstr "தொகுப்பு மூலம் காட்டியில் அனைத்து தொகுப்பதிவகங்களையும் காட்டவும்"
 
-#: ../data/org.xings.software.gschema.xml.h:20
+#: ../data/org.xings.software.gschema.xml.h:8
 msgid "Show all repositories in the package source viewer."
 msgstr "தொகுப்பு மூலம் காட்டியில் அனைத்து தொகுப்பதிவகங்களையும் காட்டவும்."
 
-#: ../data/org.xings.software.gschema.xml.h:21
-msgid "Only show the newest updates in the list"
-msgstr "கோப்பு பட்டியலில் புதிதாக இருக்கும் தொகுப்பை மட்டும் காட்டு"
-
-#: ../data/org.xings.software.gschema.xml.h:22
-msgid ""
-"Only show the newest packages in the update list, and filter out older "
-"updates that are still available."
-msgstr ""
-"புதுப்பித்தல் பட்டியலில் புதிய தொகுப்பை மட்டும் காட்டு, மற்றும் இன்னும் இருக்கக்கூடிய பழைய "
-"புதுப்பித்தல்களை வடிக்கவும்."
-
-#: ../data/org.xings.software.gschema.xml.h:23
+#: ../data/org.xings.software.gschema.xml.h:9
 msgid "Scroll to packages as they are downloaded"
 msgstr "தொகுப்புகள் பதிவிறக்கப்படுவதற்கு அவற்றை சுழற்றவும்"
 
-#: ../data/org.xings.software.gschema.xml.h:24
+#: ../data/org.xings.software.gschema.xml.h:10
 msgid ""
 "Scroll to packages in the update list as they are downloaded or installed."
 msgstr ""
 "மேம்படுத்தப்பட்ட பட்டியலில் தொகுப்புகள் பதிவிறக்க அல்லது நிறுவப்படுவதற்கு அவற்றை சுழற்றவும்."
 
-#: ../data/org.xings.software.gschema.xml.h:25
+#: ../data/org.xings.software.gschema.xml.h:11
 msgid "Allow applications to invoke the font installer"
 msgstr "எழுத்துரு நிறுவியில் நாம் பயன்பாட்டை பெற அனுமதித்தால்"
 
-#: ../data/org.xings.software.gschema.xml.h:26
+#: ../data/org.xings.software.gschema.xml.h:12
 msgid "Allow applications to invoke the font installer."
 msgstr "பயன்பாடுகள் எழுத்துரு நிறுவியை துவக்க நாம் பயன்பாட்டை அனுமதி."
 
-#: ../data/org.xings.software.gschema.xml.h:27
+#: ../data/org.xings.software.gschema.xml.h:13
 msgid "Programs that should be ignored when they issue session D-Bus requests"
 msgstr "அமர்வு டிபஸ் வேண்டுதல்களை தரும்போது உதாசீனப்படுத்த வேண்டிய நிரல்கள்."
 
-#: ../data/org.xings.software.gschema.xml.h:28
+#: ../data/org.xings.software.gschema.xml.h:14
 msgid ""
 "Programs that should be ignored when they issue session D-Bus requests, "
 "separated by commas."
@@ -572,23 +578,23 @@ msgstr ""
 "அமர்வு டிபஸ் வேண்டுதல்களை தரும்போது உதாசீனப்படுத்த வேண்டிய நிரல்கள், அரைப்புள்ளியால் "
 "பிரிக்கப்பட்டு."
 
-#: ../data/org.xings.software.gschema.xml.h:29
+#: ../data/org.xings.software.gschema.xml.h:15
 msgid "Allow applications to invoke the codec installer"
 msgstr "கோடாக் நிறுவியில் நாம் பயன்பாட்டை பெற அனுமதித்தால்"
 
-#: ../data/org.xings.software.gschema.xml.h:30
+#: ../data/org.xings.software.gschema.xml.h:16
 msgid "Allow applications to invoke the codec installer."
 msgstr "பயன்பாடுகள் கோடெக் நிறுவியை துவக்க அனுமதி"
 
-#: ../data/org.xings.software.gschema.xml.h:31
+#: ../data/org.xings.software.gschema.xml.h:17
 msgid "Allow applications to invoke the mime type installer"
 msgstr "நாம் பயன்பாடுகளை mime வகை நிறுவிக்கு அனுமதித்தால்"
 
-#: ../data/org.xings.software.gschema.xml.h:32
+#: ../data/org.xings.software.gschema.xml.h:18
 msgid "Allow applications to invoke the mime type installer."
 msgstr "பயன்பாடுகள் mime வகை நிறுவியை துவக்க அனுமதி."
 
-#: ../data/org.xings.software.gschema.xml.h:33
+#: ../data/org.xings.software.gschema.xml.h:19
 msgid ""
 "When displaying UI from a session D-Bus request, automatically use these "
 "options by default."
@@ -596,7 +602,7 @@ msgstr ""
 "UI ஐ ஒரு அமர்வு D-Bus கோரிக்கையில் காண்பிக்கும் போது, இந்த விருப்பங்களை முன்னிருப்பாக "
 "பயன்படுத்து."
 
-#: ../data/org.xings.software.gschema.xml.h:34
+#: ../data/org.xings.software.gschema.xml.h:20
 msgid ""
 "When displaying UI from a session D-Bus request, force these options to be "
 "turned on."
@@ -604,12 +610,12 @@ msgstr ""
 "UI ஐ ஒரு அமர்வு D-Bus விண்ணப்பத்தில் காட்டும் போது, இந்த விருப்பங்களை இயக்குவதைக் "
 "கட்டாயப்படுத்து."
 
-#: ../data/org.xings.software.gschema.xml.h:35
+#: ../data/org.xings.software.gschema.xml.h:21
 #, fuzzy
 msgid "Check for updates even on a mobile connection"
 msgstr "மின்கல மின்சாரத்தில் உள்ளபோது மேம்படுத்தலுக்கு சோதி"
 
-#: ../data/org.xings.software.gschema.xml.h:36
+#: ../data/org.xings.software.gschema.xml.h:22
 #, fuzzy
 msgid ""
 "Use mobile broadband connections such as GSM and CDMA to check for updates."
@@ -617,39 +623,39 @@ msgstr ""
 "மேம்படுத்தல்களை சரிபார்க்க GSM மற்றும் CDMA போன்ற மொபைல் பிராட்பேன்டு இணைப்புகளை "
 "பயன்படுத்தவும்"
 
-#: ../data/org.xings.software.gschema.xml.h:37
+#: ../data/org.xings.software.gschema.xml.h:23
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:38
+#: ../data/org.xings.software.gschema.xml.h:24
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:39
+#: ../data/org.xings.software.gschema.xml.h:25
 msgid "How often to check for updates"
 msgstr "எத்தனை முறைக்கு ஒரு முறை மேம்படுத்துதலை சரிபார்க்க வேண்டும்"
 
-#: ../data/org.xings.software.gschema.xml.h:40
+#: ../data/org.xings.software.gschema.xml.h:26
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:41
+#: ../data/org.xings.software.gschema.xml.h:27
 msgid "How often to refresh the package cache"
 msgstr "எத்தனை முறைக்கு ஒரு முறை தொகுப்பு இடையகத்தை புதுப்பிக்க வேண்டும்"
 
-#: ../data/org.xings.software.gschema.xml.h:42
+#: ../data/org.xings.software.gschema.xml.h:28
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr "எத்தனை முறைக்கு ஒரு முறை தொகுப்பு இடையகத்தை புதுப்பிக்க வேண்டும்"
 
-#: ../data/org.xings.software.gschema.xml.h:43
+#: ../data/org.xings.software.gschema.xml.h:29
 #, fuzzy
 msgid "How often to notify the user that non-critical updates are available"
 msgstr "பாதுகாப்பு மேம்படுத்தல் இருக்கும் போது பயனருக்கு அறிவிக்கவும்"
 
-#: ../data/org.xings.software.gschema.xml.h:44
+#: ../data/org.xings.software.gschema.xml.h:30
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -657,44 +663,44 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:45
+#: ../data/org.xings.software.gschema.xml.h:31
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:46
+#: ../data/org.xings.software.gschema.xml.h:32
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:181
+#: ../src/common/gpk-common.c:200
 msgid "32-bit"
 msgstr "32-பிட்டு"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:188
+#: ../src/common/gpk-common.c:207
 msgid "64-bit"
 msgstr "64-பிட்டு"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:348
+#: ../src/common/gpk-common.c:381
 msgid "This application is running as a privileged user"
 msgstr "இந்த பயன்பாடு ஒரு முன்னுரிமையான பயனராக இயங்குகிறது"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:351
+#: ../src/common/gpk-common.c:384
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s பயன்பாடு ஒரு முன்னுரிமையான பயனராக இயங்குகிறது"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:354
+#: ../src/common/gpk-common.c:387
 msgid "Package management applications are security sensitive."
 msgstr "தொகுப்பு மேலாளர் பயன்பாடுகள் பாதுகாப்பு உணர்வுடையது."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:356
+#: ../src/common/gpk-common.c:389
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -703,18 +709,18 @@ msgstr ""
 "வேண்டும்."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:362
+#: ../src/common/gpk-common.c:395
 msgid "Continue _Anyway"
 msgstr "எவ்வாறேனும் தொடரவும் (_A)"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
+#: ../src/common/gpk-common.c:433 ../src/common/gpk-common.c:483
 #, c-format
 msgid "Now"
 msgstr "இப்போது"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:443 ../src/common/gpk-common.c:493
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -722,7 +728,7 @@ msgstr[0] "%i விநாடி"
 msgstr[1] "%i விநாடிகள்"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
+#: ../src/common/gpk-common.c:453 ../src/common/gpk-common.c:506
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -730,7 +736,7 @@ msgstr[0] "%i நிமிடம்"
 msgstr[1] "%i நிமிடங்கள்"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
+#: ../src/common/gpk-common.c:459 ../src/common/gpk-common.c:525
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -741,71 +747,71 @@ msgstr[1] "%i மணிகள்"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
+#: ../src/common/gpk-common.c:512 ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:513 ../src/common/gpk-common.c:533
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "நிமிடம்"
 msgstr[1] "நிமிடங்கள்"
 
-#: ../src/common/gpk-common.c:481
+#: ../src/common/gpk-common.c:514
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "விநாடி"
 msgstr[1] "விநாடிகள்"
 
-#: ../src/common/gpk-common.c:499
+#: ../src/common/gpk-common.c:532
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "மணி"
 msgstr[1] "மணிகள்"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:529
+#: ../src/common/gpk-common.c:562
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i நிமிடம்"
 
-#: ../src/common/gpk-common.c:531
+#: ../src/common/gpk-common.c:564
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%i நிமிடம்"
 msgstr[1] "%i நிமிடங்கள்"
 
-#: ../src/common/gpk-common.c:536
+#: ../src/common/gpk-common.c:569
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%i மணி"
 msgstr[1] "%i மணிகள்"
 
-#: ../src/common/gpk-common.c:541
+#: ../src/common/gpk-common.c:574
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:546
+#: ../src/common/gpk-common.c:579
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:551
+#: ../src/common/gpk-common.c:584
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:589
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -813,25 +819,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:583
+#: ../src/common/gpk-common.c:616
 #, c-format
 msgid "%s and %s"
 msgstr "%s மற்றும் %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:587
+#: ../src/common/gpk-common.c:620
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s மற்றும் %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:591
+#: ../src/common/gpk-common.c:624
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s மற்றும் %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:596
+#: ../src/common/gpk-common.c:629
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s மற்றும் %s"
@@ -856,10 +862,8 @@ msgstr "பல தொகுப்புகள்"
 
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
-#. TRANSLATORS: column for group name
-#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2028
-#: ../src/software/gpk-application.c:2050
+#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
+#: ../src/software/gpk-application.c:1020
 msgid "Name"
 msgstr "பெயர்"
 
@@ -2387,31 +2391,6 @@ msgid "Accessories"
 msgstr "துணைப்பொருட்கள்"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1497
-msgid "Education"
-msgstr "கல்வி"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1501
-msgid "Games"
-msgstr "விளையாட்டு"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1505
-msgid "Graphics"
-msgstr "வரைகலைகள்"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1509
-msgid "Internet"
-msgstr "இணையம்"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1513
-msgid "Office"
-msgstr "அலுவலகம்"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1517 ../src/common/gpk-task.c:426
 msgid "Other"
 msgstr "வேறு"
@@ -2420,11 +2399,6 @@ msgstr "வேறு"
 #: ../src/common/gpk-enum.c:1521
 msgid "Programming"
 msgstr "நிரல்கள்"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1525
-msgid "Multimedia"
-msgstr "பல்லூடகம்"
 
 #. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1529
@@ -2517,11 +2491,6 @@ msgid "Package sources"
 msgstr "தொகுப்பு மூலங்கள்"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1601
-msgid "Science"
-msgstr "அறிவியல்"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1605
 msgid "Documentation"
 msgstr "ஆவணமாக்கம்"
@@ -2556,17 +2525,17 @@ msgstr "தெரியாத குழு"
 msgid "Icon"
 msgstr "சின்னம்"
 
-#: ../src/common/gpk-helper-chooser.c:259
+#: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "பயன்பாடுகள் இந்த வகை கோப்பினை திறக்க முடியும்"
 
 #. TRANSLATORS: button label, install
-#: ../src/common/gpk-helper-chooser.c:265
+#: ../src/common/gpk-helper-chooser.c:263
 msgid "_Install"
 msgstr "நிறுவல் (_I)"
 
 #. TRANSLATORS: button tooltip
-#: ../src/common/gpk-helper-chooser.c:269
+#: ../src/common/gpk-helper-chooser.c:267
 msgid "Install package"
 msgstr "தொகுப்பை நிறுவு"
 
@@ -2633,31 +2602,10 @@ msgstr "தொடரவும்"
 msgid "The following software also needs to be installed"
 msgstr "பின் வரும் கூடுதல் மென்பொருளும் நிறுவப்படவேண்டும்."
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "நிறுவல்"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "பின் வரும் கூடுதல் மென்பொருளும் நீக்கப்படவேண்டும்."
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "நீக்கு"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -3364,7 +3312,7 @@ msgstr "மூலங்களின் பட்டியலை பெற மு
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3180
+#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "பின்தள விவரங்களாக வெளியேறுவனவற்றை திரும்ப பெற முடியாது"
 
@@ -3382,193 +3330,108 @@ msgstr ""
 msgid "Software Settings"
 msgstr "மென்பொருள் அமைப்புகள்"
 
-#: ../src/software/gpk-application.c:218
-#, fuzzy
-msgid "Cancel Removal"
-msgstr "தேடுதல் ரத்துசெய்"
-
-#: ../src/software/gpk-application.c:238
-#, fuzzy
-msgid "Cancel Installation"
-msgstr "தொகுப்பு நிறுவல்"
-
-#. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:343
-msgid "Pending"
-msgstr "நிலுவையில்"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:413
-#, fuzzy, c-format
-msgid "%u package to be installed"
-msgid_plural "%u packages to be installed"
-msgstr[0] "எந்த தொகுப்பும் நிறுவ தேவையில்லை"
-msgstr[1] "எந்த தொகுப்பும் நிறுவ தேவையில்லை"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:420
-#, fuzzy, c-format
-msgid "%u package to be removed"
-msgid_plural "%u packages to be removed"
-msgstr[0] "தொகுப்பை நீக்க முடியவில்லை"
-msgstr[1] "தொகுப்பை நீக்க முடியவில்லை"
-
-#. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:592
-#, fuzzy, c-format
-msgid "%u file installed by %s"
-msgid_plural "%u files installed by %s"
-msgstr[0] "%i கோப்பு %sஆல் நிறுவப்பட்டது"
-msgstr[1] "%i கோப்புகள் %sஆல் நிறுவப்பட்டன"
-
-#. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
-msgid "No packages"
-msgstr "தொகுப்புகள் இல்லை"
-
-#. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:902
-msgid "No other packages require this package"
-msgstr "வேறு தொகுப்புக்கு இந்த தொகுப்பு தேவை இல்லை"
-
-#. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:909
-#, fuzzy, c-format
-msgid "%u package requires %s"
-msgid_plural "%u packages require %s"
-msgstr[0] "%i தொகுப்பு %s தேவைப்படுகிறது"
-msgstr[1] "%i கூடுதல் தொகுப்புகளுக்கு %s தேவை"
-
-#. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:914
-#, c-format
-msgid "Packages listed below require %s to function correctly."
-msgid_plural "Packages listed below require %s to function correctly."
-msgstr[0] "கீழே பட்டியலிடப்பட்ட தொகுப்பு %s சரியாக செயல்பட தேவைப்படுகிறது."
-msgstr[1] "கீழே பட்டியலிடப்பட்ட தொகுப்புகள் %s சரியாக செயல்பட தேவைப்படுகிறது."
-
-#. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1031
-msgid "This package does not depend on any others"
-msgstr "இந்தத் தொகுப்பு வேறு எவற்றையும் சார்ந்து இல்லை"
-
-#. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1038
-#, fuzzy, c-format
-msgid "%u additional package is required for %s"
-msgid_plural "%u additional packages are required for %s"
-msgstr[0] "%i கூடுதல் தொகுப்பு %sக்கு தேவைப்படுகிறது"
-msgstr[1] "%i கூடுதல் தொகுப்புகள் %sக்கு தேவைப்படுகிறது"
-
-#. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1043
-#, c-format
-msgid "Packages listed below are required for %s to function correctly."
-msgid_plural "Packages listed below are required for %s to function correctly."
-msgstr[0] "கீழே பட்டியலிடப்பட்ட தொகுப்பு %s சரியாக செயல்பட தேவைப்படுகிறது."
-msgstr[1] "கீழே பட்டியலிடப்பட்ட தொகுப்புகள் %s சரியாக செயல்பட தேவைப்படுகிறது."
-
-#. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1114
-msgid "Invalid"
-msgstr "தவறானது"
+#: ../src/software/gpk-application.c:205
+msgid "Please, be patient"
+msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1247
+#: ../src/software/gpk-application.c:484
 msgid "No results were found."
 msgstr "முடிவுகள் எதுவும் காணப்படவில்லை."
 
-#. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1255
-msgid "Try entering a package name in the search bar."
-msgstr "தேடுதல் பட்டையில் ஒரு தொகுப்பு பெயரை உள்ளிட முயற்சி செய்யவும்"
-
-#. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1258
-msgid "There are no packages queued to be installed or removed."
-msgstr "நிறுவுவதற்கு அல்லது நீக்கப்படுவதற்கு எந்த தொகுப்புகளும் வரிசையில் இல்லை."
-
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1263
+#: ../src/software/gpk-application.c:490
+#, fuzzy
 msgid ""
-"Try searching package descriptions by clicking the icon next to the search "
+"Try searching package distributions by clicking the icon next to the search "
 "text."
 msgstr ""
 "தேடும் தொகுப்பு விளக்கங்களை தேடும் உரைக்கு அடுத்துள்ள சின்னத்தை சொடுக்கி முயற்சிக்கலாம்."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1266
+#: ../src/software/gpk-application.c:493
 msgid "Try again with a different search term."
 msgstr "ஒரு வேறு தேடும் சொல்லுடன் மீண்டும் முயற்சிக்கவும்"
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1677
+#: ../src/software/gpk-application.c:854
 msgid "Changes not applied"
 msgstr "மாற்றங்கள் செயல்படுத்தப்படவில்லை"
 
-#: ../src/software/gpk-application.c:1678
+#: ../src/software/gpk-application.c:855
 msgid "Close _Anyway"
 msgstr "எவ்வாறேனும் மூடவும் (_A)"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1682
+#: ../src/software/gpk-application.c:859
 msgid "You have made changes that have not yet been applied."
 msgstr "நீங்கள் செய்த மாற்றங்கள் இதற்கு முன் செயல்படுத்தப் படவில்லை."
 
-#: ../src/software/gpk-application.c:1683
+#: ../src/software/gpk-application.c:860
 msgid "These changes will be lost if you close this window."
 msgstr "இந்த சாளரத்தை மூடினால் மாற்றங்கள் இழக்கப்படும்."
 
+#: ../src/software/gpk-application.c:1159
+#, fuzzy
+msgid "Visit the app's website"
+msgstr "திட்டத்தின் வலைத்தளத்தை பார்வையிடு"
+
+#: ../src/software/gpk-application.c:1176
+msgid "Make a donation"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1193
+msgid "Report a problem"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1210
+msgid "Translate into your language"
+msgstr ""
+
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2224
+#: ../src/software/gpk-application.c:1245
 msgid "Size"
 msgstr "அளவு"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2227
+#: ../src/software/gpk-application.c:1248
 msgid "Installed size"
 msgstr "நிறுவப்பட்ட அளவு"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2230
+#: ../src/software/gpk-application.c:1251
 msgid "Download size"
 msgstr "பதிவிறக்க அளவு"
 
-#. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2417
-msgid "Searching by name"
-msgstr "பெயரால் தேடுதல்"
+#. TRANSLATORS: entry tooltip: basic search by package name
+#: ../src/software/gpk-application.c:1381
+#, fuzzy
+msgid "Searching for distribution packages"
+msgstr "தொகுப்புகளுக்கு தேடுகிறது"
 
-#. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2443
-msgid "Searching by description"
-msgstr "விவரத்தால் தேடுதல்"
-
-#. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2469
-msgid "Searching by file"
-msgstr "கோப்பினால் தேடுதல்"
+#. TRANSLATORS: entry tooltip: applications search
+#: ../src/software/gpk-application.c:1404
+#, fuzzy
+msgid "Searching for applications"
+msgstr "கூடுதல் இணைப்புகளை தேடுகிறது"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2492
-msgid "Search by name"
-msgstr "பெயரால் தேடுதல்"
+#: ../src/software/gpk-application.c:1424
+#, fuzzy
+msgid "Search for apps"
+msgstr "கூடுதல் இணைப்புகளை தேடுகிறது"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2500
-msgid "Search by description"
-msgstr "விவரத்தால் தேடு"
+#: ../src/software/gpk-application.c:1430
+#, fuzzy
+msgid "Search for distribution packages"
+msgstr "தொகுப்புகளுக்கு தேடுகிறது"
 
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2508
-msgid "Search by file name"
-msgstr "கோப்பு பெயரால் தேடு"
-
-#: ../src/software/gpk-application.c:2541
+#: ../src/software/gpk-application.c:1462
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Licensed under the GNU General Public License Version 2"
 
-#: ../src/software/gpk-application.c:2542
+#: ../src/software/gpk-application.c:1463
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3580,7 +3443,7 @@ msgstr ""
 "Software Foundation; either version 2 of the License, or (at your option) "
 "any later version."
 
-#: ../src/software/gpk-application.c:2546
+#: ../src/software/gpk-application.c:1467
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3592,7 +3455,7 @@ msgstr ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 
-#: ../src/software/gpk-application.c:2550
+#: ../src/software/gpk-application.c:1471
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3603,55 +3466,48 @@ msgstr ""
 "Floor, Boston, MA 02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2556
+#: ../src/software/gpk-application.c:1477
 msgid "translator-credits"
 msgstr "I. Felix <ifelix@redhat.com> 2008"
 
-#: ../src/software/gpk-application.c:2577
+#: ../src/software/gpk-application.c:1498
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "மென்பொருள் மூலம்"
 
-#. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2772
-msgid "Enter a search word or click a category to get started."
-msgstr "துவக்குவதற்கு ஒரு தேடல் பெயரை உள்ளிடு அல்லது ஒரு வகையை சொடுக்கவும். "
-
-#. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2775
-msgid "Enter a search word to get started."
-msgstr "துவக்குவதற்கு ஒரு தேடல் பெயரை உள்ளிடுக"
-
-#. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:3000
-msgid "Exiting as properties could not be retrieved"
-msgstr "பின்தள விவரங்களாக வெளியேறுவனவற்றை திரும்ப பெற முடியாது"
-
-#. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3043
-msgid "All packages"
-msgstr "அனைத்து தொகுப்புகள்"
-
-#. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3045
-msgid "Show all packages"
-msgstr "அனைத்து தொகுப்புகளையும் காட்டு"
+#: ../src/software/gpk-application.c:1736
+#, fuzzy
+msgid "There was an error starting the application"
+msgstr "பயன்பாட்டை நீங்கள் மீண்டும் துவக்க வேண்டும்."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3432
-#: ../src/software-update/gpk-update-viewer.c:3412
+#: ../src/software/gpk-application.c:1953
+#: ../src/software-update/gpk-update-viewer.c:3398
 msgid "Show the program version and exit"
 msgstr "நிரல் பதிப்பை காட்டி வெளியேறு"
 
-#: ../src/software/gpk-application.c:3446
+#: ../src/software/gpk-application.c:1967
 msgid "Install Software"
 msgstr "மென்பொருளை நிறுவு"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3462
+#: ../src/software/gpk-application.c:1983
 #, fuzzy
 msgid "Software installer"
 msgstr "மென்பொருள் நிறுவல்"
+
+#: ../src/software/gpk-backend.c:87 ../src/software/gpk-backend.c:93
+#: ../src/software/gpk-backend.c:99
+#, c-format
+msgid ""
+"The backend does not support some features necessary for the application to "
+"work."
+msgstr ""
+
+#. TRANSLATORS: the repo name is invalid or not found, fall back to this
+#: ../src/software/gpk-backend.c:163
+msgid "Invalid"
+msgstr "தவறானது"
 
 #. TRANSLATORS: don't install updates now
 #: ../src/software-service/gpk-updates-notification.c:199
@@ -3823,17 +3679,17 @@ msgid "Other updates"
 msgstr "மற்ற மேம்படுத்தல்கள்"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:975
+#: ../src/software-update/gpk-update-viewer.c:973
 msgid "Getting the list of updates"
 msgstr "மேம்படுத்தல்களின் பட்டியலை பெறுகிறது"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1211
+#: ../src/software-update/gpk-update-viewer.c:1209
 msgid "Could not run upgrade script"
 msgstr "இற்றைப்படுத்தும் குறுநிரலை இயக்க முடியவில்லை"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1242
+#: ../src/software-update/gpk-update-viewer.c:1240
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3847,29 +3703,29 @@ msgstr[1] ""
 "இணைப்பு வயர்லெஸ் ப்ராட்பேண்ட் மூலம் வழங்கப்படுகிறது மற்றும் இந்த தொகுப்புகளை மேம்படுத்த அதிக "
 "செலவாகும்."
 
-#: ../src/software-update/gpk-update-viewer.c:1391
+#: ../src/software-update/gpk-update-viewer.c:1389
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1427
 msgid "No updates are available"
 msgstr "மேம்படுத்தல் எதுவும் இருப்பில் இல்லை"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1431
+#: ../src/software-update/gpk-update-viewer.c:1429
 msgid "No network connection was detected."
 msgstr "இணைய இணைப்பு இல்லை "
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1449
+#: ../src/software-update/gpk-update-viewer.c:1447
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "மேம்படுத்தல்களை நிறுவு (_I)"
 msgstr[1] "மேம்படுத்தலை நிறுவு (_I)"
 
-#: ../src/software-update/gpk-update-viewer.c:1494
+#: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3877,7 +3733,7 @@ msgstr[0] "இங்கு %i மேம்படுத்தல் இருக�
 msgstr[1] "இங்கு %i மேம்படுத்தல்கள் இருக்கின்றன"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1506
+#: ../src/software-update/gpk-update-viewer.c:1504
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3885,7 +3741,7 @@ msgstr[0] "%i மேம்படுத்தல் தேர்ந்தெட�
 msgstr[1] "%i மேம்படுத்தல்கள் தேர்ந்தெடுக்கப்பட்டன"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1515
+#: ../src/software-update/gpk-update-viewer.c:1513
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3893,50 +3749,50 @@ msgstr[0] "%i மேம்படுத்தல்கள் தேர்ந்�
 msgstr[1] "%i மேம்படுத்தல் தேர்ந்தெடுக்கப்பட்டுள்ளது (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1711
+#: ../src/software-update/gpk-update-viewer.c:1709
 msgid "Status"
 msgstr "நிலை"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1889
+#: ../src/software-update/gpk-update-viewer.c:1887
 msgid "This update will add new features and expand functionality."
 msgstr "இந்த இற்றைப்படுத்தல் புதிய அம்சங்களை சேர்க்கும்; செயலை விஸ்தரிக்கும்."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1893
+#: ../src/software-update/gpk-update-viewer.c:1891
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "இந்த மேம்படுத்தல் சில அவசிய சிக்கல்களையும் பிழையையும் திருத்துகிறது."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1897
+#: ../src/software-update/gpk-update-viewer.c:1895
 msgid "This update is important as it may solve critical problems."
 msgstr "இந்த புதுப்பித்தல் முக்கியமானது இது ஆபத்தான சிக்கல்களை தீர்க்க உதவும்."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1901
+#: ../src/software-update/gpk-update-viewer.c:1899
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "இந்த தொகுப்பில் இந்த மேம்படுத்தல் பாதுகாப்பு பாதிப்பை சரி செய்யவேண்டும்."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1905
+#: ../src/software-update/gpk-update-viewer.c:1903
 msgid "This update is blocked."
 msgstr "இந்த மேம்படுத்தல் நிறுத்தப்படுகிறது."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1917
+#: ../src/software-update/gpk-update-viewer.c:1915
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "இந்த அறிவிப்பு %sஇல் வழங்கப்பட்டு மற்றும் %sஇல் கடைசியாக மேம்படுத்தப்பட்டது."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1924
+#: ../src/software-update/gpk-update-viewer.c:1922
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "இந்த அறிவிப்பு %sஇல் கொடுக்கப்பட்டது."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1942
+#: ../src/software-update/gpk-update-viewer.c:1940
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3944,7 +3800,7 @@ msgstr[0] "இந்த மேம்படுத்தல் பற்றிய 
 msgstr[1] "இந்த மேம்படுத்தல் பற்றிய கூடுதல் தகவலுக்கு இந்த இணையதளங்களை பார்வையிடவும்:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1949
+#: ../src/software-update/gpk-update-viewer.c:1947
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3958,7 +3814,7 @@ msgstr[1] ""
 "பார்க்கவும்:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:1954
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3969,21 +3825,21 @@ msgstr[1] ""
 "பாதுகாப்பு மேம்படுத்தல் பற்றிய கூடுதல் தகவலுக்கு இந்த இணையதளங்களை பார்வையிடவும்:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1965
+#: ../src/software-update/gpk-update-viewer.c:1963
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr "மேம்படுத்தல் செய்யப்பட்ட பின் இந்த கணினி மறுதுவக்கப்படும்"
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1969
+#: ../src/software-update/gpk-update-viewer.c:1967
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
 msgstr "இந்த மேம்படுத்தலுக்கு பின் நீங்கள் விடுபதிவு செய்து மீண்டும் துவக்க வேண்டும்"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1976
+#: ../src/software-update/gpk-update-viewer.c:1974
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -3991,7 +3847,7 @@ msgstr ""
 "இந்த மேம்படுத்தலின் வகை நிலையில்லாதது ; அதாவது இந்த தயாரிப்பு பயனுக்கு உருவாக்கப்பட்டல்ல."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1980
+#: ../src/software-update/gpk-update-viewer.c:1978
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -4000,82 +3856,299 @@ msgstr ""
 "கண்டால் அறிக்கையிடவும்."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1988
+#: ../src/software-update/gpk-update-viewer.c:1986
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "உருவாக்குபவர் பதிவுகள் விளக்கம் இல்லாமல் இந்த மேம்படுத்தலுக்கு காட்டப்படும்:"
 
-#: ../src/software-update/gpk-update-viewer.c:2035
+#: ../src/software-update/gpk-update-viewer.c:2033
 msgid "Loading…"
 msgstr "ஏற்றுகிறது..."
 
-#: ../src/software-update/gpk-update-viewer.c:2038
+#: ../src/software-update/gpk-update-viewer.c:2036
 msgid "No update details available."
 msgstr "மேம்படுத்தல் விவரங்கள் எதுவும் இல்லை"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/software-update/gpk-update-viewer.c:2098
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2228
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2096
+#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:2226
 msgid "Could not get update details"
 msgstr "மேம்படுத்தல் விவரத்தை பெற முடியவில்லை"
 
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2116
 msgid "No results were returned."
 msgstr "விடைகள் இல்லை"
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2483
+#: ../src/software-update/gpk-update-viewer.c:2480
 msgid "Select all"
 msgstr "அனைத்தையும் தேர்ந்தெடு"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2491
+#: ../src/software-update/gpk-update-viewer.c:2488
 msgid "Unselect all"
 msgstr "அனைத்தையும் தேர்வு நீக்கு"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2498
+#: ../src/software-update/gpk-update-viewer.c:2495
 msgid "Select security updates"
 msgstr "பாதுகாப்பு மேம்படுத்தல்களை தேர்ந்தெடு"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2504
+#: ../src/software-update/gpk-update-viewer.c:2501
 msgid "Ignore this update"
 msgstr "இந்த மேம்படுத்தலை தவிர்"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2611
-#: ../src/software-update/gpk-update-viewer.c:2814
+#: ../src/software-update/gpk-update-viewer.c:2608
+#: ../src/software-update/gpk-update-viewer.c:2800
 msgid "Could not get updates"
 msgstr "தொகுப்புகளின் மேம்படுத்தல் கிடைக்கவில்லை"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2748
-#: ../src/software-update/gpk-update-viewer.c:2844
+#: ../src/software-update/gpk-update-viewer.c:2742
+#: ../src/software-update/gpk-update-viewer.c:2830
 msgid "Checking for updates…"
 msgstr "புதுப்பிப்புகள் உள்ளதா எனப் பார்க்கிறது..."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3116
+#: ../src/software-update/gpk-update-viewer.c:3102
 msgid "Could not get list of distribution upgrades"
 msgstr "விநியோக மேம்படுத்துதல் பட்டியல் பெற முடியவில்லை"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3146
+#: ../src/software-update/gpk-update-viewer.c:3132
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "புதிய விநியோக மேம்படுத்தல் வெளியீடு '%s' உள்ளது"
 
-#: ../src/software-update/gpk-update-viewer.c:3425
+#: ../src/software-update/gpk-update-viewer.c:3411
 msgid "Update Software"
 msgstr "மென்பொருளை மேம்படுத்து"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software allows you to install and remove packages on your system. You "
+#~ "can view and search packages by name, details or even file name and also "
+#~ "see dependencies of one package on other packages. Searching by groups is "
+#~ "possible and is an easy way to find software in your favorite desktop "
+#~ "environment."
+#~ msgstr ""
+#~ "தொகுப்பு நிறுவி மூலம் நீங்கள் கணினியில் தொகுப்புகளை நிறுவலாம், நீக்கலாம். இதில் நீங்கள் "
+#~ "தொகுப்புகளை பெயரின்படி, விவரங்களின் படி அல்லது கோப்புப் பெயரின் படியும் காணலாம், "
+#~ "தேடலாம்.அதுமட்டுமின்றி நீங்கள் தொகுப்புகளின் ஒன்றுக்கொன்று சார்ந்துள்ள சார்புத் "
+#~ "தொகுப்புகளையும் காணலாம். குழுவாரியாகத் தேடவும் முடியும். இது உங்களுக்குப் "
+#~ "பிடித்தமான பணிமேசை சூழலில் மென்பொருளைக் கண்டறிய எளிய வழி."
+
+#, fuzzy
+#~ msgid "Select to Install…"
+#~ msgstr "நிறுவப்பட வேண்டிய கோப்புகள்"
+
+#~ msgid "Visit home page for selected package"
+#~ msgstr "தேர்ந்தெடுக்கப்பட்ட தொகுப்புக்கு முதன்மை பக்கத்தை பார்வையிடு"
+
+#~ msgid "Files"
+#~ msgstr "கோப்புகள்"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "தேவைப்படுபவர்"
+
+#, fuzzy
+#~ msgid "Dependent"
+#~ msgstr "இவற்றை சார்ந்துள்ளது"
+
+#, fuzzy
+#~ msgid "Pending Changes"
+#~ msgstr "சோதித்தல் மாற்றங்கள்"
+
+#~ msgid "Apply Changes"
+#~ msgstr "மாற்றங்களை பயன்படுத்து"
+
+#, fuzzy
+#~ msgid "Apply pending changes"
+#~ msgstr "மாற்றங்களை செய்கிறது"
+
+#~ msgid "Cancel search"
+#~ msgstr "தேடுதல் ரத்துசெய்"
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "ரத்து செய்யப்பட்டது"
+
+#, fuzzy
+#~ msgid "Cancel pending changes"
+#~ msgstr "சோதித்தல் மாற்றங்கள்"
+
+#~ msgid "Only Newest Versions"
+#~ msgstr "புதிய பதிப்புகள் மட்டும்"
+
+#~ msgid "Only Native Packages"
+#~ msgstr "சொந்த தொகுப்புகள் மட்டும்"
+
+#~ msgid "Filter using basename in gpk-application"
+#~ msgstr "gpk-applicationஇல் அடிப்படை பெயரை பயன்படுத்தி வடித்தல்"
+
+#~ msgid "Filter package lists using basename in gpk-application."
+#~ msgstr ""
+#~ "gpk-application இல் அடிப்படை பெயரை பயன்படுத்தி தொகுப்பு பட்டியல்களை வடிக்கவும்."
+
+#~ msgid "Only show the newest packages in the file lists"
+#~ msgstr "கோப்பு பட்டியலில் புதிதாக இருக்கும் தொகுப்பை மட்டும் காட்டு"
+
+#~ msgid "Only show the newest packages in the file lists."
+#~ msgstr "கோப்பு பட்டியலில் புதிதாக இருக்கும் தொகுப்புகளை மட்டும் காட்டு."
+
+#~ msgid "Only show supported packages in the file lists"
+#~ msgstr "கோப்பு பட்டியல்களில் ஆதரவுள்ள தொகுப்புகளை மட்டும் காட்டு"
+
+#~ msgid "Only show supported packages in the file lists."
+#~ msgstr "கோப்பு பட்டியல்களில் ஆதரவுள்ள தொகுப்புகளை மட்டும் காட்டு."
+
+#~ msgid "Only show native packages in the file lists"
+#~ msgstr "கோப்பு பட்டியல்களில் சொந்த தொகுப்பை மட்டும் காட்டு"
+
+#~ msgid ""
+#~ "Only show native packages matching the machine architecture in the file "
+#~ "lists."
+#~ msgstr ""
+#~ "கோப்பு பட்டியல்களில் கணினி கட்டமைப்புக்குப் பொருந்தும் சொந்த தொகுப்புகளை மட்டும் காட்டு."
+
+#~ msgid "Show the category group menu"
+#~ msgstr "வகை குழு மெனுவை காட்டாவும்"
+
+#~ msgid ""
+#~ "Show the category group menu. This is more complete and custom to the "
+#~ "distribution, but takes longer to populate."
+#~ msgstr ""
+#~ "வகை குழு மெனுவை காண்பி. இது விநியோகத்திற்கு மிகவும் சிக்கலானதும் தனிப்பயனம்சம் "
+#~ "கொண்டதும் ஆகும், ஆனால் தயார்ப்படுத்த நீண்ட நேரம் ஆகும்."
+
+#~ msgid "Show the 'All Packages' group menu"
+#~ msgstr "'அனைத்து தொகுப்புகளின்' குழு மெனுவை காட்டாவும்"
+
+#~ msgid ""
+#~ "Show the all packages menu item. This takes a long time to populate on "
+#~ "most backends and is not generally required by end users."
+#~ msgstr ""
+#~ "எல்லா தொகுப்புகள் மெனு உருப்படியையும் காட்டு. பெரும்பாலான பின்புல அமைப்புகளில் "
+#~ "இதற்கு நீண்ட நேரம் ஆகலாம், பொதுவாக இறுதிப் பயனர்களுக்கு இது தேவைப்படுவதில்லை."
+
+#~ msgid "Only show the newest updates in the list"
+#~ msgstr "கோப்பு பட்டியலில் புதிதாக இருக்கும் தொகுப்பை மட்டும் காட்டு"
+
+#~ msgid ""
+#~ "Only show the newest packages in the update list, and filter out older "
+#~ "updates that are still available."
+#~ msgstr ""
+#~ "புதுப்பித்தல் பட்டியலில் புதிய தொகுப்பை மட்டும் காட்டு, மற்றும் இன்னும் இருக்கக்கூடிய "
+#~ "பழைய புதுப்பித்தல்களை வடிக்கவும்."
+
+#, fuzzy
+#~ msgid "Cancel Removal"
+#~ msgstr "தேடுதல் ரத்துசெய்"
+
+#, fuzzy
+#~ msgid "Cancel Installation"
+#~ msgstr "தொகுப்பு நிறுவல்"
+
+#~ msgid "Pending"
+#~ msgstr "நிலுவையில்"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be installed"
+#~ msgid_plural "%u packages to be installed"
+#~ msgstr[0] "எந்த தொகுப்பும் நிறுவ தேவையில்லை"
+#~ msgstr[1] "எந்த தொகுப்பும் நிறுவ தேவையில்லை"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be removed"
+#~ msgid_plural "%u packages to be removed"
+#~ msgstr[0] "தொகுப்பை நீக்க முடியவில்லை"
+#~ msgstr[1] "தொகுப்பை நீக்க முடியவில்லை"
+
+#, fuzzy, c-format
+#~ msgid "%u file installed by %s"
+#~ msgid_plural "%u files installed by %s"
+#~ msgstr[0] "%i கோப்பு %sஆல் நிறுவப்பட்டது"
+#~ msgstr[1] "%i கோப்புகள் %sஆல் நிறுவப்பட்டன"
+
+#~ msgid "No packages"
+#~ msgstr "தொகுப்புகள் இல்லை"
+
+#~ msgid "No other packages require this package"
+#~ msgstr "வேறு தொகுப்புக்கு இந்த தொகுப்பு தேவை இல்லை"
+
+#, fuzzy, c-format
+#~ msgid "%u package requires %s"
+#~ msgid_plural "%u packages require %s"
+#~ msgstr[0] "%i தொகுப்பு %s தேவைப்படுகிறது"
+#~ msgstr[1] "%i கூடுதல் தொகுப்புகளுக்கு %s தேவை"
+
+#, c-format
+#~ msgid "Packages listed below require %s to function correctly."
+#~ msgid_plural "Packages listed below require %s to function correctly."
+#~ msgstr[0] "கீழே பட்டியலிடப்பட்ட தொகுப்பு %s சரியாக செயல்பட தேவைப்படுகிறது."
+#~ msgstr[1] "கீழே பட்டியலிடப்பட்ட தொகுப்புகள் %s சரியாக செயல்பட தேவைப்படுகிறது."
+
+#~ msgid "This package does not depend on any others"
+#~ msgstr "இந்தத் தொகுப்பு வேறு எவற்றையும் சார்ந்து இல்லை"
+
+#, fuzzy, c-format
+#~ msgid "%u additional package is required for %s"
+#~ msgid_plural "%u additional packages are required for %s"
+#~ msgstr[0] "%i கூடுதல் தொகுப்பு %sக்கு தேவைப்படுகிறது"
+#~ msgstr[1] "%i கூடுதல் தொகுப்புகள் %sக்கு தேவைப்படுகிறது"
+
+#, c-format
+#~ msgid "Packages listed below are required for %s to function correctly."
+#~ msgid_plural ""
+#~ "Packages listed below are required for %s to function correctly."
+#~ msgstr[0] "கீழே பட்டியலிடப்பட்ட தொகுப்பு %s சரியாக செயல்பட தேவைப்படுகிறது."
+#~ msgstr[1] "கீழே பட்டியலிடப்பட்ட தொகுப்புகள் %s சரியாக செயல்பட தேவைப்படுகிறது."
+
+#~ msgid "Try entering a package name in the search bar."
+#~ msgstr "தேடுதல் பட்டையில் ஒரு தொகுப்பு பெயரை உள்ளிட முயற்சி செய்யவும்"
+
+#~ msgid "There are no packages queued to be installed or removed."
+#~ msgstr "நிறுவுவதற்கு அல்லது நீக்கப்படுவதற்கு எந்த தொகுப்புகளும் வரிசையில் இல்லை."
+
+#~ msgid "Searching by name"
+#~ msgstr "பெயரால் தேடுதல்"
+
+#~ msgid "Searching by description"
+#~ msgstr "விவரத்தால் தேடுதல்"
+
+#~ msgid "Searching by file"
+#~ msgstr "கோப்பினால் தேடுதல்"
+
+#~ msgid "Search by name"
+#~ msgstr "பெயரால் தேடுதல்"
+
+#~ msgid "Search by description"
+#~ msgstr "விவரத்தால் தேடு"
+
+#~ msgid "Search by file name"
+#~ msgstr "கோப்பு பெயரால் தேடு"
+
+#~ msgid "Enter a search word or click a category to get started."
+#~ msgstr "துவக்குவதற்கு ஒரு தேடல் பெயரை உள்ளிடு அல்லது ஒரு வகையை சொடுக்கவும். "
+
+#~ msgid "Enter a search word to get started."
+#~ msgstr "துவக்குவதற்கு ஒரு தேடல் பெயரை உள்ளிடுக"
+
+#~ msgid "Exiting as properties could not be retrieved"
+#~ msgstr "பின்தள விவரங்களாக வெளியேறுவனவற்றை திரும்ப பெற முடியாது"
+
+#~ msgid "All packages"
+#~ msgstr "அனைத்து தொகுப்புகள்"
+
+#~ msgid "Show all packages"
+#~ msgstr "அனைத்து தொகுப்புகளையும் காட்டு"
 
 #~ msgid "Clear current selection"
 #~ msgstr "நடப்பு தேர்வை துடை"
@@ -4193,9 +4266,6 @@ msgstr "மென்பொருளை மேம்படுத்து"
 #~ msgid "Remove Package"
 #~ msgstr "தொகுப்புகளை நீக்கவும்"
 
-#~ msgid "Visit Project Website"
-#~ msgstr "திட்டத்தின் வலைத்தளத்தை பார்வையிடு"
-
 #~ msgid "Required Packages"
 #~ msgstr "தேவையான தொகுப்புகள்"
 
@@ -4281,9 +4351,6 @@ msgstr "மென்பொருளை மேம்படுத்து"
 #~ msgid "Software management for GNOME"
 #~ msgstr "GNOME க்கான மென்பொருள் நிர்வாகம்"
 
-#~ msgid "Software error details"
-#~ msgstr "மென்பொருள் பிழை விவரங்கள்"
-
 #~ msgid "You don't have the necessary privileges to perform this action."
 #~ msgstr "இந்த செயலை செய்வதற்கு தேவையான சலுகை உங்களுக்கு இல்லை."
 
@@ -4307,9 +4374,6 @@ msgstr "மென்பொருளை மேம்படுத்து"
 
 #~ msgid "Additional software is required"
 #~ msgstr "கூடுதல் மென்பொருள் தேவை"
-
-#~ msgid "%s requires additional software"
-#~ msgstr "%s க்கு கூடுதல் மென்பொருள் தேவைப்படுகிறது"
 
 #~ msgid "An application requires additional software"
 #~ msgstr "ஒரு பயன்பாட்டுக்கு கூடுதல் மென்பொருள் தேவைப்படுகிறது"
@@ -4645,9 +4709,6 @@ msgstr "மென்பொருளை மேம்படுத்து"
 #~ msgid "Cannot get operating system upgrade information."
 #~ msgstr "இயங்கு தள மேம்படுத்தல் தகவலை பெற முடியவில்லை."
 
-#~ msgid "Distribution Upgrade Tool"
-#~ msgstr "விநியோக மேம்படுத்தல் கருவி"
-
 #~ msgid "Catalogs files to install"
 #~ msgstr "வகைகள் கோப்பு நிறுவப்பட உள்ளது"
 
@@ -4777,9 +4838,6 @@ msgstr "மென்பொருளை மேம்படுத்து"
 
 #~ msgid "_Contents"
 #~ msgstr "உள்ளடக்கங்கள் (_C)"
-
-#~ msgid "_Development"
-#~ msgstr "வளர்ச்சி (_D)"
 
 #~ msgid "_Filters"
 #~ msgstr "வடிப்பிகள் (_F)"

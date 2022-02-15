@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-22 10:24-0300\n"
+"POT-Creation-Date: 2022-02-15 12:13-0300\n"
 "PO-Revision-Date: 2010-05-18 10:04 -0400\n"
 "Last-Translator: Thomas Thurman <tthurman@gnome.org>\n"
 "Language-Team: Shavian <ubuntu-l10n-en-shaw@launchpad.net>\n"
@@ -17,27 +17,29 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:11
-#: ../src/software/gpk-application.c:2572
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:4
+#: ../src/software/gpk-application.c:238 ../src/software/gpk-application.c:1493
+#: ../src/software/gpk-application.c:1735
 msgid "Software"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:2580
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1501
 msgid "Add or remove software installed on the system"
 msgstr "𐑨𐑛 𐑹 𐑮𐑦𐑥𐑵𐑝 𐑕𐑪𐑓𐑑𐑢𐑺 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑪𐑯 𐑞 𐑕𐑦𐑕𐑑𐑩𐑥"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:3
 msgid ""
-"Software allows you to install and remove packages on your system. You can "
-"view and search packages by name, details or even file name and also see "
-"dependencies of one package on other packages. Searching by groups is "
-"possible and is an easy way to find software in your favorite desktop "
-"environment."
+"Software allows you to find and install new applications and remove existing "
+"installed applications."
 msgstr ""
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:4
+msgid "Browse by categories or search and discover new apps."
+msgstr ""
+
+#: ../data/appdata/xings-software.appdata.xml.in.h:5
 msgid ""
 "Software uses PackageKit and can work on any distribution using the native "
 "package management framework."
@@ -48,12 +50,12 @@ msgstr ""
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3442
+#: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:1 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:6 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑪𐑓𐑑𐑢𐑺 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑪𐑯 𐑞 𐑕𐑦𐑕𐑑𐑩𐑥"
 
@@ -70,118 +72,198 @@ msgid ""
 "native package management framework."
 msgstr ""
 
+#: ../data/categories/development.directory.in.h:1
+#, fuzzy
+msgid "Development"
+msgstr "𐑛𐑦𐑝𐑧𐑤𐑩𐑐𐑥𐑩𐑯𐑑"
+
+#: ../data/categories/development.directory.in.h:2
+#, fuzzy
+msgid "Software development tools"
+msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑 𐑐𐑮𐑧𐑓𐑼𐑩𐑯𐑕𐑩𐑟"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/education.directory.in.h:1 ../src/common/gpk-enum.c:1497
+msgid "Education"
+msgstr "𐑧𐑛𐑿𐑒𐑱𐑖𐑩𐑯"
+
+#: ../data/categories/education.directory.in.h:2
+#, fuzzy
+msgid "Educational software"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤 𐑕𐑪𐑓𐑑𐑢𐑺"
+
+#. TRANSLATORS: The group type
+#: ../data/categories/games.directory.in.h:1 ../src/common/gpk-enum.c:1501
+msgid "Games"
+msgstr "𐑜𐑱𐑥𐑟"
+
+#: ../data/categories/games.directory.in.h:2
+msgid "Games, puzzles, and other fun software"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/graphics.directory.in.h:1 ../src/common/gpk-enum.c:1505
+msgid "Graphics"
+msgstr "𐑜𐑮𐑨𐑓𐑦𐑒𐑕"
+
+#: ../data/categories/graphics.directory.in.h:2
+msgid "Graphics creation and manipulation applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/multimedia.directory.in.h:1 ../src/common/gpk-enum.c:1525
+msgid "Multimedia"
+msgstr "𐑥𐑩𐑤𐑑𐑰𐑥𐑰𐑛𐑰𐑩"
+
+#: ../data/categories/multimedia.directory.in.h:2
+msgid "Audio and video players and editors"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/network.directory.in.h:1 ../src/common/gpk-enum.c:1509
+msgid "Internet"
+msgstr "·𐑦𐑯𐑑𐑼𐑯𐑧𐑑"
+
+#: ../data/categories/network.directory.in.h:2
+msgid "Applications for Internet access"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/office.directory.in.h:1 ../src/common/gpk-enum.c:1513
+msgid "Office"
+msgstr "𐑪𐑓𐑦𐑕"
+
+#: ../data/categories/office.directory.in.h:2
+msgid "Office and productivity applications"
+msgstr ""
+
+#. TRANSLATORS: The group type
+#: ../data/categories/science.directory.in.h:1 ../src/common/gpk-enum.c:1601
+msgid "Science"
+msgstr "𐑕𐑲𐑩𐑯𐑕"
+
+#: ../data/categories/science.directory.in.h:2
+#, fuzzy
+msgid "Scientific software"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑓𐑲𐑯𐑛 𐑕𐑪𐑓𐑑𐑢𐑺"
+
+#: ../data/categories/settings.directory.in.h:1
+#, fuzzy
+msgid "Settings"
+msgstr "𐑕𐑑𐑸𐑑𐑦𐑙"
+
+#: ../data/categories/settings.directory.in.h:2
+#, fuzzy
+msgid "Desktop and system settings applications"
+msgstr "𐑳𐑐𐑛𐑱𐑑𐑦𐑙 𐑞 𐑤𐑦𐑕𐑑 𐑝 𐑮𐑳𐑯𐑦𐑙 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟"
+
 #: ../data/xings-software.desktop.in.h:3
 msgid ""
 "Install;Uninstall;Program;Software;App;Sources;Repositories;Preferences;"
 "Store;"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:221
+#: ../data/gpk-application.ui.h:1
 #, fuzzy
-msgid "Select to Install…"
-msgstr "𐑓𐑲𐑤𐑟 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤"
+msgid "Show categories"
+msgstr "𐑜𐑪𐑑 𐑒𐑨𐑑𐑩𐑜𐑪𐑮𐑰𐑟"
 
-#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:241
-msgid "Select to Remove…"
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+
+#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:1675
+#, fuzzy
+msgid "Categories"
+msgstr "𐑜𐑪𐑑 𐑒𐑨𐑑𐑩𐑜𐑪𐑮𐑰𐑟"
+
+#: ../data/gpk-application.ui.h:5 ../src/software/gpk-application.c:241
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4
-msgid "License"
-msgstr "𐑤𐑲𐑕𐑩𐑯𐑕"
+#: ../data/gpk-application.ui.h:7
+msgid "Open"
+msgstr ""
 
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:5 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "𐑕𐑹𐑕"
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:8 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2127
+#: ../src/packagekit-service/gpk-dbus-task.c:2467
+#: ../src/packagekit-service/gpk-dbus-task.c:2701
+msgid "Install"
+msgstr "𐑦𐑯𐑕𐑑𐑷𐑤"
 
-#: ../data/gpk-application.ui.h:6
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:9 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2991
+msgid "Remove"
+msgstr "𐑮𐑦𐑥𐑵𐑝"
+
+#: ../data/gpk-application.ui.h:10
 msgid "Homepage"
 msgstr "Homepage"
 
-#: ../data/gpk-application.ui.h:7
-msgid "Visit home page for selected package"
-msgstr "𐑝𐑦𐑟𐑦𐑑 𐑣𐑴𐑥 𐑐𐑱𐑡 𐑓𐑹 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛 𐑐𐑨𐑒𐑦𐑡"
-
-#: ../data/gpk-application.ui.h:8
-#, fuzzy
-msgid "Files"
-msgstr "𐑯𐑴 𐑓𐑲𐑤𐑟"
-
-#: ../data/gpk-application.ui.h:9
-#, fuzzy
-msgid "Required"
-msgstr "𐑜𐑪𐑑 𐑮𐑦𐑒𐑢𐑲𐑼𐑟"
-
-#: ../data/gpk-application.ui.h:10
-msgid "Dependent"
+#: ../data/gpk-application.ui.h:11
+msgid "Donate"
 msgstr ""
 
 #: ../data/gpk-application.ui.h:12
-#, fuzzy
-msgid "Pending Changes"
-msgstr "𐑑𐑧𐑕𐑑𐑦𐑙 𐑗𐑱𐑯𐑡𐑩𐑟"
+msgid "Report"
+msgstr ""
 
 #: ../data/gpk-application.ui.h:13
-msgid "Review pending changes before applying them"
-msgstr ""
+#, fuzzy
+msgid "Translate"
+msgstr "𐑑𐑮𐑨𐑯𐑟𐑨𐑒𐑖𐑩𐑯 𐑻𐑼"
 
 #: ../data/gpk-application.ui.h:14
-msgid "Apply Changes"
-msgstr ""
+msgid "License"
+msgstr "𐑤𐑲𐑕𐑩𐑯𐑕"
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:15 ../src/software/gpk-application.c:1105
 #, fuzzy
-msgid "Apply pending changes"
-msgstr "𐑑𐑧𐑕𐑑𐑦𐑙 𐑗𐑱𐑯𐑡𐑩𐑟"
+msgid "Distribution package"
+msgstr "𐑛𐑧𐑕𐑑𐑦𐑯𐑱𐑖𐑩𐑯 𐑐𐑨𐑒𐑦𐑡 𐑤𐑦𐑕𐑑:"
 
-#: ../data/gpk-application.ui.h:16
-msgid "Cancel search"
-msgstr "𐑒𐑨𐑯𐑕𐑩𐑤 𐑕𐑻𐑗"
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:16 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "𐑕𐑹𐑕"
 
 #: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Cancel"
-msgstr "𐑒𐑨𐑯𐑕𐑩𐑤𐑛"
-
-#: ../data/gpk-application.ui.h:18
-#, fuzzy
-msgid "Cancel pending changes"
-msgstr "𐑑𐑧𐑕𐑑𐑦𐑙 𐑗𐑱𐑯𐑡𐑩𐑟"
-
-#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Update Software Sources"
 msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
 
-#: ../data/gpk-application.ui.h:20 ../data/gpk-prefs.ui.h:10
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
 #, fuzzy
 msgid "Software Sources"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕"
 
 #. are we running privileged
-#: ../data/gpk-application.ui.h:21
+#: ../data/gpk-application.ui.h:19
 #: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
 #: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
 #, fuzzy
 msgid "Software History"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
 
-#: ../data/gpk-application.ui.h:22
-#, fuzzy
-msgid "Only Newest Versions"
-msgstr "𐑴𐑯𐑤𐑦 _𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
-
-#: ../data/gpk-application.ui.h:23
-#, fuzzy
-msgid "Only Native Packages"
-msgstr "𐑴𐑯𐑤𐑦 _𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
-
-#: ../data/gpk-application.ui.h:24
+#: ../data/gpk-application.ui.h:20
 #, fuzzy
 msgid "About"
 msgstr "𐑩𐑚𐑬𐑑"
 
-#: ../data/gpk-application.ui.h:25
+#: ../data/gpk-application.ui.h:21
 msgid "_Quit"
 msgstr ""
 
@@ -356,14 +438,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1457
 #, fuzzy
 msgid "All software is up to date"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1461
+#: ../src/software-update/gpk-update-viewer.c:1459
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "𐑞𐑺 𐑸 𐑯𐑴 𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤 𐑓𐑹 𐑿𐑼 𐑒𐑩𐑥𐑐𐑿𐑑𐑼 𐑨𐑑 𐑞𐑦𐑕 𐑑𐑲𐑥."
@@ -413,151 +495,72 @@ msgid "Ask the user if additional packages should be installed."
 msgstr "𐑭𐑕𐑒 𐑞 𐑿𐑟𐑼 𐑦𐑓 𐑩𐑛𐑦𐑖𐑩𐑯𐑩𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑖𐑫𐑛 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
 #: ../data/org.xings.software.gschema.xml.h:5
-msgid "Filter using basename in gpk-application"
-msgstr "𐑓𐑦𐑤𐑑𐑼 𐑿𐑟𐑦𐑙 𐑚𐑱𐑕𐑯𐑱𐑥 𐑦𐑯 gpk-𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯"
-
-#: ../data/org.xings.software.gschema.xml.h:6
-#, fuzzy
-msgid "Filter package lists using basename in gpk-application."
-msgstr "𐑓𐑦𐑤𐑑𐑼 𐑐𐑨𐑒𐑦𐑡 𐑤𐑦𐑕𐑑𐑕 𐑿𐑟𐑦𐑙 𐑚𐑱𐑕𐑯𐑱𐑥 𐑦𐑯 gpk-𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯"
-
-#: ../data/org.xings.software.gschema.xml.h:7
-msgid "Only show the newest packages in the file lists"
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
-
-#: ../data/org.xings.software.gschema.xml.h:8
-#, fuzzy
-msgid "Only show the newest packages in the file lists."
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
-
-#: ../data/org.xings.software.gschema.xml.h:9
-#, fuzzy
-msgid "Only show supported packages in the file lists"
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
-
-#: ../data/org.xings.software.gschema.xml.h:10
-#, fuzzy
-msgid "Only show supported packages in the file lists."
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
-
-#: ../data/org.xings.software.gschema.xml.h:11
-msgid "Only show native packages in the file lists"
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
-
-#: ../data/org.xings.software.gschema.xml.h:12
-#, fuzzy
-msgid ""
-"Only show native packages matching the machine architecture in the file "
-"lists."
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑥𐑨𐑗𐑦𐑙 𐑞 𐑥𐑩𐑖𐑰𐑯 𐑭𐑮𐑒𐑩𐑑𐑧𐑒𐑗𐑻 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
-
-#: ../data/org.xings.software.gschema.xml.h:13
-msgid "Show the category group menu"
-msgstr "𐑖𐑴 𐑞 𐑒𐑨𐑑𐑧𐑜𐑹𐑰 𐑜𐑮𐑵𐑐 𐑥𐑧𐑯𐑿"
-
-#: ../data/org.xings.software.gschema.xml.h:14
-#, fuzzy
-msgid ""
-"Show the category group menu. This is more complete and custom to the "
-"distribution, but takes longer to populate."
-msgstr ""
-"𐑖𐑴 𐑞 𐑒𐑨𐑑𐑧𐑜𐑹𐑰 𐑜𐑮𐑵𐑐 𐑥𐑧𐑯𐑿. 𐑞𐑦𐑕 𐑦𐑟 𐑥𐑹 𐑒𐑩𐑥𐑐𐑤𐑰𐑑 𐑯 𐑒𐑳𐑕𐑑𐑩𐑥 𐑑 𐑞 𐑛𐑦𐑕𐑑𐑮𐑦𐑚𐑿𐑖𐑩𐑯, 𐑚𐑳𐑑 𐑑𐑱𐑒𐑕 "
-"𐑤𐑪𐑙𐑜𐑼 𐑑 𐑐𐑪𐑐𐑿𐑤𐑱𐑑"
-
-#: ../data/org.xings.software.gschema.xml.h:15
-msgid "Show the 'All Packages' group menu"
-msgstr "𐑖𐑴 𐑞 '𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟' 𐑜𐑮𐑵𐑐 𐑥𐑧𐑯𐑿"
-
-#: ../data/org.xings.software.gschema.xml.h:16
-#, fuzzy
-msgid ""
-"Show the all packages menu item. This takes a long time to populate on most "
-"backends and is not generally required by end users."
-msgstr ""
-"𐑖𐑴 𐑞 𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑥𐑧𐑯𐑿 𐑲𐑑𐑩𐑥. 𐑞𐑦𐑕 𐑑𐑱𐑒𐑕 𐑩 𐑤𐑪𐑙 𐑑𐑲𐑥 𐑑 𐑐𐑪𐑐𐑿𐑤𐑱𐑑 𐑪𐑯 𐑥𐑴𐑕𐑑 𐑚𐑨𐑒𐑧𐑯𐑛𐑟 𐑯 𐑦𐑟 "
-"𐑯𐑪𐑑 𐑡𐑧𐑯𐑼𐑩𐑤𐑦 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑚𐑲 𐑧𐑯𐑛 𐑿𐑟𐑼𐑟"
-
-#: ../data/org.xings.software.gschema.xml.h:17
 msgid "The search mode used by default"
 msgstr "𐑞 𐑕𐑻𐑗 𐑥𐑴𐑛 𐑿𐑕𐑑 𐑚𐑲 𐑛𐑦𐑓𐑷𐑤𐑑"
 
-#: ../data/org.xings.software.gschema.xml.h:18
+#: ../data/org.xings.software.gschema.xml.h:6
 #, fuzzy
-msgid ""
-"The search mode used by default. Options are \"name\", \"details\", or \"file"
-"\"."
+msgid "The search mode used by default. Options are \"name\", \"details\"."
 msgstr "𐑞 𐑕𐑻𐑗 𐑥𐑴𐑛 𐑿𐑕𐑑 𐑚𐑲 𐑛𐑦𐑓𐑷𐑤𐑑. 𐑪𐑐𐑖𐑩𐑯𐑟 𐑸 \"name\", \"details\", 𐑹 \"file\""
 
-#: ../data/org.xings.software.gschema.xml.h:19
+#: ../data/org.xings.software.gschema.xml.h:7
 #, fuzzy
 msgid "Show all repositories in the package source viewer"
 msgstr "𐑖𐑴 𐑷𐑤 𐑮𐑰𐑐𐑭𐑟𐑩𐑑𐑪𐑮𐑰𐑟 𐑦𐑯 𐑞 𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕 𐑝𐑿𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:20
+#: ../data/org.xings.software.gschema.xml.h:8
 #, fuzzy
 msgid "Show all repositories in the package source viewer."
 msgstr "𐑖𐑴 𐑷𐑤 𐑮𐑰𐑐𐑭𐑟𐑩𐑑𐑪𐑮𐑰𐑟 𐑦𐑯 𐑞 𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕 𐑝𐑿𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:21
-msgid "Only show the newest updates in the list"
-msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑳𐑐𐑛𐑱𐑑𐑕 𐑦𐑯 𐑞 𐑤𐑦𐑕𐑑"
-
-#: ../data/org.xings.software.gschema.xml.h:22
-msgid ""
-"Only show the newest packages in the update list, and filter out older "
-"updates that are still available."
-msgstr ""
-"𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑳𐑐𐑛𐑱𐑑 𐑤𐑦𐑕𐑑, 𐑯 𐑓𐑦𐑤𐑑𐑼 𐑬𐑑 𐑴𐑤𐑛𐑼 𐑳𐑐𐑛𐑱𐑑𐑕 𐑞𐑨𐑑 𐑸 𐑕𐑑𐑦𐑤 "
-"𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤."
-
-#: ../data/org.xings.software.gschema.xml.h:23
+#: ../data/org.xings.software.gschema.xml.h:9
 msgid "Scroll to packages as they are downloaded"
 msgstr "𐑕𐑒𐑮𐑴𐑤 𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑨𐑟 𐑞𐑱 𐑸 𐑛𐑬𐑯𐑤𐑴𐑛𐑩𐑛"
 
-#: ../data/org.xings.software.gschema.xml.h:24
+#: ../data/org.xings.software.gschema.xml.h:10
 msgid ""
 "Scroll to packages in the update list as they are downloaded or installed."
 msgstr "𐑕𐑒𐑮𐑴𐑤 𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑳𐑐𐑛𐑱𐑑 𐑤𐑦𐑕𐑑 𐑨𐑟 𐑞𐑱 𐑸 𐑛𐑬𐑯𐑤𐑴𐑛𐑩𐑛 𐑹 𐑦𐑯𐑕𐑑𐑷𐑤𐑛."
 
-#: ../data/org.xings.software.gschema.xml.h:25
+#: ../data/org.xings.software.gschema.xml.h:11
 msgid "Allow applications to invoke the font installer"
 msgstr "𐑩𐑤𐑬 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑑 𐑦𐑯𐑝𐑴𐑒 𐑞 𐑓𐑪𐑯𐑑 𐑦𐑯𐑕𐑑𐑷𐑤𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:26
+#: ../data/org.xings.software.gschema.xml.h:12
 #, fuzzy
 msgid "Allow applications to invoke the font installer."
 msgstr "𐑩𐑤𐑬 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑑 𐑦𐑯𐑝𐑴𐑒 𐑞 𐑓𐑪𐑯𐑑 𐑦𐑯𐑕𐑑𐑷𐑤𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:27
+#: ../data/org.xings.software.gschema.xml.h:13
 msgid "Programs that should be ignored when they issue session D-Bus requests"
 msgstr "𐑐𐑮𐑴𐑜𐑮𐑨𐑥𐑟 𐑞𐑨𐑑 𐑖𐑫𐑛 𐑚𐑰 𐑦𐑜𐑯𐑹𐑛 𐑢𐑧𐑯 𐑞𐑱 𐑦𐑖𐑵 𐑕𐑧𐑖𐑩𐑯 D-Bus 𐑮𐑦𐑒𐑢𐑧𐑕𐑑𐑕"
 
-#: ../data/org.xings.software.gschema.xml.h:28
+#: ../data/org.xings.software.gschema.xml.h:14
 msgid ""
 "Programs that should be ignored when they issue session D-Bus requests, "
 "separated by commas."
 msgstr ""
 "𐑐𐑮𐑴𐑜𐑮𐑨𐑥𐑟 𐑞𐑨𐑑 𐑖𐑫𐑛 𐑚𐑰 𐑦𐑜𐑯𐑹𐑛 𐑢𐑧𐑯 𐑞𐑱 𐑦𐑖𐑵 𐑕𐑧𐑖𐑩𐑯 D-Bus 𐑮𐑦𐑒𐑢𐑧𐑕𐑑𐑕, 𐑕𐑧𐑐𐑼𐑱𐑑𐑩𐑛 𐑚𐑲 𐑒𐑭𐑥𐑩𐑟."
 
-#: ../data/org.xings.software.gschema.xml.h:29
+#: ../data/org.xings.software.gschema.xml.h:15
 msgid "Allow applications to invoke the codec installer"
 msgstr "𐑩𐑤𐑬 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑑 𐑦𐑯𐑝𐑴𐑒 𐑞 𐑒𐑴𐑛𐑧𐑒 𐑦𐑯𐑕𐑑𐑷𐑤𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:30
+#: ../data/org.xings.software.gschema.xml.h:16
 #, fuzzy
 msgid "Allow applications to invoke the codec installer."
 msgstr "𐑩𐑤𐑬 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑑 𐑦𐑯𐑝𐑴𐑒 𐑞 𐑒𐑴𐑛𐑧𐑒 𐑦𐑯𐑕𐑑𐑷𐑤𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:31
+#: ../data/org.xings.software.gschema.xml.h:17
 msgid "Allow applications to invoke the mime type installer"
 msgstr "𐑩𐑤𐑬 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑑 𐑦𐑯𐑝𐑴𐑒 𐑞 MIME 𐑑𐑲𐑐 𐑦𐑯𐑕𐑑𐑷𐑤𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:32
+#: ../data/org.xings.software.gschema.xml.h:18
 #, fuzzy
 msgid "Allow applications to invoke the mime type installer."
 msgstr "𐑩𐑤𐑬 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑑 𐑦𐑯𐑝𐑴𐑒 𐑞 MIME 𐑑𐑲𐑐 𐑦𐑯𐑕𐑑𐑷𐑤𐑼"
 
-#: ../data/org.xings.software.gschema.xml.h:33
+#: ../data/org.xings.software.gschema.xml.h:19
 #, fuzzy
 msgid ""
 "When displaying UI from a session D-Bus request, automatically use these "
@@ -565,57 +568,57 @@ msgid ""
 msgstr ""
 "𐑢𐑧𐑯 𐑛𐑦𐑕𐑐𐑤𐑱𐑦𐑙 UI 𐑓𐑮𐑪𐑥 𐑩 𐑕𐑧𐑖𐑩𐑯 DBus 𐑮𐑦𐑒𐑢𐑧𐑕𐑑, 𐑷𐑑𐑩𐑥𐑨𐑑𐑦𐑒𐑤𐑦 𐑿𐑟 𐑞𐑰𐑟 𐑪𐑐𐑖𐑩𐑯𐑟 𐑚𐑲 𐑛𐑦𐑓𐑷𐑤𐑑"
 
-#: ../data/org.xings.software.gschema.xml.h:34
+#: ../data/org.xings.software.gschema.xml.h:20
 #, fuzzy
 msgid ""
 "When displaying UI from a session D-Bus request, force these options to be "
 "turned on."
 msgstr "𐑢𐑧𐑯 𐑛𐑦𐑕𐑐𐑤𐑱𐑦𐑙 UI 𐑓𐑮𐑪𐑥 𐑩 𐑕𐑧𐑖𐑩𐑯 DBus 𐑮𐑦𐑒𐑢𐑧𐑕𐑑, 𐑓𐑹𐑕 𐑞𐑰𐑟 𐑪𐑐𐑖𐑩𐑯𐑟 𐑑 𐑚𐑰 𐑑𐑻𐑯𐑛 𐑪𐑯"
 
-#: ../data/org.xings.software.gschema.xml.h:35
+#: ../data/org.xings.software.gschema.xml.h:21
 #, fuzzy
 msgid "Check for updates even on a mobile connection"
 msgstr "𐑯𐑴𐑑𐑦𐑓𐑲 𐑞 𐑿𐑟𐑼 𐑚𐑦𐑓𐑹 𐑩 𐑤𐑸𐑡 𐑳𐑐𐑛𐑱𐑑 𐑦𐑟 𐑛𐑳𐑯 𐑪𐑯 𐑩 𐑥𐑴𐑚𐑲𐑤 𐑚𐑮𐑪𐑛𐑚𐑨𐑯𐑛 𐑒𐑩𐑯𐑧𐑒𐑖𐑩𐑯"
 
-#: ../data/org.xings.software.gschema.xml.h:36
+#: ../data/org.xings.software.gschema.xml.h:22
 #, fuzzy
 msgid ""
 "Use mobile broadband connections such as GSM and CDMA to check for updates."
 msgstr "𐑿𐑟 𐑥𐑴𐑚𐑲𐑤 𐑚𐑮𐑪𐑛𐑚𐑨𐑯𐑛 𐑒𐑩𐑯𐑧𐑒𐑖𐑩𐑯𐑟 𐑕𐑳𐑗 𐑨𐑟 GSM 𐑯 CDMA 𐑑 𐑗𐑧𐑒 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕"
 
-#: ../data/org.xings.software.gschema.xml.h:37
+#: ../data/org.xings.software.gschema.xml.h:23
 msgid "Automatically download updates in the background without confirmation"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:38
+#: ../data/org.xings.software.gschema.xml.h:24
 msgid "Automatically download updates in the background without confirmation."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:39
+#: ../data/org.xings.software.gschema.xml.h:25
 msgid "How often to check for updates"
 msgstr "𐑣𐑬 𐑪𐑓𐑩𐑯 𐑑 𐑗𐑧𐑒 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕"
 
-#: ../data/org.xings.software.gschema.xml.h:40
+#: ../data/org.xings.software.gschema.xml.h:26
 msgid ""
 "How often to check for updates. Value is in seconds. This is a maximum "
 "amount of time that can pass between a security update being published, and "
 "the user notified."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:41
+#: ../data/org.xings.software.gschema.xml.h:27
 msgid "How often to refresh the package cache"
 msgstr "𐑣𐑬 𐑪𐑓𐑩𐑯 𐑑 𐑮𐑰𐑓𐑮𐑧𐑖 𐑞 𐑐𐑨𐑒𐑦𐑡 𐑒𐑨𐑖"
 
-#: ../data/org.xings.software.gschema.xml.h:42
+#: ../data/org.xings.software.gschema.xml.h:28
 msgid "How often to refresh the package cache. Value is in seconds."
 msgstr "𐑣𐑬 𐑪𐑓𐑩𐑯 𐑑 𐑮𐑰𐑓𐑮𐑧𐑖 𐑞 𐑐𐑨𐑒𐑦𐑡 𐑒𐑨𐑖. 𐑝𐑨𐑤𐑿 𐑦𐑟 𐑦𐑯 𐑕𐑧𐑒𐑩𐑯𐑛𐑟."
 
-#: ../data/org.xings.software.gschema.xml.h:43
+#: ../data/org.xings.software.gschema.xml.h:29
 #, fuzzy
 msgid "How often to notify the user that non-critical updates are available"
 msgstr "𐑯𐑴𐑑𐑦𐑓𐑲 𐑞 𐑿𐑟𐑼 𐑢𐑧𐑯 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑳𐑐𐑛𐑱𐑑𐑕 𐑸 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
 
-#: ../data/org.xings.software.gschema.xml.h:44
+#: ../data/org.xings.software.gschema.xml.h:30
 msgid ""
 "How often to tell the user there are non-critical updates. Value is in "
 "seconds. Security update notifications are always shown after the check for "
@@ -623,44 +626,44 @@ msgid ""
 "frequently."
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:45
+#: ../data/org.xings.software.gschema.xml.h:31
 msgid "The last time we told the user about non-critical notifications"
 msgstr ""
 
-#: ../data/org.xings.software.gschema.xml.h:46
+#: ../data/org.xings.software.gschema.xml.h:32
 msgid ""
 "The last time we notified the user about non-critical updates. Value is in "
 "seconds since the epoch, or zero for never."
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:181
+#: ../src/common/gpk-common.c:200
 msgid "32-bit"
 msgstr ""
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:188
+#: ../src/common/gpk-common.c:207
 msgid "64-bit"
 msgstr ""
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:348
+#: ../src/common/gpk-common.c:381
 msgid "This application is running as a privileged user"
 msgstr "𐑞𐑦𐑕 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯 𐑦𐑟 𐑮𐑳𐑯𐑦𐑙 𐑨𐑟 𐑩 𐑐𐑮𐑦𐑝𐑤𐑩𐑡𐑛 𐑿𐑟𐑼"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:351
+#: ../src/common/gpk-common.c:384
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s 𐑦𐑟 𐑮𐑳𐑯𐑦𐑙 𐑨𐑟 𐑩 𐑐𐑮𐑦𐑝𐑤𐑩𐑡𐑛 𐑿𐑟𐑼"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:354
+#: ../src/common/gpk-common.c:387
 msgid "Package management applications are security sensitive."
 msgstr "𐑐𐑨𐑒𐑦𐑡 𐑥𐑨𐑯𐑩𐑡𐑥𐑩𐑯𐑑 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑸 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑕𐑧𐑯𐑕𐑦𐑑𐑦𐑝."
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:356
+#: ../src/common/gpk-common.c:389
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -669,18 +672,18 @@ msgstr ""
 "𐑮𐑰𐑟𐑩𐑯𐑟."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:362
+#: ../src/common/gpk-common.c:395
 msgid "Continue _Anyway"
 msgstr "𐑒𐑩𐑯𐑑𐑦𐑯𐑿 𐑧𐑯𐑦𐑢𐑱"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:400 ../src/common/gpk-common.c:450
+#: ../src/common/gpk-common.c:433 ../src/common/gpk-common.c:483
 #, c-format
 msgid "Now"
 msgstr "𐑯𐑬"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:410 ../src/common/gpk-common.c:460
+#: ../src/common/gpk-common.c:443 ../src/common/gpk-common.c:493
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -688,7 +691,7 @@ msgstr[0] "%i 𐑕𐑧𐑒𐑩𐑯𐑛"
 msgstr[1] "%i 𐑕𐑧𐑒𐑩𐑯𐑛𐑟"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:420 ../src/common/gpk-common.c:473
+#: ../src/common/gpk-common.c:453 ../src/common/gpk-common.c:506
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -696,7 +699,7 @@ msgstr[0] "%i 𐑥𐑦𐑯𐑩𐑑"
 msgstr[1] "%i 𐑥𐑦𐑯𐑩𐑑𐑕"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:426 ../src/common/gpk-common.c:492
+#: ../src/common/gpk-common.c:459 ../src/common/gpk-common.c:525
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
@@ -707,71 +710,71 @@ msgstr[1] "%i 𐑬𐑼𐑟"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:479 ../src/common/gpk-common.c:498
+#: ../src/common/gpk-common.c:512 ../src/common/gpk-common.c:531
 #, fuzzy, c-format
 msgid "%u %s %u %s"
 msgstr "%i %s %i %s"
 
-#: ../src/common/gpk-common.c:480 ../src/common/gpk-common.c:500
+#: ../src/common/gpk-common.c:513 ../src/common/gpk-common.c:533
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "𐑥𐑦𐑯𐑩𐑑"
 msgstr[1] "𐑥𐑦𐑯𐑩𐑑𐑕"
 
-#: ../src/common/gpk-common.c:481
+#: ../src/common/gpk-common.c:514
 msgid "second"
 msgid_plural "seconds"
 msgstr[0] "𐑕𐑧𐑒𐑩𐑯𐑛"
 msgstr[1] "𐑕𐑧𐑒𐑩𐑯𐑛𐑟"
 
-#: ../src/common/gpk-common.c:499
+#: ../src/common/gpk-common.c:532
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "𐑬𐑼"
 msgstr[1] "𐑬𐑼𐑟"
 
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:529
+#: ../src/common/gpk-common.c:562
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i 𐑥𐑦𐑯𐑩𐑑"
 
-#: ../src/common/gpk-common.c:531
+#: ../src/common/gpk-common.c:564
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%i 𐑥𐑦𐑯𐑩𐑑"
 msgstr[1] "%i 𐑥𐑦𐑯𐑩𐑑𐑕"
 
-#: ../src/common/gpk-common.c:536
+#: ../src/common/gpk-common.c:569
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%i 𐑬𐑼"
 msgstr[1] "%i 𐑬𐑼𐑟"
 
-#: ../src/common/gpk-common.c:541
+#: ../src/common/gpk-common.c:574
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:546
+#: ../src/common/gpk-common.c:579
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:551
+#: ../src/common/gpk-common.c:584
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:556
+#: ../src/common/gpk-common.c:589
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -779,25 +782,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:583
+#: ../src/common/gpk-common.c:616
 #, c-format
 msgid "%s and %s"
 msgstr "%s 𐑯 %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:587
+#: ../src/common/gpk-common.c:620
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s 𐑯 %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:591
+#: ../src/common/gpk-common.c:624
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s 𐑯 %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:596
+#: ../src/common/gpk-common.c:629
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s 𐑯 %s"
@@ -822,10 +825,8 @@ msgstr "𐑥𐑧𐑯𐑦 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
 
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
-#. TRANSLATORS: column for group name
-#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:701
-#: ../src/software/gpk-application.c:2028
-#: ../src/software/gpk-application.c:2050
+#: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
+#: ../src/software/gpk-application.c:1020
 msgid "Name"
 msgstr "𐑯𐑱𐑥"
 
@@ -2378,31 +2379,6 @@ msgid "Accessories"
 msgstr "𐑨𐑒𐑕𐑧𐑕𐑼𐑦𐑟"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1497
-msgid "Education"
-msgstr "𐑧𐑛𐑿𐑒𐑱𐑖𐑩𐑯"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1501
-msgid "Games"
-msgstr "𐑜𐑱𐑥𐑟"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1505
-msgid "Graphics"
-msgstr "𐑜𐑮𐑨𐑓𐑦𐑒𐑕"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1509
-msgid "Internet"
-msgstr "·𐑦𐑯𐑑𐑼𐑯𐑧𐑑"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1513
-msgid "Office"
-msgstr "𐑪𐑓𐑦𐑕"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1517 ../src/common/gpk-task.c:426
 msgid "Other"
 msgstr "𐑳𐑞𐑼"
@@ -2411,11 +2387,6 @@ msgstr "𐑳𐑞𐑼"
 #: ../src/common/gpk-enum.c:1521
 msgid "Programming"
 msgstr "𐑐𐑮𐑴𐑜𐑮𐑨𐑥𐑦𐑙"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1525
-msgid "Multimedia"
-msgstr "𐑥𐑩𐑤𐑑𐑰𐑥𐑰𐑛𐑰𐑩"
 
 #. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1529
@@ -2512,11 +2483,6 @@ msgid "Package sources"
 msgstr "𐑐𐑨𐑒𐑦𐑡 𐑦𐑟 𐑒𐑼𐑳𐑐𐑑"
 
 #. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1601
-msgid "Science"
-msgstr "𐑕𐑲𐑩𐑯𐑕"
-
-#. TRANSLATORS: The group type
 #: ../src/common/gpk-enum.c:1605
 msgid "Documentation"
 msgstr "𐑛𐑪𐑒𐑿𐑥𐑩𐑯𐑑𐑱𐑖𐑩𐑯"
@@ -2551,17 +2517,17 @@ msgstr "𐑳𐑯𐑴𐑯 𐑜𐑮𐑵𐑐"
 msgid "Icon"
 msgstr "𐑲𐑒𐑪𐑯"
 
-#: ../src/common/gpk-helper-chooser.c:259
+#: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑞𐑨𐑑 𐑒𐑨𐑯 𐑴𐑐𐑩𐑯 𐑞𐑦𐑕 𐑑𐑲𐑐 𐑝 𐑓𐑲𐑤"
 
 #. TRANSLATORS: button label, install
-#: ../src/common/gpk-helper-chooser.c:265
+#: ../src/common/gpk-helper-chooser.c:263
 msgid "_Install"
 msgstr "𐑦𐑯𐑕𐑑𐑷𐑤"
 
 #. TRANSLATORS: button tooltip
-#: ../src/common/gpk-helper-chooser.c:269
+#: ../src/common/gpk-helper-chooser.c:267
 msgid "Install package"
 msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 𐑐𐑨𐑒𐑦𐑡"
 
@@ -2628,31 +2594,10 @@ msgstr "𐑒𐑩𐑯𐑑𐑦𐑯𐑿"
 msgid "The following software also needs to be installed"
 msgstr "𐑞 𐑓𐑪𐑤𐑴𐑦𐑙 𐑕𐑪𐑓𐑑𐑢𐑺 𐑷𐑤𐑕𐑴 𐑯𐑰𐑛𐑟 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
-msgid "Install"
-msgstr "𐑦𐑯𐑕𐑑𐑷𐑤"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "𐑞 𐑓𐑪𐑤𐑴𐑦𐑙 𐑕𐑪𐑓𐑑𐑢𐑺 𐑷𐑤𐑕𐑴 𐑯𐑰𐑛𐑟 𐑑 𐑚𐑰 𐑮𐑦𐑥𐑵𐑝𐑛"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2991
-msgid "Remove"
-msgstr "𐑮𐑦𐑥𐑵𐑝"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -3379,7 +3324,7 @@ msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑜𐑧𐑑 𐑞 𐑤𐑦𐑕𐑑 𐑝 𐑕𐑹�
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3180
+#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "𐑧𐑜𐑟𐑦𐑑𐑦𐑙 𐑨𐑟 𐑚𐑨𐑒𐑧𐑯𐑛 𐑛𐑰𐑑𐑱𐑤𐑟 𐑒𐑫𐑛 𐑯𐑪𐑑 𐑚𐑰 𐑮𐑦𐑑𐑮𐑰𐑝𐑛"
 
@@ -3399,193 +3344,106 @@ msgstr ""
 msgid "Software Settings"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
 
-#: ../src/software/gpk-application.c:218
-#, fuzzy
-msgid "Cancel Removal"
-msgstr "𐑒𐑨𐑯𐑕𐑩𐑤 𐑕𐑻𐑗"
-
-#: ../src/software/gpk-application.c:238
-#, fuzzy
-msgid "Cancel Installation"
-msgstr "𐑦𐑯𐑕𐑑𐑷𐑤𐑦𐑙"
-
-#. TRANSLATORS: this is a menu group of packages in the queue
-#: ../src/software/gpk-application.c:343
-msgid "Pending"
+#: ../src/software/gpk-application.c:205
+msgid "Please, be patient"
 msgstr ""
 
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:413
-#, fuzzy, c-format
-msgid "%u package to be installed"
-msgid_plural "%u packages to be installed"
-msgstr[0] "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑯𐑰𐑛 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
-msgstr[1] "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑯𐑰𐑛 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
-
-#. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software/gpk-application.c:420
-#, fuzzy, c-format
-msgid "%u package to be removed"
-msgid_plural "%u packages to be removed"
-msgstr[0] "𐑐𐑨𐑒𐑦𐑡 𐑓𐑱𐑤𐑛 𐑑 𐑚𐑰 𐑮𐑦𐑥𐑵𐑝𐑛"
-msgstr[1] "𐑐𐑨𐑒𐑦𐑡 𐑓𐑱𐑤𐑛 𐑑 𐑚𐑰 𐑮𐑦𐑥𐑵𐑝𐑛"
-
-#. TRANSLATORS: title: how many files are installed by the application
-#: ../src/software/gpk-application.c:592
-#, fuzzy, c-format
-msgid "%u file installed by %s"
-msgid_plural "%u files installed by %s"
-msgstr[0] "%i 𐑓𐑲𐑤 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑚𐑲 %s"
-msgstr[1] "%i 𐑓𐑲𐑤𐑟 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑚𐑲 %s"
-
-#. TRANSLATORS: no packages returned
-#: ../src/software/gpk-application.c:900 ../src/software/gpk-application.c:1029
-msgid "No packages"
-msgstr "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
-
-#. TRANSLATORS: this package is not required by any others
-#: ../src/software/gpk-application.c:902
-msgid "No other packages require this package"
-msgstr "𐑯𐑴 𐑳𐑞𐑼 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑮𐑦𐑒𐑢𐑲𐑼 𐑞𐑦𐑕 𐑐𐑨𐑒𐑦𐑡"
-
-#. TRANSLATORS: title: how many packages require this package
-#: ../src/software/gpk-application.c:909
-#, fuzzy, c-format
-msgid "%u package requires %s"
-msgid_plural "%u packages require %s"
-msgstr[0] "%i 𐑐𐑨𐑒𐑦𐑡 𐑮𐑦𐑒𐑢𐑲𐑼𐑟 %s"
-msgstr[1] "%i 𐑐𐑨𐑒𐑦𐑡𐑧𐑟 𐑮𐑦𐑒𐑢𐑲𐑼 %s"
-
-#. TRANSLATORS: show a array of packages for the package
-#: ../src/software/gpk-application.c:914
-#, c-format
-msgid "Packages listed below require %s to function correctly."
-msgid_plural "Packages listed below require %s to function correctly."
-msgstr[0] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑮𐑦𐑒𐑢𐑲𐑼 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
-msgstr[1] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑮𐑦𐑒𐑢𐑲𐑼 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
-
-#. TRANSLATORS: this package does not depend on any others
-#: ../src/software/gpk-application.c:1031
-#, fuzzy
-msgid "This package does not depend on any others"
-msgstr "𐑞𐑦𐑕 𐑐𐑨𐑒𐑦𐑡 𐑛𐑳𐑟 𐑯𐑪𐑑 𐑛𐑦𐑐𐑧𐑯𐑛𐑟 𐑪𐑯 𐑧𐑯𐑦 𐑳𐑞𐑼𐑟"
-
-#. TRANSLATORS: title: show the number of other packages we depend on
-#: ../src/software/gpk-application.c:1038
-#, fuzzy, c-format
-msgid "%u additional package is required for %s"
-msgid_plural "%u additional packages are required for %s"
-msgstr[0] "%i 𐑩𐑛𐑦𐑖𐑩𐑯𐑩𐑤 𐑐𐑨𐑒𐑦𐑡 𐑦𐑟 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s"
-msgstr[1] "%i 𐑩𐑛𐑦𐑖𐑩𐑯𐑩𐑤𐑧𐑟 𐑐𐑨𐑒𐑦𐑡 𐑸 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s"
-
-#. TRANSLATORS: message: show the array of dependent packages for this package
-#: ../src/software/gpk-application.c:1043
-#, c-format
-msgid "Packages listed below are required for %s to function correctly."
-msgid_plural "Packages listed below are required for %s to function correctly."
-msgstr[0] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑸 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
-msgstr[1] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑸 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
-
-#. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-application.c:1114
-msgid "Invalid"
-msgstr "𐑦𐑯𐑝𐑨𐑤𐑦𐑛"
-
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:1247
+#: ../src/software/gpk-application.c:484
 msgid "No results were found."
 msgstr "𐑯𐑴 𐑮𐑦𐑟𐑳𐑤𐑑𐑕 𐑢𐑻 𐑓𐑬𐑯𐑛."
 
-#. TRANSLATORS: be helpful, but this shouldn't happen
-#: ../src/software/gpk-application.c:1255
-msgid "Try entering a package name in the search bar."
-msgstr "𐑑𐑮𐑲 𐑧𐑯𐑑𐑼𐑦𐑙 𐑩 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑦𐑯 𐑞 𐑕𐑻𐑗 𐑚𐑸."
-
-#. TRANSLATORS: nothing in the package queue
-#: ../src/software/gpk-application.c:1258
-msgid "There are no packages queued to be installed or removed."
-msgstr "𐑞𐑺 𐑸 𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑒𐑿𐑛 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑹 𐑮𐑦𐑥𐑵𐑝𐑛."
-
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:1263
+#: ../src/software/gpk-application.c:490
+#, fuzzy
 msgid ""
-"Try searching package descriptions by clicking the icon next to the search "
+"Try searching package distributions by clicking the icon next to the search "
 "text."
 msgstr "𐑑𐑮𐑲 𐑕𐑻𐑗𐑦𐑙 𐑐𐑨𐑒𐑦𐑡 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯𐑟 𐑚𐑲 𐑒𐑤𐑦𐑒𐑦𐑙 𐑞 𐑲𐑒𐑪𐑯 𐑯𐑧𐑒𐑕𐑑 𐑑 𐑞 𐑕𐑻𐑗 𐑑𐑧𐑒𐑕𐑑."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:1266
+#: ../src/software/gpk-application.c:493
 msgid "Try again with a different search term."
 msgstr "𐑑𐑮𐑲 𐑩𐑜𐑱𐑯 𐑢𐑦𐑞 𐑩 𐑛𐑦𐑓𐑼𐑩𐑯𐑑 𐑕𐑻𐑗 𐑑𐑻𐑥."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:1677
+#: ../src/software/gpk-application.c:854
 msgid "Changes not applied"
 msgstr "𐑗𐑱𐑯𐑡𐑩𐑟 𐑯𐑪𐑑 𐑩𐑐𐑤𐑲𐑛"
 
-#: ../src/software/gpk-application.c:1678
+#: ../src/software/gpk-application.c:855
 msgid "Close _Anyway"
 msgstr "𐑒𐑤𐑴𐑟 𐑧𐑯𐑦𐑢𐑱"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:1682
+#: ../src/software/gpk-application.c:859
 msgid "You have made changes that have not yet been applied."
 msgstr "𐑿 𐑣𐑨𐑝 𐑥𐑱𐑛 𐑗𐑱𐑯𐑡𐑩𐑟 𐑞𐑨𐑑 𐑣𐑨𐑝 𐑯𐑪𐑑 𐑘𐑧𐑑 𐑚𐑰𐑯 𐑩𐑐𐑤𐑲𐑛."
 
-#: ../src/software/gpk-application.c:1683
+#: ../src/software/gpk-application.c:860
 msgid "These changes will be lost if you close this window."
 msgstr "𐑞𐑰𐑟 𐑗𐑱𐑯𐑡𐑩𐑟 𐑢𐑦𐑤 𐑚𐑰 𐑤𐑪𐑕𐑑 𐑦𐑓 𐑿 𐑒𐑤𐑴𐑟 𐑞𐑦𐑕 𐑢𐑦𐑯𐑛𐑴."
 
+#: ../src/software/gpk-application.c:1159
+msgid "Visit the app's website"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1176
+msgid "Make a donation"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1193
+msgid "Report a problem"
+msgstr ""
+
+#: ../src/software/gpk-application.c:1210
+msgid "Translate into your language"
+msgstr ""
+
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:2224
+#: ../src/software/gpk-application.c:1245
 msgid "Size"
 msgstr "𐑕𐑲𐑟"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:2227
+#: ../src/software/gpk-application.c:1248
 msgid "Installed size"
 msgstr "𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑕𐑲𐑟"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:2230
+#: ../src/software/gpk-application.c:1251
 msgid "Download size"
 msgstr "𐑛𐑬𐑯𐑤𐑴𐑛 𐑕𐑲𐑟"
 
-#. TRANSLATORS: entry tooltip: basic search
-#: ../src/software/gpk-application.c:2417
-msgid "Searching by name"
-msgstr "𐑕𐑻𐑗𐑦𐑙 𐑚𐑲 𐑯𐑱𐑥"
+#. TRANSLATORS: entry tooltip: basic search by package name
+#: ../src/software/gpk-application.c:1381
+#, fuzzy
+msgid "Searching for distribution packages"
+msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
 
-#. TRANSLATORS: entry tooltip: detailed search
-#: ../src/software/gpk-application.c:2443
-msgid "Searching by description"
-msgstr "𐑕𐑻𐑗𐑦𐑙 𐑚𐑲 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
-
-#. TRANSLATORS: entry tooltip: file search
-#: ../src/software/gpk-application.c:2469
-msgid "Searching by file"
-msgstr "𐑕𐑻𐑗𐑦𐑙 𐑚𐑲 𐑓𐑲𐑤"
+#. TRANSLATORS: entry tooltip: applications search
+#: ../src/software/gpk-application.c:1404
+#, fuzzy
+msgid "Searching for applications"
+msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑤𐑳𐑜𐑦𐑯𐑟"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2492
-msgid "Search by name"
-msgstr "𐑕𐑻𐑗 𐑚𐑲 𐑯𐑱𐑥"
+#: ../src/software/gpk-application.c:1424
+#, fuzzy
+msgid "Search for apps"
+msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑤𐑳𐑜𐑦𐑯𐑟"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2500
-msgid "Search by description"
-msgstr "𐑕𐑻𐑗 𐑚𐑲 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
+#: ../src/software/gpk-application.c:1430
+#, fuzzy
+msgid "Search for distribution packages"
+msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
 
-#. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:2508
-msgid "Search by file name"
-msgstr "𐑕𐑻𐑗 𐑚𐑲 𐑓𐑲𐑤 𐑯𐑱𐑥"
-
-#: ../src/software/gpk-application.c:2541
+#: ../src/software/gpk-application.c:1462
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "𐑤𐑲𐑕𐑩𐑯𐑕𐑑 𐑳𐑯𐑛𐑼 𐑞 ·𐑜𐑯𐑿 𐑡𐑧𐑯𐑼𐑩𐑤 𐑐𐑳𐑚𐑤𐑦𐑒 𐑤𐑲𐑕𐑩𐑯𐑕 𐑝𐑻𐑠𐑩𐑯 2"
 
-#: ../src/software/gpk-application.c:2542
+#: ../src/software/gpk-application.c:1463
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3596,7 +3454,7 @@ msgstr ""
 "·𐑜𐑯𐑿 𐑡𐑧𐑯𐑼𐑩𐑤 𐑐𐑳𐑚𐑤𐑦𐑒 𐑤𐑲𐑕𐑩𐑯𐑕 𐑨𐑟 𐑐𐑳𐑚𐑤𐑦𐑖𐑑 𐑚𐑲 𐑞 𐑓𐑮𐑰 𐑕𐑪𐑓𐑑𐑢𐑺 𐑓𐑬𐑯𐑛𐑱𐑖𐑩𐑯; 𐑲𐑞𐑼 𐑝𐑻𐑠𐑩𐑯 2 𐑝 "
 "𐑞 𐑤𐑲𐑕𐑩𐑯𐑕, 𐑹 (𐑨𐑑 𐑿𐑼 𐑪𐑐𐑖𐑩𐑯) 𐑧𐑯𐑦 𐑤𐑱𐑑𐑼 𐑝𐑻𐑠𐑩𐑯."
 
-#: ../src/software/gpk-application.c:2546
+#: ../src/software/gpk-application.c:1467
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3607,7 +3465,7 @@ msgstr ""
 "𐑢𐑪𐑮𐑩𐑯𐑑𐑰; 𐑢𐑦𐑞𐑬𐑑 𐑰𐑝𐑩𐑯 𐑞 𐑦𐑥𐑐𐑤𐑲𐑛 𐑢𐑪𐑮𐑩𐑯𐑑𐑰 𐑝 𐑥𐑻𐑗𐑩𐑯𐑩𐑚𐑦𐑤𐑦𐑑𐑦 𐑹 𐑓𐑦𐑑𐑯𐑩𐑕 𐑓𐑹 𐑩 𐑐𐑼𐑑𐑦𐑒𐑿𐑤𐑼 "
 "𐑐𐑻𐑐𐑩𐑕.  𐑕𐑰 𐑞 ·𐑜𐑯𐑿 𐑡𐑧𐑯𐑼𐑩𐑤 𐑐𐑳𐑚𐑤𐑦𐑒 𐑤𐑲𐑕𐑩𐑯𐑕 𐑓𐑹 𐑥𐑹 𐑛𐑰𐑑𐑱𐑤𐑟."
 
-#: ../src/software/gpk-application.c:2550
+#: ../src/software/gpk-application.c:1471
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3618,58 +3476,49 @@ msgstr ""
 "·𐑚𐑪𐑕𐑑𐑩𐑯, 𐑥𐑶 02110-1301, 𐑘𐑵𐑧𐑕𐑱."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:2556
+#: ../src/software/gpk-application.c:1477
 msgid "translator-credits"
 msgstr "·𐑑𐑪𐑥𐑩𐑕 ·𐑔𐑻𐑥𐑩𐑯"
 
-#: ../src/software/gpk-application.c:2577
+#: ../src/software/gpk-application.c:1498
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕"
 
-#. TRANSLATORS: welcome text if we can click the group array
-#: ../src/software/gpk-application.c:2772
+#: ../src/software/gpk-application.c:1736
 #, fuzzy
-msgid "Enter a search word or click a category to get started."
-msgstr "𐑧𐑯𐑑𐑼 𐑩 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑯 𐑞𐑧𐑯 𐑒𐑤𐑦𐑒 𐑓𐑲𐑯𐑛, 𐑹 𐑒𐑤𐑦𐑒 𐑩 𐑜𐑮𐑵𐑐 𐑑 𐑜𐑧𐑑 𐑕𐑑𐑸𐑑𐑩𐑛."
-
-#. TRANSLATORS: welcome text if we have to search by name
-#: ../src/software/gpk-application.c:2775
-#, fuzzy
-msgid "Enter a search word to get started."
-msgstr "𐑧𐑯𐑑𐑼 𐑩 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑯 𐑞𐑧𐑯 𐑒𐑤𐑦𐑒 𐑓𐑲𐑯𐑛 𐑑 𐑜𐑧𐑑 𐑕𐑑𐑸𐑑𐑩𐑛."
-
-#. TRANSLATORS: daemon is broken
-#: ../src/software/gpk-application.c:3000
-msgid "Exiting as properties could not be retrieved"
-msgstr "𐑧𐑜𐑟𐑦𐑑𐑦𐑙 𐑨𐑟 𐑐𐑮𐑪𐑐𐑼𐑑𐑦𐑟 𐑒𐑫𐑛 𐑯𐑪𐑑 𐑚𐑰 𐑮𐑦𐑑𐑮𐑰𐑝𐑛"
-
-#. TRANSLATORS: title: all of the packages on the system and available in sources
-#: ../src/software/gpk-application.c:3043
-msgid "All packages"
-msgstr "𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
-
-#. TRANSLATORS: tooltip: all packages
-#: ../src/software/gpk-application.c:3045
-msgid "Show all packages"
-msgstr "𐑖𐑴 𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+msgid "There was an error starting the application"
+msgstr "𐑿 𐑯𐑰𐑛 𐑑 𐑮𐑰𐑕𐑑𐑸𐑑 𐑞 𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:3432
-#: ../src/software-update/gpk-update-viewer.c:3412
+#: ../src/software/gpk-application.c:1953
+#: ../src/software-update/gpk-update-viewer.c:3398
 msgid "Show the program version and exit"
 msgstr "𐑖𐑴 𐑞 𐑐𐑮𐑴𐑜𐑮𐑨𐑥 𐑝𐑻𐑠𐑩𐑯 𐑯 𐑧𐑜𐑟𐑦𐑑"
 
-#: ../src/software/gpk-application.c:3446
+#: ../src/software/gpk-application.c:1967
 #, fuzzy
 msgid "Install Software"
 msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 firmware"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:3462
+#: ../src/software/gpk-application.c:1983
 #, fuzzy
 msgid "Software installer"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺"
+
+#: ../src/software/gpk-backend.c:87 ../src/software/gpk-backend.c:93
+#: ../src/software/gpk-backend.c:99
+#, c-format
+msgid ""
+"The backend does not support some features necessary for the application to "
+"work."
+msgstr ""
+
+#. TRANSLATORS: the repo name is invalid or not found, fall back to this
+#: ../src/software/gpk-backend.c:163
+msgid "Invalid"
+msgstr "𐑦𐑯𐑝𐑨𐑤𐑦𐑛"
 
 #. TRANSLATORS: don't install updates now
 #: ../src/software-service/gpk-updates-notification.c:199
@@ -3849,17 +3698,17 @@ msgid "Other updates"
 msgstr "𐑜𐑪𐑑 𐑳𐑐𐑛𐑱𐑑𐑕"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:975
+#: ../src/software-update/gpk-update-viewer.c:973
 msgid "Getting the list of updates"
 msgstr "𐑜𐑧𐑑𐑦𐑙 𐑞 𐑤𐑦𐑕𐑑 𐑝 𐑳𐑐𐑛𐑱𐑑𐑕"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1211
+#: ../src/software-update/gpk-update-viewer.c:1209
 msgid "Could not run upgrade script"
 msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑮𐑳𐑯 𐑳𐑐𐑜𐑮𐑱𐑛 𐑕𐑒𐑮𐑦𐑐𐑑"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1242
+#: ../src/software-update/gpk-update-viewer.c:1240
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3873,31 +3722,31 @@ msgstr[1] ""
 "𐑒𐑩𐑯𐑧𐑒𐑑𐑦𐑝𐑦𐑑𐑰 𐑦𐑟 𐑚𐑰𐑦𐑙 𐑐𐑮𐑩𐑝𐑲𐑛𐑩𐑛 𐑚𐑲 𐑢𐑲𐑮𐑤𐑦𐑕 𐑚𐑮𐑪𐑛𐑚𐑨𐑯𐑛, 𐑯 𐑦𐑑 𐑥𐑱 𐑚𐑰 𐑦𐑒𐑕𐑐𐑧𐑯𐑕𐑦𐑝 𐑑 "
 "𐑳𐑐𐑛𐑱𐑑 𐑞𐑰𐑟 𐑐𐑨𐑒𐑦𐑡𐑩𐑟."
 
-#: ../src/software-update/gpk-update-viewer.c:1391
+#: ../src/software-update/gpk-update-viewer.c:1389
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1427
 #, fuzzy
 msgid "No updates are available"
 msgstr "𐑳𐑐𐑛𐑱𐑑 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1431
+#: ../src/software-update/gpk-update-viewer.c:1429
 #, fuzzy
 msgid "No network connection was detected."
 msgstr "𐑯𐑴 𐑯𐑧𐑑𐑢𐑻𐑒 𐑒𐑩𐑯𐑧𐑒𐑖𐑩𐑯 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1449
+#: ../src/software-update/gpk-update-viewer.c:1447
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_𐑦𐑯𐑕𐑑𐑷𐑤 𐑳𐑐𐑛𐑱𐑑"
 msgstr[1] "_𐑦𐑯𐑕𐑑𐑷𐑤 𐑳𐑐𐑛𐑱𐑑𐑕"
 
-#: ../src/software-update/gpk-update-viewer.c:1494
+#: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3905,7 +3754,7 @@ msgstr[0] "𐑞𐑺 𐑦𐑟 %d 𐑳𐑐𐑛𐑱𐑑 𐑩𐑝𐑱𐑤𐑩𐑚�
 msgstr[1] "𐑞𐑺 𐑸 %d 𐑳𐑐𐑛𐑱𐑑𐑕 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1506
+#: ../src/software-update/gpk-update-viewer.c:1504
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3913,7 +3762,7 @@ msgstr[0] "%i 𐑳𐑐𐑛𐑱𐑑 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛"
 msgstr[1] "%i 𐑳𐑐𐑛𐑱𐑑𐑕 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1515
+#: ../src/software-update/gpk-update-viewer.c:1513
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3921,50 +3770,50 @@ msgstr[0] "%i 𐑳𐑐𐑛𐑱𐑑 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛 (%s)"
 msgstr[1] "%i 𐑳𐑐𐑛𐑱𐑑𐑕 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛 (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1711
+#: ../src/software-update/gpk-update-viewer.c:1709
 msgid "Status"
 msgstr "𐑕𐑑𐑱𐑑𐑫𐑕"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1889
+#: ../src/software-update/gpk-update-viewer.c:1887
 msgid "This update will add new features and expand functionality."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1893
+#: ../src/software-update/gpk-update-viewer.c:1891
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑 𐑢𐑦𐑤 𐑓𐑦𐑒𐑕 𐑚𐑳𐑜𐑟 𐑯 𐑳𐑞𐑼 𐑯𐑪𐑯-𐑒𐑮𐑦𐑑𐑦𐑒𐑩𐑤 𐑐𐑮𐑪𐑚𐑤𐑩𐑥𐑟."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1897
+#: ../src/software-update/gpk-update-viewer.c:1895
 msgid "This update is important as it may solve critical problems."
 msgstr "𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑 𐑦𐑟 𐑦𐑥𐑐𐑹𐑑𐑩𐑯𐑑 𐑨𐑟 𐑦𐑑 𐑥𐑱 𐑕𐑪𐑤𐑝 𐑒𐑮𐑦𐑑𐑦𐑒𐑩𐑤 𐑐𐑮𐑪𐑚𐑤𐑩𐑥𐑟."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1901
+#: ../src/software-update/gpk-update-viewer.c:1899
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑 𐑦𐑟 𐑯𐑰𐑛𐑩𐑛 𐑑 𐑓𐑦𐑒𐑕 𐑩 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑝𐑩𐑤𐑯𐑻𐑩𐑚𐑦𐑤𐑦𐑑𐑰 𐑢𐑦𐑞 𐑞𐑦𐑕 𐑐𐑨𐑒𐑦𐑡."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1905
+#: ../src/software-update/gpk-update-viewer.c:1903
 msgid "This update is blocked."
 msgstr "𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑 𐑦𐑟 𐑚𐑤𐑪𐑒𐑑."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1917
+#: ../src/software-update/gpk-update-viewer.c:1915
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "𐑞𐑦𐑕 𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯 𐑢𐑪𐑟 𐑦𐑖𐑵𐑛 𐑪𐑯 %s 𐑯 𐑤𐑭𐑕𐑑 𐑳𐑐𐑛𐑱𐑑𐑩𐑛 𐑪𐑯 %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1924
+#: ../src/software-update/gpk-update-viewer.c:1922
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "𐑞𐑦𐑕 𐑯𐑴𐑑𐑦𐑓𐑦𐑒𐑱𐑖𐑩𐑯 𐑢𐑪𐑟 𐑦𐑖𐑵𐑛 𐑪𐑯 %s."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1942
+#: ../src/software-update/gpk-update-viewer.c:1940
 #, fuzzy
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
@@ -3973,7 +3822,7 @@ msgstr[0] "𐑓𐑹 𐑥𐑹 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑩𐑚𐑬�
 msgstr[1] "𐑓𐑹 𐑥𐑹 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑩𐑚𐑬𐑑 𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑 𐑐𐑤𐑰𐑟 𐑝𐑦𐑟𐑦𐑑 𐑞𐑰𐑟 websites:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1949
+#: ../src/software-update/gpk-update-viewer.c:1947
 #, fuzzy
 msgid ""
 "For more information about bugs fixed by this update please visit this "
@@ -3986,7 +3835,7 @@ msgstr[1] ""
 "𐑓𐑹 𐑥𐑹 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑩𐑚𐑬𐑑 𐑚𐑳𐑜𐑟 𐑓𐑦𐑒𐑕𐑑 𐑚𐑲 𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑 𐑐𐑤𐑰𐑟 𐑝𐑦𐑟𐑦𐑑 𐑞𐑰𐑟 websites:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:1954
 #, fuzzy
 msgid ""
 "For more information about this security update please visit this website:"
@@ -3996,21 +3845,21 @@ msgstr[0] "𐑓𐑹 𐑥𐑹 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑩𐑚𐑬�
 msgstr[1] "𐑓𐑹 𐑥𐑹 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯 𐑩𐑚𐑬𐑑 𐑞𐑦𐑕 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑳𐑐𐑛𐑱𐑑 𐑐𐑤𐑰𐑟 𐑝𐑦𐑟𐑦𐑑 𐑞𐑰𐑟 websites:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1965
+#: ../src/software-update/gpk-update-viewer.c:1963
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr "𐑞 𐑒𐑩𐑥𐑐𐑿𐑑𐑼 𐑢𐑦𐑤 𐑣𐑨𐑝 𐑑 𐑚𐑰 𐑮𐑰𐑕𐑑𐑸𐑑𐑩𐑛 𐑭𐑓𐑑𐑼 𐑞 𐑳𐑐𐑛𐑱𐑑 𐑓𐑹 𐑞 𐑗𐑱𐑯𐑡𐑩𐑟 𐑑 𐑑𐑱𐑒 𐑦𐑓𐑧𐑒𐑑."
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1969
+#: ../src/software-update/gpk-update-viewer.c:1967
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
 msgstr "𐑿 𐑢𐑦𐑤 𐑯𐑰𐑛 𐑑 𐑤𐑪𐑜 𐑬𐑑 𐑯 𐑚𐑨𐑒 𐑦𐑯 𐑭𐑓𐑑𐑼 𐑞 𐑳𐑐𐑛𐑱𐑑 𐑓𐑹 𐑞 𐑗𐑱𐑯𐑡𐑩𐑟 𐑑 𐑑𐑱𐑒 𐑦𐑓𐑧𐑒𐑑."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1976
+#: ../src/software-update/gpk-update-viewer.c:1974
 #, fuzzy
 msgid ""
 "The classification of this update is unstable which means it is not designed "
@@ -4020,7 +3869,7 @@ msgstr ""
 "𐑐𐑮𐑩𐑛𐑳𐑒𐑖𐑩𐑯 𐑿𐑟."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1980
+#: ../src/software-update/gpk-update-viewer.c:1978
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -4029,18 +3878,18 @@ msgstr ""
 "𐑮𐑩𐑜𐑮𐑧𐑖𐑩𐑯𐑟 𐑿 𐑦𐑯𐑒𐑶𐑯𐑑𐑻."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1988
+#: ../src/software-update/gpk-update-viewer.c:1986
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "𐑞 𐑛𐑦𐑝𐑧𐑤𐑩𐑐𐑼 𐑤𐑪𐑜𐑟 𐑢𐑦𐑤 𐑚𐑰 𐑖𐑴𐑯 𐑨𐑟 𐑯𐑴 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯 𐑦𐑟 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤 𐑓𐑹 𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑:"
 
-#: ../src/software-update/gpk-update-viewer.c:2035
+#: ../src/software-update/gpk-update-viewer.c:2033
 #, fuzzy
 msgid "Loading…"
 msgstr "𐑤𐑴𐑛𐑦𐑙..."
 
-#: ../src/software-update/gpk-update-viewer.c:2038
+#: ../src/software-update/gpk-update-viewer.c:2036
 #, fuzzy
 msgid "No update details available."
 msgstr "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡 𐑒𐑨𐑖 𐑦𐑟 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤."
@@ -4048,68 +3897,272 @@ msgstr "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡 𐑒𐑨𐑖 𐑦𐑟 𐑩𐑝𐑱𐑤𐑩
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#. TRANSLATORS: PackageKit did not send any results for the query...
-#: ../src/software-update/gpk-update-viewer.c:2098
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2228
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2096
+#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:2226
 msgid "Could not get update details"
 msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑜𐑧𐑑 𐑳𐑐𐑛𐑱𐑑 𐑛𐑰𐑑𐑱𐑤𐑟"
 
-#: ../src/software-update/gpk-update-viewer.c:2118
-#: ../src/software-update/gpk-update-viewer.c:2248
+#: ../src/software-update/gpk-update-viewer.c:2116
 msgid "No results were returned."
 msgstr "𐑯𐑴 𐑮𐑦𐑟𐑳𐑤𐑑𐑕 𐑢𐑻 𐑮𐑦𐑑𐑻𐑯𐑛."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2483
+#: ../src/software-update/gpk-update-viewer.c:2480
 msgid "Select all"
 msgstr "𐑕𐑩𐑤𐑧𐑒𐑑 𐑷𐑤"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2491
+#: ../src/software-update/gpk-update-viewer.c:2488
 #, fuzzy
 msgid "Unselect all"
 msgstr "Unselect 𐑷𐑤"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2498
+#: ../src/software-update/gpk-update-viewer.c:2495
 msgid "Select security updates"
 msgstr "𐑕𐑩𐑤𐑧𐑒𐑑 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑳𐑐𐑛𐑱𐑑𐑕"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2504
+#: ../src/software-update/gpk-update-viewer.c:2501
 msgid "Ignore this update"
 msgstr "𐑦𐑜𐑯𐑹 𐑞𐑦𐑕 𐑳𐑐𐑛𐑱𐑑"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2611
-#: ../src/software-update/gpk-update-viewer.c:2814
+#: ../src/software-update/gpk-update-viewer.c:2608
+#: ../src/software-update/gpk-update-viewer.c:2800
 msgid "Could not get updates"
 msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑜𐑧𐑑 𐑳𐑐𐑛𐑱𐑑𐑕"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2748
-#: ../src/software-update/gpk-update-viewer.c:2844
+#: ../src/software-update/gpk-update-viewer.c:2742
+#: ../src/software-update/gpk-update-viewer.c:2830
 #, fuzzy
 msgid "Checking for updates…"
 msgstr "𐑗𐑧𐑒𐑦𐑙 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕..."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3116
+#: ../src/software-update/gpk-update-viewer.c:3102
 msgid "Could not get list of distribution upgrades"
 msgstr "𐑒𐑫𐑛 𐑯𐑪𐑑 𐑜𐑧𐑑 𐑤𐑦𐑕𐑑 𐑝 𐑛𐑦𐑕𐑑𐑮𐑦𐑚𐑿𐑖𐑩𐑯 𐑩𐑐𐑜𐑮𐑱𐑛𐑟"
 
 #. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3146
+#: ../src/software-update/gpk-update-viewer.c:3132
 #, fuzzy, c-format
 msgid "New distribution upgrade release “%s” is available"
 msgstr "𐑯𐑿 𐑛𐑦𐑕𐑑𐑮𐑦𐑚𐑿𐑖𐑩𐑯 𐑳𐑐𐑜𐑮𐑱𐑛 𐑮𐑦𐑤𐑰𐑕 '%s' 𐑦𐑟 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
 
-#: ../src/software-update/gpk-update-viewer.c:3425
+#: ../src/software-update/gpk-update-viewer.c:3411
 #, fuzzy
 msgid "Update Software"
 msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
+
+#, fuzzy
+#~ msgid "Select to Install…"
+#~ msgstr "𐑓𐑲𐑤𐑟 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤"
+
+#~ msgid "Visit home page for selected package"
+#~ msgstr "𐑝𐑦𐑟𐑦𐑑 𐑣𐑴𐑥 𐑐𐑱𐑡 𐑓𐑹 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛 𐑐𐑨𐑒𐑦𐑡"
+
+#, fuzzy
+#~ msgid "Files"
+#~ msgstr "𐑯𐑴 𐑓𐑲𐑤𐑟"
+
+#, fuzzy
+#~ msgid "Required"
+#~ msgstr "𐑜𐑪𐑑 𐑮𐑦𐑒𐑢𐑲𐑼𐑟"
+
+#, fuzzy
+#~ msgid "Pending Changes"
+#~ msgstr "𐑑𐑧𐑕𐑑𐑦𐑙 𐑗𐑱𐑯𐑡𐑩𐑟"
+
+#, fuzzy
+#~ msgid "Apply pending changes"
+#~ msgstr "𐑑𐑧𐑕𐑑𐑦𐑙 𐑗𐑱𐑯𐑡𐑩𐑟"
+
+#~ msgid "Cancel search"
+#~ msgstr "𐑒𐑨𐑯𐑕𐑩𐑤 𐑕𐑻𐑗"
+
+#, fuzzy
+#~ msgid "Cancel"
+#~ msgstr "𐑒𐑨𐑯𐑕𐑩𐑤𐑛"
+
+#, fuzzy
+#~ msgid "Cancel pending changes"
+#~ msgstr "𐑑𐑧𐑕𐑑𐑦𐑙 𐑗𐑱𐑯𐑡𐑩𐑟"
+
+#, fuzzy
+#~ msgid "Only Newest Versions"
+#~ msgstr "𐑴𐑯𐑤𐑦 _𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+
+#, fuzzy
+#~ msgid "Only Native Packages"
+#~ msgstr "𐑴𐑯𐑤𐑦 _𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+
+#~ msgid "Filter using basename in gpk-application"
+#~ msgstr "𐑓𐑦𐑤𐑑𐑼 𐑿𐑟𐑦𐑙 𐑚𐑱𐑕𐑯𐑱𐑥 𐑦𐑯 gpk-𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯"
+
+#, fuzzy
+#~ msgid "Filter package lists using basename in gpk-application."
+#~ msgstr "𐑓𐑦𐑤𐑑𐑼 𐑐𐑨𐑒𐑦𐑡 𐑤𐑦𐑕𐑑𐑕 𐑿𐑟𐑦𐑙 𐑚𐑱𐑕𐑯𐑱𐑥 𐑦𐑯 gpk-𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯"
+
+#~ msgid "Only show the newest packages in the file lists"
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
+
+#, fuzzy
+#~ msgid "Only show the newest packages in the file lists."
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
+
+#, fuzzy
+#~ msgid "Only show supported packages in the file lists"
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
+
+#, fuzzy
+#~ msgid "Only show supported packages in the file lists."
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
+
+#~ msgid "Only show native packages in the file lists"
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
+
+#, fuzzy
+#~ msgid ""
+#~ "Only show native packages matching the machine architecture in the file "
+#~ "lists."
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑯𐑱𐑑𐑦𐑝 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑥𐑨𐑗𐑦𐑙 𐑞 𐑥𐑩𐑖𐑰𐑯 𐑭𐑮𐑒𐑩𐑑𐑧𐑒𐑗𐑻 𐑦𐑯 𐑞 𐑓𐑲𐑤 𐑤𐑦𐑕𐑑𐑕"
+
+#~ msgid "Show the category group menu"
+#~ msgstr "𐑖𐑴 𐑞 𐑒𐑨𐑑𐑧𐑜𐑹𐑰 𐑜𐑮𐑵𐑐 𐑥𐑧𐑯𐑿"
+
+#, fuzzy
+#~ msgid ""
+#~ "Show the category group menu. This is more complete and custom to the "
+#~ "distribution, but takes longer to populate."
+#~ msgstr ""
+#~ "𐑖𐑴 𐑞 𐑒𐑨𐑑𐑧𐑜𐑹𐑰 𐑜𐑮𐑵𐑐 𐑥𐑧𐑯𐑿. 𐑞𐑦𐑕 𐑦𐑟 𐑥𐑹 𐑒𐑩𐑥𐑐𐑤𐑰𐑑 𐑯 𐑒𐑳𐑕𐑑𐑩𐑥 𐑑 𐑞 𐑛𐑦𐑕𐑑𐑮𐑦𐑚𐑿𐑖𐑩𐑯, 𐑚𐑳𐑑 "
+#~ "𐑑𐑱𐑒𐑕 𐑤𐑪𐑙𐑜𐑼 𐑑 𐑐𐑪𐑐𐑿𐑤𐑱𐑑"
+
+#~ msgid "Show the 'All Packages' group menu"
+#~ msgstr "𐑖𐑴 𐑞 '𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟' 𐑜𐑮𐑵𐑐 𐑥𐑧𐑯𐑿"
+
+#, fuzzy
+#~ msgid ""
+#~ "Show the all packages menu item. This takes a long time to populate on "
+#~ "most backends and is not generally required by end users."
+#~ msgstr ""
+#~ "𐑖𐑴 𐑞 𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑥𐑧𐑯𐑿 𐑲𐑑𐑩𐑥. 𐑞𐑦𐑕 𐑑𐑱𐑒𐑕 𐑩 𐑤𐑪𐑙 𐑑𐑲𐑥 𐑑 𐑐𐑪𐑐𐑿𐑤𐑱𐑑 𐑪𐑯 𐑥𐑴𐑕𐑑 𐑚𐑨𐑒𐑧𐑯𐑛𐑟 𐑯 "
+#~ "𐑦𐑟 𐑯𐑪𐑑 𐑡𐑧𐑯𐑼𐑩𐑤𐑦 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑚𐑲 𐑧𐑯𐑛 𐑿𐑟𐑼𐑟"
+
+#~ msgid "Only show the newest updates in the list"
+#~ msgstr "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑳𐑐𐑛𐑱𐑑𐑕 𐑦𐑯 𐑞 𐑤𐑦𐑕𐑑"
+
+#~ msgid ""
+#~ "Only show the newest packages in the update list, and filter out older "
+#~ "updates that are still available."
+#~ msgstr ""
+#~ "𐑴𐑯𐑤𐑦 𐑖𐑴 𐑞 𐑯𐑿𐑩𐑕𐑑 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑦𐑯 𐑞 𐑳𐑐𐑛𐑱𐑑 𐑤𐑦𐑕𐑑, 𐑯 𐑓𐑦𐑤𐑑𐑼 𐑬𐑑 𐑴𐑤𐑛𐑼 𐑳𐑐𐑛𐑱𐑑𐑕 𐑞𐑨𐑑 𐑸 "
+#~ "𐑕𐑑𐑦𐑤 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤."
+
+#, fuzzy
+#~ msgid "Cancel Removal"
+#~ msgstr "𐑒𐑨𐑯𐑕𐑩𐑤 𐑕𐑻𐑗"
+
+#, fuzzy
+#~ msgid "Cancel Installation"
+#~ msgstr "𐑦𐑯𐑕𐑑𐑷𐑤𐑦𐑙"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be installed"
+#~ msgid_plural "%u packages to be installed"
+#~ msgstr[0] "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑯𐑰𐑛 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
+#~ msgstr[1] "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑯𐑰𐑛 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
+
+#, fuzzy, c-format
+#~ msgid "%u package to be removed"
+#~ msgid_plural "%u packages to be removed"
+#~ msgstr[0] "𐑐𐑨𐑒𐑦𐑡 𐑓𐑱𐑤𐑛 𐑑 𐑚𐑰 𐑮𐑦𐑥𐑵𐑝𐑛"
+#~ msgstr[1] "𐑐𐑨𐑒𐑦𐑡 𐑓𐑱𐑤𐑛 𐑑 𐑚𐑰 𐑮𐑦𐑥𐑵𐑝𐑛"
+
+#, fuzzy, c-format
+#~ msgid "%u file installed by %s"
+#~ msgid_plural "%u files installed by %s"
+#~ msgstr[0] "%i 𐑓𐑲𐑤 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑚𐑲 %s"
+#~ msgstr[1] "%i 𐑓𐑲𐑤𐑟 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑚𐑲 %s"
+
+#~ msgid "No packages"
+#~ msgstr "𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+
+#~ msgid "No other packages require this package"
+#~ msgstr "𐑯𐑴 𐑳𐑞𐑼 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑮𐑦𐑒𐑢𐑲𐑼 𐑞𐑦𐑕 𐑐𐑨𐑒𐑦𐑡"
+
+#, fuzzy, c-format
+#~ msgid "%u package requires %s"
+#~ msgid_plural "%u packages require %s"
+#~ msgstr[0] "%i 𐑐𐑨𐑒𐑦𐑡 𐑮𐑦𐑒𐑢𐑲𐑼𐑟 %s"
+#~ msgstr[1] "%i 𐑐𐑨𐑒𐑦𐑡𐑧𐑟 𐑮𐑦𐑒𐑢𐑲𐑼 %s"
+
+#, c-format
+#~ msgid "Packages listed below require %s to function correctly."
+#~ msgid_plural "Packages listed below require %s to function correctly."
+#~ msgstr[0] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑮𐑦𐑒𐑢𐑲𐑼 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
+#~ msgstr[1] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑮𐑦𐑒𐑢𐑲𐑼 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
+
+#, fuzzy
+#~ msgid "This package does not depend on any others"
+#~ msgstr "𐑞𐑦𐑕 𐑐𐑨𐑒𐑦𐑡 𐑛𐑳𐑟 𐑯𐑪𐑑 𐑛𐑦𐑐𐑧𐑯𐑛𐑟 𐑪𐑯 𐑧𐑯𐑦 𐑳𐑞𐑼𐑟"
+
+#, fuzzy, c-format
+#~ msgid "%u additional package is required for %s"
+#~ msgid_plural "%u additional packages are required for %s"
+#~ msgstr[0] "%i 𐑩𐑛𐑦𐑖𐑩𐑯𐑩𐑤 𐑐𐑨𐑒𐑦𐑡 𐑦𐑟 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s"
+#~ msgstr[1] "%i 𐑩𐑛𐑦𐑖𐑩𐑯𐑩𐑤𐑧𐑟 𐑐𐑨𐑒𐑦𐑡 𐑸 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s"
+
+#, c-format
+#~ msgid "Packages listed below are required for %s to function correctly."
+#~ msgid_plural ""
+#~ "Packages listed below are required for %s to function correctly."
+#~ msgstr[0] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑸 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
+#~ msgstr[1] "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑤𐑦𐑕𐑑𐑩𐑛 𐑚𐑩𐑤𐑴 𐑸 𐑮𐑦𐑒𐑢𐑲𐑼𐑛 𐑓𐑹 %s 𐑑 𐑓𐑳𐑙𐑒𐑖𐑩𐑯 𐑒𐑩𐑮𐑧𐑒𐑑𐑤𐑦."
+
+#~ msgid "Try entering a package name in the search bar."
+#~ msgstr "𐑑𐑮𐑲 𐑧𐑯𐑑𐑼𐑦𐑙 𐑩 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑦𐑯 𐑞 𐑕𐑻𐑗 𐑚𐑸."
+
+#~ msgid "There are no packages queued to be installed or removed."
+#~ msgstr "𐑞𐑺 𐑸 𐑯𐑴 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑒𐑿𐑛 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑹 𐑮𐑦𐑥𐑵𐑝𐑛."
+
+#~ msgid "Searching by name"
+#~ msgstr "𐑕𐑻𐑗𐑦𐑙 𐑚𐑲 𐑯𐑱𐑥"
+
+#~ msgid "Searching by description"
+#~ msgstr "𐑕𐑻𐑗𐑦𐑙 𐑚𐑲 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
+
+#~ msgid "Searching by file"
+#~ msgstr "𐑕𐑻𐑗𐑦𐑙 𐑚𐑲 𐑓𐑲𐑤"
+
+#~ msgid "Search by name"
+#~ msgstr "𐑕𐑻𐑗 𐑚𐑲 𐑯𐑱𐑥"
+
+#~ msgid "Search by description"
+#~ msgstr "𐑕𐑻𐑗 𐑚𐑲 𐑛𐑦𐑕𐑒𐑮𐑦𐑐𐑖𐑩𐑯"
+
+#~ msgid "Search by file name"
+#~ msgstr "𐑕𐑻𐑗 𐑚𐑲 𐑓𐑲𐑤 𐑯𐑱𐑥"
+
+#, fuzzy
+#~ msgid "Enter a search word or click a category to get started."
+#~ msgstr "𐑧𐑯𐑑𐑼 𐑩 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑯 𐑞𐑧𐑯 𐑒𐑤𐑦𐑒 𐑓𐑲𐑯𐑛, 𐑹 𐑒𐑤𐑦𐑒 𐑩 𐑜𐑮𐑵𐑐 𐑑 𐑜𐑧𐑑 𐑕𐑑𐑸𐑑𐑩𐑛."
+
+#, fuzzy
+#~ msgid "Enter a search word to get started."
+#~ msgstr "𐑧𐑯𐑑𐑼 𐑩 𐑐𐑨𐑒𐑦𐑡 𐑯𐑱𐑥 𐑯 𐑞𐑧𐑯 𐑒𐑤𐑦𐑒 𐑓𐑲𐑯𐑛 𐑑 𐑜𐑧𐑑 𐑕𐑑𐑸𐑑𐑩𐑛."
+
+#~ msgid "Exiting as properties could not be retrieved"
+#~ msgstr "𐑧𐑜𐑟𐑦𐑑𐑦𐑙 𐑨𐑟 𐑐𐑮𐑪𐑐𐑼𐑑𐑦𐑟 𐑒𐑫𐑛 𐑯𐑪𐑑 𐑚𐑰 𐑮𐑦𐑑𐑮𐑰𐑝𐑛"
+
+#~ msgid "All packages"
+#~ msgstr "𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+
+#~ msgid "Show all packages"
+#~ msgstr "𐑖𐑴 𐑷𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
 
 #~ msgid "Clear current selection"
 #~ msgstr "𐑒𐑤𐑽 𐑒𐑳𐑮𐑩𐑯𐑑 𐑕𐑦𐑤𐑧𐑒𐑖𐑩𐑯"
@@ -4470,9 +4523,6 @@ msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
 #~ msgid "_Contents"
 #~ msgstr "_𐑒𐑪𐑯𐑑𐑩𐑯𐑑𐑕"
 
-#~ msgid "_Development"
-#~ msgstr "𐑛𐑦𐑝𐑧𐑤𐑩𐑐𐑥𐑩𐑯𐑑"
-
 #~ msgid "_Filters"
 #~ msgstr "𐑓𐑦𐑤𐑑𐑼𐑟"
 
@@ -4551,9 +4601,6 @@ msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
 
 #~ msgid "Create an archive of all the pending updates"
 #~ msgstr "𐑒𐑮𐑦𐑱𐑑 𐑩𐑯 𐑸𐑒𐑲𐑝 𐑝 𐑷𐑤 𐑞 𐑐𐑧𐑯𐑛𐑦𐑙 𐑳𐑐𐑛𐑱𐑑𐑕"
-
-#~ msgid "Destination package list:"
-#~ msgstr "𐑛𐑧𐑕𐑑𐑦𐑯𐑱𐑖𐑩𐑯 𐑐𐑨𐑒𐑦𐑡 𐑤𐑦𐑕𐑑:"
 
 #~ msgid "Multiple packages can be specified using a comma delimited list"
 #~ msgstr "𐑥𐑳𐑤𐑑𐑦𐑐𐑩𐑤 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑒𐑨𐑯 𐑚𐑰 𐑕𐑐𐑧𐑕𐑦𐑓𐑲𐑛 𐑿𐑟𐑦𐑙 𐑩 𐑒𐑪𐑥𐑩 delimited 𐑤𐑦𐑕𐑑"
