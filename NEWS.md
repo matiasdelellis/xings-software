@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Version 0.3.90] - 2022-02-15
+### Added
+ - Integration with Appstream, to show the most relevant information for users,
+   and organize applications.
+ - Allows browsing applications by categories, and searching for applications,
+   but also distribution packages.
+ - Add a button to launch installed apps instead annoying dialogue.
+ - Add the link to reporting, translations and donations.
+
+### Fixed
+ - Fix dont build on EPEL 7 due "for" loop initial declarations. Fix issue #4
+ - No need to bother the user for not having the details of the update.
+ - Don't use PK_FILTER_ENUM_NEWEST filter when getting updates.
+ - No need to bother the user for not having the details of the update.
+
+### Regressions
+Although I do remove them with conviction, recognize that they are regressions,
+and that they are probably annoying for some users.
+ - Remove search for files feature.
+ - Remove search by detail, and only search by name.
+ - Remove the option to remove or install multiple packages.
+ - Remove the option to show only newest and native packages.
+ - Remove dependencies, required and package files dialogs.
+
 ## [Version 0.3.5] - 2021-10-22
 ### Added
  - Hoping for a better future, we called the project Xings Software.
