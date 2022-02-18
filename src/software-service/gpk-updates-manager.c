@@ -31,6 +31,16 @@
 
 #include "gpk-updates-manager.h"
 
+/* We do not depend on UPOWER, but we must understand this enum */
+typedef enum {
+	UP_DEVICE_LEVEL_UNKNOWN,
+	UP_DEVICE_LEVEL_NONE,
+	UP_DEVICE_LEVEL_DISCHARGING,
+	UP_DEVICE_LEVEL_LOW,
+	UP_DEVICE_LEVEL_CRITICAL,
+	UP_DEVICE_LEVEL_ACTION,
+	UP_DEVICE_LEVEL_LAST
+} UpDeviceLevel;
 
 struct _GpkUpdatesManager
 {
@@ -41,6 +51,7 @@ struct _GpkUpdatesManager
 	guint			 check_startup_id;	/* 60s after startup */
 	guint			 check_hourly_id;	/* and then every hour */
 
+	GDBusProxy		*proxy_upower;
 	GNetworkMonitor		*network_monitor;
 
 	guint			 dbus_watch_id;
@@ -77,6 +88,31 @@ gpk_updates_manager_is_online (GpkUpdatesManager *manager)
 		return FALSE;
 
 	return TRUE;
+}
+
+UpDeviceLevel
+gpk_updates_manager_get_battery_status (GpkUpdatesManager *manager)
+{
+	GVariant *val = NULL;
+	UpDeviceLevel level = UP_DEVICE_LEVEL_UNKNOWN;
+
+	if (!manager->proxy_upower) {
+		g_debug ("no UPower support, so not doing power level checks");
+		level = UP_DEVICE_LEVEL_NONE;
+		goto out;
+	}
+
+	val = g_dbus_proxy_get_cached_property (manager->proxy_upower, "WarningLevel");
+	if (!val) {
+		g_debug ("no UPower support, so not doing power level checks");
+		level = UP_DEVICE_LEVEL_NONE;
+		goto out;
+	}
+	level = g_variant_get_uint32 (val);
+	g_variant_unref (val);
+
+out:
+	return level;
 }
 
 static void
@@ -120,11 +156,16 @@ gpk_updates_manager_auto_download_done (GpkUpdatesManager *manager)
 static void
 gpk_updates_manager_checker_has_updates (GpkUpdatesManager *manager)
 {
+	UpDeviceLevel battery_level = UP_DEVICE_LEVEL_UNKNOWN;
+	gboolean auto_download = FALSE;
 	gchar **package_ids;
 
+	battery_level = gpk_updates_manager_get_battery_status (manager);
+	auto_download = g_settings_get_boolean (gpk_updates_shared_get_settings (manager->shared),
+	                                        GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES);
+
 	/* should we auto-download the updates? */
-	if (g_settings_get_boolean (gpk_updates_shared_get_settings (manager->shared),
-	                            GPK_SETTINGS_AUTO_DOWNLOAD_UPDATES)) {
+	if (auto_download && battery_level >= UP_DEVICE_LEVEL_DISCHARGING) {
 		g_debug ("there are updates to download");
 
 		package_ids = gpk_updates_checker_get_update_packages_ids (manager->checker);
@@ -153,9 +194,17 @@ gpk_updates_manager_generic_error (GpkUpdatesManager *manager)
 static void
 gpk_updates_manager_check_updates (GpkUpdatesManager *manager)
 {
-	/* never check for updates when offline */
-	if (!gpk_updates_manager_is_online(manager))
+	/* never refresh when the battery is low */
+	if (gpk_updates_manager_get_battery_status (manager) >= UP_DEVICE_LEVEL_LOW) {
+		g_debug ("not getting updates on low power");
 		return;
+	}
+
+	/* never check for updates when offline */
+	if (!gpk_updates_manager_is_online(manager)) {
+		g_debug ("coul not getting updates due offline");
+		return;
+	}
 
 	/* check if need refresh cache. */
 	gpk_updates_refresh_update_cache (manager->refresh);
@@ -283,6 +332,8 @@ gpk_updates_manager_dispose (GObject *object)
 		manager->dbus_watch_id = 0;
 	}
 
+	g_clear_object (&manager->proxy_upower);
+
 	g_clear_object (&manager->notification);
 
 	g_clear_object (&manager->refresh);
@@ -306,6 +357,8 @@ gpk_updates_manager_class_init (GpkUpdatesManagerClass *klass)
 static void
 gpk_updates_manager_init (GpkUpdatesManager *manager)
 {
+	GError *error = NULL;
+
 	g_debug ("Starting updates manager");
 
 	/* The shared code between the different tasks */
@@ -349,6 +402,21 @@ gpk_updates_manager_init (GpkUpdatesManager *manager)
 	/* we have to consider the network connection before looking for updates */
 
 	manager->network_monitor = g_network_monitor_get_default ();
+
+	/* connect to UPower to get the system power state */
+	manager->proxy_upower =
+		g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+		                               G_DBUS_PROXY_FLAGS_NONE,
+		                               NULL,
+		                               "org.freedesktop.UPower",
+		                               "/org/freedesktop/UPower/devices/DisplayDevice",
+		                               "org.freedesktop.UPower.Device",
+		                               NULL,
+		                               &error);
+	if (!manager->proxy_upower) {
+		g_warning ("failed to connect to upower: %s", error->message);
+		g_error_free (error);
+	}
 
 	/* do a first check 60 seconds after login, and then every hour */
 	manager->check_startup_id =
