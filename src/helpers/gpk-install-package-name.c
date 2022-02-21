@@ -29,7 +29,6 @@
 
 #include <common/gpk-common.h>
 #include <common/gpk-error.h>
-//#include <common/gpk-dbus.h>
 #include <common/gpk-debug.h>
 
 /**
@@ -39,11 +38,13 @@ int
 main (int argc, char *argv[])
 {
 	GOptionContext *context;
-	gboolean ret;
+	GDBusProxy *proxy = NULL;
+	GVariantBuilder  array_builder;
+	GVariant *output;
 	GError *error = NULL;
 	gchar **packages = NULL;
-	DBusGConnection *connection;
-	DBusGProxy *proxy = NULL;
+	guint i = 0;
+	gboolean ret;
 
 	const GOptionEntry options[] = {
 		{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &packages,
@@ -82,42 +83,50 @@ main (int argc, char *argv[])
 		goto out;
 	}
 
-	/* check dbus connections, exit if not valid */
-	connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-	if (connection == NULL) {
-		g_warning ("%s", error->message);
-		goto out;
-	}
+	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+	                                       G_DBUS_PROXY_FLAGS_NONE,
+	                                       NULL,
+	                                       "org.freedesktop.PackageKit",
+	                                       "/org/freedesktop/PackageKit",
+	                                       "org.freedesktop.PackageKit.Modify",
+	                                       NULL,
+	                                       &error);
 
-	/* get a connection */
-	proxy = dbus_g_proxy_new_for_name (connection,
-					   "org.freedesktop.PackageKit",
-					   "/org/freedesktop/PackageKit",
-					   "org.freedesktop.PackageKit.Modify");
 	if (proxy == NULL) {
-		g_warning ("Cannot connect to session service");
-		goto out;
-	}
-
-	/* don't timeout, as dbus-glib sets the timeout ~25 seconds */
-	dbus_g_proxy_set_default_timeout (proxy, INT_MAX);
-
-	/* do method */
-	ret = dbus_g_proxy_call (proxy, "InstallPackageNames", &error,
-				 G_TYPE_UINT, 0, /* xid */
-				 G_TYPE_STRV, packages, /* data */
-				 G_TYPE_STRING, "hide-finished,show-warnings", /* interaction */
-				 G_TYPE_INVALID,
-				 G_TYPE_INVALID);
-	if (!ret) {
-		g_warning ("%s", error->message);
-		goto out;
-	}
-out:
-	if (error != NULL)
+		g_warning ("Cannot connect to session service: %s", error->message);
 		g_error_free (error);
+		goto out;
+	}
+
+	g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+	for (i = 0; packages[i] != NULL ; i++) {
+		g_variant_builder_add (&array_builder,
+		                       "s",
+		                       packages[i]);
+	}
+
+	output = g_dbus_proxy_call_sync (proxy,
+	                                 "InstallPackageNames",
+	                                 g_variant_new ("(uass)",
+	                                                0, /* fake xid */
+	                                                &array_builder, /* data */
+	                                                "hide-finished,show-warnings"), /* interactions */
+	                                 G_DBUS_CALL_FLAGS_NONE,
+	                                 G_MAXINT,
+	                                 NULL,
+	                                 &error);
+
+	if (output) {
+		g_variant_unref (output);
+	} else {
+		g_warning ("Cannot install packages: %s", error->message);
+		g_error_free (error);
+	}
+
+out:
 	if (proxy != NULL)
 		g_object_unref (proxy);
 	g_strfreev (packages);
+
 	return !ret;
 }
