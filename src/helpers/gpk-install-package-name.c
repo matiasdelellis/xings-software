@@ -24,8 +24,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <locale.h>
-#include <dbus/dbus-glib.h>
 
 #include <common/gpk-common.h>
 #include <common/gpk-error.h>
@@ -48,7 +46,7 @@ main (int argc, char *argv[])
 
 	const GOptionEntry options[] = {
 		{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_STRING_ARRAY, &packages,
-		  _("Packages to install"), NULL },
+		  _("Distribution packages to install"), NULL },
 		{ NULL}
 	};
 
@@ -61,9 +59,9 @@ main (int argc, char *argv[])
 	gtk_init (&argc, &argv);
 
 	/* TRANSLATORS: program name: installs a package (or packages) by name */
-	g_set_application_name (_("Software Install"));
+	g_set_application_name (_("Software Installer"));
 	context = g_option_context_new ("PACKAGE1 PACKAGE2…");
-	g_option_context_set_summary (context, _("Package Name Installer"));
+	g_option_context_set_summary (context, _("Install software with the name of the distribution packages"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
@@ -71,7 +69,7 @@ main (int argc, char *argv[])
 	g_option_context_free (context);
 
 	/* TRANSLATORS: application name to pass to to the user if there are not enough privs */
-	ret = gpk_check_privileged_user (_("Package Name Installer"), TRUE);
+	ret = gpk_check_privileged_user (_("Software Installer"), TRUE);
 	if (!ret)
 		goto out;
 
