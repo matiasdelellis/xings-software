@@ -195,7 +195,10 @@ gpk_application_start_progress_acction (GpkApplicationPrivate *priv,
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_empty"));
 	g_object_set (widget, "icon-name", gpk_status_enum_to_icon_name (status), NULL);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "stack_search_categories"));
+	gtk_widget_set_sensitive (widget, FALSE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_packages"));
 	gtk_widget_set_sensitive (widget, FALSE);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_title"));
@@ -231,7 +234,10 @@ gpk_application_stop_progress_acction (GpkApplicationPrivate *priv)
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "spinner_empty"));
 	gtk_spinner_stop (GTK_SPINNER (widget));
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_packages"));
+	gtk_widget_set_sensitive (widget, TRUE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "stack_search_categories"));
 	gtk_widget_set_sensitive (widget, TRUE);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_empty_title"));
@@ -1009,7 +1015,7 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	/* column for images */
 	column = gtk_tree_view_column_new ();
 	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
+	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
 	gtk_tree_view_column_add_attribute (column, renderer, "icon-name", PACKAGES_COLUMN_IMAGE);
 	gtk_tree_view_append_column (treeview, column);
@@ -1746,10 +1752,13 @@ gpk_application_open_backend_ready (GpkBackend            *backend,
 	gpk_application_stop_progress_acction (priv);
 
 	/* explicit show categories.. */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_packages"));
 	gtk_widget_show (widget);
 
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack	"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "sidebar-header"));
+	gtk_widget_show (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
 	gtk_widget_grab_focus (widget);
 }
 
@@ -1890,8 +1899,13 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	gpk_application_packages_add_columns (priv);
 
 	/* Show empty page */
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "box_package_selection"));
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "sidebar-header"));
 	gtk_widget_hide (widget);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "scrolledwindow_packages"));
+	gtk_widget_hide (widget);
+
+	/* Show empty page */
 	gpk_application_start_progress_acction (priv, PK_STATUS_ENUM_QUERY);
 
 	/* set a size, as much as the screen allows */
