@@ -24,6 +24,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libnotify/notify.h>
 
 #include <common/gpk-common.h>
 #include <common/gpk-error.h>
@@ -35,6 +36,7 @@
 int
 main (int argc, char *argv[])
 {
+	NotifyNotification *notification = NULL;
 	GOptionContext *context;
 	GDBusProxy *proxy = NULL;
 	GVariantBuilder  array_builder;
@@ -55,6 +57,8 @@ main (int argc, char *argv[])
 	bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
+
+	notify_init (_("Software Installer"));
 
 	gtk_init (&argc, &argv);
 
@@ -114,17 +118,30 @@ main (int argc, char *argv[])
 	                                 NULL,
 	                                 &error);
 
-	if (output) {
-		g_variant_unref (output);
-	} else {
+	if (!output) {
 		g_warning ("Cannot install packages: %s", error->message);
 		g_error_free (error);
+		goto out;
 	}
+
+	notification = notify_notification_new (_("Software Intalled"),
+	                                        _("The requested software has been installed"),
+	                                        "system-software-install");
+
+	if (!notify_notification_show (notification, &error)) {
+		g_warning ("Cannot notify the software installed: %s", error->message);
+		g_error_free (error);
+	}
+
+	g_object_unref(G_OBJECT(notification));
+	g_variant_unref (output);
 
 out:
 	if (proxy != NULL)
 		g_object_unref (proxy);
 	g_strfreev (packages);
+
+	notify_uninit ();
 
 	return !ret;
 }
