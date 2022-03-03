@@ -24,12 +24,10 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
-#include <locale.h>
-#include <dbus/dbus-glib.h>
+#include <libnotify/notify.h>
 
 #include <common/gpk-common.h>
 #include <common/gpk-error.h>
-//#include <common/gpk-dbus.h>
 #include <common/gpk-debug.h>
 
 /**
@@ -38,20 +36,22 @@
 int
 main (int argc, char *argv[])
 {
+	NotifyNotification *notification = NULL;
 	GOptionContext *context;
-	gboolean ret;
+	GDBusProxy *proxy = NULL;
+	GVariantBuilder  array_builder;
+	GVariant *output;
 	GError *error = NULL;
 	gchar **files = NULL;
 	gchar *tmp;
 	gchar *current_dir;
-	guint i;
-	DBusGConnection *connection;
-	DBusGProxy *proxy = NULL;
+	guint i = 0;
+	gboolean ret;
 
 	const GOptionEntry options[] = {
 		{ G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, &files,
 		  /* TRANSLATORS: command line option: a list of files to install */
-		  _("Files to install"), NULL },
+		  _("Local distribution packages to install"), NULL },
 		{ NULL}
 	};
 
@@ -61,12 +61,14 @@ main (int argc, char *argv[])
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
+	notify_init (_("Local distribution package installer"));
+
 	gtk_init (&argc, &argv);
 
 	/* TRANSLATORS: program name: application to install a package to provide a file */
-	g_set_application_name (_("Software Install"));
+	g_set_application_name (_("Local distribution package installer"));
 	context = g_option_context_new ("PACKAGEFILE1 PACKAGEFILE2…");
-	g_option_context_set_summary (context, _("PackageKit File Installer"));
+	g_option_context_set_summary (context, _("Install software from local distribution package"));
 	g_option_context_add_main_entries (context, options, NULL);
 	g_option_context_add_group (context, gpk_debug_get_option_group ());
 	g_option_context_add_group (context, gtk_get_option_group (TRUE));
@@ -74,15 +76,15 @@ main (int argc, char *argv[])
 	g_option_context_free (context);
 
 	/* TRANSLATORS: title to pass to to the user if there are not enough privs */
-	ret = gpk_check_privileged_user (_("Local file installer"), TRUE);
+	ret = gpk_check_privileged_user (_("Local distribution package installer"), TRUE);
 	if (!ret)
 		goto out;
 
 	if (files == NULL) {
 		/* TRANSLATORS: could not install a package that contained the file we wanted */
-		gpk_error_dialog (_("Failed to install a package to provide a file"),
-				  /* TRANSLATORS: nothing selected */
-				  _("You need to specify a file to install"), NULL);
+		gpk_error_dialog (_("Failed to install a local package file"),
+		                  /* TRANSLATORS: nothing selected */
+		                  _("You need to specify a package file to install"), NULL);
 		goto out;
 	}
 
@@ -98,42 +100,63 @@ main (int argc, char *argv[])
 	}
 	g_free (current_dir);
 
-	/* check dbus connections, exit if not valid */
-	connection = dbus_g_bus_get (DBUS_BUS_SESSION, &error);
-	if (connection == NULL) {
-		g_warning ("%s", error->message);
-		goto out;
-	}
+	proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+	                                       G_DBUS_PROXY_FLAGS_NONE,
+	                                       NULL,
+	                                       "org.freedesktop.PackageKit",
+	                                       "/org/freedesktop/PackageKit",
+	                                       "org.freedesktop.PackageKit.Modify",
+	                                       NULL,
+	                                       &error);
 
-	/* get a connection */
-	proxy = dbus_g_proxy_new_for_name (connection,
-					   "org.freedesktop.PackageKit",
-					   "/org/freedesktop/PackageKit",
-					   "org.freedesktop.PackageKit.Modify");
 	if (proxy == NULL) {
-		g_warning ("Cannot connect to session service");
-		goto out;
-	}
-
-	/* don't timeout, as dbus-glib sets the timeout ~25 seconds */
-	dbus_g_proxy_set_default_timeout (proxy, INT_MAX);
-
-	/* do method */
-	ret = dbus_g_proxy_call (proxy, "InstallPackageFiles", &error,
-				 G_TYPE_UINT, 0, /* xid */
-				 G_TYPE_STRV, files, /* data */
-				 G_TYPE_STRING, "hide-finished,show-warnings", /* interaction */
-				 G_TYPE_INVALID,
-				 G_TYPE_INVALID);
-	if (!ret) {
-		g_warning ("%s", error->message);
-		goto out;
-	}
-out:
-	if (error != NULL)
+		g_warning ("Cannot connect to session service: %s", error->message);
 		g_error_free (error);
+		goto out;
+	}
+
+	g_variant_builder_init (&array_builder, G_VARIANT_TYPE ("as"));
+	for (i = 0; files[i] != NULL ; i++) {
+		g_variant_builder_add (&array_builder,
+		                       "s",
+		                       files[i]);
+	}
+
+	output = g_dbus_proxy_call_sync (proxy,
+	                                 "InstallPackageFiles",
+	                                 g_variant_new ("(uass)",
+	                                                0, /* fake xid */
+	                                                &array_builder, /* data */
+	                                                "hide-finished,show-warnings"), /* interactions */
+	                                 G_DBUS_CALL_FLAGS_NONE,
+	                                 G_MAXINT,
+	                                 NULL,
+	                                 &error);
+
+	if (!output) {
+		g_warning ("Cannot install packages: %s", error->message);
+		g_error_free (error);
+		goto out;
+	}
+
+	notification = notify_notification_new (_("Software Intalled"),
+	                                        _("The requested software has been installed"),
+	                                        "system-software-install");
+
+	if (!notify_notification_show (notification, &error)) {
+		g_warning ("Cannot notify the software installed: %s", error->message);
+		g_error_free (error);
+	}
+
+	g_object_unref(G_OBJECT(notification));
+	g_variant_unref (output);
+
+out:
 	if (proxy != NULL)
 		g_object_unref (proxy);
 	g_strfreev (files);
+
+	notify_uninit ();
+
 	return !ret;
 }
