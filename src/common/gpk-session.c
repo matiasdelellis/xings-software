@@ -35,15 +35,6 @@
 
 static void     gpk_session_finalize   (GObject		*object);
 
-#define GPK_GNOME_SESSION_MANAGER_SERVICE		"org.gnome.SessionManager"
-#define GPK_GNOME_SESSION_MANAGER_PATH			"/org/gnome/SessionManager"
-#define GPK_GNOME_SESSION_MANAGER_INTERFACE		"org.gnome.SessionManager"
-#define GPK_GNOME_SESSION_LOGOUT_METHOD			"Logout"
-#define GPK_GNOME_SESSION_LOGOUT_ARGUMENTS		g_variant_new ("(u)", 1)
-#define GPK_GNOME_SESSION_REBOOT_METHOD		"Reboot"
-#define GPK_GNOME_SESSION_REBOOT_ARGUMENTS		NULL
-
-
 static gpointer gpk_session_object = NULL;
 
 typedef struct
@@ -91,10 +82,12 @@ gpk_session_can_reboot (GpkSession  *session,
                         gboolean    *can_reboot,
                         GError     **error)
 {
-	GpkSessionPrivate *priv;
-	g_return_val_if_fail (GPK_IS_SESSION (session), FALSE);
-	priv = gpk_session_get_instance_private (GPK_SESSION (session));
 #ifdef HAVE_SYSTEMD
+	GpkSessionPrivate *priv;
+#endif
+	g_return_val_if_fail (GPK_IS_SESSION (session), FALSE);
+#ifdef HAVE_SYSTEMD
+	priv = gpk_session_get_instance_private (GPK_SESSION (session));
 	return systemd_proxy_can_restart (priv->systemd_proxy, can_reboot, error);
 #else
 	// TODO: Get from session manager
@@ -216,10 +209,12 @@ gpk_session_finalize (GObject *object)
 	if (priv->xfce_proxy)
 		g_clear_object (&priv->xfce_proxy);
 
+#ifdef HAVE_SYSTEMD
 	if (priv->systemd_proxy) {
 		systemd_proxy_free (priv->systemd_proxy);
 		priv->systemd_proxy = NULL;
 	}
+#endif
 
 	G_OBJECT_CLASS (gpk_session_parent_class)->finalize (object);
 }
