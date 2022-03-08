@@ -107,6 +107,47 @@ _g_strzero (const gchar *text)
 	return FALSE;
 }
 
+static GdkPixbuf *
+gpk_get_pixbuf_from_component (AsComponent *component, gint size)
+{
+	GPtrArray *icons = NULL;
+	AsIcon *icon = NULL;
+	GdkPixbuf *pixbuf = NULL, *scaled_pixbuf = NULL;
+	const gchar *filename = NULL;
+	guint i = 0;
+
+	icons = as_component_get_icons(component);
+	for (i = 0; i < icons->len; i++) {
+		icon = AS_ICON (g_ptr_array_index (icons, i));
+		if (as_icon_get_kind (icon) != AS_ICON_KIND_STOCK) {
+			filename = as_icon_get_filename (icon);
+			pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
+			if (pixbuf) break;
+		}
+	}
+
+	if (pixbuf) {
+		scaled_pixbuf = gdk_pixbuf_scale_simple (pixbuf,
+		                                         size,
+		                                         size,
+		                                         GDK_INTERP_BILINEAR);
+		g_object_unref (pixbuf);
+		pixbuf = scaled_pixbuf;
+	}
+
+	return pixbuf;
+}
+
+static GdkPixbuf *
+gpk_get_pixbuf_from_icon_name (const gchar *icon_name, gint size)
+{
+	return gtk_icon_theme_load_icon (gtk_icon_theme_get_default (),
+	                                 icon_name,
+	                                 size,
+	                                 GTK_ICON_LOOKUP_FORCE_SIZE,
+	                                 NULL);
+}
+
 /**
  * gpk_application_set_text_buffer:
  **/
@@ -425,6 +466,7 @@ static void
 gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *item)
 {
 	AsComponent *component = NULL;
+	GdkPixbuf *app_pixbuf = NULL;
 	GtkTreeIter iter;
 	gchar *text;
 	PkInfoEnum info;
@@ -449,26 +491,30 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	package_name = gpk_package_id_get_name (package_id);
 	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
 	if (component) {
+		app_pixbuf = gpk_get_pixbuf_from_component (component, 32);
+		if (!app_pixbuf) {
+			app_pixbuf = gpk_get_pixbuf_from_icon_name (gpk_info_enum_to_icon_name (info), 32);
+		}
 		text = gpk_common_format_details (as_component_get_name (component),
 		                                  as_component_get_summary (component),
 		                                  TRUE);
 		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_PIXBUF, app_pixbuf,
 		                    PACKAGES_COLUMN_TEXT, text,
 		                    PACKAGES_COLUMN_SUMMARY, summary,
 		                    PACKAGES_COLUMN_ID, package_id,
-		                    PACKAGES_COLUMN_IMAGE, gpk_info_enum_to_icon_name (info),
 		                    PACKAGES_COLUMN_APP_NAME, as_component_get_name (component),
 		                    -1);
 	} else {
+		app_pixbuf = gpk_get_pixbuf_from_icon_name (gpk_info_enum_to_icon_name (info), 32);
 		text = gpk_package_id_format_details (package_id,
 		                                      summary,
 		                                      TRUE);
-
 		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_PIXBUF, app_pixbuf,
 		                    PACKAGES_COLUMN_TEXT, text,
 		                    PACKAGES_COLUMN_SUMMARY, summary,
 		                    PACKAGES_COLUMN_ID, package_id,
-		                    PACKAGES_COLUMN_IMAGE, gpk_info_enum_to_icon_name (info),
 		                    PACKAGES_COLUMN_APP_NAME, NULL,
 		                    -1);
 	}
@@ -503,7 +549,7 @@ gpk_application_suggest_better_search (GpkApplicationPrivate *priv)
 	gtk_list_store_append (priv->packages_store, &iter);
 	gtk_list_store_set (priv->packages_store, &iter,
 			    PACKAGES_COLUMN_TEXT, text,
-			    PACKAGES_COLUMN_IMAGE, "system-search",
+			    PACKAGES_COLUMN_PIXBUF, gpk_get_pixbuf_from_icon_name ("system-search", 32),
 			    PACKAGES_COLUMN_ID, NULL,
 			    PACKAGES_COLUMN_APP_NAME, NULL,
 			    -1);
@@ -1015,9 +1061,8 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	/* column for images */
 	column = gtk_tree_view_column_new ();
 	renderer = gtk_cell_renderer_pixbuf_new ();
-	g_object_set (renderer, "stock-size", GTK_ICON_SIZE_DND, NULL);
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
-	gtk_tree_view_column_add_attribute (column, renderer, "icon-name", PACKAGES_COLUMN_IMAGE);
+	gtk_tree_view_column_add_attribute (column, renderer, "pixbuf", PACKAGES_COLUMN_PIXBUF);
 	gtk_tree_view_append_column (treeview, column);
 
 	/* column for name */
@@ -1051,6 +1096,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gchar *package_name = NULL;
 	gchar *desktop_id = NULL;
 	gchar *url = NULL;
+	GdkPixbuf *app_pixbuf = NULL;
 	gchar *license = NULL;
 	gchar *summary = NULL, *package_details = NULL, *package_pretty = NULL, *description = NULL, *escape_url = NULL;
 	gchar *donation = NULL, *translate = NULL, *report = NULL;
@@ -1097,6 +1143,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	if (component != NULL) {
 		summary = g_strdup(as_component_get_name (component));
 		package_details = g_strdup(as_component_get_summary (component));
+		app_pixbuf = gpk_get_pixbuf_from_component (component, 48);
 		desktop_id = gpk_as_component_get_desktop_id (component);
 		description = g_strdup(as_component_get_description (component));
 		license = g_strdup(as_component_get_project_license(component));
@@ -1138,9 +1185,13 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gtk_widget_set_visible (widget, installed);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "icon_details_package"));
-	gtk_image_set_from_icon_name (GTK_IMAGE (widget),
-	                              gpk_info_enum_to_icon_name (installed ? PK_INFO_ENUM_INSTALLED : PK_INFO_ENUM_AVAILABLE),
-	                              GTK_ICON_SIZE_DIALOG);
+	if (app_pixbuf != NULL) {
+		gtk_image_set_from_pixbuf (GTK_IMAGE (widget), app_pixbuf);
+	} else {
+		gtk_image_set_from_icon_name (GTK_IMAGE (widget),
+		                              gpk_info_enum_to_icon_name (installed ? PK_INFO_ENUM_INSTALLED : PK_INFO_ENUM_AVAILABLE),
+		                              GTK_ICON_SIZE_DIALOG);
+	}
 
 	g_free (priv->desktop_id);
 	priv->desktop_id = g_strdup(desktop_id);
@@ -1278,6 +1329,8 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 out:
 	g_free (package_id);
 	g_free (desktop_id);
+	if (app_pixbuf)
+		g_object_unref (app_pixbuf);
 	g_free (url);
 	g_free (license);
 	g_free (summary);
@@ -1696,7 +1749,7 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 		gtk_list_store_append (priv->packages_store, &iter);
 		gtk_list_store_set (priv->packages_store, &iter,
 		                    PACKAGES_COLUMN_TEXT, text,
-		                    PACKAGES_COLUMN_IMAGE, icon,
+		                    PACKAGES_COLUMN_PIXBUF, gpk_get_pixbuf_from_icon_name (icon, 32),
 		                    PACKAGES_COLUMN_ID, id,
 		                    PACKAGES_COLUMN_APP_NAME, name,
 		                    PACKAGES_COLUMN_IS_CATEGORY, TRUE,
