@@ -1546,8 +1546,6 @@ gpk_application_activate_about_cb (GSimpleAction *action,
 
 	/* use parent */
 	main_window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
-
-	gtk_window_set_default_icon_name (GPK_ICON_SOFTWARE_INSTALLER);
 	gtk_show_about_dialog (GTK_WINDOW (main_window),
 	                       "program-name", _("Software"),
 	                       "version", PACKAGE_VERSION,
@@ -1857,6 +1855,8 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 					   PKGDATADIR G_DIR_SEPARATOR_S "icons");
 	gtk_icon_theme_append_search_path (gtk_icon_theme_get_default (),
 					   "/usr/share/PackageKit/icons");
+	gtk_window_set_default_icon_name (GPK_ICON_SOFTWARE_INSTALLER);
+
 
 	/* get UI */
 	priv->builder = gtk_builder_new ();
@@ -1868,6 +1868,8 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	}
 
 	main_window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
+	gtk_window_set_title (GTK_WINDOW (main_window), _("Software"));
+	gtk_window_set_icon_name (GTK_WINDOW (main_window), GPK_ICON_SOFTWARE_INSTALLER);
 
 	gtk_application_add_window (application, GTK_WINDOW (main_window));
 	gtk_window_set_application (GTK_WINDOW (main_window), application);
@@ -1879,11 +1881,6 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	/* setup the application menu */
 	menu = G_MENU_MODEL (gtk_builder_get_object (priv->builder, "appmenu"));
 	gtk_application_set_app_menu (priv->application, menu);
-
-	/* Hide window first so that the dialogue resizes itself without redrawing */
-	gtk_widget_hide (main_window);
-	gtk_window_set_icon_name (GTK_WINDOW (main_window), GPK_ICON_SOFTWARE_INSTALLER);
-	gtk_window_set_default_icon_name (GPK_ICON_SOFTWARE_INSTALLER);
 
 	/* open */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
