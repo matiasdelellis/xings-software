@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Version 0.3.91] - 2022-03-15
+### Added
+ - Yet another modernization of the main interface of software.
+ - Show app icon in software application.
+ - Notify when finish installing a package with name or local file. Issue #2
+ - Never check for updates on low battery. Issue #7
+ - Don't download updates when battery is discharging and the updates. Issue #7
+
+### Fixed
+- Fix some memory leaks.
+- Fix build without systemd, and small clean.
+
 ## [Version 0.3.90] - 2022-02-15
 ### Added
  - Integration with Appstream, to show the most relevant information for users,
