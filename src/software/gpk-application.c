@@ -519,6 +519,7 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 		                    -1);
 	}
 
+	g_object_unref (app_pixbuf);
 	g_free (package_id);
 	g_free (package_name);
 	g_free (summary);
@@ -1337,6 +1338,9 @@ out:
 	g_free (package_details);
 	g_free (package_pretty);
 	g_free (description);
+	g_free (donation);
+	g_free (translate);
+	g_free (report);
 	g_strfreev (split);
 	if (error_code != NULL)
 		g_object_unref (error_code);
@@ -1759,6 +1763,7 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 		g_free (icon);
 		g_free (text);
 	}
+	g_ptr_array_unref (categories);
 
 	priv->has_package = TRUE;
 }
