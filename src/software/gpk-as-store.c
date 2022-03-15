@@ -64,6 +64,7 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 			                     g_object_ref (component));
 		}
 	}
+	g_ptr_array_unref (components);
 
 	g_debug ("Appstream components: %u", components->len);
 	g_debug ("Appstream packages: %u", g_hash_table_size(store->packages_components));
@@ -112,6 +113,7 @@ gpk_as_store_search_pkgnames_by_categories (GpkAsStore *store, gchar **categorie
 			g_ptr_array_add (pkgname_list, g_strdup(pkgname));
 		}
 	}
+	g_ptr_array_unref (components);
 
 	g_ptr_array_add (pkgname_list, NULL);
 
