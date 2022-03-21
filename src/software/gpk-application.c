@@ -1474,8 +1474,11 @@ gpk_application_menu_search_for_application (GtkMenuItem *item, GpkApplicationPr
 static void
 gpk_application_entry_text_icon_press_cb (GtkEntry *entry, GtkEntryIconPosition icon_pos, GdkEventButton *event, GpkApplicationPrivate *priv)
 {
-	GtkMenu *menu = (GtkMenu*) gtk_menu_new ();
-	GtkWidget *item;
+	GtkMenu *menu = NULL;
+	GtkWidget *item = NULL;
+	GSList *group = NULL;
+
+	menu = (GtkMenu*) gtk_menu_new ();
 
 	/* only respond to left button */
 	if (event->button != 1)
@@ -1484,15 +1487,18 @@ gpk_application_entry_text_icon_press_cb (GtkEntry *entry, GtkEntryIconPosition 
 	g_debug ("icon_pos=%u", icon_pos);
 
 	/* TRANSLATORS: context menu item for the search type icon */
-	item = gtk_menu_item_new_with_mnemonic (_("Search for apps"));
+	item = gtk_radio_menu_item_new_with_label (group, _("Search for apps"));
+	group = gtk_radio_menu_item_get_group (GTK_RADIO_MENU_ITEM (item));
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), priv->search_type == GPK_SEARCH_APP);
 	g_signal_connect (G_OBJECT (item), "activate",
 	                  G_CALLBACK (gpk_application_menu_search_for_application), priv);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	/* TRANSLATORS: context menu item for the search type icon */
-	item = gtk_menu_item_new_with_mnemonic (_("Search for distribution packages"));
+	item = gtk_radio_menu_item_new_with_label (group, _("Search for distribution packages"));
 	g_signal_connect (G_OBJECT (item), "activate",
 	                  G_CALLBACK (gpk_application_menu_search_by_pkgname), priv);
+	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item), priv->search_type == GPK_SEARCH_PKGNAME);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	gtk_widget_show_all (GTK_WIDGET (menu));
