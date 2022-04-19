@@ -49,6 +49,7 @@ struct _GpkBackend
 	PkTask			*task;
 	GpkAsStore		*as_store;
 	GpkCategories		*categories;
+	PkPackageSack		*updates_sack;
 	GHashTable		*repos;
 };
 
@@ -62,7 +63,7 @@ gpk_backend_open_threaded (GTask        *task,
 {
 	GpkBackend *backend = NULL;
 	PkControl *control = NULL;
-	PkResults *results = NULL;
+	PkResults *updates_results = NULL, *repos_results = NULL;
 	PkRepoDetail *item = NULL;
 	PkBitfield roles = PK_ROLE_ENUM_UNKNOWN;
 	GPtrArray *array = NULL;
@@ -99,6 +100,12 @@ gpk_backend_open_threaded (GTask        *task,
 		                     _("The backend does not support some features necessary for the application to work."));
 		goto out;
 	}
+	if (!pk_bitfield_contain (roles, PK_ROLE_ENUM_GET_UPDATES)) {
+		error = g_error_new (PK_CONTROL_ERROR,
+		                     PK_ERROR_ENUM_NOT_SUPPORTED,
+		                     _("The backend does not support some features necessary for the application to work."));
+		goto out;
+	}
 
 	/* load appstream store */
 	if (!gpk_as_store_load (backend->as_store, cancellable, &error)) {
@@ -110,18 +117,31 @@ gpk_backend_open_threaded (GTask        *task,
 		goto out;
 	}
 
-	/* get repos, so we can show the full name in the package source box */
-	results = pk_client_get_repo_list (PK_CLIENT (backend->task),
-	                                   pk_bitfield_value (PK_FILTER_ENUM_NONE),
-	                                   cancellable,
-	                                   NULL, NULL,
-	                                   &error);
+	/* get available updates */
+	updates_results = pk_client_get_updates (PK_CLIENT(backend->task),
+	                                         pk_bitfield_value (PK_FILTER_ENUM_NONE),
+	                                         cancellable,
+	                                         NULL, NULL,
+	                                         &error);
 
 	if (error) {
 		goto out;
 	}
 
-	array = pk_results_get_repo_detail_array (results);
+	backend->updates_sack = pk_results_get_package_sack (updates_results);
+
+	/* get repos, so we can show the full name in the package source box */
+	repos_results = pk_client_get_repo_list (PK_CLIENT (backend->task),
+	                                         pk_bitfield_value (PK_FILTER_ENUM_NONE),
+	                                         cancellable,
+	                                         NULL, NULL,
+	                                         &error);
+
+	if (error) {
+		goto out;
+	}
+
+	array = pk_results_get_repo_detail_array (repos_results);
 	for (i = 0; i < array->len; i++) {
 		item = g_ptr_array_index (array, i);
 		g_object_get (item,
@@ -140,8 +160,10 @@ gpk_backend_open_threaded (GTask        *task,
 out:
 	if (array)
 		g_ptr_array_unref (array);
-	if (results)
-		g_object_unref (results);
+	if (updates_results)
+		g_object_unref (updates_results);
+	if (repos_results)
+		g_object_unref (repos_results);
 	if (control)
 		g_object_unref (control);
 
@@ -198,6 +220,13 @@ gpk_backend_get_principals_categories (GpkBackend *backend)
 	return gpk_categories_get_principals (backend->categories);
 }
 
+GPtrArray *
+gpk_backend_get_updates_array (GpkBackend *backend)
+{
+	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
+	return pk_package_sack_get_array (backend->updates_sack);
+}
+
 gchar **
 gpk_backend_search_pkgnames_with_component (GpkBackend *backend, const gchar *search)
 {
@@ -210,6 +239,12 @@ gpk_backend_search_pkgnames_by_categories (GpkBackend *backend, gchar **categori
 {
 	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
 	return gpk_as_store_search_pkgnames_by_categories (backend->as_store, categories);
+}
+
+gboolean
+gpk_backend_has_updates (GpkBackend *backend)
+{
+	return pk_package_sack_get_size (backend->updates_sack) > 0;
 }
 
 PkTask *
@@ -264,6 +299,9 @@ gpk_backend_finalize (GObject *object)
 
 	if (backend->categories != NULL)
 		g_object_unref (backend->categories);
+
+	if (backend->updates_sack)
+		g_object_unref(backend->updates_sack);
 
 	if (backend->repos != NULL)
 		g_hash_table_destroy (backend->repos);
