@@ -41,6 +41,9 @@ gpk_backend_get_category_by_id (GpkBackend *backend, const gchar *id);
 GPtrArray *
 gpk_backend_get_principals_categories (GpkBackend *backend);
 
+GPtrArray *
+gpk_backend_get_updates_array (GpkBackend *backend);
+
 gchar **
 gpk_backend_search_pkgnames_with_component (GpkBackend *backend, const gchar *search);
 
@@ -49,6 +52,9 @@ gpk_backend_search_pkgnames_by_categories (GpkBackend *backend, gchar **categori
 
 const gchar *
 gpk_backend_get_full_repo_name (GpkBackend *backend, const gchar *repo_id);
+
+gboolean
+gpk_backend_has_updates (GpkBackend *backend);
 
 PkTask *
 gpk_backend_get_task (GpkBackend *backend);

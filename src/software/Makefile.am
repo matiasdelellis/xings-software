@@ -34,6 +34,8 @@ xings_software_SOURCES =				\
 	gpk-category.h					\
 	gpk-packages-list.c				\
 	gpk-packages-list.h				\
+	gpk-package-row.c				\
+	gpk-package-row.h				\
 	gpk-application.c
 
 xings_software_LDADD =					\

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2022 Matias De lellis <mati86dl@gmail.com>
+ * Copyright (C) 2022 Matias De lellis <matias@delellis.com.ar>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -19,34 +19,26 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __GPK_PACKAGES_LIST_H
-#define __GPK_PACKAGES_LIST_H
-
-#include <gtk/gtk.h>
-#include <glib-object.h>
+#ifndef GPK_PACKAGE_ROW_H
+#define GPK_PACKAGE_ROW_H
 
 G_BEGIN_DECLS
 
-enum {
-	PACKAGES_COLUMN_PIXBUF,
-	PACKAGES_COLUMN_TEXT,
-	PACKAGES_COLUMN_ID,
-	PACKAGES_COLUMN_SUMMARY,
-	PACKAGES_COLUMN_APP_NAME,
-	PACKAGES_COLUMN_IS_SPECIAL,
-	PACKAGES_COLUMN_IS_SEPARATOR,
-	PACKAGES_COLUMN_IS_CATEGORY,
-	PACKAGES_COLUMN_LAST
-};
+#define GPK_TYPE_PACKAGE_ROW (gpk_package_row_get_type ())
+G_DECLARE_FINAL_TYPE (GpkPackageRow, gpk_package_row, GPK, PACKAGE_ROW, GtkListBoxRow)
 
-gboolean
-gpk_packages_list_row_separator_func (GtkTreeModel *model,
-                                      GtkTreeIter  *iter,
-                                      gpointer      user_data);
+gint
+gpk_package_row_sort_func (GtkListBoxRow *a,
+                           GtkListBoxRow *b,
+                           gpointer       user_data);
 
-GtkListStore *
-gpk_packages_list_store_new (void);
+void
+gpk_package_row_set_component (GpkPackageRow *row,
+                               AsComponent   *component);
+
+GtkWidget *
+gpk_package_row_new (PkPackage   *package);
 
 G_END_DECLS
 
-#endif	/* __GPK_PACKAGES_LIST_H */
+#endif
