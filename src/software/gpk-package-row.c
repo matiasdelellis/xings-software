@@ -35,6 +35,7 @@ struct _GpkPackageRow
 	GtkListBoxRow  parent;
 
 	PkPackage     *package;
+
 	AsComponent   *component;
 
 	GtkWidget     *image;
@@ -264,14 +265,54 @@ gpk_package_row_init (GpkPackageRow *self)
 {
 }
 
+gint
+gpk_package_row_sort_func (GtkListBoxRow *a,
+                           GtkListBoxRow *b,
+                           gpointer       user_data)
+{
+	gchar *title_a, *title_b;
+	gint result = 0;
+
+	GpkPackageRow *row_a = GPK_PACKAGE_ROW(a);
+	GpkPackageRow *row_b = GPK_PACKAGE_ROW(b);
+
+	if ((row_a->component && row_b->component) ||
+	    (!row_a->component && !row_b->component)) {
+		title_a = gpk_package_row_get_title (row_a);
+		title_b = gpk_package_row_get_title (row_b);
+		result = strcasecmp (title_a, title_b);
+		g_free (title_a);
+		g_free (title_b);
+	} else if (row_a->component && !row_b->component) {
+		result = -1;
+	} else {
+		result = 1;
+	}
+
+	return result;
+}
+
 void
 gpk_package_row_set_component (GpkPackageRow *row,
                                AsComponent   *component)
 {
+	GdkPixbuf *pixbuf = NULL;
+	gchar *title = NULL, *subtitle = NULL;
+
+	g_clear_object (&row->component);
 	row->component = component;
-	gtk_image_set_from_pixbuf (GTK_IMAGE(row->image), gpk_package_row_get_pixbuf (row));
-	gtk_label_set_markup (GTK_LABEL(row->title), gpk_package_row_get_title (row));
-	gtk_label_set_markup (GTK_LABEL(row->subtitle), gpk_package_row_get_subtitle (row));
+
+	pixbuf = gpk_package_row_get_pixbuf (row);
+	gtk_image_set_from_pixbuf (GTK_IMAGE(row->image), pixbuf);
+	g_object_unref (pixbuf);
+
+	title = gpk_package_row_get_title (row);
+	gtk_label_set_markup (GTK_LABEL(row->title), title);
+	g_free (title);
+
+	subtitle = gpk_package_row_get_title (row);
+	gtk_label_set_markup (GTK_LABEL(row->subtitle), subtitle);
+	g_free (subtitle);
 }
 
 GtkWidget *

@@ -27,6 +27,11 @@ G_BEGIN_DECLS
 #define GPK_TYPE_PACKAGE_ROW (gpk_package_row_get_type ())
 G_DECLARE_FINAL_TYPE (GpkPackageRow, gpk_package_row, GPK, PACKAGE_ROW, GtkListBoxRow)
 
+gint
+gpk_package_row_sort_func (GtkListBoxRow *a,
+                           GtkListBoxRow *b,
+                           gpointer       user_data);
+
 void
 gpk_package_row_set_component (GpkPackageRow *row,
                                AsComponent   *component);

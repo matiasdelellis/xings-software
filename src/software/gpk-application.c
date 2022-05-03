@@ -1773,6 +1773,7 @@ gpk_application_show_special (GpkApplicationPrivate *priv,
 
 	if (g_strcmp0 (special_id, "updates-available")) {
 		g_debug ("ignoring not implemented %s...", special_id);
+		return;
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_category"));
@@ -2062,6 +2063,10 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
+
+	/* updates list */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
+	gtk_list_box_set_sort_func (GTK_LIST_BOX (widget), gpk_package_row_sort_func, NULL, NULL);
 
 	/* create package tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
