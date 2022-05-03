@@ -49,6 +49,7 @@
 #include "gpk-backend.h"
 #include "gpk-categories.h"
 #include "gpk-packages-list.h"
+#include "gpk-package-row.h"
 
 typedef enum {
 	GPK_SEARCH_APP,
@@ -107,40 +108,6 @@ _g_strzero (const gchar *text)
 	if (text[0] == '\0')
 		return TRUE;
 	return FALSE;
-}
-
-static GtkWidget *
-gpk_get_update_list_row (GdkPixbuf   *pixbuf,
-                         const gchar *title,
-                         const gchar *subtitle)
-{
-	GtkWidget *widget, *row, *hbox, *vbox;
-
-	row = gtk_list_box_row_new ();
-	gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW(row), FALSE);
-	gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW(row), FALSE);
-
-	hbox = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 2);
-	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-
-	widget = gtk_image_new_from_pixbuf (pixbuf);
-	gtk_box_pack_start (GTK_BOX(hbox), widget, FALSE, FALSE, 4);
-
-	widget = gtk_label_new (title);
-	gtk_label_set_markup (GTK_LABEL(widget), title);
-	gtk_widget_set_halign (widget, GTK_ALIGN_START);
-	gtk_box_pack_start (GTK_BOX(vbox), widget, FALSE, FALSE, 0);
-
-	widget = gtk_label_new (NULL);
-	gtk_label_set_markup (GTK_LABEL(widget), subtitle);
-	gtk_widget_set_halign (widget, GTK_ALIGN_START);
-	gtk_box_pack_end (GTK_BOX(vbox), widget, FALSE, FALSE, 0);
-
-	gtk_box_pack_end (GTK_BOX(hbox), vbox, TRUE, TRUE, 2);
-
-	gtk_container_add (GTK_CONTAINER(row), hbox);
-
-	return row;
 }
 
 static GdkPixbuf *
@@ -503,41 +470,24 @@ static void
 gpk_application_add_item_as_update (GpkApplicationPrivate *priv, PkPackage *item)
 {
 	AsComponent *component = NULL;
-	PkInfoEnum info;
 	GtkWidget *listbox = NULL, *row = NULL;
-	GdkPixbuf *app_pixbuf = NULL;
 	gchar *package_id = NULL, *package_name = NULL;
-	gchar *name = NULL, *summary = NULL;
 
-	g_object_get (item,
-	              "info", &info,
-	              "package-id", &package_id,
-	               NULL);
-
+	g_object_get (item, "package-id", &package_id, NULL);
 	package_name = gpk_package_id_get_name (package_id);
+
+	row = gpk_package_row_new (item);
+
 	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
 	if (component) {
-		app_pixbuf = gpk_get_pixbuf_from_component (component, 32);
-		if (!app_pixbuf) {
-			app_pixbuf = gpk_get_pixbuf_from_icon_name (gpk_info_enum_to_icon_name (info), 32);
-		}
-		name = g_strdup (as_component_get_name (component));
-		summary = g_strdup (as_component_get_summary (component));
-	} else {
-		app_pixbuf = gpk_get_pixbuf_from_icon_name (gpk_info_enum_to_icon_name (info), 32);
-		name = g_strdup (package_name);
-		g_object_get (item, "summary", &summary, NULL);
+		gpk_package_row_set_component(GPK_PACKAGE_ROW(row), component);
 	}
 
 	listbox = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
-	row = gpk_get_update_list_row (app_pixbuf, name, summary);
 	gtk_container_add(GTK_CONTAINER(listbox), row);
 
-	g_object_unref (app_pixbuf);
 	g_free (package_id);
 	g_free (package_name);
-	g_free (summary);
-	g_free (name);
 }
 
 /**
