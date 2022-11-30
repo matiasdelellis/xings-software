@@ -107,6 +107,26 @@ _g_strzero (const gchar *text)
 	return FALSE;
 }
 
+static gchar *
+gpk_get_icon_name_from_component (AsComponent *component)
+{
+	GPtrArray *icons = NULL;
+	AsIcon *icon = NULL;
+	const gchar *icon_name = NULL;
+	guint i = 0;
+
+	icons = as_component_get_icons(component);
+	for (i = 0; i < icons->len; i++) {
+		icon = AS_ICON (g_ptr_array_index (icons, i));
+		if (as_icon_get_kind (icon) == AS_ICON_KIND_STOCK) {
+			icon_name = as_icon_get_name (icon);
+			break;
+		}
+	}
+
+	return icon_name;
+}
+
 static GdkPixbuf *
 gpk_get_pixbuf_from_component (AsComponent *component, gint size)
 {
@@ -119,8 +139,10 @@ gpk_get_pixbuf_from_component (AsComponent *component, gint size)
 	icons = as_component_get_icons(component);
 	for (i = 0; i < icons->len; i++) {
 		icon = AS_ICON (g_ptr_array_index (icons, i));
-		if (as_icon_get_kind (icon) != AS_ICON_KIND_STOCK) {
+		if (as_icon_get_kind (icon) == AS_ICON_KIND_LOCAL) {
 			filename = as_icon_get_filename (icon);
+			if (!filename) continue;
+
 			pixbuf = gdk_pixbuf_new_from_file (filename, NULL);
 			if (pixbuf) break;
 		}
@@ -468,7 +490,7 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	AsComponent *component = NULL;
 	GdkPixbuf *app_pixbuf = NULL;
 	GtkTreeIter iter;
-	gchar *text;
+	gchar *text, *app_icon = NULL;
 	PkInfoEnum info;
 	gchar *package_id = NULL;
 	gchar *package_name = NULL;
@@ -493,8 +515,15 @@ gpk_application_add_item_to_results (GpkApplicationPrivate *priv, PkPackage *ite
 	if (component) {
 		app_pixbuf = gpk_get_pixbuf_from_component (component, 32);
 		if (!app_pixbuf) {
+			app_icon = gpk_get_icon_name_from_component (component);
+			if (app_icon)
+				app_pixbuf = gpk_get_pixbuf_from_icon_name (app_icon, 32);
+		}
+
+		if (!app_pixbuf) {
 			app_pixbuf = gpk_get_pixbuf_from_icon_name (gpk_info_enum_to_icon_name (info), 32);
 		}
+
 		text = gpk_common_format_details (as_component_get_name (component),
 		                                  as_component_get_summary (component),
 		                                  TRUE);
