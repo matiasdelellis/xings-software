@@ -37,10 +37,6 @@
 #include "gpk-common.h"
 #include "gpk-error.h"
 
-#define GNOME_SESSION_MANAGER_NAME		"org.gnome.SessionManager"
-#define GNOME_SESSION_MANAGER_PATH		"/org/gnome/SessionManager"
-#define GNOME_SESSION_MANAGER_INTERFACE		"org.gnome.SessionManager"
-
 /* if the dialog is going to cover more than this much of the screen, then maximize it at startup */
 #define GPK_SMALL_FORM_FACTOR_SCREEN_PERCENT	75 /* % */
 
@@ -457,81 +453,6 @@ gpk_time_to_imprecise_string (guint time_secs)
 	hours = minutes / 60;
 	/* TRANSLATORS: time */
 	timestring = g_strdup_printf (ngettext ("%u hour", "%u hours", hours), hours);
-out:
-	return timestring;
-}
-
-/**
- * gpk_time_to_localised_string:
- * @time_secs: The time value to convert in seconds
- *
- * Returns a localized timestring
- *
- * Return value: The time string, e.g. "2 hours 3 minutes"
- **/
-gchar *
-gpk_time_to_localised_string (guint time_secs)
-{
-	gchar* timestring = NULL;
-	guint hours;
-	guint minutes;
-	guint seconds;
-
-	/* is valid? */
-	if (time_secs == 0) {
-		/* TRANSLATORS: The actions has just literally happened */
-		timestring = g_strdup_printf (_("Now"));
-		goto out;
-	}
-
-	/* make local copy */
-	seconds = time_secs;
-
-	/* less than a minute */
-	if (seconds < 60) {
-		/* TRANSLATORS: time */
-		timestring = g_strdup_printf (ngettext ("%u second",
-							"%u seconds",
-							seconds), seconds);
-		goto out;
-	}
-
-	/* Add 0.5 to do rounding */
-	minutes = (guint) ((time_secs / 60.0 ) + 0.5);
-	seconds = seconds % 60;
-
-	/* less than an hour */
-	if (minutes < 60) {
-		if (seconds == 0) {
-			timestring = g_strdup_printf (ngettext ("%u minute",
-								"%u minutes",
-								minutes), minutes);
-		} else {
-			/* TRANSLATOR: "%i %s %i %s" are "%i minutes %i seconds"
-			 * Swap order with "%2$s %2$i %1$s %1$i if needed */
-			timestring = g_strdup_printf (_("%u %s %u %s"),
-					minutes, ngettext ("minute", "minutes", minutes),
-					seconds, ngettext ("second", "seconds", seconds));
-		}
-		goto out;
-	}
-
-	/* more than an hour */
-	hours = minutes / 60;
-	minutes = minutes % 60;
-	if (minutes == 0) {
-		/* TRANSLATORS: time */
-		timestring = g_strdup_printf (ngettext (
-				"%u hour",
-				"%u hours",
-				hours), hours);
-	} else {
-		/* TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
-		 * Swap order with "%2$s %2$i %1$s %1$i if needed */
-		timestring = g_strdup_printf (_("%u %s %u %s"),
-				hours, ngettext ("hour", "hours", hours),
-				minutes, ngettext ("minute", "minutes", minutes));
-	}
 out:
 	return timestring;
 }

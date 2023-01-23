@@ -57,8 +57,6 @@ typedef enum {
 
 const gchar	*gpk_role_enum_to_localised_past	(PkRoleEnum	 role)
 							 G_GNUC_CONST;
-const gchar	*gpk_role_enum_to_localised_present	(PkRoleEnum	 role)
-							 G_GNUC_CONST;
 const gchar	*gpk_role_enum_to_icon_name		(PkRoleEnum	 role);
 const gchar	*gpk_media_type_enum_to_localised_text	(PkMediaTypeEnum type)
 							 G_GNUC_CONST;
@@ -73,21 +71,12 @@ const gchar	*gpk_status_enum_to_localised_text	(PkStatusEnum	 status)
 							 G_GNUC_CONST;
 const gchar	*gpk_status_enum_to_icon_name		(PkStatusEnum	 status);
 const gchar	*gpk_restart_enum_to_icon_name		(PkRestartEnum	 restart);
-const gchar	*gpk_restart_enum_to_dialog_icon_name	(PkRestartEnum	 restart);
 const gchar	*gpk_error_enum_to_localised_text	(PkErrorEnum code)
 							 G_GNUC_CONST;
 const gchar	*gpk_error_enum_to_localised_message	(PkErrorEnum code);
 const gchar	*gpk_restart_enum_to_localised_text	(PkRestartEnum	 restart)
 							 G_GNUC_CONST;
-const gchar	*gpk_update_state_enum_to_localised_text (PkUpdateStateEnum state)
-							 G_GNUC_CONST;
 const gchar	*gpk_restart_enum_to_localised_text_future(PkRestartEnum	 restart)
-							 G_GNUC_CONST;
-const gchar	*gpk_group_enum_to_localised_text	(PkGroupEnum	 group)
-							 G_GNUC_CONST;
-const gchar	*gpk_group_enum_to_icon_name		(PkGroupEnum	 group);
-gchar		*gpk_update_enum_to_localised_text	(PkInfoEnum	 info,
-							 guint		 number)
 							 G_GNUC_CONST;
 const gchar	*gpk_info_status_enum_to_string		(GpkInfoStatusEnum info);
 const gchar	*gpk_info_status_enum_to_icon_name	(GpkInfoStatusEnum info);
