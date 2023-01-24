@@ -1,5 +1,6 @@
 categorydir = $(pkgdatadir)/categories
 category_in_files =							\
+	accesories.directory.in						\
 	development.directory.in					\
 	education.directory.in						\
 	games.directory.in						\

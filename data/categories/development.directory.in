@@ -2,6 +2,6 @@
 Version=1.0
 Type=Directory
 Icon=applications-development
-Include=Database;Debugger;Development;GUIDesigner;IDE;RevisionControl;TerminalEmulator;WebDevelopment;
+Include=Development;
 _Name=Development
 _Comment=Software development tools

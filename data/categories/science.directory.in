@@ -2,6 +2,6 @@
 Version=1.0
 Type=Directory
 Icon=applications-science
-Include=ArtificialIntelligence;Astronomy;Biology;Calculator;Chemistry;ComputerScience;DataVisualization;Electricity;Electronics;Engineering;Geology;Geoscience;Math;NumericalAnalysis;Physics;Robotics;Science;
 _Name=Science
+Include=Science;Engineering;
 _Comment=Scientific software

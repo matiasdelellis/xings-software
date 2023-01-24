@@ -2,6 +2,6 @@
 Version=1.0
 Type=Directory
 Icon=applications-games
-Include=ActionGame;AdventureGame;ArcadeGame;Amusement;BlocksGame;BoardGame;CardGame;Game;KidsGame;LogicGame;RolePlaying;Shooter;Simulation;SportsGame;StrategyGame;
+Include=Game;
 _Name=Games
 _Comment=Games, puzzles, and other fun software

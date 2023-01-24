@@ -47,7 +47,6 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 	const gchar *pkgname = NULL;
 	guint i = 0, p = 0;
 
-
 	if (!as_pool_load (store->as_pool, cancellable, error))
 		return FALSE;
 
@@ -64,10 +63,11 @@ gpk_as_store_load (GpkAsStore *store, GCancellable *cancellable, GError **error)
 			                     g_object_ref (component));
 		}
 	}
-	g_ptr_array_unref (components);
 
 	g_debug ("Appstream components: %u", components->len);
 	g_debug ("Appstream packages: %u", g_hash_table_size(store->packages_components));
+
+	g_ptr_array_unref (components);
 
 	return TRUE;
 }
@@ -96,24 +96,35 @@ gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname)
 }
 
 gchar **
-gpk_as_store_search_pkgnames_by_categories (GpkAsStore *store, gchar **categories)
+gpk_as_store_search_pkgnames_by_categories (GpkAsStore *store, gchar **includes, gchar **excludes)
 {
 	GPtrArray *pkgname_list = NULL, *components = NULL;
 	AsComponent *component = NULL;
+	GStrv category_ids = NULL;
 	const gchar *pkgname = NULL;
-	guint i = 0;
+	guint i = 0, j = 0;
 
 	pkgname_list = g_ptr_array_new ();
 
-	components = as_pool_get_components_by_categories (store->as_pool, categories);
-	for (i = 0; i < components->len; i++) {
-		component = AS_COMPONENT (g_ptr_array_index (components, i));
-		pkgname = as_component_get_pkgname (component);
-		if (pkgname) {
-			g_ptr_array_add (pkgname_list, g_strdup(pkgname));
+	for (i = 0; includes[i] != NULL; i++) {
+		g_debug ("Include: %s", includes[i]);
+
+		category_ids = g_new0 (gchar *, 2);
+		category_ids[0] = g_strdup (includes[i]);
+
+		components = as_pool_get_components_by_categories (store->as_pool, category_ids);
+		for (j = 0; j < components->len; j++) {
+			component = AS_COMPONENT (g_ptr_array_index (components, j));
+			pkgname = as_component_get_pkgname (component);
+			if (pkgname) {
+				g_ptr_array_add (pkgname_list, g_strdup(pkgname));
+			}
 		}
+		g_ptr_array_unref (components);
+		g_strfreev (category_ids);
 	}
-	g_ptr_array_unref (components);
+
+	g_debug ("Appstream packages: %u", pkgname_list->len);
 
 	g_ptr_array_add (pkgname_list, NULL);
 

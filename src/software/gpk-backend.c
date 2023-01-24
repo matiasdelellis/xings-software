@@ -219,7 +219,7 @@ gchar **
 gpk_backend_search_pkgnames_by_categories (GpkBackend *backend, gchar **categories)
 {
 	g_return_val_if_fail (GPK_IS_BACKEND (backend), NULL);
-	return gpk_as_store_search_pkgnames_by_categories (backend->as_store, categories);
+	return gpk_as_store_search_pkgnames_by_categories (backend->as_store, categories, NULL);
 }
 
 PkTask *

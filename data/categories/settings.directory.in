@@ -2,6 +2,6 @@
 Version=1.0
 Type=Directory
 Icon=preferences-desktop
-Include=Monitor;Settings;System;
+Include=Settings;System;
 _Name=Settings
 _Comment=Desktop and system settings applications

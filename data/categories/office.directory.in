@@ -2,6 +2,6 @@
 Version=1.0
 Type=Directory
 Icon=applications-office
-Include=Office;Presentation;Publishing;Spreadsheet;WordProcessor;
+Include=Office;
 _Name=Office
 _Comment=Office and productivity applications

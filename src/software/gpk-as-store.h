@@ -44,7 +44,7 @@ AsComponent *
 gpk_as_store_get_component_by_pkgname (GpkAsStore *store, const gchar *pkgname);
 
 gchar **
-gpk_as_store_search_pkgnames_by_categories (GpkAsStore *store, gchar **categories);
+gpk_as_store_search_pkgnames_by_categories (GpkAsStore *store, gchar **includes, gchar **excludes);
 
 gchar **
 gpk_as_store_search_pkgnames (GpkAsStore *store, const gchar *search);

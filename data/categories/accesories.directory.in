@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Directory
+Icon=applications-accessories
+Include=Utility;
+Exclude=Accessibility;
+_Name=Accessories
+_Comment=Desktop accessories

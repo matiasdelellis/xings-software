@@ -2,6 +2,6 @@
 Version=1.0
 Type=Directory
 Icon=applications-internet
-Include=Network;P2P;
+Include=Network;
 _Name=Internet
 _Comment=Applications for Internet access
