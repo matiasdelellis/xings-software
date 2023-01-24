@@ -100,6 +100,16 @@ gpk_backend_open_threaded (GTask        *task,
 		goto out;
 	}
 
+	/* Sync repositories if they are old */
+	results = pk_task_refresh_cache_sync (backend->task, FALSE,
+	                                      cancellable,
+	                                      NULL, NULL,
+	                                      &error);
+
+	if (error) {
+		goto out;
+	}
+
 	/* load appstream store */
 	if (!gpk_as_store_load (backend->as_store, cancellable, &error)) {
 		goto out;
