@@ -811,7 +811,7 @@ gpk_application_search_categories (GpkApplicationPrivate *priv, gchar **categori
 
 	g_debug ("Searching appstream categories:");
 	for (i = 0; categories[i] != NULL; i++) {
-		g_debug (" - category: %s", categories[i]);
+		g_debug (" - Category: %s", categories[i]);
 	}
 
 	packages = gpk_backend_search_pkgnames_by_categories (priv->backend, categories);
@@ -830,6 +830,9 @@ static void
 gpk_application_search_pkgname (GpkApplicationPrivate *priv, gchar *search_text)
 {
 	gchar **tokens = NULL;
+
+	g_debug ("Searching by pkgname: %s", search_text);
+
 	tokens = g_strsplit (search_text, " ", -1);
 
 	pk_task_search_names_async (gpk_backend_get_task (priv->backend),
