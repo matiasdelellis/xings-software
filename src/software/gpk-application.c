@@ -139,7 +139,8 @@ gpk_get_pixbuf_from_component (AsComponent *component, gint size)
 	icons = as_component_get_icons(component);
 	for (i = 0; i < icons->len; i++) {
 		icon = AS_ICON (g_ptr_array_index (icons, i));
-		if (as_icon_get_kind (icon) == AS_ICON_KIND_LOCAL) {
+		if (as_icon_get_kind (icon) == AS_ICON_KIND_LOCAL ||
+		    as_icon_get_kind (icon) == AS_ICON_KIND_CACHED) {
 			filename = as_icon_get_filename (icon);
 			if (!filename) continue;
 
