@@ -1,0 +1,13 @@
+[Desktop Entry]
+_Name=Third Parties Installer
+_Comment=Install apps downloaded from the Internet
+GenericName=Flatpak Installer
+Categories=System;
+Keywords=flatpak;
+Exec=xings-third-parties %F
+Terminal=false
+Type=Application
+Icon=system-software-install
+StartupNotify=true
+NoDisplay=true
+MimeType=application/vnd.flatpak.ref;

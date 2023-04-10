@@ -11,6 +11,7 @@ desktop_in_files =					\
 	xings-software-history.desktop.in		\
 	xings-software-preferences.desktop.in		\
 	xings-software-update.desktop.in		\
+	xings-third-parties-installer.desktop.in	\
 	$(NULL)
 
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
