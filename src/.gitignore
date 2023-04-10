@@ -22,6 +22,7 @@ xings-packagekit-service
 xings-software
 xings-software-preferences
 xings-software-service
+xings-third-parties
 gpk-self-test
 gpk-self-test.log
 gpk-self-test.trs

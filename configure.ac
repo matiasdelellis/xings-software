@@ -103,6 +103,7 @@ PKG_CHECK_MODULES(DBUS, \
 PKG_CHECK_MODULES(GTK, \
  gtk+-3.0 >= 3.15.2 gdk-3.0 fontconfig)
 PKG_CHECK_MODULES(X11, x11)
+PKG_CHECK_MODULES(FLATPAK, flatpak)
 
 dnl **** Check for libnotify ****
 PKG_CHECK_MODULES(NOTIFY, libnotify >= 0.7.0)
@@ -234,6 +235,7 @@ src/preferences/Makefile
 src/software/Makefile
 src/software-service/Makefile
 src/software-update/Makefile
+src/third-parties/Makefile
 man/Makefile
 po/Makefile.in
 data/Makefile

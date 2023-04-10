@@ -6,4 +6,5 @@ SUBDIRS =						\
 	preferences					\
 	software					\
 	software-service				\
-	software-update
+	software-update					\
+	third-parties
