@@ -49,6 +49,7 @@
 #include "gpk-backend.h"
 #include "gpk-categories.h"
 #include "gpk-packages-list.h"
+#include "gpk-package-row.h"
 
 typedef enum {
 	GPK_SEARCH_APP,
@@ -92,6 +93,8 @@ static void gpk_application_remove_packages_cb (PkTask *task, GAsyncResult *res,
 static void gpk_application_install_packages_cb (PkTask *task, GAsyncResult *res, GpkApplicationPrivate *priv);
 
 static void gpk_application_perform_search (GpkApplicationPrivate *priv);
+static void gpk_application_show_special (GpkApplicationPrivate *priv,
+                                          const gchar           *special_id);
 static void gpk_application_show_category (GpkApplicationPrivate *priv,
                                            const gchar           *category_id);
 static void gpk_application_show_categories (GpkApplicationPrivate *priv);
@@ -482,6 +485,34 @@ gpk_application_clear_packages (GpkApplicationPrivate *priv)
 	gtk_list_store_clear (priv->packages_store);
 }
 
+
+/**
+ * gpk_application_add_item_as_update:
+ **/
+static void
+gpk_application_add_item_as_update (GpkApplicationPrivate *priv, PkPackage *item)
+{
+	AsComponent *component = NULL;
+	GtkWidget *listbox = NULL, *row = NULL;
+	gchar *package_id = NULL, *package_name = NULL;
+
+	g_object_get (item, "package-id", &package_id, NULL);
+	package_name = gpk_package_id_get_name (package_id);
+
+	row = gpk_package_row_new (item);
+
+	component = gpk_backend_get_component_by_pkgname (priv->backend, package_name);
+	if (component) {
+		gpk_package_row_set_component(GPK_PACKAGE_ROW(row), component);
+	}
+
+	listbox = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
+	gtk_container_add(GTK_CONTAINER(listbox), row);
+
+	g_free (package_id);
+	g_free (package_name);
+}
+
 /**
  * gpk_application_add_item_to_results:
  **/
@@ -762,7 +793,7 @@ gpk_application_search_cb (PkClient *client, GAsyncResult *res, GpkApplicationPr
 	/* if there is an exact match, select it */
 	if (!_g_strzero (priv->selection_id)) {
 		gpk_application_select_exact_match (priv, priv->selection_id);
-	} else {
+	} else if (!_g_strzero (priv->search_text)) {
 		gpk_application_select_exact_match (priv, priv->search_text);
 	}
 
@@ -1394,7 +1425,7 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	GtkTreeIter iter;
 	gchar **package_ids = NULL, **split = NULL;
 	gchar *package_id = NULL, *summary = NULL;
-	gboolean is_category = FALSE;
+	gboolean is_special = FALSE, is_category = FALSE;
 
 	/* ignore selection changed if we've just cleared the package list */
 	if (!priv->has_package)
@@ -1413,11 +1444,18 @@ gpk_application_package_selection_changed_cb (GtkTreeSelection *selection, GpkAp
 	gtk_tree_model_get (model, &iter,
 	                    PACKAGES_COLUMN_ID, &package_id,
 	                    PACKAGES_COLUMN_APP_NAME, &summary,
+	                    PACKAGES_COLUMN_IS_SPECIAL, &is_special,
 	                    PACKAGES_COLUMN_IS_CATEGORY, &is_category,
 	                   -1);
 
 	if (package_id == NULL) {
 		g_debug ("ignoring help click");
+		goto out;
+	}
+
+	if (is_special) {
+		g_debug ("special %s selected...", package_id);
+		gpk_application_show_special (priv, package_id);
 		goto out;
 	}
 
@@ -1754,6 +1792,69 @@ gpk_application_show_category (GpkApplicationPrivate *priv,
 }
 
 /**
+ * gpk_application_show_special
+ */
+static void
+gpk_application_show_special (GpkApplicationPrivate *priv,
+                              const gchar           *special_id)
+{
+	GPtrArray *array = NULL;
+	GtkWidget *widget = NULL;
+	PkPackage *item;
+	gchar *text = NULL;
+	guint i = 0;
+
+	if (g_strcmp0 (special_id, "updates-available")) {
+		g_debug ("ignoring not implemented %s...", special_id);
+		return;
+	}
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_category"));
+	gtk_label_set_label (GTK_LABEL (widget), _("Updates"));
+
+	g_debug ("Searching updates");
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
+	gtk_container_foreach (GTK_CONTAINER (widget),
+	                       (GtkCallback) gtk_widget_destroy, NULL);
+
+	/* get data */
+	array = gpk_backend_get_updates_array (priv->backend);
+	for (i = 0; i < array->len; i++) {
+		item = g_ptr_array_index (array, i);
+		gpk_application_add_item_as_update (priv, item);
+	}
+
+	if (array->len > 0) {
+		widget = GTK_WIDGET(gtk_builder_get_object (priv->builder, "label_updates_details"));
+		text = g_strdup_printf (ngettext ("There is %u update available",
+		                                  "There are %u updates available", array->len),
+		                        array->len);
+		gtk_label_set_label (GTK_LABEL(widget), text);
+		g_free (text);
+
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_updates_install"));
+		gtk_widget_set_sensitive (widget, TRUE);
+
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
+		gtk_widget_set_sensitive (widget, TRUE);
+	} else {
+		widget = GTK_WIDGET(gtk_builder_get_object (priv->builder, "label_updates_details"));
+		gtk_label_set_label (GTK_LABEL(widget), _("No updates are available"));
+
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_updates_install"));
+		gtk_widget_set_sensitive (widget, FALSE);
+
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
+		gtk_widget_set_sensitive (widget, FALSE);
+	}
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "details_stack"));
+	gtk_stack_set_visible_child_name (GTK_STACK (widget), "updates_page");
+	gtk_widget_show_all(widget);
+}
+
+/**
  * gpk_application_show_categories:
  **/
 static void
@@ -1773,10 +1874,6 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_category"));
 	gtk_label_set_label (GTK_LABEL (widget), _("Categories"));
-
-	priv->package_view = GPK_VIEW_CATEGORIES;
-	g_free (priv->search_text);
-	priv->search_text = NULL;
 
 	categories = gpk_backend_get_principals_categories (priv->backend);
 	for (i = 0; i < categories->len; i++) {
@@ -1804,6 +1901,26 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 	}
 	g_ptr_array_unref (categories);
 
+	if (gpk_backend_has_updates (priv->backend)) {
+		g_debug ("Show updates...");
+		gtk_list_store_append (priv->packages_store, &iter);
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_IS_SEPARATOR, TRUE,
+		                    PACKAGES_COLUMN_ID, "separator", -1);
+
+		gtk_list_store_append (priv->packages_store, &iter);
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_TEXT, _("Updates"),
+		                    PACKAGES_COLUMN_PIXBUF, gpk_get_pixbuf_from_icon_name (GPK_ICON_SOFTWARE_UPDATE, 32),
+		                    PACKAGES_COLUMN_ID, "updates-available",
+		                    PACKAGES_COLUMN_APP_NAME, _("Updates"),
+		                    PACKAGES_COLUMN_IS_SPECIAL, TRUE,
+		                    -1);
+	}
+
+	priv->package_view = GPK_VIEW_CATEGORIES;
+	g_free (priv->search_text);
+	priv->search_text = NULL;
 	priv->has_package = TRUE;
 }
 
@@ -1980,8 +2097,16 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
 	gtk_tree_view_columns_autosize (GTK_TREE_VIEW (widget));
 
+	/* updates list */
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "list_updates"));
+	gtk_list_box_set_sort_func (GTK_LIST_BOX (widget), gpk_package_row_sort_func, NULL, NULL);
+
 	/* create package tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
+	gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (widget),
+	                                      (GtkTreeViewRowSeparatorFunc) gpk_packages_list_row_separator_func,
+	                                      priv, NULL);
+
 	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
 				 GTK_TREE_MODEL (priv->packages_store));
 
