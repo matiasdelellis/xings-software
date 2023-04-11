@@ -156,6 +156,14 @@ gpk_flatpak_installer_get_download_size (GpkFlatpakInstaller *installer)
 	return priv->download_size;
 }
 
+gchar *
+gpk_flatpak_installer_get_name (GpkFlatpakInstaller *installer)
+{
+	GpkFlatpakInstallerPrivate *priv;
+	priv = gpk_flatpak_installer_get_instance_private (installer);
+	return gpk_flatpak_ref_get_name(priv->flatpakref);
+}
+
 gboolean
 gpk_flatpak_installer_perform (GpkFlatpakInstaller *installer, GError **error)
 {
@@ -252,7 +260,7 @@ gpk_flatpak_installer_preprare_flatpakref (GpkFlatpakInstaller *installer, gchar
 		if (g_error_matches (*error, FLATPAK_ERROR, FLATPAK_ERROR_ABORTED)) {
 			g_clear_error (error);
 		} else {
-			g_warning ("Failed to run Flatpak transaction");
+			g_warning ("Failed to run prepare transaction");
 			ret = FALSE;
 			goto out;
 		}

@@ -41,6 +41,9 @@ gpk_flatpak_installer_launch_ready (GpkFlatpakInstaller *installer, GError **err
 guint64
 gpk_flatpak_installer_get_download_size (GpkFlatpakInstaller *installer);
 
+gchar *
+gpk_flatpak_installer_get_name (GpkFlatpakInstaller *installer);
+
 gboolean
 gpk_flatpak_installer_perform (GpkFlatpakInstaller *installer, GError **error);
 

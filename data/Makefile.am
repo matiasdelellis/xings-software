@@ -34,6 +34,7 @@ pkgdata_DATA =						\
 	gpk-error.ui					\
 	gpk-log.ui					\
 	gpk-client.ui					\
+	gpk-third-party-installer.ui			\
 	$(NULL)
 
 servicedir = $(datadir)/dbus-1/services
