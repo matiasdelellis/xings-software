@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2022 Matias De lellis <matias@delellis.com.ar>
+ * Copyright (C) 2022-2023 Matias De lellis <matias@delellis.com.ar>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -43,6 +43,12 @@ gpk_category_get_comment (GpkCategory *category);
 
 gchar **
 gpk_category_get_categories (GpkCategory *category);
+
+gchar **
+gpk_category_get_packages (GpkCategory *category);
+
+gboolean
+gpk_category_is_special (GpkCategory *category);
 
 GpkCategory *
 gpk_category_new (void);

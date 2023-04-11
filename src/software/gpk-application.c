@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2021-2022 Matias De lellis <mati86dl@gmail.com>
+ * Copyright (C) 2021-2023 Matias De lellis <mati86dl@gmail.com>
  * Copyright (C) 2007-2012 Richard Hughes <richard@hughsie.com>
  *
  * Licensed under the GNU General Public License Version 2
@@ -844,6 +844,18 @@ gpk_application_search_pkgname (GpkApplicationPrivate *priv, gchar *search_text)
 	                            (GAsyncReadyCallback) gpk_application_search_cb, priv);
 
 	g_strfreev (tokens);
+}
+
+static void
+gpk_application_search_packages (GpkApplicationPrivate *priv, gchar **packages)
+{
+	pk_task_resolve_async (gpk_backend_get_task (priv->backend),
+	                       pk_bitfield_from_enums (PK_FILTER_ENUM_NEWEST,
+	                                               PK_FILTER_ENUM_ARCH,
+	                                               -1),
+	                       packages, priv->cancellable,
+	                       (PkProgressCallback) gpk_application_progress_cb, priv,
+	                       (GAsyncReadyCallback) gpk_application_search_cb, priv);
 }
 
 /**
@@ -1732,7 +1744,7 @@ gpk_application_show_category (GpkApplicationPrivate *priv,
 {
 	GtkWidget *widget = NULL;
 	GpkCategory *category = NULL;
-	gchar **categories;
+	gchar **categories = NULL, **packages = NULL;
 	gchar *category_name = NULL;
 
 	gpk_application_clear_packages (priv);
@@ -1746,10 +1758,16 @@ gpk_application_show_category (GpkApplicationPrivate *priv,
 	g_free (priv->search_text);
 	priv->search_text = g_strdup (category_id);
 
-	categories = gpk_category_get_categories (category);
-	gpk_application_search_categories (priv, categories);
+	packages = gpk_category_get_packages (category);
+	if (packages) {
+		gpk_application_search_packages (priv, packages);
+		g_strfreev (packages);
+	} else {
+		categories = gpk_category_get_categories (category);
+		gpk_application_search_categories (priv, categories);
+		g_strfreev (categories);
+	}
 
-	g_strfreev (categories);
 	g_free (category_name);
 }
 
@@ -1765,6 +1783,7 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 	GtkTreeIter iter;
 	gchar *id = NULL, *name = NULL, *comment = NULL, *icon = NULL;
 	gchar *text = NULL;
+	gboolean is_special = FALSE, has_special = FALSE;
 	guint i = 0;
 
 	g_debug ("Show categories...");
@@ -1784,8 +1803,13 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 		id = gpk_category_get_id (category);
 		name = gpk_category_get_name (category);
 		comment = gpk_category_get_comment (category);
-		text = gpk_common_format_details (name, comment, TRUE);
 		icon = gpk_category_get_icon (category);
+		is_special = gpk_category_is_special (category);
+
+		text = gpk_common_format_details (name, comment, TRUE);
+
+		if (is_special)
+			has_special = TRUE;
 
 		gtk_list_store_append (priv->packages_store, &iter);
 		gtk_list_store_set (priv->packages_store, &iter,
@@ -1793,6 +1817,7 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 		                    PACKAGES_COLUMN_PIXBUF, gpk_get_pixbuf_from_icon_name (icon, 32),
 		                    PACKAGES_COLUMN_ID, id,
 		                    PACKAGES_COLUMN_APP_NAME, name,
+		                    PACKAGES_COLUMN_IS_SPECIAL, is_special,
 		                    PACKAGES_COLUMN_IS_CATEGORY, TRUE,
 		                    -1);
 
@@ -1802,6 +1827,14 @@ gpk_application_show_categories (GpkApplicationPrivate *priv)
 		g_free (icon);
 		g_free (text);
 	}
+
+	if (has_special) {
+		gtk_list_store_append (priv->packages_store, &iter);
+		gtk_list_store_set (priv->packages_store, &iter,
+		                    PACKAGES_COLUMN_IS_SEPARATOR, TRUE,
+		                    PACKAGES_COLUMN_ID, "separator", -1);
+	}
+
 	g_ptr_array_unref (categories);
 
 	priv->has_package = TRUE;
@@ -1982,6 +2015,10 @@ gpk_application_startup_cb (GtkApplication *application, GpkApplicationPrivate *
 
 	/* create package tree view */
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "treeview_packages"));
+	gtk_tree_view_set_row_separator_func (GTK_TREE_VIEW (widget),
+	                                      (GtkTreeViewRowSeparatorFunc) gpk_packages_list_row_separator_func,
+	                                      priv, NULL);
+
 	gtk_tree_view_set_model (GTK_TREE_VIEW (widget),
 				 GTK_TREE_MODEL (priv->packages_store));
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2022 Matias De lellis <matias@delellis.com.ar>
+ * Copyright (C) 2022-2023 Matias De lellis <matias@delellis.com.ar>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -65,6 +65,25 @@ gchar **
 gpk_category_get_categories (GpkCategory *category)
 {
 	return g_key_file_get_string_list (category->key_file, "Desktop Entry", "Include", NULL, NULL);
+}
+
+gchar **
+gpk_category_get_packages (GpkCategory *category)
+{
+	return g_key_file_get_string_list (category->key_file, "Desktop Entry", "Packages", NULL, NULL);
+}
+
+gboolean
+gpk_category_is_special (GpkCategory *category)
+{
+	gboolean is_special = FALSE;
+	gchar **packages = NULL;
+
+	packages = gpk_category_get_packages (category);
+	is_special = (packages != NULL);
+	g_strfreev (packages);
+
+	return is_special;
 }
 
 gboolean

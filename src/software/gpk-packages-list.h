@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2022 Matias De lellis <mati86dl@gmail.com>
+ * Copyright (C) 2022-2023 Matias De lellis <mati86dl@gmail.com>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -33,9 +33,16 @@ enum {
 	PACKAGES_COLUMN_ID,
 	PACKAGES_COLUMN_SUMMARY,
 	PACKAGES_COLUMN_APP_NAME,
+	PACKAGES_COLUMN_IS_SPECIAL,
+	PACKAGES_COLUMN_IS_SEPARATOR,
 	PACKAGES_COLUMN_IS_CATEGORY,
 	PACKAGES_COLUMN_LAST
 };
+
+gboolean
+gpk_packages_list_row_separator_func (GtkTreeModel *model,
+                                      GtkTreeIter  *iter,
+                                      gpointer      user_data);
 
 GtkListStore *
 gpk_packages_list_store_new (void);
