@@ -98,7 +98,7 @@ gpk_third_party_installer_success (GpkThirdPartyAppInstallerAppPrivate *priv, gb
 		if (name)
 			title = g_strdup_printf (_("“%s” is already installed"), name);
 		else
-			title = g_strdup (_("This app is already installed."));
+			title = g_strdup (_("This app is already installed"));
 	}
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "image_badge"));

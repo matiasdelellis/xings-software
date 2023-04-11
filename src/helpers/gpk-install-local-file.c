@@ -139,7 +139,7 @@ main (int argc, char *argv[])
 		goto out;
 	}
 
-	notification = notify_notification_new (_("Software Intalled"),
+	notification = notify_notification_new (_("Software Installed"),
 	                                        _("The requested software has been installed"),
 	                                        "system-software-install");
 

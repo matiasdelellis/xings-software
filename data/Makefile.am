@@ -63,6 +63,7 @@ DISTCLEANFILES =					\
 	xings-software-preferences.desktop		\
 	xings-software-update.desktop			\
 	xings-software-service.desktop			\
+	xings-third-parties-installer.desktop		\
 	org.xings.PackageKit.service		\
 	$(NULL)
 

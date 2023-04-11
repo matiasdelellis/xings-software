@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.or\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-15 12:13-0300\n"
+"POT-Creation-Date: 2023-04-11 20:47-0300\n"
 "PO-Revision-Date: 2013-05-09 23:43+0530\n"
 "Last-Translator: Manoj Kumar Giri <mgiri@redhat.com>\n"
 "Language-Team: Oriya <oriya-it@googlegroups.com>\n"
@@ -26,15 +26,16 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:4
-#: ../src/software/gpk-application.c:238 ../src/software/gpk-application.c:1493
-#: ../src/software/gpk-application.c:1735
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
+#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../src/software/gpk-application.c:1869
+#: ../src/software/gpk-application.c:1948
 msgid "Software"
 msgstr "ସଫ୍ଟୱେର"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1501
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1613
 msgid "Add or remove software installed on the system"
 msgstr "ତନ୍ତ୍ରରେ ସ୍ଥାପିତ ସଫ୍ଟୱେରରେ ଯୋଗକରନ୍ତୁ କିମ୍ବା କାଢ଼ି ଦିଅନ୍ତୁ"
 
@@ -64,7 +65,7 @@ msgid "Software Update"
 msgstr "ସଫ୍ଟୱେର ଅଦ୍ୟତନ"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:6 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "ତନ୍ତ୍ରରେ ସ୍ଥାପନ କରାଯାଇଥିବା ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 
@@ -81,6 +82,15 @@ msgid ""
 "native package management framework."
 msgstr ""
 
+#: ../data/categories/accesories.directory.in.h:1
+msgid "Accessories"
+msgstr "ସହାୟକ ସାମଗ୍ରୀ"
+
+#: ../data/categories/accesories.directory.in.h:2
+#, fuzzy
+msgid "Desktop accessories"
+msgstr "ସହାୟକ ସାମଗ୍ରୀ"
+
 #: ../data/categories/development.directory.in.h:1
 #, fuzzy
 msgid "Development"
@@ -91,8 +101,7 @@ msgstr "ବିକାଶ (_D)"
 msgid "Software development tools"
 msgstr "ସଫ୍ଟୱେର୍‌ ତ୍ରୁଟି ବିବରଣୀ"
 
-#. TRANSLATORS: The group type
-#: ../data/categories/education.directory.in.h:1 ../src/common/gpk-enum.c:1497
+#: ../data/categories/education.directory.in.h:1
 msgid "Education"
 msgstr "ଶିକ୍ଷା"
 
@@ -101,8 +110,7 @@ msgstr "ଶିକ୍ଷା"
 msgid "Educational software"
 msgstr "%s ଅତିରିକ୍ତ ସଫ୍ଟୱେର ଆବଶ୍ୟକ କରିଥାଏ"
 
-#. TRANSLATORS: The group type
-#: ../data/categories/games.directory.in.h:1 ../src/common/gpk-enum.c:1501
+#: ../data/categories/games.directory.in.h:1
 msgid "Games"
 msgstr "ଖେଳ"
 
@@ -110,8 +118,7 @@ msgstr "ଖେଳ"
 msgid "Games, puzzles, and other fun software"
 msgstr ""
 
-#. TRANSLATORS: The group type
-#: ../data/categories/graphics.directory.in.h:1 ../src/common/gpk-enum.c:1505
+#: ../data/categories/graphics.directory.in.h:1
 msgid "Graphics"
 msgstr "ଆଲେଖୀ"
 
@@ -119,8 +126,7 @@ msgstr "ଆଲେଖୀ"
 msgid "Graphics creation and manipulation applications"
 msgstr ""
 
-#. TRANSLATORS: The group type
-#: ../data/categories/multimedia.directory.in.h:1 ../src/common/gpk-enum.c:1525
+#: ../data/categories/multimedia.directory.in.h:1
 msgid "Multimedia"
 msgstr "ବହୁମାଧ୍ଯମ"
 
@@ -128,8 +134,7 @@ msgstr "ବହୁମାଧ୍ଯମ"
 msgid "Audio and video players and editors"
 msgstr ""
 
-#. TRANSLATORS: The group type
-#: ../data/categories/network.directory.in.h:1 ../src/common/gpk-enum.c:1509
+#: ../data/categories/network.directory.in.h:1
 msgid "Internet"
 msgstr "ଇଣ୍ଟରନେଟ"
 
@@ -137,8 +142,7 @@ msgstr "ଇଣ୍ଟରନେଟ"
 msgid "Applications for Internet access"
 msgstr ""
 
-#. TRANSLATORS: The group type
-#: ../data/categories/office.directory.in.h:1 ../src/common/gpk-enum.c:1513
+#: ../data/categories/office.directory.in.h:1
 msgid "Office"
 msgstr "କାର୍ଯ୍ୟାଳୟ"
 
@@ -146,8 +150,7 @@ msgstr "କାର୍ଯ୍ୟାଳୟ"
 msgid "Office and productivity applications"
 msgstr ""
 
-#. TRANSLATORS: The group type
-#: ../data/categories/science.directory.in.h:1 ../src/common/gpk-enum.c:1601
+#: ../data/categories/science.directory.in.h:1
 msgid "Science"
 msgstr "ବିଜ୍ଞାନ"
 
@@ -173,26 +176,11 @@ msgid ""
 "Store;"
 msgstr "ଅଦ୍ୟତନ;ଉନ୍ନୟନ;ଉତ୍ସ;ରେପୋଜିଟୋରୀ;ପସନ୍ଦ;ସ୍ଥାପନ;ସଂରକ୍ଷଣ ସ୍ଥାନ;"
 
-#: ../data/gpk-application.ui.h:1
-#, fuzzy
-msgid "Show categories"
-msgstr "ବିଭାଗଗୁଡ଼ିକୁ ପାଇଛି"
-
-#: ../data/gpk-application.ui.h:2
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
-
-#: ../data/gpk-application.ui.h:3 ../src/software/gpk-application.c:1675
-#, fuzzy
-msgid "Categories"
-msgstr "ବିଭାଗଗୁଡ଼ିକୁ ପାଇଛି"
-
-#: ../data/gpk-application.ui.h:5 ../src/software/gpk-application.c:241
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
 msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:4
 msgid "Open"
 msgstr ""
 
@@ -202,53 +190,68 @@ msgstr ""
 #. TRANSLATORS: button: install a font
 #. TRANSLATORS: button: install Plasma services
 #. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:8 ../src/common/gpk-task.c:396
+#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
 #: ../src/packagekit-service/gpk-dbus-task.c:693
 #: ../src/packagekit-service/gpk-dbus-task.c:1238
 #: ../src/packagekit-service/gpk-dbus-task.c:1461
 #: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2127
-#: ../src/packagekit-service/gpk-dbus-task.c:2467
-#: ../src/packagekit-service/gpk-dbus-task.c:2701
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
 msgid "Install"
 msgstr "ସ୍ଥାପନକରନ୍ତୁ"
 
 #. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:9 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2991
+#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2972
 msgid "Remove"
 msgstr "କାଢ଼ନ୍ତୁ"
 
-#: ../data/gpk-application.ui.h:10
+#: ../data/gpk-application.ui.h:7
 msgid "Homepage"
 msgstr "ମୂଳସ୍ଥାନ ପୃଷ୍ଠା"
 
-#: ../data/gpk-application.ui.h:11
+#: ../data/gpk-application.ui.h:8
 msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:12
+#: ../data/gpk-application.ui.h:9
 msgid "Report"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:13
+#: ../data/gpk-application.ui.h:10
 #, fuzzy
 msgid "Translate"
 msgstr "କାରବାର ତ୍ରୁଟି"
 
-#: ../data/gpk-application.ui.h:14
+#: ../data/gpk-application.ui.h:11
 msgid "License"
 msgstr "ଅନୁମତି ପତ୍ର"
 
-#: ../data/gpk-application.ui.h:15 ../src/software/gpk-application.c:1105
+#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
 #, fuzzy
 msgid "Distribution package"
 msgstr "ବଣ୍ଟନ ଉନ୍ନୟନ ସାଧନ"
 
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:16 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "ଉତ୍ସ"
+
+#: ../data/gpk-application.ui.h:14
+#, fuzzy
+msgid "Show categories"
+msgstr "ବିଭାଗଗୁଡ଼ିକୁ ପାଇଛି"
+
+#: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
+
+#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "ବିଭାଗଗୁଡ଼ିକୁ ପାଇଛି"
 
 #: ../data/gpk-application.ui.h:17
 #, fuzzy
@@ -445,6 +448,17 @@ msgstr "ସଫ୍ଟୱେର ଉତ୍ସ"
 #: ../data/xings-software-service.desktop.in.h:2
 #: ../src/software-service/gpk-updates-service.c:78
 msgid "Keeps repositories up-to-date and checks for software updates"
+msgstr ""
+
+#. TRANSLATORS: program name: application to install a package to provide a file
+#: ../data/xings-third-parties-installer.desktop.in.h:1
+#: ../src/third-parties/gpk-third-parties.c:221
+#, fuzzy
+msgid "Third Party Software Installer"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
+
+#: ../data/xings-third-parties-installer.desktop.in.h:2
+msgid "Install apps downloaded from the Internet"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
@@ -649,33 +663,33 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: a 32 bit package
-#: ../src/common/gpk-common.c:200
+#: ../src/common/gpk-common.c:196
 msgid "32-bit"
 msgstr "32-ବିଟ"
 
 #. TRANSLATORS: a 64 bit package
-#: ../src/common/gpk-common.c:207
+#: ../src/common/gpk-common.c:203
 msgid "64-bit"
 msgstr "64-ବିଟ"
 
 #. TRANSLATORS: these tools cannot run as root (unknown name)
-#: ../src/common/gpk-common.c:381
+#: ../src/common/gpk-common.c:377
 msgid "This application is running as a privileged user"
 msgstr "ଏହି ପ୍ରୟୋଗଟି ଗୋଟିଏ ବିଶେଷାଧିକାରପ୍ରାପ୍ତ ଚାଳକ ଭାବରେ ଚାଲୁଅଛି"
 
 #. TRANSLATORS: cannot run as root user, and we display the application name
-#: ../src/common/gpk-common.c:384
+#: ../src/common/gpk-common.c:380
 #, c-format
 msgid "%s is running as a privileged user"
 msgstr "%s ଟି ଗୋଟିଏ ବିଶେଷାଧିକାରପ୍ରାପ୍ତ ଚାଳକ ଭାବରେ ଚାଲୁଅଛି"
 
 #. TRANSLATORS: tell the user off
-#: ../src/common/gpk-common.c:387
+#: ../src/common/gpk-common.c:383
 msgid "Package management applications are security sensitive."
 msgstr "ପ୍ୟାକେଜ ପରିଚାଳନା ପ୍ରୟୋଗଗୁଡ଼ିକ ସୁରକ୍ଷା ସଚେତନ।"
 
 #. TRANSLATORS: and explain why
-#: ../src/common/gpk-common.c:389
+#: ../src/common/gpk-common.c:385
 msgid ""
 "Running graphical applications as a privileged user should be avoided for "
 "security reasons."
@@ -684,18 +698,18 @@ msgstr ""
 "କରିବା ଉଚିତ."
 
 #. TRANSLATORS: button: allow the user to run this, even when insecure
-#: ../src/common/gpk-common.c:395
+#: ../src/common/gpk-common.c:391
 msgid "Continue _Anyway"
 msgstr "ଯେକୌଣସି ପ୍ରକାରେ ଅଗ୍ରସର କରନ୍ତୁ (_A)"
 
 #. TRANSLATORS: The actions has just literally happened
-#: ../src/common/gpk-common.c:433 ../src/common/gpk-common.c:483
+#: ../src/common/gpk-common.c:429
 #, c-format
 msgid "Now"
 msgstr "ବର୍ତ୍ତମାନ"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:443 ../src/common/gpk-common.c:493
+#: ../src/common/gpk-common.c:439
 #, fuzzy, c-format
 msgid "%u second"
 msgid_plural "%u seconds"
@@ -703,7 +717,7 @@ msgstr[0] "%i ସେକଣ୍ଡ"
 msgstr[1] "%i ସେକଣ୍ଡ"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:453 ../src/common/gpk-common.c:506
+#: ../src/common/gpk-common.c:449
 #, fuzzy, c-format
 msgid "%u minute"
 msgid_plural "%u minutes"
@@ -711,82 +725,55 @@ msgstr[0] "%i ମିନଟ"
 msgstr[1] "%i ମିନଟ"
 
 #. TRANSLATORS: time
-#: ../src/common/gpk-common.c:459 ../src/common/gpk-common.c:525
+#: ../src/common/gpk-common.c:455
 #, fuzzy, c-format
 msgid "%u hour"
 msgid_plural "%u hours"
 msgstr[0] "%i ଘଣ୍ଟା"
 msgstr[1] "%i ଘଣ୍ଟା"
 
-#. TRANSLATOR: "%i %s %i %s" are "%i minutes %i seconds"
-#. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
-#. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: ../src/common/gpk-common.c:512 ../src/common/gpk-common.c:531
-#, fuzzy, c-format
-msgid "%u %s %u %s"
-msgstr "%i %s %i %s"
-
-#: ../src/common/gpk-common.c:513 ../src/common/gpk-common.c:533
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "ମିନଟ"
-msgstr[1] "ମିନଟ"
-
-#: ../src/common/gpk-common.c:514
-msgid "second"
-msgid_plural "seconds"
-msgstr[0] "ସେକଣ୍ଡ"
-msgstr[1] "ସେକଣ୍ଡ"
-
-#: ../src/common/gpk-common.c:532
-msgid "hour"
-msgid_plural "hours"
-msgstr[0] "ଘଣ୍ଟା"
-msgstr[1] "ଘଣ୍ଟା"
-
 #. TRANSLATORS: something happened less than 5 minutes ago
-#: ../src/common/gpk-common.c:562
+#: ../src/common/gpk-common.c:483
 #, fuzzy
 msgid "A moment ago"
 msgstr "%i ମିନଟ"
 
-#: ../src/common/gpk-common.c:564
+#: ../src/common/gpk-common.c:485
 #, fuzzy, c-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
 msgstr[0] "%i ମିନଟ"
 msgstr[1] "%i ମିନଟ"
 
-#: ../src/common/gpk-common.c:569
+#: ../src/common/gpk-common.c:490
 #, fuzzy, c-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
 msgstr[0] "%i ଘଣ୍ଟା"
 msgstr[1] "%i ଘଣ୍ଟା"
 
-#: ../src/common/gpk-common.c:574
+#: ../src/common/gpk-common.c:495
 #, c-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:579
+#: ../src/common/gpk-common.c:500
 #, c-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:584
+#: ../src/common/gpk-common.c:505
 #, c-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/common/gpk-common.c:589
+#: ../src/common/gpk-common.c:510
 #, c-format
 msgid "%d year ago"
 msgid_plural "%d years ago"
@@ -794,25 +781,25 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Translators: a list of two things
-#: ../src/common/gpk-common.c:616
+#: ../src/common/gpk-common.c:537
 #, c-format
 msgid "%s and %s"
 msgstr "%s ଏବଂ %s"
 
 #. Translators: a list of three things
-#: ../src/common/gpk-common.c:620
+#: ../src/common/gpk-common.c:541
 #, c-format
 msgid "%s, %s and %s"
 msgstr "%s, %s ଏବଂ %s"
 
 #. Translators: a list of four things
-#: ../src/common/gpk-common.c:624
+#: ../src/common/gpk-common.c:545
 #, c-format
 msgid "%s, %s, %s and %s"
 msgstr "%s, %s, %s ଏବଂ %s"
 
 #. Translators: a list of five things
-#: ../src/common/gpk-common.c:629
+#: ../src/common/gpk-common.c:550
 #, c-format
 msgid "%s, %s, %s, %s and %s"
 msgstr "%s, %s, %s, %s ଏବଂ %s"
@@ -838,7 +825,7 @@ msgstr "ଏକାଧିକ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
-#: ../src/software/gpk-application.c:1020
+#: ../src/software/gpk-application.c:1117
 msgid "Name"
 msgstr "ନାମ"
 
@@ -852,311 +839,311 @@ msgid "Do not show this again"
 msgstr "ପୁଣିଥରେ ଏହାକୁ ଦର୍ଶାନ୍ତୁ ନାହିଁ"
 
 #. TRANSLATORS: this is compact disk (CD) media
-#: ../src/common/gpk-enum.c:218
+#: ../src/common/gpk-enum.c:162
 msgid "CD"
 msgstr "CD"
 
 #. TRANSLATORS: this is digital versatile disk (DVD) media
-#: ../src/common/gpk-enum.c:222
+#: ../src/common/gpk-enum.c:166
 msgid "DVD"
 msgstr "DVD"
 
 #. TRANSLATORS: this is either CD or DVD media
-#: ../src/common/gpk-enum.c:226
+#: ../src/common/gpk-enum.c:170
 msgid "disc"
 msgstr "ଡିସ୍କ"
 
 #. TRANSLATORS: this is generic media of unknown type that we will install from
-#: ../src/common/gpk-enum.c:230
+#: ../src/common/gpk-enum.c:174
 msgid "media"
 msgstr "ମେଡିଆ"
 
-#: ../src/common/gpk-enum.c:247
+#: ../src/common/gpk-enum.c:191
 msgid "Failed with unknown error code"
 msgstr "ଅଜଣା ତ୍ରୁଟି ସଂକେତ ହେତୁ ବିଫଳ ହେଲା"
 
-#: ../src/common/gpk-enum.c:250
+#: ../src/common/gpk-enum.c:194
 msgid "No network connection available"
 msgstr "କୌଣସି ନେଟୱର୍କ ସଂଯୋଗ ଉପଲବ୍ଧ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:253
+#: ../src/common/gpk-enum.c:197
 msgid "No package cache is available."
 msgstr "କୌଣସି ପ୍ୟାକେଜ କ୍ୟାଶେ ଉପଲବ୍ଧ ନାହିଁ."
 
-#: ../src/common/gpk-enum.c:256
+#: ../src/common/gpk-enum.c:200
 msgid "Out of memory"
 msgstr "ସ୍ମୃତିସ୍ଥାନର ଅଭାବ"
 
-#: ../src/common/gpk-enum.c:259
+#: ../src/common/gpk-enum.c:203
 msgid "Failed to create a thread"
 msgstr "ଗୋଟିଏ ସୂତ୍ର ନିର୍ମାଣରେ ବିଫଳ"
 
-#: ../src/common/gpk-enum.c:262
+#: ../src/common/gpk-enum.c:206
 msgid "Not supported by this backend"
 msgstr "ଏହି ପୃଷ୍ଠଭୂମି ଦ୍ୱାରା ସମର୍ଥିତ ନୁହଁ"
 
-#: ../src/common/gpk-enum.c:265
+#: ../src/common/gpk-enum.c:209
 msgid "An internal system error has occurred"
 msgstr "ଗୋଟିଏ ଆଭ୍ୟନ୍ତରୀଣ ତନ୍ତ୍ର ତ୍ରୁଟି ଘଟିଅଛି"
 
-#: ../src/common/gpk-enum.c:268
+#: ../src/common/gpk-enum.c:212
 msgid "A security signature is not present"
 msgstr "ଗୋଟିଏ ସୁରକ୍ଷା ହସ୍ତାକ୍ଷର ଉପସ୍ଥିତ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:271
+#: ../src/common/gpk-enum.c:215
 msgid "The package is not installed"
 msgstr "ପ୍ୟାକେଜ ସ୍ଥାପିତ ହୋଇନାହିଁ"
 
-#: ../src/common/gpk-enum.c:274
+#: ../src/common/gpk-enum.c:218
 msgid "The package was not found"
 msgstr "ପ୍ୟାକେଜ ମିଳୁନାହିଁ"
 
-#: ../src/common/gpk-enum.c:277 ../src/packagekit-service/gpk-dbus-task.c:1122
+#: ../src/common/gpk-enum.c:221 ../src/packagekit-service/gpk-dbus-task.c:1122
 #, fuzzy
 msgid "The package is already installed"
 msgid_plural "The packages are already installed"
 msgstr[0] "ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ"
 msgstr[1] "ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ"
 
-#: ../src/common/gpk-enum.c:280
+#: ../src/common/gpk-enum.c:224
 msgid "The package download failed"
 msgstr "ପ୍ୟାକେଜ ଆହରଣ ବିଫଳ"
 
-#: ../src/common/gpk-enum.c:283
+#: ../src/common/gpk-enum.c:227
 msgid "The group was not found"
 msgstr "ଶ୍ରେଣୀଟି ମିଳୁନାହିଁ"
 
-#: ../src/common/gpk-enum.c:286
+#: ../src/common/gpk-enum.c:230
 msgid "The group list was invalid"
 msgstr "ଶ୍ରେଣୀ ତାଲିକାଟି ଅବୈଧ ଥିଲା"
 
-#: ../src/common/gpk-enum.c:289
+#: ../src/common/gpk-enum.c:233
 msgid "Dependency resolution failed"
 msgstr "ନିର୍ଭରତା ବିଭେଦନ ବିଫଳ"
 
-#: ../src/common/gpk-enum.c:292
+#: ../src/common/gpk-enum.c:236
 msgid "Search filter was invalid"
 msgstr "ସନ୍ଧାନ ଛାଣକଟି ଅବୈଧ"
 
-#: ../src/common/gpk-enum.c:295
+#: ../src/common/gpk-enum.c:239
 msgid "The package identifier was not well formed"
 msgstr "ପ୍ୟାକେଜ ପରିଚାୟକଟି ପ୍ରସ୍ତୁତ ନଥିଲା"
 
-#: ../src/common/gpk-enum.c:298
+#: ../src/common/gpk-enum.c:242
 msgid "Transaction error"
 msgstr "କାରବାର ତ୍ରୁଟି"
 
-#: ../src/common/gpk-enum.c:301
+#: ../src/common/gpk-enum.c:245
 msgid "Repository name was not found"
 msgstr "ସଂଗ୍ରହାଳୟ ନାମଟି ମିଳୁନାହିଁ"
 
-#: ../src/common/gpk-enum.c:304
+#: ../src/common/gpk-enum.c:248
 msgid "Could not remove a protected system package"
 msgstr "ସୁରକ୍ଷିତ ତନ୍ତ୍ର ପ୍ୟାକେଜକୁ କାଢ଼ିପାରିବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:307
+#: ../src/common/gpk-enum.c:251
 msgid "The action was canceled"
 msgstr "ଗୋଟିଏ କାର୍ଯ୍ୟ ବାତିଲ ହୋଇସାରିଛି"
 
-#: ../src/common/gpk-enum.c:310
+#: ../src/common/gpk-enum.c:254
 msgid "The action was forcibly canceled"
 msgstr "କାର୍ଯ୍ୟଟିକୁ ବଳପୂର୍ବକ ଭାବରେ ବାତିଲ କରା ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:313
+#: ../src/common/gpk-enum.c:257
 msgid "Reading the configuration file failed"
 msgstr "ବିନ୍ୟାସ ଫାଇଲକୁ ପଢ଼ିବାରେ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:316
+#: ../src/common/gpk-enum.c:260
 msgid "The action cannot be canceled"
 msgstr "କାର୍ଯ୍ୟଟିକୁ ବାତିଲ କରାଯାଇପାରିବ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:319
+#: ../src/common/gpk-enum.c:263
 msgid "Source packages cannot be installed"
 msgstr "ଉତ୍ସ ପ୍ୟାକେଜକୁ ସ୍ଥାପନ କରାଯାଇପାରିବ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:322
+#: ../src/common/gpk-enum.c:266
 msgid "The license agreement failed"
 msgstr "ଅନୁମତି ପ୍ରମାଣପତ୍ରଟି ବିଫଳ ହେଲା"
 
-#: ../src/common/gpk-enum.c:325
+#: ../src/common/gpk-enum.c:269
 msgid "Local file conflict between packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ମଧ୍ଯରେ ସ୍ଥାନୀୟ ଫାଇଲର ବିରୋଧ"
 
-#: ../src/common/gpk-enum.c:328
+#: ../src/common/gpk-enum.c:272
 msgid "Packages are not compatible"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ସୁସଂଗତ ନୁହଁ"
 
-#: ../src/common/gpk-enum.c:331
+#: ../src/common/gpk-enum.c:275
 #, fuzzy
 msgid "Problem connecting to a package source"
 msgstr "ଗୋଟିଏ ସଫ୍ଟୱେର ଉତ୍ସ ସହିତ ସଂଯୁକ୍ତ ହେବାରେ ସମସ୍ୟା"
 
-#: ../src/common/gpk-enum.c:334
+#: ../src/common/gpk-enum.c:278
 msgid "Failed to initialize"
 msgstr "ଆରମ୍ଭ କରିବାରେ ବିଫଳ"
 
-#: ../src/common/gpk-enum.c:337
+#: ../src/common/gpk-enum.c:281
 msgid "Failed to finalize"
 msgstr "ଅନ୍ତିମ ସମାଧାନ ଦେବାରେ ବିଫଳ"
 
-#: ../src/common/gpk-enum.c:340
+#: ../src/common/gpk-enum.c:284
 msgid "Cannot get lock"
 msgstr "ଚାବି ପାଇଲା ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:343
+#: ../src/common/gpk-enum.c:287
 msgid "No packages to update"
 msgstr "ଅଦ୍ୟତନ କରିବା ପାଇଁ କୌଣସି ପ୍ୟାକେଜ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:346
+#: ../src/common/gpk-enum.c:290
 msgid "Cannot write repository configuration"
 msgstr "ସଂଗ୍ରହାଳୟ ରୂପରେଖ ଲେଖିପାରିବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:349
+#: ../src/common/gpk-enum.c:293
 msgid "Local install failed"
 msgstr "ସ୍ଥାନୀୟ ସ୍ଥାପନ ବିଫଳ ହେଲା"
 
-#: ../src/common/gpk-enum.c:352
+#: ../src/common/gpk-enum.c:296
 msgid "Bad security signature"
 msgstr "ଖରାପ ସୁରକ୍ଷା ହସ୍ତାକ୍ଷର"
 
-#: ../src/common/gpk-enum.c:355
+#: ../src/common/gpk-enum.c:299
 msgid "Missing security signature"
 msgstr "ଅନୁପସ୍ଥିତ ସୁରକ୍ଷା ହସ୍ତାକ୍ଷର"
 
-#: ../src/common/gpk-enum.c:358
+#: ../src/common/gpk-enum.c:302
 msgid "Repository configuration invalid"
 msgstr "ସଂଗ୍ରହାଳୟ ରୂପରେଖଟି ଅବୈଧ ଅଟେ"
 
-#: ../src/common/gpk-enum.c:361
+#: ../src/common/gpk-enum.c:305
 msgid "Invalid package file"
 msgstr "ଅବୈଧ ପ୍ୟାକେଜ ଫାଇଲ"
 
-#: ../src/common/gpk-enum.c:364
+#: ../src/common/gpk-enum.c:308
 msgid "Package install blocked"
 msgstr "ପ୍ୟାକେଜ ସ୍ଥାପନା ଅଟକିଯାଇଛି"
 
-#: ../src/common/gpk-enum.c:367
+#: ../src/common/gpk-enum.c:311
 msgid "Package is corrupt"
 msgstr "ପ୍ୟାକେଜଟି ତ୍ରୁଟିଯୁକ୍ତ"
 
-#: ../src/common/gpk-enum.c:370
+#: ../src/common/gpk-enum.c:314
 msgid "All packages are already installed"
 msgstr "ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ ପୂର୍ବରୁ ସ୍ଥାପିତ"
 
-#: ../src/common/gpk-enum.c:373
+#: ../src/common/gpk-enum.c:317
 msgid "The specified file could not be found"
 msgstr "ଉଲ୍ଲିଖିତ ଫାଇଲଟି ମିଳୁନାହିଁ"
 
-#: ../src/common/gpk-enum.c:376
+#: ../src/common/gpk-enum.c:320
 msgid "No more mirrors are available"
 msgstr "କୌଣସି ପ୍ରତିଫଳକ ଉପଲବ୍ଧ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:379
+#: ../src/common/gpk-enum.c:323
 msgid "No distribution upgrade data is available"
 msgstr "କୌଣସି ବଣ୍ଟନ ଉନ୍ନୟନ ତଥ୍ୟ ଉପଲବ୍ଧ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:382
+#: ../src/common/gpk-enum.c:326
 msgid "Package is incompatible with this system"
 msgstr "ପ୍ୟାକେଜଟି ଏହି ତନ୍ତ୍ର ସହିତ ସୁସଂଗତ ନୁହଁ"
 
-#: ../src/common/gpk-enum.c:385
+#: ../src/common/gpk-enum.c:329
 msgid "No space is left on the disk"
 msgstr "ଡିସ୍କରେ କୌଣସି ଖାଲିସ୍ଥାନ ବଳିନାହିଁ"
 
 #. TRANSLATORS: this is the window title when a new CD or DVD is required
-#: ../src/common/gpk-enum.c:388 ../src/common/gpk-task.c:348
+#: ../src/common/gpk-enum.c:332 ../src/common/gpk-task.c:348
 msgid "A media change is required"
 msgstr "ଗୋଟିଏ ମେଡିଆ ପରିବର୍ତ୍ତନ ଆବଶ୍ୟକ"
 
-#: ../src/common/gpk-enum.c:391
+#: ../src/common/gpk-enum.c:335
 msgid "Authorization failed"
 msgstr "ବୈଧିକରଣ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:394
+#: ../src/common/gpk-enum.c:338
 msgid "Update not found"
 msgstr "ଅଦ୍ୟତନ ମିଳୁନାହିଁ"
 
-#: ../src/common/gpk-enum.c:397
+#: ../src/common/gpk-enum.c:341
 msgid "Cannot install from untrusted source"
 msgstr "ଅବିସ୍ୱସ୍ଥ ଉତ୍ସରୁ ସ୍ଥାପନ କରିପାରିବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:400
+#: ../src/common/gpk-enum.c:344
 msgid "Cannot update from untrusted source"
 msgstr "ଅବିସ୍ୱସ୍ଥ ଉତ୍ସରୁ ଅଦ୍ୟତନ କରିପାରିବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:403
+#: ../src/common/gpk-enum.c:347
 msgid "Cannot get the file list"
 msgstr "ଫାଇଲ ତାଲିକା ପାଇବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:406
+#: ../src/common/gpk-enum.c:350
 msgid "Cannot get package requires"
 msgstr "ଆବଶ୍ୟକ କରୁଥିବା ପ୍ୟାକେଜକୁ ପାଇବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:409
+#: ../src/common/gpk-enum.c:353
 msgid "Cannot disable source"
 msgstr "ଉତ୍ସକୁ ନିଷ୍କ୍ରିୟ କରିପାରିବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:412
+#: ../src/common/gpk-enum.c:356
 msgid "The download failed"
 msgstr "ଆହରଣ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:415
+#: ../src/common/gpk-enum.c:359
 msgid "Package failed to configure"
 msgstr "ପ୍ୟାକେଜ ବିନ୍ୟାସ କରିବାରେ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:418
+#: ../src/common/gpk-enum.c:362
 msgid "Package failed to build"
 msgstr "ପ୍ୟାକେଜ ନିର୍ମାଣ କରିବାରେ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:421
+#: ../src/common/gpk-enum.c:365
 msgid "Package failed to install"
 msgstr "ପ୍ୟାକେଜ ସ୍ଥାପନ କରିବାରେ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:424
+#: ../src/common/gpk-enum.c:368
 msgid "Package failed to be removed"
 msgstr "ପ୍ୟାକେଜ କଢ଼ାହେବାରେ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:427
+#: ../src/common/gpk-enum.c:371
 msgid "Update failed due to running process"
 msgstr "ଚାଲୁଥିବା ପଦ୍ଧତି ହେତୁ ଅଦ୍ୟତନ ବିଫଳ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:430
+#: ../src/common/gpk-enum.c:374
 msgid "The package database was changed"
 msgstr "ପ୍ୟାକେଜ ତଥ୍ୟାଧାର ପରିବର୍ତ୍ତିତ ହୋଇଛି"
 
-#: ../src/common/gpk-enum.c:433
+#: ../src/common/gpk-enum.c:377
 msgid "Virtual provide type is not supported"
 msgstr "ଆଭାସୀ ପ୍ରଦାନ ପ୍ରକାର ସହାୟତା ପ୍ରାପ୍ତ ନୁହଁ"
 
-#: ../src/common/gpk-enum.c:436
+#: ../src/common/gpk-enum.c:380
 msgid "Install root is invalid"
 msgstr "ସ୍ଥାପନ ରୁଟଟି ଅବୈଧ ଅଟେ"
 
-#: ../src/common/gpk-enum.c:439
+#: ../src/common/gpk-enum.c:383
 msgid "Cannot fetch install sources"
 msgstr "ସ୍ଥାପନ ଉତ୍ସକୁ ଆଣି ପାରିବେ ନାହିଁ"
 
-#: ../src/common/gpk-enum.c:442
+#: ../src/common/gpk-enum.c:386
 msgid "Rescheduled due to priority"
 msgstr "ଅଗ୍ରାଧିକାର ହେତୁ ପୁନଃଯୋଜନା କରାଯାଇଛି"
 
-#: ../src/common/gpk-enum.c:445
+#: ../src/common/gpk-enum.c:389
 msgid "Unfinished transaction"
 msgstr "ଅସମାପ୍ତ କାରବାର"
 
-#: ../src/common/gpk-enum.c:448
+#: ../src/common/gpk-enum.c:392
 msgid "Lock required"
 msgstr "ତାଲା ଆବଶ୍ଯକ"
 
-#: ../src/common/gpk-enum.c:452
+#: ../src/common/gpk-enum.c:395
 msgid "Source already set"
 msgstr ""
 
-#: ../src/common/gpk-enum.c:470
+#: ../src/common/gpk-enum.c:412
 msgid "Failed with unknown error code."
 msgstr "ଅଜଣା ତ୍ରୁଟି ସଂକେତ ସହିତ ବିଫଳ ହୋଇଛି।"
 
-#: ../src/common/gpk-enum.c:473
+#: ../src/common/gpk-enum.c:415
 msgid ""
 "There is no network connection available.\n"
 "Please check your connection settings and try again."
@@ -1164,7 +1151,7 @@ msgstr ""
 "ସେଠାରେ କୌଣସି ନେଟୱର୍କ ସଂଯୋଗ ଉପଲବ୍ଧ ନାହିଁ।\n"
 "ଦୟାକରି ଆପଣଙ୍କର ସଂଯୋଗ ବିନ୍ୟାସକୁ ଯାଞ୍ଚକରନ୍ତୁ ଏବଂ ପୁଣି ଚେଷ୍ଟାକରନ୍ତୁ।"
 
-#: ../src/common/gpk-enum.c:477
+#: ../src/common/gpk-enum.c:419
 msgid ""
 "The package list needs to be rebuilt.\n"
 "This should have been done by the backend automatically."
@@ -1172,7 +1159,7 @@ msgstr ""
 "ପ୍ୟାକେଜ ତାଲିକାକୁ ପୁନଃନିର୍ମାଣ କରିବା ଆବଶ୍ୟକ.\n"
 "ଏହାକୁ ପୃଷ୍ଠଭୂମି ଦ୍ୱାରା ସ୍ୱୟଂଚାଳିତ ଭାବରେ କରାଯାଇପାରିବ."
 
-#: ../src/common/gpk-enum.c:481
+#: ../src/common/gpk-enum.c:423
 msgid ""
 "The service that is responsible for handling user requests is out of "
 "memory.\n"
@@ -1181,11 +1168,11 @@ msgstr ""
 "ଚାଳକ ଅନୁରୋଧଗୁଡ଼ିକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ ଥିବା ସର୍ଭିସରେ ସ୍ମୃତିସ୍ଥାନର ଅଭାବ.\n"
 "ଦୟାକରି ଆପଣଙ୍କ କମ୍ପୁଟରକୁ ପୁନଃପ୍ରାରମ୍ଭ କରନ୍ତୁ."
 
-#: ../src/common/gpk-enum.c:485
+#: ../src/common/gpk-enum.c:427
 msgid "A thread could not be created to service the user request."
 msgstr "ଚାଳକ ଅନୁରୋଧକୁ ସର୍ଭିସ ଦେବା ପାଇଁ ସୂତ୍ର ନିର୍ମାଣ କରିହେବ ନାହିଁ."
 
-#: ../src/common/gpk-enum.c:488
+#: ../src/common/gpk-enum.c:430
 msgid ""
 "The action is not supported by this backend.\n"
 "Please report a bug in your distribution bug tracker as this should not have "
@@ -1194,7 +1181,7 @@ msgstr ""
 "ଏହି କାର୍ଯ୍ୟଟି ପୃଷ୍ଠଭୂମି ଦ୍ୱାରା ସମର୍ଥିତ ନୁହଁ।\n"
 "ଦୟାକରି ଆପଣଙ୍କର ବଣ୍ଟନ ତ୍ରୁଟି ଅନୁସରଣକୁ ତ୍ରୁଟି ଖବର କରନ୍ତୁ ଯେହେତୁ ଏହା ହେବା ଉଚିତ ନୁହଁ।"
 
-#: ../src/common/gpk-enum.c:492
+#: ../src/common/gpk-enum.c:434
 msgid ""
 "A problem that we were not expecting has occurred.\n"
 "Please report this bug in your distribution bug tracker with the error "
@@ -1203,7 +1190,7 @@ msgstr ""
 "ଆମେ ଆଶାକରୁନଥିବା ଗୋଟିଏ ସମସ୍ୟା ଘଟିଛି।\n"
 "ଦୟାକରି ଏହି ତ୍ରୁଟିକୁ ତ୍ରୁଟି ଅନୁସରଣରେ ତ୍ରୁଟି ବର୍ଣ୍ଣନା ସହିତ ଖବର କରନ୍ତୁ।"
 
-#: ../src/common/gpk-enum.c:496
+#: ../src/common/gpk-enum.c:438
 #, fuzzy
 msgid ""
 "A security trust relationship could not be made with package source.\n"
@@ -1212,23 +1199,23 @@ msgstr ""
 "ସଫ୍ଟୱେର ଉତ୍ସ ସହିତ ସୁରକ୍ଷା ବିଶ୍ୱସ୍ତ ସମ୍ପର୍କ ସ୍ଥାପନ କରିହେବ ନାହିଁ.\n"
 "ଦୟାକରି ଆପଣଙ୍କର ସୁରକ୍ଷା ବିନ୍ୟାସକୁ ଯାଞ୍ଚକରନ୍ତୁ."
 
-#: ../src/common/gpk-enum.c:500
+#: ../src/common/gpk-enum.c:442
 msgid ""
 "The package that is trying to be removed or updated is not already installed."
 msgstr "କଢ଼ାଯିବାକୁ କିମ୍ବା ଅଦ୍ୟତନ ହେବାକୁ ଚେଷ୍ଟାକରୁଥିବା ପ୍ୟାକେଜ ପୂର୍ବରୁ ସ୍ଥାପିତ ହୋଇନାହିଁ."
 
-#: ../src/common/gpk-enum.c:503
+#: ../src/common/gpk-enum.c:445
 #, fuzzy
 msgid ""
 "The package that is being modified was not found on your system or in any "
 "package source."
 msgstr "ପରିବର୍ତ୍ତିତ ହୋଇସାରିଥିବା ପ୍ୟାକେଜଟି ଆପଣଙ୍କ ତନ୍ତ୍ରରେ କିମ୍ବା କୌଣସି ସଫ୍ଟୱେର ଉତ୍ସରେ ମିଳୁନାହିଁ."
 
-#: ../src/common/gpk-enum.c:506
+#: ../src/common/gpk-enum.c:448
 msgid "The package that is trying to be installed is already installed."
 msgstr "ସ୍ଥାପନ ହେବାକୁ ଚେଷ୍ଟାକରୁଥିବା ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ."
 
-#: ../src/common/gpk-enum.c:509
+#: ../src/common/gpk-enum.c:451
 msgid ""
 "The package download failed.\n"
 "Please check your network connectivity."
@@ -1236,7 +1223,7 @@ msgstr ""
 "ପ୍ୟାକେଜ ଆହରଣ ବିଫଳ.\n"
 "ଦୟାକରି ଆପଣଙ୍କର ନେଟୱର୍କ ସଂଯୋଜକତାକୁ ଯାଞ୍ଚକରନ୍ତୁ."
 
-#: ../src/common/gpk-enum.c:513
+#: ../src/common/gpk-enum.c:455
 msgid ""
 "The group type was not found.\n"
 "Please check your group list and try again."
@@ -1244,7 +1231,7 @@ msgstr ""
 "ଶ୍ରେଣୀ ପ୍ରକାର ମିଳୁନାହିଁ.\n"
 "ଦୟାକରି ଆପଣଙ୍କର ଶ୍ରେଣୀ ତାଲିକା ଯାଞ୍ଚ କରନ୍ତୁ ଏବଂ ପୁଣି ଚେଷ୍ଟାକରନ୍ତୁ."
 
-#: ../src/common/gpk-enum.c:517
+#: ../src/common/gpk-enum.c:459
 msgid ""
 "The group list could not be loaded.\n"
 "Refreshing your cache may help, although this is normally a software source "
@@ -1254,7 +1241,7 @@ msgstr ""
 "ଆପଣଙ୍କର କ୍ୟାଶେକୁ ସତେଜ କଲେ କିଛି ସହାୟତା ମିଳିପାରେ, ଯଦିଚ ଏହା ସାଧାରଣତଃ ଗୋଟିଏ ସଫ୍ଟୱେର ଉତ୍ସ "
 "ତ୍ରୁଟି."
 
-#: ../src/common/gpk-enum.c:522
+#: ../src/common/gpk-enum.c:464
 msgid ""
 "A package could not be found that allows the action to complete.\n"
 "More information is available in the detailed report."
@@ -1262,11 +1249,11 @@ msgstr ""
 "ଏହି କାର୍ଯ୍ୟଟିକୁ ସମ୍ପନ୍ନ କରିବା ପାଇଁ ସହାୟକ ପ୍ୟାକେଜଟି ମିଳୁନାହିଁ।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:526
+#: ../src/common/gpk-enum.c:468
 msgid "The search filter was not correctly formed."
 msgstr "ସନ୍ଧାନ ଛାଣକଟି ସଠିକ ଭାବରେ ନିର୍ମିତ ନୁହଁ."
 
-#: ../src/common/gpk-enum.c:529
+#: ../src/common/gpk-enum.c:471
 msgid ""
 "The package identifier was not well formed when sent to the server.\n"
 "This normally indicates an internal error and should be reported."
@@ -1274,7 +1261,7 @@ msgstr ""
 "ସର୍ଭରକୁ ପଠାଇବା ସମୟରେ ପ୍ୟାକେଜ ପରିଚାୟକଟି ସୁନିର୍ମିତ ନୁହଁ.\n"
 "ଏହା ସାଧାରଣତଃ ଗୋଟିଏ ଆଭ୍ୟନ୍ତରୀଣ ତ୍ରୁଟିକୁ ଈଙ୍ଗିତ କରେ ଏବଂ ଏହାକୁ ଖବର କରାଯିବା ଉଚିତ."
 
-#: ../src/common/gpk-enum.c:533
+#: ../src/common/gpk-enum.c:475
 msgid ""
 "An unspecified transaction error has occurred.\n"
 "More information is available in the detailed report."
@@ -1282,7 +1269,7 @@ msgstr ""
 "ଗୋଟିଏ ଉଲ୍ଲେଖ ହୋଇନଥିବା ତ୍ରୁଟି ଘଟିଛି।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:537
+#: ../src/common/gpk-enum.c:479
 #, fuzzy
 msgid ""
 "The remote package source name was not found.\n"
@@ -1291,15 +1278,15 @@ msgstr ""
 "ସୁଦୁର ସଫ୍ଟୱେର ଉତ୍ସ ନାମଟି ମିଳୁନାହିଁ।\n"
 "ଆପଣଙ୍କୁ ସଫ୍ଟୱେର ଉତ୍ସରେ ଗୋଟିଏ ବସ୍ତୁ ସକ୍ରିୟ କରିବାକୁ ହେବ।"
 
-#: ../src/common/gpk-enum.c:541
+#: ../src/common/gpk-enum.c:483
 msgid "Removing a protected system package is not allowed."
 msgstr "ଗୋଟିଏ ସୁରକ୍ଷିତ ତନ୍ତ୍ର ପ୍ୟାକେଜ ଅନୁମୋଦିତ ନୁହଁ."
 
-#: ../src/common/gpk-enum.c:544
+#: ../src/common/gpk-enum.c:486
 msgid "The action was canceled successfully and no packages were changed."
 msgstr "କାର୍ଯ୍ୟଟି ସଫଳତାର ସହିତ ବାତିଲ ହେଲା ଏବଂ କୌଣସି ପ୍ୟାକେଜ ପରିବର୍ତ୍ତନ ହୋଇନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:547
+#: ../src/common/gpk-enum.c:489
 msgid ""
 "The action was canceled successfully and no packages were changed.\n"
 "The backend did not exit cleanly."
@@ -1307,7 +1294,7 @@ msgstr ""
 "କାର୍ଯ୍ୟଟି ସଫଳତାର ସହିତ ବାତିଲ ହେଲା ଏବଂ କୌଣସି ପ୍ୟାକେଜ ପରିବର୍ତ୍ତନ ହୋଇନାହିଁ।\n"
 "ପୃଷ୍ଠଭୂମିଟି ନିର୍ମଳ ଭାବରେ ପ୍ରସ୍ଥାନ କରିନଥିଲା।"
 
-#: ../src/common/gpk-enum.c:551
+#: ../src/common/gpk-enum.c:493
 msgid ""
 "The native package configuration file could not be opened.\n"
 "Please make sure configuration is valid."
@@ -1315,11 +1302,11 @@ msgstr ""
 "ମୂଳ ପ୍ୟାକେଜ ବିନ୍ୟାସ ଫାଇଲକୁ ଖୋଲାଯାଇପାରିବ ନାହିଁ.\n"
 "ଦୟାକରି ନିଶ୍ଚିତ ହୁଅନ୍ତୁ ଯେ ବିନ୍ୟାସଟି ବୈଧ ଅଟେ."
 
-#: ../src/common/gpk-enum.c:555
+#: ../src/common/gpk-enum.c:497
 msgid "The action cannot be canceled at this time."
 msgstr "ଏହି ସମୟରେ କାର୍ଯ୍ୟଟିକୁ ବାତିଲ କରିବା ସୁରକ୍ଷିତ ନୁହଁ।"
 
-#: ../src/common/gpk-enum.c:558
+#: ../src/common/gpk-enum.c:500
 msgid ""
 "Source packages are not normally installed this way.\n"
 "Check the extension of the file you are trying to install."
@@ -1327,7 +1314,7 @@ msgstr ""
 "ଉତ୍ସ ପ୍ୟାକେଜଗୁଡ଼ିକୁ ସାଧାରଣତଃ ଏହି ପ୍ରକାର ସ୍ଥାପନ କରାଯାଏ ନାହିଁ.\n"
 "ଆପଣ ସ୍ଥାପନ କରିବାକୁ ଚେଷ୍ଟାକରୁଥିବା ଫାଇଲ ଅନୁଲଗ୍ନକୁ ଯାଞ୍ଚକରନ୍ତୁ."
 
-#: ../src/common/gpk-enum.c:562
+#: ../src/common/gpk-enum.c:504
 msgid ""
 "The license agreement was not agreed to.\n"
 "To use this software you have to accept the license."
@@ -1335,7 +1322,7 @@ msgstr ""
 "ସହମତି ପ୍ରମାଣପତ୍ରଟି ସହମତି ପାଇନଥିଲା.\n"
 "ଏହି ସଫ୍ଟୱେରକୁ ବ୍ୟବହାର କରିବା ପାଇଁ ଆପଣଙ୍କୁ ଏହି ଅନୁମତିପତ୍ରକୁ ଗ୍ରହଣ କରିବାକୁ ପଡ଼ିବ."
 
-#: ../src/common/gpk-enum.c:566
+#: ../src/common/gpk-enum.c:508
 #, fuzzy
 msgid ""
 "Two packages provide the same file.\n"
@@ -1344,7 +1331,7 @@ msgstr ""
 "ଦୁଇଟି ପ୍ୟାକେଜ ସମାନ ଫାଇଲ ପ୍ରଦାନ କରେ.\n"
 "ଏହା ସାଧାରଣତଃ ବିଭିନ୍ନ ପ୍ରକାର ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକର ମିଶ୍ରିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ଯୋଗୁଁ ହୋଇଥାଏ."
 
-#: ../src/common/gpk-enum.c:570
+#: ../src/common/gpk-enum.c:512
 #, fuzzy
 msgid ""
 "Multiple packages exist that are not compatible with each other.\n"
@@ -1353,7 +1340,7 @@ msgstr ""
 "ଏକାଧିକ ପ୍ୟାକେଜ ଅବସ୍ଥିତ ଯାହାକି ସେମାନଙ୍କ ମଧ୍ଯରେ ସୁସଙ୍ଗତ ନୁହଁନ୍ତି.\n"
 "ଏହା ସାଧାରଣତଃ ବିଭନ୍ନ ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକରୁ ମିଶ୍ରିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ଯୋଗୁଁ ହୋଇଥାଏ."
 
-#: ../src/common/gpk-enum.c:574
+#: ../src/common/gpk-enum.c:516
 #, fuzzy
 msgid ""
 "There was a (possibly temporary) problem connecting to a package source.\n"
@@ -1362,7 +1349,7 @@ msgstr ""
 "ସଫ୍ଟୱେର ଉତ୍ସ ସହିତ ସଂଯୁକ୍ତ ଗୋଟିଏ ସମସ୍ୟା ଅଛି (ସମ୍ଭବତଃ ଅସ୍ଥାୟୀ)\n"
 "ପରବର୍ତ୍ତୀ ବିବରଣୀ ପାଇଁ ଦୟାକରି ବିସ୍ତୃତ ତ୍ରୁଟିକୁ ଯାଞ୍ଚକରନ୍ତୁ।"
 
-#: ../src/common/gpk-enum.c:578
+#: ../src/common/gpk-enum.c:520
 msgid ""
 "Failed to initialize packaging backend.\n"
 "This may occur if other packaging tools are being used simultaneously."
@@ -1370,7 +1357,7 @@ msgstr ""
 "ପ୍ୟାକେଜିଙ୍ଗ ପୃଷ୍ଠଭୂମିକୁ ଆରମ୍ଭ କରିବାରେ ବିଫଳ.\n"
 "ଏହା ଘଟିପାରେ ଯଦି ଅନ୍ୟାନ୍ୟ ପ୍ୟାକେଜିଙ୍ଗ ସାଧନଗୁଡ଼ିକ ଏକସଙ୍ଗରେ ବ୍ୟବହୃତ ହୋଇଥାଏ."
 
-#: ../src/common/gpk-enum.c:582
+#: ../src/common/gpk-enum.c:524
 msgid ""
 "Failed to close down the backend instance.\n"
 "This error can normally be ignored."
@@ -1378,7 +1365,7 @@ msgstr ""
 "ପୃଷ୍ଠଭୂମି ଦୃଷ୍ଟାନ୍ତକୁ ବନ୍ଦକରିବାରେ ବିଫଳ.\n"
 "ଏହି ତ୍ରୁଟିକୁ ସାଧାରଣତଃ ଅଗ୍ରାହ୍ୟ କରାଯାଇପାରେ."
 
-#: ../src/common/gpk-enum.c:586
+#: ../src/common/gpk-enum.c:528
 msgid ""
 "Cannot get the exclusive lock on the packaging backend.\n"
 "Please close any other legacy packaging tools that may be open."
@@ -1386,15 +1373,15 @@ msgstr ""
 "ପ୍ୟାକେଜିଙ୍ଗ ପୃଷ୍ଠଭୂମିରେ ଅନନ୍ୟ ତାଲା ପାଇବ ନାହିଁ.\n"
 "ଦୟାକରି ଅନ୍ୟକୌଣସି ପୁରୁଣା ପ୍ୟାକେଜିଙ୍ଗ ସାଧନଗୁଡ଼ିକୁ ବନ୍ଦକରନ୍ତୁ ଯାହାକି ଖୋଲାଥାଇପାରେ."
 
-#: ../src/common/gpk-enum.c:590
+#: ../src/common/gpk-enum.c:532
 msgid "None of the selected packages could be updated."
 msgstr "ବଚ୍ଛିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ମଧ୍ୟରୁ କାହାକୁ ମଧ୍ଯ ଅଦ୍ୟତନ କରାଯାଇପାରିବ ନାହିଁ."
 
-#: ../src/common/gpk-enum.c:593
+#: ../src/common/gpk-enum.c:535
 msgid "The repository configuration could not be modified."
 msgstr "ସଂଗ୍ରହାଳୟ ରୂପରେଖକୁ ପରିବର୍ତ୍ତନ କରାଯାଇପାରିବ ନାହିଁ."
 
-#: ../src/common/gpk-enum.c:596
+#: ../src/common/gpk-enum.c:538
 msgid ""
 "Installing the local file failed.\n"
 "More information is available in the detailed report."
@@ -1402,11 +1389,11 @@ msgstr ""
 "ସ୍ଥାନୀୟ ଫାଇଲକୁ ସ୍ଥାପନ କରିବାରେ ବିଫଳ.\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ."
 
-#: ../src/common/gpk-enum.c:600
+#: ../src/common/gpk-enum.c:542
 msgid "The package security signature could not be verified."
 msgstr "ପ୍ୟାକେଜ ସୁରକ୍ଷା ହସ୍ତାକ୍ଷରକୁ ଯାଞ୍ଚକରାଯାଇପାରିଲା ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:603
+#: ../src/common/gpk-enum.c:545
 msgid ""
 "The package security signature is missing and this package is untrusted.\n"
 "This package was not signed when created."
@@ -1414,11 +1401,11 @@ msgstr ""
 "ପ୍ୟାକେଜ ସୁରକ୍ଷା ହସ୍ତାକ୍ଷର ନାହିଁ ଏବଂ ଏହି ପ୍ୟାକେଜଟି ଅବିଶ୍ୱସ୍ତ।\n"
 "ଏହି ପ୍ୟକେଜଟି ସୃଷ୍ଟି ହେବା ସମୟରେ ହସ୍ତାକ୍ଷର ପ୍ରାପ୍ତ ହୋଇନଥିଲା।"
 
-#: ../src/common/gpk-enum.c:607
+#: ../src/common/gpk-enum.c:549
 msgid "Repository configuration was invalid and could not be read."
 msgstr "ସଂଗ୍ରହାଳୟ ରୂପରେଖାଟି ଅବୈଧ ଏବଂ ପଢ଼ିହେବ ନାହିଁ."
 
-#: ../src/common/gpk-enum.c:610
+#: ../src/common/gpk-enum.c:552
 msgid ""
 "The package you are attempting to install is not valid.\n"
 "The package file could be corrupt, or not a proper package."
@@ -1426,23 +1413,23 @@ msgstr ""
 "ଆପଣ ସ୍ଥାପନ କରିବାକୁ ଚେଷ୍ଟାକରୁଥିବା ପ୍ୟାକେଜଟି ଅବୈଧ ଅଟେ.\n"
 "ପ୍ୟାକେଜ ଫାଇଲ ନଷ୍ଟ ହୋଇଥାଇପାରେ, କିମ୍ବା ଉଚିତ ପ୍ୟାକେଜ ନୁହଁ."
 
-#: ../src/common/gpk-enum.c:614
+#: ../src/common/gpk-enum.c:556
 msgid ""
 "Installation of this package prevented by your packaging system's "
 "configuration."
 msgstr "ଏହି ପ୍ୟାକେଜର ସ୍ଥାପନା ଆପଣଙ୍କର ପ୍ୟାକେଜିଙ୍ଗ ତନ୍ତ୍ରର ରୂପରେଖ ଦ୍ୱାରା ଅଟକାଯାଇଛି."
 
-#: ../src/common/gpk-enum.c:617
+#: ../src/common/gpk-enum.c:559
 msgid ""
 "The package that was downloaded is corrupt and needs to be downloaded again."
 msgstr "ଆହରଣ କରାଯାଇଥିବା ପ୍ୟାକେଜଟି ତ୍ରୁଟିଯୁକ୍ତ ଏବଂ ପୁଣିଥରେ ଆହରଣ କରିବା ଆବଶ୍ୟକ."
 
-#: ../src/common/gpk-enum.c:620
+#: ../src/common/gpk-enum.c:562
 msgid ""
 "All of the packages selected for install are already installed on the system."
 msgstr "ସ୍ଥାପନା ପାଇଁ ବଚ୍ଛିତ ସମସ୍ତ ପ୍ୟାକେଜଗୁଡ଼ିକ ତନ୍ତ୍ରରେ ପୂର୍ବରୁ ସ୍ଥାପିତ."
 
-#: ../src/common/gpk-enum.c:623
+#: ../src/common/gpk-enum.c:565
 msgid ""
 "The specified file could not be found on the system.\n"
 "Check the file still exists and has not been deleted."
@@ -1450,7 +1437,7 @@ msgstr ""
 "ଉଲ୍ଲିଖିତ ଫାଇଲଟି ତନ୍ତ୍ରରେ ମିଳୁନାହିଁ.\n"
 "ଫାଇଲଟି ଏପର୍ଯ୍ୟନ୍ତ ଅବସ୍ଥିତ ଅଛି କି ନାହିଁ ଏବଂ ଅପସାରଣ କରାଯାଇଛି କି ନାହିଁ ତାହା ଯାଞ୍ଚକରନ୍ତୁ."
 
-#: ../src/common/gpk-enum.c:627
+#: ../src/common/gpk-enum.c:569
 #, fuzzy
 msgid ""
 "Required data could not be found on any of the configured package sources.\n"
@@ -1459,7 +1446,7 @@ msgstr ""
 "କୌଣସି ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ ମଧ୍ଯରୁ ଆବଶ୍ୟକୀୟ ତଥ୍ୟ ମିଳିନଥିଲା.\n"
 "ସେଠାରେ ଅଧିକ ଆରହିତ ପ୍ରତିବିମ୍ବ ନାହିଁ ଯାହାକୁ କି ଚେଷ୍ଟାକରାଯାଇପାରିବ."
 
-#: ../src/common/gpk-enum.c:631
+#: ../src/common/gpk-enum.c:573
 #, fuzzy
 msgid ""
 "Required upgrade data could not be found in any of the configured package "
@@ -1469,12 +1456,12 @@ msgstr ""
 "ବିନ୍ୟାସିତ ସଫ୍ଟୱେର ଉତ୍ସଗୁଡ଼ିକ ମଧ୍ଯରୁ କୌଣସି ଆବଶ୍ୟକୀୟ ଉନ୍ନୟନ ତଥ୍ୟ ମିଳିନଥିଲା।\n"
 "ସେଠାରେ ଅଧିକ ଆରହିତ ପ୍ରତିବିମ୍ବ ଉପଲବ୍ଧ ନାହିଁ ଯାହାକୁ କି ଚେଷ୍ଟାକରାଯାଇପାରିବ।"
 
-#: ../src/common/gpk-enum.c:635
+#: ../src/common/gpk-enum.c:577
 msgid ""
 "The package that is trying to be installed is incompatible with this system."
 msgstr "ସ୍ଥାପନ ହେବାକୁ ଚେଷ୍ଟାକରୁଥିବା ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ ତନ୍ତ୍ର ସହିତ ସୁସଂଗତ ନୁହଁ।"
 
-#: ../src/common/gpk-enum.c:638
+#: ../src/common/gpk-enum.c:580
 msgid ""
 "There is insufficient space on the device.\n"
 "Free some space on the system disk to perform this operation."
@@ -1482,11 +1469,11 @@ msgstr ""
 "ସେହି ଉପକରଣରେ ଯଥେଷ୍ଟ ଖାଲି ସ୍ଥାନ ନାହିଁ।\n"
 "ଏହି ପ୍ରୟୋଗକୁ କାର୍ଯ୍ୟକାରୀ କରିବା ପାଇଁ ତନ୍ତ୍ର ଡିସ୍କରେ କିଛି ସ୍ଥାନକୁ ଖାଲି କରନ୍ତୁ।"
 
-#: ../src/common/gpk-enum.c:642
+#: ../src/common/gpk-enum.c:584
 msgid "Additional media is required to complete the transaction."
 msgstr "ଏହି ତତ୍ୱକୁ ଚଲାଇବା ପାଇଁ ଗୋଟିଏ ଅତିରିକ୍ତ ମେଡିଆ ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:645
+#: ../src/common/gpk-enum.c:587
 msgid ""
 "You have failed to provide correct authentication.\n"
 "Please check any passwords or account settings."
@@ -1494,7 +1481,7 @@ msgstr ""
 "ଆପଣ ସଠିକ ବୈଧିକରଣ ପ୍ରଦାନ କରିବାରେ ବିଫଳ।\n"
 "ଦୟାକରି କୌଣସି ପ୍ରବେଶ ସଂକେତ ଅଥବା ଖାତା ସଂରଚନାକୁ ଯାଞ୍ଚକରନ୍ତୁ।"
 
-#: ../src/common/gpk-enum.c:649
+#: ../src/common/gpk-enum.c:591
 msgid ""
 "The specified update could not be found.\n"
 "It could have already been installed or no longer available on the remote "
@@ -1503,28 +1490,28 @@ msgstr ""
 "ଉଲ୍ଲିଖିତ ଅଦ୍ୟତନ ମିଳିପାରିଲା ନାହିଁ।\n"
 "ଏହା ହୁଏତଃ ପୂର୍ବରୁ ସ୍ଥାପିତ ହୋଇଛି ଅଥବା ବର୍ତ୍ତମାନ ସୁଦୂର ସର୍ଭରରେ ଉପଲବ୍ଧ ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:653
+#: ../src/common/gpk-enum.c:595
 msgid "The package could not be installed from untrusted source."
 msgstr "ପ୍ୟାକେଜଟିକୁ ଅବିଶ୍ୱସ୍ତ ଉତ୍ସରୁ ସ୍ଥାପନ କରିହେଲା ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:656
+#: ../src/common/gpk-enum.c:598
 msgid "The package could not be updated from untrusted source."
 msgstr "ଅବିଶ୍ୱସ୍ତ ଉତ୍ସରୁ ପ୍ୟାକେଜକୁ ଅଦ୍ୟତନ କରିହେଲା ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:659
+#: ../src/common/gpk-enum.c:601
 msgid "The file list is not available for this package."
 msgstr "ଏହି ଫାଇଲ ତାଲିକାଟି ଏହି ପ୍ୟାକେଜ ପାଇଁ ଉପଲବ୍ଧ ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:662
+#: ../src/common/gpk-enum.c:604
 msgid "The information about what requires this package could not be obtained."
 msgstr "ଏହି ପ୍ୟାକେଜ ପାଇଁ ଯେଉଁ ସୂଚନା ଆବଶ୍ୟକ ତାହା ମିଳିଲା ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:665
+#: ../src/common/gpk-enum.c:607
 #, fuzzy
 msgid "The specified package source could not be disabled."
 msgstr "ଉଲ୍ଲିଖିତ ସଫ୍ଟୱେର ଉତ୍ସକୁ ନିଷ୍କ୍ରିୟ କରିହେଲା ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:668
+#: ../src/common/gpk-enum.c:610
 msgid ""
 "The download could not be done automatically and should be done manually.\n"
 "More information is available in the detailed report."
@@ -1532,7 +1519,7 @@ msgstr ""
 "ସ୍ୱୟଂଚାଳିତ ଭାବରେ ଆହରଣ କରିହେଲା ନାହିଁ ଏବଂ ଏହି କାର୍ଯ୍ୟଟିକୁ ହସ୍ତକୃତ ଭାବରେ ସମ୍ପନ୍ନ କରିବା ଉଚିତ।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:672
+#: ../src/common/gpk-enum.c:614
 msgid ""
 "One of the selected packages failed to configure correctly.\n"
 "More information is available in the detailed report."
@@ -1540,7 +1527,7 @@ msgstr ""
 "ବଚ୍ଛିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ମଧ୍ଯରୁ ଗୋଟିଏ ସଠିକ ଭାବରେ ସଂରଚନା ହେବାରେ ବିଫଳ ହୋଇଛି।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:676
+#: ../src/common/gpk-enum.c:618
 msgid ""
 "One of the selected packages failed to build correctly.\n"
 "More information is available in the detailed report."
@@ -1548,7 +1535,7 @@ msgstr ""
 "ବଚ୍ଛିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ମଧ୍ଯରୁ ଗୋଟିଏ ସଠିକ ଭାବରେ ନିର୍ମାଣ ହେବାରେ ବିଫଳ ହୋଇଛି।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:680
+#: ../src/common/gpk-enum.c:622
 msgid ""
 "One of the selected packages failed to install correctly.\n"
 "More information is available in the detailed report."
@@ -1556,7 +1543,7 @@ msgstr ""
 "ବଚ୍ଛିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ମଧ୍ଯରୁ ଗୋଟିଏ ସଠିକ ଭାବରେ ସ୍ଥାପନ ହେବାରେ ବିଫଳ ହୋଇଛି।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:684
+#: ../src/common/gpk-enum.c:626
 msgid ""
 "One of the selected packages failed to be removed correctly.\n"
 "More information is available in the detailed report."
@@ -1564,7 +1551,7 @@ msgstr ""
 "ବଚ୍ଛିତ ପ୍ୟାକେଜଗୁଡ଼ିକ ମଧ୍ଯରୁ ଗୋଟିଏ ସଠିକ ଭାବରେ କଢ଼ା ହେବାରେ ବିଫଳ ହୋଇଛି।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:688
+#: ../src/common/gpk-enum.c:630
 msgid ""
 "A program is running that has to be closed before the update can proceed.\n"
 "More information is available in the detailed report."
@@ -1572,937 +1559,586 @@ msgstr ""
 "ଅଦ୍ୟତନଟି ଅଗ୍ରସର ହେବା ପୂର୍ବରୁ ଚାଲୁଥିବା ପ୍ରଗ୍ରାମଟିକୁ ବନ୍ଦ କରିବା ଉଚିତ।\n"
 "ବିସ୍ତୃତ ବିବରଣୀରେ ଅଧିକ ସୂଚନା ଉପଲବ୍ଧ ଅଛି।"
 
-#: ../src/common/gpk-enum.c:692
+#: ../src/common/gpk-enum.c:634
 msgid "The package database was changed while the request was running."
 msgstr "ଅନୁରୋଧ ଚାଲୁଥିବା ସମୟରେ ପ୍ୟାକେଜ ତଥ୍ୟାଧାରଟି ପରିବର୍ତ୍ତିତ ହୋଇଛି।"
 
-#: ../src/common/gpk-enum.c:695
+#: ../src/common/gpk-enum.c:637
 msgid "The virtual provide type is not supported by this system."
 msgstr "ଆଭାସୀ ପ୍ରଦାତା ପ୍ରକାର ଏହି ତନ୍ତ୍ର ଦ୍ୱାରା ସହାୟତା ପ୍ରାପ୍ତ ନୁହଁ।"
 
-#: ../src/common/gpk-enum.c:698
+#: ../src/common/gpk-enum.c:640
 msgid "The install root is invalid. Please contact your administrator."
 msgstr "ସ୍ଥାପନ ରୁଟ୍‌ ଅବୈଧ ଅଟେ। ଦୟାକରି ଆପଣଙ୍କର ତନ୍ତ ପ୍ରଶାସକଙ୍କ ସହିତ ସମ୍ପର୍କ କରନ୍ତୁ।"
 
-#: ../src/common/gpk-enum.c:701
+#: ../src/common/gpk-enum.c:643
 #, fuzzy
 msgid "The list of package sources could not be downloaded."
 msgstr "ଫ୍ଟୱେର ଉତ୍ସ ତାଲିକାକୁ ଆହରଣ କରିହେଲା ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:704
+#: ../src/common/gpk-enum.c:646
 msgid "A previous package management transaction was interrupted."
 msgstr "ପୂର୍ବ ପ୍ୟାକେଜ ପରିଚାଳନା କାରବାରଟି ବାଧାପ୍ରାପ୍ତ ହୋଇଛି।"
 
-#: ../src/common/gpk-enum.c:707
+#: ../src/common/gpk-enum.c:649
 msgid ""
 "The transaction has been canceled and will be retried when the system is "
 "idle."
 msgstr "କାରବାରକୁ ବାତିଲ କରାଯାଇଛି ଏବଂ ତନ୍ତ୍ର ନିଷ୍କ୍ରିୟ ଥିବା ସମୟରେ ପୁଣି ଚେଷ୍ଟା କରିଛି।"
 
-#: ../src/common/gpk-enum.c:710
+#: ../src/common/gpk-enum.c:652
 msgid "A package manager lock is required."
 msgstr "ଗୋଟିଏ ପ୍ୟାକେଜ ପରିଚାଳନା ତାଲା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:714
+#: ../src/common/gpk-enum.c:655
 #, fuzzy
 msgid "The software source is already in this state."
 msgstr "ସଫ୍ଟୱେର୍‌ଟି ପୂର୍ବରୁ ସ୍ଥାପିତ"
 
-#: ../src/common/gpk-enum.c:732
+#: ../src/common/gpk-enum.c:672
 msgid "No restart is necessary."
 msgstr "କୌଣସି ପୁନର୍ଚାଳନ ଆବଶ୍ୟକ ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:735
+#: ../src/common/gpk-enum.c:675
 msgid "You will be required to restart this application."
 msgstr "ଆପଣ ଏହି ପ୍ରୟୋଗକୁ ପୁନର୍ଚାଳନ କରିବା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:738
+#: ../src/common/gpk-enum.c:678
 msgid "You will be required to log out and back in."
 msgstr "ଆପଣ ଲଗ ଆଉଟ କରି ପଛକୁ ଫେରିବା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:741
+#: ../src/common/gpk-enum.c:681
 msgid "A restart will be required."
 msgstr "ଗୋଟିଏ ପୁନର୍ଚାଳନ ଆବଶ୍ୟକ ହେବ।"
 
-#: ../src/common/gpk-enum.c:744
+#: ../src/common/gpk-enum.c:684
 msgid "You will be required to log out and back in due to a security update."
 msgstr "ଆପଣଙ୍କୁ ଏହି ସୁରକ୍ଷା ଅଦ୍ୟତନ ପରେ ଲଗ ଆଉଟ କରି ପଛକୁ ଫେରିବା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:747
+#: ../src/common/gpk-enum.c:687
 msgid "A restart will be required due to a security update."
 msgstr "ସୁରକ୍ଷା ଅଦ୍ୟତନ ହେତୁ ଗୋଟିଏ ପୁନର୍ଚାଳନ ଆବଶ୍ୟକ ହେବ।"
 
-#: ../src/common/gpk-enum.c:764
+#: ../src/common/gpk-enum.c:704
 msgid "No restart is required."
 msgstr "କୌଣସି ପୁନର୍ଚାଳନ ଆବଶ୍ୟକ ନାହିଁ।"
 
-#: ../src/common/gpk-enum.c:767
+#: ../src/common/gpk-enum.c:707
 msgid "A restart is required."
 msgstr "ଗୋଟିଏ ପୁନର୍ଚାଳନ ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:770
+#: ../src/common/gpk-enum.c:710
 msgid "You need to log out and log back in."
 msgstr "ଆପଣଙ୍କୁ ଲଗ ଆଉଟ କରି ପଛରେ ପୁଣି ଲଗ ଇନ କରିବା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:773
+#: ../src/common/gpk-enum.c:713
 msgid "You need to restart the application."
 msgstr "ଆପଣ ଏହି ପ୍ରୟୋଗକୁ ପୁନର୍ଚାଳନ କରିବା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:776
+#: ../src/common/gpk-enum.c:716
 msgid "You need to log out and log back in to remain secure."
 msgstr "ସୁରକ୍ଷିତ ରହିବା ପାଇଁ ଆପଣଙ୍କୁ ଲଗ ଆଉଟ କରି ପଛରେ ପୁଣି ଲଗଇନ କରିବା ଆବଶ୍ୟକ।"
 
-#: ../src/common/gpk-enum.c:779
+#: ../src/common/gpk-enum.c:719
 msgid "A restart is required to remain secure."
 msgstr "ସୁରକ୍ଷିତ ରହିବା ପାଇଁ ଗୋଟିଏ ପୁନର୍ଚାଳନ ଆବଶ୍ୟକ।"
 
-#. TRANSLATORS: A distribution stability level
-#: ../src/common/gpk-enum.c:797
-msgid "Stable"
-msgstr "ସ୍ଥିର"
-
-#. TRANSLATORS: A distribution stability level
-#: ../src/common/gpk-enum.c:801
-msgid "Unstable"
-msgstr "ଅସ୍ଥିର"
-
-#. TRANSLATORS: A distribution stability level
-#: ../src/common/gpk-enum.c:805
-msgid "Testing"
-msgstr "ପରୀକ୍ଷଣ"
-
 #. TRANSLATORS: This is when the transaction status is not known
-#: ../src/common/gpk-enum.c:823
+#: ../src/common/gpk-enum.c:738
 msgid "Unknown state"
 msgstr "ଅଜଣା ସ୍ଥିତି"
 
 #. TRANSLATORS: transaction state, the daemon is in the process of starting
-#: ../src/common/gpk-enum.c:827
+#: ../src/common/gpk-enum.c:742
 msgid "Starting"
 msgstr "ଆରମ୍ଭ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, the transaction is waiting for another to complete
-#: ../src/common/gpk-enum.c:831
+#: ../src/common/gpk-enum.c:746
 msgid "Waiting in queue"
 msgstr "ଧାଡ଼ିରେ ଅପେକ୍ଷା କରିଅଛି"
 
 #. TRANSLATORS: transaction state, just started
-#: ../src/common/gpk-enum.c:835
+#: ../src/common/gpk-enum.c:750
 msgid "Running"
 msgstr "ଚାଲୁଅଛି"
 
 #. TRANSLATORS: transaction state, is querying data
-#: ../src/common/gpk-enum.c:839
+#: ../src/common/gpk-enum.c:754
 msgid "Querying"
 msgstr "ଅନୁସନ୍ଧାନ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, getting data from a server
-#: ../src/common/gpk-enum.c:843
+#: ../src/common/gpk-enum.c:758
 msgid "Getting information"
 msgstr "ସୂଚନା ଗ୍ରହଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, removing packages
 #. TRANSLATORS: title: removing packages
-#: ../src/common/gpk-enum.c:847 ../src/packagekit-service/gpk-dbus-task.c:2845
+#: ../src/common/gpk-enum.c:762 ../src/packagekit-service/gpk-dbus-task.c:2826
 msgid "Removing packages"
 msgstr "ପ୍ଯାକେଜମାନଙ୍କୁ କାଢ଼ୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading package files
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:851 ../src/common/gpk-enum.c:1301
+#: ../src/common/gpk-enum.c:766
 msgid "Downloading packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, installing packages
 #. TRANSLATORS: title: installing packages
-#: ../src/common/gpk-enum.c:855 ../src/packagekit-service/gpk-dbus-task.c:494
+#: ../src/common/gpk-enum.c:770 ../src/packagekit-service/gpk-dbus-task.c:494
 msgid "Installing packages"
 msgstr "ପ୍ୟକେଜଗୁଡ଼ିକୁ ସ୍ଥାପନ କରାଯାଉଛି"
 
 #. TRANSLATORS: transaction state, refreshing internal lists
-#: ../src/common/gpk-enum.c:859
+#: ../src/common/gpk-enum.c:774
 msgid "Refreshing software list"
 msgstr "ସଫ୍ଟୱେର ତାଲିକାକୁ ସତେଜକରୁଅଛି"
 
 #. TRANSLATORS: transaction state, installing updates
-#: ../src/common/gpk-enum.c:863
+#: ../src/common/gpk-enum.c:778
 msgid "Installing updates"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ସ୍ଥାପନ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, removing old packages, and cleaning config files
-#: ../src/common/gpk-enum.c:867
+#: ../src/common/gpk-enum.c:782
 msgid "Cleaning up packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ସଫା କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, obsoleting old packages
-#: ../src/common/gpk-enum.c:871
+#: ../src/common/gpk-enum.c:786
 msgid "Obsoleting packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ପ୍ରତ୍ୟାଖାନ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, checking the transaction before we do it
-#: ../src/common/gpk-enum.c:875
+#: ../src/common/gpk-enum.c:790
 msgid "Resolving dependencies"
 msgstr "ଆଶ୍ରିତମାନଙ୍କୁ ସମାଧାନ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, checking if we have all the security keys for the operation
-#: ../src/common/gpk-enum.c:879
+#: ../src/common/gpk-enum.c:794
 msgid "Checking signatures"
 msgstr "ହସ୍ତାକ୍ଷରଗୁଡ଼ିକୁ ଯାଞ୍ଚକରୁଅଛି"
 
 #. TRANSLATORS: transaction state, when we're doing a test transaction
-#: ../src/common/gpk-enum.c:883
+#: ../src/common/gpk-enum.c:798
 msgid "Testing changes"
 msgstr "ପରୀକ୍ଷଣ ପରିବର୍ତ୍ତିତ ହୁଏ"
 
 #. TRANSLATORS: transaction state, when we're writing to the system package database
-#: ../src/common/gpk-enum.c:887
+#: ../src/common/gpk-enum.c:802
 msgid "Committing changes"
 msgstr "ସମର୍ପଣ ପରିବର୍ତିତ"
 
 #. TRANSLATORS: transaction state, requesting data from a server
-#: ../src/common/gpk-enum.c:891
+#: ../src/common/gpk-enum.c:806
 msgid "Requesting data"
 msgstr "ତଥ୍ୟ ଅନୁରୋଧ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, all done!
-#: ../src/common/gpk-enum.c:895
+#: ../src/common/gpk-enum.c:810
 msgid "Finished"
 msgstr "ସମାପ୍ତ"
 
 #. TRANSLATORS: transaction state, in the process of canceling
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:899 ../src/common/gpk-enum.c:1256
+#: ../src/common/gpk-enum.c:814
 msgid "Canceling"
 msgstr "ବାତିଲ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading metadata
-#: ../src/common/gpk-enum.c:903
+#: ../src/common/gpk-enum.c:818
 msgid "Downloading repository information"
 msgstr "ସଂଗ୍ରହାଳୟ ସୂଚନା ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading metadata
-#: ../src/common/gpk-enum.c:907
+#: ../src/common/gpk-enum.c:822
 msgid "Downloading list of packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକର ତାଲିକାକୁ ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading metadata
-#: ../src/common/gpk-enum.c:911
+#: ../src/common/gpk-enum.c:826
 msgid "Downloading file lists"
 msgstr "ଫାଇଲ ତାଲିକାଗୁଡ଼ିକୁ ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading metadata
-#: ../src/common/gpk-enum.c:915
+#: ../src/common/gpk-enum.c:830
 msgid "Downloading lists of changes"
 msgstr "ପରିବର୍ତ୍ତନ ତାଲିକାଗୁଡ଼ିକୁ ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading metadata
-#: ../src/common/gpk-enum.c:919
+#: ../src/common/gpk-enum.c:834
 msgid "Downloading groups"
 msgstr "ଶ୍ରେଣୀ ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, downloading metadata
-#: ../src/common/gpk-enum.c:923
+#: ../src/common/gpk-enum.c:838
 msgid "Downloading update information"
 msgstr "ଅଦ୍ୟତନ ସୂଚନା ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, repackaging delta files
-#: ../src/common/gpk-enum.c:927
+#: ../src/common/gpk-enum.c:842
 msgid "Repackaging files"
 msgstr "ଫାଇଲଗୁଡ଼ିକୁ ପୁନଃପ୍ୟାକେଜ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, loading databases
-#: ../src/common/gpk-enum.c:931
+#: ../src/common/gpk-enum.c:846
 msgid "Loading cache"
 msgstr "କ୍ୟାଶେ ଧାରଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, scanning for running processes
-#: ../src/common/gpk-enum.c:935
+#: ../src/common/gpk-enum.c:850
 msgid "Scanning installed applications"
 msgstr "ସ୍ଥାପିତ ପ୍ରୟୋଗଗୁଡ଼ିକୁ କ୍ରମବୀକ୍ଷଣ କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, generating a list of packages installed on the system
-#: ../src/common/gpk-enum.c:939
+#: ../src/common/gpk-enum.c:854
 msgid "Generating package lists"
 msgstr "ପ୍ୟାକେଜ ତାଲିକାଗୁଡ଼ିକୁ ସୃଷ୍ଟି କରୁଅଛି"
 
 #. TRANSLATORS: transaction state, when we're waiting for the native tools to exit
-#: ../src/common/gpk-enum.c:943
+#: ../src/common/gpk-enum.c:858
 msgid "Waiting for package manager lock"
 msgstr "ପ୍ୟାକେଜ ପରିଚାଳକଙ୍କ ଲକକୁ ଅପେକ୍ଷା କରିଅଛି।"
 
 #. TRANSLATORS: waiting for user to type in a password
-#: ../src/common/gpk-enum.c:947
+#: ../src/common/gpk-enum.c:862
 msgid "Waiting for authentication"
 msgstr "ବୈଧିକରଣ ପାଇଁ ଅପେକ୍ଷା କରିଅଛି"
 
 #. TRANSLATORS: we are updating the list of processes
-#: ../src/common/gpk-enum.c:951
+#: ../src/common/gpk-enum.c:866
 msgid "Updating the list of running applications"
 msgstr "ଚାଲୁଥିବା ପ୍ରୟୋଗଗୁଡ଼ିକର ତାଲିକାକୁ ଅଦ୍ୟତନ କରୁଅଛି"
 
 #. TRANSLATORS: we are checking executable files in use
-#: ../src/common/gpk-enum.c:955
+#: ../src/common/gpk-enum.c:870
 msgid "Checking for applications currently in use"
 msgstr "ବର୍ତ୍ତମାନ ବ୍ୟବହାରରେ ଥିବା ପ୍ରୟୋଗଗୁଡ଼ିକୁ ଯାଞ୍ଚ କରୁଅଛି"
 
 #. TRANSLATORS: we are checking for libraries in use
-#: ../src/common/gpk-enum.c:959
+#: ../src/common/gpk-enum.c:874
 msgid "Checking for libraries currently in use"
 msgstr "ବର୍ତ୍ତମାନ ବ୍ୟବହାରରେ ଥିବା ଲାଇବ୍ରେରୀଗୁଡ଼ିକୁ ଯାଞ୍ଚକରୁଅଛି"
 
 #. TRANSLATORS: we are copying package files to prepare to install
-#: ../src/common/gpk-enum.c:963
+#: ../src/common/gpk-enum.c:878
 msgid "Copying files"
 msgstr "ଫାଇଲ ମାନଙ୍କୁ ନକଲ କରୁଅଛି"
 
 #. TRANSLATORS: we are running hooks pre or post transaction
-#: ../src/common/gpk-enum.c:968
+#: ../src/common/gpk-enum.c:882
 #, fuzzy
 msgid "Running hooks"
 msgstr "ଚାଲୁଅଛି"
 
-#. TRANSLATORS: type of update
-#: ../src/common/gpk-enum.c:987
-#, fuzzy, c-format
-msgid "%u trivial update"
-msgid_plural "%u trivial updates"
-msgstr[0] "%i ଛୋଟ ଅଦ୍ୟତନ"
-msgstr[1] "%i ଛୋଟ ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
-#. TRANSLATORS: type of update in the case that we don't have any data
-#: ../src/common/gpk-enum.c:991
-#, fuzzy, c-format
-msgid "%u update"
-msgid_plural "%u updates"
-msgstr[0] "%i ଅଦ୍ୟତନ"
-msgstr[1] "%i ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
-#. TRANSLATORS: type of update
-#: ../src/common/gpk-enum.c:995
-#, fuzzy, c-format
-msgid "%u important update"
-msgid_plural "%u important updates"
-msgstr[0] "%i ଦରକାରୀ ଅଦ୍ୟତନ"
-msgstr[1] "%i ଦରକାରୀ ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
-#. TRANSLATORS: type of update
-#: ../src/common/gpk-enum.c:999
-#, fuzzy, c-format
-msgid "%u security update"
-msgid_plural "%u security updates"
-msgstr[0] "%i ସୁରକ୍ଷା ଅଦ୍ୟତନ"
-msgstr[1] "%i ସୁରକ୍ଷା ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
-#. TRANSLATORS: type of update
-#: ../src/common/gpk-enum.c:1003
-#, fuzzy, c-format
-msgid "%u bug fix update"
-msgid_plural "%u bug fix updates"
-msgstr[0] "%i ତ୍ରୁଟି ନିବାରଣ ଅଦ୍ୟତନ"
-msgstr[1] "%i ତ୍ରୁଟି ନିବାରଣ ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
-#. TRANSLATORS: type of update
-#: ../src/common/gpk-enum.c:1007
-#, fuzzy, c-format
-msgid "%u enhancement update"
-msgid_plural "%u enhancement updates"
-msgstr[0] "%i ବୃଦ୍ଧି ଅଦ୍ୟତନ"
-msgstr[1] "%i ବୃଦ୍ଧି ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
-#. TRANSLATORS: number of updates that cannot be installed due to deps
-#: ../src/common/gpk-enum.c:1011
-#, fuzzy, c-format
-msgid "%u blocked update"
-msgid_plural "%u blocked updates"
-msgstr[0] "%i ଅବରୂଦ୍ଧ ଅଦ୍ୟତନ"
-msgstr[1] "%i ଅବରୂଦ୍ଧ ଅଦ୍ୟତନଗୁଡ଼ିକ"
-
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1029
+#: ../src/common/gpk-enum.c:901
 msgid "Trivial update"
 msgstr "ଛୋଟ ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1033
+#: ../src/common/gpk-enum.c:905
 msgid "Normal update"
 msgstr "ସାଧାରଣ ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1037
+#: ../src/common/gpk-enum.c:909
 msgid "Important update"
 msgstr "ଦରକାରୀ ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1041
+#: ../src/common/gpk-enum.c:913
 msgid "Security update"
 msgstr "ସୁରକ୍ଷା ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1045
+#: ../src/common/gpk-enum.c:917
 msgid "Bug fix update"
 msgstr "ତ୍ରୁଟି ନିବାରକ ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1049
+#: ../src/common/gpk-enum.c:921
 msgid "Enhancement update"
 msgstr "ବୃଦ୍ଧି ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The type of update
-#: ../src/common/gpk-enum.c:1053
+#: ../src/common/gpk-enum.c:925
 msgid "Blocked update"
 msgstr "ଅବରୂଦ୍ଧ ଅଦ୍ୟତନ"
 
 #. TRANSLATORS: The state of a package
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1058 ../src/common/gpk-enum.c:1153
+#: ../src/common/gpk-enum.c:930 ../src/common/gpk-enum.c:1023
 msgid "Installed"
 msgstr "ସ୍ଥାପିତ"
 
 #. TRANSLATORS: The state of a package, i.e. not installed
-#: ../src/common/gpk-enum.c:1063
+#: ../src/common/gpk-enum.c:935
 msgid "Available"
 msgstr "ଉପଲବ୍ଧ"
 
 #. TRANSLATORS: The type of package
-#: ../src/common/gpk-enum.c:1067
+#: ../src/common/gpk-enum.c:939
 msgid "Trusted"
 msgstr "ବିଶ୍ୱସ୍ତ"
 
 #. TRANSLATORS: The type of package
-#: ../src/common/gpk-enum.c:1071
+#: ../src/common/gpk-enum.c:943
 msgid "Untrusted"
 msgstr "ଅବିଶ୍ୱସ୍ତ"
 
 #. TRANSLATORS: The state of a package
-#: ../src/common/gpk-enum.c:1076
+#: ../src/common/gpk-enum.c:947
 #, fuzzy
 msgid "Unavailable"
 msgstr "ଉପଲବ୍ଧ"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1095
+#: ../src/common/gpk-enum.c:965
 msgid "Downloading"
 msgstr "ଆହରଣ କରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1099
+#: ../src/common/gpk-enum.c:969
 msgid "Updating"
 msgstr "ଅଦ୍ୟତନ କରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1103 ../src/common/gpk-enum.c:1240
+#: ../src/common/gpk-enum.c:973
 msgid "Installing"
 msgstr "ସ୍ଥାପନ କରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1107 ../src/common/gpk-enum.c:1236
+#: ../src/common/gpk-enum.c:977
 msgid "Removing"
 msgstr "କାଢ଼ୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1111
+#: ../src/common/gpk-enum.c:981
 msgid "Cleaning up"
 msgstr "ସଫାକରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1115
+#: ../src/common/gpk-enum.c:985
 msgid "Obsoleting"
 msgstr "ଲୁପ୍ତ ପାଉଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1119
+#: ../src/common/gpk-enum.c:989
 msgid "Reinstalling"
 msgstr "ପୁନଃ ସ୍ଥାପନ କରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1123
+#: ../src/common/gpk-enum.c:993
 msgid "Preparing"
 msgstr "ପ୍ରସ୍ତୁତ କରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in present tense
-#: ../src/common/gpk-enum.c:1127
+#: ../src/common/gpk-enum.c:997
 msgid "Decompressing"
 msgstr "ଅସମ୍ପୀଡନ କରୁଅଛି"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1145
+#: ../src/common/gpk-enum.c:1015
 msgid "Downloaded"
 msgstr "ଆରହିତ"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1149
+#: ../src/common/gpk-enum.c:1019
 msgid "Updated"
 msgstr "ଅଦ୍ୟତିତ"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1157
+#: ../src/common/gpk-enum.c:1027
 msgid "Removed"
 msgstr "କଢ଼ାଯାଇଛି"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1161
+#: ../src/common/gpk-enum.c:1031
 msgid "Cleaned up"
 msgstr "ସଫା ହୋଇଛି"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1165 ../src/common/gpk-task.c:406
+#: ../src/common/gpk-enum.c:1035 ../src/common/gpk-task.c:406
 msgid "Obsoleted"
 msgstr "ଅପ୍ରଚଳିତ"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1169
+#: ../src/common/gpk-enum.c:1039
 msgid "Reinstalled"
 msgstr "ପୁନଃ ସ୍ଥାପିତ"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1173
+#: ../src/common/gpk-enum.c:1043
 msgid "Prepared"
 msgstr "ପ୍ରସ୍ତୁତ"
 
 #. TRANSLATORS: The action of the package, in past tense
-#: ../src/common/gpk-enum.c:1177
+#: ../src/common/gpk-enum.c:1047
 msgid "Decompressed"
 msgstr "ଅସମ୍ପୀଡିତ"
 
-#. TRANSLATORS: The role of the transaction, in present tense
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1195 ../src/common/gpk-enum.c:1343
+#: ../src/common/gpk-enum.c:1068
 msgid "Unknown role type"
 msgstr "ଅଜଣା ଭୂମିକା ପ୍ରକାର"
 
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1199
-msgid "Getting dependencies"
-msgstr "ଆଶ୍ରିତମାନଙ୍କୁ ଗ୍ରହଣ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1203
-msgid "Getting update detail"
-msgstr "ଅଦ୍ୟତନ ବିବରଣୀ ଗ୍ରହଣ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1208
-msgid "Getting details"
-msgstr "ବିବରଣୀ ଗ୍ରହଣ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1212
-msgid "Getting requires"
-msgstr "ଆବଶ୍ୟକଗୁଡ଼ିକୁ ଗ୍ରହଣକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1216
-msgid "Getting updates"
-msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଗ୍ରହଣକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1220
-msgid "Searching details"
-msgstr "ବିବରଣୀ ଖୋଜୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#. TRANSLATORS: searching for the package that provides the file
-#: ../src/common/gpk-enum.c:1224 ../src/packagekit-service/gpk-dbus-task.c:1473
-#: ../src/packagekit-service/gpk-dbus-task.c:3003
-msgid "Searching for file"
-msgstr "ଫାଇଲ ସନ୍ଧାନ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1228
-msgid "Searching groups"
-msgstr "ଶ୍ରେଣୀ ଖୋଜୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1232
-msgid "Searching for package name"
-msgstr "ପ୍ୟାକେଜ ନାମ ଖୋଜୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1244
-msgid "Installing file"
-msgstr "ଫାଇଲ ସ୍ଥାପନକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1248
-msgid "Refreshing package cache"
-msgstr "ପ୍ୟାକେଜ କ୍ୟାଶକୁ ସତେଜକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1252
-msgid "Updating packages"
-msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଅଦ୍ୟତନକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1260
-msgid "Getting list of repositories"
-msgstr "ସଂଗ୍ରହାଳୟଗୁଡ଼ିକର ତାଲିକା ପାଉଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1264
-msgid "Enabling repository"
-msgstr "ସଂଗ୍ରହାଳୟ ସକ୍ରିୟକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1268
-#, fuzzy
-msgid "Removing repository"
-msgstr "ସଂଗ୍ରହାଳୟ ସକ୍ରିୟକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1272
-msgid "Setting repository data"
-msgstr "ସଂଗ୍ରହାଳୟ ତଥ୍ୟ ବିନ୍ୟାସ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1276
-msgid "Resolving"
-msgstr "ସମାଧାନକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1281
-msgid "Getting file list"
-msgstr "ଫାଇଲ ତାଲିକା ପାଉଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1285
-msgid "Getting what provides"
-msgstr "କଣ ପ୍ରଦାନକରୁଅଛି ତାହା ପାଉଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1289
-msgid "Installing signature"
-msgstr "ହସ୍ତାକ୍ଷର ସ୍ଥାପନ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1293
-msgid "Getting package lists"
-msgstr "ପ୍ୟାକେଜ ତାଲିକା ଗ୍ରହଣ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1297
-msgid "Accepting EULA"
-msgstr "EULA ଗ୍ରହଣ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1305
-msgid "Getting distribution upgrade information"
-msgstr "ବଣ୍ଟନ ଉନ୍ନୟନ ସୂଚନା ପାଉଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1309
-msgid "Getting categories"
-msgstr "ବିଭାଗଗୁଡ଼ିକୁ ଗ୍ରହଣକରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1313
-msgid "Getting old transactions"
-msgstr "ପୁରୁଣା ତତ୍ୱଗୁଡ଼ିକୁ ଗ୍ରହଣ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
-#: ../src/common/gpk-enum.c:1317
-msgid "Repairing the system"
-msgstr "ତନ୍ତ୍ରକୁ ସଜାଡ଼ୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in present tense
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1322 ../src/common/gpk-enum.c:1470
-#, fuzzy
-msgid "Upgrading the system"
-msgstr "ତନ୍ତ୍ରକୁ ଉନ୍ନୟନ କରୁଅଛି"
-
-#. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1347
+#: ../src/common/gpk-enum.c:1072
 msgid "Got dependencies"
 msgstr "ଆଶ୍ରିତମାନଙ୍କୁ ପାଇଅଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1351
+#: ../src/common/gpk-enum.c:1076
 msgid "Got update detail"
 msgstr "ଅଦ୍ୟତନ ବିବରଣୀ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1356
+#: ../src/common/gpk-enum.c:1081
 msgid "Got details"
 msgstr "ବିବରଣୀ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1360
+#: ../src/common/gpk-enum.c:1085
 msgid "Got requires"
 msgstr "ଆବଶ୍ୟକତାଗୁଡ଼ିକୁ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1364
+#: ../src/common/gpk-enum.c:1089
 msgid "Got updates"
 msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1368
+#: ../src/common/gpk-enum.c:1093
 msgid "Searched for package details"
 msgstr "ପ୍ୟକେଜ ବିବରଣୀଗୁଡ଼ିକୁ ସନ୍ଧାନ କରୁଅଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1372
+#: ../src/common/gpk-enum.c:1097
 msgid "Searched for file"
 msgstr "ଫାଇଲ ପାଇଁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1376
+#: ../src/common/gpk-enum.c:1101
 msgid "Searched groups"
 msgstr "ସନ୍ଧାନ ଶ୍ରେଣୀ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1380
+#: ../src/common/gpk-enum.c:1105
 msgid "Searched for package name"
 msgstr "ପ୍ୟକେଜ ନାମ ପାଇଁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1384
+#: ../src/common/gpk-enum.c:1109
 msgid "Removed packages"
 msgstr "କଢ଼ାଯାଇଥିବା ପ୍ୟକେଜଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1388
+#: ../src/common/gpk-enum.c:1113
 msgid "Installed packages"
 msgstr "ସ୍ଥାପିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1392
+#: ../src/common/gpk-enum.c:1117
 msgid "Installed local files"
 msgstr "ସ୍ଥାପିତ ସ୍ଥାନୀୟ ଫାଇଲ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1396
+#: ../src/common/gpk-enum.c:1121
 msgid "Refreshed package cache"
 msgstr "ସତେଜିତ ପ୍ୟାକେଜ କ୍ୟାଶେ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1400
+#: ../src/common/gpk-enum.c:1125
 msgid "Updated packages"
 msgstr "ଅଦ୍ୟତିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1404
+#: ../src/common/gpk-enum.c:1129
 msgid "Canceled"
 msgstr "ବାତିଲ ହେଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1408
+#: ../src/common/gpk-enum.c:1133
 msgid "Got list of repositories"
 msgstr "ସଂଗ୍ରହାଳୟଗୁଡ଼ିକର ତାଲିକା ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1412
+#: ../src/common/gpk-enum.c:1137
 msgid "Enabled repository"
 msgstr "ସକ୍ରିୟ ସଂଗ୍ରହାଳୟ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1416
+#: ../src/common/gpk-enum.c:1141
 #, fuzzy
 msgid "Removed repository"
 msgstr "ସକ୍ରିୟ ସଂଗ୍ରହାଳୟ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1420
+#: ../src/common/gpk-enum.c:1145
 msgid "Set repository data"
 msgstr "ସଂଗ୍ରହାଳୟ ତଥ୍ୟ ବିନ୍ୟାସ କରନ୍ତୁ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1424
+#: ../src/common/gpk-enum.c:1149
 msgid "Resolved"
 msgstr "ସମାଧାନ ହୋଇସାରିଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1429
+#: ../src/common/gpk-enum.c:1154
 msgid "Got file list"
 msgstr "ଫାଇଲ ତାଲିକା ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1433
+#: ../src/common/gpk-enum.c:1158
 msgid "Got what provides"
 msgstr "ଯାହା ପ୍ରଦାନ କରାଯାଇଥିଲା ତାହା ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1437
+#: ../src/common/gpk-enum.c:1162
 msgid "Installed signature"
 msgstr "ସ୍ଥାପିତ ହସ୍ତାକ୍ଷର"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1441
+#: ../src/common/gpk-enum.c:1166
 msgid "Got package lists"
 msgstr "ପ୍ୟାକେଜ ତାଲିକା ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1445
+#: ../src/common/gpk-enum.c:1170
 msgid "Accepted EULA"
 msgstr "ଗ୍ରହଣୀୟ EULA"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1449
+#: ../src/common/gpk-enum.c:1174
 msgid "Downloaded packages"
 msgstr "ଆହରିତ ପ୍ୟାକେଜଗୁଡ଼ିକ"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1453
+#: ../src/common/gpk-enum.c:1178
 msgid "Got distribution upgrades"
 msgstr "ବଣ୍ଟନ ଉନ୍ନୟନ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1457
+#: ../src/common/gpk-enum.c:1182
 msgid "Got categories"
 msgstr "ବିଭାଗଗୁଡ଼ିକୁ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1461
+#: ../src/common/gpk-enum.c:1186
 msgid "Got old transactions"
 msgstr "ପୁରୁଣା ତତ୍ୱଗୁଡ଼ିକୁ ପାଇଛି"
 
 #. TRANSLATORS: The role of the transaction, in past tense
-#: ../src/common/gpk-enum.c:1465
+#: ../src/common/gpk-enum.c:1190
 msgid "Repaired the system"
 msgstr "ତନ୍ତ୍ରକୁ ସଜାଡ଼ିସାରିଛି"
 
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1489
-msgid "Accessibility"
-msgstr "ଅଭିଗମ୍ୟତା"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1493
-msgid "Accessories"
-msgstr "ସହାୟକ ସାମଗ୍ରୀ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1517 ../src/common/gpk-task.c:426
-msgid "Other"
-msgstr "ଅନ୍ୟାନ୍ୟ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1521
-msgid "Programming"
-msgstr "ପ୍ରଗ୍ରାମିଙ୍ଗ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1529
-msgid "System"
-msgstr "ତନ୍ତ୍ର"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1533
-msgid "GNOME desktop"
-msgstr "GNOME ଡେସ୍କଟପ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1537
-msgid "KDE desktop"
-msgstr "KDE ଡେସ୍କଟପ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1541
-msgid "Xfce desktop"
-msgstr "Xfce ଡେସ୍କଟପ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1545
-msgid "Other desktops"
-msgstr "ଅନ୍ଯାନ୍ୟ ଡେସ୍କଟପ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1549
-msgid "Publishing"
-msgstr "ପ୍ରକାଶନ କରୁଅଛି"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1553
-msgid "Servers"
-msgstr "ସର୍ଭରଗୁଡ଼ିକ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1557
-msgid "Fonts"
-msgstr "ଅକ୍ଷରରୂପଗୁଡ଼ିକ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1561
-msgid "Admin tools"
-msgstr "ପ୍ରଶାସନ ଉପକରଣଗୁଡ଼ିକ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1565
-msgid "Legacy"
-msgstr "ପୁରୁଣା"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1569
-msgid "Localization"
-msgstr "ସ୍ଥାନୀୟକରଣ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1573
-msgid "Virtualization"
-msgstr "ଆଭାସୀକରଣ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1577
-msgid "Security"
-msgstr "ସୁରକ୍ଷା"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1581
-msgid "Power management"
-msgstr "ଶକ୍ତି ପରିଚାଳନା"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1585
-msgid "Communication"
-msgstr "ସଞ୍ଚାର ବ୍ୟବସ୍ଥା"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1589
-msgid "Network"
-msgstr "ନେଟୱର୍କ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1593
-msgid "Maps"
-msgstr "ପ୍ରତିଚିତ୍ରଣଗୁଡ଼ିକ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1597
+#. TRANSLATORS: The role of the transaction, in past tense
+#: ../src/common/gpk-enum.c:1194
 #, fuzzy
-msgid "Package sources"
-msgstr "ପ୍ୟାକେଜଟି ତ୍ରୁଟିଯୁକ୍ତ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1605
-msgid "Documentation"
-msgstr "ଦଲିଲିକରଣ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1609
-msgid "Electronics"
-msgstr "ଇଲେକ୍ଟ୍ରନିକସ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1613
-msgid "Package collections"
-msgstr "ପ୍ୟାକେଜ ସଂଗ୍ରହ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1617
-msgid "Vendor"
-msgstr "ବିକ୍ରେତା"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1621
-msgid "Newest packages"
-msgstr "ନୂତନତମ ପ୍ୟାକେଜଗୁଡ଼ିକ"
-
-#. TRANSLATORS: The group type
-#: ../src/common/gpk-enum.c:1625
-msgid "Unknown group"
-msgstr "ଅଜଣା ଶ୍ରେଣୀ"
+msgid "Upgrading the system"
+msgstr "ତନ୍ତ୍ରକୁ ଉନ୍ନୟନ କରୁଅଛି"
 
 #. TRANSLATORS: column for the application icon
 #: ../src/common/gpk-helper-chooser.c:112 ../src/common/gpk-helper-run.c:182
@@ -2633,6 +2269,10 @@ msgstr "ପଦାବନତ"
 msgid "The following software also needs to be processed"
 msgstr "ନିମ୍ନଲିଖିତ ସଫ୍ଟୱେରଗୁଡ଼ିକୁ ମଧ୍ଯ କାର୍ଯ୍ୟକାରୀ କରାଯିବା ଆବଶ୍ୟକ"
 
+#: ../src/common/gpk-task.c:426
+msgid "Other"
+msgstr "ଅନ୍ୟାନ୍ୟ"
+
 #. TRANSLATORS: title of a dependency dialog
 #: ../src/common/gpk-task.c:489
 msgid "Additional confirmation required"
@@ -2679,53 +2319,74 @@ msgstr "ଏହି କାରବାରକୁ କାର୍ଯ୍ୟକାରୀ କ
 
 #. TRANSLATORS: command line option: a list of files to install
 #: ../src/helpers/gpk-install-local-file.c:54
-msgid "Files to install"
-msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଫାଇଲଗୁଡ଼ିକ"
+#, fuzzy
+msgid "Local distribution packages to install"
+msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ସ୍ଥାନୀୟ ଫାଇଲଗୁଡ଼ିକ"
 
 #. TRANSLATORS: program name: application to install a package to provide a file
-#. TRANSLATORS: program name: installs a package (or packages) by name
-#: ../src/helpers/gpk-install-local-file.c:67
-#: ../src/helpers/gpk-install-package-name.c:63
-#: ../src/packagekit-service/gpk-dbus-task.c:3197
-msgid "Software Install"
-msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
-
-#: ../src/helpers/gpk-install-local-file.c:69
-msgid "PackageKit File Installer"
-msgstr "PackageKit ଫାଇଲ ସ୍ଥାପକ"
-
 #. TRANSLATORS: title to pass to to the user if there are not enough privs
-#: ../src/helpers/gpk-install-local-file.c:77
-msgid "Local file installer"
-msgstr "ସ୍ଥାନୀୟ ଫାଇଲ ସ୍ଥାପକ"
+#: ../src/helpers/gpk-install-local-file.c:64
+#: ../src/helpers/gpk-install-local-file.c:69
+#: ../src/helpers/gpk-install-local-file.c:79
+#, fuzzy
+msgid "Local distribution package installer"
+msgstr "ବଣ୍ଟନ ଉନ୍ନୟନ ସାଧନ"
+
+#: ../src/helpers/gpk-install-local-file.c:71
+#, fuzzy
+msgid "Install software from local distribution package"
+msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: could not install a package that contained the file we wanted
-#: ../src/helpers/gpk-install-local-file.c:83
-msgid "Failed to install a package to provide a file"
-msgstr "ଫାଇଲ ପ୍ରଦାନ କରିବା ପାଇଁ ଗୋଟିଏ ପ୍ୟାକେଜ ସ୍ଥାପନ କରିବାରେ ବିଫଳ"
+#: ../src/helpers/gpk-install-local-file.c:85
+#, fuzzy
+msgid "Failed to install a local package file"
+msgstr "ପ୍ୟକେଜକୁ ସ୍ଥାପନ କରିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: nothing selected
-#: ../src/helpers/gpk-install-local-file.c:85
-msgid "You need to specify a file to install"
-msgstr "ଆପଣଙ୍କୁ ସ୍ଥାପନ କରିବା ପାଇଁ ଗୋଟିଏ ଫାଇଲ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବା ଉଚିତ"
+#: ../src/helpers/gpk-install-local-file.c:87
+#, fuzzy
+msgid "You need to specify a package file to install"
+msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଆପଣଙ୍କୁ କେବଳ ଗୋଟିଏ ପ୍ୟାକେଜ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବାକୁ ହେବ"
 
-#: ../src/helpers/gpk-install-package-name.c:50
-msgid "Packages to install"
-msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ"
+#: ../src/helpers/gpk-install-local-file.c:142
+#: ../src/helpers/gpk-install-package-name.c:127
+#, fuzzy
+msgid "Software Installed"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
 
+#: ../src/helpers/gpk-install-local-file.c:143
+#: ../src/helpers/gpk-install-package-name.c:128
+#, fuzzy
+msgid "The requested software has been installed"
+msgstr "ନିମ୍ନଲିଖିତ ସଫ୍ଟୱେରଗୁଡ଼ିକୁ ମଧ୍ଯ ସ୍ଥାପନ କରାଯିବା ଆବଶ୍ୟକ"
+
+#: ../src/helpers/gpk-install-package-name.c:51
+#, fuzzy
+msgid "Distribution packages to install"
+msgstr "ବଣ୍ଟନ ଉନ୍ନୟନ ସାଧନ"
+
+#. TRANSLATORS: program name: installs a package (or packages) by name
 #. TRANSLATORS: application name to pass to to the user if there are not enough privs
-#: ../src/helpers/gpk-install-package-name.c:65
-#: ../src/helpers/gpk-install-package-name.c:73
-msgid "Package Name Installer"
-msgstr "ପ୍ୟାକେଜ ନାମ ସ୍ଥାପକ"
+#: ../src/helpers/gpk-install-package-name.c:61
+#: ../src/helpers/gpk-install-package-name.c:66
+#: ../src/helpers/gpk-install-package-name.c:76
+#, fuzzy
+msgid "Software Installer"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
+
+#: ../src/helpers/gpk-install-package-name.c:68
+#, fuzzy
+msgid "Install software with the name of the distribution packages"
+msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: failed
-#: ../src/helpers/gpk-install-package-name.c:79
+#: ../src/helpers/gpk-install-package-name.c:82
 msgid "Failed to install software by name"
 msgstr "ନାମ ଅନୁଯାୟୀ ସଫ୍ଟୱେର ସ୍ଥାପନ କରିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: nothing was specified
-#: ../src/helpers/gpk-install-package-name.c:81
+#: ../src/helpers/gpk-install-package-name.c:84
 msgid "You need to specify the name of the software to install"
 msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଆପଣଙ୍କୁ ସଫ୍ଟୱେର ନାମ ଉଲ୍ଲେଖ କରିବା ଉଚିତ"
 
@@ -2882,9 +2543,9 @@ msgstr "ଏହି ଫାଇଲଟି କୌଣସି ପ୍ୟାକେଜରେ
 #: ../src/packagekit-service/gpk-dbus-task.c:1085
 #: ../src/packagekit-service/gpk-dbus-task.c:1330
 #: ../src/packagekit-service/gpk-dbus-task.c:1635
-#: ../src/packagekit-service/gpk-dbus-task.c:1843
-#: ../src/packagekit-service/gpk-dbus-task.c:2100
-#: ../src/packagekit-service/gpk-dbus-task.c:2439
+#: ../src/packagekit-service/gpk-dbus-task.c:1839
+#: ../src/packagekit-service/gpk-dbus-task.c:2092
+#: ../src/packagekit-service/gpk-dbus-task.c:2427
 msgid "More information"
 msgstr "ଅଧିକ ସୂଚନା"
 
@@ -2935,7 +2596,7 @@ msgstr[1] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ପ୍ୟାକେଜଗୁ�
 
 #. TRANSLATORS: title, searching
 #: ../src/packagekit-service/gpk-dbus-task.c:1251
-#: ../src/packagekit-service/gpk-dbus-task.c:2761
+#: ../src/packagekit-service/gpk-dbus-task.c:2745
 msgid "Searching for packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
 
@@ -2946,7 +2607,7 @@ msgstr "ପ୍ୟାକେଜକୁ ଖୋଜି ପାଇଲା ନାହିଁ
 
 #. TRANSLATORS: nothing found
 #: ../src/packagekit-service/gpk-dbus-task.c:1328
-#: ../src/packagekit-service/gpk-dbus-task.c:2901
+#: ../src/packagekit-service/gpk-dbus-task.c:2882
 msgid "The file could not be found in any packages"
 msgstr "ଏହି ଫାଇଲଟି କୌଣସି ପ୍ୟାକେଜରେ ମିଳିବ ନାହିଁ"
 
@@ -2985,6 +2646,12 @@ msgid_plural "A program wants to install files"
 msgstr[0] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଫାଇଲ ସ୍ଥାପନ କରିବାକୁ ଚାହୁଁଛନ୍ତି"
 msgstr[1] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଫାଇଲଗୁଡ଼ିକୁ ସ୍ଥାପନ କରିବାକୁ ଚାହୁଁଛନ୍ତି"
 
+#. TRANSLATORS: searching for the package that provides the file
+#: ../src/packagekit-service/gpk-dbus-task.c:1473
+#: ../src/packagekit-service/gpk-dbus-task.c:2984
+msgid "Searching for file"
+msgstr "ଫାଇଲ ସନ୍ଧାନ କରୁଅଛି"
+
 #. TRANSLATORS: we are listing the plugins in a box
 #: ../src/packagekit-service/gpk-dbus-task.c:1516
 msgid "The following plugin is required:"
@@ -2994,7 +2661,7 @@ msgstr[1] "ନିମ୍ନଲିଖିତ ପ୍ଲଗଇନଗୁଡ଼ିକ �
 
 #. TRANSLATORS: ask for confirmation
 #: ../src/packagekit-service/gpk-dbus-task.c:1534
-#: ../src/packagekit-service/gpk-dbus-task.c:2368
+#: ../src/packagekit-service/gpk-dbus-task.c:2356
 msgid "Do you want to search for this now?"
 msgid_plural "Do you want to search for these now?"
 msgstr[0] "ଆପଣ ଏହାପାଇଁ ବର୍ତ୍ତମାନ ସନ୍ଧାନ କରିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
@@ -3047,9 +2714,9 @@ msgstr[1] "ଏହି ପ୍ରୟୋଗ ପାଇଁ ଗୋଟିଏ ପ୍ର�
 
 #. TRANSLATORS: button: confirm to search for packages
 #: ../src/packagekit-service/gpk-dbus-task.c:1575
-#: ../src/packagekit-service/gpk-dbus-task.c:1929
-#: ../src/packagekit-service/gpk-dbus-task.c:2304
-#: ../src/packagekit-service/gpk-dbus-task.c:2380
+#: ../src/packagekit-service/gpk-dbus-task.c:1925
+#: ../src/packagekit-service/gpk-dbus-task.c:2296
+#: ../src/packagekit-service/gpk-dbus-task.c:2368
 msgid "Search"
 msgstr "ସନ୍ଧାନ କରନ୍ତୁ"
 
@@ -3065,7 +2732,7 @@ msgid "Could not find plugin in any configured package source"
 msgstr "ଯେକୌଣସି ବିନ୍ୟାସିତ ସଫ୍ଟୱେର ଉତ୍ସରେ ପ୍ଲଗଇନକୁ ଖୋଜିବାରେ ବିଫଳ"
 
 #: ../src/packagekit-service/gpk-dbus-task.c:1654
-#: ../src/packagekit-service/gpk-dbus-task.c:2458
+#: ../src/packagekit-service/gpk-dbus-task.c:2446
 msgid "Install the following plugin"
 msgid_plural "Install the following plugins"
 msgstr[0] "ନିମ୍ନଲିଖିତ ପ୍ଲଗଇନକୁ ସ୍ଥାପନ କରନ୍ତୁ"
@@ -3073,9 +2740,9 @@ msgstr[1] "ନିମ୍ନଲିଖିତ ପ୍ଲଗଇନଗୁଡ଼ିକ�
 
 #. TRANSLATORS: title: show a list of fonts
 #: ../src/packagekit-service/gpk-dbus-task.c:1655
-#: ../src/packagekit-service/gpk-dbus-task.c:2120
-#: ../src/packagekit-service/gpk-dbus-task.c:2459
-#: ../src/packagekit-service/gpk-dbus-task.c:2693
+#: ../src/packagekit-service/gpk-dbus-task.c:2112
+#: ../src/packagekit-service/gpk-dbus-task.c:2447
+#: ../src/packagekit-service/gpk-dbus-task.c:2677
 #, fuzzy
 msgid "Do you want to install this package now?"
 msgid_plural "Do you want to install these packages now?"
@@ -3092,32 +2759,32 @@ msgstr "ପ୍ଲଗଇନଗୁଡ଼ିକୁ ଖୋଜନ୍ତୁ"
 msgid "Searching for plugin: %s"
 msgstr "ପ୍ଲଗଇନ ପାଇଁ ସନ୍ଧାନ କରୁଅଛି: %s"
 
-#: ../src/packagekit-service/gpk-dbus-task.c:1810
+#: ../src/packagekit-service/gpk-dbus-task.c:1806
 msgid "Failed to search for provides"
 msgstr "ପ୍ରଦାନ କରିବା ପାଇଁ ଖୋଜିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: title
-#: ../src/packagekit-service/gpk-dbus-task.c:1839
+#: ../src/packagekit-service/gpk-dbus-task.c:1835
 msgid "Failed to find software"
 msgstr "ସଫ୍ଟୱେର ଖୋଜିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: nothing found in the package sources that helps
-#: ../src/packagekit-service/gpk-dbus-task.c:1841
+#: ../src/packagekit-service/gpk-dbus-task.c:1837
 msgid "No new applications can be found to handle this type of file"
 msgstr "ଏହି ପ୍ରକାର ଫାଇଲକୁ ନିୟନ୍ତ୍ରଣ କରିବା ପାଇଁ କୌଣସି ନୂତନ ପ୍ରୟୋଗ ମିଳିନାହିଁ"
 
 #. TRANSLATORS: message: mime type opener required
-#: ../src/packagekit-service/gpk-dbus-task.c:1911
+#: ../src/packagekit-service/gpk-dbus-task.c:1907
 msgid "An additional program is required to open this type of file:"
 msgstr "ଏହି ପ୍ରକାର ଫାଇଲକୁ ଖୋଲିବା ପାଇଁ ଗୋଟିଏ ଅତିରିକ୍ତ ପ୍ରଗ୍ରାମ ଆବଶ୍ୟକ:"
 
 #. TRANSLATORS: message: confirm with the user
-#: ../src/packagekit-service/gpk-dbus-task.c:1914
+#: ../src/packagekit-service/gpk-dbus-task.c:1910
 msgid "Do you want to search for a program to open this file type now?"
 msgstr "ଏହି ପ୍ରକାର ଫାଇଲକୁ ଖୋଲିବା ପାଇଁ ଆପଣ ଗୋଟିଏ ଅତିରିକ୍ତ ପ୍ରଗ୍ରାମ ଖୋଜିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
 
 #. TRANSLATORS: string is a program name, e.g. "Movie Player"
-#: ../src/packagekit-service/gpk-dbus-task.c:1922
+#: ../src/packagekit-service/gpk-dbus-task.c:1918
 #, c-format
 msgid "%s requires a new mime type"
 msgid_plural "%s requires new mime types"
@@ -3125,48 +2792,48 @@ msgstr[0] "%s ଗୋଟିଏ ନୂତନ ମାଇମ ପ୍ରକାର ଆ�
 msgstr[1] "%s ନୂତନ ମାଇମ ପ୍ରକାରଗୁଡ଼ିକୁ ଆବଶ୍ୟକ"
 
 #. TRANSLATORS: a random program which we can't get the name wants to do something
-#: ../src/packagekit-service/gpk-dbus-task.c:1925
+#: ../src/packagekit-service/gpk-dbus-task.c:1921
 msgid "A program requires a new mime type"
 msgid_plural "A program requires new mime types"
 msgstr[0] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଗୋଟିଏ ନୂତନ ମାଇମ ପ୍ରକାର ଆବଶ୍ୟକ କରିଥାଏ"
 msgstr[1] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ନୂତନ ମାଇମ ପ୍ରକାରଗୁଡ଼ିକୁ ଆବଶ୍ୟକ କରିଥାଏ"
 
 #. TRANSLATORS: title: searching for mime type handlers
-#: ../src/packagekit-service/gpk-dbus-task.c:1940
+#: ../src/packagekit-service/gpk-dbus-task.c:1936
 msgid "Searching for file handlers"
 msgstr "ଗୋଟିଏ ଫାଇଲ ନିୟନ୍ତ୍ରକକୁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: we could not parse the ISO639 code from the fontconfig tag name
-#: ../src/packagekit-service/gpk-dbus-task.c:2022
+#: ../src/packagekit-service/gpk-dbus-task.c:2014
 msgid "Language tag not parsed"
 msgstr "ଭାଷା ସୂଚକ ବିଶ୍ଳେଷଣ ହୋଇନାହିଁ"
 
 #. TRANSLATORS: we could not find en_US string for ISO639 code
-#: ../src/packagekit-service/gpk-dbus-task.c:2030
+#: ../src/packagekit-service/gpk-dbus-task.c:2022
 msgid "Language code not matched"
 msgstr "ଭାଷା ସୂଚକ ମେଳ ହେଉନାହିଁ"
 
 #. TRANSLATORS: title: cannot find in sources
-#: ../src/packagekit-service/gpk-dbus-task.c:2090
+#: ../src/packagekit-service/gpk-dbus-task.c:2082
 msgid "Failed to find font"
 msgid_plural "Failed to find fonts"
 msgstr[0] "ଅକ୍ଷରରୂପ ଖୋଜିବାରେ ବିଫଳ"
 msgstr[1] "ଅକ୍ଷରରୂପଗୁଡ଼ିକୁ ଖୋଜିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: message: tell the user we suck
-#: ../src/packagekit-service/gpk-dbus-task.c:2098
+#: ../src/packagekit-service/gpk-dbus-task.c:2090
 msgid "No new fonts can be found for this document"
 msgstr "ଏହି ଦଲିଲ ପାଇଁ କୌଣସି ନୂତନ ଅକ୍ଷରରୂପ ମିଳିଲା ନାହିଁ"
 
 #. TRANSLATORS: we need to download a new font package to display a document
-#: ../src/packagekit-service/gpk-dbus-task.c:2283
+#: ../src/packagekit-service/gpk-dbus-task.c:2275
 msgid "An additional font is required to view this document correctly."
 msgid_plural "Additional fonts are required to view this document correctly."
 msgstr[0] "ଏହି ଦଲିଲକୁ ସଠିକଭାବରେ ଦେଖିବା ପାଇଁ ଗୋଟିଏ ଅତିରିକ୍ତ ଅକ୍ଷରରୂପ ଆବଶ୍ୟକ।"
 msgstr[1] "ଏହି ଦଲିଲକୁ ସଠିକଭାବରେ ଦେଖିବା ପାଇଁ ଗୋଟିଏ ଅତିରିକ୍ତ ଅକ୍ଷରରୂପ ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: we need to download a new font package to display a document
-#: ../src/packagekit-service/gpk-dbus-task.c:2287
+#: ../src/packagekit-service/gpk-dbus-task.c:2279
 #, fuzzy
 msgid "Do you want to search for a suitable package now?"
 msgid_plural "Do you want to search for suitable packages now?"
@@ -3174,7 +2841,7 @@ msgstr[0] "ଆପଣ ବର୍ତ୍ତମାନ ଗୋଟିଏ ଉପଯୁକ
 msgstr[1] "ଆପଣ ବର୍ତ୍ତମାନ ଗୋଟିଏ ଉପଯୁକ୍ତ ଅକ୍ଷରରୂପଗୁଡ଼ିକୁ ଖୋଜିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
 
 #. TRANSLATORS: string is a program name, e.g. "Movie Player"
-#: ../src/packagekit-service/gpk-dbus-task.c:2297
+#: ../src/packagekit-service/gpk-dbus-task.c:2289
 #, c-format
 msgid "%s wants to install a font"
 msgid_plural "%s wants to install fonts"
@@ -3182,83 +2849,83 @@ msgstr[0] "%s ଗୋଟିଏ ଅକ୍ଷରରୂପ ସ୍ଥାପନ କର
 msgstr[1] "%s ଅକ୍ଷରରୂପଗୁଡ଼ିକୁ ସ୍ଥାପନ କରିବାକୁ ଚାହୁଁଅଛି"
 
 #. TRANSLATORS: a random program which we can't get the name wants to do something
-#: ../src/packagekit-service/gpk-dbus-task.c:2300
+#: ../src/packagekit-service/gpk-dbus-task.c:2292
 msgid "A program wants to install a font"
 msgid_plural "A program wants to install fonts"
 msgstr[0] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଅକ୍ଷରରୂପ ସ୍ଥାପନ କରିବାକୁ ଚାହୁଁଅଛି"
 msgstr[1] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଅକ୍ଷରରୂପଗୁଡ଼ିକୁ ସ୍ଥାପନ କରିବାକୁ ଚାହୁଁଅଛି"
 
 #. TRANSLATORS: title to show when searching for font files
-#: ../src/packagekit-service/gpk-dbus-task.c:2316
+#: ../src/packagekit-service/gpk-dbus-task.c:2308
 msgid "Searching for font"
 msgid_plural "Searching for fonts"
 msgstr[0] "ଅକ୍ଷରରୂପ ଖୋଜୁଅଛି"
 msgstr[1] "ଅକ୍ଷରରୂପଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: we are listing the services in a box
-#: ../src/packagekit-service/gpk-dbus-task.c:2356
+#: ../src/packagekit-service/gpk-dbus-task.c:2344
 msgid "The following service is required:"
 msgid_plural "The following services are required:"
 msgstr[0] "ନିମ୍ନଲିଖିତ ସର୍ଭିସ୍‌ଟି ଆବଶ୍ୟକ:"
 msgstr[1] "ନିମ୍ନଲିଖିତ ସର୍ଭିସ୍‌ଗୁଡ଼ିକ ଆବଶ୍ୟକ:"
 
-#: ../src/packagekit-service/gpk-dbus-task.c:2376
+#: ../src/packagekit-service/gpk-dbus-task.c:2364
 msgid "Plasma requires an additional service for this operation"
 msgid_plural "Plasma requires additional services for this operation"
 msgstr[0] "ଏହି ପ୍ରୟୋଗ ପାଇଁ  ପ୍ଲାଜମା ଅତିରିକ୍ତ ସର୍ଭିସ ଆବଶ୍ୟକ କରିଥାଏ"
 msgstr[1] "ଏହି ପ୍ରୟୋଗ ପାଇଁ  ପ୍ଲାଜମା ଅତିରିକ୍ତ ସର୍ଭିସଗୁଡ଼ିକୁ ଆବଶ୍ୟକ କରିଥାଏ"
 
-#: ../src/packagekit-service/gpk-dbus-task.c:2434
+#: ../src/packagekit-service/gpk-dbus-task.c:2422
 msgid "Failed to search for Plasma service"
 msgstr "ପ୍ଲାଜମା ସର୍ଭିସ୍‌କୁ ଖୋଜିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: no package sources have the wanted Plasma service
-#: ../src/packagekit-service/gpk-dbus-task.c:2436
+#: ../src/packagekit-service/gpk-dbus-task.c:2424
 #, fuzzy
 msgid "Could not find service in any configured package source"
 msgstr "ଯେକୌଣସି ବିନ୍ୟାସିତ ସଫ୍ଟୱେର ଉତ୍ସରେ ସର୍ଭିସ୍‌କୁ ଖୋଜିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: search for Plasma services
-#: ../src/packagekit-service/gpk-dbus-task.c:2541
+#: ../src/packagekit-service/gpk-dbus-task.c:2529
 msgid "Searching for services"
 msgstr "ସର୍ଭିସ୍‌ ସନ୍ଧାନ କରୁଅଛି"
 
-#: ../src/packagekit-service/gpk-dbus-task.c:2559
+#: ../src/packagekit-service/gpk-dbus-task.c:2547
 #, c-format
 msgid "Searching for service: %s"
 msgstr "ସର୍ଭିସ୍‌ ପାଇଁ ସନ୍ଧାନ କରୁଅଛି: %s"
 
-#: ../src/packagekit-service/gpk-dbus-task.c:2616
+#: ../src/packagekit-service/gpk-dbus-task.c:2600
 msgid "Failed to remove package"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ କାଢ଼ିବାରେ ବିଫଳ"
 
-#: ../src/packagekit-service/gpk-dbus-task.c:2692
+#: ../src/packagekit-service/gpk-dbus-task.c:2676
 msgid "Install the following driver"
 msgid_plural "Install the following drivers"
 msgstr[0] "ନିମ୍ନଲିଖିତ ଡ୍ରାଇଭର୍‌କୁ ସ୍ଥାପନ କରନ୍ତୁ"
 msgstr[1] "ନିମ୍ନଲିଖିତ ଡ୍ରାଇଭର୍‌ଗୁଡ଼ିକୁ ସ୍ଥାପନ କରନ୍ତୁ"
 
 #. TRANSLATORS: failed to find the package for the file
-#: ../src/packagekit-service/gpk-dbus-task.c:2899
+#: ../src/packagekit-service/gpk-dbus-task.c:2880
 msgid "Failed to find package for this file"
 msgstr "ଏହି ଫାଇଲ ପାଇଁ ପ୍ୟାକେଜକୁ ଖୋଜିବାରେ ବିଫଳ"
 
 #. TRANSLATORS: a program wants to remove a file, e.g. /lib/moo.so
-#: ../src/packagekit-service/gpk-dbus-task.c:2976
+#: ../src/packagekit-service/gpk-dbus-task.c:2957
 msgid "The following file will be removed:"
 msgid_plural "The following files will be removed:"
 msgstr[0] "ନିମ୍ନଲିଖିତ ଫାଇଲକୁ କଢ଼ାଯିବ:"
 msgstr[1] "ନିମ୍ନଲିଖିତ ଫାଇଲଗୁଡ଼ିକୁ କଢ଼ାଯିବ:"
 
 #. TRANSLATORS: confirm with the user
-#: ../src/packagekit-service/gpk-dbus-task.c:2979
+#: ../src/packagekit-service/gpk-dbus-task.c:2960
 msgid "Do you want to remove this file now?"
 msgid_plural "Do you want to remove these files now?"
 msgstr[0] "ଆପଣ ବର୍ତ୍ତମାନ ଏହି ଫାଇଲକୁ କାଢ଼ିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
 msgstr[1] "ଆପଣ ବର୍ତ୍ତମାନ ଏହି ଫାଇଲଗୁଡ଼ିକୁ କାଢ଼ିବାକୁ ଚାହୁଁଛନ୍ତି କି?"
 
 #. TRANSLATORS: string is a program name, e.g. "Movie Player"
-#: ../src/packagekit-service/gpk-dbus-task.c:2984
+#: ../src/packagekit-service/gpk-dbus-task.c:2965
 #, c-format
 msgid "%s wants to remove a file"
 msgid_plural "%s wants to remove files"
@@ -3266,11 +2933,15 @@ msgstr[0] "%s ଗୋଟିଏ ଫାଇଲକୁ କାଢ଼ିବାକୁ ଚ
 msgstr[1] "%s ଫାଇଲଗୁଡ଼ିକୁ କାଢ଼ିବାକୁ ଚାହୁଁଅଛି"
 
 #. TRANSLATORS: a random program which we can't get the name wants to do something
-#: ../src/packagekit-service/gpk-dbus-task.c:2987
+#: ../src/packagekit-service/gpk-dbus-task.c:2968
 msgid "A program wants to remove a file"
 msgid_plural "A program wants to remove files"
 msgstr[0] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଏକ ଫାଇଲକୁ କାଢ଼ିବାକୁ ଚାହୁଁଅଛି"
 msgstr[1] "ଗୋଟିଏ ପ୍ରଗ୍ରାମ ଫାଇଲଗୁଡ଼ିକୁ କାଢ଼ିବାକୁ ଚାହୁଁଅଛି"
+
+#: ../src/packagekit-service/gpk-dbus-task.c:3178
+msgid "Software Install"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
 
 #. TRANSLATORS: check once an hour
 #: ../src/preferences/gpk-prefs.c:62
@@ -3328,17 +2999,17 @@ msgstr ""
 msgid "Software Settings"
 msgstr "ସଫ୍ଟୱେର ବିନ୍ୟାସ"
 
-#: ../src/software/gpk-application.c:205
+#: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:484
+#: ../src/software/gpk-application.c:567
 msgid "No results were found."
 msgstr "କୌଣସି ଫଳାଫଳ ମିଳିଲା ନାହିଁ."
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:490
+#: ../src/software/gpk-application.c:573
 #, fuzzy
 msgid ""
 "Try searching package distributions by clicking the icon next to the search "
@@ -3346,89 +3017,89 @@ msgid ""
 msgstr "ଖୋଜିବାକୁ ଥିବା ପାଠ୍ୟ ପରବର୍ତ୍ତୀ ଚିତ୍ରସଂକେତ ସଫ୍ଟୱେର୍‌ ବର୍ଣ୍ଣନାଗୁଡ଼ିକୁ ଖୋଜିବାକୁ ଚେଷ୍ଟାକରନ୍ତୁ।"
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:493
+#: ../src/software/gpk-application.c:576
 msgid "Try again with a different search term."
 msgstr "ଅନ୍ୟ ଏକ ସନ୍ଧାନ ବସ୍ତୁ ସହିତ ପୁଣିଥରେ ଚେଷ୍ଟାକରନ୍ତୁ."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:854
+#: ../src/software/gpk-application.c:952
 msgid "Changes not applied"
 msgstr "ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ପ୍ରୟୋଗକରାଯାଇପାରିବ ନାହିଁ"
 
-#: ../src/software/gpk-application.c:855
+#: ../src/software/gpk-application.c:953
 msgid "Close _Anyway"
 msgstr "ଯେକୌଣସି ପ୍ରକାରେ ବନ୍ଦକରନ୍ତୁ (_A)"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:859
+#: ../src/software/gpk-application.c:957
 msgid "You have made changes that have not yet been applied."
 msgstr "ଆପଣ କରିଥିବା ପରିବର୍ତ୍ତନଗୁଡ଼ିକୁ ଏପର୍ଯ୍ୟନ୍ତ ପ୍ରୟୋଗ କରାଯାଇନାହିଁ."
 
-#: ../src/software/gpk-application.c:860
+#: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "ଯଦି ଆପଣ ଏହି ୱିଣ୍ଡୋକୁ ବନ୍ଦକରନ୍ତି ତେବେ ପରିବର୍ତ୍ତନଗୁଡ଼ିକ ନଷ୍ଟହୋଇଯିବ."
 
-#: ../src/software/gpk-application.c:1159
+#: ../src/software/gpk-application.c:1262
 #, fuzzy
 msgid "Visit the app's website"
 msgstr "ପ୍ରକଳ୍ପ ୱେବସାଇଟକୁ ପରିଦର୍ଶନ କରନ୍ତୁ"
 
-#: ../src/software/gpk-application.c:1176
+#: ../src/software/gpk-application.c:1279
 msgid "Make a donation"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1193
+#: ../src/software/gpk-application.c:1296
 msgid "Report a problem"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1210
+#: ../src/software/gpk-application.c:1313
 msgid "Translate into your language"
 msgstr ""
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:1245
+#: ../src/software/gpk-application.c:1348
 msgid "Size"
 msgstr "ଆକାର"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:1248
+#: ../src/software/gpk-application.c:1351
 msgid "Installed size"
 msgstr "ସ୍ଥାପିତ ଆକାର"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:1251
+#: ../src/software/gpk-application.c:1354
 msgid "Download size"
 msgstr "ଆକାର ଆହରଣ କରନ୍ତୁ"
 
 #. TRANSLATORS: entry tooltip: basic search by package name
-#: ../src/software/gpk-application.c:1381
+#: ../src/software/gpk-application.c:1489
 #, fuzzy
 msgid "Searching for distribution packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
 
 #. TRANSLATORS: entry tooltip: applications search
-#: ../src/software/gpk-application.c:1404
+#: ../src/software/gpk-application.c:1512
 #, fuzzy
 msgid "Searching for applications"
 msgstr "ପ୍ଲଗଇନଗୁଡ଼ିକୁ ଖୋଜନ୍ତୁ"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1424
+#: ../src/software/gpk-application.c:1535
 #, fuzzy
 msgid "Search for apps"
 msgstr "ପ୍ଲଗଇନଗୁଡ଼ିକୁ ଖୋଜନ୍ତୁ"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1430
+#: ../src/software/gpk-application.c:1543
 #, fuzzy
 msgid "Search for distribution packages"
 msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଖୋଜୁଅଛି"
 
-#: ../src/software/gpk-application.c:1462
+#: ../src/software/gpk-application.c:1576
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "GNU General Public License Version 2 ଅନ୍ତର୍ଗତରେ ଅନୁମତି ପ୍ରାପ୍ତ"
 
-#: ../src/software/gpk-application.c:1463
+#: ../src/software/gpk-application.c:1577
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3440,7 +3111,7 @@ msgstr ""
 "Software Foundation; either version 2 of the License, or (at your option) "
 "any later version."
 
-#: ../src/software/gpk-application.c:1467
+#: ../src/software/gpk-application.c:1581
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3452,7 +3123,7 @@ msgstr ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 
-#: ../src/software/gpk-application.c:1471
+#: ../src/software/gpk-application.c:1585
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3463,32 +3134,32 @@ msgstr ""
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:1477
+#: ../src/software/gpk-application.c:1591
 msgid "translator-credits"
 msgstr "ମନୋଜ କୁମାର ଗିରି <mgiri@redhat.com>"
 
-#: ../src/software/gpk-application.c:1498
+#: ../src/software/gpk-application.c:1610
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "ସଫ୍ଟୱେର ଉତ୍ସ"
 
-#: ../src/software/gpk-application.c:1736
+#: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
 msgstr "ଆପଣ ଏହି ପ୍ରୟୋଗକୁ ପୁନର୍ଚାଳନ କରିବା ଆବଶ୍ୟକ।"
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:1953
+#: ../src/software/gpk-application.c:2098
 #: ../src/software-update/gpk-update-viewer.c:3398
 msgid "Show the program version and exit"
 msgstr "ପ୍ରଗ୍ରାମ ସଂସ୍କରଣକୁ ଦର୍ଶାନ୍ତୁ ଏବଂ ପ୍ରସ୍ଥାନକରନ୍ତୁ"
 
-#: ../src/software/gpk-application.c:1967
+#: ../src/software/gpk-application.c:2112
 msgid "Install Software"
 msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ କରନ୍ତୁ"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:1983
+#: ../src/software/gpk-application.c:2128
 #, fuzzy
 msgid "Software installer"
 msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ"
@@ -3502,7 +3173,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: the repo name is invalid or not found, fall back to this
-#: ../src/software/gpk-backend.c:163
+#: ../src/software/gpk-backend.c:173
 msgid "Invalid"
 msgstr "ଅବୈଧ"
 
@@ -3929,6 +3600,310 @@ msgstr "ନୂତନ ବଣ୍ଟନ ଉନ୍ନୟନ ପ୍ରକାଶନ '%
 #: ../src/software-update/gpk-update-viewer.c:3411
 msgid "Update Software"
 msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
+
+#: ../src/third-parties/gpk-flatpak-installer.c:76
+#, fuzzy, c-format
+msgid "Installing %s\n"
+msgstr "ସ୍ଥାପନ କରୁଅଛି"
+
+#: ../src/third-parties/gpk-flatpak-installer.c:79
+#, fuzzy, c-format
+msgid "Updating %s\n"
+msgstr "ଅଦ୍ୟତନ କରୁଅଛି"
+
+#: ../src/third-parties/gpk-flatpak-installer.c:82
+#, fuzzy, c-format
+msgid "Uninstalling %s\n"
+msgstr "ପୁନଃ ସ୍ଥାପନ କରୁଅଛି"
+
+#: ../src/third-parties/gpk-third-parties.c:79
+#: ../src/third-parties/gpk-third-parties.c:191
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "ସଫ୍ଟୱେର ସ୍ଥାପନ କରିବାରେ ବିଫଳ"
+
+#: ../src/third-parties/gpk-third-parties.c:94
+#, fuzzy, c-format
+msgid "“%s” has been installed"
+msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ସ୍ଥାପିତ ହୋଇସାରିଛି"
+
+#: ../src/third-parties/gpk-third-parties.c:96
+#, fuzzy
+msgid "The app has been installed"
+msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ସ୍ଥାପିତ ହୋଇସାରିଛି"
+
+#: ../src/third-parties/gpk-third-parties.c:99
+#, fuzzy, c-format
+msgid "“%s” is already installed"
+msgstr "ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ"
+
+#: ../src/third-parties/gpk-third-parties.c:101
+#, fuzzy
+msgid "This app is already installed"
+msgstr "ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ"
+
+#: ../src/third-parties/gpk-third-parties.c:111
+msgid "Open it any time from the Applications Menu"
+msgstr ""
+
+#: ../src/third-parties/gpk-third-parties.c:223
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#: ../src/third-parties/gpk-third-parties.c:245
+#, fuzzy, c-format
+msgid "Download size may be up to %s"
+msgstr "ଆକାର ଆହରଣ କରନ୍ତୁ"
+
+#, fuzzy
+#~ msgid "Third Parties Installer"
+#~ msgstr "ପ୍ୟାକେଜ ସ୍ଥାପକ"
+
+#, fuzzy, c-format
+#~ msgid "%u %s %u %s"
+#~ msgstr "%i %s %i %s"
+
+#~ msgid "minute"
+#~ msgid_plural "minutes"
+#~ msgstr[0] "ମିନଟ"
+#~ msgstr[1] "ମିନଟ"
+
+#~ msgid "second"
+#~ msgid_plural "seconds"
+#~ msgstr[0] "ସେକଣ୍ଡ"
+#~ msgstr[1] "ସେକଣ୍ଡ"
+
+#~ msgid "hour"
+#~ msgid_plural "hours"
+#~ msgstr[0] "ଘଣ୍ଟା"
+#~ msgstr[1] "ଘଣ୍ଟା"
+
+#~ msgid "Stable"
+#~ msgstr "ସ୍ଥିର"
+
+#~ msgid "Unstable"
+#~ msgstr "ଅସ୍ଥିର"
+
+#~ msgid "Testing"
+#~ msgstr "ପରୀକ୍ଷଣ"
+
+#, fuzzy, c-format
+#~ msgid "%u trivial update"
+#~ msgid_plural "%u trivial updates"
+#~ msgstr[0] "%i ଛୋଟ ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ଛୋଟ ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#, fuzzy, c-format
+#~ msgid "%u update"
+#~ msgid_plural "%u updates"
+#~ msgstr[0] "%i ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#, fuzzy, c-format
+#~ msgid "%u important update"
+#~ msgid_plural "%u important updates"
+#~ msgstr[0] "%i ଦରକାରୀ ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ଦରକାରୀ ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#, fuzzy, c-format
+#~ msgid "%u security update"
+#~ msgid_plural "%u security updates"
+#~ msgstr[0] "%i ସୁରକ୍ଷା ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ସୁରକ୍ଷା ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#, fuzzy, c-format
+#~ msgid "%u bug fix update"
+#~ msgid_plural "%u bug fix updates"
+#~ msgstr[0] "%i ତ୍ରୁଟି ନିବାରଣ ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ତ୍ରୁଟି ନିବାରଣ ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#, fuzzy, c-format
+#~ msgid "%u enhancement update"
+#~ msgid_plural "%u enhancement updates"
+#~ msgstr[0] "%i ବୃଦ୍ଧି ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ବୃଦ୍ଧି ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#, fuzzy, c-format
+#~ msgid "%u blocked update"
+#~ msgid_plural "%u blocked updates"
+#~ msgstr[0] "%i ଅବରୂଦ୍ଧ ଅଦ୍ୟତନ"
+#~ msgstr[1] "%i ଅବରୂଦ୍ଧ ଅଦ୍ୟତନଗୁଡ଼ିକ"
+
+#~ msgid "Getting dependencies"
+#~ msgstr "ଆଶ୍ରିତମାନଙ୍କୁ ଗ୍ରହଣ କରୁଅଛି"
+
+#~ msgid "Getting update detail"
+#~ msgstr "ଅଦ୍ୟତନ ବିବରଣୀ ଗ୍ରହଣ କରୁଅଛି"
+
+#~ msgid "Getting details"
+#~ msgstr "ବିବରଣୀ ଗ୍ରହଣ କରୁଅଛି"
+
+#~ msgid "Getting requires"
+#~ msgstr "ଆବଶ୍ୟକଗୁଡ଼ିକୁ ଗ୍ରହଣକରୁଅଛି"
+
+#~ msgid "Getting updates"
+#~ msgstr "ଅଦ୍ୟତନଗୁଡ଼ିକୁ ଗ୍ରହଣକରୁଅଛି"
+
+#~ msgid "Searching details"
+#~ msgstr "ବିବରଣୀ ଖୋଜୁଅଛି"
+
+#~ msgid "Searching groups"
+#~ msgstr "ଶ୍ରେଣୀ ଖୋଜୁଅଛି"
+
+#~ msgid "Searching for package name"
+#~ msgstr "ପ୍ୟାକେଜ ନାମ ଖୋଜୁଅଛି"
+
+#~ msgid "Installing file"
+#~ msgstr "ଫାଇଲ ସ୍ଥାପନକରୁଅଛି"
+
+#~ msgid "Refreshing package cache"
+#~ msgstr "ପ୍ୟାକେଜ କ୍ୟାଶକୁ ସତେଜକରୁଅଛି"
+
+#~ msgid "Updating packages"
+#~ msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ ଅଦ୍ୟତନକରୁଅଛି"
+
+#~ msgid "Getting list of repositories"
+#~ msgstr "ସଂଗ୍ରହାଳୟଗୁଡ଼ିକର ତାଲିକା ପାଉଅଛି"
+
+#~ msgid "Enabling repository"
+#~ msgstr "ସଂଗ୍ରହାଳୟ ସକ୍ରିୟକରୁଅଛି"
+
+#, fuzzy
+#~ msgid "Removing repository"
+#~ msgstr "ସଂଗ୍ରହାଳୟ ସକ୍ରିୟକରୁଅଛି"
+
+#~ msgid "Setting repository data"
+#~ msgstr "ସଂଗ୍ରହାଳୟ ତଥ୍ୟ ବିନ୍ୟାସ କରୁଅଛି"
+
+#~ msgid "Resolving"
+#~ msgstr "ସମାଧାନକରୁଅଛି"
+
+#~ msgid "Getting file list"
+#~ msgstr "ଫାଇଲ ତାଲିକା ପାଉଅଛି"
+
+#~ msgid "Getting what provides"
+#~ msgstr "କଣ ପ୍ରଦାନକରୁଅଛି ତାହା ପାଉଅଛି"
+
+#~ msgid "Installing signature"
+#~ msgstr "ହସ୍ତାକ୍ଷର ସ୍ଥାପନ କରୁଅଛି"
+
+#~ msgid "Getting package lists"
+#~ msgstr "ପ୍ୟାକେଜ ତାଲିକା ଗ୍ରହଣ କରୁଅଛି"
+
+#~ msgid "Accepting EULA"
+#~ msgstr "EULA ଗ୍ରହଣ କରୁଅଛି"
+
+#~ msgid "Getting distribution upgrade information"
+#~ msgstr "ବଣ୍ଟନ ଉନ୍ନୟନ ସୂଚନା ପାଉଅଛି"
+
+#~ msgid "Getting categories"
+#~ msgstr "ବିଭାଗଗୁଡ଼ିକୁ ଗ୍ରହଣକରୁଅଛି"
+
+#~ msgid "Getting old transactions"
+#~ msgstr "ପୁରୁଣା ତତ୍ୱଗୁଡ଼ିକୁ ଗ୍ରହଣ କରୁଅଛି"
+
+#~ msgid "Repairing the system"
+#~ msgstr "ତନ୍ତ୍ରକୁ ସଜାଡ଼ୁଅଛି"
+
+#~ msgid "Accessibility"
+#~ msgstr "ଅଭିଗମ୍ୟତା"
+
+#~ msgid "Programming"
+#~ msgstr "ପ୍ରଗ୍ରାମିଙ୍ଗ"
+
+#~ msgid "System"
+#~ msgstr "ତନ୍ତ୍ର"
+
+#~ msgid "GNOME desktop"
+#~ msgstr "GNOME ଡେସ୍କଟପ"
+
+#~ msgid "KDE desktop"
+#~ msgstr "KDE ଡେସ୍କଟପ"
+
+#~ msgid "Xfce desktop"
+#~ msgstr "Xfce ଡେସ୍କଟପ"
+
+#~ msgid "Other desktops"
+#~ msgstr "ଅନ୍ଯାନ୍ୟ ଡେସ୍କଟପ"
+
+#~ msgid "Publishing"
+#~ msgstr "ପ୍ରକାଶନ କରୁଅଛି"
+
+#~ msgid "Servers"
+#~ msgstr "ସର୍ଭରଗୁଡ଼ିକ"
+
+#~ msgid "Fonts"
+#~ msgstr "ଅକ୍ଷରରୂପଗୁଡ଼ିକ"
+
+#~ msgid "Admin tools"
+#~ msgstr "ପ୍ରଶାସନ ଉପକରଣଗୁଡ଼ିକ"
+
+#~ msgid "Legacy"
+#~ msgstr "ପୁରୁଣା"
+
+#~ msgid "Localization"
+#~ msgstr "ସ୍ଥାନୀୟକରଣ"
+
+#~ msgid "Virtualization"
+#~ msgstr "ଆଭାସୀକରଣ"
+
+#~ msgid "Security"
+#~ msgstr "ସୁରକ୍ଷା"
+
+#~ msgid "Power management"
+#~ msgstr "ଶକ୍ତି ପରିଚାଳନା"
+
+#~ msgid "Communication"
+#~ msgstr "ସଞ୍ଚାର ବ୍ୟବସ୍ଥା"
+
+#~ msgid "Network"
+#~ msgstr "ନେଟୱର୍କ"
+
+#~ msgid "Maps"
+#~ msgstr "ପ୍ରତିଚିତ୍ରଣଗୁଡ଼ିକ"
+
+#, fuzzy
+#~ msgid "Package sources"
+#~ msgstr "ପ୍ୟାକେଜଟି ତ୍ରୁଟିଯୁକ୍ତ"
+
+#~ msgid "Documentation"
+#~ msgstr "ଦଲିଲିକରଣ"
+
+#~ msgid "Electronics"
+#~ msgstr "ଇଲେକ୍ଟ୍ରନିକସ"
+
+#~ msgid "Package collections"
+#~ msgstr "ପ୍ୟାକେଜ ସଂଗ୍ରହ"
+
+#~ msgid "Vendor"
+#~ msgstr "ବିକ୍ରେତା"
+
+#~ msgid "Newest packages"
+#~ msgstr "ନୂତନତମ ପ୍ୟାକେଜଗୁଡ଼ିକ"
+
+#~ msgid "Unknown group"
+#~ msgstr "ଅଜଣା ଶ୍ରେଣୀ"
+
+#~ msgid "Files to install"
+#~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଫାଇଲଗୁଡ଼ିକ"
+
+#~ msgid "PackageKit File Installer"
+#~ msgstr "PackageKit ଫାଇଲ ସ୍ଥାପକ"
+
+#~ msgid "Local file installer"
+#~ msgstr "ସ୍ଥାନୀୟ ଫାଇଲ ସ୍ଥାପକ"
+
+#~ msgid "Failed to install a package to provide a file"
+#~ msgstr "ଫାଇଲ ପ୍ରଦାନ କରିବା ପାଇଁ ଗୋଟିଏ ପ୍ୟାକେଜ ସ୍ଥାପନ କରିବାରେ ବିଫଳ"
+
+#~ msgid "You need to specify a file to install"
+#~ msgstr "ଆପଣଙ୍କୁ ସ୍ଥାପନ କରିବା ପାଇଁ ଗୋଟିଏ ଫାଇଲ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବା ଉଚିତ"
+
+#~ msgid "Packages to install"
+#~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଥିବା ପ୍ୟାକେଜଗୁଡ଼ିକ"
+
+#~ msgid "Package Name Installer"
+#~ msgstr "ପ୍ୟାକେଜ ନାମ ସ୍ଥାପକ"
 
 #, fuzzy
 #~ msgid "Select to Install…"
@@ -4621,9 +4596,6 @@ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 #~ msgid "Configuration files were changed"
 #~ msgstr "ବିନ୍ୟାସ ଫାଇଲଗୁଡ଼ିକ ପରିବର୍ତ୍ତିତ"
 
-#~ msgid "Package is already installed"
-#~ msgstr "ପ୍ୟାକେଜଟି ପୂର୍ବରୁ ସ୍ଥାପିତ"
-
 #~ msgid "Automatic cleanup is being ignored"
 #~ msgstr "ସ୍ୱୟଂଚାଳିତ ସଫାକରିବାକୁ ଅଗ୍ରାହ୍ୟ କରାଯାଇଛି"
 
@@ -4665,9 +4637,6 @@ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 
 #~ msgid "You need to specify a mime type to install"
 #~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଆପଣଙ୍କୁ ଗୋଟିଏ ମାଇମ ଟାଇପ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବା ଉଚିତ"
-
-#~ msgid "Local files to install"
-#~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ସ୍ଥାନୀୟ ଫାଇଲଗୁଡ଼ିକ"
 
 #~ msgid "Single File Installer"
 #~ msgstr "ଏକକ ଫାଇଲ ସ୍ଥାପକ"
@@ -4765,8 +4734,8 @@ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 #~ "Automatically update these types of updates. Options are \"all\", "
 #~ "\"security\", or \"none\""
 #~ msgstr ""
-#~ "ଏହି ପ୍ରକାର ଅଦ୍ୟତନଗୁଡ଼ିକୁ ସ୍ୱୟଂଚାଳିତ ଭାବେ ଅଦ୍ୟତନ କରନ୍ତୁ. ବିକଳ୍ପଗୁଡ଼ିକ ହେଲା \"ସମସ୍ତ\", \"ସୁରକ୍ଷା"
-#~ "\", କିମ୍ବା \"କେହିନୁହଁ\""
+#~ "ଏହି ପ୍ରକାର ଅଦ୍ୟତନଗୁଡ଼ିକୁ ସ୍ୱୟଂଚାଳିତ ଭାବେ ଅଦ୍ୟତନ କରନ୍ତୁ. ବିକଳ୍ପଗୁଡ଼ିକ ହେଲା \"ସମସ୍ତ\", "
+#~ "\"ସୁରକ୍ଷା\", କିମ୍ବା \"କେହିନୁହଁ\""
 
 #~ msgid "Devices that should be ignored"
 #~ msgstr "ଉପକରଣ ଯାହାକୁ ଅଗ୍ରାହ୍ୟ କରିବା ଉଚିତ"
@@ -5006,9 +4975,6 @@ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 #~ msgid "Backend name:"
 #~ msgstr "ପୃଷ୍ଠଭୂମି ନାମ:"
 
-#~ msgid "Package Installer"
-#~ msgstr "ପ୍ୟାକେଜ ସ୍ଥାପକ"
-
 #~ msgid "_Automatically install:"
 #~ msgstr "ସ୍ୱୟଂଚାଳିତ ସ୍ଥାପନ (_A):"
 
@@ -5205,9 +5171,6 @@ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 #~ msgid "Failed to install package from name"
 #~ msgstr "ନାମରୁ ପ୍ୟାକେଜ ସ୍ଥାପନ କରିବାରେ ବିଫଳ"
 
-#~ msgid "You need to specify a package to install"
-#~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଆପଣଙ୍କୁ କେବଳ ଗୋଟିଏ ପ୍ୟାକେଜ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବାକୁ ହେବ"
-
 #~ msgid "You need to specify a filename to install"
 #~ msgstr "ସ୍ଥାପନ କରିବା ପାଇଁ ଗୋଟିଏ ଫାଇଲନାମ ନିର୍ଦ୍ଦିଷ୍ଟ କରିବା ଉଚିତ"
 
@@ -5280,10 +5243,6 @@ msgstr "ସଫ୍ଟୱେରକୁ ଅଦ୍ୟତନ କରନ୍ତୁ"
 #~| msgid "Package '%s' has been removed"
 #~ msgid "Packages have been removed"
 #~ msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକୁ କଢ଼ାସରିଛି"
-
-#~| msgid "Package '%s' has been installed"
-#~ msgid "Packages have been installed"
-#~ msgstr "ପ୍ୟାକେଜଗୁଡ଼ିକ ସ୍ଥାପିତ ହୋଇସାରିଛି"
 
 #~ msgid "System has been updated"
 #~ msgstr "ତନ୍ତ୍ର ଅଦ୍ୟତିତ ହୋଇସାରିଛି"
