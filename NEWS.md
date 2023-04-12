@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Version 0.3.92] - 2023-04-11
+### Added
+- Use radio menu items to show that is searching.
+- Improves the fetching of the icons from components.
+- Remove old code and modernize some code.
+- Update repositories on first run. Issue #9.
+- Use appstream icons also for cached icons.
+- Search by main categories. See ximion/appstream#456 for context.
+- Initial version of Xings Third Parties to install apps with flatpakrefs.
+- Add support for special categories, as "Editor's suggestions" or "New applications".
+
 ## [Version 0.3.91] - 2022-03-15
 ### Added
  - Yet another modernization of the main interface of software.
