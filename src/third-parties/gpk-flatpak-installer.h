@@ -45,10 +45,29 @@ gchar *
 gpk_flatpak_installer_get_name (GpkFlatpakInstaller *installer);
 
 gboolean
-gpk_flatpak_installer_perform (GpkFlatpakInstaller *installer, GError **error);
+gpk_flatpak_installer_perform_finish (GpkFlatpakInstaller  *installer,
+                                      GAsyncResult         *result,
+                                      GError              **error);
 
 gboolean
-gpk_flatpak_installer_preprare_flatpakref (GpkFlatpakInstaller *installer, gchar *file, GError **error);
+gpk_flatpak_installer_perform_async (GpkFlatpakInstaller  *installer,
+                                     GAsyncReadyCallback   ready_callback,
+                                     gpointer              callback_data,
+                                     GCancellable         *cancellable,
+                                     GError              **error);
+
+gboolean
+gpk_flatpak_installer_prepare_finish (GpkFlatpakInstaller  *installer,
+                                      GAsyncResult         *result,
+                                      GError              **error);
+
+gboolean
+gpk_flatpak_installer_prepare_async (GpkFlatpakInstaller  *installer,
+                                      gchar                *file,
+                                      GAsyncReadyCallback   ready_callback,
+                                      gpointer              callback_data,
+                                      GCancellable         *cancellable,
+                                      GError              **error);
 
 GpkFlatpakInstaller *
 gpk_flatpak_installer_new (void);

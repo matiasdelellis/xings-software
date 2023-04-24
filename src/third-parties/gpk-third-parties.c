@@ -36,52 +36,21 @@
 typedef struct {
 	GtkApplication      *application;
 	GtkBuilder          *builder;
+
 	GpkFlatpakInstaller *installer;
+	GCancellable        *cancellable;
 } GpkThirdPartyAppInstallerAppPrivate;
 
 
 static void
-gpk_third_party_installer_success (GpkThirdPartyAppInstallerAppPrivate *priv, gboolean already_installed);
+gpk_third_party_installer_done (GObject      *source_object,
+                                GAsyncResult *res,
+                                gpointer      user_data);
 
 
-static void
-gpk_third_party_installer_check_understand_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
-{
-	GtkWidget *button;
-	button = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
-	gtk_widget_set_sensitive (GTK_WIDGET (button), gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget)));
-}
-
-static void
-gpk_third_party_installer_install_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
-{
-	GError *error = NULL;
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "check_understand"));
-	gtk_widget_set_sensitive (widget, FALSE);
-
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
-	gtk_widget_set_sensitive (widget, FALSE);
-
-	// TODO Implement some async version....
-	if (!gpk_flatpak_installer_perform (priv->installer, &error)) {
-		g_debug("Failed to run flatpakref installation: %s\n", error->message);
-		goto out;
-	}
-
-	// Success. We inform and suggest opening the application..
-	gpk_third_party_installer_success (priv, TRUE);
-
-out:
-	if (error) {
-		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_third_party_installer"));
-		gpk_error_dialog_modal (GTK_WINDOW(widget),
-		                        _("Failed to install a third party software"),
-		                        error->message, NULL);
-		g_clear_error (&error);
-	}
-}
-
+/**
+ * Some helpers.
+ */
 static void
 gpk_third_party_installer_success (GpkThirdPartyAppInstallerAppPrivate *priv, gboolean really_happened)
 {
@@ -116,6 +85,9 @@ gpk_third_party_installer_success (GpkThirdPartyAppInstallerAppPrivate *priv, gb
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "check_understand"));
 	gtk_widget_set_visible (widget, FALSE);
 
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_percent"));
+	gtk_widget_set_visible (widget, FALSE);
+
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
 	gtk_widget_set_visible (widget, FALSE);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
@@ -127,14 +99,58 @@ gpk_third_party_installer_success (GpkThirdPartyAppInstallerAppPrivate *priv, gb
 	g_free (title);
 }
 
+
+/**
+ * Some user interactions.
+ */
 static void
-gpk_third_party_installer_cancel_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
+gpk_third_party_installer_understand_check_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
 {
+	GtkWidget *button;
+	button = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
+	gtk_widget_set_sensitive (GTK_WIDGET (button), gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON(widget)));
+}
+
+static void
+gpk_third_party_installer_install_button_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
+{
+	GError *error = NULL;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "check_understand"));
+	gtk_widget_set_sensitive (widget, FALSE);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
+	gtk_widget_set_sensitive (widget, FALSE);
+
+	gpk_flatpak_installer_perform_async (priv->installer,
+	                                     gpk_third_party_installer_done,
+	                                     priv,
+	                                     priv->cancellable,
+	                                     &error);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_percent"));
+	gtk_widget_set_visible (widget, TRUE);
+	gtk_progress_bar_pulse (GTK_PROGRESS_BAR(widget));
+
+	if (error) {
+		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_third_party_installer"));
+		gpk_error_dialog_modal (GTK_WINDOW(widget),
+		                        _("Failed to install a third party software"),
+		                        error->message, NULL);
+		g_clear_error (&error);
+	}
+}
+
+static void
+gpk_third_party_installer_cancel_button_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
+{
+	g_cancellable_cancel (priv->cancellable);
+
 	g_application_quit (G_APPLICATION(priv->application));
 }
 
 static void
-gpk_third_party_installer_open_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
+gpk_third_party_installer_open_button_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
 {
 	GError *error = NULL;
 
@@ -146,6 +162,73 @@ gpk_third_party_installer_open_cb (GtkWidget *widget, GpkThirdPartyAppInstallerA
 	g_application_quit (G_APPLICATION(priv->application));
 }
 
+
+/**
+ * Flatpak Installer code
+ */
+static void
+gpk_third_party_installer_done (GObject      *source_object,
+                                GAsyncResult *res,
+                                gpointer      user_data)
+{
+	GpkThirdPartyAppInstallerAppPrivate *priv = NULL;
+	GpkFlatpakInstaller *installer = NULL;
+	GError *error = NULL;
+
+	installer = GPK_FLATPAK_INSTALLER (source_object);
+	priv = (GpkThirdPartyAppInstallerAppPrivate *) user_data;
+
+	if (!gpk_flatpak_installer_perform_finish (installer, res, &error)) {
+		gpk_error_dialog (_("Failed to install a third party software"),
+		                  error->message, NULL);
+		g_clear_error (&error);
+		return;
+	}
+
+	// Success. We inform and suggest opening the application..
+	gpk_third_party_installer_success (priv, TRUE);
+}
+
+
+static void
+gpk_third_party_installer_prepared (GObject      *source_object,
+                                    GAsyncResult *res,
+                                    gpointer      user_data)
+{
+	GtkWidget *widget = NULL;
+	GpkThirdPartyAppInstallerAppPrivate *priv = NULL;
+	GpkFlatpakInstaller *installer = NULL;
+	gchar *human_size = NULL, *size_text = NULL;
+	GError *error = NULL;
+
+	installer = GPK_FLATPAK_INSTALLER (source_object);
+	priv = (GpkThirdPartyAppInstallerAppPrivate *) user_data;
+
+	if (!gpk_flatpak_installer_prepare_finish (installer, res, &error)) {
+		if (g_error_matches (error, FLATPAK_ERROR, FLATPAK_ERROR_ALREADY_INSTALLED)) {
+			g_debug("Nothing to do. This app is already installed");
+			gpk_third_party_installer_success (priv, FALSE);
+			g_clear_error (&error);
+		} else {
+			g_debug("Failed to prepare flatpakref installation: %s\n", error->message);
+		}
+		return;
+	}
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_download_size"));
+	human_size = g_format_size (gpk_flatpak_installer_get_download_size (priv->installer));
+	size_text = g_strdup_printf (_("Download size may be up to %s"), human_size);
+	gtk_label_set_text (GTK_LABEL(widget), size_text);
+	g_free (human_size);
+	g_free (size_text);
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "check_understand"));
+	gtk_widget_set_sensitive (widget, TRUE);
+}
+
+/**
+ * Gtk/G/Application
+ */
 static void
 gpk_third_party_installer_startup_cb (GtkApplication *application, GpkThirdPartyAppInstallerAppPrivate *priv)
 {
@@ -169,19 +252,19 @@ gpk_third_party_installer_startup_cb (GtkApplication *application, GpkThirdParty
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "check_understand"));
 	g_signal_connect (widget, "clicked",
-	                  G_CALLBACK (gpk_third_party_installer_check_understand_cb), priv);
+	                  G_CALLBACK (gpk_third_party_installer_understand_check_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_install"));
 	g_signal_connect (widget, "clicked",
-	                  G_CALLBACK (gpk_third_party_installer_install_cb), priv);
+	                  G_CALLBACK (gpk_third_party_installer_install_button_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_cancel"));
 	g_signal_connect (widget, "clicked",
-	                  G_CALLBACK (gpk_third_party_installer_cancel_cb), priv);
+	                  G_CALLBACK (gpk_third_party_installer_cancel_button_cb), priv);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
 	g_signal_connect (widget, "clicked",
-	                  G_CALLBACK (gpk_third_party_installer_open_cb), priv);
+	                  G_CALLBACK (gpk_third_party_installer_open_button_cb), priv);
 
 	gtk_application_add_window (application, GTK_WINDOW (main_window));
 	gtk_window_present (GTK_WINDOW (main_window));
@@ -197,16 +280,14 @@ out:
 
 static int
 gpk_third_party_installer_commandline_cb (GApplication *application,
-                                      GApplicationCommandLine *cmdline,
-                                      GpkThirdPartyAppInstallerAppPrivate *priv)
+                                          GApplicationCommandLine *cmdline,
+                                          GpkThirdPartyAppInstallerAppPrivate *priv)
 {
-	GtkWidget *widget = NULL;
 	gboolean ret;
 	gchar **argv;
 	gint argc;
 	GOptionContext *context;
 	gchar **files = NULL;
-	gchar *human_size = NULL, *size_text = NULL;
 	GError *error = NULL;
 
 	const GOptionEntry options[] = {
@@ -228,24 +309,16 @@ gpk_third_party_installer_commandline_cb (GApplication *application,
 	if (!ret)
 		goto out;
 
-	// TODO Implement some async version
-	if (!gpk_flatpak_installer_preprare_flatpakref (priv->installer, files[0], &error)) {
-		if (g_error_matches (error, FLATPAK_ERROR, FLATPAK_ERROR_ALREADY_INSTALLED)) {
-			g_debug("Nothing to do. This app is already installed");
-			gpk_third_party_installer_success (priv, FALSE);
-		} else {
-			g_debug("Failed to preprare flatpakref installation: %s\n", error->message);
-		}
-		goto out;
-	}
+	gpk_flatpak_installer_prepare_async (priv->installer, files[0],
+	                                     gpk_third_party_installer_prepared,
+	                                     priv,
+	                                     priv->cancellable,
+	                                     &error);
 
-	// TODO: Move to async version
-	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "label_download_size"));
-	human_size = g_format_size (gpk_flatpak_installer_get_download_size (priv->installer));
-	size_text = g_strdup_printf (_("Download size may be up to %s"), human_size);
-	gtk_label_set_text (GTK_LABEL(widget), size_text);
-	g_free (human_size);
-	g_free (size_text);
+	if (error != NULL) {
+		g_debug("Failed to prepare flatpakref installation: %s\n", error->message);
+		g_clear_error(&error);
+	}
 
 out:
 	g_strfreev (argv);
@@ -270,8 +343,10 @@ main (int argc, char *argv[])
 
 	priv = g_new0 (GpkThirdPartyAppInstallerAppPrivate, 1);
 
-	priv->installer = gpk_flatpak_installer_new ();
 	priv->builder = gtk_builder_new ();
+
+	priv->installer = gpk_flatpak_installer_new ();
+	priv->cancellable = g_cancellable_new ();
 
 	priv->application = gtk_application_new ("org.xings.ThirdParty",
 	                                         G_APPLICATION_HANDLES_COMMAND_LINE);
@@ -286,6 +361,7 @@ main (int argc, char *argv[])
 
 	g_object_unref (priv->builder);
 	g_object_unref (priv->installer);
+	g_object_unref (priv->cancellable);
 	g_free (priv);
 
 	return status;

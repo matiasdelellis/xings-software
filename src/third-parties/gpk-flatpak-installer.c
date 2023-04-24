@@ -36,89 +36,16 @@ typedef struct
 	FlatpakInstallation *installation;
 	GpkFlatpakRef       *flatpakref;
 
+	GCancellable        *cancellable;
+
 	guint64              download_size;
 } GpkFlatpakInstallerPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GpkFlatpakInstaller, gpk_flatpak_installer, G_TYPE_OBJECT)
 
-static void
-gpk_flatpak_transaction_progress_changed_cb (FlatpakTransactionProgress *progress,
-                                             gpointer data)
-{
-	guint percent = flatpak_transaction_progress_get_progress (progress);
-	g_debug ("%u %%", percent);
-}
-
-static gboolean
-gpk_flatpak_transaction_add_new_remote (FlatpakTransaction *transaction,
-                                        FlatpakTransactionRemoteReason reason,
-                                        const char *from_id,
-                                        const char *remote_name,
-                                        const char *url)
-{
-	g_debug ("Transaction request to add new remote: %s", remote_name);
-
-	// Allow new remotes.
-	return TRUE;
-}
-
-static void
-gpk_flatpak_transaction_new_operation (FlatpakTransaction *transaction,
-                                       FlatpakTransactionOperation *op,
-                                       FlatpakTransactionProgress  *progress)
-{
-	FlatpakTransactionOperationType op_type = flatpak_transaction_operation_get_operation_type (op);
-	const char *ref = flatpak_transaction_operation_get_ref (op);
-
-	switch (op_type) {
-		case FLATPAK_TRANSACTION_OPERATION_INSTALL_BUNDLE:
-		case FLATPAK_TRANSACTION_OPERATION_INSTALL:
-			g_debug(_("Installing %s\n"), ref);
-			break;
-		case FLATPAK_TRANSACTION_OPERATION_UPDATE:
-			g_debug(_("Updating %s\n"), ref);
-			break;
-		case FLATPAK_TRANSACTION_OPERATION_UNINSTALL:
-			g_debug (_("Uninstalling %s\n"), ref);
-			break;
-		default:
-			g_assert_not_reached ();
-			break;
-	}
-
-	flatpak_transaction_progress_set_update_frequency (progress, FLATPAK_CLI_UPDATE_FREQUENCY);
-	g_signal_connect (progress, "changed",
-	                  G_CALLBACK (gpk_flatpak_transaction_progress_changed_cb), NULL);
-}
-
-static gboolean
-gpk_flatpak_transaction_ready_but_simulate (FlatpakTransaction  *transaction,
-                                            GpkFlatpakInstaller *installer)
-{
-	GpkFlatpakInstallerPrivate *priv;
-	FlatpakTransactionOperation *operation;
-	GList *opertations, *l;
-	gchar *human_size = NULL;
-
-	priv = gpk_flatpak_installer_get_instance_private (installer);
-
-	if (priv->download_size > 0)
-		return TRUE;
-
-	opertations = flatpak_transaction_get_operations (transaction);
-	for (l = opertations; l != NULL; l = l->next) {
-		operation = l->data;
-		priv->download_size += flatpak_transaction_operation_get_download_size (operation);
-	}
-
-	human_size = g_format_size (priv->download_size);
-	g_debug ("Download size: %s", human_size);
-	g_free (human_size);
-
-	// Do not allow the install since we are simulating.
-	return FALSE;
-}
-
+/**
+ *  Public utils.
+ */
 gboolean
 gpk_flatpak_installer_launch_ready (GpkFlatpakInstaller *installer, GError **error)
 {
@@ -164,104 +91,229 @@ gpk_flatpak_installer_get_name (GpkFlatpakInstaller *installer)
 	return gpk_flatpak_ref_get_name(priv->flatpakref);
 }
 
-gboolean
-gpk_flatpak_installer_perform (GpkFlatpakInstaller *installer, GError **error)
-{
-	FlatpakTransaction  *transaction;
-	GpkFlatpakInstallerPrivate *priv;
-	GBytes *raw_data = NULL;
-	gboolean ret = TRUE;
 
+/**
+ * Common operations to prepare and install
+ */
+static void
+gpk_flatpak_transaction_progress_changed_cb (FlatpakTransactionProgress *transaction_progress,
+                                             GpkFlatpakInstaller        *installer)
+{
+	guint percent = -1;
+
+	percent = flatpak_transaction_progress_get_progress (transaction_progress);
+
+	g_debug ("%u %%", percent);
+}
+
+static gboolean
+gpk_flatpak_transaction_add_new_remote (FlatpakTransaction *transaction,
+                                        FlatpakTransactionRemoteReason reason,
+                                        const char *from_id,
+                                        const char *remote_name,
+                                        const char *url)
+{
+	g_debug ("Transaction request to add new remote: %s", remote_name);
+
+	// Allow new remotes.
+	return TRUE;
+}
+
+static void
+gpk_flatpak_transaction_new_operation (FlatpakTransaction          *transaction,
+                                       FlatpakTransactionOperation *op,
+                                       FlatpakTransactionProgress  *progress,
+                                       GpkFlatpakInstaller         *installer)
+{
+	FlatpakTransactionOperationType op_type = flatpak_transaction_operation_get_operation_type (op);
+	const char *ref = flatpak_transaction_operation_get_ref (op);
+
+	switch (op_type) {
+		case FLATPAK_TRANSACTION_OPERATION_INSTALL_BUNDLE:
+		case FLATPAK_TRANSACTION_OPERATION_INSTALL:
+			g_debug(_("Installing %s\n"), ref);
+			break;
+		case FLATPAK_TRANSACTION_OPERATION_UPDATE:
+			g_debug(_("Updating %s\n"), ref);
+			break;
+		case FLATPAK_TRANSACTION_OPERATION_UNINSTALL:
+			g_debug (_("Uninstalling %s\n"), ref);
+			break;
+		default:
+			g_assert_not_reached ();
+			break;
+	}
+
+	flatpak_transaction_progress_set_update_frequency (progress, FLATPAK_CLI_UPDATE_FREQUENCY);
+	g_signal_connect (progress, "changed",
+	                  G_CALLBACK (gpk_flatpak_transaction_progress_changed_cb), progress);
+}
+
+
+/**
+ *  Perform installation.
+ */
+static void
+gpk_flatpak_installer_perform_threaded (GTask        *task,
+                                        gpointer      source_object,
+                                        gpointer      task_data,
+                                        GCancellable *cancellable)
+{
+	GpkFlatpakInstaller *installer = NULL;
+	GpkFlatpakInstallerPrivate *priv = NULL;
+	FlatpakTransaction *transaction;
+	GBytes *raw_data = NULL;
+	GError *error = NULL;
+
+	installer = GPK_FLATPAK_INSTALLER (source_object);
 	priv = gpk_flatpak_installer_get_instance_private (installer);
 
 	/* Creates a new FlatpakTransaction to installation */
-	transaction = flatpak_transaction_new_for_installation (priv->installation, NULL, NULL);
+	transaction = flatpak_transaction_new_for_installation (priv->installation,
+	                                                        priv->cancellable,
+	                                                        &error);
 
 	/* Connect signals. */
 	g_signal_connect (transaction, "add-new-remote",
 	                  G_CALLBACK (gpk_flatpak_transaction_add_new_remote), NULL);
 	g_signal_connect (transaction, "new-operation",
-	                  G_CALLBACK (gpk_flatpak_transaction_new_operation), NULL);
-
-	raw_data = gpk_flatpak_ref_get_raw_data (priv->flatpakref);
+	                  G_CALLBACK (gpk_flatpak_transaction_new_operation), installer);
 
 	/* Adds installing the given flatpakref to this transaction.*/
+	raw_data = gpk_flatpak_ref_get_raw_data (priv->flatpakref);
 	if (!flatpak_transaction_add_install_flatpakref (transaction,
 	                                                 raw_data,
-	                                                 error)) {
+	                                                 &error)) {
 		g_warning ("Failed to add installer transaction");
-		ret = FALSE;
 		goto out;
 	}
 
 	/* Executes the transaction */
-	if (!flatpak_transaction_run (transaction, NULL, error)) {
-		g_warning ("Failed to run Flatpak transaction");
-		ret = FALSE;
-		goto out;
+	if (!flatpak_transaction_run (transaction, priv->cancellable, &error)) {
+		g_warning ("Failed to run prepare transaction");
 	}
 
 out:
 	if (transaction)
 		g_object_unref (transaction);
-
 	if (raw_data)
 		g_bytes_unref (raw_data);
 
-	return ret;
+	if (error)
+		g_task_return_error (task, error);
+	else
+		g_task_return_boolean (task, TRUE);
 }
 
 gboolean
-gpk_flatpak_installer_preprare_flatpakref (GpkFlatpakInstaller *installer, gchar *file, GError **error)
+gpk_flatpak_installer_perform_finish (GpkFlatpakInstaller  *installer,
+                                      GAsyncResult         *result,
+                                      GError              **error)
 {
-	FlatpakTransaction *transaction;
+	g_return_val_if_fail (GPK_IS_FLATPAK_INSTALLER (installer), FALSE);
+
+	return g_task_propagate_boolean (G_TASK (result), error);
+}
+
+gboolean
+gpk_flatpak_installer_perform_async (GpkFlatpakInstaller  *installer,
+                                     GAsyncReadyCallback   ready_callback,
+                                     gpointer              callback_data,
+                                     GCancellable         *cancellable,
+                                     GError              **error)
+{
+	GTask *task = NULL;
+
+	g_return_val_if_fail (GPK_IS_FLATPAK_INSTALLER (installer), FALSE);
+
+	/* Create async task */
+	task = g_task_new (installer, cancellable, ready_callback, callback_data);
+
+	g_task_set_source_tag (task, gpk_flatpak_installer_perform_async);
+	g_task_run_in_thread (task, gpk_flatpak_installer_perform_threaded);
+
+	g_object_unref (task);
+
+	return TRUE;
+}
+
+
+/**
+ *  Prepare installation.
+ */
+static gboolean
+gpk_flatpak_transaction_ready_but_simulate (FlatpakTransaction  *transaction,
+                                            GpkFlatpakInstaller *installer)
+{
 	GpkFlatpakInstallerPrivate *priv;
-	GBytes *raw_data = NULL;
-	gboolean ret = TRUE;
+	FlatpakTransactionOperation *operation;
+	GList *opertations, *l;
+	gchar *human_size = NULL;
 
 	priv = gpk_flatpak_installer_get_instance_private (installer);
 
+	if (priv->download_size > 0)
+		return TRUE;
+
+	opertations = flatpak_transaction_get_operations (transaction);
+	for (l = opertations; l != NULL; l = l->next) {
+		operation = l->data;
+		priv->download_size += flatpak_transaction_operation_get_download_size (operation);
+	}
+
+	human_size = g_format_size (priv->download_size);
+	g_debug ("Download size: %s", human_size);
+	g_free (human_size);
+
+	// Do not allow the install since we are simulating
+	return FALSE;
+}
+
+static void
+gpk_flatpak_installer_prepare_threaded (GTask        *task,
+                                        gpointer      source_object,
+                                        gpointer      task_data,
+                                        GCancellable *cancellable)
+{
+	GpkFlatpakInstaller *installer = NULL;
+	GpkFlatpakInstallerPrivate *priv = NULL;
+	FlatpakTransaction *transaction;
+	GBytes *raw_data = NULL;
+	GError *error = NULL;
+
+	installer = GPK_FLATPAK_INSTALLER (source_object);
+	priv = gpk_flatpak_installer_get_instance_private (installer);
+
 	/* Creates a new FlatpakTransaction to installation */
-	transaction = flatpak_transaction_new_for_installation (priv->installation, NULL, NULL);
+	transaction = flatpak_transaction_new_for_installation (priv->installation,
+	                                                        priv->cancellable,
+	                                                        &error);
 
 	/* Connect signals. */
 	g_signal_connect (transaction, "add-new-remote",
 	                  G_CALLBACK (gpk_flatpak_transaction_add_new_remote), NULL);
 	g_signal_connect (transaction, "new-operation",
 	                  G_CALLBACK (gpk_flatpak_transaction_new_operation), NULL);
-	// This signal indicates that it is ready to install, but we cancel here to simulate
+	/* This signal indicates that it is ready to install, but we cancel here to simulate */
 	g_signal_connect (transaction, "ready",
 	                  G_CALLBACK (gpk_flatpak_transaction_ready_but_simulate), installer);
 
-	/* Create a new FlatpakRef */
-	priv->flatpakref = gpk_flatpak_ref_new ();
-
-	/* Load that.*/
-	if (!gpk_flatpak_ref_load_from_file (priv->flatpakref, file, error)) {
-		g_debug("Failed to load FlatpakRef file");
-		ret = FALSE;
-		goto out;
-	}
-
-	raw_data = gpk_flatpak_ref_get_raw_data (priv->flatpakref);
-
 	/* Adds installing the given flatpakref to this transaction.*/
+	raw_data = gpk_flatpak_ref_get_raw_data (priv->flatpakref);
 	if (!flatpak_transaction_add_install_flatpakref (transaction,
 	                                                 raw_data,
-	                                                 error)) {
+	                                                 &error)) {
 		g_warning ("Failed to add installer transaction");
-		ret = FALSE;
 		goto out;
 	}
 
 	/* Executes the transaction */
-	if (!flatpak_transaction_run (transaction, NULL, error)) {
+	if (!flatpak_transaction_run (transaction, priv->cancellable, &error)) {
 		// The cancellation to simulate responds to an error
-		if (g_error_matches (*error, FLATPAK_ERROR, FLATPAK_ERROR_ABORTED)) {
-			g_clear_error (error);
+		if (g_error_matches (error, FLATPAK_ERROR, FLATPAK_ERROR_ABORTED)) {
+			g_clear_error (&error);
 		} else {
 			g_warning ("Failed to run prepare transaction");
-			ret = FALSE;
 			goto out;
 		}
 	}
@@ -269,12 +321,61 @@ gpk_flatpak_installer_preprare_flatpakref (GpkFlatpakInstaller *installer, gchar
 out:
 	if (transaction)
 		g_object_unref (transaction);
-
 	if (raw_data)
 		g_bytes_unref (raw_data);
 
-	return ret;
+	if (error)
+		g_task_return_error (task, error);
+	else
+		g_task_return_boolean (task, TRUE);
 }
+
+gboolean
+gpk_flatpak_installer_prepare_finish (GpkFlatpakInstaller  *installer,
+                                      GAsyncResult         *result,
+                                      GError              **error)
+{
+	g_return_val_if_fail (GPK_IS_FLATPAK_INSTALLER (installer), FALSE);
+
+	return g_task_propagate_boolean (G_TASK (result), error);
+}
+
+gboolean
+gpk_flatpak_installer_prepare_async (GpkFlatpakInstaller  *installer,
+                                     gchar                *file,
+                                     GAsyncReadyCallback   ready_callback,
+                                     gpointer              callback_data,
+                                     GCancellable         *cancellable,
+                                     GError              **error)
+{
+	GpkFlatpakInstallerPrivate *priv = NULL;
+	GTask *task = NULL;
+
+	g_return_val_if_fail (GPK_IS_FLATPAK_INSTALLER (installer), FALSE);
+
+	priv = gpk_flatpak_installer_get_instance_private (installer);
+
+	/* Load the flatpakref file */
+	if (!gpk_flatpak_ref_load_from_file (priv->flatpakref, file, error)) {
+		g_debug("Failed to load FlatpakRef file");
+		return FALSE;
+	}
+
+	/* Create async task */
+	task = g_task_new (installer, cancellable, ready_callback, callback_data);
+
+	g_task_set_source_tag (task, gpk_flatpak_installer_prepare_async);
+	g_task_run_in_thread (task, gpk_flatpak_installer_prepare_threaded);
+
+	g_object_unref (task);
+
+	return TRUE;
+}
+
+
+/**
+ *  GpkFlatpakInstaller class.
+ */
 
 static void
 gpk_flatpak_installer_class_init (GpkFlatpakInstallerClass *klass)
