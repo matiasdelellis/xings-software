@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:17-0300\n"
+"POT-Creation-Date: 2023-04-24 15:33-0300\n"
 "PO-Revision-Date: 2015-05-25 09:29+0200\n"
 "Last-Translator: Cédric Valmary (Tot en òc) <cvalmary@yahoo.fr>\n"
 "Language-Team: Tot en òc (totenoc.eu)\n"
@@ -21,8 +21,8 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
-#: ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
+#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -57,13 +57,14 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
+#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "Mise à jour des logiciels"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Met a jorn los logicials installats sul sistèma"
 
@@ -180,6 +181,112 @@ msgid ""
 "Store;"
 msgstr "Fonts;Depauses;Preferéncias;Installacion;Installar;Botiga;"
 
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
+msgstr ""
+
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "Installar"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "Suprimir"
+
+#: ../data/gpk-application.ui.h:7
+msgid "Homepage"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:8
+msgid "Donate"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:9
+msgid "Report"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:10
+#, fuzzy
+msgid "Translate"
+msgstr "Transaccion"
+
+#: ../data/gpk-application.ui.h:11
+msgid "License"
+msgstr "Licéncia"
+
+#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "Distribucion"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Font"
+
+#: ../data/gpk-application.ui.h:14
+#, fuzzy
+msgid "Show categories"
+msgstr "Recuperacion de las categorias efectuada"
+
+#: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "Recherche de paquets"
+
+#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "Categoria"
+
+#: ../data/gpk-application.ui.h:17
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "Sources des logiciels"
+
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
+msgid "Software Sources"
+msgstr "Sources des logiciels"
+
+#. are we running privileged
+#: ../data/gpk-application.ui.h:19
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
+#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "Sources de logiciels"
+
+#: ../data/gpk-application.ui.h:20
+msgid "About"
+msgstr "A prepaus"
+
+#: ../data/gpk-application.ui.h:21
+msgid "_Quit"
+msgstr "_Quitar"
+
+#: ../data/gpk-client.ui.h:1
+msgid "Install Package"
+msgstr "Installar un paquet"
+
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -194,6 +301,27 @@ msgstr "Servici PackageKit"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "Service DBus de session pour PackageKit"
 
+#: ../data/gpk-error.ui.h:1
+msgid "More details"
+msgstr "Mai de detalhs"
+
+#: ../data/gpk-error.ui.h:2
+msgid "_Force install"
+msgstr "_Forçar l'installacion"
+
+#. button tooltip
+#: ../data/gpk-error.ui.h:4
+msgid "Force installing package"
+msgstr "Fòrça l'installacion del paquet"
+
+#: ../data/gpk-eula.ui.h:1
+msgid "License Agreement Required"
+msgstr "Acòrd de licéncia requesit"
+
+#: ../data/gpk-eula.ui.h:2
+msgid "_Accept Agreement"
+msgstr "_Acceptar l'acòrd"
+
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -202,13 +330,6 @@ msgstr "Installacion del logicial"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "Installar lo paquet seleccionat sul sistèma"
-
-#. are we running privileged
-#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
-#: ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Sources de logiciels"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -232,6 +353,88 @@ msgid ""
 "Install;Uninstall;Updates;Upgrade;Sources;Repositories;Preferences;Program;"
 "Software;App;Store;"
 msgstr "Fonts;Depauses;Preferéncias;Installacion;Installar;Botiga;"
+
+#: ../data/gpk-prefs.ui.h:1
+#, fuzzy
+msgid ""
+"When your device is online, we check for updates regularly. These updates "
+"can fix bugs, eliminate security vulnerabilities, and provide new features."
+msgstr ""
+"Las mesas a jorn de paquets corregisson d'errors, eliminan de falhas de "
+"seguretat e provesisson de novèlas foncionalitats."
+
+#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
+#, fuzzy
+msgid "Check for updates"
+msgstr "_Vérifier les mises à jour :"
+
+#: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "Vérifier les mises à jour sur batterie"
+
+#: ../data/gpk-prefs.ui.h:4
+msgid "You will be notified when the updates are ready to be installed"
+msgstr ""
+
+#: ../data/gpk-prefs.ui.h:5
+#, fuzzy
+msgid "Download updates in the background"
+msgstr "Telecargament de las informacions de mesas a jorn"
+
+#. TRANSLATORS: the updates mechanism
+#: ../data/gpk-prefs.ui.h:6
+#: ../src/software-service/gpk-updates-notification.c:316
+msgid "Updates"
+msgstr "Mesas a jorn"
+
+#: ../data/gpk-prefs.ui.h:7
+#, fuzzy
+msgid ""
+"A software source contains packages that can be installed on this computer."
+msgstr ""
+"Una font de paquets conten de paquets que pòdon èsser installats sus aqueste "
+"ordenador."
+
+#. shows extra -source, -debuginfo, and -devel sources
+#: ../data/gpk-prefs.ui.h:9
+msgid "_Show debug and development package sources"
+msgstr "_Afichar las fonts de desvolopament e de desbugatge dels paquets"
+
+#: ../data/gpk-signature.ui.h:1
+msgid "Do you trust the source of the packages?"
+msgstr "Vos fisatz de la font d'aquestes paquets ?"
+
+#: ../data/gpk-signature.ui.h:2
+#, fuzzy
+msgid "Repository name"
+msgstr "Nom del depaus :"
+
+#: ../data/gpk-signature.ui.h:3
+#, fuzzy
+msgid "Signature URL"
+msgstr "URL de la signatura :"
+
+#: ../data/gpk-signature.ui.h:4
+#, fuzzy
+msgid "Signature user identifier"
+msgstr "Identificant de l'utilizaire de la signatura :"
+
+#: ../data/gpk-signature.ui.h:5
+#, fuzzy
+msgid "Signature identifier"
+msgstr "Identificant de la signatura :"
+
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
+#: ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "Paquet"
+
+#: ../data/gpk-signature.ui.h:7
+msgid "Do you recognize the user and trust this key?"
+msgstr "Reconeissètz aqueste utilizaire e vos fisatz d'aquesta clau ?"
 
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
@@ -273,10 +476,6 @@ msgstr "Anullacion efectuada"
 msgid "Install Anyway"
 msgstr "Installar %s ara"
 
-#: ../data/gpk-third-party-installer.ui.h:4
-msgid "Open"
-msgstr ""
-
 #: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
 msgid "Trust and install this app?"
@@ -300,6 +499,42 @@ msgstr ""
 #: ../data/gpk-third-party-installer.ui.h:9
 msgid "I understand"
 msgstr ""
+
+#. TRANSLATORS: title: nothing to do
+#: ../data/gpk-update-viewer.ui.h:1
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "Mise à jour des logiciels"
+
+#. TRANSLATORS: tell the user the problem
+#: ../data/gpk-update-viewer.ui.h:2
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "I a pas de mesa a jorn disponibla per vòstre ordenador actualament."
+
+#: ../data/gpk-update-viewer.ui.h:4
+#, fuzzy
+msgid ""
+"Software updates correct errors, eliminate security vulnerabilities, and "
+"provide new features."
+msgstr ""
+"Las mesas a jorn de paquets corregisson d'errors, eliminan de falhas de "
+"seguretat e provesisson de novèlas foncionalitats."
+
+#: ../data/gpk-update-viewer.ui.h:5
+msgid "_Upgrade"
+msgstr "Metre a jo_rn"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "Detalhs"
+
+#: ../data/gpk-update-viewer.ui.h:8
+msgid "_Install Updates"
+msgstr "_Installar las mesas a jorn"
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -1977,12 +2212,6 @@ msgstr "Mise à jour du système"
 msgid "Icon"
 msgstr "Icône"
 
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "Paquet"
-
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Applications pouvant ouvrir ce type de fichiers"
@@ -2064,31 +2293,10 @@ msgstr "Contunhar"
 msgid "The following software also needs to be installed"
 msgstr "Los logicials seguents devon tanben èsser installats"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "Installar"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Los logicials seguents devon tanben èsser suprimits"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "Suprimir"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2280,11 +2488,6 @@ msgstr "Data"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Accion"
-
-#. TRANSLATORS: column for what packages were upgraded
-#: ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "Detalhs"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2862,11 +3065,6 @@ msgstr "Fracàs del cambiament d'estat"
 msgid "Enabled"
 msgstr "Activat"
 
-#. TRANSLATORS: column for the source description
-#: ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Font"
-
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2896,10 +3094,6 @@ msgstr "Paramètres des logiciels"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
-msgstr ""
-
-#: ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -2939,11 +3133,6 @@ msgstr "Avètz fach de cambiaments que son pas encara estats aplicats."
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "Aquestes cambiaments seràn perduts se tampatz la fenèstra."
-
-#: ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "Distribucion"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3050,11 +3239,6 @@ msgstr "Cédric Valmary <cvalmary@yahoo.fr>, 2015."
 msgid "Xings Software Website"
 msgstr "Source du logiciel"
 
-#: ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "Categoria"
-
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3120,11 +3304,6 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "Cap de detalh de mesa a jorn pas disponible."
 msgstr[1] "Cap de detalh de mesa a jorn pas disponible."
-
-#. TRANSLATORS: the updates mechanism
-#: ../src/software-service/gpk-updates-notification.c:316
-msgid "Updates"
-msgstr "Mesas a jorn"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3312,18 +3491,6 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Installar la mesa a jorn"
 msgstr[1] "_Installar las mesas a jorn"
-
-#. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1457
-#, fuzzy
-msgid "All software is up to date"
-msgstr "Mise à jour des logiciels"
-
-#. TRANSLATORS: tell the user the problem
-#: ../src/software-update/gpk-update-viewer.c:1459
-#, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "I a pas de mesa a jorn disponibla per vòstre ordenador actualament."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3602,120 +3769,6 @@ msgstr "Talha telecargada"
 #: ../src/third-parties/gpk-third-parties.c:304
 msgid "Install third party software from flatpakref"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Translate"
-#~ msgstr "Transaccion"
-
-#~ msgid "License"
-#~ msgstr "Licéncia"
-
-#, fuzzy
-#~ msgid "Show categories"
-#~ msgstr "Recuperacion de las categorias efectuada"
-
-#, fuzzy
-#~ msgid "Search for apps or distribution packages"
-#~ msgstr "Recherche de paquets"
-
-#, fuzzy
-#~ msgid "Update Software Sources"
-#~ msgstr "Sources des logiciels"
-
-#~ msgid "Software Sources"
-#~ msgstr "Sources des logiciels"
-
-#~ msgid "About"
-#~ msgstr "A prepaus"
-
-#~ msgid "_Quit"
-#~ msgstr "_Quitar"
-
-#~ msgid "Install Package"
-#~ msgstr "Installar un paquet"
-
-#~ msgid "More details"
-#~ msgstr "Mai de detalhs"
-
-#~ msgid "_Force install"
-#~ msgstr "_Forçar l'installacion"
-
-#~ msgid "Force installing package"
-#~ msgstr "Fòrça l'installacion del paquet"
-
-#~ msgid "License Agreement Required"
-#~ msgstr "Acòrd de licéncia requesit"
-
-#~ msgid "_Accept Agreement"
-#~ msgstr "_Acceptar l'acòrd"
-
-#, fuzzy
-#~ msgid ""
-#~ "When your device is online, we check for updates regularly. These updates "
-#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
-#~ "features."
-#~ msgstr ""
-#~ "Las mesas a jorn de paquets corregisson d'errors, eliminan de falhas de "
-#~ "seguretat e provesisson de novèlas foncionalitats."
-
-#, fuzzy
-#~ msgid "Check for updates"
-#~ msgstr "_Vérifier les mises à jour :"
-
-#, fuzzy
-#~ msgid "Check for updates on mobile connections"
-#~ msgstr "Vérifier les mises à jour sur batterie"
-
-#, fuzzy
-#~ msgid "Download updates in the background"
-#~ msgstr "Telecargament de las informacions de mesas a jorn"
-
-#, fuzzy
-#~ msgid ""
-#~ "A software source contains packages that can be installed on this "
-#~ "computer."
-#~ msgstr ""
-#~ "Una font de paquets conten de paquets que pòdon èsser installats sus "
-#~ "aqueste ordenador."
-
-#~ msgid "_Show debug and development package sources"
-#~ msgstr "_Afichar las fonts de desvolopament e de desbugatge dels paquets"
-
-#~ msgid "Do you trust the source of the packages?"
-#~ msgstr "Vos fisatz de la font d'aquestes paquets ?"
-
-#, fuzzy
-#~ msgid "Repository name"
-#~ msgstr "Nom del depaus :"
-
-#, fuzzy
-#~ msgid "Signature URL"
-#~ msgstr "URL de la signatura :"
-
-#, fuzzy
-#~ msgid "Signature user identifier"
-#~ msgstr "Identificant de l'utilizaire de la signatura :"
-
-#, fuzzy
-#~ msgid "Signature identifier"
-#~ msgstr "Identificant de la signatura :"
-
-#~ msgid "Do you recognize the user and trust this key?"
-#~ msgstr "Reconeissètz aqueste utilizaire e vos fisatz d'aquesta clau ?"
-
-#, fuzzy
-#~ msgid ""
-#~ "Software updates correct errors, eliminate security vulnerabilities, and "
-#~ "provide new features."
-#~ msgstr ""
-#~ "Las mesas a jorn de paquets corregisson d'errors, eliminan de falhas de "
-#~ "seguretat e provesisson de novèlas foncionalitats."
-
-#~ msgid "_Upgrade"
-#~ msgstr "Metre a jo_rn"
-
-#~ msgid "_Install Updates"
-#~ msgstr "_Installar las mesas a jorn"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:17-0300\n"
+"POT-Creation-Date: 2023-04-24 15:33-0300\n"
 "PO-Revision-Date: 2014-09-14 19:43+0200\n"
 "Last-Translator: Kris Thomsen <mail@kristhomsen.dk>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -24,8 +24,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
-#: ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
+#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -60,13 +60,14 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
+#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "Softwareopdatering"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Opdatér software installeret på systemet"
 
@@ -186,6 +187,113 @@ msgstr ""
 "Opdateringer;Opgrader;Opgradering;Kilder;Pakkearkiver;Arkiver;Indstillinger;"
 "Installere;Installering;Forretning;Store;"
 
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
+msgstr ""
+
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "Installér"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "Fjern"
+
+#: ../data/gpk-application.ui.h:7
+msgid "Homepage"
+msgstr "Hjemmeside"
+
+#: ../data/gpk-application.ui.h:8
+msgid "Donate"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:9
+#, fuzzy
+msgid "Report"
+msgstr "Softwarekilde"
+
+#: ../data/gpk-application.ui.h:10
+#, fuzzy
+msgid "Translate"
+msgstr "Transaktionsfejl"
+
+#: ../data/gpk-application.ui.h:11
+msgid "License"
+msgstr "Licens"
+
+#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "Opgraderingsværktøj for distribution"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Kilde"
+
+#: ../data/gpk-application.ui.h:14
+#, fuzzy
+msgid "Show categories"
+msgstr "Hentede kategorier"
+
+#: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "Søger efter pakker"
+
+#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "Hentede kategorier"
+
+#: ../data/gpk-application.ui.h:17
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "Softwarekilder"
+
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
+msgid "Software Sources"
+msgstr "Softwarekilder"
+
+#. are we running privileged
+#: ../data/gpk-application.ui.h:19
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
+#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "Softwarekilder"
+
+#: ../data/gpk-application.ui.h:20
+msgid "About"
+msgstr "Om"
+
+#: ../data/gpk-application.ui.h:21
+msgid "_Quit"
+msgstr "_Afslut"
+
+#: ../data/gpk-client.ui.h:1
+msgid "Install Package"
+msgstr "Installér pakke"
+
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -200,6 +308,27 @@ msgstr "PackageKit-webside"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "Sessions-D-Bus-tjeneste til PackageKit"
 
+#: ../data/gpk-error.ui.h:1
+msgid "More details"
+msgstr "Flere detaljer"
+
+#: ../data/gpk-error.ui.h:2
+msgid "_Force install"
+msgstr "_Gennemtving installation"
+
+#. button tooltip
+#: ../data/gpk-error.ui.h:4
+msgid "Force installing package"
+msgstr "Gennemtving installation af pakke"
+
+#: ../data/gpk-eula.ui.h:1
+msgid "License Agreement Required"
+msgstr "Licensaftale kræves"
+
+#: ../data/gpk-eula.ui.h:2
+msgid "_Accept Agreement"
+msgstr "_Acceptér aftale"
+
 #
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
@@ -209,13 +338,6 @@ msgstr "Installér software"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "Installér valgte pakker på systemet"
-
-#. are we running privileged
-#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
-#: ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Softwarekilder"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -241,6 +363,87 @@ msgid ""
 msgstr ""
 "Opdateringer;Opgrader;Opgradering;Kilder;Pakkearkiver;Arkiver;Indstillinger;"
 "Installere;Installering;Forretning;Store;"
+
+#: ../data/gpk-prefs.ui.h:1
+#, fuzzy
+msgid ""
+"When your device is online, we check for updates regularly. These updates "
+"can fix bugs, eliminate security vulnerabilities, and provide new features."
+msgstr ""
+"Pakkeopdateringer retter fejl, eliminerer sikkerhedsfejl og leverer nye "
+"funktioner."
+
+#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
+#, fuzzy
+msgid "Check for updates"
+msgstr "_Søg efter opdateringer:"
+
+#: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "Søg efter opdateringer ved batteridrift"
+
+#: ../data/gpk-prefs.ui.h:4
+msgid "You will be notified when the updates are ready to be installed"
+msgstr ""
+
+#: ../data/gpk-prefs.ui.h:5
+#, fuzzy
+msgid "Download updates in the background"
+msgstr "Henter opdateringsinformation"
+
+#. TRANSLATORS: the updates mechanism
+#: ../data/gpk-prefs.ui.h:6
+#: ../src/software-service/gpk-updates-notification.c:316
+msgid "Updates"
+msgstr "Opdateringer"
+
+#: ../data/gpk-prefs.ui.h:7
+#, fuzzy
+msgid ""
+"A software source contains packages that can be installed on this computer."
+msgstr ""
+"En pakkekilde indeholder pakker, som kan installeres på denne computer."
+
+#. shows extra -source, -debuginfo, and -devel sources
+#: ../data/gpk-prefs.ui.h:9
+msgid "_Show debug and development package sources"
+msgstr "_Vis fejlsøgnings- og udviklings-pakkekilder"
+
+#: ../data/gpk-signature.ui.h:1
+msgid "Do you trust the source of the packages?"
+msgstr "Stoler du på pakkernes kilde?"
+
+#: ../data/gpk-signature.ui.h:2
+#, fuzzy
+msgid "Repository name"
+msgstr "Pakkearkivnavn:"
+
+#: ../data/gpk-signature.ui.h:3
+#, fuzzy
+msgid "Signature URL"
+msgstr "Signatur-URL:"
+
+#: ../data/gpk-signature.ui.h:4
+#, fuzzy
+msgid "Signature user identifier"
+msgstr "Signatur-brugeridentificering:"
+
+#: ../data/gpk-signature.ui.h:5
+#, fuzzy
+msgid "Signature identifier"
+msgstr "Signaturidentificering:"
+
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
+#: ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "Pakke"
+
+#: ../data/gpk-signature.ui.h:7
+msgid "Do you recognize the user and trust this key?"
+msgstr "Kan du genkende denne bruger, og stoler du på denne nøgle?"
 
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
@@ -284,10 +487,6 @@ msgstr "_Annullér"
 msgid "Install Anyway"
 msgstr "Installér software"
 
-#: ../data/gpk-third-party-installer.ui.h:4
-msgid "Open"
-msgstr ""
-
 #: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
 msgid "Trust and install this app?"
@@ -311,6 +510,43 @@ msgstr ""
 #: ../data/gpk-third-party-installer.ui.h:9
 msgid "I understand"
 msgstr ""
+
+#. TRANSLATORS: title: nothing to do
+#: ../data/gpk-update-viewer.ui.h:1
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "Softwareopdatering"
+
+#. TRANSLATORS: tell the user the problem
+#: ../data/gpk-update-viewer.ui.h:2
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr ""
+"Der er ingen pakkeopdateringer til din computer på nuværende tidspunkt."
+
+#: ../data/gpk-update-viewer.ui.h:4
+#, fuzzy
+msgid ""
+"Software updates correct errors, eliminate security vulnerabilities, and "
+"provide new features."
+msgstr ""
+"Pakkeopdateringer retter fejl, eliminerer sikkerhedsfejl og leverer nye "
+"funktioner."
+
+#: ../data/gpk-update-viewer.ui.h:5
+msgid "_Upgrade"
+msgstr "_Opgradér"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "Detaljer"
+
+#: ../data/gpk-update-viewer.ui.h:8
+msgid "_Install Updates"
+msgstr "_Installér opdateringer"
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -1986,12 +2222,6 @@ msgstr "Opgraderer system"
 msgid "Icon"
 msgstr "Ikon"
 
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "Pakke"
-
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Programmer der kan åbne denne type fil"
@@ -2074,31 +2304,10 @@ msgstr "Fortsæt"
 msgid "The following software also needs to be installed"
 msgstr "Følgende software skal også installeres"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "Installér"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Følgende software skal også fjernes"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "Fjern"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2276,11 +2485,6 @@ msgstr "Dato"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Handling"
-
-#. TRANSLATORS: column for what packages were upgraded
-#: ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "Detaljer"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2861,11 +3065,6 @@ msgstr "Ændring af status fejlede"
 msgid "Enabled"
 msgstr "Aktiveret"
 
-#. TRANSLATORS: column for the source description
-#: ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Kilde"
-
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2893,10 +3092,6 @@ msgstr "Softwareindstillinger"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
-msgstr ""
-
-#: ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -2936,11 +3131,6 @@ msgstr "Du har lavet ændringer, der endnu ikke blev tilføjet."
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "Disse ændringer mistes, hvis du lukker dette vindue."
-
-#: ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "Opgraderingsværktøj for distribution"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3056,11 +3246,6 @@ msgstr ""
 msgid "Xings Software Website"
 msgstr "Softwarekilde"
 
-#: ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "Hentede kategorier"
-
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3127,11 +3312,6 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "Ingen opdateringsdetaljer tilgængelige."
 msgstr[1] "Ingen opdateringsdetaljer tilgængelige."
-
-#. TRANSLATORS: the updates mechanism
-#: ../src/software-service/gpk-updates-notification.c:316
-msgid "Updates"
-msgstr "Opdateringer"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3319,19 +3499,6 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Installér opdatering"
 msgstr[1] "_Installér opdateringer"
-
-#. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1457
-#, fuzzy
-msgid "All software is up to date"
-msgstr "Softwareopdatering"
-
-#. TRANSLATORS: tell the user the problem
-#: ../src/software-update/gpk-update-viewer.c:1459
-#, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr ""
-"Der er ingen pakkeopdateringer til din computer på nuværende tidspunkt."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3609,126 +3776,6 @@ msgstr "Nedhentningsstørrelse"
 #: ../src/third-parties/gpk-third-parties.c:304
 msgid "Install third party software from flatpakref"
 msgstr ""
-
-#~ msgid "Homepage"
-#~ msgstr "Hjemmeside"
-
-#, fuzzy
-#~ msgid "Report"
-#~ msgstr "Softwarekilde"
-
-#, fuzzy
-#~ msgid "Translate"
-#~ msgstr "Transaktionsfejl"
-
-#~ msgid "License"
-#~ msgstr "Licens"
-
-#, fuzzy
-#~ msgid "Show categories"
-#~ msgstr "Hentede kategorier"
-
-#, fuzzy
-#~ msgid "Search for apps or distribution packages"
-#~ msgstr "Søger efter pakker"
-
-#, fuzzy
-#~ msgid "Update Software Sources"
-#~ msgstr "Softwarekilder"
-
-#~ msgid "Software Sources"
-#~ msgstr "Softwarekilder"
-
-#~ msgid "About"
-#~ msgstr "Om"
-
-#~ msgid "_Quit"
-#~ msgstr "_Afslut"
-
-#~ msgid "Install Package"
-#~ msgstr "Installér pakke"
-
-#~ msgid "More details"
-#~ msgstr "Flere detaljer"
-
-#~ msgid "_Force install"
-#~ msgstr "_Gennemtving installation"
-
-#~ msgid "Force installing package"
-#~ msgstr "Gennemtving installation af pakke"
-
-#~ msgid "License Agreement Required"
-#~ msgstr "Licensaftale kræves"
-
-#~ msgid "_Accept Agreement"
-#~ msgstr "_Acceptér aftale"
-
-#, fuzzy
-#~ msgid ""
-#~ "When your device is online, we check for updates regularly. These updates "
-#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
-#~ "features."
-#~ msgstr ""
-#~ "Pakkeopdateringer retter fejl, eliminerer sikkerhedsfejl og leverer nye "
-#~ "funktioner."
-
-#, fuzzy
-#~ msgid "Check for updates"
-#~ msgstr "_Søg efter opdateringer:"
-
-#, fuzzy
-#~ msgid "Check for updates on mobile connections"
-#~ msgstr "Søg efter opdateringer ved batteridrift"
-
-#, fuzzy
-#~ msgid "Download updates in the background"
-#~ msgstr "Henter opdateringsinformation"
-
-#, fuzzy
-#~ msgid ""
-#~ "A software source contains packages that can be installed on this "
-#~ "computer."
-#~ msgstr ""
-#~ "En pakkekilde indeholder pakker, som kan installeres på denne computer."
-
-#~ msgid "_Show debug and development package sources"
-#~ msgstr "_Vis fejlsøgnings- og udviklings-pakkekilder"
-
-#~ msgid "Do you trust the source of the packages?"
-#~ msgstr "Stoler du på pakkernes kilde?"
-
-#, fuzzy
-#~ msgid "Repository name"
-#~ msgstr "Pakkearkivnavn:"
-
-#, fuzzy
-#~ msgid "Signature URL"
-#~ msgstr "Signatur-URL:"
-
-#, fuzzy
-#~ msgid "Signature user identifier"
-#~ msgstr "Signatur-brugeridentificering:"
-
-#, fuzzy
-#~ msgid "Signature identifier"
-#~ msgstr "Signaturidentificering:"
-
-#~ msgid "Do you recognize the user and trust this key?"
-#~ msgstr "Kan du genkende denne bruger, og stoler du på denne nøgle?"
-
-#, fuzzy
-#~ msgid ""
-#~ "Software updates correct errors, eliminate security vulnerabilities, and "
-#~ "provide new features."
-#~ msgstr ""
-#~ "Pakkeopdateringer retter fejl, eliminerer sikkerhedsfejl og leverer nye "
-#~ "funktioner."
-
-#~ msgid "_Upgrade"
-#~ msgstr "_Opgradér"
-
-#~ msgid "_Install Updates"
-#~ msgstr "_Installér opdateringer"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"

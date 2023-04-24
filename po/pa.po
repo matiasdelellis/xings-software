@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome Packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:17-0300\n"
+"POT-Creation-Date: 2023-04-24 15:33-0300\n"
 "PO-Revision-Date: 2014-09-08 21:03-0500\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -21,8 +21,8 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
-#: ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
+#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -57,13 +57,14 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
+#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "ਸਾਫਟਵੇਅਰ ਅੱਪਡੇਟ"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "ਸਿਸਟਮ ਉੱਤੇ ਇੰਸਟਾਲ ਸਾਫਟਵੇਅਰ ਅੱਪਡੇਟ ਕਰੋ"
 
@@ -182,6 +183,113 @@ msgstr ""
 "ਅੱਪਡੇਟ;ਸਰੋਤ;ਰਿਪੋਜ਼ਟਰੀ;ਪਸੰਦ,ਇੰਸਟਾਲ;ਸਟੋਰ;ਅੱਪਗਰੇਡ;Updates;Upgrade;Sources;Repositories;"
 "Preferences;Install;Store;"
 
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
+msgstr ""
+
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "ਇੰਸਟਾਲ"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "ਹਟਾਓ"
+
+#: ../data/gpk-application.ui.h:7
+msgid "Homepage"
+msgstr "ਹੋਮ-ਪੇਜ਼"
+
+#: ../data/gpk-application.ui.h:8
+msgid "Donate"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:9
+#, fuzzy
+msgid "Report"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ"
+
+#: ../data/gpk-application.ui.h:10
+#, fuzzy
+msgid "Translate"
+msgstr "ਟਰਾਂਸੈਕਸ਼ਨ ਗਲਤੀ"
+
+#: ../data/gpk-application.ui.h:11
+msgid "License"
+msgstr "ਲਾਈਸੈਂਸ"
+
+#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "ਡਿਸਟਰੀਬਿਊਸ਼ਨ ਅੱਪਗਰੇਡ ਟੂਲ"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "ਸਰੋਤ"
+
+#: ../data/gpk-application.ui.h:14
+#, fuzzy
+msgid "Show categories"
+msgstr "ਕੈਟਾਗਰੀਆਂ ਲਈਆਂ"
+
+#: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "ਪੈਕੇਜਾਂ ਲਈ ਖੋਜ ਜਾਰੀ ਹੈ"
+
+#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "ਕੈਟਾਗਰੀਆਂ ਲਈਆਂ"
+
+#: ../data/gpk-application.ui.h:17
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
+
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
+msgid "Software Sources"
+msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
+
+#. are we running privileged
+#: ../data/gpk-application.ui.h:19
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
+#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
+
+#: ../data/gpk-application.ui.h:20
+msgid "About"
+msgstr "ਇਸ ਬਾਰੇ"
+
+#: ../data/gpk-application.ui.h:21
+msgid "_Quit"
+msgstr "ਬੰਦ ਕਰੋ(_Q)"
+
+#: ../data/gpk-client.ui.h:1
+msgid "Install Package"
+msgstr "ਪੈਕੇਜ ਇੰਸਟਾਲ"
+
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -196,6 +304,27 @@ msgstr "ਪੈਕੇਜਕਿੱਟ ਵੈੱਬਸਾਈਟ"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "ਪੈਕੇਜਕਿੱਟ ਲਈ ਸ਼ੈਸ਼ਨ ਡੀ-ਬੱਗ ਸਰਵਿਸ"
 
+#: ../data/gpk-error.ui.h:1
+msgid "More details"
+msgstr "ਹੋਰ ਵੇਰਵਾ"
+
+#: ../data/gpk-error.ui.h:2
+msgid "_Force install"
+msgstr "ਧੱਕੇ ਨਾਲ ਇੰਸਟਾਲ(_F)"
+
+#. button tooltip
+#: ../data/gpk-error.ui.h:4
+msgid "Force installing package"
+msgstr "ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਧੱਕਾ"
+
+#: ../data/gpk-eula.ui.h:1
+msgid "License Agreement Required"
+msgstr "ਲਾਈਸੈਂਸ ਇਕਰਾਰਨਾਮ ਲੋੜੀਦਾ ਹੈ"
+
+#: ../data/gpk-eula.ui.h:2
+msgid "_Accept Agreement"
+msgstr "ਇਕਰਾਰਨਾਮਾ ਮਨਜ਼ੂਰ(_A)"
+
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -204,13 +333,6 @@ msgstr "ਸਾਫਟਵੇਅਰ ਇੰਸਟਾਲ"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "ਚੁਣੇ ਪੈਕੇਜ ਸਿਸਟਮ ਉੱਤੇ ਇੰਸਟਾਲ ਕਰੋ"
-
-#. are we running privileged
-#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
-#: ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -234,6 +356,86 @@ msgid ""
 msgstr ""
 "ਅੱਪਡੇਟ;ਸਰੋਤ;ਰਿਪੋਜ਼ਟਰੀ;ਪਸੰਦ,ਇੰਸਟਾਲ;ਸਟੋਰ;ਅੱਪਗਰੇਡ;Updates;Upgrade;Sources;Repositories;"
 "Preferences;Install;Store;"
+
+#: ../data/gpk-prefs.ui.h:1
+#, fuzzy
+msgid ""
+"When your device is online, we check for updates regularly. These updates "
+"can fix bugs, eliminate security vulnerabilities, and provide new features."
+msgstr ""
+"ਪੈਕੇਜ ਅੱਪਡੇਟ ਨਾਲ ਗਲਤੀਆਂ ਠੀਕ ਹੁੰਦੀਆਂ ਹਨ, ਸੁਰੱਖਿਆ ਕਮਜ਼ੋਰੀਆਂ ਖਤਮ ਹੁੰਦੀਆਂ ਹਨ ਅਤੇ ਨਵੇਂ ਫੀਚਰ ਉਪਲੱਬਧ ਹੁੰਦੇ "
+"ਹਨ।"
+
+#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
+#, fuzzy
+msgid "Check for updates"
+msgstr "ਅੱਪਡੇਟ ਲਈ ਚੈੱਕ(_h):"
+
+#: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "ਬੈਟਰੀ ਵਰਤਣ ਸਮੇਂ ਅੱਪਡੇਟ ਲਈ ਚੈੱਕ ਕਰੋ"
+
+#: ../data/gpk-prefs.ui.h:4
+msgid "You will be notified when the updates are ready to be installed"
+msgstr ""
+
+#: ../data/gpk-prefs.ui.h:5
+#, fuzzy
+msgid "Download updates in the background"
+msgstr "ਅੱਪਡੇਟ ਜਾਣਕਾਰੀ ਡਾਊਨਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+
+#. TRANSLATORS: the updates mechanism
+#: ../data/gpk-prefs.ui.h:6
+#: ../src/software-service/gpk-updates-notification.c:316
+msgid "Updates"
+msgstr "ਅੱਪਡੇਟ"
+
+#: ../data/gpk-prefs.ui.h:7
+#, fuzzy
+msgid ""
+"A software source contains packages that can be installed on this computer."
+msgstr "ਪੈਕੇਜ ਸਰੋਤ 'ਚ ਪੈਕੇਜ ਹੁੰਦੇ ਹਨ, ਜੋ ਕਿ ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਇੰਸਟਾਲ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ।"
+
+#. shows extra -source, -debuginfo, and -devel sources
+#: ../data/gpk-prefs.ui.h:9
+msgid "_Show debug and development package sources"
+msgstr "ਡੀਬੱਗ ਅਤੇ ਡਿਵੈਲਪਮੈਂਟ ਪੈਕੇਜ ਸਰੋਤ ਵੇਖੋ(_S)"
+
+#: ../data/gpk-signature.ui.h:1
+msgid "Do you trust the source of the packages?"
+msgstr "ਕੀ ਤੁਸੀਂ ਪੈਕੇਜ ਦੇ ਸਰੋਤ ਉੱਤੇ ਭਰੋਸਾ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
+
+#: ../data/gpk-signature.ui.h:2
+#, fuzzy
+msgid "Repository name"
+msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਾਂ:"
+
+#: ../data/gpk-signature.ui.h:3
+#, fuzzy
+msgid "Signature URL"
+msgstr "ਦਸਤਖਤ URL:"
+
+#: ../data/gpk-signature.ui.h:4
+#, fuzzy
+msgid "Signature user identifier"
+msgstr "ਦਸਤਖਤੀ ਯੂਜ਼ਰ ਪਛਾਣਕਰਤਾ:"
+
+#: ../data/gpk-signature.ui.h:5
+#, fuzzy
+msgid "Signature identifier"
+msgstr "ਦਸਤਖਤੀ ਪਛਾਣਕਰਤਾ:"
+
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
+#: ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "ਪੈਕੇਜ"
+
+#: ../data/gpk-signature.ui.h:7
+msgid "Do you recognize the user and trust this key?"
+msgstr "ਕੀ ਤੁਸੀਂ ਯੂਜ਼ਰ ਨੂੰ ਪਛਾਣ ਦੇ ਹੋ ਅਤੇ ਇਸ ਕੁੰਜੀ (ਕੀ) ਉੱਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹੋ?"
 
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
@@ -275,10 +477,6 @@ msgstr "ਰੱਦ ਕਰੋ(_C)"
 msgid "Install Anyway"
 msgstr "ਸਾਫਟਵੇਅਰ ਇੰਸਟਾਲ"
 
-#: ../data/gpk-third-party-installer.ui.h:4
-msgid "Open"
-msgstr ""
-
 #: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
 msgid "Trust and install this app?"
@@ -302,6 +500,42 @@ msgstr ""
 #: ../data/gpk-third-party-installer.ui.h:9
 msgid "I understand"
 msgstr ""
+
+#. TRANSLATORS: title: nothing to do
+#: ../data/gpk-update-viewer.ui.h:1
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "ਸਾਫਟਵੇਅਰ ਅੱਪਡੇਟ"
+
+#. TRANSLATORS: tell the user the problem
+#: ../data/gpk-update-viewer.ui.h:2
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "ਤੁਹਾਡੇ ਕੰਪਿਊਟਰ ਲਈ ਇਸ ਵੇਲੇ ਕੋਈ ਵੀ ਪੈਕੇਜ ਅੱਪਡੇਟ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
+
+#: ../data/gpk-update-viewer.ui.h:4
+#, fuzzy
+msgid ""
+"Software updates correct errors, eliminate security vulnerabilities, and "
+"provide new features."
+msgstr ""
+"ਪੈਕੇਜ ਅੱਪਡੇਟ ਨਾਲ ਗਲਤੀਆਂ ਠੀਕ ਹੁੰਦੀਆਂ ਹਨ, ਸੁਰੱਖਿਆ ਕਮਜ਼ੋਰੀਆਂ ਖਤਮ ਹੁੰਦੀਆਂ ਹਨ ਅਤੇ ਨਵੇਂ ਫੀਚਰ ਉਪਲੱਬਧ ਹੁੰਦੇ "
+"ਹਨ।"
+
+#: ../data/gpk-update-viewer.ui.h:5
+msgid "_Upgrade"
+msgstr "ਅੱਪਗਰੇਡ(_U)"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "ਵੇਰਵਾ"
+
+#: ../data/gpk-update-viewer.ui.h:8
+msgid "_Install Updates"
+msgstr "ਅੱਪਡੇਟ ਇੰਸਟਾਲ ਕਰੋ(_I)"
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -1925,12 +2159,6 @@ msgstr "ਸਿਸਟਮ ਅੱਪਗਰੇਡ ਕੀਤਾ ਜਾ ਰਿਹਾ �
 msgid "Icon"
 msgstr "ਆਈਕਾਨ"
 
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "ਪੈਕੇਜ"
-
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "ਐਪਲੀਕੇਸ਼ਨਾਂ, ਜੋ ਇਸ ਕਿਸਮ ਦੀ ਫਾਇਲ ਖੋਲ੍ਹ ਸਕਦੀਆਂ ਹਨ"
@@ -2009,31 +2237,10 @@ msgstr "ਜਾਰੀ ਰੱਖੋ"
 msgid "The following software also needs to be installed"
 msgstr "ਅੱਗੇ ਦਿੱਤੇ ਸਾਫਟਵੇਅਰ ਵੀ ਇੰਸਟਾਲ ਕਰਨ ਦੀ ਲੋੜ ਹੈ"
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "ਇੰਸਟਾਲ"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "ਅੱਗੇ ਦਿੱਤੇ ਸਾਫਟਵੇਅਰ ਨੂੰ ਵੀ ਹਟਾਉਣ ਦੀ ਲੋੜ ਹੈ"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "ਹਟਾਓ"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2207,11 +2414,6 @@ msgstr "ਮਿਤੀ"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "ਐਕਸ਼ਨ"
-
-#. TRANSLATORS: column for what packages were upgraded
-#: ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "ਵੇਰਵਾ"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2772,11 +2974,6 @@ msgstr "ਹਾਲਤ ਬਦਲਣ ਲਈ ਫੇਲ੍ਹ ਹੈ"
 msgid "Enabled"
 msgstr "ਯੋਗ ਕੀਤਾ"
 
-#. TRANSLATORS: column for the source description
-#: ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "ਸਰੋਤ"
-
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2804,10 +3001,6 @@ msgstr "ਸਾਫਟਵੇਅਰ ਸੈਟਿੰਗ"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
-msgstr ""
-
-#: ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -2845,11 +3038,6 @@ msgstr "ਤੁਸੀਂ ਕੁਝ ਬਦਲਾਅ ਕੀਤੇ ਹਨ, ਜੋ �
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "ਇਹ ਬਦਲਾਅ ਖਤਮ ਹੋ ਜਾਣਗੇ, ਜੇ ਤੁਸੀਂ ਇਹ ਵਿੰਡੋ ਬੰਦ ਕਰ ਦਿੱਤੀ।"
-
-#: ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "ਡਿਸਟਰੀਬਿਊਸ਼ਨ ਅੱਪਗਰੇਡ ਟੂਲ"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -2953,11 +3141,6 @@ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ"
 msgid "Xings Software Website"
 msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
 
-#: ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "ਕੈਟਾਗਰੀਆਂ ਲਈਆਂ"
-
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3023,11 +3206,6 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "ਕੋਈ ਅੱਪਡੇਟ ਵੇਰਵਾ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
 msgstr[1] "ਕੋਈ ਅੱਪਡੇਟ ਵੇਰਵਾ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
-
-#. TRANSLATORS: the updates mechanism
-#: ../src/software-service/gpk-updates-notification.c:316
-msgid "Updates"
-msgstr "ਅੱਪਡੇਟ"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3212,18 +3390,6 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "ਅੱਪਡੇਟ ਇੰਸਟਾਲ ਕਰੋ(_I)"
 msgstr[1] "ਅੱਪਡੇਟ ਇੰਸਟਾਲ ਕਰੋ(_I)"
-
-#. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1457
-#, fuzzy
-msgid "All software is up to date"
-msgstr "ਸਾਫਟਵੇਅਰ ਅੱਪਡੇਟ"
-
-#. TRANSLATORS: tell the user the problem
-#: ../src/software-update/gpk-update-viewer.c:1459
-#, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "ਤੁਹਾਡੇ ਕੰਪਿਊਟਰ ਲਈ ਇਸ ਵੇਲੇ ਕੋਈ ਵੀ ਪੈਕੇਜ ਅੱਪਡੇਟ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ।"
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3478,125 +3644,6 @@ msgstr "ਡਾਊਨਲੋਡ ਸਾਈਜ਼"
 #: ../src/third-parties/gpk-third-parties.c:304
 msgid "Install third party software from flatpakref"
 msgstr ""
-
-#~ msgid "Homepage"
-#~ msgstr "ਹੋਮ-ਪੇਜ਼"
-
-#, fuzzy
-#~ msgid "Report"
-#~ msgstr "ਰਿਪੋਜ਼ਟਰੀ"
-
-#, fuzzy
-#~ msgid "Translate"
-#~ msgstr "ਟਰਾਂਸੈਕਸ਼ਨ ਗਲਤੀ"
-
-#~ msgid "License"
-#~ msgstr "ਲਾਈਸੈਂਸ"
-
-#, fuzzy
-#~ msgid "Show categories"
-#~ msgstr "ਕੈਟਾਗਰੀਆਂ ਲਈਆਂ"
-
-#, fuzzy
-#~ msgid "Search for apps or distribution packages"
-#~ msgstr "ਪੈਕੇਜਾਂ ਲਈ ਖੋਜ ਜਾਰੀ ਹੈ"
-
-#, fuzzy
-#~ msgid "Update Software Sources"
-#~ msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
-
-#~ msgid "Software Sources"
-#~ msgstr "ਸਾਫਟਵੇਅਰ ਸਰੋਤ"
-
-#~ msgid "About"
-#~ msgstr "ਇਸ ਬਾਰੇ"
-
-#~ msgid "_Quit"
-#~ msgstr "ਬੰਦ ਕਰੋ(_Q)"
-
-#~ msgid "Install Package"
-#~ msgstr "ਪੈਕੇਜ ਇੰਸਟਾਲ"
-
-#~ msgid "More details"
-#~ msgstr "ਹੋਰ ਵੇਰਵਾ"
-
-#~ msgid "_Force install"
-#~ msgstr "ਧੱਕੇ ਨਾਲ ਇੰਸਟਾਲ(_F)"
-
-#~ msgid "Force installing package"
-#~ msgstr "ਪੈਕੇਜ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਧੱਕਾ"
-
-#~ msgid "License Agreement Required"
-#~ msgstr "ਲਾਈਸੈਂਸ ਇਕਰਾਰਨਾਮ ਲੋੜੀਦਾ ਹੈ"
-
-#~ msgid "_Accept Agreement"
-#~ msgstr "ਇਕਰਾਰਨਾਮਾ ਮਨਜ਼ੂਰ(_A)"
-
-#, fuzzy
-#~ msgid ""
-#~ "When your device is online, we check for updates regularly. These updates "
-#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
-#~ "features."
-#~ msgstr ""
-#~ "ਪੈਕੇਜ ਅੱਪਡੇਟ ਨਾਲ ਗਲਤੀਆਂ ਠੀਕ ਹੁੰਦੀਆਂ ਹਨ, ਸੁਰੱਖਿਆ ਕਮਜ਼ੋਰੀਆਂ ਖਤਮ ਹੁੰਦੀਆਂ ਹਨ ਅਤੇ ਨਵੇਂ ਫੀਚਰ ਉਪਲੱਬਧ "
-#~ "ਹੁੰਦੇ ਹਨ।"
-
-#, fuzzy
-#~ msgid "Check for updates"
-#~ msgstr "ਅੱਪਡੇਟ ਲਈ ਚੈੱਕ(_h):"
-
-#, fuzzy
-#~ msgid "Check for updates on mobile connections"
-#~ msgstr "ਬੈਟਰੀ ਵਰਤਣ ਸਮੇਂ ਅੱਪਡੇਟ ਲਈ ਚੈੱਕ ਕਰੋ"
-
-#, fuzzy
-#~ msgid "Download updates in the background"
-#~ msgstr "ਅੱਪਡੇਟ ਜਾਣਕਾਰੀ ਡਾਊਨਲੋਡ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
-
-#, fuzzy
-#~ msgid ""
-#~ "A software source contains packages that can be installed on this "
-#~ "computer."
-#~ msgstr "ਪੈਕੇਜ ਸਰੋਤ 'ਚ ਪੈਕੇਜ ਹੁੰਦੇ ਹਨ, ਜੋ ਕਿ ਇਸ ਕੰਪਿਊਟਰ ਉੱਤੇ ਇੰਸਟਾਲ ਕੀਤੇ ਜਾ ਸਕਦੇ ਹਨ।"
-
-#~ msgid "_Show debug and development package sources"
-#~ msgstr "ਡੀਬੱਗ ਅਤੇ ਡਿਵੈਲਪਮੈਂਟ ਪੈਕੇਜ ਸਰੋਤ ਵੇਖੋ(_S)"
-
-#~ msgid "Do you trust the source of the packages?"
-#~ msgstr "ਕੀ ਤੁਸੀਂ ਪੈਕੇਜ ਦੇ ਸਰੋਤ ਉੱਤੇ ਭਰੋਸਾ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
-
-#, fuzzy
-#~ msgid "Repository name"
-#~ msgstr "ਰਿਪੋਜ਼ਟਰੀ ਨਾਂ:"
-
-#, fuzzy
-#~ msgid "Signature URL"
-#~ msgstr "ਦਸਤਖਤ URL:"
-
-#, fuzzy
-#~ msgid "Signature user identifier"
-#~ msgstr "ਦਸਤਖਤੀ ਯੂਜ਼ਰ ਪਛਾਣਕਰਤਾ:"
-
-#, fuzzy
-#~ msgid "Signature identifier"
-#~ msgstr "ਦਸਤਖਤੀ ਪਛਾਣਕਰਤਾ:"
-
-#~ msgid "Do you recognize the user and trust this key?"
-#~ msgstr "ਕੀ ਤੁਸੀਂ ਯੂਜ਼ਰ ਨੂੰ ਪਛਾਣ ਦੇ ਹੋ ਅਤੇ ਇਸ ਕੁੰਜੀ (ਕੀ) ਉੱਤੇ ਭਰੋਸਾ ਕਰਦੇ ਹੋ?"
-
-#, fuzzy
-#~ msgid ""
-#~ "Software updates correct errors, eliminate security vulnerabilities, and "
-#~ "provide new features."
-#~ msgstr ""
-#~ "ਪੈਕੇਜ ਅੱਪਡੇਟ ਨਾਲ ਗਲਤੀਆਂ ਠੀਕ ਹੁੰਦੀਆਂ ਹਨ, ਸੁਰੱਖਿਆ ਕਮਜ਼ੋਰੀਆਂ ਖਤਮ ਹੁੰਦੀਆਂ ਹਨ ਅਤੇ ਨਵੇਂ ਫੀਚਰ ਉਪਲੱਬਧ "
-#~ "ਹੁੰਦੇ ਹਨ।"
-
-#~ msgid "_Upgrade"
-#~ msgstr "ਅੱਪਗਰੇਡ(_U)"
-
-#~ msgid "_Install Updates"
-#~ msgstr "ਅੱਪਡੇਟ ਇੰਸਟਾਲ ਕਰੋ(_I)"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"

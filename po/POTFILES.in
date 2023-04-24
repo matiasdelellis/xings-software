@@ -30,6 +30,7 @@ data/xings-software-service.desktop.in
 data/xings-third-parties-installer.desktop.in
 [type: gettext/glade]data/gpk-third-party-installer.ui
 [type: gettext/glade]data/gpk-update-viewer.ui
+data/xings-third-parties-installer.desktop.in
 data/org.xings.software.gschema.xml
 src/common/gpk-common.c
 src/common/gpk-debug.c
@@ -52,7 +53,5 @@ src/software-service/gpk-updates-manager.c
 src/software-service/gpk-updates-notification.c
 src/software-service/gpk-updates-service.c
 src/software-update/gpk-update-viewer.c
-data/gpk-third-party-installer.ui
-data/xings-third-parties-installer.desktop.in
 src/third-parties/gpk-flatpak-installer.c
 src/third-parties/gpk-third-parties.c

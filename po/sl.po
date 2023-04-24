@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:17-0300\n"
+"POT-Creation-Date: 2023-04-24 15:33-0300\n"
 "PO-Revision-Date: 2014-09-14 19:37+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian <gnome-si@googlegroups.com>\n"
@@ -22,8 +22,8 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
-#: ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
+#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -58,13 +58,14 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
+#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "Posodobitev programske opreme"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Posodobitev programske opreme nameščene na sistemu"
 
@@ -181,6 +182,112 @@ msgid ""
 "Store;"
 msgstr "posodobitve;nadgradnja;viri;skladišča;možnosti;namestitev;nakupovanje;"
 
+#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
+msgstr ""
+
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "Namesti"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "Odstrani"
+
+#: ../data/gpk-application.ui.h:7
+msgid "Homepage"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:8
+msgid "Donate"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:9
+msgid "Report"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:10
+#, fuzzy
+msgid "Translate"
+msgstr "Napaka prenosa"
+
+#: ../data/gpk-application.ui.h:11
+msgid "License"
+msgstr "Dovoljenje"
+
+#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "Orodje za posodobitev celotne distribucije"
+
+#. TRANSLATORS: column for the source description
+#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Vir"
+
+#: ../data/gpk-application.ui.h:14
+#, fuzzy
+msgid "Show categories"
+msgstr "Pridobljene kategorije"
+
+#: ../data/gpk-application.ui.h:15
+#, fuzzy
+msgid "Search for apps or distribution packages"
+msgstr "Iskanje paketov"
+
+#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "Pridobljene kategorije"
+
+#: ../data/gpk-application.ui.h:17
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "Viri programske opreme"
+
+#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
+msgid "Software Sources"
+msgstr "Viri programske opreme"
+
+#. are we running privileged
+#: ../data/gpk-application.ui.h:19
+#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
+#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "Viri programske opreme"
+
+#: ../data/gpk-application.ui.h:20
+msgid "About"
+msgstr "O programu"
+
+#: ../data/gpk-application.ui.h:21
+msgid "_Quit"
+msgstr "_Končaj"
+
+#: ../data/gpk-client.ui.h:1
+msgid "Install Package"
+msgstr "Namesti paket"
+
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -195,6 +302,27 @@ msgstr "Spletišče programa PackageKit"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "Storitev seje D-Bus programa PackageKit"
 
+#: ../data/gpk-error.ui.h:1
+msgid "More details"
+msgstr "Več podrobnosti"
+
+#: ../data/gpk-error.ui.h:2
+msgid "_Force install"
+msgstr "_Vsili namestitev"
+
+#. button tooltip
+#: ../data/gpk-error.ui.h:4
+msgid "Force installing package"
+msgstr "Vsili namestitev paketa"
+
+#: ../data/gpk-eula.ui.h:1
+msgid "License Agreement Required"
+msgstr "Zahtevano je strinjanje z dovoljenjem uporabe"
+
+#: ../data/gpk-eula.ui.h:2
+msgid "_Accept Agreement"
+msgstr "_Sprejmi dovoljenje"
+
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -203,13 +331,6 @@ msgstr "Namesti programsko opremo"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "Namestitev izbrane programske opreme v sistem"
-
-#. are we running privileged
-#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
-#: ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Viri programske opreme"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -232,6 +353,87 @@ msgid ""
 "Install;Uninstall;Updates;Upgrade;Sources;Repositories;Preferences;Program;"
 "Software;App;Store;"
 msgstr "posodobitve;nadgradnja;viri;skladišča;možnosti;namestitev;nakupovanje;"
+
+#: ../data/gpk-prefs.ui.h:1
+#, fuzzy
+msgid ""
+"When your device is online, we check for updates regularly. These updates "
+"can fix bugs, eliminate security vulnerabilities, and provide new features."
+msgstr ""
+"Programske posodobitve odpravljajo napake in varnostne luknje ter ponujajo "
+"nove programske zmožnosti."
+
+#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
+#, fuzzy
+msgid "Check for updates"
+msgstr "_Preveri za posodobitve:"
+
+#: ../data/gpk-prefs.ui.h:3
+#, fuzzy
+msgid "Check for updates on mobile connections"
+msgstr "Preveri za posodobitve med delovanjem z baterijskim napajanjem"
+
+#: ../data/gpk-prefs.ui.h:4
+msgid "You will be notified when the updates are ready to be installed"
+msgstr ""
+
+#: ../data/gpk-prefs.ui.h:5
+#, fuzzy
+msgid "Download updates in the background"
+msgstr "Prejemanje podatkov posodobitve"
+
+#. TRANSLATORS: the updates mechanism
+#: ../data/gpk-prefs.ui.h:6
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "Posodobi"
+
+#: ../data/gpk-prefs.ui.h:7
+#, fuzzy
+msgid ""
+"A software source contains packages that can be installed on this computer."
+msgstr "Vir programske opreme vsebuje pakete, ki jih je mogoče namestiti."
+
+#. shows extra -source, -debuginfo, and -devel sources
+#: ../data/gpk-prefs.ui.h:9
+msgid "_Show debug and development package sources"
+msgstr "_Pokaži vire razhroščevanja in razvoja programske opreme"
+
+#: ../data/gpk-signature.ui.h:1
+msgid "Do you trust the source of the packages?"
+msgstr "Ali zaupate viru paketa?"
+
+#: ../data/gpk-signature.ui.h:2
+#, fuzzy
+msgid "Repository name"
+msgstr "Ime skladišča:"
+
+#: ../data/gpk-signature.ui.h:3
+#, fuzzy
+msgid "Signature URL"
+msgstr "Naslov URL podpisa:"
+
+#: ../data/gpk-signature.ui.h:4
+#, fuzzy
+msgid "Signature user identifier"
+msgstr "Določilo uporabniškega podpisa:"
+
+#: ../data/gpk-signature.ui.h:5
+#, fuzzy
+msgid "Signature identifier"
+msgstr "Določilo podpisa:"
+
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
+#: ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "Paket"
+
+#: ../data/gpk-signature.ui.h:7
+msgid "Do you recognize the user and trust this key?"
+msgstr "Ali prepoznate uporabnika in zaupate temu ključu?"
 
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
@@ -273,10 +475,6 @@ msgstr "Preklicano"
 msgid "Install Anyway"
 msgstr "Namesti programsko opremo"
 
-#: ../data/gpk-third-party-installer.ui.h:4
-msgid "Open"
-msgstr ""
-
 #: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
 msgid "Trust and install this app?"
@@ -300,6 +498,42 @@ msgstr ""
 #: ../data/gpk-third-party-installer.ui.h:9
 msgid "I understand"
 msgstr ""
+
+#. TRANSLATORS: title: nothing to do
+#: ../data/gpk-update-viewer.ui.h:1
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "Posodobitev programske opreme"
+
+#. TRANSLATORS: tell the user the problem
+#: ../data/gpk-update-viewer.ui.h:2
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "Trenutno ni nobenih posodobitev programske opreme."
+
+#: ../data/gpk-update-viewer.ui.h:4
+#, fuzzy
+msgid ""
+"Software updates correct errors, eliminate security vulnerabilities, and "
+"provide new features."
+msgstr ""
+"Programske posodobitve odpravljajo napake in varnostne luknje ter ponujajo "
+"nove programske zmožnosti."
+
+#: ../data/gpk-update-viewer.ui.h:5
+msgid "_Upgrade"
+msgstr "_Posodobi"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "Podrobnosti"
+
+#: ../data/gpk-update-viewer.ui.h:8
+msgid "_Install Updates"
+msgstr "_Namesti posodobitve"
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -1965,12 +2199,6 @@ msgstr "Posodabljanje sistema"
 msgid "Icon"
 msgstr "Ikona"
 
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "Paket"
-
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Program, ki odpira to vrsto datotek"
@@ -2055,31 +2283,10 @@ msgstr "Nadaljuj"
 msgid "The following software also needs to be installed"
 msgstr "Navedene datoteke je treba prav tako namestiti."
 
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "Namesti"
-
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Navedene datoteke je treba odstraniti."
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "Odstrani"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2279,11 +2486,6 @@ msgstr "Datum"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Dejanje"
-
-#. TRANSLATORS: column for what packages were upgraded
-#: ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "Podrobnosti"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2917,11 +3119,6 @@ msgstr "Napaka med spreminjanjem stanja"
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#. TRANSLATORS: column for the source description
-#: ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Vir"
-
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2950,10 +3147,6 @@ msgstr "Nastavitve programske opreme"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
-msgstr ""
-
-#: ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -2991,11 +3184,6 @@ msgstr "Narejene so bile spremembe, ki še niso bile uveljavljene."
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "Ko se okno zapre bodo vse spremembe izgubljene."
-
-#: ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "Orodje za posodobitev celotne distribucije"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3101,11 +3289,6 @@ msgstr "Matej Urbančič <mateju@svn.gnome.org>"
 msgid "Xings Software Website"
 msgstr "Programski viri"
 
-#: ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "Pridobljene kategorije"
-
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3175,12 +3358,6 @@ msgstr[0] "Podrobnosti o posodobitvi niso na voljo."
 msgstr[1] "Podrobnosti o posodobitvi niso na voljo."
 msgstr[2] "Podrobnosti o posodobitvi niso na voljo."
 msgstr[3] "Podrobnosti o posodobitvi niso na voljo."
-
-#. TRANSLATORS: the updates mechanism
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "Posodobi"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3370,18 +3547,6 @@ msgstr[0] "_Namesti posodobitve"
 msgstr[1] "_Namesti posodobitev"
 msgstr[2] "_Namesti posodobitve"
 msgstr[3] "_Namesti posodobitve"
-
-#. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1457
-#, fuzzy
-msgid "All software is up to date"
-msgstr "Posodobitev programske opreme"
-
-#. TRANSLATORS: tell the user the problem
-#: ../src/software-update/gpk-update-viewer.c:1459
-#, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "Trenutno ni nobenih posodobitev programske opreme."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3655,118 +3820,6 @@ msgstr "Velikost prejemanja"
 #: ../src/third-parties/gpk-third-parties.c:304
 msgid "Install third party software from flatpakref"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Translate"
-#~ msgstr "Napaka prenosa"
-
-#~ msgid "License"
-#~ msgstr "Dovoljenje"
-
-#, fuzzy
-#~ msgid "Show categories"
-#~ msgstr "Pridobljene kategorije"
-
-#, fuzzy
-#~ msgid "Search for apps or distribution packages"
-#~ msgstr "Iskanje paketov"
-
-#, fuzzy
-#~ msgid "Update Software Sources"
-#~ msgstr "Viri programske opreme"
-
-#~ msgid "Software Sources"
-#~ msgstr "Viri programske opreme"
-
-#~ msgid "About"
-#~ msgstr "O programu"
-
-#~ msgid "_Quit"
-#~ msgstr "_Končaj"
-
-#~ msgid "Install Package"
-#~ msgstr "Namesti paket"
-
-#~ msgid "More details"
-#~ msgstr "Več podrobnosti"
-
-#~ msgid "_Force install"
-#~ msgstr "_Vsili namestitev"
-
-#~ msgid "Force installing package"
-#~ msgstr "Vsili namestitev paketa"
-
-#~ msgid "License Agreement Required"
-#~ msgstr "Zahtevano je strinjanje z dovoljenjem uporabe"
-
-#~ msgid "_Accept Agreement"
-#~ msgstr "_Sprejmi dovoljenje"
-
-#, fuzzy
-#~ msgid ""
-#~ "When your device is online, we check for updates regularly. These updates "
-#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
-#~ "features."
-#~ msgstr ""
-#~ "Programske posodobitve odpravljajo napake in varnostne luknje ter "
-#~ "ponujajo nove programske zmožnosti."
-
-#, fuzzy
-#~ msgid "Check for updates"
-#~ msgstr "_Preveri za posodobitve:"
-
-#, fuzzy
-#~ msgid "Check for updates on mobile connections"
-#~ msgstr "Preveri za posodobitve med delovanjem z baterijskim napajanjem"
-
-#, fuzzy
-#~ msgid "Download updates in the background"
-#~ msgstr "Prejemanje podatkov posodobitve"
-
-#, fuzzy
-#~ msgid ""
-#~ "A software source contains packages that can be installed on this "
-#~ "computer."
-#~ msgstr "Vir programske opreme vsebuje pakete, ki jih je mogoče namestiti."
-
-#~ msgid "_Show debug and development package sources"
-#~ msgstr "_Pokaži vire razhroščevanja in razvoja programske opreme"
-
-#~ msgid "Do you trust the source of the packages?"
-#~ msgstr "Ali zaupate viru paketa?"
-
-#, fuzzy
-#~ msgid "Repository name"
-#~ msgstr "Ime skladišča:"
-
-#, fuzzy
-#~ msgid "Signature URL"
-#~ msgstr "Naslov URL podpisa:"
-
-#, fuzzy
-#~ msgid "Signature user identifier"
-#~ msgstr "Določilo uporabniškega podpisa:"
-
-#, fuzzy
-#~ msgid "Signature identifier"
-#~ msgstr "Določilo podpisa:"
-
-#~ msgid "Do you recognize the user and trust this key?"
-#~ msgstr "Ali prepoznate uporabnika in zaupate temu ključu?"
-
-#, fuzzy
-#~ msgid ""
-#~ "Software updates correct errors, eliminate security vulnerabilities, and "
-#~ "provide new features."
-#~ msgstr ""
-#~ "Programske posodobitve odpravljajo napake in varnostne luknje ter "
-#~ "ponujajo nove programske zmožnosti."
-
-#~ msgid "_Upgrade"
-#~ msgstr "_Posodobi"
-
-#~ msgid "_Install Updates"
-#~ msgstr "_Namesti posodobitve"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
