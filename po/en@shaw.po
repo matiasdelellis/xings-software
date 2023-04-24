@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2010-05-18 10:04 -0400\n"
 "Last-Translator: Thomas Thurman <tthurman@gnome.org>\n"
 "Language-Team: Shavian <ubuntu-l10n-en-shaw@launchpad.net>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 msgid "Software"
@@ -49,14 +49,13 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑪𐑓𐑑𐑢𐑺 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑪𐑯 𐑞 𐑕𐑦𐑕𐑑𐑩𐑥"
 
@@ -166,114 +165,6 @@ msgid ""
 "Store;"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "𐑦𐑯𐑕𐑑𐑷𐑤"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "𐑮𐑦𐑥𐑵𐑝"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr "Homepage"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "𐑑𐑮𐑨𐑯𐑟𐑨𐑒𐑖𐑩𐑯 𐑻𐑼"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "𐑤𐑲𐑕𐑩𐑯𐑕"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "𐑛𐑧𐑕𐑑𐑦𐑯𐑱𐑖𐑩𐑯 𐑐𐑨𐑒𐑦𐑡 𐑤𐑦𐑕𐑑:"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "𐑕𐑹𐑕"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "𐑜𐑪𐑑 𐑒𐑨𐑑𐑩𐑜𐑪𐑮𐑰𐑟"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "𐑜𐑪𐑑 𐑒𐑨𐑑𐑩𐑜𐑪𐑮𐑰𐑟"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
-
-#: ../data/gpk-application.ui.h:20
-#, fuzzy
-msgid "About"
-msgstr "𐑩𐑚𐑬𐑑"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr ""
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 𐑐𐑨𐑒𐑦𐑡"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -288,27 +179,6 @@ msgstr "·𐑐𐑩𐑒𐑦𐑡𐑒𐑦𐑑 𐑢𐑧𐑚𐑕𐑲𐑑"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "𐑕𐑧𐑖𐑩𐑯 DBus 𐑕𐑻𐑝𐑦𐑕 𐑓𐑹 PackageKit"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "𐑥𐑹 𐑛𐑰𐑑𐑱𐑤𐑟"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "_𐑓𐑹𐑕 𐑦𐑯𐑕𐑑𐑷𐑤"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "𐑓𐑹𐑕 𐑦𐑯𐑕𐑑𐑷𐑤𐑦𐑙 𐑐𐑨𐑒𐑦𐑡"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "𐑤𐑲𐑕𐑩𐑯𐑕 𐑩𐑜𐑮𐑰𐑥𐑩𐑯𐑑 𐑮𐑦𐑒𐑢𐑲𐑼𐑛"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "𐑨𐑒𐑕𐑧𐑐𐑑 𐑩𐑜𐑮𐑰𐑥𐑩𐑯𐑑"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -318,6 +188,13 @@ msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 𐑐𐑨𐑒𐑦𐑡"
 #, fuzzy
 msgid "Install selected packages on the system"
 msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 𐑕𐑩𐑤𐑧𐑒𐑑𐑩𐑛 𐑕𐑪𐑓𐑑𐑢𐑺 𐑪𐑯 𐑞 𐑕𐑦𐑕𐑑𐑩𐑥"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -340,87 +217,6 @@ msgid ""
 "Software;App;Store;"
 msgstr ""
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑒𐑩𐑮𐑧𐑒𐑑 𐑻𐑼𐑟, 𐑩𐑤𐑦𐑥𐑦𐑯𐑱𐑑 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑝𐑩𐑤𐑯𐑻𐑩𐑚𐑦𐑤𐑦𐑑𐑰𐑟 𐑯 𐑐𐑮𐑩𐑝𐑲𐑛 𐑯𐑿 𐑓𐑰𐑗𐑼𐑟."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "_𐑗𐑧𐑒 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕:"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "_𐑗𐑧𐑒 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕:"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "𐑛𐑬𐑯𐑤𐑴𐑛𐑦𐑙 𐑳𐑐𐑛𐑱𐑑 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "𐑳𐑐𐑛𐑱𐑑𐑩𐑛"
-
-#: ../data/gpk-prefs.ui.h:7
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr ""
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-#, fuzzy
-msgid "_Show debug and development package sources"
-msgstr "𐑖𐑴 𐑛𐑰𐑚𐑳𐑜 𐑯 𐑛𐑦𐑝𐑧𐑤𐑩𐑐𐑥𐑩𐑯𐑑 𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "𐑛𐑵 𐑿 𐑑𐑮𐑳𐑕𐑑 𐑞 𐑕𐑹𐑕 𐑝 𐑞 𐑐𐑨𐑒𐑦𐑡𐑩𐑟?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "𐑮𐑰𐑐𐑭𐑟𐑩𐑑𐑪𐑮𐑰 𐑯𐑱𐑥:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "𐑕𐑦𐑜𐑯𐑩𐑗𐑼 URL:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "𐑕𐑦𐑜𐑯𐑩𐑗𐑼 𐑿𐑟𐑼 𐑲𐑛𐑧𐑯𐑑𐑦𐑓𐑲𐑼:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "𐑕𐑦𐑜𐑯𐑩𐑗𐑼 𐑲𐑛𐑧𐑯𐑑𐑦𐑓𐑲𐑼:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "𐑐𐑨𐑒𐑦𐑡"
-
-#: ../data/gpk-signature.ui.h:7
-#, fuzzy
-msgid "Do you recognize the user and trust this key?"
-msgstr "𐑛𐑵 𐑿 𐑮𐑧𐑒𐑪𐑜𐑯𐑲𐑟 𐑞 𐑿𐑟𐑼 𐑯 𐑑𐑮𐑳𐑕𐑑 𐑞𐑦𐑕 𐑒𐑰?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -441,7 +237,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺"
@@ -450,41 +247,43 @@ msgstr "𐑕𐑪𐑓𐑑𐑢𐑺"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑"
+msgid "Cancel"
+msgstr "𐑒𐑨𐑯𐑕𐑩𐑤𐑛"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "𐑞𐑺 𐑸 𐑯𐑴 𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤 𐑓𐑹 𐑿𐑼 𐑒𐑩𐑥𐑐𐑿𐑑𐑼 𐑨𐑑 𐑞𐑦𐑕 𐑑𐑲𐑥."
+msgid "Install Anyway"
+msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 firmware"
 
-#: ../data/gpk-update-viewer.ui.h:4
-#, fuzzy
-msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑒𐑩𐑮𐑧𐑒𐑑 𐑻𐑼𐑟, 𐑩𐑤𐑦𐑥𐑦𐑯𐑱𐑑 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑝𐑩𐑤𐑯𐑻𐑩𐑚𐑦𐑤𐑦𐑑𐑰𐑟 𐑯 𐑐𐑮𐑩𐑝𐑲𐑛 𐑯𐑿 𐑓𐑰𐑗𐑼𐑟."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "𐑳𐑐𐑜𐑮𐑱𐑛"
-
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "𐑛𐑰𐑑𐑱𐑤𐑟"
-
-#: ../data/gpk-update-viewer.ui.h:8
+#: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
-msgid "_Install Updates"
-msgstr "_𐑦𐑯𐑕𐑑𐑷𐑤 𐑳𐑐𐑛𐑱𐑑"
+msgid "Trust and install this app?"
+msgstr "𐑛𐑵 𐑿 𐑢𐑪𐑯𐑑 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤 𐑞𐑦𐑕 𐑒𐑨𐑑𐑩𐑤𐑪𐑜?"
+
+#: ../data/gpk-third-party-installer.ui.h:6
+msgid ""
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "𐑛𐑬𐑯𐑤𐑴𐑛 𐑕𐑲𐑟"
+
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2149,6 +1948,12 @@ msgstr "𐑳𐑐𐑛𐑱𐑑𐑦𐑙 𐑕𐑦𐑕𐑑𐑩𐑥"
 msgid "Icon"
 msgstr "𐑲𐑒𐑪𐑯"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "𐑐𐑨𐑒𐑦𐑡"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "𐑩𐑐𐑤𐑦𐑒𐑱𐑕𐑩𐑯𐑟 𐑞𐑨𐑑 𐑒𐑨𐑯 𐑴𐑐𐑩𐑯 𐑞𐑦𐑕 𐑑𐑲𐑐 𐑝 𐑓𐑲𐑤"
@@ -2226,10 +2031,31 @@ msgstr "𐑒𐑩𐑯𐑑𐑦𐑯𐑿"
 msgid "The following software also needs to be installed"
 msgstr "𐑞 𐑓𐑪𐑤𐑴𐑦𐑙 𐑕𐑪𐑓𐑑𐑢𐑺 𐑷𐑤𐑕𐑴 𐑯𐑰𐑛𐑟 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "𐑦𐑯𐑕𐑑𐑷𐑤"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "𐑞 𐑓𐑪𐑤𐑴𐑦𐑙 𐑕𐑪𐑓𐑑𐑢𐑺 𐑷𐑤𐑕𐑴 𐑯𐑰𐑛𐑟 𐑑 𐑚𐑰 𐑮𐑦𐑥𐑵𐑝𐑛"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "𐑮𐑦𐑥𐑵𐑝"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2409,6 +2235,11 @@ msgstr "𐑛𐑱𐑑"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "𐑨𐑒𐑖𐑩𐑯"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "𐑛𐑰𐑑𐑱𐑤𐑟"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2983,6 +2814,11 @@ msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑗𐑱𐑯𐑡 𐑕𐑑𐑱𐑑𐑫𐑕"
 msgid "Enabled"
 msgstr "𐑦𐑯𐑱𐑚𐑩𐑤𐑛"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "𐑕𐑹𐑕"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -3012,6 +2848,10 @@ msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -3049,6 +2889,11 @@ msgstr "𐑿 𐑣𐑨𐑝 𐑥𐑱𐑛 𐑗𐑱𐑯𐑡𐑩𐑟 𐑞𐑨𐑑 �
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "𐑞𐑰𐑟 𐑗𐑱𐑯𐑡𐑩𐑟 𐑢𐑦𐑤 𐑚𐑰 𐑤𐑪𐑕𐑑 𐑦𐑓 𐑿 𐑒𐑤𐑴𐑟 𐑞𐑦𐑕 𐑢𐑦𐑯𐑛𐑴."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "𐑛𐑧𐑕𐑑𐑦𐑯𐑱𐑖𐑩𐑯 𐑐𐑨𐑒𐑦𐑡 𐑤𐑦𐑕𐑑:"
 
 #: ../src/software/gpk-application.c:1262
 msgid "Visit the app's website"
@@ -3151,6 +2996,11 @@ msgstr "·𐑑𐑪𐑥𐑩𐑕 ·𐑔𐑻𐑥𐑩𐑯"
 msgid "Xings Software Website"
 msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "𐑜𐑪𐑑 𐑒𐑨𐑑𐑩𐑜𐑪𐑮𐑰𐑟"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3217,6 +3067,12 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "𐑞𐑺 𐑸 𐑯𐑴 𐑳𐑐𐑛𐑱𐑑𐑕 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
 msgstr[1] "𐑞𐑺 𐑸 𐑯𐑴 𐑳𐑐𐑛𐑱𐑑𐑕 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤"
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "𐑳𐑐𐑛𐑱𐑑𐑩𐑛"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3411,6 +3267,18 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_𐑦𐑯𐑕𐑑𐑷𐑤 𐑳𐑐𐑛𐑱𐑑"
 msgstr[1] "_𐑦𐑯𐑕𐑑𐑷𐑤 𐑳𐑐𐑛𐑱𐑑𐑕"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "𐑞𐑺 𐑸 𐑯𐑴 𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑩𐑝𐑱𐑤𐑩𐑚𐑩𐑤 𐑓𐑹 𐑿𐑼 𐑒𐑩𐑥𐑐𐑿𐑑𐑼 𐑨𐑑 𐑞𐑦𐑕 𐑑𐑲𐑥."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3623,59 +3491,171 @@ msgstr "𐑯𐑿 𐑛𐑦𐑕𐑑𐑮𐑦𐑚𐑿𐑖𐑩𐑯 𐑳𐑐𐑜𐑮�
 msgid "Update Software"
 msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "𐑦𐑯𐑕𐑑𐑷𐑤𐑦𐑙"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "𐑳𐑐𐑛𐑱𐑑𐑦𐑙"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "Reinstalling"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤 𐑕𐑪𐑓𐑑𐑢𐑺"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑣𐑨𐑝 𐑚𐑰𐑯 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑣𐑨𐑝 𐑚𐑰𐑯 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "𐑐𐑨𐑒𐑦𐑡 𐑦𐑟 𐑷𐑤𐑮𐑧𐑛𐑦 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "𐑞 𐑐𐑨𐑒𐑦𐑡 𐑦𐑟 𐑷𐑤𐑮𐑧𐑛𐑦 𐑦𐑯𐑕𐑑𐑷𐑤𐑛"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "𐑓𐑱𐑤𐑛 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤 𐑕𐑪𐑓𐑑𐑢𐑺"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "𐑛𐑬𐑯𐑤𐑴𐑛 𐑕𐑲𐑟"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#~ msgid "Homepage"
+#~ msgstr "Homepage"
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "𐑑𐑮𐑨𐑯𐑟𐑨𐑒𐑖𐑩𐑯 𐑻𐑼"
+
+#~ msgid "License"
+#~ msgstr "𐑤𐑲𐑕𐑩𐑯𐑕"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "𐑜𐑪𐑑 𐑒𐑨𐑑𐑩𐑜𐑪𐑮𐑰𐑟"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "𐑕𐑻𐑗𐑦𐑙 𐑓𐑹 𐑐𐑨𐑒𐑦𐑡𐑩𐑟"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "𐑳𐑐𐑛𐑱𐑑 𐑕𐑦𐑕𐑑𐑩𐑥"
+
+#, fuzzy
+#~ msgid "Software Sources"
+#~ msgstr "𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕"
+
+#, fuzzy
+#~ msgid "About"
+#~ msgstr "𐑩𐑚𐑬𐑑"
+
+#~ msgid "Install Package"
+#~ msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 𐑐𐑨𐑒𐑦𐑡"
+
+#~ msgid "More details"
+#~ msgstr "𐑥𐑹 𐑛𐑰𐑑𐑱𐑤𐑟"
+
+#~ msgid "_Force install"
+#~ msgstr "_𐑓𐑹𐑕 𐑦𐑯𐑕𐑑𐑷𐑤"
+
+#~ msgid "Force installing package"
+#~ msgstr "𐑓𐑹𐑕 𐑦𐑯𐑕𐑑𐑷𐑤𐑦𐑙 𐑐𐑨𐑒𐑦𐑡"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "𐑤𐑲𐑕𐑩𐑯𐑕 𐑩𐑜𐑮𐑰𐑥𐑩𐑯𐑑 𐑮𐑦𐑒𐑢𐑲𐑼𐑛"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "𐑨𐑒𐑕𐑧𐑐𐑑 𐑩𐑜𐑮𐑰𐑥𐑩𐑯𐑑"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑒𐑩𐑮𐑧𐑒𐑑 𐑻𐑼𐑟, 𐑩𐑤𐑦𐑥𐑦𐑯𐑱𐑑 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑝𐑩𐑤𐑯𐑻𐑩𐑚𐑦𐑤𐑦𐑑𐑰𐑟 𐑯 𐑐𐑮𐑩𐑝𐑲𐑛 𐑯𐑿 "
+#~ "𐑓𐑰𐑗𐑼𐑟."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "_𐑗𐑧𐑒 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕:"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "_𐑗𐑧𐑒 𐑓𐑹 𐑳𐑐𐑛𐑱𐑑𐑕:"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "𐑛𐑬𐑯𐑤𐑴𐑛𐑦𐑙 𐑳𐑐𐑛𐑱𐑑 𐑦𐑯𐑓𐑼𐑥𐑱𐑖𐑩𐑯"
+
+#, fuzzy
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "𐑖𐑴 𐑛𐑰𐑚𐑳𐑜 𐑯 𐑛𐑦𐑝𐑧𐑤𐑩𐑐𐑥𐑩𐑯𐑑 𐑕𐑪𐑓𐑑𐑢𐑺 𐑕𐑹𐑕𐑩𐑟"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "𐑛𐑵 𐑿 𐑑𐑮𐑳𐑕𐑑 𐑞 𐑕𐑹𐑕 𐑝 𐑞 𐑐𐑨𐑒𐑦𐑡𐑩𐑟?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "𐑮𐑰𐑐𐑭𐑟𐑩𐑑𐑪𐑮𐑰 𐑯𐑱𐑥:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "𐑕𐑦𐑜𐑯𐑩𐑗𐑼 URL:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "𐑕𐑦𐑜𐑯𐑩𐑗𐑼 𐑿𐑟𐑼 𐑲𐑛𐑧𐑯𐑑𐑦𐑓𐑲𐑼:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "𐑕𐑦𐑜𐑯𐑩𐑗𐑼 𐑲𐑛𐑧𐑯𐑑𐑦𐑓𐑲𐑼:"
+
+#, fuzzy
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "𐑛𐑵 𐑿 𐑮𐑧𐑒𐑪𐑜𐑯𐑲𐑟 𐑞 𐑿𐑟𐑼 𐑯 𐑑𐑮𐑳𐑕𐑑 𐑞𐑦𐑕 𐑒𐑰?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "𐑕𐑪𐑓𐑑𐑢𐑺 𐑳𐑐𐑛𐑱𐑑𐑕 𐑒𐑩𐑮𐑧𐑒𐑑 𐑻𐑼𐑟, 𐑩𐑤𐑦𐑥𐑦𐑯𐑱𐑑 𐑕𐑦𐑒𐑘𐑫𐑼𐑦𐑑𐑦 𐑝𐑩𐑤𐑯𐑻𐑩𐑚𐑦𐑤𐑦𐑑𐑰𐑟 𐑯 𐑐𐑮𐑩𐑝𐑲𐑛 𐑯𐑿 "
+#~ "𐑓𐑰𐑗𐑼𐑟."
+
+#~ msgid "_Upgrade"
+#~ msgstr "𐑳𐑐𐑜𐑮𐑱𐑛"
+
+#, fuzzy
+#~ msgid "_Install Updates"
+#~ msgstr "_𐑦𐑯𐑕𐑑𐑷𐑤 𐑳𐑐𐑛𐑱𐑑"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3957,10 +3937,6 @@ msgstr "𐑛𐑬𐑯𐑤𐑴𐑛 𐑕𐑲𐑟"
 
 #~ msgid "Cancel search"
 #~ msgstr "𐑒𐑨𐑯𐑕𐑩𐑤 𐑕𐑻𐑗"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "𐑒𐑨𐑯𐑕𐑩𐑤𐑛"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"
@@ -4744,11 +4720,6 @@ msgstr "𐑛𐑬𐑯𐑤𐑴𐑛 𐑕𐑲𐑟"
 
 #~ msgid "The following packages are marked to be installed from the catalog:"
 #~ msgstr "𐑞 𐑓𐑪𐑤𐑴𐑦𐑙 𐑐𐑨𐑒𐑦𐑡𐑩𐑟 𐑸 𐑥𐑸𐑒𐑑 𐑑 𐑚𐑰 𐑦𐑯𐑕𐑑𐑷𐑤𐑛 𐑓𐑮𐑪𐑥 𐑞 𐑒𐑨𐑑𐑩𐑤𐑪𐑜:"
-
-#~ msgid "Do you want to install this catalog?"
-#~ msgid_plural "Do you want to install these catalogs?"
-#~ msgstr[0] "𐑛𐑵 𐑿 𐑢𐑪𐑯𐑑 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤 𐑞𐑦𐑕 𐑒𐑨𐑑𐑩𐑤𐑪𐑜?"
-#~ msgstr[1] "𐑛𐑵 𐑿 𐑢𐑪𐑯𐑑 𐑑 𐑦𐑯𐑕𐑑𐑷𐑤 𐑞𐑰𐑟 𐑒𐑨𐑑𐑩𐑤𐑪𐑜𐑟?"
 
 #~ msgid "Install catalogs"
 #~ msgstr "𐑦𐑯𐑕𐑑𐑷𐑤 𐑒𐑨𐑑𐑩𐑤𐑪𐑜𐑟"

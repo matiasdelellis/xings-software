@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.kn\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2014-09-18 15:01+0530\n"
 "Last-Translator: Shankar Prasad <svenkate AT redhat Dot com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -20,8 +20,8 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -56,14 +56,13 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್‌"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "ಗಣಕದಲ್ಲಿ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿರುವ ತಂತ್ರಾಂಶವನ್ನು ಅಪ್ಡೇಟ್ ಮಾಡು"
 
@@ -180,112 +179,6 @@ msgid ""
 "Store;"
 msgstr "ಅಪ್‌ಡೇಟ್‌ಗಳು;ನವೀಕರಣಗಳು;ಆಕರಗಳು;ರೆಪೊಸಿಟರಿಗಳು;ಆದ್ಯತೆಗಳು;ಅನುಸ್ಥಾಪನೆ;ಶೇಖರಣೆ;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "ಅನುಸ್ಥಾಪಿಸು"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "ತೆಗೆದು ಹಾಕು"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "ವ್ಯವಹಾರ ದೋಷ"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "ಪರವಾನಗಿ"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "ವಿತರಣೆಯ ನವೀಕರಣ ಉಪಕರಣ"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "ಆಕರ"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "ವರ್ಗಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಲಾಗಿದೆ"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "ಪ್ಯಾಕೇಜುಗಳಿಗಾಗಿ ಹುಡುಕಲಾಗುತ್ತಿದೆ"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "ವರ್ಗಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಲಾಗಿದೆ"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-msgid "Software Sources"
-msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "ಕುರಿತು"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "ನಿರ್ಗಮಿಸು (_Q)"
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "ಪ್ಯಾಕೇಜನ್ನು ಅನುಸ್ಥಾಪಿಸು"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -300,27 +193,6 @@ msgstr "PackageKit ಜಾಲತಾಣ"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "PackageKit ಗಾಗಿ ಅಧಿವೇಶನ D-Bus ಸೇವೆ"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "ಹೆಚ್ಚಿನ ವಿವರಗಳು"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "ಒತ್ತಾಯಪೂರ್ವಕ ಅನುಸ್ಥಾಪನೆ(_F)"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "ಪ್ಯಾಕೇಜನ್ನು ಒತ್ತಾಯಪೂರ್ವಕವಾಗಿ ಅನುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "ಲೈಸನ್ಸ್‍ ಒಡಂಬಡಿಕೆಯ ಅಗತ್ಯವಿದೆ"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "ಒಡಂಬಡಿಕೆಯನ್ನು ಒಪ್ಪಿಕೊ(_A)"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -329,6 +201,13 @@ msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅನುಸ್ಥಾಪಿಸ�
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "ಆರಿಸಲಾದ ಪ್ಯಾಕೇಜನ್ನು ವ್ಯವಸ್ಥೆಯಲ್ಲಿ ಅನುಸ್ಥಾಪಿಸು"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -353,87 +232,6 @@ msgid ""
 "Software;App;Store;"
 msgstr "ಅಪ್‌ಡೇಟ್‌ಗಳು;ನವೀಕರಣಗಳು;ಆಕರಗಳು;ರೆಪೊಸಿಟರಿಗಳು;ಆದ್ಯತೆಗಳು;ಅನುಸ್ಥಾಪನೆ;ಶೇಖರಣೆ;"
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"ಪ್ಯಾಕೇಜ್ ಅಪ್‌ಡೇಟುಗಳು ದೋಷಗಳನ್ನು ಸರಿಪಡಿಸುತ್ತವೆ, ಸುರಕ್ಷತಾ ದುರ್ಬಲತೆಗಳನ್ನು ಹೋಗಲಾಡಿಸುತ್ತವೆ "
-"ಮತ್ತು ಹೊಸ ಸವಲತ್ತುಗಳನ್ನು ಒದಗಿಸುತ್ತವೆ."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "ಅಪ್‌ಡೇಟ್‌ಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸು(_h):"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "ಬ್ಯಾಟರಿ ವಿದ್ಯುಚ್ಛಕ್ತಿಯಲ್ಲಿದ್ದಾಗ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸು"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "ಅಪ್‌ಡೇಟ್ ಮಾಹಿತಿಯನ್ನು ಇಳಿಸಿಕೊಳ್ಳಲಾಗುತ್ತಿದೆ"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "ಅಪ್‌ಡೇಟ್"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr "ಒಂದು ಪ್ಯಾಕೇಜ್ ಆಕರವು ಗಣಕದಲ್ಲಿ ಅನುಸ್ಥಾಪಿಸಬಹುದಾದ ಪ್ಯಾಕೇಜುಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ."
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-msgid "_Show debug and development package sources"
-msgstr "ಡೀಬಗ್‌ ಮ ವಿಕಸನಾ ಪ್ಯಾಕೇಜು ಆಕರಗಳನ್ನು ತೋರಿಸು (_S)"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "ನೀವು ಈ ಪ್ಯಾಕೇಜುಗಳ ಮೂಲವನ್ನು ನಂಬುತ್ತೀರಾ?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "ರೆಪೊಸಿಟರಿಯ ಹೆಸರು:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "ಸಹಿ URL:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "ಸಹಿ ಮಾಡಿದವರ ಪತ್ತೆಗಾರ:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "ಸಹಿ ಪತ್ತೆಗಾರ:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "ಪ್ಯಾಕೇಜ್"
-
-#: ../data/gpk-signature.ui.h:7
-msgid "Do you recognize the user and trust this key?"
-msgstr "ನೀವು ಈ ಬಳಕೆದಾರನನ್ನು ಗುರುತಿಸುತ್ತೀರಾ ಹಾಗು ಈ ಕೀಲಿಯನ್ನು ನಂಬುತ್ತೀರಾ?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -454,7 +252,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "ತಂತ್ರಾಂಶ ಅನುಸ್ಥಾಪನೆ"
@@ -463,41 +262,43 @@ msgstr "ತಂತ್ರಾಂಶ ಅನುಸ್ಥಾಪನೆ"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್‌"
+msgid "Cancel"
+msgstr "ರದ್ದು ಮಾಡಲಾಗಿದೆ"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "ನಿಮ್ಮ ಗಣಕಕ್ಕಾಗಿ ಸದ್ಯಕ್ಕೆ ಯಾವುದೆ ಪ್ಯಾಕೇಜು ಅಪ್‌ಡೇಟುಗಳು ಲಭ್ಯವಿಲ್ಲ."
+msgid "Install Anyway"
+msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅನುಸ್ಥಾಪಿಸಿ"
 
-#: ../data/gpk-update-viewer.ui.h:4
-#, fuzzy
-msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"ಪ್ಯಾಕೇಜ್ ಅಪ್‌ಡೇಟುಗಳು ದೋಷಗಳನ್ನು ಸರಿಪಡಿಸುತ್ತವೆ, ಸುರಕ್ಷತಾ ದುರ್ಬಲತೆಗಳನ್ನು ಹೋಗಲಾಡಿಸುತ್ತವೆ "
-"ಮತ್ತು ಹೊಸ ಸವಲತ್ತುಗಳನ್ನು ಒದಗಿಸುತ್ತವೆ."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "ನವೀಕರಣ(_U)"
+#: ../data/gpk-third-party-installer.ui.h:5
+#, fuzzy
+msgid "Trust and install this app?"
+msgstr "ನೀವು ಈ ಸೂಚಿಯನ್ನು ಅನುಸ್ಥಾಪಿಸಲು ಬಯಸುತ್ತೀರೆ?"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "ವಿವರಣೆಗಳು"
+#: ../data/gpk-third-party-installer.ui.h:6
+msgid ""
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "ಅಪ್‌ಡೇಟುಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸು (_I)"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "ಇಳಿಸಿಕೊಂಡ ಗಾತ್ರ"
+
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2144,6 +1945,12 @@ msgstr "ವ್ಯವಸ್ಥೆಯನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾ�
 msgid "Icon"
 msgstr "ಚಿಹ್ನೆ"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "ಪ್ಯಾಕೇಜ್"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "ಈ ಬಗೆಯ ಕಡತಗಳನ್ನು ತೆರೆಯಬಲ್ಲಂತಹ ಅನ್ವಯಗಳು"
@@ -2225,10 +2032,31 @@ msgstr "ಮುಂದುವರೆ"
 msgid "The following software also needs to be installed"
 msgstr "ಈ ಕೆಳಗಿನ ತಂತ್ರಾಂಶವನ್ನೂ ಸಹ ಅನುಸ್ಥಾಪಿಸುವ ಅಗತ್ಯವಿರುತ್ತದೆ"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "ಅನುಸ್ಥಾಪಿಸು"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "ಈ ಕೆಳಗಿನ ತಂತ್ರಾಂಶವನ್ನೂ ಸಹ ತೆಗೆದುಹಾಕುವ ಅಗತ್ಯವಿರುತ್ತದೆ"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "ತೆಗೆದು ಹಾಕು"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2408,6 +2236,11 @@ msgstr "ದಿನಾಂಕ"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "ಕಾರ್ಯ"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "ವಿವರಣೆಗಳು"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2968,6 +2801,11 @@ msgstr "ಸ್ಥಿತಿಯನ್ನು ಬದಲಾಯಿಸಲು ಸಾಧ�
 msgid "Enabled"
 msgstr "ಸಕ್ರಿಯಗೊಂಡಿದೆ"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "ಆಕರ"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2995,6 +2833,10 @@ msgstr "ತಂತ್ರಾಂಶ ಸಿದ್ಧತೆಗಳು"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -3034,6 +2876,11 @@ msgstr "ನೀವು ಕೆಲವು ಬದಲಾವಣೆಗಳನ್ನು ಮ
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "ಈ ವಿಂಡೋವನ್ನು ನೀವು ಮುಚ್ಚಿದರೆ ಈ ಎಲ್ಲಾ ಬದಲಾವಣೆಗಳು ನಾಶಗೊಳ್ಳುತ್ತವೆ."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "ವಿತರಣೆಯ ನವೀಕರಣ ಉಪಕರಣ"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3139,6 +2986,11 @@ msgstr "ಶಂಕರ್ ಪ್ರಸಾದ್ ಎಂ. ವಿ. <svenkate@redhat.c
 msgid "Xings Software Website"
 msgstr "ತಂತ್ರಾಂಶ ಆಕರ"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "ವರ್ಗಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಲಾಗಿದೆ"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3204,6 +3056,12 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "ಯಾವುದೆ ಅಪ್‌ಡೇಟ್‌ ವಿವರಗಳು ಲಭ್ಯವಿಲ್ಲ."
 msgstr[1] "ಯಾವುದೆ ಅಪ್‌ಡೇಟ್‌ ವಿವರಗಳು ಲಭ್ಯವಿಲ್ಲ."
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "ಅಪ್‌ಡೇಟ್"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3391,6 +3249,18 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "ಅಪ್‌ಡೇಟನ್ನು ಅನುಸ್ಥಾಪಿಸು(_I)"
 msgstr[1] "ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸು(_I)"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "ತಂತ್ರಾಂಶ ಅಪ್‌ಡೇಟ್‌"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "ನಿಮ್ಮ ಗಣಕಕ್ಕಾಗಿ ಸದ್ಯಕ್ಕೆ ಯಾವುದೆ ಪ್ಯಾಕೇಜು ಅಪ್‌ಡೇಟುಗಳು ಲಭ್ಯವಿಲ್ಲ."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3604,59 +3474,172 @@ msgstr "ಹೊಸ ವಿತರಣಾ ನವೀಕರಣ ಬಿಡುಗಡೆ '%
 msgid "Update Software"
 msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅಪ್‌ಡೇಟ್ ಮಾಡು"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "ಅನುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "ಅಪ್‌ಡೇಟ್‌ ಮಾಡಲಾಗುತ್ತಿದೆ"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "ಮರಳಿ ಅನುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅನುಸ್ಥಾಪಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "ಅನುಸ್ಥಾಪಿಸಲು ಯಾವುದೆ ಪ್ಯಾಕೇಜುಗಳಿಲ್ಲ"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "ಪ್ಯಾಕೇಜ್ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿಲ್ಲ"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "ಪ್ಯಾಕೇಜ್ ಈಗಾಗಲೆ ಅನುಸ್ಥಾಪಿತಗೊಂಡಿದೆ"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "ಪ್ಯಾಕೇಜನ್ನು ಈಗಾಗಲೆ ಅನುಸ್ಥಾಪಿಸಲಾಗಿದೆ"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "ತಂತ್ರಾಂಶವನ್ನು ಅನುಸ್ಥಾಪಿಸುವಲ್ಲಿ ವಿಫಲಗೊಂಡಿದೆ"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "ಇಳಿಸಿಕೊಂಡ ಗಾತ್ರ"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "ವ್ಯವಹಾರ ದೋಷ"
+
+#~ msgid "License"
+#~ msgstr "ಪರವಾನಗಿ"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "ವರ್ಗಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಲಾಗಿದೆ"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "ಪ್ಯಾಕೇಜುಗಳಿಗಾಗಿ ಹುಡುಕಲಾಗುತ್ತಿದೆ"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
+
+#~ msgid "Software Sources"
+#~ msgstr "ತಂತ್ರಾಂಶ ಆಕರಗಳು"
+
+#~ msgid "About"
+#~ msgstr "ಕುರಿತು"
+
+#~ msgid "_Quit"
+#~ msgstr "ನಿರ್ಗಮಿಸು (_Q)"
+
+#~ msgid "Install Package"
+#~ msgstr "ಪ್ಯಾಕೇಜನ್ನು ಅನುಸ್ಥಾಪಿಸು"
+
+#~ msgid "More details"
+#~ msgstr "ಹೆಚ್ಚಿನ ವಿವರಗಳು"
+
+#~ msgid "_Force install"
+#~ msgstr "ಒತ್ತಾಯಪೂರ್ವಕ ಅನುಸ್ಥಾಪನೆ(_F)"
+
+#~ msgid "Force installing package"
+#~ msgstr "ಪ್ಯಾಕೇಜನ್ನು ಒತ್ತಾಯಪೂರ್ವಕವಾಗಿ ಅನುಸ್ಥಾಪಿಸಲಾಗುತ್ತಿದೆ"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "ಲೈಸನ್ಸ್‍ ಒಡಂಬಡಿಕೆಯ ಅಗತ್ಯವಿದೆ"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "ಒಡಂಬಡಿಕೆಯನ್ನು ಒಪ್ಪಿಕೊ(_A)"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "ಪ್ಯಾಕೇಜ್ ಅಪ್‌ಡೇಟುಗಳು ದೋಷಗಳನ್ನು ಸರಿಪಡಿಸುತ್ತವೆ, ಸುರಕ್ಷತಾ ದುರ್ಬಲತೆಗಳನ್ನು "
+#~ "ಹೋಗಲಾಡಿಸುತ್ತವೆ ಮತ್ತು ಹೊಸ ಸವಲತ್ತುಗಳನ್ನು ಒದಗಿಸುತ್ತವೆ."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "ಅಪ್‌ಡೇಟ್‌ಗಳಿಗಾಗಿ ಪರಿಶೀಲಿಸು(_h):"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "ಬ್ಯಾಟರಿ ವಿದ್ಯುಚ್ಛಕ್ತಿಯಲ್ಲಿದ್ದಾಗ ಅಪ್‌ಡೇಟ್‌ಗಳನ್ನು ಪರಿಶೀಲಿಸು"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "ಅಪ್‌ಡೇಟ್ ಮಾಹಿತಿಯನ್ನು ಇಳಿಸಿಕೊಳ್ಳಲಾಗುತ್ತಿದೆ"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr "ಒಂದು ಪ್ಯಾಕೇಜ್ ಆಕರವು ಗಣಕದಲ್ಲಿ ಅನುಸ್ಥಾಪಿಸಬಹುದಾದ ಪ್ಯಾಕೇಜುಗಳನ್ನು ಹೊಂದಿರುತ್ತದೆ."
+
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "ಡೀಬಗ್‌ ಮ ವಿಕಸನಾ ಪ್ಯಾಕೇಜು ಆಕರಗಳನ್ನು ತೋರಿಸು (_S)"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "ನೀವು ಈ ಪ್ಯಾಕೇಜುಗಳ ಮೂಲವನ್ನು ನಂಬುತ್ತೀರಾ?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "ರೆಪೊಸಿಟರಿಯ ಹೆಸರು:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "ಸಹಿ URL:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "ಸಹಿ ಮಾಡಿದವರ ಪತ್ತೆಗಾರ:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "ಸಹಿ ಪತ್ತೆಗಾರ:"
+
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "ನೀವು ಈ ಬಳಕೆದಾರನನ್ನು ಗುರುತಿಸುತ್ತೀರಾ ಹಾಗು ಈ ಕೀಲಿಯನ್ನು ನಂಬುತ್ತೀರಾ?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "ಪ್ಯಾಕೇಜ್ ಅಪ್‌ಡೇಟುಗಳು ದೋಷಗಳನ್ನು ಸರಿಪಡಿಸುತ್ತವೆ, ಸುರಕ್ಷತಾ ದುರ್ಬಲತೆಗಳನ್ನು "
+#~ "ಹೋಗಲಾಡಿಸುತ್ತವೆ ಮತ್ತು ಹೊಸ ಸವಲತ್ತುಗಳನ್ನು ಒದಗಿಸುತ್ತವೆ."
+
+#~ msgid "_Upgrade"
+#~ msgstr "ನವೀಕರಣ(_U)"
+
+#~ msgid "_Install Updates"
+#~ msgstr "ಅಪ್‌ಡೇಟುಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸು (_I)"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3948,10 +3931,6 @@ msgstr "ಇಳಿಸಿಕೊಂಡ ಗಾತ್ರ"
 
 #~ msgid "Cancel search"
 #~ msgstr "ಹುಡುಕನ್ನು ರದ್ದುಗೊಳಿಸು"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "ರದ್ದು ಮಾಡಲಾಗಿದೆ"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"
@@ -4425,11 +4404,6 @@ msgstr "ಇಳಿಸಿಕೊಂಡ ಗಾತ್ರ"
 
 #~ msgid "The file could not be found in any available software"
 #~ msgstr "ಕಡತವು ಲಭ್ಯವಿರುವ ಯಾವುದೆ ತಂತ್ರಾಂಶ ಕಟ್ಟುಗಳಲ್ಲಿ ಕಂಡುಬಂದಿಲ್ಲ"
-
-#~ msgid "Do you want to install this catalog?"
-#~ msgid_plural "Do you want to install these catalogs?"
-#~ msgstr[0] "ನೀವು ಈ ಸೂಚಿಯನ್ನು ಅನುಸ್ಥಾಪಿಸಲು ಬಯಸುತ್ತೀರೆ?"
-#~ msgstr[1] "ನೀವು ಈ ಸೂಚಿಗಳನ್ನು ಅನುಸ್ಥಾಪಿಸಲು ಬಯಸುತ್ತೀರೆ?"
 
 #~ msgid "Install catalogs"
 #~ msgstr "ಸೂಚಿಯನ್ನು ಅನುಸ್ಥಾಪಿಸು"

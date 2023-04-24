@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: new\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2013-04-25 18:36+0530\n"
 "Last-Translator: Anish A <aneesh.nl@gmail.com>\n"
 "Language-Team: Swatantra Malayalam Computing\n"
@@ -22,8 +22,8 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 msgid "Software"
@@ -54,14 +54,13 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കാരം"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "സിസ്റ്റമില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്ന സോഫ്റ്റ്‌വെയറുകള്‍ പരിഷ്കരിക്കുക"
 
@@ -172,113 +171,6 @@ msgid ""
 "Store;"
 msgstr "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "നീക്കം ചെയ്യുക"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr "പ്രധാനതാള്‍"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "ഇടപാടില്‍ പിശക്"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "സമ്മതപത്രം"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "വിതരണ പരിഷ്കരണ പ്രയോഗം"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "ശ്രോതസ്സ്"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "വിഭാഗങ്ങള്‍ ലഭ്യമായി"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "പാക്കേജുകള്‍ക്കായി തെരയുന്നു"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "വിഭാഗങ്ങള്‍ ലഭ്യമായി"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-msgid "Software Sources"
-msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍"
-
-#: ../data/gpk-application.ui.h:20
-#, fuzzy
-msgid "About"
-msgstr "_സംബന്ധിച്ചു്"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "പു_റത്തു് കടക്കുക"
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "പാക്കേജ് ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -293,27 +185,6 @@ msgstr "പാക്കേജ്കിറ്റിനുള്ള വെബ്�
 msgid "Session D-Bus Service for PackageKit"
 msgstr "പാക്കേജ്കിറ്റിനുള്ള സെഷന്‍ ഡീബസ് സര്‍വീസ്"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "കൂടുതല്‍ വിശദാംശങ്ങള്‍"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "_നിര്‍ബന്ധമായും ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "നിര്‍ബന്ധമായും പാക്കേജ് ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "ലൈസന്‍സ് എഗ്രിമെന്റ് ആവശ്യമുണ്ടു്"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "എഗ്രിമെന്റ് _സ്വീകരിക്കുക"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -323,6 +194,13 @@ msgstr "സോഫ്റ്റ്‌വെയര്‍ ഇന്‍സ്റ്�
 #, fuzzy
 msgid "Install selected packages on the system"
 msgstr "തെരഞ്ഞെടുത്ത സോഫ്റ്റ്‌വെയറുകള്‍ സിസ്റ്റമില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -347,89 +225,6 @@ msgid ""
 "Software;App;Store;"
 msgstr "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;"
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരണങ്ങള്‍ പിശകുകള്‍ തിരുത്തുന്നു, സുരക്ഷാ പ്രശ്നങ്ങള്‍ ഒഴിവാക്കുന്നു, പുതിയ വിശേഷതകള്‍ "
-"ലഭ്യമാക്കുന്നു."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "_പരിഷ്കരണങ്ങള്‍ക്കായി പരിശോധിക്കുക:"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "ബാറ്ററി പവറില്‍ പരിഷ്കരണങ്ങള്‍ക്കായി പരിശോധിക്കുക"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "പരിഷ്കരണ വിവരങ്ങള്‍ ഡൌണ്‍ലോട് ചെയ്യുന്നു"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "പരിഷ്കരിയ്ക്കുക"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr ""
-"ഈ കമ്പ്യൂട്ടറില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുവാന്‍ സാധിയ്ക്കുന്ന പാക്കേജുകള്‍ ഒരു സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സിലടങ്ങുന്നു."
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-#, fuzzy
-msgid "_Show debug and development package sources"
-msgstr "ഡീബഗ്, ഡവലപ്മെന്റ് സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍ _കാണിക്കുക"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "ഈ പാക്കേജുകളുടെ ഉറവിടം വിശ്വസനീയമാണോ?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "സംഭരണിയുടെ പേരു്:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "ഒപ്പിനുള്ള യുആര്‍എല്‍:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "ഒപ്പിനുള്ള യൂസര്‍ ഐഡന്റിഫയര്‍:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "ഒപ്പ് തിരിച്ചറിയല്‍ സംവിധാനം:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "പാക്കേജ്"
-
-#: ../data/gpk-signature.ui.h:7
-msgid "Do you recognize the user and trust this key?"
-msgstr "ഈ ഉപയോക്താവിനെ നിങ്ങള്‍ തിരിച്ചറിയുന്നുവോ? ഈ കീ വിശ്വസനീയമാണോ?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -450,7 +245,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "സോഫ്റ്റ്‌വെയര്‍ ഇന്‍സ്റ്റോള്‍"
@@ -459,41 +255,43 @@ msgstr "സോഫ്റ്റ്‌വെയര്‍ ഇന്‍സ്റ്�
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കാരം"
+msgid "Cancel"
+msgstr "റദ്ദാക്കിയിരിക്കുന്നു"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "ഇപ്പോള്‍ നിങ്ങളുടെ കമ്പ്യൂട്ടറിനാവശ്യമായ സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരണങ്ങളൊന്നും ലഭ്യമല്ല."
+msgid "Install Anyway"
+msgstr "സോഫ്റ്റ്‌വെയര്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
 
-#: ../data/gpk-update-viewer.ui.h:4
-#, fuzzy
-msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരണങ്ങള്‍ പിശകുകള്‍ തിരുത്തുന്നു, സുരക്ഷാ പ്രശ്നങ്ങള്‍ ഒഴിവാക്കുന്നു, പുതിയ വിശേഷതകള്‍ "
-"ലഭ്യമാക്കുന്നു."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "_പുതുക്കുക"
+#: ../data/gpk-third-party-installer.ui.h:5
+#, fuzzy
+msgid "Trust and install this app?"
+msgstr "നിങ്ങള്‍ക്കു് ഈ കാറ്റലോഗ് ഇന്‍സ്റ്റോള്‍ ചെയ്യണമോ?"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "വിശദാംശങ്ങള്‍"
+#: ../data/gpk-third-party-installer.ui.h:6
+msgid ""
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "പരിഷ്കരണം _ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "ഡൌണ്‍ലോട് ചെയ്യുന്നതിനുള്ള വ്യാപ്തി"
+
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2144,6 +1942,12 @@ msgstr "സിസ്റ്റം പരിഷ്കരിക്കുന്ന�
 msgid "Icon"
 msgstr "പ്രതിരൂപം"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "പാക്കേജ്"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "ഇത്തരത്തിലുള്ള ഫയല്‍ തുറക്കുവാന്‍ സാധിക്കുന്ന പ്രയോഗങ്ങള്‍"
@@ -2223,10 +2027,31 @@ msgstr "തുടരുക"
 msgid "The following software also needs to be installed"
 msgstr "താഴെ പറയുന്ന പാക്കേജുകളും ഇന്‍സ്റ്റോള്‍ ചെയ്യണം"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "താഴെ പറയുന്ന പാക്കേജുകളും നീക്കം ചെയ്യണം"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "നീക്കം ചെയ്യുക"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2409,6 +2234,11 @@ msgstr "തീയതി"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "പ്രവര്‍ത്തനം"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "വിശദാംശങ്ങള്‍"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2979,6 +2809,11 @@ msgstr "നിലവാരം മാറ്റുന്നതില്‍ പര�
 msgid "Enabled"
 msgstr "പ്രവര്‍ത്തന സജ്ജമാക്കുക"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "ശ്രോതസ്സ്"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -3007,6 +2842,10 @@ msgstr "സോഫ്റ്റ്‌വെയര്‍ സജ്ജീകരണ�
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -3046,6 +2885,11 @@ msgstr "നിങ്ങള്‍ വരുത്തിയ മാറ്റങ്�
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "ഈ ജാലകം അടച്ചാല്‍ നിങ്ങള്‍ വരുത്തിയ മാറ്റങ്ങള്‍ നഷ്ടപ്പെടുന്നതാണു്."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "വിതരണ പരിഷ്കരണ പ്രയോഗം"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3149,6 +2993,11 @@ msgstr "അനി പീറ്റര്‍ <apeter@redhat.com>"
 msgid "Xings Software Website"
 msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സ്"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "വിഭാഗങ്ങള്‍ ലഭ്യമായി"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3214,6 +3063,12 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "പരിഷ്കരണ വിവരങ്ങള്‍ ലഭ്യമല്ല."
 msgstr[1] "പരിഷ്കരണ വിവരങ്ങള്‍ ലഭ്യമല്ല."
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "പരിഷ്കരിയ്ക്കുക"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3401,6 +3256,18 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "പരിഷ്കരണം _ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
 msgstr[1] "പരിഷ്കരണങ്ങള്‍ _ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കാരം"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "ഇപ്പോള്‍ നിങ്ങളുടെ കമ്പ്യൂട്ടറിനാവശ്യമായ സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരണങ്ങളൊന്നും ലഭ്യമല്ല."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3611,59 +3478,178 @@ msgstr "പുതിയ വിതരണ പരിഷ്കരണത്തിന�
 msgid "Update Software"
 msgstr "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരിക്കുക"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നു"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "പരിഷ്കരിക്കപ്പെടുന്നു"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "വീണ്ടും ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നു"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "സോഫ്റ്റ്‌വെയര്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നതില്‍ പരാജയപ്പെട്ടു"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "പാക്കേജുകള്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്നു"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "പാക്കേജുകള്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്നു"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "നിലവില്‍ പാക്കേജ് ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്നു"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "പാക്കേജ് നിലവില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്തിരിക്കുന്നു"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "സോഫ്റ്റ്‌വെയര്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുന്നതില്‍ പരാജയപ്പെട്ടു"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "ഡൌണ്‍ലോട് ചെയ്യുന്നതിനുള്ള വ്യാപ്തി"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#~ msgid "Homepage"
+#~ msgstr "പ്രധാനതാള്‍"
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "ഇടപാടില്‍ പിശക്"
+
+#~ msgid "License"
+#~ msgstr "സമ്മതപത്രം"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "വിഭാഗങ്ങള്‍ ലഭ്യമായി"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "പാക്കേജുകള്‍ക്കായി തെരയുന്നു"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍"
+
+#~ msgid "Software Sources"
+#~ msgstr "സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍"
+
+#, fuzzy
+#~ msgid "About"
+#~ msgstr "_സംബന്ധിച്ചു്"
+
+#~ msgid "_Quit"
+#~ msgstr "പു_റത്തു് കടക്കുക"
+
+#~ msgid "Install Package"
+#~ msgstr "പാക്കേജ് ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+
+#~ msgid "More details"
+#~ msgstr "കൂടുതല്‍ വിശദാംശങ്ങള്‍"
+
+#~ msgid "_Force install"
+#~ msgstr "_നിര്‍ബന്ധമായും ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+
+#~ msgid "Force installing package"
+#~ msgstr "നിര്‍ബന്ധമായും പാക്കേജ് ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "ലൈസന്‍സ് എഗ്രിമെന്റ് ആവശ്യമുണ്ടു്"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "എഗ്രിമെന്റ് _സ്വീകരിക്കുക"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരണങ്ങള്‍ പിശകുകള്‍ തിരുത്തുന്നു, സുരക്ഷാ പ്രശ്നങ്ങള്‍ ഒഴിവാക്കുന്നു, പുതിയ "
+#~ "വിശേഷതകള്‍ ലഭ്യമാക്കുന്നു."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "_പരിഷ്കരണങ്ങള്‍ക്കായി പരിശോധിക്കുക:"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "ബാറ്ററി പവറില്‍ പരിഷ്കരണങ്ങള്‍ക്കായി പരിശോധിക്കുക"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "പരിഷ്കരണ വിവരങ്ങള്‍ ഡൌണ്‍ലോട് ചെയ്യുന്നു"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr ""
+#~ "ഈ കമ്പ്യൂട്ടറില്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുവാന്‍ സാധിയ്ക്കുന്ന പാക്കേജുകള്‍ ഒരു സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സിലടങ്ങുന്നു."
+
+#, fuzzy
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "ഡീബഗ്, ഡവലപ്മെന്റ് സോഫ്റ്റ്‌വെയര്‍ ശ്രോതസ്സുകള്‍ _കാണിക്കുക"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "ഈ പാക്കേജുകളുടെ ഉറവിടം വിശ്വസനീയമാണോ?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "സംഭരണിയുടെ പേരു്:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "ഒപ്പിനുള്ള യുആര്‍എല്‍:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "ഒപ്പിനുള്ള യൂസര്‍ ഐഡന്റിഫയര്‍:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "ഒപ്പ് തിരിച്ചറിയല്‍ സംവിധാനം:"
+
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "ഈ ഉപയോക്താവിനെ നിങ്ങള്‍ തിരിച്ചറിയുന്നുവോ? ഈ കീ വിശ്വസനീയമാണോ?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "സോഫ്റ്റ്‌വെയര്‍ പരിഷ്കരണങ്ങള്‍ പിശകുകള്‍ തിരുത്തുന്നു, സുരക്ഷാ പ്രശ്നങ്ങള്‍ ഒഴിവാക്കുന്നു, പുതിയ "
+#~ "വിശേഷതകള്‍ ലഭ്യമാക്കുന്നു."
+
+#~ msgid "_Upgrade"
+#~ msgstr "_പുതുക്കുക"
+
+#~ msgid "_Install Updates"
+#~ msgstr "പരിഷ്കരണം _ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3946,10 +3932,6 @@ msgstr "ഡൌണ്‍ലോട് ചെയ്യുന്നതിനുള�
 
 #~ msgid "Cancel search"
 #~ msgstr "തെരച്ചില്‍ റദ്ദാക്കുക"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "റദ്ദാക്കിയിരിക്കുന്നു"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"
@@ -4448,11 +4430,6 @@ msgstr "ഡൌണ്‍ലോട് ചെയ്യുന്നതിനുള�
 
 #~ msgid "The file could not be found in any available software"
 #~ msgstr "ഒരു സോഫ്റ്റ്‌വെയറിലും ഫയല്‍ ലഭ്യമല്ല"
-
-#~ msgid "Do you want to install this catalog?"
-#~ msgid_plural "Do you want to install these catalogs?"
-#~ msgstr[0] "നിങ്ങള്‍ക്കു് ഈ കാറ്റലോഗ് ഇന്‍സ്റ്റോള്‍ ചെയ്യണമോ?"
-#~ msgstr[1] "നിങ്ങള്‍ക്കു് ഈ കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യണമോ?"
 
 #~ msgid "Install catalogs"
 #~ msgstr "കാറ്റലോഗുകള്‍ ഇന്‍സ്റ്റോള്‍ ചെയ്യുക"

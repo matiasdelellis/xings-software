@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2014-09-08 16:14+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <gnome-fi-laatu@lists.sourceforge.net>\n"
@@ -28,8 +28,8 @@ msgstr ""
 "X-POT-Import-Date: 2012-03-05 14:46:24+0000\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -64,7 +64,6 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 #, fuzzy
@@ -72,7 +71,7 @@ msgid "Software Update"
 msgstr "Ohjelmistojen asennus"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Päivitä järjestelmään asennettuja ohjelmistoja"
 
@@ -192,113 +191,6 @@ msgstr ""
 "Päivitys;Lähde;Lähteet;Ohjelmalähteet;Ohjelmistolähteet;Asetukset;Asenna;"
 "Kauppa;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "Asenna"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "Poista"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "Transaktiovirhe"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "Lisenssi"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "Saatiin jakelupäivityksiä"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Lähde"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "Saatiin kategoriat"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "Etsitään paketteja"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "Saatiin kategoriat"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "Ohjelmistot"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "Ohjelmistoallekirjoitus vaaditaan"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Ohjelmistojen asennus"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "Tietoja"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "_Lopeta"
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "Asenna paketti"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -313,27 +205,6 @@ msgstr "PackageKitin verkkosivu"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "PackageKitin istunnon D-Bus-palvelu"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "Lisää tietoja"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "_Pakota asennus"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "Pakota paketin asennus"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "Käyttöoikeussopimus vaaditaan"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "_Hyväksy sopimus"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -342,6 +213,13 @@ msgstr "Asenna ohjelmistoja"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "Asenna valitut paketit järjestelmään"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "Ohjelmistojen asennus"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -367,88 +245,6 @@ msgstr ""
 "Päivitys;Lähde;Lähteet;Ohjelmalähteet;Ohjelmistolähteet;Asetukset;Asenna;"
 "Kauppa;"
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"Pakettipäivitykset korjaavat virheitä ja turvallisuushaavoittuvuuksia sekä "
-"tuovat uusia ominaisuuksia."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "Tarkista päivitykset"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "Tarkista päivitykset"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "Ladataan päivitystietoja"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "Päivitys"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr ""
-"Pakettilähde sisältää paketteja, joita voidaan asentaa tähän tietokoneeseen."
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-msgid "_Show debug and development package sources"
-msgstr "_Näytä virheenjäljitys- ja kehityspakettilähteet"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "Luotatko pakettien lähteeseen?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "Asennuslähteen nimi:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "Allekirjoituksen URL:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "Allekirjoituksen käyttäjätunniste:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "Allekirjoituksen tunniste:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "Paketti"
-
-#: ../data/gpk-signature.ui.h:7
-msgid "Do you recognize the user and trust this key?"
-msgstr "Tunnistatko käyttäjän ja luotatko tähän avaimeen?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -469,7 +265,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "Ohjelmistojen asennus"
@@ -478,42 +275,43 @@ msgstr "Ohjelmistojen asennus"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "Ohjelmistojen asennus"
+msgid "Cancel"
+msgstr "Peruttiin"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
+msgid "Install Anyway"
+msgstr "Asenna ohjelmistoja"
+
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"Tietokoneeseesi ei ole tällä hetkellä saatavilla päivitettäviä paketteja."
 
-#: ../data/gpk-update-viewer.ui.h:4
+#: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
+msgid "Trust and install this app?"
+msgstr "Haluatko asentaa tämän tiedoston?"
+
+#: ../data/gpk-third-party-installer.ui.h:6
 msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
 msgstr ""
-"Pakettipäivitykset korjaavat virheitä ja turvallisuushaavoittuvuuksia sekä "
-"tuovat uusia ominaisuuksia."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "_Päivitä"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "Latauksen koko"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "Tiedot"
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "_Asenna päivitykset"
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2162,6 +1960,12 @@ msgstr "Korjataan järjestelmää"
 msgid "Icon"
 msgstr "Kuvake"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "Paketti"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Ohjelmat, jotka voivat avata tämän tyyppisiä tiedostoja"
@@ -2241,10 +2045,31 @@ msgstr "Jatka"
 msgid "The following software also needs to be installed"
 msgstr "Seuraavat ohjelmistot on myös asennettava"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "Asenna"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Seuraavat ohjelmistot on myös poistettava"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "Poista"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2420,6 +2245,11 @@ msgstr "Päiväys"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Toiminto"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "Tiedot"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2981,6 +2811,11 @@ msgstr "Tilan muuttaminen epäonnistui"
 msgid "Enabled"
 msgstr "Käytössä"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Lähde"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -3009,6 +2844,10 @@ msgstr "Ohjelmistojen asennus"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -3048,6 +2887,11 @@ msgstr "Olet tehnyt muutoksia joita ei ole vielä otettu käyttöön."
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "Nämä muutokset menetetään, jos suljet tämän ikkunan."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "Saatiin jakelupäivityksiä"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3157,6 +3001,11 @@ msgstr ""
 msgid "Xings Software Website"
 msgstr "Ohjelmistoallekirjoitus vaaditaan"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "Saatiin kategoriat"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3222,6 +3071,12 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "Päivitystietoja ei ole saatavilla."
 msgstr[1] "Päivitystietoja ei ole saatavilla."
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "Päivitys"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3409,6 +3264,19 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Asenna päivitys"
 msgstr[1] "_Asenna päivitykset"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "Ohjelmistojen asennus"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr ""
+"Tietokoneeseesi ei ole tällä hetkellä saatavilla päivitettäviä paketteja."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3626,59 +3494,175 @@ msgstr "Jakelun versiopäivitys ”%s” on saatavilla"
 msgid "Update Software"
 msgstr "Ohjelmistot"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "Asennetaan"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "Päivitetään"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "Asennetaan uudelleen"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "Ohjelmiston asennus epäonnistui"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "Lähdepaketteja ei voida asentaa"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "Pakettia ei ole asennettu"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "Paketti on jo asennettu"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "Paketti on jo asennettu"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "Ohjelmiston asennus epäonnistui"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "Latauksen koko"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "Transaktiovirhe"
+
+#~ msgid "License"
+#~ msgstr "Lisenssi"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "Saatiin kategoriat"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "Etsitään paketteja"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "Ohjelmistot"
+
+#, fuzzy
+#~ msgid "Software Sources"
+#~ msgstr "Ohjelmistoallekirjoitus vaaditaan"
+
+#~ msgid "About"
+#~ msgstr "Tietoja"
+
+#~ msgid "_Quit"
+#~ msgstr "_Lopeta"
+
+#~ msgid "Install Package"
+#~ msgstr "Asenna paketti"
+
+#~ msgid "More details"
+#~ msgstr "Lisää tietoja"
+
+#~ msgid "_Force install"
+#~ msgstr "_Pakota asennus"
+
+#~ msgid "Force installing package"
+#~ msgstr "Pakota paketin asennus"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "Käyttöoikeussopimus vaaditaan"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "_Hyväksy sopimus"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "Pakettipäivitykset korjaavat virheitä ja turvallisuushaavoittuvuuksia "
+#~ "sekä tuovat uusia ominaisuuksia."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "Tarkista päivitykset"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "Tarkista päivitykset"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "Ladataan päivitystietoja"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr ""
+#~ "Pakettilähde sisältää paketteja, joita voidaan asentaa tähän "
+#~ "tietokoneeseen."
+
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "_Näytä virheenjäljitys- ja kehityspakettilähteet"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "Luotatko pakettien lähteeseen?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "Asennuslähteen nimi:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "Allekirjoituksen URL:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "Allekirjoituksen käyttäjätunniste:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "Allekirjoituksen tunniste:"
+
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "Tunnistatko käyttäjän ja luotatko tähän avaimeen?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "Pakettipäivitykset korjaavat virheitä ja turvallisuushaavoittuvuuksia "
+#~ "sekä tuovat uusia ominaisuuksia."
+
+#~ msgid "_Upgrade"
+#~ msgstr "_Päivitä"
+
+#~ msgid "_Install Updates"
+#~ msgstr "_Asenna päivitykset"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3972,10 +3956,6 @@ msgstr "Latauksen koko"
 
 #~ msgid "Cancel search"
 #~ msgstr "Peru haku"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "Peruttiin"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"

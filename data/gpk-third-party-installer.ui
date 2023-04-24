@@ -37,7 +37,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_install">
-                <property name="label">Install Anyway</property>
+                <property name="label" translatable="yes">Install Anyway</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can-focus">True</property>
@@ -54,7 +54,7 @@
             </child>
             <child>
               <object class="GtkButton" id="button_open">
-                <property name="label">Open</property>
+                <property name="label" translatable="yes">Open</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
                 <style>
@@ -119,7 +119,7 @@
                       <object class="GtkLabel" id="label_title">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
-                        <property name="label">Trust and install this app?</property>
+                        <property name="label" translatable="yes">Trust and install this app?</property>
                         <property name="wrap">True</property>
                         <attributes>
                           <attribute name="weight" value="semibold"/>
@@ -151,7 +151,7 @@
                           <object class="GtkLabel" id="label_message">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label">This app is provided solely by its developer and has not been reviewed for security, privacy, or system integration.</property>
+                            <property name="label" translatable="yes">This app is provided solely by its developer and has not been reviewed for security, privacy, or system integration.</property>
                             <property name="use-markup">True</property>
                             <property name="wrap">True</property>
                           </object>
@@ -205,7 +205,7 @@
                           <object class="GtkLabel" id="label_download_size">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label">Calculating download size</property>
+                            <property name="label" translatable="yes">Calculating download size…</property>
                             <property name="use-markup">True</property>
                             <property name="wrap">True</property>
                           </object>
@@ -244,7 +244,7 @@
                           <object class="GtkLabel" id="label_update">
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
-                            <property name="label">Updates to this app will not be reviewed</property>
+                            <property name="label" translatable="yes">Updates to this app will not be reviewed</property>
                             <property name="use-markup">True</property>
                             <property name="wrap">True</property>
                           </object>
@@ -286,6 +286,7 @@
                   <object class="GtkCheckButton" id="check_understand">
                     <property name="label" translatable="yes">I understand</property>
                     <property name="visible">True</property>
+                    <property name="sensitive">False</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">False</property>
                     <property name="draw-indicator">True</property>

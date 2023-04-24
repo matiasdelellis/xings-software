@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2012-09-23 14:32+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -54,7 +54,6 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 #, fuzzy
@@ -62,7 +61,7 @@ msgid "Software Update"
 msgstr "Праграмны журнал"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Абнаўленне апраграмавання, усталяванага ў сістэме"
 
@@ -179,113 +178,6 @@ msgid ""
 "Store;"
 msgstr "Абнаўленне;Абноўкі;Крыніцы;Сховішчы;Настройкі;Усталяванне;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "Усталяваць"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "Выдаліць"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "Памылка трансакцыі"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "Ліцэнзія"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "Абноўкі дыстрыбутыва атрыманыя"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Крыніца"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "Спіс катэгорый атрыманы"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "Пошук пакункаў"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "Спіс катэгорый атрыманы"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "Абноўкі сістэмы"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "Патрэбны подпіс апраграмавання"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Усталяванне апраграмавання"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "Аб праграме"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "_Выйсці"
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "Усталяванне пакунка"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -300,27 +192,6 @@ msgstr "Сеціўная пляцоўка PackageKit"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "Служба сеансаў D-Bus для PackageKit"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "Больш падрабязнасцяў"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "_Дабіцца ўсталявання"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "Дабіцца ўсталявання пакунка"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "Патрэбна ліцэнзійнае пагадненне"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "_Прыняць пагадненне"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -329,6 +200,13 @@ msgstr "Усталяванне апраграмавання"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "Усталяванне вылучаных пакункаў у сістэме"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "Усталяванне апраграмавання"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -351,88 +229,6 @@ msgid ""
 "Software;App;Store;"
 msgstr "Абнаўленне;Абноўкі;Крыніцы;Сховішчы;Настройкі;Усталяванне;"
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"Абноўкі пакункаў выпраўляюць памылкі, павышаюць бяспеку сістэмы і дадаюць "
-"новыя магчымасці."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "Праверыць абноўкі"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "Праверыць абноўкі"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "Сцягванне інфармацыі аб абноўках"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "Абнавіць"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr ""
-"Крыніца змяшчае пакункі, якія могуць быць усталяваныя на гэтым камп'ютары."
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-msgid "_Show debug and development package sources"
-msgstr "_Паказваць адладачныя крыніцы пакункаў і крыніцы ў распрацаванні"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "Вы давяраеце крыніцы гэтых пакункаў?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "Назва сховішча:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "URL-адрас подпісу:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "Ідэнтыфікатар падпісанта:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "Ідэнтыфікатар подпісу:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "Пакунак"
-
-#: ../data/gpk-signature.ui.h:7
-msgid "Do you recognize the user and trust this key?"
-msgstr "Вы сапраўды ведаеце гэтага карыстальніка і давяраеце гэтаму ключу?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -453,7 +249,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "Усталяванне апраграмавання"
@@ -462,41 +259,43 @@ msgstr "Усталяванне апраграмавання"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "Праграмны журнал"
+msgid "Cancel"
+msgstr "Скасавана"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "На дадзены момант няма ніводнай абноўкі для вашага камп'ютара."
+msgid "Install Anyway"
+msgstr "Усталяванне апраграмавання"
 
-#: ../data/gpk-update-viewer.ui.h:4
-#, fuzzy
-msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"Абноўкі пакункаў выпраўляюць памылкі, павышаюць бяспеку сістэмы і дадаюць "
-"новыя магчымасці."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "_Абнавіць"
+#: ../data/gpk-third-party-installer.ui.h:5
+#, fuzzy
+msgid "Trust and install this app?"
+msgstr "Усталяваць гэты файл?"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "Падрабязнасці"
+#: ../data/gpk-third-party-installer.ui.h:6
+msgid ""
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "_Усталяваць абноўкі"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "Памер сцягвання"
+
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2154,6 +1953,12 @@ msgstr "Рамонт сістэмы"
 msgid "Icon"
 msgstr "Значок"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "Пакунак"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Праграмы, якія могуць адкрыць гэты тып файла"
@@ -2232,10 +2037,31 @@ msgstr "Працягнуць"
 msgid "The following software also needs to be installed"
 msgstr "Наступнае апраграмаванне мусіць быць усталявана"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "Усталяваць"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Наступнае апраграмаванне мусіць быць выдалена"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "Выдаліць"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2429,6 +2255,11 @@ msgstr "Дата"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Дзеянне"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "Падрабязнасці"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -3030,6 +2861,11 @@ msgstr "Памылка змянення стану"
 msgid "Enabled"
 msgstr "Уключана"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Крыніца"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -3058,6 +2894,10 @@ msgstr "Праграмны журнал"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -3097,6 +2937,11 @@ msgstr "Зробленыя змены яшчэ не ўжытыя."
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "Калі вы закрыеце гэта акно, змены будуць незваротна страчаны."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "Абноўкі дыстрыбутыва атрыманыя"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3201,6 +3046,11 @@ msgstr "Kasia Bondarava <kasia.bondarava@gmail.com>"
 msgid "Xings Software Website"
 msgstr "Патрэбны подпіс апраграмавання"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "Спіс катэгорый атрыманы"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3268,6 +3118,12 @@ msgid_plural "Software updates are available."
 msgstr[0] "Падрабязнасці пра абноўку адсутнічаюць."
 msgstr[1] "Падрабязнасці пра абноўку адсутнічаюць."
 msgstr[2] "Падрабязнасці пра абноўку адсутнічаюць."
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "Абнавіць"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3458,6 +3314,18 @@ msgid_plural "_Install Updates"
 msgstr[0] "_Усталяваць абноўку"
 msgstr[1] "_Усталяваць абноўкі"
 msgstr[2] "_Усталяваць абноўкі"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "Праграмны журнал"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "На дадзены момант няма ніводнай абноўкі для вашага камп'ютара."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3687,59 +3555,174 @@ msgstr "Даступна абноўка дыстрыбутыва да версі
 msgid "Update Software"
 msgstr "Абноўкі сістэмы"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "Усталяванне"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "Абнаўленне"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "Пераўсталяванне"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "Не ўдалося ўсталяваць апраграмаванне"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "Не ўдалося ўсталяваць пакункі з выточным кодам"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "Пакунак не ўсталяваны"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "Гэты пакунак ужо ўсталяваны"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "Гэты пакунак ужо ўсталяваны"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "Не ўдалося ўсталяваць апраграмаванне"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "Памер сцягвання"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "Памылка трансакцыі"
+
+#~ msgid "License"
+#~ msgstr "Ліцэнзія"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "Спіс катэгорый атрыманы"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "Пошук пакункаў"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "Абноўкі сістэмы"
+
+#, fuzzy
+#~ msgid "Software Sources"
+#~ msgstr "Патрэбны подпіс апраграмавання"
+
+#~ msgid "About"
+#~ msgstr "Аб праграме"
+
+#~ msgid "_Quit"
+#~ msgstr "_Выйсці"
+
+#~ msgid "Install Package"
+#~ msgstr "Усталяванне пакунка"
+
+#~ msgid "More details"
+#~ msgstr "Больш падрабязнасцяў"
+
+#~ msgid "_Force install"
+#~ msgstr "_Дабіцца ўсталявання"
+
+#~ msgid "Force installing package"
+#~ msgstr "Дабіцца ўсталявання пакунка"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "Патрэбна ліцэнзійнае пагадненне"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "_Прыняць пагадненне"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "Абноўкі пакункаў выпраўляюць памылкі, павышаюць бяспеку сістэмы і дадаюць "
+#~ "новыя магчымасці."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "Праверыць абноўкі"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "Праверыць абноўкі"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "Сцягванне інфармацыі аб абноўках"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr ""
+#~ "Крыніца змяшчае пакункі, якія могуць быць усталяваныя на гэтым камп'ютары."
+
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "_Паказваць адладачныя крыніцы пакункаў і крыніцы ў распрацаванні"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "Вы давяраеце крыніцы гэтых пакункаў?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "Назва сховішча:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "URL-адрас подпісу:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "Ідэнтыфікатар падпісанта:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "Ідэнтыфікатар подпісу:"
+
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "Вы сапраўды ведаеце гэтага карыстальніка і давяраеце гэтаму ключу?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "Абноўкі пакункаў выпраўляюць памылкі, павышаюць бяспеку сістэмы і дадаюць "
+#~ "новыя магчымасці."
+
+#~ msgid "_Upgrade"
+#~ msgstr "_Абнавіць"
+
+#~ msgid "_Install Updates"
+#~ msgstr "_Усталяваць абноўкі"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -4045,10 +4028,6 @@ msgstr "Памер сцягвання"
 
 #~ msgid "Cancel search"
 #~ msgstr "Скасаваць пошук"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "Скасавана"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.mk.po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2011-12-19 23:30+0100\n"
 "Last-Translator: Jovan N\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural= n==1 || n%10==1 ? 0 : 1;\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -51,14 +51,13 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "Ажурирање на софтвер"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Ажурирај го софтверот инсталирај на системот"
 
@@ -168,112 +167,6 @@ msgid ""
 "Store;"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "Инсталирај"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "Отстрани"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr "Веб страница"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "Грешка на трансакција"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "Лиценца"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "Алатка за надградба на дистрибуцијата"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "Извор"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "Добив категории"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "Пребарувам пакети"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "Добив категории"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "Извори на софтвер"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-msgid "Software Sources"
-msgstr "Извори на софтвер"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Извори на софтвер"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr ""
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "Инсталирај пакет"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -288,27 +181,6 @@ msgstr "Веб сајт на PackageKit"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "Сервис на DBus сесијата за PackageKit"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "Повеќе детали"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "_Присили инсталација"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "Присили инсталирање на пакет"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "Потребна е согласност за лиценца"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "_Прифати"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -318,6 +190,13 @@ msgstr "Инсталирај пакет"
 #, fuzzy
 msgid "Install selected packages on the system"
 msgstr "Инсталирај го избраниот софтвер на системот"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "Извори на софтвер"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -341,91 +220,6 @@ msgid ""
 "Software;App;Store;"
 msgstr ""
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"Ажурирањата на софтвер ги поправаат грешките, ги елиминираат пропустите и "
-"овозможуваат нови опции."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "П_ровери дали има ажурирања:"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "П_ровери дали има ажурирања:"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "Преземам информации за ажурирање"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "Ажурирај"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr ""
-"Изворите на софтвер содржат пакети кои може да се инсталираат на овој "
-"компјутер."
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-#, fuzzy
-msgid "_Show debug and development package sources"
-msgstr "_Покажи ги изворите за дебагирање и развој"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "Дали му верувате на изворот на пакетите?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "Име на складиште:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "URL на потпис:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "Кориснички идентификатор на потпис:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "Идентификатор на потпис:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "Пакет"
-
-#: ../data/gpk-signature.ui.h:7
-#, fuzzy
-msgid "Do you recognize the user and trust this key?"
-msgstr "Дали го препознавате корисникот и му верувате на овој клуч?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -446,7 +240,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "Инсталација на софтвер"
@@ -455,41 +250,43 @@ msgstr "Инсталација на софтвер"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "Ажурирање на софтвер"
+msgid "Cancel"
+msgstr "Прекинав"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "Моментално нема достапни софтверски ажурирања за Вашиот компјутер."
+msgid "Install Anyway"
+msgstr "Не успеав да го инсталирам софтверот"
 
-#: ../data/gpk-update-viewer.ui.h:4
-#, fuzzy
-msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"Ажурирањата на софтвер ги поправаат грешките, ги елиминираат пропустите и "
-"овозможуваат нови опции."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "_Надградба"
+#: ../data/gpk-third-party-installer.ui.h:5
+#, fuzzy
+msgid "Trust and install this app?"
+msgstr "Дали сакате да го инсталирате овој каталог?"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "Детали"
+#: ../data/gpk-third-party-installer.ui.h:6
+msgid ""
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "_Инсталирај ги ажурирањата"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "Големина на преземање"
+
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2161,6 +1958,12 @@ msgstr "Го надградувам системот"
 msgid "Icon"
 msgstr "Икона"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "Пакет"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "Апликации кои можат да го отворат овој тип на датотеки"
@@ -2245,10 +2048,31 @@ msgstr "Продолжи"
 msgid "The following software also needs to be installed"
 msgstr "Следниот софтвер мора да се инсталира исто така"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "Инсталирај"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "Следниот софтвер мора да се избрише исто така"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "Отстрани"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2426,6 +2250,11 @@ msgstr "Датум"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "Дејство"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "Детали"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -3005,6 +2834,11 @@ msgstr "Не успеав да го променам статусот"
 msgid "Enabled"
 msgstr "Овозможено"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "Извор"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -3033,6 +2867,10 @@ msgstr "Поставувања за софтвер"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -3072,6 +2910,11 @@ msgstr "Направивте промени кои сѐ уште не се пр�
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "Овие промени ќе бидат изгубени ако го затворите овој прозорец."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "Алатка за надградба на дистрибуцијата"
 
 #: ../src/software/gpk-application.c:1262
 msgid "Visit the app's website"
@@ -3176,6 +3019,11 @@ msgstr "Jovan N"
 msgid "Xings Software Website"
 msgstr "Извор на софтвер"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "Добив категории"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3242,6 +3090,12 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "Нема детали за ажурирањето."
 msgstr[1] "Нема детали за ажурирањето."
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "Ажурирај"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3429,6 +3283,18 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Инсталирај го ажурирањето"
 msgstr[1] "_Инсталирај ги ажурирањата"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "Ажурирање на софтвер"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "Моментално нема достапни софтверски ажурирања за Вашиот компјутер."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3644,59 +3510,173 @@ msgstr "Новото издание „%s“ на дистрибуцијата �
 msgid "Update Software"
 msgstr "Ажурирај го системот"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "Инсталирам"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "Ажурирам"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "Преинсталирам"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "Не успеав да го инсталирам софтверот"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "Не мора да се инсталираат пакети"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "Пакетот не е инсталиран"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "Пакетот е веќе инсталиран"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "Пакетот е веќе инсталиран"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "Не успеав да го инсталирам софтверот"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "Големина на преземање"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#~ msgid "Homepage"
+#~ msgstr "Веб страница"
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "Грешка на трансакција"
+
+#~ msgid "License"
+#~ msgstr "Лиценца"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "Добив категории"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "Пребарувам пакети"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "Извори на софтвер"
+
+#~ msgid "Software Sources"
+#~ msgstr "Извори на софтвер"
+
+#~ msgid "Install Package"
+#~ msgstr "Инсталирај пакет"
+
+#~ msgid "More details"
+#~ msgstr "Повеќе детали"
+
+#~ msgid "_Force install"
+#~ msgstr "_Присили инсталација"
+
+#~ msgid "Force installing package"
+#~ msgstr "Присили инсталирање на пакет"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "Потребна е согласност за лиценца"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "_Прифати"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "Ажурирањата на софтвер ги поправаат грешките, ги елиминираат пропустите и "
+#~ "овозможуваат нови опции."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "П_ровери дали има ажурирања:"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "П_ровери дали има ажурирања:"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "Преземам информации за ажурирање"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr ""
+#~ "Изворите на софтвер содржат пакети кои може да се инсталираат на овој "
+#~ "компјутер."
+
+#, fuzzy
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "_Покажи ги изворите за дебагирање и развој"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "Дали му верувате на изворот на пакетите?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "Име на складиште:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "URL на потпис:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "Кориснички идентификатор на потпис:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "Идентификатор на потпис:"
+
+#, fuzzy
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "Дали го препознавате корисникот и му верувате на овој клуч?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "Ажурирањата на софтвер ги поправаат грешките, ги елиминираат пропустите и "
+#~ "овозможуваат нови опции."
+
+#~ msgid "_Upgrade"
+#~ msgstr "_Надградба"
+
+#~ msgid "_Install Updates"
+#~ msgstr "_Инсталирај ги ажурирањата"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3983,10 +3963,6 @@ msgstr "Големина на преземање"
 
 #~ msgid "Cancel search"
 #~ msgstr "Откажи со пребарување"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "Прекинав"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"
@@ -4502,11 +4478,6 @@ msgstr "Големина на преземање"
 
 #~ msgid "The following packages are marked to be installed from the catalog:"
 #~ msgstr "Следните пакети од каталогот се означени за инсталација:"
-
-#~ msgid "Do you want to install this catalog?"
-#~ msgid_plural "Do you want to install these catalogs?"
-#~ msgstr[0] "Дали сакате да го инсталирате овој каталог?"
-#~ msgstr[1] "Дали сакате да ги инсталирате овие каталози?"
 
 #~ msgid "Install catalogs"
 #~ msgstr "Инсталирај каталози"

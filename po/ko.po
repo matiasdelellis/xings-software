@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2014-09-06 03:48+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
@@ -25,8 +25,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -61,7 +61,6 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 #, fuzzy
@@ -69,7 +68,7 @@ msgid "Software Update"
 msgstr "소프트웨어 설치"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "시스템에 설치한 소프트웨어를 업데이트합니다"
 
@@ -188,113 +187,6 @@ msgstr ""
 "Updates;업데이트;Upgrade;업그레이드;Sources;공급원;Repositories;저장소;"
 "Preferences;설정;Install;설치;Store;마켓;스토어;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "설치"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "제거"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "처리 오류"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "라이선스"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "배포판 업그레이드를 받음"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "공급원"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "분류를 받음"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "패키지를 검색하는 중입니다"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "분류를 받음"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "그놈 소프트웨어"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "소프트웨어 서명이 필요합니다"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "소프트웨어 설치"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "정보"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "끝내기(_Q)"
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "패키지 설치"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -309,27 +201,6 @@ msgstr "패키지키트 홈페이지"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "패키지키트 세션 D-버스 서비스"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "더 자세히"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "강제 설치(_F)"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "패키지를 강제로 설치합니다"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "라이선스 동의가 필요합니다"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "동의(_A)"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -338,6 +209,13 @@ msgstr "소프트웨어 설치"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "선택한 패키지를 시스템에 설치합니다"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "소프트웨어 설치"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -362,87 +240,6 @@ msgstr ""
 "Updates;업데이트;Upgrade;업그레이드;Sources;공급원;Repositories;저장소;"
 "Preferences;설정;Install;설치;Store;마켓;스토어;"
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr ""
-"패키지를 업데이트하면 오류를 수정하고, 보안 취약점을 해결하고, 새로운 기능이 "
-"추가됩니다."
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "업데이트 확인"
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "업데이트 확인"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "업데이트 정보를 다운로드하는 중"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "업데이트"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr "패키지 공급원에 이 컴퓨터에 설치할 수 있는 패키지가 들어 있습니다."
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-msgid "_Show debug and development package sources"
-msgstr "디버깅용 및 개발용 패키지 공급원 표시(_S)"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "패키지 공급원을 신뢰하십니까?"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "저장소 이름:"
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "서명 URL:"
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "서명 사용자 신원:"
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "서명 신원:"
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "패키지"
-
-#: ../data/gpk-signature.ui.h:7
-msgid "Do you recognize the user and trust this key?"
-msgstr "이 사용자를 알고 키를 신뢰하십니까?"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -463,7 +260,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "소프트웨어 설치"
@@ -472,41 +270,43 @@ msgstr "소프트웨어 설치"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
+msgid "Cancel"
+msgstr "취소함"
+
+#: ../data/gpk-third-party-installer.ui.h:3
+#, fuzzy
+msgid "Install Anyway"
 msgstr "소프트웨어 설치"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
-#, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "현재 이 컴퓨터에 필요한 패키지 업데이트가 없습니다."
-
-#: ../data/gpk-update-viewer.ui.h:4
-#, fuzzy
-msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
 msgstr ""
-"패키지를 업데이트하면 오류를 수정하고, 보안 취약점을 해결하고, 새로운 기능이 "
-"추가됩니다."
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "업그레이드(_U)"
+#: ../data/gpk-third-party-installer.ui.h:5
+#, fuzzy
+msgid "Trust and install this app?"
+msgstr "다음 파일을 설치하시겠습니까?"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "자세히"
+#: ../data/gpk-third-party-installer.ui.h:6
+msgid ""
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "업데이트 설치(_I)"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "다운로드 크기"
+
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2124,6 +1924,12 @@ msgstr "시스템 수리하는 중"
 msgid "Icon"
 msgstr "아이콘"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "패키지"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "이 종류의 파일을 열 수 있는 프로그램"
@@ -2203,10 +2009,31 @@ msgstr "계속"
 msgid "The following software also needs to be installed"
 msgstr "다음 소프트웨어도 설치해야 합니다"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "설치"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "다음 소프트웨어도 제거해야 합니다"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "제거"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2377,6 +2204,11 @@ msgstr "날짜"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "동작"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "자세히"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2903,6 +2735,11 @@ msgstr "상태를 바꾸는데 실패했습니다"
 msgid "Enabled"
 msgstr "사용"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "공급원"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2931,6 +2768,10 @@ msgstr "소프트웨어 설치"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -2968,6 +2809,11 @@ msgstr "바뀐 사항 중에 적용하지 않은 부분이 있습니다."
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "이 창을 닫으면 다음 바뀐 사항을 잃어버립니다."
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "배포판 업그레이드를 받음"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3075,6 +2921,11 @@ msgstr "GNOME Korea <http://gnome.or.kr/>"
 msgid "Xings Software Website"
 msgstr "소프트웨어 서명이 필요합니다"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "분류를 받음"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3138,6 +2989,12 @@ msgstr[0] "사용 가능한 업데이트가 없습니다"
 msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "업데이트 상세 정보가 없습니다."
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "업데이트"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3320,6 +3177,18 @@ msgstr "사용 가능한 네트워크 연결이 발견되지 않았습니다."
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "업데이트 설치(_I)"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "소프트웨어 설치"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "현재 이 컴퓨터에 필요한 패키지 업데이트가 없습니다."
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3521,60 +3390,174 @@ msgstr "배포판 업그레이드 '%s' 릴리스가 새로 나왔습니다"
 msgid "Update Software"
 msgstr "그놈 소프트웨어"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "설치하는 중"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "업데이트하는 중"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "다시 설치하는 중"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "소프트웨어 설치에 실패했습니다"
-
 # 소스 코드
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "소스 패키지를 설치할 수 없습니다"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "패키지를 설치하지 않았습니다"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "패키지를 이미 설치했습니다"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "패키지를 이미 설치했습니다"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "소프트웨어 설치에 실패했습니다"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "다운로드 크기"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "처리 오류"
+
+#~ msgid "License"
+#~ msgstr "라이선스"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "분류를 받음"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "패키지를 검색하는 중입니다"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "그놈 소프트웨어"
+
+#, fuzzy
+#~ msgid "Software Sources"
+#~ msgstr "소프트웨어 서명이 필요합니다"
+
+#~ msgid "About"
+#~ msgstr "정보"
+
+#~ msgid "_Quit"
+#~ msgstr "끝내기(_Q)"
+
+#~ msgid "Install Package"
+#~ msgstr "패키지 설치"
+
+#~ msgid "More details"
+#~ msgstr "더 자세히"
+
+#~ msgid "_Force install"
+#~ msgstr "강제 설치(_F)"
+
+#~ msgid "Force installing package"
+#~ msgstr "패키지를 강제로 설치합니다"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "라이선스 동의가 필요합니다"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "동의(_A)"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr ""
+#~ "패키지를 업데이트하면 오류를 수정하고, 보안 취약점을 해결하고, 새로운 기능"
+#~ "이 추가됩니다."
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "업데이트 확인"
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "업데이트 확인"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "업데이트 정보를 다운로드하는 중"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr "패키지 공급원에 이 컴퓨터에 설치할 수 있는 패키지가 들어 있습니다."
+
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "디버깅용 및 개발용 패키지 공급원 표시(_S)"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "패키지 공급원을 신뢰하십니까?"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "저장소 이름:"
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "서명 URL:"
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "서명 사용자 신원:"
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "서명 신원:"
+
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "이 사용자를 알고 키를 신뢰하십니까?"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr ""
+#~ "패키지를 업데이트하면 오류를 수정하고, 보안 취약점을 해결하고, 새로운 기능"
+#~ "이 추가됩니다."
+
+#~ msgid "_Upgrade"
+#~ msgstr "업그레이드(_U)"
+
+#~ msgid "_Install Updates"
+#~ msgstr "업데이트 설치(_I)"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3857,10 +3840,6 @@ msgstr "다운로드 크기"
 
 #~ msgid "Cancel search"
 #~ msgstr "검색을 취소합니다"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "취소함"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"

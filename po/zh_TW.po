@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit 3.3.6\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-11 20:47-0300\n"
+"POT-Creation-Date: 2023-04-24 15:17-0300\n"
 "PO-Revision-Date: 2014-08-23 00:03+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese (traditional)\n"
@@ -19,8 +19,8 @@ msgstr ""
 "X-Generator: Poedit 1.5.4\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
+#: ../data/xings-software.desktop.in.h:1 ../src/software/gpk-application.c:308
+#: ../src/software/gpk-application.c:1605
 #: ../src/software/gpk-application.c:1869
 #: ../src/software/gpk-application.c:1948
 #, fuzzy
@@ -55,14 +55,13 @@ msgstr ""
 #. TRANSLATORS: title to pass to the user if there are not enough privs
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
-#: ../data/gpk-update-viewer.ui.h:7
 #: ../src/software-service/gpk-updates-notification.c:187
 #: ../src/software-update/gpk-update-viewer.c:3428
 msgid "Software Update"
 msgstr "軟體更新"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "更新系統中已安裝的軟體"
 
@@ -181,112 +180,6 @@ msgstr ""
 "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;更新;升級;來"
 "源;套件庫;軟體庫;偏好設定;安裝;商店;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
-msgid "Browse by categories or search and discover new apps"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:4
-msgid "Open"
-msgstr ""
-
-#. TRANSLATORS: title: installing local files
-#. TRANSLATORS: button: confirm to search for packages
-#. TRANSLATORS: button: install codecs
-#. TRANSLATORS: button: install a font
-#. TRANSLATORS: button: install Plasma services
-#. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
-#: ../src/packagekit-service/gpk-dbus-task.c:693
-#: ../src/packagekit-service/gpk-dbus-task.c:1238
-#: ../src/packagekit-service/gpk-dbus-task.c:1461
-#: ../src/packagekit-service/gpk-dbus-task.c:1663
-#: ../src/packagekit-service/gpk-dbus-task.c:2119
-#: ../src/packagekit-service/gpk-dbus-task.c:2455
-#: ../src/packagekit-service/gpk-dbus-task.c:2685
-msgid "Install"
-msgstr "安裝"
-
-#. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
-#: ../src/packagekit-service/gpk-dbus-task.c:2972
-msgid "Remove"
-msgstr "移除"
-
-#: ../data/gpk-application.ui.h:7
-msgid "Homepage"
-msgstr "首頁"
-
-#: ../data/gpk-application.ui.h:8
-msgid "Donate"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:9
-msgid "Report"
-msgstr ""
-
-#: ../data/gpk-application.ui.h:10
-#, fuzzy
-msgid "Translate"
-msgstr "處理事項錯誤"
-
-#: ../data/gpk-application.ui.h:11
-msgid "License"
-msgstr "授權條款"
-
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
-#, fuzzy
-msgid "Distribution package"
-msgstr "散布版升級工具"
-
-#. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
-msgid "Source"
-msgstr "來源"
-
-#: ../data/gpk-application.ui.h:14
-#, fuzzy
-msgid "Show categories"
-msgstr "已取得型錄"
-
-#: ../data/gpk-application.ui.h:15
-#, fuzzy
-msgid "Search for apps or distribution packages"
-msgstr "正在搜尋軟體包"
-
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
-#, fuzzy
-msgid "Categories"
-msgstr "已取得型錄"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "軟體來源"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-msgid "Software Sources"
-msgstr "軟體來源"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "軟體原始碼"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "關於"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "退出(_Q)"
-
-#: ../data/gpk-client.ui.h:1
-msgid "Install Package"
-msgstr "安裝軟體包"
-
 #. TRANSLATORS: program name, a session wide daemon to watch for updates and changing system state
 #: ../data/xings-packagekit-service.desktop.in.h:1
 #: ../src/packagekit-service/gpk-dbus-service.c:138
@@ -301,27 +194,6 @@ msgstr "PackageKit 網站"
 msgid "Session D-Bus Service for PackageKit"
 msgstr "PackageKit 的作業階段 D-Bus 服務"
 
-#: ../data/gpk-error.ui.h:1
-msgid "More details"
-msgstr "更多詳細資訊"
-
-#: ../data/gpk-error.ui.h:2
-msgid "_Force install"
-msgstr "強制安裝(_F)"
-
-#. button tooltip
-#: ../data/gpk-error.ui.h:4
-msgid "Force installing package"
-msgstr "強制安裝軟體包"
-
-#: ../data/gpk-eula.ui.h:1
-msgid "License Agreement Required"
-msgstr "需要接受授權條款"
-
-#: ../data/gpk-eula.ui.h:2
-msgid "_Accept Agreement"
-msgstr "接受授權條款(_A)"
-
 #: ../data/xings-install-local-package.desktop.in.h:1
 #, fuzzy
 msgid "Install Software Package"
@@ -330,6 +202,13 @@ msgstr "安裝軟體"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "安裝選取的軟體包到系統中"
+
+#. are we running privileged
+#: ../data/xings-software-history.desktop.in.h:1 ../src/history/gpk-log.c:773
+#: ../src/history/gpk-log.c:781
+#, fuzzy
+msgid "Software History"
+msgstr "軟體原始碼"
 
 #: ../data/xings-software-history.desktop.in.h:2
 msgid "View past package management tasks"
@@ -354,85 +233,6 @@ msgstr ""
 "Updates;Upgrade;Sources;Repositories;Preferences;Install;Store;更新;升級;來"
 "源;套件庫;軟體庫;偏好設定;安裝;商店;"
 
-#: ../data/gpk-prefs.ui.h:1
-#, fuzzy
-msgid ""
-"When your device is online, we check for updates regularly. These updates "
-"can fix bugs, eliminate security vulnerabilities, and provide new features."
-msgstr "軟體包更新可修正錯誤、消除安全漏洞，提供新功能等。"
-
-#: ../data/gpk-prefs.ui.h:2 ../data/gpk-update-viewer.ui.h:3
-#, fuzzy
-msgid "Check for updates"
-msgstr "檢查是否有更新(_H)："
-
-#: ../data/gpk-prefs.ui.h:3
-#, fuzzy
-msgid "Check for updates on mobile connections"
-msgstr "使用電池時也檢查是否有更新"
-
-#: ../data/gpk-prefs.ui.h:4
-msgid "You will be notified when the updates are ready to be installed"
-msgstr ""
-
-#: ../data/gpk-prefs.ui.h:5
-#, fuzzy
-msgid "Download updates in the background"
-msgstr "正在下載更新資訊"
-
-#. TRANSLATORS: the updates mechanism
-#: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
-#, fuzzy
-msgid "Updates"
-msgstr "更新"
-
-#: ../data/gpk-prefs.ui.h:7
-#, fuzzy
-msgid ""
-"A software source contains packages that can be installed on this computer."
-msgstr "軟體包來源包含可以安裝在此電腦上的軟體包。"
-
-#. shows extra -source, -debuginfo, and -devel sources
-#: ../data/gpk-prefs.ui.h:9
-msgid "_Show debug and development package sources"
-msgstr "顯示與除錯、開發相關的軟體包來源(_S)"
-
-#: ../data/gpk-signature.ui.h:1
-msgid "Do you trust the source of the packages?"
-msgstr "您是否信任軟體包的來源？"
-
-#: ../data/gpk-signature.ui.h:2
-#, fuzzy
-msgid "Repository name"
-msgstr "軟體庫名稱："
-
-#: ../data/gpk-signature.ui.h:3
-#, fuzzy
-msgid "Signature URL"
-msgstr "簽章網址："
-
-#: ../data/gpk-signature.ui.h:4
-#, fuzzy
-msgid "Signature user identifier"
-msgstr "簽章使用者識別："
-
-#: ../data/gpk-signature.ui.h:5
-#, fuzzy
-msgid "Signature identifier"
-msgstr "簽章識別碼："
-
-#. TRANSLATORS: column for the application name
-#. TRANSLATORS: column for the package name
-#: ../data/gpk-signature.ui.h:6 ../src/common/gpk-helper-chooser.c:119
-#: ../src/common/gpk-helper-run.c:189
-msgid "Package"
-msgstr "軟體包"
-
-#: ../data/gpk-signature.ui.h:7
-msgid "Do you recognize the user and trust this key?"
-msgstr "您是否認知此使用者，並信任此金鑰？"
-
 #: ../data/xings-software-update.desktop.in.h:3
 #, fuzzy
 msgid "Updates;Upgrade;Software;App;Store;"
@@ -453,7 +253,8 @@ msgstr ""
 
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
-#: ../src/third-parties/gpk-third-parties.c:221
+#: ../data/gpk-third-party-installer.ui.h:1
+#: ../src/third-parties/gpk-third-parties.c:302
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "軟體安裝"
@@ -462,39 +263,43 @@ msgstr "軟體安裝"
 msgid "Install apps downloaded from the Internet"
 msgstr ""
 
-#. TRANSLATORS: title: nothing to do
-#: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../data/gpk-third-party-installer.ui.h:2
 #, fuzzy
-msgid "All software is up to date"
-msgstr "軟體更新"
+msgid "Cancel"
+msgstr "已取消"
 
-#. TRANSLATORS: tell the user the problem
-#: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../data/gpk-third-party-installer.ui.h:3
 #, fuzzy
-msgid "There are no updates available for your computer at this time."
-msgstr "目前沒有您電腦適用的軟體包更新。"
+msgid "Install Anyway"
+msgstr "安裝軟體"
 
-#: ../data/gpk-update-viewer.ui.h:4
+#: ../data/gpk-third-party-installer.ui.h:4
+msgid "Open"
+msgstr ""
+
+#: ../data/gpk-third-party-installer.ui.h:5
 #, fuzzy
+msgid "Trust and install this app?"
+msgstr "您是否要安裝這個型錄？"
+
+#: ../data/gpk-third-party-installer.ui.h:6
 msgid ""
-"Software updates correct errors, eliminate security vulnerabilities, and "
-"provide new features."
-msgstr "軟體包更新可修正錯誤、消除安全漏洞，提供新功能等。"
+"This app is provided solely by its developer and has not been reviewed for "
+"security, privacy, or system integration."
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:5
-msgid "_Upgrade"
-msgstr "升級(_U)"
+#: ../data/gpk-third-party-installer.ui.h:7
+#, fuzzy
+msgid "Calculating download size…"
+msgstr "下載的大小"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
-msgid "Details"
-msgstr "詳細資料"
+#: ../data/gpk-third-party-installer.ui.h:8
+msgid "Updates to this app will not be reviewed"
+msgstr ""
 
-#: ../data/gpk-update-viewer.ui.h:8
-msgid "_Install Updates"
-msgstr "安裝更新(_I)"
+#: ../data/gpk-third-party-installer.ui.h:9
+msgid "I understand"
+msgstr ""
 
 #: ../data/org.xings.software.gschema.xml.h:1
 msgid "Automatically remove unused dependencies"
@@ -2116,6 +1921,12 @@ msgstr "正在升級系統"
 msgid "Icon"
 msgstr "圖示"
 
+#. TRANSLATORS: column for the application name
+#. TRANSLATORS: column for the package name
+#: ../src/common/gpk-helper-chooser.c:119 ../src/common/gpk-helper-run.c:189
+msgid "Package"
+msgstr "軟體包"
+
 #: ../src/common/gpk-helper-chooser.c:257
 msgid "Applications that can open this type of file"
 msgstr "可以開啟此檔案類型的應用程式"
@@ -2193,10 +2004,31 @@ msgstr "繼續"
 msgid "The following software also needs to be installed"
 msgstr "下列軟體也需要安裝"
 
+#. TRANSLATORS: title: installing local files
+#. TRANSLATORS: button: confirm to search for packages
+#. TRANSLATORS: button: install codecs
+#. TRANSLATORS: button: install a font
+#. TRANSLATORS: button: install Plasma services
+#. TRANSLATORS: button: install printer drivers
+#: ../src/common/gpk-task.c:396 ../src/packagekit-service/gpk-dbus-task.c:693
+#: ../src/packagekit-service/gpk-dbus-task.c:1238
+#: ../src/packagekit-service/gpk-dbus-task.c:1461
+#: ../src/packagekit-service/gpk-dbus-task.c:1663
+#: ../src/packagekit-service/gpk-dbus-task.c:2119
+#: ../src/packagekit-service/gpk-dbus-task.c:2455
+#: ../src/packagekit-service/gpk-dbus-task.c:2685
+msgid "Install"
+msgstr "安裝"
+
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:400 ../src/common/gpk-task.c:405
 msgid "The following software also needs to be removed"
 msgstr "下列軟體也需要移除"
+
+#. TRANSLATORS: button: confirm to search for packages
+#: ../src/common/gpk-task.c:401 ../src/packagekit-service/gpk-dbus-task.c:2972
+msgid "Remove"
+msgstr "移除"
 
 #. TRANSLATORS: additional message text for the deps dialog
 #: ../src/common/gpk-task.c:410
@@ -2370,6 +2202,11 @@ msgstr "日期"
 #: ../src/history/gpk-log.c:301
 msgid "Action"
 msgstr "動作"
+
+#. TRANSLATORS: column for what packages were upgraded
+#: ../src/history/gpk-log.c:328
+msgid "Details"
+msgstr "詳細資料"
 
 #. TRANSLATORS: column for the user name, e.g. Richard Hughes
 #: ../src/history/gpk-log.c:334
@@ -2928,6 +2765,11 @@ msgstr "無法變更狀態"
 msgid "Enabled"
 msgstr "啟用"
 
+#. TRANSLATORS: column for the source description
+#: ../src/preferences/gpk-prefs.c:395
+msgid "Source"
+msgstr "來源"
+
 #. TRANSLATORS: for one reason or another, we could not get the list of sources
 #: ../src/preferences/gpk-prefs.c:457
 msgid "Failed to get the list of sources"
@@ -2955,6 +2797,10 @@ msgstr "軟體設定值"
 
 #: ../src/software/gpk-application.c:272
 msgid "Please, be patient"
+msgstr ""
+
+#: ../src/software/gpk-application.c:311
+msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
@@ -2992,6 +2838,11 @@ msgstr "您已經做出改變但尚未套用它。"
 #: ../src/software/gpk-application.c:958
 msgid "These changes will be lost if you close this window."
 msgstr "如果您關閉此視窗，將會失去這些變更。"
+
+#: ../src/software/gpk-application.c:1204
+#, fuzzy
+msgid "Distribution package"
+msgstr "散布版升級工具"
 
 #: ../src/software/gpk-application.c:1262
 #, fuzzy
@@ -3096,6 +2947,11 @@ msgstr ""
 msgid "Xings Software Website"
 msgstr "軟體來源"
 
+#: ../src/software/gpk-application.c:1794
+#, fuzzy
+msgid "Categories"
+msgstr "已取得型錄"
+
 #: ../src/software/gpk-application.c:1870
 #, fuzzy
 msgid "There was an error starting the application"
@@ -3161,6 +3017,12 @@ msgid "A software update is available."
 msgid_plural "Software updates are available."
 msgstr[0] "無可用的詳細更新資訊。"
 msgstr[1] "無可用的詳細更新資訊。"
+
+#. TRANSLATORS: the updates mechanism
+#: ../src/software-service/gpk-updates-notification.c:316
+#, fuzzy
+msgid "Updates"
+msgstr "更新"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
@@ -3336,6 +3198,18 @@ msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "安裝更新(_I)"
 msgstr[1] "安裝更新(_I)"
+
+#. TRANSLATORS: title: nothing to do
+#: ../src/software-update/gpk-update-viewer.c:1457
+#, fuzzy
+msgid "All software is up to date"
+msgstr "軟體更新"
+
+#. TRANSLATORS: tell the user the problem
+#: ../src/software-update/gpk-update-viewer.c:1459
+#, fuzzy
+msgid "There are no updates available for your computer at this time."
+msgstr "目前沒有您電腦適用的軟體包更新。"
 
 #: ../src/software-update/gpk-update-viewer.c:1492
 #, fuzzy, c-format
@@ -3536,59 +3410,171 @@ msgstr "有新的散布版「%s」可供升級"
 msgid "Update Software"
 msgstr "更新軟體"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:76
+#: ../src/third-parties/gpk-flatpak-installer.c:134
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "正在安裝"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:79
+#: ../src/third-parties/gpk-flatpak-installer.c:137
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "正在更新"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:82
+#: ../src/third-parties/gpk-flatpak-installer.c:140
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "正在重新安裝"
 
-#: ../src/third-parties/gpk-third-parties.c:79
-#: ../src/third-parties/gpk-third-parties.c:191
-#, fuzzy
-msgid "Failed to install a third party software"
-msgstr "無法安裝軟體"
-
-#: ../src/third-parties/gpk-third-parties.c:94
+#: ../src/third-parties/gpk-third-parties.c:63
 #, fuzzy, c-format
 msgid "“%s” has been installed"
 msgstr "軟體包已經安裝"
 
-#: ../src/third-parties/gpk-third-parties.c:96
+#: ../src/third-parties/gpk-third-parties.c:65
 #, fuzzy
 msgid "The app has been installed"
 msgstr "軟體包已經安裝"
 
-#: ../src/third-parties/gpk-third-parties.c:99
+#: ../src/third-parties/gpk-third-parties.c:68
 #, fuzzy, c-format
 msgid "“%s” is already installed"
 msgstr "軟體包已安裝過"
 
-#: ../src/third-parties/gpk-third-parties.c:101
+#: ../src/third-parties/gpk-third-parties.c:70
 #, fuzzy
 msgid "This app is already installed"
 msgstr "軟體包已安裝過"
 
-#: ../src/third-parties/gpk-third-parties.c:111
+#: ../src/third-parties/gpk-third-parties.c:80
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:223
-msgid "Install third party software from flatpakref"
-msgstr ""
+#: ../src/third-parties/gpk-third-parties.c:138
+#: ../src/third-parties/gpk-third-parties.c:182
+#: ../src/third-parties/gpk-third-parties.c:274
+#, fuzzy
+msgid "Failed to install a third party software"
+msgstr "無法安裝軟體"
 
-#: ../src/third-parties/gpk-third-parties.c:245
+#: ../src/third-parties/gpk-third-parties.c:220
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "下載的大小"
+
+#: ../src/third-parties/gpk-third-parties.c:304
+msgid "Install third party software from flatpakref"
+msgstr ""
+
+#~ msgid "Homepage"
+#~ msgstr "首頁"
+
+#, fuzzy
+#~ msgid "Translate"
+#~ msgstr "處理事項錯誤"
+
+#~ msgid "License"
+#~ msgstr "授權條款"
+
+#, fuzzy
+#~ msgid "Show categories"
+#~ msgstr "已取得型錄"
+
+#, fuzzy
+#~ msgid "Search for apps or distribution packages"
+#~ msgstr "正在搜尋軟體包"
+
+#, fuzzy
+#~ msgid "Update Software Sources"
+#~ msgstr "軟體來源"
+
+#~ msgid "Software Sources"
+#~ msgstr "軟體來源"
+
+#~ msgid "About"
+#~ msgstr "關於"
+
+#~ msgid "_Quit"
+#~ msgstr "退出(_Q)"
+
+#~ msgid "Install Package"
+#~ msgstr "安裝軟體包"
+
+#~ msgid "More details"
+#~ msgstr "更多詳細資訊"
+
+#~ msgid "_Force install"
+#~ msgstr "強制安裝(_F)"
+
+#~ msgid "Force installing package"
+#~ msgstr "強制安裝軟體包"
+
+#~ msgid "License Agreement Required"
+#~ msgstr "需要接受授權條款"
+
+#~ msgid "_Accept Agreement"
+#~ msgstr "接受授權條款(_A)"
+
+#, fuzzy
+#~ msgid ""
+#~ "When your device is online, we check for updates regularly. These updates "
+#~ "can fix bugs, eliminate security vulnerabilities, and provide new "
+#~ "features."
+#~ msgstr "軟體包更新可修正錯誤、消除安全漏洞，提供新功能等。"
+
+#, fuzzy
+#~ msgid "Check for updates"
+#~ msgstr "檢查是否有更新(_H)："
+
+#, fuzzy
+#~ msgid "Check for updates on mobile connections"
+#~ msgstr "使用電池時也檢查是否有更新"
+
+#, fuzzy
+#~ msgid "Download updates in the background"
+#~ msgstr "正在下載更新資訊"
+
+#, fuzzy
+#~ msgid ""
+#~ "A software source contains packages that can be installed on this "
+#~ "computer."
+#~ msgstr "軟體包來源包含可以安裝在此電腦上的軟體包。"
+
+#~ msgid "_Show debug and development package sources"
+#~ msgstr "顯示與除錯、開發相關的軟體包來源(_S)"
+
+#~ msgid "Do you trust the source of the packages?"
+#~ msgstr "您是否信任軟體包的來源？"
+
+#, fuzzy
+#~ msgid "Repository name"
+#~ msgstr "軟體庫名稱："
+
+#, fuzzy
+#~ msgid "Signature URL"
+#~ msgstr "簽章網址："
+
+#, fuzzy
+#~ msgid "Signature user identifier"
+#~ msgstr "簽章使用者識別："
+
+#, fuzzy
+#~ msgid "Signature identifier"
+#~ msgstr "簽章識別碼："
+
+#~ msgid "Do you recognize the user and trust this key?"
+#~ msgstr "您是否認知此使用者，並信任此金鑰？"
+
+#, fuzzy
+#~ msgid ""
+#~ "Software updates correct errors, eliminate security vulnerabilities, and "
+#~ "provide new features."
+#~ msgstr "軟體包更新可修正錯誤、消除安全漏洞，提供新功能等。"
+
+#~ msgid "_Upgrade"
+#~ msgstr "升級(_U)"
+
+#~ msgid "_Install Updates"
+#~ msgstr "安裝更新(_I)"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
@@ -3881,10 +3867,6 @@ msgstr "下載的大小"
 
 #~ msgid "Cancel search"
 #~ msgstr "取消搜尋"
-
-#, fuzzy
-#~ msgid "Cancel"
-#~ msgstr "已取消"
 
 #, fuzzy
 #~ msgid "Cancel pending changes"
@@ -4360,11 +4342,6 @@ msgstr "下載的大小"
 
 #~ msgid "The file could not be found in any available software"
 #~ msgstr "此檔案在任何可用軟體中皆找不到"
-
-#~ msgid "Do you want to install this catalog?"
-#~ msgid_plural "Do you want to install these catalogs?"
-#~ msgstr[0] "您是否要安裝這個型錄？"
-#~ msgstr[1] "您是否要安裝這些型錄？"
 
 #~ msgid "Install catalogs"
 #~ msgstr "安裝型錄"
