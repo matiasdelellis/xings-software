@@ -38,10 +38,46 @@ typedef struct
 
 	GCancellable        *cancellable;
 
+	GFIProgressCallback  progress_callback;
+	gpointer             progress_user_data;
+
 	guint64              download_size;
 } GpkFlatpakInstallerPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (GpkFlatpakInstaller, gpk_flatpak_installer, G_TYPE_OBJECT)
+
+/**
+ * Progress helper
+ */
+
+struct _GFIProgress {
+	GFIProgressCallback callback;
+	gpointer            user_data;
+	guint               percent;
+};
+
+GFIProgress *
+gpk_flatpak_installer_progress_new (GFIProgressCallback  callback,
+                                    gpointer             user_data,
+                                    guint                percent)
+{
+	GFIProgress *progress;
+
+	progress = g_slice_new0(GFIProgress);
+
+	progress->callback = callback;
+	progress->user_data = user_data;
+	progress->percent = percent;
+
+	return progress;
+}
+
+void
+gpk_flatpak_installer_progress_free (GFIProgress *progress)
+{
+	g_slice_free(GFIProgress, progress);
+}
+
 
 /**
  *  Public utils.
@@ -95,15 +131,35 @@ gpk_flatpak_installer_get_name (GpkFlatpakInstaller *installer)
 /**
  * Common operations to prepare and install
  */
+
+static gboolean
+gpk_flatpak_installer_progress_idle (GFIProgress *progress)
+{
+	progress->callback (progress->percent, progress->user_data);
+
+	gpk_flatpak_installer_progress_free (progress);
+
+	return FALSE;
+}
 static void
 gpk_flatpak_transaction_progress_changed_cb (FlatpakTransactionProgress *transaction_progress,
                                              GpkFlatpakInstaller        *installer)
 {
+	GpkFlatpakInstallerPrivate *priv = NULL;
+	GFIProgress *progress = NULL;
 	guint percent = -1;
 
 	percent = flatpak_transaction_progress_get_progress (transaction_progress);
 
 	g_debug ("%u %%", percent);
+
+	priv = gpk_flatpak_installer_get_instance_private (installer);
+
+	progress = gpk_flatpak_installer_progress_new (priv->progress_callback,
+	                                               priv->progress_user_data,
+	                                               percent);
+
+	g_idle_add ((GSourceFunc) gpk_flatpak_installer_progress_idle, progress);
 }
 
 static gboolean
@@ -146,7 +202,7 @@ gpk_flatpak_transaction_new_operation (FlatpakTransaction          *transaction,
 
 	flatpak_transaction_progress_set_update_frequency (progress, FLATPAK_CLI_UPDATE_FREQUENCY);
 	g_signal_connect (progress, "changed",
-	                  G_CALLBACK (gpk_flatpak_transaction_progress_changed_cb), progress);
+	                  G_CALLBACK (gpk_flatpak_transaction_progress_changed_cb), installer);
 }
 
 
@@ -218,13 +274,21 @@ gpk_flatpak_installer_perform_finish (GpkFlatpakInstaller  *installer,
 gboolean
 gpk_flatpak_installer_perform_async (GpkFlatpakInstaller  *installer,
                                      GAsyncReadyCallback   ready_callback,
+                                     GFIProgressCallback   progress_callback,
                                      gpointer              callback_data,
                                      GCancellable         *cancellable,
                                      GError              **error)
 {
+	GpkFlatpakInstallerPrivate *priv;
 	GTask *task = NULL;
 
 	g_return_val_if_fail (GPK_IS_FLATPAK_INSTALLER (installer), FALSE);
+
+	priv = gpk_flatpak_installer_get_instance_private (installer);
+
+	/* Add helpers to track progress */
+	priv->progress_callback = progress_callback;
+	priv->progress_user_data = callback_data;
 
 	/* Create async task */
 	task = g_task_new (installer, cancellable, ready_callback, callback_data);

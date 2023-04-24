@@ -35,6 +35,24 @@ struct _GpkFlatpakInstallerClass
 	GObjectClass	parent_class;
 };
 
+
+typedef void (* GFIProgressCallback) (guint    progress,
+                                      gpointer user_data);
+
+typedef struct _GFIProgress GFIProgress;
+
+GFIProgress *
+gpk_flatpak_installer_progress_new (GFIProgressCallback  progress_callback,
+                                    gpointer             progress_user_data,
+                                    guint                percent);
+
+void
+gpk_flatpak_installer_progress_free (GFIProgress *progress);
+
+guint
+gpk_flatpak_installer_progress_get_percent(GFIProgress *progress);
+
+
 gboolean
 gpk_flatpak_installer_launch_ready (GpkFlatpakInstaller *installer, GError **error);
 
@@ -52,6 +70,7 @@ gpk_flatpak_installer_perform_finish (GpkFlatpakInstaller  *installer,
 gboolean
 gpk_flatpak_installer_perform_async (GpkFlatpakInstaller  *installer,
                                      GAsyncReadyCallback   ready_callback,
+                                     GFIProgressCallback   progress_callback,
                                      gpointer              callback_data,
                                      GCancellable         *cancellable,
                                      GError              **error);

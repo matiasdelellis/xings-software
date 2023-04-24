@@ -112,6 +112,19 @@ gpk_third_party_installer_understand_check_cb (GtkWidget *widget, GpkThirdPartyA
 }
 
 static void
+gpk_third_party_installer_progress (guint    progress,
+                                    gpointer user_data)
+{
+	GtkWidget *widget = NULL;
+	GpkThirdPartyAppInstallerAppPrivate *priv = NULL;
+
+	priv = (GpkThirdPartyAppInstallerAppPrivate *) user_data;
+
+	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_percent"));
+	gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR(widget), (gdouble) progress/100);
+}
+
+static void
 gpk_third_party_installer_install_button_cb (GtkWidget *widget, GpkThirdPartyAppInstallerAppPrivate *priv)
 {
 	GError *error = NULL;
@@ -124,13 +137,13 @@ gpk_third_party_installer_install_button_cb (GtkWidget *widget, GpkThirdPartyApp
 
 	gpk_flatpak_installer_perform_async (priv->installer,
 	                                     gpk_third_party_installer_done,
+	                                     gpk_third_party_installer_progress,
 	                                     priv,
 	                                     priv->cancellable,
 	                                     &error);
 
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "progressbar_percent"));
 	gtk_widget_set_visible (widget, TRUE);
-	gtk_progress_bar_pulse (GTK_PROGRESS_BAR(widget));
 
 	if (error) {
 		widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "dialog_third_party_installer"));
