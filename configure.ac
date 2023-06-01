@@ -229,7 +229,6 @@ Makefile
 src/Makefile
 src/common/Makefile
 src/helpers/Makefile
-src/history/Makefile
 src/packagekit-service/Makefile
 src/preferences/Makefile
 src/software/Makefile

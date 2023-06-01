@@ -8,7 +8,6 @@ desktop_in_files =					\
 	xings-install-local-package.desktop.in		\
 	xings-packagekit-service.desktop.in		\
 	xings-software.desktop.in			\
-	xings-software-history.desktop.in		\
 	xings-software-preferences.desktop.in		\
 	xings-software-update.desktop.in		\
 	xings-third-parties-installer.desktop.in	\
@@ -59,7 +58,6 @@ DISTCLEANFILES =					\
 	xings-install-local-package.desktop		\
 	xings-packagekit-service.desktop		\
 	xings-software.desktop				\
-	xings-software-history.desktop			\
 	xings-software-preferences.desktop		\
 	xings-software-update.desktop			\
 	xings-software-service.desktop			\

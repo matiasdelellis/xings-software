@@ -1647,33 +1647,6 @@ gpk_application_activate_sources_cb (GSimpleAction *action,
 }
 
 /**
- * gpk_application_activate_log_cb:
- **/
-static void
-gpk_application_activate_log_cb (GSimpleAction *action,
-				 GVariant *parameter,
-				 gpointer user_data)
-{
-	gboolean ret;
-	gchar *command;
-	GpkApplicationPrivate *priv = user_data;
-	GtkWidget *window;
-	guint xid;
-
-	/* get xid */
-	window = GTK_WIDGET (gtk_builder_get_object (priv->builder, "window_manager"));
-	xid = gdk_x11_window_get_xid (gtk_widget_get_window (window));
-
-	command = g_strdup_printf ("%s/xings-software-history --parent-window %u", BINDIR, xid);
-	g_debug ("running: %s", command);
-	ret = g_spawn_command_line_async (command, NULL);
-	if (!ret) {
-		g_warning ("spawn of %s failed", command);
-	}
-	g_free (command);
-}
-
-/**
  * gpk_application_refresh_cache_cb:
  **/
 static void
@@ -2075,7 +2048,6 @@ gpk_application_activate_quit_cb (GSimpleAction *action,
 static GActionEntry gpk_menu_app_entries[] = {
 	{ "sources",		gpk_application_activate_sources_cb, NULL, NULL, NULL },
 	{ "refresh",		gpk_application_activate_refresh_cb, NULL, NULL, NULL },
-	{ "log",		gpk_application_activate_log_cb, NULL, NULL, NULL },
 	{ "quit",		gpk_application_activate_quit_cb, NULL, NULL, NULL },
 	{ "about",		gpk_application_activate_about_cb, NULL, NULL, NULL },
 };

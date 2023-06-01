@@ -13,14 +13,15 @@ one with proper integration with other desktops.
 * **Xings Software Update:** Update software installed on the system.
 * **Xings Software Preferences:** Change software update preferences and
   enable or disable software sources.
-* **Xings Software History:** View past package management tasks.
+* **Xings Third Parties:** Install third party software from flatpakref files.
 
 ## User Service
-* **xings-updates-service:** It allows to synchronize the repositories
-  regularly, searching and even downloading the updates.
+* **xings-software-service:** It allows to synchronize the repositories
+  regularly, searching, nofity and even downloading the updates.
 ## D-Bus Service
-* **org.xings.PackageKit.service:** Implement the `org.freedesktop.PackageKit`
-  D-Bus service, allowing other applications to install software
+* **xings-packagekit-service/org.xings.PackageKit.service:** Implement the
+  `org.freedesktop.PackageKit` D-Bus service, allowing other applications to
+  install software.
 
 ## Screenshots
 

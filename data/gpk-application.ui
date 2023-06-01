@@ -820,10 +820,6 @@ Software uses PackageKit and can work on any distribution using the native packa
         <attribute name="label" translatable="yes">Software Sources</attribute>
         <attribute name="action">app.sources</attribute>
       </item>
-      <item>
-        <attribute name="label" translatable="yes">Software History</attribute>
-        <attribute name="action">app.log</attribute>
-      </item>
     </section>
     <section>
       <item>

@@ -20,7 +20,6 @@ data/xings-packagekit-service.desktop.in
 [type: gettext/glade]data/gpk-error.ui
 [type: gettext/glade]data/gpk-eula.ui
 data/xings-install-local-package.desktop.in
-data/xings-software-history.desktop.in
 [type: gettext/glade]data/gpk-log.ui
 data/xings-software-preferences.desktop.in
 [type: gettext/glade]data/gpk-prefs.ui
@@ -43,7 +42,6 @@ src/common/gpk-modal-dialog.c
 src/common/gpk-task.c
 src/helpers/gpk-install-local-file.c
 src/helpers/gpk-install-package-name.c
-src/history/gpk-log.c
 src/packagekit-service/gpk-dbus-service.c
 src/packagekit-service/gpk-dbus-task.c
 src/preferences/gpk-prefs.c
