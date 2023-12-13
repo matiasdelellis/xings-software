@@ -65,7 +65,8 @@ WARN_CFLAGS_EXTRA="
 	-Wundef
 	-Wuninitialized
 	-Wunused-but-set-variable
-	-Wwrite-strings"
+	-Wwrite-strings
+	-Wunreachable-code"
 AX_APPEND_COMPILE_FLAGS([$WARN_CFLAGS_EXTRA], [WARN_CFLAGS])
 
 dnl ---------------------------------------------------------------------------

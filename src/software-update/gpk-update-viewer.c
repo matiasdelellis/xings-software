@@ -83,11 +83,9 @@ enum {
 	GPK_UPDATES_COLUMN_PREPARED,
 	GPK_UPDATES_COLUMN_SIZE,
 	GPK_UPDATES_COLUMN_SIZE_DISPLAY,
-	GPK_UPDATES_COLUMN_PERCENTAGE,
 	GPK_UPDATES_COLUMN_STATUS,
 	GPK_UPDATES_COLUMN_DETAILS_OBJ,
 	GPK_UPDATES_COLUMN_UPDATE_DETAIL_OBJ,
-	GPK_UPDATES_COLUMN_PULSE,
 	GPK_UPDATES_COLUMN_VISIBLE,
 	GPK_UPDATES_COLUMN_LAST
 };
@@ -379,7 +377,6 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 	GPtrArray *array = NULL;
 	GtkWidget *widget;
 	PkRestartEnum restart;
-	gchar *text;
 	PkError *error_code = NULL;
 	GtkWindow *window;
 	gboolean ret;
@@ -457,15 +454,12 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 		gpk_update_viewer_check_restart ();
 		gpk_update_viewer_quit ();
 		goto out;
-	} else {
-		goto out;
 	}
 
 	/* show a new title */
 	widget = GTK_WIDGET(gtk_builder_get_object (builder, "label_header_title"));
 	/* TRANSLATORS: completed all updates */
 	gtk_label_set_label (GTK_LABEL(widget), _("Updates installed"));
-	g_free (text);
 
 	/* do different text depending on if we deselected any */
 	treeview = GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_updates"));
@@ -477,13 +471,6 @@ gpk_update_viewer_update_packages_cb (PkTask *_task, GAsyncResult *res, gpointer
 			_("Updates installed"),
 			/* TRANSLATORS: title: all updates for the machine installed okay */
 			_("All updates were installed successfully."),
-			TRUE);
-	} else {
-		gpk_update_viewer_empty_stack_message (
-			/* TRANSLATORS: title: all updates installed okay */
-			_("Updates installed"),
-			/* TRANSLATORS: title: all the selected updates installed okay */
-			_("The selected updates were installed successfully."),
 			TRUE);
 	}
 
@@ -499,124 +486,6 @@ out:
 		g_object_unref (results);
 }
 
-static GSList *active_rows = NULL;
-static guint active_row_timeout_id = 0;
-
-/**
- * gpk_update_viewer_compare_refs:
- **/
-static gint
-gpk_update_viewer_compare_refs (GtkTreeRowReference *a, GtkTreeRowReference *b)
-{
-	GtkTreeModel *am, *bm;
-	GtkTreePath *ap, *bp;
-	gint res;
-
-	am = gtk_tree_row_reference_get_model (a);
-	bm = gtk_tree_row_reference_get_model (b);
-
-	res = 1;
-	if (am == bm) {
-		ap = gtk_tree_row_reference_get_path (a);
-		bp = gtk_tree_row_reference_get_path (b);
-
-		res = gtk_tree_path_compare (ap, bp);
-
-		gtk_tree_path_free (ap);
-		gtk_tree_path_free (bp);
-	}
-
-	return res;
-}
-
-/**
- * gpk_update_viewer_pulse_active_rows:
- **/
-static gboolean
-gpk_update_viewer_pulse_active_rows (gpointer user_data)
-{
-	GSList *l;
-	GtkTreeRowReference *ref;
-	GtkTreeModel *model;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	gint val;
-
-	for (l = active_rows; l; l = l->next) {
-		ref = l->data;
-		model = gtk_tree_row_reference_get_model (ref);
-		path = gtk_tree_row_reference_get_path (ref);
-		if (path) {
-			gtk_tree_model_get_iter (model, &iter, path);
-			gtk_tree_model_get (model, &iter, GPK_UPDATES_COLUMN_PULSE, &val, -1);
-			gtk_tree_store_set (GTK_TREE_STORE(model), &iter, GPK_UPDATES_COLUMN_PULSE, val + 1, -1);
-			gtk_tree_path_free (path);
-		}
-	}
-
-	return TRUE;
-}
-
-/**
- * gpk_update_viewer_add_active_row:
- **/
-static void
-gpk_update_viewer_add_active_row (GtkTreeModel *model, GtkTreePath *path)
-{
-	GtkTreeRowReference *ref;
-	GSList *row = NULL;
-
-	/* check if already active */
-	ref = gtk_tree_row_reference_new (model, path);
-	if (ref == NULL)
-		goto out;
-	row = g_slist_find_custom (active_rows, (gconstpointer)ref, (GCompareFunc)gpk_update_viewer_compare_refs);
-	if (row != NULL) {
-		g_debug ("already active");
-		gtk_tree_row_reference_free (ref);
-		goto out;
-	}
-
-	/* add poll */
-	if (active_row_timeout_id == 0) {
-		active_row_timeout_id = g_timeout_add (60, (GSourceFunc)gpk_update_viewer_pulse_active_rows, NULL);
-		g_source_set_name_by_id (active_row_timeout_id, "[GpkUpdateViewer] pulse row");
-	}
-	active_rows = g_slist_prepend (active_rows, ref);
-out:
-	return;
-}
-
-/**
- * gpk_update_viewer_remove_active_row:
- **/
-static void
-gpk_update_viewer_remove_active_row (GtkTreeModel *model, GtkTreePath *path)
-{
-	GSList *row;
-	GtkTreeRowReference *ref;
-	GtkTreeIter iter;
-
-	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_store_set (GTK_TREE_STORE(model), &iter, GPK_UPDATES_COLUMN_PULSE, -1, -1);
-
-	ref = gtk_tree_row_reference_new (model, path);
-	row = g_slist_find_custom (active_rows, (gconstpointer)ref, (GCompareFunc)gpk_update_viewer_compare_refs);
-	gtk_tree_row_reference_free (ref);
-	if (row == NULL) {
-		g_warning ("row not already added");
-		return;
-	}
-
-	active_rows = g_slist_remove_link (active_rows, row);
-	gtk_tree_row_reference_free (row->data);
-	g_slist_free (row);
-
-	if (active_rows == NULL) {
-		g_source_remove (active_row_timeout_id);
-		active_row_timeout_id = 0;
-	}
-}
 
 /**
  * gpk_update_viewer_find_iter_model_cb:
@@ -787,8 +656,6 @@ gpk_update_viewer_get_parent_for_info (PkInfoEnum info, GtkTreeIter *parent)
 				    GPK_UPDATES_COLUMN_STATUS, PK_INFO_ENUM_UNKNOWN,
 				    GPK_UPDATES_COLUMN_SIZE, 0,
 				    GPK_UPDATES_COLUMN_SIZE_DISPLAY, 0,
-				    GPK_UPDATES_COLUMN_PERCENTAGE, 0,
-				    GPK_UPDATES_COLUMN_PULSE, -1,
 				    -1);
 		*parent = iter;
 		g_free (title);
@@ -851,18 +718,6 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 		treeview = GTK_TREE_VIEW(gtk_builder_get_object (builder, "treeview_updates"));
 		model = gtk_tree_view_get_model (treeview);
 
-		/* enable or disable the correct spinners */
-		if (role == PK_ROLE_ENUM_UPDATE_PACKAGES) {
-			path = gpk_update_viewer_model_get_path (model, package_id);
-			if (path != NULL) {
-				if (info == PK_INFO_ENUM_FINISHED)
-					gpk_update_viewer_remove_active_row (model, path);
-				else
-					gpk_update_viewer_add_active_row (model, path);
-			}
-			gtk_tree_path_free (path);
-		}
-
 		/* update icon */
 		path = gpk_update_viewer_model_get_path (model, package_id);
 		if (path == NULL) {
@@ -885,8 +740,6 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 					    GPK_UPDATES_COLUMN_STATUS, PK_INFO_ENUM_UNKNOWN,
 					    GPK_UPDATES_COLUMN_SIZE, 0,
 					    GPK_UPDATES_COLUMN_SIZE_DISPLAY, 0,
-					    GPK_UPDATES_COLUMN_PERCENTAGE, 0,
-					    GPK_UPDATES_COLUMN_PULSE, -1,
 					    -1);
 			g_free (text);
 			path = gpk_update_viewer_model_get_path (model, package_id);
@@ -1028,7 +881,6 @@ gpk_update_viewer_progress_cb (PkProgress *progress,
 		if (percentage > 0) {
 			size_display = size - ((size * percentage) / 100);
 			gtk_tree_store_set (array_store_updates, &iter,
-					    GPK_UPDATES_COLUMN_PERCENTAGE, percentage,
 					    GPK_UPDATES_COLUMN_SIZE_DISPLAY, size_display,
 					    -1);
 		}
@@ -1719,16 +1571,6 @@ gpk_update_viewer_treeview_add_columns_update (GtkTreeView *treeview)
 	gtk_tree_view_column_pack_start (column, renderer, TRUE);
 	gtk_tree_view_column_add_attribute (column, renderer, "value", GPK_UPDATES_COLUMN_STATUS);
 
-	/* column for progress */
-	renderer = gtk_cell_renderer_spinner_new ();
-	g_object_set (renderer, "size", GTK_ICON_SIZE_BUTTON, NULL);
-	gtk_tree_view_column_pack_start (column, renderer, TRUE);
-	gtk_tree_view_column_add_attribute (column, renderer, "pulse", GPK_UPDATES_COLUMN_PULSE);
-	gtk_tree_view_column_set_expand (GTK_TREE_VIEW_COLUMN (column), FALSE);
-
-	gtk_tree_view_append_column (treeview, column);
-	g_object_set_data (G_OBJECT (column), "tooltip-id", GINT_TO_POINTER (GPK_UPDATES_COLUMN_STATUS));
-
 	/* tooltips */
 	g_signal_connect (treeview, "query-tooltip", G_CALLBACK (gpk_update_viewer_treeview_query_tooltip_cb), NULL);
 	g_object_set (treeview, "has-tooltip", TRUE, NULL);
@@ -2074,9 +1916,7 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 	GPtrArray *array = NULL;
 	PkDetails *item;
 	guint i;
-#if PK_CHECK_VERSION(1,2,4)
 	guint64 download_size;
-#endif
 	guint64 size;
 	gchar *package_id = NULL;
 	GtkWidget *widget;
@@ -2127,9 +1967,7 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 		g_object_get (item,
 			      "package-id", &package_id,
 		              "size", &size,
-#if PK_CHECK_VERSION(1,2,4)
 		              "download-size",  &download_size,
-#endif
 		              NULL);
 
 		path = gpk_update_viewer_model_get_path (model, package_id);
@@ -2144,11 +1982,7 @@ gpk_update_viewer_get_details_cb (PkClient *client, GAsyncResult *res, gpointer 
 					    GPK_UPDATES_COLUMN_SIZE_DISPLAY, (gint)size,
 					    -1);
 			/* in cache */
-#if PK_CHECK_VERSION(1,2,4)
 			if (size > 0 && download_size == 0)
-#else
-			if (size == 0)
-#endif
 				gtk_tree_store_set (array_store_updates, &iter,
 						    GPK_UPDATES_COLUMN_STATUS, GPK_INFO_ENUM_DOWNLOADED, -1);
 		}
@@ -2666,8 +2500,6 @@ gpk_update_viewer_get_updates_cb (PkClient *client, GAsyncResult *res, gpointer 
 				    GPK_UPDATES_COLUMN_STATUS, PK_INFO_ENUM_UNKNOWN,
 				    GPK_UPDATES_COLUMN_SIZE, 0,
 				    GPK_UPDATES_COLUMN_SIZE_DISPLAY, 0,
-				    GPK_UPDATES_COLUMN_PERCENTAGE, 0,
-				    GPK_UPDATES_COLUMN_PULSE, -1,
 				    -1);
 		g_free (text);
 		g_free (package_id);
@@ -3269,11 +3101,9 @@ gpk_update_viewer_application_startup_cb (GtkApplication *_application, gpointer
 	                                          G_TYPE_BOOLEAN,  // GPK_UPDATES_COLUMN_PREPARED
 	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_SIZE
 	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_SIZE_DISPLAY
-	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_PERCENTAGE
 	                                          G_TYPE_UINT,     // GPK_UPDATES_COLUMN_STATUS
 	                                          G_TYPE_POINTER,  // GPK_UPDATES_COLUMN_DETAILS_OBJ
 	                                          G_TYPE_POINTER,  // GPK_UPDATES_COLUMN_UPDATE_DETAIL_OBJ
-	                                          G_TYPE_INT,      // GPK_UPDATES_COLUMN_PULSE
 	                                          G_TYPE_BOOLEAN); // GPK_UPDATES_COLUMN_VISIBLE
 
 	text_buffer = gtk_text_buffer_new (NULL);
