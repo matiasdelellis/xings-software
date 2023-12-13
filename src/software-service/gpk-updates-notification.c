@@ -156,9 +156,11 @@ out:
 }
 
 static void
-gpk_updates_notification_closed (NotifyNotification *notification, gpointer data)
+gpk_updates_notification_closed (NotifyNotification     *notification_updates,
+                                 GpkUpdatesNotification *notification)
 {
-	g_object_unref (notification);
+	notification->notification_updates = NULL;
+	g_object_unref (notification_updates);
 }
 
 static void
@@ -173,8 +175,11 @@ gpk_updates_notification_show (GpkUpdatesNotification *notification,
 	GError *error = NULL;
 
 	if (notification->notification_updates != NULL) {
-		notify_notification_close (notification->notification_updates, NULL);
-		notification->notification_updates = NULL;
+		if (!notify_notification_close (notification->notification_updates, &error)) {
+			g_printerr ("Failed to close notification: %s", error->message);
+			g_clear_error (&error);
+			return;
+		}
 	}
 
 	/* do the bubble */
