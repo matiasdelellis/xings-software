@@ -1120,6 +1120,17 @@ gpk_application_packages_add_columns (GpkApplicationPrivate *priv)
 	gtk_tree_view_append_column (treeview, column);
 }
 
+static gboolean
+package_is_installed (const gchar *data)
+{
+	if (g_str_has_prefix (data, "installed") ||
+	    g_str_has_prefix (data, "manual:") ||
+	    g_str_has_prefix (data, "auto:")) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
 /**
  * gpk_application_get_details_cb:
  **/
@@ -1218,7 +1229,7 @@ gpk_application_get_details_cb (PkClient *client, GAsyncResult *res, GpkApplicat
 	gtk_label_set_markup (GTK_LABEL (widget), package_pretty);
 
 	/* open button */
-	installed = g_str_has_prefix (split[PK_PACKAGE_ID_DATA], "installed");
+	installed = package_is_installed(split[PK_PACKAGE_ID_DATA]);
 	widget = GTK_WIDGET (gtk_builder_get_object (priv->builder, "button_open"));
 	gtk_widget_set_visible (widget, installed && desktop_id != NULL);
 
