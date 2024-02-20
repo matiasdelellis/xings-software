@@ -1,7 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.38.2 -->
+<!-- Generated with glade 3.40.0 -->
 <interface>
   <requires lib="gtk+" version="3.24"/>
+  <object class="GtkPopoverMenu" id="main_menu">
+    <property name="can-focus">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="border-width">4</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.thirdparty</property>
+            <property name="text" translatable="yes">Search for third party apps</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.refresh</property>
+            <property name="text" translatable="yes">Update Software Sources</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.sources</property>
+            <property name="text" translatable="yes">Software Sources</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.about</property>
+            <property name="text" translatable="yes">About</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">7</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="action-name">app.quit</property>
+            <property name="text" translatable="yes">_Quit</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">7</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">main</property>
+      </packing>
+    </child>
+  </object>
   <object class="GtkApplicationWindow" id="window_manager">
     <property name="can-focus">False</property>
     <child>
@@ -782,10 +900,10 @@ Software uses PackageKit and can work on any distribution using the native packa
             </child>
             <child>
               <object class="GtkMenuButton" id="menu_button">
-                <property name="menu_model">primary_menu</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">False</property>
+                <property name="popover">main_menu</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -810,29 +928,6 @@ Software uses PackageKit and can work on any distribution using the native packa
       </object>
     </child>
   </object>
-  <menu id="primary_menu">
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">Update Software Sources</attribute>
-        <attribute name="action">app.refresh</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">Software Sources</attribute>
-        <attribute name="action">app.sources</attribute>
-      </item>
-    </section>
-    <section>
-      <item>
-        <attribute name="label" translatable="yes">About</attribute>
-        <attribute name="action">app.about</attribute>
-      </item>
-      <item>
-        <attribute name="label" translatable="yes">_Quit</attribute>
-        <attribute name="action">app.quit</attribute>
-        <attribute name="accel">&lt;Primary&gt;q</attribute>
-      </item>
-    </section>
-  </menu>
   <object class="GtkSizeGroup">
     <widgets>
       <widget name="details_stack"/>

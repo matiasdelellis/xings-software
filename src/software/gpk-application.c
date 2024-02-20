@@ -41,6 +41,7 @@
 #include <common/gpk-dialog.h>
 #include <common/gpk-enum.h>
 #include <common/gpk-error.h>
+#include <common/gpk-gnome.h>
 #include <common/gpk-helper-run.h>
 #include <common/gpk-task.h>
 #include <common/gpk-debug.h>
@@ -1631,6 +1632,17 @@ gpk_application_activate_about_cb (GSimpleAction *action,
 }
 
 /**
+ * gpk_application_activate_thirdparty_cb:
+ **/
+static void
+gpk_application_activate_thirdparty_cb (GSimpleAction *action,
+				        GVariant *parameter,
+				        gpointer user_data)
+{
+	gpk_gnome_open ("https://flathub.org/");
+}
+
+/**
  * gpk_application_activate_sources_cb:
  **/
 static void
@@ -2057,6 +2069,7 @@ gpk_application_activate_quit_cb (GSimpleAction *action,
 }
 
 static GActionEntry gpk_menu_app_entries[] = {
+	{ "thirdparty",		gpk_application_activate_thirdparty_cb, NULL, NULL, NULL },
 	{ "sources",		gpk_application_activate_sources_cb, NULL, NULL, NULL },
 	{ "refresh",		gpk_application_activate_refresh_cb, NULL, NULL, NULL },
 	{ "quit",		gpk_application_activate_quit_cb, NULL, NULL, NULL },
