@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit.master.as\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:33-0300\n"
+"POT-Creation-Date: 2024-02-20 13:27-0300\n"
 "PO-Revision-Date: 2014-08-14 18:04+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
@@ -20,17 +20,17 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
-#: ../src/software/gpk-application.c:1869
-#: ../src/software/gpk-application.c:1948
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:6
+#: ../src/software/gpk-application.c:309 ../src/software/gpk-application.c:1617
+#: ../src/software/gpk-application.c:1865
+#: ../src/software/gpk-application.c:1944
 #, fuzzy
 msgid "Software"
 msgstr "চফ্টৱেৰ লগ"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1613
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1625
 msgid "Add or remove software installed on the system"
 msgstr "চিস্টেমত ইনস্টল্ড চফ্টৱেৰ যোগ কৰক অথবা আতৰাওক"
 
@@ -57,13 +57,13 @@ msgstr ""
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3428
+#: ../src/software-service/gpk-updates-notification.c:192
+#: ../src/software-update/gpk-update-viewer.c:3126
 msgid "Software Update"
 msgstr "চফ্টৱেৰ আপডেইট"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:8 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "চিস্টেমত ইনস্টল্ড চফ্টৱেৰ আপডেইট কৰক"
 
@@ -181,11 +181,33 @@ msgid ""
 "Store;"
 msgstr "আপডেইটসমূহ;উন্নয়ন;উৎসসমূহ;ভঁৰালসমূহ;পছন্দসমূহ;ইনস্টল;সংৰক্ষণ;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+#: ../data/gpk-application.ui.h:1
+#, fuzzy
+msgid "Search for third party apps"
+msgstr "প্লাগিনসমূহ সন্ধান কৰা হৈছে"
+
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "চফ্টৱেৰৰ উৎসসমূহ"
+
+#: ../data/gpk-application.ui.h:3 ../data/gpk-prefs.ui.h:10
+msgid "Software Sources"
+msgstr "চফ্টৱেৰৰ উৎসসমূহ"
+
+#: ../data/gpk-application.ui.h:4
+msgid "About"
+msgstr "বিষয়ে"
+
+#: ../data/gpk-application.ui.h:5
+msgid "_Quit"
+msgstr "প্ৰস্থান কৰক (_Q)"
+
+#: ../data/gpk-application.ui.h:7 ../src/software/gpk-application.c:312
 msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+#: ../data/gpk-application.ui.h:9 ../data/gpk-third-party-installer.ui.h:4
 msgid "Open"
 msgstr ""
 
@@ -195,7 +217,7 @@ msgstr ""
 #. TRANSLATORS: button: install a font
 #. TRANSLATORS: button: install Plasma services
 #. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../data/gpk-application.ui.h:10 ../src/common/gpk-task.c:396
 #: ../src/packagekit-service/gpk-dbus-task.c:693
 #: ../src/packagekit-service/gpk-dbus-task.c:1238
 #: ../src/packagekit-service/gpk-dbus-task.c:1461
@@ -207,81 +229,56 @@ msgid "Install"
 msgstr "ইনস্টল"
 
 #. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../data/gpk-application.ui.h:11 ../src/common/gpk-task.c:401
 #: ../src/packagekit-service/gpk-dbus-task.c:2972
 msgid "Remove"
 msgstr "আতৰাওক"
 
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:12
 msgid "Homepage"
 msgstr "ঘৰৰ পৃষ্ঠা"
 
-#: ../data/gpk-application.ui.h:8
+#: ../data/gpk-application.ui.h:13
 msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:9
+#: ../data/gpk-application.ui.h:14
 msgid "Report"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:10
+#: ../data/gpk-application.ui.h:15
 #, fuzzy
 msgid "Translate"
 msgstr "লেন-দেন ত্ৰুটি"
 
-#: ../data/gpk-application.ui.h:11
+#: ../data/gpk-application.ui.h:16
 msgid "License"
 msgstr "অনুজ্ঞা"
 
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#: ../data/gpk-application.ui.h:17 ../src/software/gpk-application.c:1216
 #, fuzzy
 msgid "Distribution package"
 msgstr "বিতৰন উন্নয়ন সঁজুলি"
 
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:18 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "উৎস"
 
-#: ../data/gpk-application.ui.h:14
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Show categories"
 msgstr "বিভাগ প্ৰাপ্ত হৈছে"
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:20
 #, fuzzy
 msgid "Search for apps or distribution packages"
 msgstr "পেকেইজসমূহ সন্ধান কৰা হৈছে"
 
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#: ../data/gpk-application.ui.h:21 ../src/software/gpk-application.c:1790
 #, fuzzy
 msgid "Categories"
 msgstr "বিভাগ প্ৰাপ্ত হৈছে"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "চফ্টৱেৰৰ উৎসসমূহ"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-msgid "Software Sources"
-msgstr "চফ্টৱেৰৰ উৎসসমূহ"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "চফ্টৱেৰৰ উৎসসমূহ"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "বিষয়ে"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "প্ৰস্থান কৰক (_Q)"
 
 #: ../data/gpk-client.ui.h:1
 msgid "Install Package"
@@ -331,10 +328,6 @@ msgstr "চফ্টৱেৰ ইনস্টল কৰক"
 msgid "Install selected packages on the system"
 msgstr "চিস্টেমত নিৰ্বাচিত পেকেইজসমূহ ইনস্টল কৰক"
 
-#: ../data/xings-software-history.desktop.in.h:2
-msgid "View past package management tasks"
-msgstr "আগৰ পেকেইজ ব্যৱস্থাপনা কাৰ্য্য দৰ্শন কৰক"
-
 #: ../data/xings-software-preferences.desktop.in.h:1
 #, fuzzy
 msgid "Software Preferences"
@@ -382,7 +375,7 @@ msgstr "আপডেইট তথ্য ডাউনল'ড কৰা হৈছ�
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
+#: ../src/software-service/gpk-updates-notification.c:321
 #, fuzzy
 msgid "Updates"
 msgstr "আপডেইট কৰক"
@@ -455,7 +448,7 @@ msgstr ""
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
 #: ../data/gpk-third-party-installer.ui.h:1
-#: ../src/third-parties/gpk-third-parties.c:302
+#: ../src/third-parties/gpk-third-parties.c:315
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "চফ্টৱেৰ ইনস্টল"
@@ -500,14 +493,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../src/software-update/gpk-update-viewer.c:1309
 #, fuzzy
 msgid "All software is up to date"
 msgstr "চফ্টৱেৰ আপডেইট"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1311
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "আপোনাৰ কমপিউটাৰৰ বাবে বৰ্তমানে কোনো পেকেইজ আপডেইট উপলব্ধ নাই।"
@@ -524,8 +517,7 @@ msgstr ""
 msgid "_Upgrade"
 msgstr "উন্নয়ন (_U)"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+#: ../data/gpk-update-viewer.ui.h:6
 msgid "Details"
 msgstr "বিৱৰণ"
 
@@ -858,7 +850,7 @@ msgstr "একাধিক পেকেইজ"
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
-#: ../src/software/gpk-application.c:1117
+#: ../src/software/gpk-application.c:1118
 msgid "Name"
 msgstr "নাম"
 
@@ -2257,8 +2249,8 @@ msgstr "নিম্নলিখিত চফ্টৱেৰক আপডেই�
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/software-service/gpk-updates-notification.c:248
-#: ../src/software-service/gpk-updates-notification.c:284
+#: ../src/software-service/gpk-updates-notification.c:253
+#: ../src/software-service/gpk-updates-notification.c:289
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2407,76 +2399,6 @@ msgstr "চফ্টৱেৰ নামৰে ইনস্টল কৰিবল
 #: ../src/helpers/gpk-install-package-name.c:84
 msgid "You need to specify the name of the software to install"
 msgstr "আপুনি ইনস্টল কৰিব লগিয়া চফ্টৱেৰৰ নাম ধাৰ্য্য কৰিব লাগিব"
-
-#. TRANSLATORS: strftime formatted please
-#: ../src/history/gpk-log.c:167
-msgid "%d %B %Y"
-msgstr "%d %B %Y"
-
-#. TRANSLATORS: column for the date
-#: ../src/history/gpk-log.c:292
-msgid "Date"
-msgstr "তাৰিখ"
-
-#. TRANSLATORS: column for what was done, e.g. update-system
-#: ../src/history/gpk-log.c:301
-msgid "Action"
-msgstr "কাৰ্য্য"
-
-#. TRANSLATORS: column for the user name, e.g. Richard Hughes
-#: ../src/history/gpk-log.c:334
-msgid "User name"
-msgstr "ব্যৱহাৰকাৰী নাম"
-
-#. TRANSLATORS: column for the application used for the install, e.g. Add/Remove Programs
-#: ../src/history/gpk-log.c:341
-msgid "Application"
-msgstr "এপ্লিকেচন"
-
-#. TRANSLATORS: user-friendly name for pkcon
-#: ../src/history/gpk-log.c:505
-msgid "Command line client"
-msgstr "কমান্ড শাৰী ক্লাএন্ট"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:508
-msgid "GNOME Packages"
-msgstr "GNOME পেকেইজসমূহ"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:511
-msgid "GNOME Package Updater"
-msgstr "GNOME পেকেইজ আপডেইটাৰ"
-
-#. TRANSLATORS: user-friendly name for gpk-update-icon, which used to exist
-#: ../src/history/gpk-log.c:514
-msgid "Update Icon"
-msgstr "আপডেইট আইকণ"
-
-#. TRANSLATORS: user-friendly name for the command not found plugin
-#: ../src/history/gpk-log.c:517
-msgid "Bash – Command Not Found"
-msgstr "Bash – কমান্ড পোৱা নগল"
-
-#. TRANSLATORS: user-friendly name for gnome-settings-daemon, which used to handle updates
-#: ../src/history/gpk-log.c:520
-msgid "GNOME Session"
-msgstr "GNOME অধিবেশন"
-
-#. TRANSLATORS: user-friendly name for gnome-software
-#: ../src/history/gpk-log.c:523
-msgid "GNOME Software"
-msgstr "GNOME চফ্টৱেৰ"
-
-#. TRANSLATORS: preset the GtktextBox with this filter text
-#: ../src/history/gpk-log.c:757
-msgid "Set the filter to this value"
-msgstr "চিহ্নিত মানলৈ পৰিস্ৰাৱন ধাৰ্য্য কৰক"
-
-#. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:760 ../src/preferences/gpk-prefs.c:737
-msgid "Set the parent window to make this modal"
-msgstr "ইয়াকে modal ৰূপে ধাৰ্য্য কৰাৰ বাবে উপধায়ক উইন্ডো ধাৰ্য্য কৰক"
 
 #: ../src/packagekit-service/gpk-dbus-service.c:127
 msgid "Do not exit after the request has been processed"
@@ -2989,13 +2911,17 @@ msgstr "উৎসসমূহৰ তালিকা প্ৰাপ্ত কৰ
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "বেকএন্ডৰ তথ্য প্ৰাপ্ত নোহোৱাৰ ফলত প্ৰস্থান কৰা হৈছে"
 
 #: ../src/preferences/gpk-prefs.c:585
 msgid "Getting package source list not supported by backend"
 msgstr "পেকেইজৰ উৎসৰ তালিকা প্ৰাপ্ত কৰা বেকএন্ড দ্বাৰা সমৰ্থিত নহয়"
+
+#. TRANSLATORS: we can make this modal (stay on top of) another window
+#: ../src/preferences/gpk-prefs.c:737
+msgid "Set the parent window to make this modal"
+msgstr "ইয়াকে modal ৰূপে ধাৰ্য্য কৰাৰ বাবে উপধায়ক উইন্ডো ধাৰ্য্য কৰক"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
 #: ../src/preferences/gpk-prefs.c:740
@@ -3007,17 +2933,17 @@ msgstr ""
 msgid "Software Settings"
 msgstr "চফ্টৱেৰ সংহতিসমূহ"
 
-#: ../src/software/gpk-application.c:272
+#: ../src/software/gpk-application.c:273
 msgid "Please, be patient"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:567
+#: ../src/software/gpk-application.c:568
 msgid "No results were found."
 msgstr "কোনো ফলাফল পোৱা নাযায়।"
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:573
+#: ../src/software/gpk-application.c:574
 #, fuzzy
 msgid ""
 "Try searching package distributions by clicking the icon next to the search "
@@ -3025,89 +2951,89 @@ msgid ""
 msgstr "সন্ধানৰ লিখনিৰ ওচৰৰ আইকন ক্লিক কৰি পেকেইজৰ বিৱৰণৰ সন্ধানৰ চেষ্টা কৰক।"
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:576
+#: ../src/software/gpk-application.c:577
 msgid "Try again with a different search term."
 msgstr "এটা ভিন্ন সন্ধান সংজ্ঞাৰ সৈতে পুনৰ চেষ্টা কৰক।"
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:952
+#: ../src/software/gpk-application.c:953
 msgid "Changes not applied"
 msgstr "পৰিবৰ্তন প্ৰয়োগ কৰা নহয়"
 
-#: ../src/software/gpk-application.c:953
+#: ../src/software/gpk-application.c:954
 msgid "Close _Anyway"
 msgstr "তথাপি বন্ধ কৰক (_A)"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:957
+#: ../src/software/gpk-application.c:958
 msgid "You have made changes that have not yet been applied."
 msgstr "আপোনাৰ কিছুমান পৰিবৰ্তন এতিয়াও প্ৰয়োগ কৰা নহয়।"
 
-#: ../src/software/gpk-application.c:958
+#: ../src/software/gpk-application.c:959
 msgid "These changes will be lost if you close this window."
 msgstr "এই উইন্ডো বন্ধ কৰিলে এই পৰিবৰ্তনসমূহ হেৰাব।"
 
-#: ../src/software/gpk-application.c:1262
+#: ../src/software/gpk-application.c:1274
 #, fuzzy
 msgid "Visit the app's website"
 msgstr "প্ৰকল্পৰ ৱেবছাইট দৰ্শন কৰক"
 
-#: ../src/software/gpk-application.c:1279
+#: ../src/software/gpk-application.c:1291
 msgid "Make a donation"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1296
+#: ../src/software/gpk-application.c:1308
 msgid "Report a problem"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1313
+#: ../src/software/gpk-application.c:1325
 msgid "Translate into your language"
 msgstr ""
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:1348
+#: ../src/software/gpk-application.c:1360
 msgid "Size"
 msgstr "আকাৰ"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:1351
+#: ../src/software/gpk-application.c:1363
 msgid "Installed size"
 msgstr "ইনস্টলৰ আকাৰ"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:1354
+#: ../src/software/gpk-application.c:1366
 msgid "Download size"
 msgstr "ডাউনল'ডৰ আকাৰ"
 
 #. TRANSLATORS: entry tooltip: basic search by package name
-#: ../src/software/gpk-application.c:1489
+#: ../src/software/gpk-application.c:1501
 #, fuzzy
 msgid "Searching for distribution packages"
 msgstr "পেকেইজসমূহ সন্ধান কৰা হৈছে"
 
 #. TRANSLATORS: entry tooltip: applications search
-#: ../src/software/gpk-application.c:1512
+#: ../src/software/gpk-application.c:1524
 #, fuzzy
 msgid "Searching for applications"
 msgstr "প্লাগিনসমূহ সন্ধান কৰা হৈছে"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1535
+#: ../src/software/gpk-application.c:1547
 #, fuzzy
 msgid "Search for apps"
 msgstr "প্লাগিনসমূহ সন্ধান কৰা হৈছে"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1543
+#: ../src/software/gpk-application.c:1555
 #, fuzzy
 msgid "Search for distribution packages"
 msgstr "পেকেইজসমূহ সন্ধান কৰা হৈছে"
 
-#: ../src/software/gpk-application.c:1576
+#: ../src/software/gpk-application.c:1588
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "GNU General Public License সংস্কৰণ ২ ৰ অন্তৰ্গত অনুজ্ঞিত"
 
-#: ../src/software/gpk-application.c:1577
+#: ../src/software/gpk-application.c:1589
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3119,7 +3045,7 @@ msgstr ""
 "অথবা সলনি  কৰিব পাৰিব; হৈতো অনুজ্ঞাৰ সংস্কৰণ ২, অথবা (আপুনাৰ বিকল্পত) যিকোনো "
 "পৰৱৰ্তী সংস্কৰণ।"
 
-#: ../src/software/gpk-application.c:1581
+#: ../src/software/gpk-application.c:1593
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3130,7 +3056,7 @@ msgstr ""
 "নথকাকৈ; ব্যৱসায়ীক  অথবা কোনো এটা বিশেষ কাৰণৰ যোগ্যতাৰ বাবে বুজুৱা ৱাৰেন্টিনথকাকৈ। "
 "অধিক যানিবলৈ  GNU General Public License চাওক।"
 
-#: ../src/software/gpk-application.c:1585
+#: ../src/software/gpk-application.c:1597
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3141,34 +3067,34 @@ msgstr ""
 "Boston, MA 02110-1301 USA লে লিখক."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:1591
+#: ../src/software/gpk-application.c:1603
 msgid "translator-credits"
 msgstr ""
 "অমিতাক্ষ ফুকন (aphukan@fedoraproject.org), নীলমদ্যুতি গোস্বামী (ngoswami@redhat."
 "com)"
 
-#: ../src/software/gpk-application.c:1610
+#: ../src/software/gpk-application.c:1622
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "চফ্টৱেৰৰ উৎস"
 
-#: ../src/software/gpk-application.c:1870
+#: ../src/software/gpk-application.c:1866
 #, fuzzy
 msgid "There was an error starting the application"
 msgstr "এপ্লিকেচন পুনাৰম্ভ কৰা প্ৰয়োজনীয়।"
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:2098
-#: ../src/software-update/gpk-update-viewer.c:3398
+#: ../src/software/gpk-application.c:2094
+#: ../src/software-update/gpk-update-viewer.c:3096
 msgid "Show the program version and exit"
 msgstr "এপ্লিকেচনৰ সংস্কৰণ প্ৰদৰ্শন কৰি প্ৰস্থান কৰক"
 
-#: ../src/software/gpk-application.c:2112
+#: ../src/software/gpk-application.c:2108
 msgid "Install Software"
 msgstr "চফ্টৱেৰ ইনস্টল কৰক"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:2128
+#: ../src/software/gpk-application.c:2124
 #, fuzzy
 msgid "Software installer"
 msgstr "চফ্টৱেৰ ইনস্টল"
@@ -3187,23 +3113,23 @@ msgid "Invalid"
 msgstr "অবৈধ"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/software-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:204
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/software-service/gpk-updates-notification.c:206
+#: ../src/software-service/gpk-updates-notification.c:211
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/software-service/gpk-updates-notification.c:217
+#: ../src/software-service/gpk-updates-notification.c:222
 #, fuzzy
 msgid "Restart & Install"
 msgstr "চফ্টৱেৰ ইনস্টল"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/software-service/gpk-updates-notification.c:251
+#: ../src/software-service/gpk-updates-notification.c:256
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3211,7 +3137,7 @@ msgstr[0] "কোনো আপডেইট উপলব্ধ নাই"
 msgstr[1] "কোনো আপডেইট উপলব্ধ নাই"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/software-service/gpk-updates-notification.c:287
+#: ../src/software-service/gpk-updates-notification.c:292
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3220,22 +3146,22 @@ msgstr[1] "কোনো আপডেইট বিৱৰণ উপলব্ধ �
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/software-service/gpk-updates-notification.c:320
+#: ../src/software-service/gpk-updates-notification.c:325
 #, fuzzy
 msgid "Unable to access software updates"
 msgstr "সকলো চফ্টৱেৰ উন্নয়ন দেখুৱাওক"
 
-#: ../src/software-service/gpk-updates-notification.c:433
+#: ../src/software-service/gpk-updates-notification.c:438
 msgid "Software Updates"
 msgstr "চফ্টৱেৰ আপডেইট"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/software-update/gpk-update-viewer.c:171
+#: ../src/software-update/gpk-update-viewer.c:169
 msgid "Failed to process request."
 msgstr "অনুৰোধ প্ৰক্ৰিয়া কৰিবলে ব্যৰ্থ।"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:197
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3244,13 +3170,13 @@ msgstr ""
 "কৰা প্ৰয়োজনীয়।"
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/software-update/gpk-update-viewer.c:201
-#: ../src/software-update/gpk-update-viewer.c:207
+#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:205
 msgid "Restart Computer"
 msgstr "কমপিউটাৰ পুনাৰম্ভ কৰক"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:205
+#: ../src/software-update/gpk-update-viewer.c:203
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
@@ -3259,7 +3185,7 @@ msgstr ""
 "কমপিউটাৰ পুনাৰম্ভ কৰা প্ৰয়োজনীয়।"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:209
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3268,13 +3194,13 @@ msgstr ""
 "লগিন কৰা প্ৰয়োজনীয়।"
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/software-update/gpk-update-viewer.c:213
-#: ../src/software-update/gpk-update-viewer.c:219
+#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:217
 msgid "Log Out"
 msgstr "লগ আউট কৰক"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:217
+#: ../src/software-update/gpk-update-viewer.c:215
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3283,93 +3209,87 @@ msgstr ""
 "লগিন কৰা প্ৰয়োজনীয়।"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:258
+#: ../src/software-update/gpk-update-viewer.c:256
 msgid "Could not restart"
 msgstr "পুনৰাম্ভ কৰিব নোৱাৰি"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:265
+#: ../src/software-update/gpk-update-viewer.c:263
 #, fuzzy
 msgid "Could not log out"
 msgstr "আপডেইটসমূহ প্ৰাপ্ত কৰা নগল"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/software-update/gpk-update-viewer.c:328
+#: ../src/software-update/gpk-update-viewer.c:326
 msgid "Some updates were not installed"
 msgstr "কিছুমান আপডেইট ইনস্টল্ড নাছিল"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:395
-#: ../src/software-update/gpk-update-viewer.c:406
+#: ../src/software-update/gpk-update-viewer.c:392
+#: ../src/software-update/gpk-update-viewer.c:403
 #, fuzzy
 msgid "Could not install updates"
 msgstr "আপডেইটসমূহ প্ৰাপ্ত কৰা নগল"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:467
-#: ../src/software-update/gpk-update-viewer.c:477
-#: ../src/software-update/gpk-update-viewer.c:484
+#: ../src/software-update/gpk-update-viewer.c:462
+#: ../src/software-update/gpk-update-viewer.c:471
 msgid "Updates installed"
 msgstr "আপডেইটসমূহ ইনস্টল কৰা হল"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/software-update/gpk-update-viewer.c:479
+#: ../src/software-update/gpk-update-viewer.c:473
 msgid "All updates were installed successfully."
 msgstr "সকলো আপডেইট সফলভাৱে ইনস্টল কৰা হল।"
 
-#. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:486
-msgid "The selected updates were installed successfully."
-msgstr "নিৰ্বাচিত আপডেইটসমূহ সফলভাৱে ইনস্টল কৰা হল।"
-
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:694
+#: ../src/software-update/gpk-update-viewer.c:563
 msgid "Trivial updates"
 msgstr "গুৰুত্বহিন আপডেইটসমূহ"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:698
+#: ../src/software-update/gpk-update-viewer.c:567
 msgid "Important updates"
 msgstr "গুৰুত্বপূৰ্ণ আপডেইটসমূহ"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:702
+#: ../src/software-update/gpk-update-viewer.c:571
 msgid "Security updates"
 msgstr "সুৰক্ষা আপডেইটসমূহ"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:706
+#: ../src/software-update/gpk-update-viewer.c:575
 msgid "Bug fix updates"
 msgstr "বাগ ঠিক কৰা আপডেইটসমূহ"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:710
+#: ../src/software-update/gpk-update-viewer.c:579
 msgid "Enhancement updates"
 msgstr "সম্প্ৰসাৰন আপডেইটসমূহ"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:714
+#: ../src/software-update/gpk-update-viewer.c:583
 msgid "Blocked updates"
 msgstr "প্ৰতিৰোধ কৰা আপডেইটসমূহ"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/software-update/gpk-update-viewer.c:718
+#: ../src/software-update/gpk-update-viewer.c:587
 msgid "Other updates"
 msgstr "অন্য আপডেইটসমূহ"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:973
+#: ../src/software-update/gpk-update-viewer.c:826
 msgid "Getting the list of updates"
 msgstr "আপডেইটসমূহৰ তালিকা প্ৰাপ্ত কৰা হৈছে"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1209
+#: ../src/software-update/gpk-update-viewer.c:1061
 msgid "Could not run upgrade script"
 msgstr "উন্নয়ন স্ক্ৰিপ্ট চলাব নোৱাৰি"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1240
+#: ../src/software-update/gpk-update-viewer.c:1092
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3383,29 +3303,29 @@ msgstr[1] ""
 "সংযোগ বেতাঁৰ ব্ৰডবেন্ড দ্বাৰা প্ৰদান কৰা হৈছে, আৰু এই পেকেইজসমূহক আপডেইট কৰা খৰচিয়া "
 "হব পাৰে।"
 
-#: ../src/software-update/gpk-update-viewer.c:1389
+#: ../src/software-update/gpk-update-viewer.c:1241
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1427
+#: ../src/software-update/gpk-update-viewer.c:1279
 msgid "No updates are available"
 msgstr "কোনো আপডেইট উপলব্ধ নাই"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1281
 msgid "No network connection was detected."
 msgstr "কোনো নেটৱৰ্ক সংযোগ পোৱা নগল।"
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1447
+#: ../src/software-update/gpk-update-viewer.c:1299
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "আপডেইট ইনস্টল কৰক (_I)"
 msgstr[1] "আপডেইটসমূহ ইনস্টল কৰক (_I)"
 
-#: ../src/software-update/gpk-update-viewer.c:1492
+#: ../src/software-update/gpk-update-viewer.c:1344
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3413,7 +3333,7 @@ msgstr[0] "%i আপডেইট উপলব্ধ"
 msgstr[1] "%i আপডেইটসমূহ উপলব্ধ"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1504
+#: ../src/software-update/gpk-update-viewer.c:1356
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3421,7 +3341,7 @@ msgstr[0] "%i আপডেইট নিৰ্বাচিত"
 msgstr[1] "%i আপডেইটসমূহ নিৰ্বাচিত"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1513
+#: ../src/software-update/gpk-update-viewer.c:1365
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3429,50 +3349,50 @@ msgstr[0] "%i আপডেইট নিৰ্বাচিত (%s)"
 msgstr[1] "%i আপডেইটসমূহ নিৰ্বাচিত (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1709
+#: ../src/software-update/gpk-update-viewer.c:1561
 msgid "Status"
 msgstr "অৱস্থা"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1887
+#: ../src/software-update/gpk-update-viewer.c:1729
 msgid "This update will add new features and expand functionality."
 msgstr "এই আপডেইটে নতুন বৈশিষ্টসমূহ যোগ কৰিব আৰু কাৰ্য্যকৰীতা বৃদ্ধি কৰিব।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1891
+#: ../src/software-update/gpk-update-viewer.c:1733
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "এই আপডেইটৰ সহায়ত বাগ আৰু অন্য কম গুৰুত্বপূৰ্ণ সমস্যা সংশোধন কৰা যাব"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1895
+#: ../src/software-update/gpk-update-viewer.c:1737
 msgid "This update is important as it may solve critical problems."
 msgstr "এই গুৰুত্বপূৰ্ণ আপডেইটৰ সহায়ত কিছুমান গুৰুতৰ সমস্যা সংশোধন কৰা সম্ভৱ হ'ব।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1899
+#: ../src/software-update/gpk-update-viewer.c:1741
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "এই পেকেইজৰ সুৰক্ষাৰ এটা সমস্যা সংশোধনৰ বাবে এই আপডেইটৰ প্ৰয়োজন।"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1903
+#: ../src/software-update/gpk-update-viewer.c:1745
 msgid "This update is blocked."
 msgstr "এই আপডেইট প্ৰতিৰোধ কৰা আছে।"
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1915
+#: ../src/software-update/gpk-update-viewer.c:1757
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "%s ত অধিসূচনা দিয়া হৈছে আৰু %s ত সৰ্বশেষ আপডেইট কৰা হৈছে।"
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1922
+#: ../src/software-update/gpk-update-viewer.c:1764
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "%s ত অধিসূচনা দিয়া হৈছে।"
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1940
+#: ../src/software-update/gpk-update-viewer.c:1782
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3480,7 +3400,7 @@ msgstr[0] "এই আপডেইট সম্পৰ্কে অধিক ব�
 msgstr[1] "এই আপডেইট সম্পৰ্কে অধিক বিৱৰণৰ বাবে নিম্নলিখিত ৱেবছাইটসমূহ চাওক:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1947
+#: ../src/software-update/gpk-update-viewer.c:1789
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3494,7 +3414,7 @@ msgstr[1] ""
 "চাওক:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1954
+#: ../src/software-update/gpk-update-viewer.c:1796
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3503,7 +3423,7 @@ msgstr[0] "এই সুৰক্ষা আপডেইট সম্পৰ্ক
 msgstr[1] "এই সুৰক্ষা আপডেইট সম্পৰ্কে অধিক বিৱৰণৰ বাবে নিম্নলিখিত ৱেবছাইটসমূহ চাওক:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1963
+#: ../src/software-update/gpk-update-viewer.c:1805
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -3511,7 +3431,7 @@ msgstr ""
 "আপডেইটৰ ফলত হোৱা পৰিবৰ্তনসমূহ প্ৰয়োগ কৰাৰ বাবে কমপিউটাৰ পুনাৰম্ভ কৰা প্ৰয়োজনীয়।"
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1967
+#: ../src/software-update/gpk-update-viewer.c:1809
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3519,7 +3439,7 @@ msgstr ""
 "এই আপডেইটৰ ফলত হোৱা পৰিবৰ্তনসমূহ প্ৰয়োগ কৰাৰ বাবে লগআউট কৰি লগিন কৰা প্ৰয়োজনীয়"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1974
+#: ../src/software-update/gpk-update-viewer.c:1816
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -3527,7 +3447,7 @@ msgstr ""
 "এই আপডেইটৰ শ্ৰেণীবিভাজন অস্থিৰ যাৰ অৰ্থ এই যে ই উৎপাদন ব্যৱহাৰৰ বাবে ৰূপাঙ্কীত নহয়।"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1978
+#: ../src/software-update/gpk-update-viewer.c:1820
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3536,91 +3456,80 @@ msgstr ""
 "পূৰ্ববৰ্তী সমস্যা দেখা দিলে অনুগ্ৰহ কৰি সেইটো সম্পৰ্কে সূচিত কৰক।"
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1986
+#: ../src/software-update/gpk-update-viewer.c:1828
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "এই আপডেইট সম্পৰ্কে কোনো বিৱৰণ অনুপস্থিত থকাৰ ফলত উন্নয়নকৰ কামৰ লগ দেখুৱাওক:"
 
-#: ../src/software-update/gpk-update-viewer.c:2033
+#: ../src/software-update/gpk-update-viewer.c:1875
 msgid "Loading…"
 msgstr "ল'ড কৰা হৈছে…"
 
-#: ../src/software-update/gpk-update-viewer.c:2036
+#: ../src/software-update/gpk-update-viewer.c:1878
 msgid "No update details available."
 msgstr "কোনো আপডেইট বিৱৰণ উপলব্ধ নাই।"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2096
-#: ../src/software-update/gpk-update-viewer.c:2116
-#: ../src/software-update/gpk-update-viewer.c:2226
+#: ../src/software-update/gpk-update-viewer.c:1936
+#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:2060
 msgid "Could not get update details"
 msgstr "আপডেইট বিৱৰণসমূহ প্ৰাপ্ত কৰিব নোৱাৰি"
 
-#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:1956
 msgid "No results were returned."
 msgstr "কোনো ফলাফল পোৱা নগল।"
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2480
+#: ../src/software-update/gpk-update-viewer.c:2314
 msgid "Select all"
 msgstr "সকলো নিৰ্বাচন কৰক"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2488
+#: ../src/software-update/gpk-update-viewer.c:2322
 msgid "Unselect all"
 msgstr "সকলো নিৰ্বাচন বাতিল কৰক"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2495
+#: ../src/software-update/gpk-update-viewer.c:2329
 msgid "Select security updates"
 msgstr "সুৰক্ষা আপডেইটসমূহ বাছক"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2501
+#: ../src/software-update/gpk-update-viewer.c:2335
 msgid "Ignore this update"
 msgstr "এই আপডেইট উপেক্ষা কৰক"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2608
-#: ../src/software-update/gpk-update-viewer.c:2800
+#: ../src/software-update/gpk-update-viewer.c:2442
+#: ../src/software-update/gpk-update-viewer.c:2632
 msgid "Could not get updates"
 msgstr "আপডেইটসমূহ প্ৰাপ্ত কৰা নগল"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2742
-#: ../src/software-update/gpk-update-viewer.c:2830
+#: ../src/software-update/gpk-update-viewer.c:2574
+#: ../src/software-update/gpk-update-viewer.c:2662
 msgid "Checking for updates…"
 msgstr "আপডেইটসমূহৰ বাবে নিৰীক্ষণ কৰা হৈছে…"
 
-#. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3102
-msgid "Could not get list of distribution upgrades"
-msgstr "বিতৰন উন্নয়নসমূহৰ তালিকা পোৱা নগল"
-
-#. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3132
-#, fuzzy, c-format
-msgid "New distribution upgrade release “%s” is available"
-msgstr "নতুন বিতৰণৰ উন্নয়ন উন্মোচন '%s' উপলব্ধ"
-
-#: ../src/software-update/gpk-update-viewer.c:3411
+#: ../src/software-update/gpk-update-viewer.c:3109
 msgid "Update Software"
 msgstr "চফ্টৱেৰ আপডেইট কৰক"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:134
+#: ../src/third-parties/gpk-flatpak-installer.c:190
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "ইনস্টল কৰা হৈছে"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:137
+#: ../src/third-parties/gpk-flatpak-installer.c:193
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "আপডেইট কৰা হৈছে"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:140
+#: ../src/third-parties/gpk-flatpak-installer.c:196
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "পুনৰ ইনস্টল কৰা হৈছে"
@@ -3649,21 +3558,77 @@ msgstr "পেকেইজ ইতিমধ্যে ইনস্টল আছে
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:138
-#: ../src/third-parties/gpk-third-parties.c:182
-#: ../src/third-parties/gpk-third-parties.c:274
+#: ../src/third-parties/gpk-third-parties.c:151
+#: ../src/third-parties/gpk-third-parties.c:195
+#: ../src/third-parties/gpk-third-parties.c:287
 #, fuzzy
 msgid "Failed to install a third party software"
 msgstr "চফ্টৱেৰ ইনস্টল কৰিবলৈ ব্যৰ্থ"
 
-#: ../src/third-parties/gpk-third-parties.c:220
+#: ../src/third-parties/gpk-third-parties.c:233
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "ডাউনল'ডৰ আকাৰ"
 
-#: ../src/third-parties/gpk-third-parties.c:304
+#: ../src/third-parties/gpk-third-parties.c:317
 msgid "Install third party software from flatpakref"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Software History"
+#~ msgstr "চফ্টৱেৰৰ উৎসসমূহ"
+
+#~ msgid "View past package management tasks"
+#~ msgstr "আগৰ পেকেইজ ব্যৱস্থাপনা কাৰ্য্য দৰ্শন কৰক"
+
+#~ msgid "%d %B %Y"
+#~ msgstr "%d %B %Y"
+
+#~ msgid "Date"
+#~ msgstr "তাৰিখ"
+
+#~ msgid "Action"
+#~ msgstr "কাৰ্য্য"
+
+#~ msgid "User name"
+#~ msgstr "ব্যৱহাৰকাৰী নাম"
+
+#~ msgid "Application"
+#~ msgstr "এপ্লিকেচন"
+
+#~ msgid "Command line client"
+#~ msgstr "কমান্ড শাৰী ক্লাএন্ট"
+
+#~ msgid "GNOME Packages"
+#~ msgstr "GNOME পেকেইজসমূহ"
+
+#~ msgid "GNOME Package Updater"
+#~ msgstr "GNOME পেকেইজ আপডেইটাৰ"
+
+#~ msgid "Update Icon"
+#~ msgstr "আপডেইট আইকণ"
+
+#~ msgid "Bash – Command Not Found"
+#~ msgstr "Bash – কমান্ড পোৱা নগল"
+
+#~ msgid "GNOME Session"
+#~ msgstr "GNOME অধিবেশন"
+
+#~ msgid "GNOME Software"
+#~ msgstr "GNOME চফ্টৱেৰ"
+
+#~ msgid "Set the filter to this value"
+#~ msgstr "চিহ্নিত মানলৈ পৰিস্ৰাৱন ধাৰ্য্য কৰক"
+
+#~ msgid "The selected updates were installed successfully."
+#~ msgstr "নিৰ্বাচিত আপডেইটসমূহ সফলভাৱে ইনস্টল কৰা হল।"
+
+#~ msgid "Could not get list of distribution upgrades"
+#~ msgstr "বিতৰন উন্নয়নসমূহৰ তালিকা পোৱা নগল"
+
+#, fuzzy, c-format
+#~ msgid "New distribution upgrade release “%s” is available"
+#~ msgstr "নতুন বিতৰণৰ উন্নয়ন উন্মোচন '%s' উপলব্ধ"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"

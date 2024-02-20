@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:33-0300\n"
+"POT-Creation-Date: 2024-02-20 13:27-0300\n"
 "PO-Revision-Date: 2014-09-06 03:48+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
@@ -25,17 +25,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
-#: ../src/software/gpk-application.c:1869
-#: ../src/software/gpk-application.c:1948
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:6
+#: ../src/software/gpk-application.c:309 ../src/software/gpk-application.c:1617
+#: ../src/software/gpk-application.c:1865
+#: ../src/software/gpk-application.c:1944
 #, fuzzy
 msgid "Software"
 msgstr "그놈 소프트웨어"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1613
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1625
 msgid "Add or remove software installed on the system"
 msgstr "시스템에 설치하는 소프트웨어를 추가하거나 제거합니다"
 
@@ -62,14 +62,14 @@ msgstr ""
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3428
+#: ../src/software-service/gpk-updates-notification.c:192
+#: ../src/software-update/gpk-update-viewer.c:3126
 #, fuzzy
 msgid "Software Update"
 msgstr "소프트웨어 설치"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:8 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "시스템에 설치한 소프트웨어를 업데이트합니다"
 
@@ -188,11 +188,34 @@ msgstr ""
 "Updates;업데이트;Upgrade;업그레이드;Sources;공급원;Repositories;저장소;"
 "Preferences;설정;Install;설치;Store;마켓;스토어;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+#: ../data/gpk-application.ui.h:1
+#, fuzzy
+msgid "Search for third party apps"
+msgstr "확장 기능 검색하는 중"
+
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "그놈 소프트웨어"
+
+#: ../data/gpk-application.ui.h:3 ../data/gpk-prefs.ui.h:10
+#, fuzzy
+msgid "Software Sources"
+msgstr "소프트웨어 서명이 필요합니다"
+
+#: ../data/gpk-application.ui.h:4
+msgid "About"
+msgstr "정보"
+
+#: ../data/gpk-application.ui.h:5
+msgid "_Quit"
+msgstr "끝내기(_Q)"
+
+#: ../data/gpk-application.ui.h:7 ../src/software/gpk-application.c:312
 msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+#: ../data/gpk-application.ui.h:9 ../data/gpk-third-party-installer.ui.h:4
 msgid "Open"
 msgstr ""
 
@@ -202,7 +225,7 @@ msgstr ""
 #. TRANSLATORS: button: install a font
 #. TRANSLATORS: button: install Plasma services
 #. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../data/gpk-application.ui.h:10 ../src/common/gpk-task.c:396
 #: ../src/packagekit-service/gpk-dbus-task.c:693
 #: ../src/packagekit-service/gpk-dbus-task.c:1238
 #: ../src/packagekit-service/gpk-dbus-task.c:1461
@@ -214,82 +237,56 @@ msgid "Install"
 msgstr "설치"
 
 #. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../data/gpk-application.ui.h:11 ../src/common/gpk-task.c:401
 #: ../src/packagekit-service/gpk-dbus-task.c:2972
 msgid "Remove"
 msgstr "제거"
 
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:12
 msgid "Homepage"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:8
+#: ../data/gpk-application.ui.h:13
 msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:9
+#: ../data/gpk-application.ui.h:14
 msgid "Report"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:10
+#: ../data/gpk-application.ui.h:15
 #, fuzzy
 msgid "Translate"
 msgstr "처리 오류"
 
-#: ../data/gpk-application.ui.h:11
+#: ../data/gpk-application.ui.h:16
 msgid "License"
 msgstr "라이선스"
 
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#: ../data/gpk-application.ui.h:17 ../src/software/gpk-application.c:1216
 #, fuzzy
 msgid "Distribution package"
 msgstr "배포판 업그레이드를 받음"
 
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:18 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "공급원"
 
-#: ../data/gpk-application.ui.h:14
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Show categories"
 msgstr "분류를 받음"
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:20
 #, fuzzy
 msgid "Search for apps or distribution packages"
 msgstr "패키지를 검색하는 중입니다"
 
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#: ../data/gpk-application.ui.h:21 ../src/software/gpk-application.c:1790
 #, fuzzy
 msgid "Categories"
 msgstr "분류를 받음"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "그놈 소프트웨어"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "소프트웨어 서명이 필요합니다"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "소프트웨어 설치"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "정보"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "끝내기(_Q)"
 
 #: ../data/gpk-client.ui.h:1
 msgid "Install Package"
@@ -338,10 +335,6 @@ msgstr "소프트웨어 설치"
 #: ../data/xings-install-local-package.desktop.in.h:2
 msgid "Install selected packages on the system"
 msgstr "선택한 패키지를 시스템에 설치합니다"
-
-#: ../data/xings-software-history.desktop.in.h:2
-msgid "View past package management tasks"
-msgstr "패키지 관리 작업 내역을 봅니다"
 
 #: ../data/xings-software-preferences.desktop.in.h:1
 #, fuzzy
@@ -392,7 +385,7 @@ msgstr "업데이트 정보를 다운로드하는 중"
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
+#: ../src/software-service/gpk-updates-notification.c:321
 #, fuzzy
 msgid "Updates"
 msgstr "업데이트"
@@ -464,7 +457,7 @@ msgstr ""
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
 #: ../data/gpk-third-party-installer.ui.h:1
-#: ../src/third-parties/gpk-third-parties.c:302
+#: ../src/third-parties/gpk-third-parties.c:315
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "소프트웨어 설치"
@@ -509,14 +502,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../src/software-update/gpk-update-viewer.c:1309
 #, fuzzy
 msgid "All software is up to date"
 msgstr "소프트웨어 설치"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1311
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "현재 이 컴퓨터에 필요한 패키지 업데이트가 없습니다."
@@ -534,8 +527,7 @@ msgstr ""
 msgid "_Upgrade"
 msgstr "업그레이드(_U)"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+#: ../data/gpk-update-viewer.ui.h:6
 msgid "Details"
 msgstr "자세히"
 
@@ -851,7 +843,7 @@ msgstr "여러 패키지"
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
-#: ../src/software/gpk-application.c:1117
+#: ../src/software/gpk-application.c:1118
 msgid "Name"
 msgstr "이름"
 
@@ -2250,8 +2242,8 @@ msgstr "다음 소프트웨어도 업데이트해야 합니다"
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/software-service/gpk-updates-notification.c:248
-#: ../src/software-service/gpk-updates-notification.c:284
+#: ../src/software-service/gpk-updates-notification.c:253
+#: ../src/software-service/gpk-updates-notification.c:289
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2397,76 +2389,6 @@ msgstr "소프트웨어 설치에 실패했습니다"
 #, fuzzy
 msgid "You need to specify the name of the software to install"
 msgstr "설치하려는 파일을 지정해야 합니다"
-
-#. TRANSLATORS: strftime formatted please
-#: ../src/history/gpk-log.c:167
-msgid "%d %B %Y"
-msgstr "%Y년 %B %d일"
-
-#. TRANSLATORS: column for the date
-#: ../src/history/gpk-log.c:292
-msgid "Date"
-msgstr "날짜"
-
-#. TRANSLATORS: column for what was done, e.g. update-system
-#: ../src/history/gpk-log.c:301
-msgid "Action"
-msgstr "동작"
-
-#. TRANSLATORS: column for the user name, e.g. Richard Hughes
-#: ../src/history/gpk-log.c:334
-msgid "User name"
-msgstr "사용자 이름"
-
-#. TRANSLATORS: column for the application used for the install, e.g. Add/Remove Programs
-#: ../src/history/gpk-log.c:341
-msgid "Application"
-msgstr "프로그램"
-
-#. TRANSLATORS: user-friendly name for pkcon
-#: ../src/history/gpk-log.c:505
-msgid "Command line client"
-msgstr "명령행 클라이언트"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:508
-msgid "GNOME Packages"
-msgstr "그놈 패키지"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:511
-msgid "GNOME Package Updater"
-msgstr "그놈 패키지 업데이트"
-
-#. TRANSLATORS: user-friendly name for gpk-update-icon, which used to exist
-#: ../src/history/gpk-log.c:514
-msgid "Update Icon"
-msgstr "아이콘 업데이트"
-
-#. TRANSLATORS: user-friendly name for the command not found plugin
-#: ../src/history/gpk-log.c:517
-msgid "Bash – Command Not Found"
-msgstr "Bash – 명령어가 없습니다"
-
-#. TRANSLATORS: user-friendly name for gnome-settings-daemon, which used to handle updates
-#: ../src/history/gpk-log.c:520
-msgid "GNOME Session"
-msgstr "그놈 세션"
-
-#. TRANSLATORS: user-friendly name for gnome-software
-#: ../src/history/gpk-log.c:523
-msgid "GNOME Software"
-msgstr "그놈 소프트웨어"
-
-#. TRANSLATORS: preset the GtktextBox with this filter text
-#: ../src/history/gpk-log.c:757
-msgid "Set the filter to this value"
-msgstr "필터를 이 값으로 설정합니다"
-
-#. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:760 ../src/preferences/gpk-prefs.c:737
-msgid "Set the parent window to make this modal"
-msgstr "모달로 설정할 상위 창을 지정합니다"
 
 #: ../src/packagekit-service/gpk-dbus-service.c:127
 msgid "Do not exit after the request has been processed"
@@ -2945,13 +2867,17 @@ msgstr "공급원 목록을 읽는데 실패했습니다"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "백엔드 상세 정보를 가져올 수 없습니다"
 
 #: ../src/preferences/gpk-prefs.c:585
 msgid "Getting package source list not supported by backend"
 msgstr "백엔드가 지원하지 않는 패키지 공급원 목록을 받는 중입니다"
+
+#. TRANSLATORS: we can make this modal (stay on top of) another window
+#: ../src/preferences/gpk-prefs.c:737
+msgid "Set the parent window to make this modal"
+msgstr "모달로 설정할 상위 창을 지정합니다"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
 #: ../src/preferences/gpk-prefs.c:740
@@ -2964,17 +2890,17 @@ msgstr ""
 msgid "Software Settings"
 msgstr "소프트웨어 설치"
 
-#: ../src/software/gpk-application.c:272
+#: ../src/software/gpk-application.c:273
 msgid "Please, be patient"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:567
+#: ../src/software/gpk-application.c:568
 msgid "No results were found."
 msgstr "검색 결과가 없습니다."
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:573
+#: ../src/software/gpk-application.c:574
 #, fuzzy
 msgid ""
 "Try searching package distributions by clicking the icon next to the search "
@@ -2982,91 +2908,91 @@ msgid ""
 msgstr "검색어 옆의 아이콘을 눌러 패키지 설명을 검색해 보십시오."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:576
+#: ../src/software/gpk-application.c:577
 msgid "Try again with a different search term."
 msgstr "다른 검색어로 다시 시도해 보십시오."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:952
+#: ../src/software/gpk-application.c:953
 msgid "Changes not applied"
 msgstr "바뀐 사항을 적용하지 않았습니다"
 
-#: ../src/software/gpk-application.c:953
+#: ../src/software/gpk-application.c:954
 msgid "Close _Anyway"
 msgstr "그래도 닫기(_A)"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:957
+#: ../src/software/gpk-application.c:958
 msgid "You have made changes that have not yet been applied."
 msgstr "바뀐 사항 중에 적용하지 않은 부분이 있습니다."
 
-#: ../src/software/gpk-application.c:958
+#: ../src/software/gpk-application.c:959
 msgid "These changes will be lost if you close this window."
 msgstr "이 창을 닫으면 다음 바뀐 사항을 잃어버립니다."
 
-#: ../src/software/gpk-application.c:1262
+#: ../src/software/gpk-application.c:1274
 #, fuzzy
 msgid "Visit the app's website"
 msgstr "프로젝트 홈페이지 보기"
 
-#: ../src/software/gpk-application.c:1279
+#: ../src/software/gpk-application.c:1291
 msgid "Make a donation"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1296
+#: ../src/software/gpk-application.c:1308
 msgid "Report a problem"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1313
+#: ../src/software/gpk-application.c:1325
 msgid "Translate into your language"
 msgstr ""
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:1348
+#: ../src/software/gpk-application.c:1360
 msgid "Size"
 msgstr "크기"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:1351
+#: ../src/software/gpk-application.c:1363
 msgid "Installed size"
 msgstr "설치 크기"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:1354
+#: ../src/software/gpk-application.c:1366
 msgid "Download size"
 msgstr "다운로드 크기"
 
 #. TRANSLATORS: entry tooltip: basic search by package name
-#: ../src/software/gpk-application.c:1489
+#: ../src/software/gpk-application.c:1501
 #, fuzzy
 msgid "Searching for distribution packages"
 msgstr "패키지를 검색하는 중입니다"
 
 #. TRANSLATORS: entry tooltip: applications search
-#: ../src/software/gpk-application.c:1512
+#: ../src/software/gpk-application.c:1524
 #, fuzzy
 msgid "Searching for applications"
 msgstr "확장 기능 검색하는 중"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1535
+#: ../src/software/gpk-application.c:1547
 #, fuzzy
 msgid "Search for apps"
 msgstr "확장 기능 검색하는 중"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1543
+#: ../src/software/gpk-application.c:1555
 #, fuzzy
 msgid "Search for distribution packages"
 msgstr "패키지를 검색하는 중입니다"
 
-#: ../src/software/gpk-application.c:1576
+#: ../src/software/gpk-application.c:1588
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr ""
 "라이선스는 GNU 일반 공중 사용 허가서(GNU General Public License) 버전 2입니"
 "다."
 
-#: ../src/software/gpk-application.c:1577
+#: ../src/software/gpk-application.c:1589
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3078,7 +3004,7 @@ msgstr ""
 "Software Foundation; either version 2 of the License, or (at your option) "
 "any later version."
 
-#: ../src/software/gpk-application.c:1581
+#: ../src/software/gpk-application.c:1593
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3090,7 +3016,7 @@ msgstr ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 
-#: ../src/software/gpk-application.c:1585
+#: ../src/software/gpk-application.c:1597
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3101,32 +3027,32 @@ msgstr ""
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:1591
+#: ../src/software/gpk-application.c:1603
 msgid "translator-credits"
 msgstr "GNOME Korea <http://gnome.or.kr/>"
 
-#: ../src/software/gpk-application.c:1610
+#: ../src/software/gpk-application.c:1622
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "소프트웨어 서명이 필요합니다"
 
-#: ../src/software/gpk-application.c:1870
+#: ../src/software/gpk-application.c:1866
 #, fuzzy
 msgid "There was an error starting the application"
 msgstr "이 프로그램을 다시 시작해야 합니다."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:2098
-#: ../src/software-update/gpk-update-viewer.c:3398
+#: ../src/software/gpk-application.c:2094
+#: ../src/software-update/gpk-update-viewer.c:3096
 msgid "Show the program version and exit"
 msgstr "프로그램 버전을 표시하고 끝납니다"
 
-#: ../src/software/gpk-application.c:2112
+#: ../src/software/gpk-application.c:2108
 msgid "Install Software"
 msgstr "소프트웨어 설치"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:2128
+#: ../src/software/gpk-application.c:2124
 #, fuzzy
 msgid "Software installer"
 msgstr "소프트웨어 설치"
@@ -3145,30 +3071,30 @@ msgid "Invalid"
 msgstr "잘못됨"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/software-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:204
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/software-service/gpk-updates-notification.c:206
+#: ../src/software-service/gpk-updates-notification.c:211
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/software-service/gpk-updates-notification.c:217
+#: ../src/software-service/gpk-updates-notification.c:222
 #, fuzzy
 msgid "Restart & Install"
 msgstr "소프트웨어 설치"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/software-service/gpk-updates-notification.c:251
+#: ../src/software-service/gpk-updates-notification.c:256
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
 msgstr[0] "사용 가능한 업데이트가 없습니다"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/software-service/gpk-updates-notification.c:287
+#: ../src/software-service/gpk-updates-notification.c:292
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3176,22 +3102,22 @@ msgstr[0] "업데이트 상세 정보가 없습니다."
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/software-service/gpk-updates-notification.c:320
+#: ../src/software-service/gpk-updates-notification.c:325
 msgid "Unable to access software updates"
 msgstr ""
 
-#: ../src/software-service/gpk-updates-notification.c:433
+#: ../src/software-service/gpk-updates-notification.c:438
 #, fuzzy
 msgid "Software Updates"
 msgstr "업데이트를 받음"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/software-update/gpk-update-viewer.c:171
+#: ../src/software-update/gpk-update-viewer.c:169
 msgid "Failed to process request."
 msgstr "요청을 처리하는데 실패했습니다."
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:197
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3199,13 +3125,13 @@ msgstr ""
 "설치한 업데이트 일부는 바뀐 사항을 적용하려면 컴퓨터를 다시 시작해야 합니다."
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/software-update/gpk-update-viewer.c:201
-#: ../src/software-update/gpk-update-viewer.c:207
+#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:205
 msgid "Restart Computer"
 msgstr "컴퓨터 다시 시작"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:205
+#: ../src/software-update/gpk-update-viewer.c:203
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
@@ -3214,7 +3140,7 @@ msgstr ""
 "니다."
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:209
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3223,13 +3149,13 @@ msgstr ""
 "야 합니다."
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/software-update/gpk-update-viewer.c:213
-#: ../src/software-update/gpk-update-viewer.c:219
+#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:217
 msgid "Log Out"
 msgstr "로그아웃"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:217
+#: ../src/software-update/gpk-update-viewer.c:215
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3238,93 +3164,87 @@ msgstr ""
 "야 합니다."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:258
+#: ../src/software-update/gpk-update-viewer.c:256
 msgid "Could not restart"
 msgstr "다시 시작할 수 없습니다"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:265
+#: ../src/software-update/gpk-update-viewer.c:263
 #, fuzzy
 msgid "Could not log out"
 msgstr "업데이트를 받을 수 없습니다"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/software-update/gpk-update-viewer.c:328
+#: ../src/software-update/gpk-update-viewer.c:326
 msgid "Some updates were not installed"
 msgstr "설치하지 못한 업데이트가 있습니다"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:395
-#: ../src/software-update/gpk-update-viewer.c:406
+#: ../src/software-update/gpk-update-viewer.c:392
+#: ../src/software-update/gpk-update-viewer.c:403
 #, fuzzy
 msgid "Could not install updates"
 msgstr "업데이트를 받을 수 없습니다"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:467
-#: ../src/software-update/gpk-update-viewer.c:477
-#: ../src/software-update/gpk-update-viewer.c:484
+#: ../src/software-update/gpk-update-viewer.c:462
+#: ../src/software-update/gpk-update-viewer.c:471
 msgid "Updates installed"
 msgstr "업데이트를 설치했습니다"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/software-update/gpk-update-viewer.c:479
+#: ../src/software-update/gpk-update-viewer.c:473
 msgid "All updates were installed successfully."
 msgstr "모든 업데이트를 성공적으로 설치했습니다."
 
-#. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:486
-msgid "The selected updates were installed successfully."
-msgstr "선택한 업데이트를 성공적으로 설치했습니다."
-
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:694
+#: ../src/software-update/gpk-update-viewer.c:563
 msgid "Trivial updates"
 msgstr "사소한 업데이트"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:698
+#: ../src/software-update/gpk-update-viewer.c:567
 msgid "Important updates"
 msgstr "중요 업데이트"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:702
+#: ../src/software-update/gpk-update-viewer.c:571
 msgid "Security updates"
 msgstr "보안 업데이트"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:706
+#: ../src/software-update/gpk-update-viewer.c:575
 msgid "Bug fix updates"
 msgstr "문제 수정 업데이트"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:710
+#: ../src/software-update/gpk-update-viewer.c:579
 msgid "Enhancement updates"
 msgstr "기능 업데이트"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:714
+#: ../src/software-update/gpk-update-viewer.c:583
 msgid "Blocked updates"
 msgstr "설치 불가 업데이트"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/software-update/gpk-update-viewer.c:718
+#: ../src/software-update/gpk-update-viewer.c:587
 msgid "Other updates"
 msgstr "기타 업데이트"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:973
+#: ../src/software-update/gpk-update-viewer.c:826
 msgid "Getting the list of updates"
 msgstr "업데이트 목록을 받는 중"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1209
+#: ../src/software-update/gpk-update-viewer.c:1061
 msgid "Could not run upgrade script"
 msgstr "업그레이드 스크립트를 실행할 수 없습니다"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1240
+#: ../src/software-update/gpk-update-viewer.c:1092
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3335,99 +3255,99 @@ msgstr[0] ""
 "무선 네트워크를 통해 연결 중인 상태이므로, 이 패키지를 업데이트하면 이용 요금"
 "이 많이 부과될 수 있습니다."
 
-#: ../src/software-update/gpk-update-viewer.c:1389
+#: ../src/software-update/gpk-update-viewer.c:1241
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1427
+#: ../src/software-update/gpk-update-viewer.c:1279
 msgid "No updates are available"
 msgstr "업데이트가 없습니다"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1281
 msgid "No network connection was detected."
 msgstr "사용 가능한 네트워크 연결이 발견되지 않았습니다."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1447
+#: ../src/software-update/gpk-update-viewer.c:1299
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "업데이트 설치(_I)"
 
-#: ../src/software-update/gpk-update-viewer.c:1492
+#: ../src/software-update/gpk-update-viewer.c:1344
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
 msgstr[0] "업데이트가 %i개 있습니다"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1504
+#: ../src/software-update/gpk-update-viewer.c:1356
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
 msgstr[0] "업데이트 %i개 선택"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1513
+#: ../src/software-update/gpk-update-viewer.c:1365
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
 msgstr[0] "업데이트 %i개 선택(%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1709
+#: ../src/software-update/gpk-update-viewer.c:1561
 msgid "Status"
 msgstr "상태"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1887
+#: ../src/software-update/gpk-update-viewer.c:1729
 msgid "This update will add new features and expand functionality."
 msgstr "이 업데이트에서는 새로운 기능이 추가되고 기능이 확대됩니다."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1891
+#: ../src/software-update/gpk-update-viewer.c:1733
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "이 업데이트는 버그 및 기타 중요하지 않은 문제점을 수정합니다."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1895
+#: ../src/software-update/gpk-update-viewer.c:1737
 msgid "This update is important as it may solve critical problems."
 msgstr "이 중요 업데이트는 치명적인 문제점을 수정합니다."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1899
+#: ../src/software-update/gpk-update-viewer.c:1741
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "이 패키지의 보안 취약점을 수정하려면 이 업데이트가 필요합니다."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1903
+#: ../src/software-update/gpk-update-viewer.c:1745
 msgid "This update is blocked."
 msgstr "이 업데이트는 설치 불가 상태입니다."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1915
+#: ../src/software-update/gpk-update-viewer.c:1757
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "이 알림 메시지가 %s에서 발생했고 %s에서 업데이트했습니다."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1922
+#: ../src/software-update/gpk-update-viewer.c:1764
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "이 알림 메시지가 %s에서 발생했습니다."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1940
+#: ../src/software-update/gpk-update-viewer.c:1782
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
 msgstr[0] "이 업데이트에 관한 정보를 더 보려면 다음 웹 사이트를 보십시오:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1947
+#: ../src/software-update/gpk-update-viewer.c:1789
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3439,7 +3359,7 @@ msgstr[0] ""
 "오:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1954
+#: ../src/software-update/gpk-update-viewer.c:1796
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3447,7 +3367,7 @@ msgid_plural ""
 msgstr[0] "이 보안 업데이트에 관한 정보를 더 보려면 다음 웹 사이트를 보십시오:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1963
+#: ../src/software-update/gpk-update-viewer.c:1805
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
@@ -3455,7 +3375,7 @@ msgstr ""
 "업데이트한 후에 컴퓨터를 다시 시작해야 해야 바뀐 사항이 효과가 있습니다."
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1967
+#: ../src/software-update/gpk-update-viewer.c:1809
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
@@ -3463,7 +3383,7 @@ msgstr ""
 "업데이트한 후에 로그아웃하고 다시 로그인해야 바뀐 사항이 효과가 있습니다."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1974
+#: ../src/software-update/gpk-update-viewer.c:1816
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -3472,7 +3392,7 @@ msgstr ""
 "부적합합니다."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1978
+#: ../src/software-update/gpk-update-viewer.c:1820
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3481,92 +3401,81 @@ msgstr ""
 "면 알려 주십시오."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1986
+#: ../src/software-update/gpk-update-viewer.c:1828
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr "이 업데이트에 대한 설명이 없으므로 개발자 기록을 표시합니다:"
 
-#: ../src/software-update/gpk-update-viewer.c:2033
+#: ../src/software-update/gpk-update-viewer.c:1875
 msgid "Loading…"
 msgstr "읽어들이는 중…"
 
-#: ../src/software-update/gpk-update-viewer.c:2036
+#: ../src/software-update/gpk-update-viewer.c:1878
 msgid "No update details available."
 msgstr "업데이트 상세 정보가 없습니다."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2096
-#: ../src/software-update/gpk-update-viewer.c:2116
-#: ../src/software-update/gpk-update-viewer.c:2226
+#: ../src/software-update/gpk-update-viewer.c:1936
+#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:2060
 msgid "Could not get update details"
 msgstr "업데이트 상세 정보를 받을 수 없습니다"
 
-#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:1956
 msgid "No results were returned."
 msgstr "결과가 없습니다."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2480
+#: ../src/software-update/gpk-update-viewer.c:2314
 msgid "Select all"
 msgstr "모두 선택"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2488
+#: ../src/software-update/gpk-update-viewer.c:2322
 msgid "Unselect all"
 msgstr "모두 해제"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2495
+#: ../src/software-update/gpk-update-viewer.c:2329
 msgid "Select security updates"
 msgstr "보안 업데이트 선택"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2501
+#: ../src/software-update/gpk-update-viewer.c:2335
 msgid "Ignore this update"
 msgstr "이 업데이트 무시"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2608
-#: ../src/software-update/gpk-update-viewer.c:2800
+#: ../src/software-update/gpk-update-viewer.c:2442
+#: ../src/software-update/gpk-update-viewer.c:2632
 msgid "Could not get updates"
 msgstr "업데이트를 받을 수 없습니다"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2742
-#: ../src/software-update/gpk-update-viewer.c:2830
+#: ../src/software-update/gpk-update-viewer.c:2574
+#: ../src/software-update/gpk-update-viewer.c:2662
 msgid "Checking for updates…"
 msgstr "업데이트를 확인하는 중입니다…"
 
-#. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3102
-msgid "Could not get list of distribution upgrades"
-msgstr "배포판 업그레이드 목록을 받을 수 없습니다"
-
-#. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3132
-#, fuzzy, c-format
-msgid "New distribution upgrade release “%s” is available"
-msgstr "배포판 업그레이드 '%s' 릴리스가 새로 나왔습니다"
-
-#: ../src/software-update/gpk-update-viewer.c:3411
+#: ../src/software-update/gpk-update-viewer.c:3109
 #, fuzzy
 msgid "Update Software"
 msgstr "그놈 소프트웨어"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:134
+#: ../src/third-parties/gpk-flatpak-installer.c:190
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "설치하는 중"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:137
+#: ../src/third-parties/gpk-flatpak-installer.c:193
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "업데이트하는 중"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:140
+#: ../src/third-parties/gpk-flatpak-installer.c:196
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "다시 설치하는 중"
@@ -3596,21 +3505,77 @@ msgstr "패키지를 이미 설치했습니다"
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:138
-#: ../src/third-parties/gpk-third-parties.c:182
-#: ../src/third-parties/gpk-third-parties.c:274
+#: ../src/third-parties/gpk-third-parties.c:151
+#: ../src/third-parties/gpk-third-parties.c:195
+#: ../src/third-parties/gpk-third-parties.c:287
 #, fuzzy
 msgid "Failed to install a third party software"
 msgstr "소프트웨어 설치에 실패했습니다"
 
-#: ../src/third-parties/gpk-third-parties.c:220
+#: ../src/third-parties/gpk-third-parties.c:233
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "다운로드 크기"
 
-#: ../src/third-parties/gpk-third-parties.c:304
+#: ../src/third-parties/gpk-third-parties.c:317
 msgid "Install third party software from flatpakref"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Software History"
+#~ msgstr "소프트웨어 설치"
+
+#~ msgid "View past package management tasks"
+#~ msgstr "패키지 관리 작업 내역을 봅니다"
+
+#~ msgid "%d %B %Y"
+#~ msgstr "%Y년 %B %d일"
+
+#~ msgid "Date"
+#~ msgstr "날짜"
+
+#~ msgid "Action"
+#~ msgstr "동작"
+
+#~ msgid "User name"
+#~ msgstr "사용자 이름"
+
+#~ msgid "Application"
+#~ msgstr "프로그램"
+
+#~ msgid "Command line client"
+#~ msgstr "명령행 클라이언트"
+
+#~ msgid "GNOME Packages"
+#~ msgstr "그놈 패키지"
+
+#~ msgid "GNOME Package Updater"
+#~ msgstr "그놈 패키지 업데이트"
+
+#~ msgid "Update Icon"
+#~ msgstr "아이콘 업데이트"
+
+#~ msgid "Bash – Command Not Found"
+#~ msgstr "Bash – 명령어가 없습니다"
+
+#~ msgid "GNOME Session"
+#~ msgstr "그놈 세션"
+
+#~ msgid "GNOME Software"
+#~ msgstr "그놈 소프트웨어"
+
+#~ msgid "Set the filter to this value"
+#~ msgstr "필터를 이 값으로 설정합니다"
+
+#~ msgid "The selected updates were installed successfully."
+#~ msgstr "선택한 업데이트를 성공적으로 설치했습니다."
+
+#~ msgid "Could not get list of distribution upgrades"
+#~ msgstr "배포판 업그레이드 목록을 받을 수 없습니다"
+
+#, fuzzy, c-format
+#~ msgid "New distribution upgrade release “%s” is available"
+#~ msgstr "배포판 업그레이드 '%s' 릴리스가 새로 나왔습니다"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit master\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:33-0300\n"
+"POT-Creation-Date: 2024-02-20 13:27-0300\n"
 "PO-Revision-Date: 2012-09-23 14:32+0300\n"
 "Last-Translator: Ihar Hrachyshka <ihar.hrachyshka@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "X-Project-Style: gnome\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
-#: ../src/software/gpk-application.c:1869
-#: ../src/software/gpk-application.c:1948
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:6
+#: ../src/software/gpk-application.c:309 ../src/software/gpk-application.c:1617
+#: ../src/software/gpk-application.c:1865
+#: ../src/software/gpk-application.c:1944
 #, fuzzy
 msgid "Software"
 msgstr "Праграмны журнал"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1613
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1625
 msgid "Add or remove software installed on the system"
 msgstr "Дадаць ці выдаліць апраграмаванне, усталяванае ў сістэме"
 
@@ -55,14 +55,14 @@ msgstr ""
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3428
+#: ../src/software-service/gpk-updates-notification.c:192
+#: ../src/software-update/gpk-update-viewer.c:3126
 #, fuzzy
 msgid "Software Update"
 msgstr "Праграмны журнал"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:8 ../data/xings-software-update.desktop.in.h:2
 msgid "Update software installed on the system"
 msgstr "Абнаўленне апраграмавання, усталяванага ў сістэме"
 
@@ -179,11 +179,34 @@ msgid ""
 "Store;"
 msgstr "Абнаўленне;Абноўкі;Крыніцы;Сховішчы;Настройкі;Усталяванне;"
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+#: ../data/gpk-application.ui.h:1
+#, fuzzy
+msgid "Search for third party apps"
+msgstr "Пошук плугінаў"
+
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "Абноўкі сістэмы"
+
+#: ../data/gpk-application.ui.h:3 ../data/gpk-prefs.ui.h:10
+#, fuzzy
+msgid "Software Sources"
+msgstr "Патрэбны подпіс апраграмавання"
+
+#: ../data/gpk-application.ui.h:4
+msgid "About"
+msgstr "Аб праграме"
+
+#: ../data/gpk-application.ui.h:5
+msgid "_Quit"
+msgstr "_Выйсці"
+
+#: ../data/gpk-application.ui.h:7 ../src/software/gpk-application.c:312
 msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+#: ../data/gpk-application.ui.h:9 ../data/gpk-third-party-installer.ui.h:4
 msgid "Open"
 msgstr ""
 
@@ -193,7 +216,7 @@ msgstr ""
 #. TRANSLATORS: button: install a font
 #. TRANSLATORS: button: install Plasma services
 #. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../data/gpk-application.ui.h:10 ../src/common/gpk-task.c:396
 #: ../src/packagekit-service/gpk-dbus-task.c:693
 #: ../src/packagekit-service/gpk-dbus-task.c:1238
 #: ../src/packagekit-service/gpk-dbus-task.c:1461
@@ -205,82 +228,56 @@ msgid "Install"
 msgstr "Усталяваць"
 
 #. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../data/gpk-application.ui.h:11 ../src/common/gpk-task.c:401
 #: ../src/packagekit-service/gpk-dbus-task.c:2972
 msgid "Remove"
 msgstr "Выдаліць"
 
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:12
 msgid "Homepage"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:8
+#: ../data/gpk-application.ui.h:13
 msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:9
+#: ../data/gpk-application.ui.h:14
 msgid "Report"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:10
+#: ../data/gpk-application.ui.h:15
 #, fuzzy
 msgid "Translate"
 msgstr "Памылка трансакцыі"
 
-#: ../data/gpk-application.ui.h:11
+#: ../data/gpk-application.ui.h:16
 msgid "License"
 msgstr "Ліцэнзія"
 
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#: ../data/gpk-application.ui.h:17 ../src/software/gpk-application.c:1216
 #, fuzzy
 msgid "Distribution package"
 msgstr "Абноўкі дыстрыбутыва атрыманыя"
 
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:18 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr "Крыніца"
 
-#: ../data/gpk-application.ui.h:14
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Show categories"
 msgstr "Спіс катэгорый атрыманы"
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:20
 #, fuzzy
 msgid "Search for apps or distribution packages"
 msgstr "Пошук пакункаў"
 
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#: ../data/gpk-application.ui.h:21 ../src/software/gpk-application.c:1790
 #, fuzzy
 msgid "Categories"
 msgstr "Спіс катэгорый атрыманы"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "Абноўкі сістэмы"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "Патрэбны подпіс апраграмавання"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Усталяванне апраграмавання"
-
-#: ../data/gpk-application.ui.h:20
-msgid "About"
-msgstr "Аб праграме"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr "_Выйсці"
 
 #: ../data/gpk-client.ui.h:1
 msgid "Install Package"
@@ -330,10 +327,6 @@ msgstr "Усталяванне апраграмавання"
 msgid "Install selected packages on the system"
 msgstr "Усталяванне вылучаных пакункаў у сістэме"
 
-#: ../data/xings-software-history.desktop.in.h:2
-msgid "View past package management tasks"
-msgstr "Прагляд апошніх заданняў кіравання пакункамі"
-
 #: ../data/xings-software-preferences.desktop.in.h:1
 #, fuzzy
 msgid "Software Preferences"
@@ -381,7 +374,7 @@ msgstr "Сцягванне інфармацыі аб абноўках"
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
+#: ../src/software-service/gpk-updates-notification.c:321
 #, fuzzy
 msgid "Updates"
 msgstr "Абнавіць"
@@ -454,7 +447,7 @@ msgstr ""
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
 #: ../data/gpk-third-party-installer.ui.h:1
-#: ../src/third-parties/gpk-third-parties.c:302
+#: ../src/third-parties/gpk-third-parties.c:315
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "Усталяванне апраграмавання"
@@ -499,14 +492,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../src/software-update/gpk-update-viewer.c:1309
 #, fuzzy
 msgid "All software is up to date"
 msgstr "Праграмны журнал"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1311
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr "На дадзены момант няма ніводнай абноўкі для вашага камп'ютара."
@@ -524,8 +517,7 @@ msgstr ""
 msgid "_Upgrade"
 msgstr "_Абнавіць"
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+#: ../data/gpk-update-viewer.ui.h:6
 msgid "Details"
 msgstr "Падрабязнасці"
 
@@ -869,7 +861,7 @@ msgstr "шмат пакункаў"
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
-#: ../src/software/gpk-application.c:1117
+#: ../src/software/gpk-application.c:1118
 msgid "Name"
 msgstr "Назва"
 
@@ -2279,8 +2271,8 @@ msgstr "Наступнае апраграмаванне мусіць быць а
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/software-service/gpk-updates-notification.c:248
-#: ../src/software-service/gpk-updates-notification.c:284
+#: ../src/software-service/gpk-updates-notification.c:253
+#: ../src/software-service/gpk-updates-notification.c:289
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2449,78 +2441,6 @@ msgstr "Не ўдалося ўсталяваць апраграмаванне"
 #, fuzzy
 msgid "You need to specify the name of the software to install"
 msgstr "Трэба вызначыць файл для ўсталявання"
-
-#. TRANSLATORS: strftime formatted please
-#: ../src/history/gpk-log.c:167
-msgid "%d %B %Y"
-msgstr "%d %B %Y"
-
-#. TRANSLATORS: column for the date
-#: ../src/history/gpk-log.c:292
-msgid "Date"
-msgstr "Дата"
-
-#. TRANSLATORS: column for what was done, e.g. update-system
-#: ../src/history/gpk-log.c:301
-msgid "Action"
-msgstr "Дзеянне"
-
-#. TRANSLATORS: column for the user name, e.g. Richard Hughes
-#: ../src/history/gpk-log.c:334
-msgid "User name"
-msgstr "Імя карыстальніка"
-
-#. TRANSLATORS: column for the application used for the install, e.g. Add/Remove Programs
-#: ../src/history/gpk-log.c:341
-msgid "Application"
-msgstr "Праграма"
-
-#. TRANSLATORS: user-friendly name for pkcon
-#: ../src/history/gpk-log.c:505
-msgid "Command line client"
-msgstr "Праграма для загаднага радка"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:508
-msgid "GNOME Packages"
-msgstr "Кіраўнік пакункаў GNOME"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:511
-msgid "GNOME Package Updater"
-msgstr "Кіраўнік праграмнага абнаўлення GNOME"
-
-#. TRANSLATORS: user-friendly name for gpk-update-icon, which used to exist
-#: ../src/history/gpk-log.c:514
-msgid "Update Icon"
-msgstr "Абноўкі значкоў"
-
-#. TRANSLATORS: user-friendly name for the command not found plugin
-#: ../src/history/gpk-log.c:517
-#, fuzzy
-msgid "Bash – Command Not Found"
-msgstr "Bash - загад не знойдзены"
-
-#. TRANSLATORS: user-friendly name for gnome-settings-daemon, which used to handle updates
-#: ../src/history/gpk-log.c:520
-msgid "GNOME Session"
-msgstr "Сеанс GNOME"
-
-#. TRANSLATORS: user-friendly name for gnome-software
-#: ../src/history/gpk-log.c:523
-#, fuzzy
-msgid "GNOME Software"
-msgstr "Праграмны журнал"
-
-#. TRANSLATORS: preset the GtktextBox with this filter text
-#: ../src/history/gpk-log.c:757
-msgid "Set the filter to this value"
-msgstr "Наставіць значэнне фільтра"
-
-#. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:760 ../src/preferences/gpk-prefs.c:737
-msgid "Set the parent window to make this modal"
-msgstr "Зрабіць бацькоўскае акно мадальным"
 
 #: ../src/packagekit-service/gpk-dbus-service.c:127
 msgid "Do not exit after the request has been processed"
@@ -3072,13 +2992,17 @@ msgstr "Памылка атрымання спіса крыніц"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3166
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Скончана, бо не ўдалося атрымаць падрабязнасці пра драйвер"
 
 #: ../src/preferences/gpk-prefs.c:585
 msgid "Getting package source list not supported by backend"
 msgstr "Атрыманне спіса крыніц пакункаў не падтрымліваецца драйверам"
+
+#. TRANSLATORS: we can make this modal (stay on top of) another window
+#: ../src/preferences/gpk-prefs.c:737
+msgid "Set the parent window to make this modal"
+msgstr "Зрабіць бацькоўскае акно мадальным"
 
 #. TRANSLATORS: we can display updates or repsository tab by default
 #: ../src/preferences/gpk-prefs.c:740
@@ -3091,17 +3015,17 @@ msgstr ""
 msgid "Software Settings"
 msgstr "Праграмны журнал"
 
-#: ../src/software/gpk-application.c:272
+#: ../src/software/gpk-application.c:273
 msgid "Please, be patient"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:567
+#: ../src/software/gpk-application.c:568
 msgid "No results were found."
 msgstr "Нічога не знойдзена."
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:573
+#: ../src/software/gpk-application.c:574
 #, fuzzy
 msgid ""
 "Try searching package distributions by clicking the icon next to the search "
@@ -3111,89 +3035,89 @@ msgstr ""
 "шуканага тэксту."
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:576
+#: ../src/software/gpk-application.c:577
 msgid "Try again with a different search term."
 msgstr "Паспрабуйце іншы запыт."
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:952
+#: ../src/software/gpk-application.c:953
 msgid "Changes not applied"
 msgstr "Змены не ўжытыя"
 
-#: ../src/software/gpk-application.c:953
+#: ../src/software/gpk-application.c:954
 msgid "Close _Anyway"
 msgstr "_Усё роўна закрыць"
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:957
+#: ../src/software/gpk-application.c:958
 msgid "You have made changes that have not yet been applied."
 msgstr "Зробленыя змены яшчэ не ўжытыя."
 
-#: ../src/software/gpk-application.c:958
+#: ../src/software/gpk-application.c:959
 msgid "These changes will be lost if you close this window."
 msgstr "Калі вы закрыеце гэта акно, змены будуць незваротна страчаны."
 
-#: ../src/software/gpk-application.c:1262
+#: ../src/software/gpk-application.c:1274
 #, fuzzy
 msgid "Visit the app's website"
 msgstr "Наведаць сеціўную старонку праекта"
 
-#: ../src/software/gpk-application.c:1279
+#: ../src/software/gpk-application.c:1291
 msgid "Make a donation"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1296
+#: ../src/software/gpk-application.c:1308
 msgid "Report a problem"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1313
+#: ../src/software/gpk-application.c:1325
 msgid "Translate into your language"
 msgstr ""
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:1348
+#: ../src/software/gpk-application.c:1360
 msgid "Size"
 msgstr "Памер"
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:1351
+#: ../src/software/gpk-application.c:1363
 msgid "Installed size"
 msgstr "Памер усталявання"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:1354
+#: ../src/software/gpk-application.c:1366
 msgid "Download size"
 msgstr "Памер сцягвання"
 
 #. TRANSLATORS: entry tooltip: basic search by package name
-#: ../src/software/gpk-application.c:1489
+#: ../src/software/gpk-application.c:1501
 #, fuzzy
 msgid "Searching for distribution packages"
 msgstr "Пошук пакункаў"
 
 #. TRANSLATORS: entry tooltip: applications search
-#: ../src/software/gpk-application.c:1512
+#: ../src/software/gpk-application.c:1524
 #, fuzzy
 msgid "Searching for applications"
 msgstr "Пошук плугінаў"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1535
+#: ../src/software/gpk-application.c:1547
 #, fuzzy
 msgid "Search for apps"
 msgstr "Пошук плугінаў"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1543
+#: ../src/software/gpk-application.c:1555
 #, fuzzy
 msgid "Search for distribution packages"
 msgstr "Пошук пакункаў"
 
-#: ../src/software/gpk-application.c:1576
+#: ../src/software/gpk-application.c:1588
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Распаўсюджваецца на ўмовах Агульнай Грамадскай Ліцэнзіі GNU версіі 2"
 
-#: ../src/software/gpk-application.c:1577
+#: ../src/software/gpk-application.c:1589
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
 "the terms of the GNU General Public License as published by the Free "
@@ -3204,7 +3128,7 @@ msgstr ""
 "яго згодна з умовамі Агульнай Грамадскай Ліцэнзіі GNU (GPL), апублікаванай "
 "Фондам свабоднага апраграмавання, версіі 2 ці любой пазнейшай."
 
-#: ../src/software/gpk-application.c:1581
+#: ../src/software/gpk-application.c:1593
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
 "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or "
@@ -3215,7 +3139,7 @@ msgstr ""
 "гарантый, у тым ліку камерцыйнай вартасці праграмы і наогул яе карысці.  "
 "Падрабязней глядзіце ў тэксце Агульнай Грамадскай Ліцэнзіі GNU (GPL)."
 
-#: ../src/software/gpk-application.c:1585
+#: ../src/software/gpk-application.c:1597
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
@@ -3227,32 +3151,32 @@ msgstr ""
 "Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:1591
+#: ../src/software/gpk-application.c:1603
 msgid "translator-credits"
 msgstr "Kasia Bondarava <kasia.bondarava@gmail.com>"
 
-#: ../src/software/gpk-application.c:1610
+#: ../src/software/gpk-application.c:1622
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "Патрэбны подпіс апраграмавання"
 
-#: ../src/software/gpk-application.c:1870
+#: ../src/software/gpk-application.c:1866
 #, fuzzy
 msgid "There was an error starting the application"
 msgstr "Патрэбны перазапуск праграмы."
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:2098
-#: ../src/software-update/gpk-update-viewer.c:3398
+#: ../src/software/gpk-application.c:2094
+#: ../src/software-update/gpk-update-viewer.c:3096
 msgid "Show the program version and exit"
 msgstr "Паказаць версію праграмы і выйсці"
 
-#: ../src/software/gpk-application.c:2112
+#: ../src/software/gpk-application.c:2108
 msgid "Install Software"
 msgstr "Усталяванне апраграмавання"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:2128
+#: ../src/software/gpk-application.c:2124
 #, fuzzy
 msgid "Software installer"
 msgstr "Усталяванне апраграмавання"
@@ -3271,23 +3195,23 @@ msgid "Invalid"
 msgstr "Няправільны"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/software-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:204
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/software-service/gpk-updates-notification.c:206
+#: ../src/software-service/gpk-updates-notification.c:211
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/software-service/gpk-updates-notification.c:217
+#: ../src/software-service/gpk-updates-notification.c:222
 #, fuzzy
 msgid "Restart & Install"
 msgstr "Усталяванне апраграмавання"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/software-service/gpk-updates-notification.c:251
+#: ../src/software-service/gpk-updates-notification.c:256
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3296,7 +3220,7 @@ msgstr[1] "Няма даступных абновак"
 msgstr[2] "Няма даступных абновак"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/software-service/gpk-updates-notification.c:287
+#: ../src/software-service/gpk-updates-notification.c:292
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3306,22 +3230,22 @@ msgstr[2] "Падрабязнасці пра абноўку адсутнічаю
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/software-service/gpk-updates-notification.c:320
+#: ../src/software-service/gpk-updates-notification.c:325
 msgid "Unable to access software updates"
 msgstr ""
 
-#: ../src/software-service/gpk-updates-notification.c:433
+#: ../src/software-service/gpk-updates-notification.c:438
 #, fuzzy
 msgid "Software Updates"
 msgstr "Абноўкі атрыманыя"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/software-update/gpk-update-viewer.c:171
+#: ../src/software-update/gpk-update-viewer.c:169
 msgid "Failed to process request."
 msgstr "Памылка апрацавання запыту."
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:197
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
@@ -3330,13 +3254,13 @@ msgstr ""
 "зменаў."
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/software-update/gpk-update-viewer.c:201
-#: ../src/software-update/gpk-update-viewer.c:207
+#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:205
 msgid "Restart Computer"
 msgstr "Перазапусціць камп'ютар"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:205
+#: ../src/software-update/gpk-update-viewer.c:203
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
@@ -3345,7 +3269,7 @@ msgstr ""
 "бяспекі."
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:209
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
@@ -3354,13 +3278,13 @@ msgstr ""
 "зменаў."
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/software-update/gpk-update-viewer.c:213
-#: ../src/software-update/gpk-update-viewer.c:219
+#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:217
 msgid "Log Out"
 msgstr "Скончыць сеанс"
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:217
+#: ../src/software-update/gpk-update-viewer.c:215
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
@@ -3368,93 +3292,87 @@ msgstr ""
 "Некаторыя ўсталяваныя абноўкі патрабуюць перазапуску сеанса ў мэтах бяспекі."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:258
+#: ../src/software-update/gpk-update-viewer.c:256
 msgid "Could not restart"
 msgstr "Не ўдалося перазапусціць камп'ютар"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:265
+#: ../src/software-update/gpk-update-viewer.c:263
 #, fuzzy
 msgid "Could not log out"
 msgstr "Памылка атрымання абновак"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/software-update/gpk-update-viewer.c:328
+#: ../src/software-update/gpk-update-viewer.c:326
 msgid "Some updates were not installed"
 msgstr "Некаторыя абноўкі не былі ўсталяваныя"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:395
-#: ../src/software-update/gpk-update-viewer.c:406
+#: ../src/software-update/gpk-update-viewer.c:392
+#: ../src/software-update/gpk-update-viewer.c:403
 #, fuzzy
 msgid "Could not install updates"
 msgstr "Памылка атрымання абновак"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:467
-#: ../src/software-update/gpk-update-viewer.c:477
-#: ../src/software-update/gpk-update-viewer.c:484
+#: ../src/software-update/gpk-update-viewer.c:462
+#: ../src/software-update/gpk-update-viewer.c:471
 msgid "Updates installed"
 msgstr "Абнаўленні ўсталяваныя"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/software-update/gpk-update-viewer.c:479
+#: ../src/software-update/gpk-update-viewer.c:473
 msgid "All updates were installed successfully."
 msgstr "Усе абноўкі былі паспяхова ўсталяваныя."
 
-#. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:486
-msgid "The selected updates were installed successfully."
-msgstr "Вылучаныя абноўкі былі паспяхова ўсталяваныя."
-
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:694
+#: ../src/software-update/gpk-update-viewer.c:563
 msgid "Trivial updates"
 msgstr "Дробныя абноўкі"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:698
+#: ../src/software-update/gpk-update-viewer.c:567
 msgid "Important updates"
 msgstr "Важныя абноўкі"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:702
+#: ../src/software-update/gpk-update-viewer.c:571
 msgid "Security updates"
 msgstr "Абноўкі бяспекі"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:706
+#: ../src/software-update/gpk-update-viewer.c:575
 msgid "Bug fix updates"
 msgstr "Выпраўленні хібаў"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:710
+#: ../src/software-update/gpk-update-viewer.c:579
 msgid "Enhancement updates"
 msgstr "Паляпшэнні"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:714
+#: ../src/software-update/gpk-update-viewer.c:583
 msgid "Blocked updates"
 msgstr "Заблакіраваныя абноўкі"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/software-update/gpk-update-viewer.c:718
+#: ../src/software-update/gpk-update-viewer.c:587
 msgid "Other updates"
 msgstr "Іншыя абноўкі"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:973
+#: ../src/software-update/gpk-update-viewer.c:826
 msgid "Getting the list of updates"
 msgstr "Атрыманне спіса абновак"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1209
+#: ../src/software-update/gpk-update-viewer.c:1061
 msgid "Could not run upgrade script"
 msgstr "Не ўдалося запусціць сцэнарый абнаўлення"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1240
+#: ../src/software-update/gpk-update-viewer.c:1092
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3471,30 +3389,30 @@ msgstr[2] ""
 "Абноўка пакункаў праз мабільнае бесправадное злучэнне можа каштаваць "
 "дастаткова дорага."
 
-#: ../src/software-update/gpk-update-viewer.c:1389
+#: ../src/software-update/gpk-update-viewer.c:1241
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1427
+#: ../src/software-update/gpk-update-viewer.c:1279
 msgid "No updates are available"
 msgstr "Няма даступных абновак"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1281
 msgid "No network connection was detected."
 msgstr "Сеткавае злучэнне не выяўлена."
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1447
+#: ../src/software-update/gpk-update-viewer.c:1299
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "_Усталяваць абноўку"
 msgstr[1] "_Усталяваць абноўкі"
 msgstr[2] "_Усталяваць абноўкі"
 
-#: ../src/software-update/gpk-update-viewer.c:1492
+#: ../src/software-update/gpk-update-viewer.c:1344
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3503,7 +3421,7 @@ msgstr[1] "Даступна %i абноўкі"
 msgstr[2] "Даступна %i абновак"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1504
+#: ../src/software-update/gpk-update-viewer.c:1356
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3512,7 +3430,7 @@ msgstr[1] "Вылучана %i абноўкі"
 msgstr[2] "Вылучана %i абновак"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1513
+#: ../src/software-update/gpk-update-viewer.c:1365
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3521,50 +3439,50 @@ msgstr[1] "Вылучана %i абноўкі (%s)"
 msgstr[2] "Вылучана %i абновак (%s)"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1709
+#: ../src/software-update/gpk-update-viewer.c:1561
 msgid "Status"
 msgstr "Стан"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1887
+#: ../src/software-update/gpk-update-viewer.c:1729
 msgid "This update will add new features and expand functionality."
 msgstr "Гэта абноўка дадасць новыя магчымасці і пашырыць функцыянальнасць."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1891
+#: ../src/software-update/gpk-update-viewer.c:1733
 msgid "This update will fix bugs and other non-critical problems."
 msgstr "Гэта абноўка выправіць хібы і іншыя некрытычныя праблемы."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1895
+#: ../src/software-update/gpk-update-viewer.c:1737
 msgid "This update is important as it may solve critical problems."
 msgstr "Гэта абноўка важная, бо можа выправіць крытычныя праблемы."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1899
+#: ../src/software-update/gpk-update-viewer.c:1741
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr "Гэта абноўка неабходна, каб выправіць праблему бяспекі гэтага пакунка."
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1903
+#: ../src/software-update/gpk-update-viewer.c:1745
 msgid "This update is blocked."
 msgstr "Гэтая абноўка заблакіравана."
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1915
+#: ../src/software-update/gpk-update-viewer.c:1757
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr "Гэтае нагадванне было выдадзена %s і апошні раз абноўлена %s."
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1922
+#: ../src/software-update/gpk-update-viewer.c:1764
 #, c-format
 msgid "This notification was issued on %s."
 msgstr "Гэтае нагадванне было выдадзена %s."
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1940
+#: ../src/software-update/gpk-update-viewer.c:1782
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3579,7 +3497,7 @@ msgstr[2] ""
 "сеціўныя пляцоўкі:"
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1947
+#: ../src/software-update/gpk-update-viewer.c:1789
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3597,7 +3515,7 @@ msgstr[2] ""
 "наведайце наступныя сеціўныя пляцоўкі:"
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1954
+#: ../src/software-update/gpk-update-viewer.c:1796
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3613,21 +3531,21 @@ msgstr[2] ""
 "наступныя сеціўныя пляцоўкі:"
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1963
+#: ../src/software-update/gpk-update-viewer.c:1805
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr "Для ўжыцця зменаў трэба перазапусціць камп'ютар пасля абнаўлення."
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1967
+#: ../src/software-update/gpk-update-viewer.c:1809
 msgid ""
 "You will need to log out and back in after the update for the changes to "
 "take effect."
 msgstr "Для ўжыцця зменаў трэба перазапусціць сеанс пасля абнаўлення."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1974
+#: ../src/software-update/gpk-update-viewer.c:1816
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
@@ -3636,7 +3554,7 @@ msgstr ""
 "для шырокага выкарыстання."
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1978
+#: ../src/software-update/gpk-update-viewer.c:1820
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
@@ -3645,7 +3563,7 @@ msgstr ""
 "Паведамляйце пра любыя праблемы, якія вы ў ёй заўважыце."
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1986
+#: ../src/software-update/gpk-update-viewer.c:1828
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
@@ -3653,86 +3571,75 @@ msgstr ""
 "Апісанне гэтай абноўкі не даступна, таму будуць паказаныя журналы "
 "распрацоўшчыкаў:"
 
-#: ../src/software-update/gpk-update-viewer.c:2033
+#: ../src/software-update/gpk-update-viewer.c:1875
 msgid "Loading…"
 msgstr "Загрузка..."
 
-#: ../src/software-update/gpk-update-viewer.c:2036
+#: ../src/software-update/gpk-update-viewer.c:1878
 msgid "No update details available."
 msgstr "Падрабязнасці пра абноўку адсутнічаюць."
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2096
-#: ../src/software-update/gpk-update-viewer.c:2116
-#: ../src/software-update/gpk-update-viewer.c:2226
+#: ../src/software-update/gpk-update-viewer.c:1936
+#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:2060
 msgid "Could not get update details"
 msgstr "Памылка атрымання падрабязнасцяў пра абноўку"
 
-#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:1956
 msgid "No results were returned."
 msgstr "Нічога не знойдзена."
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2480
+#: ../src/software-update/gpk-update-viewer.c:2314
 msgid "Select all"
 msgstr "Вылучыць усё"
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2488
+#: ../src/software-update/gpk-update-viewer.c:2322
 msgid "Unselect all"
 msgstr "Зняць вылучэнне з усяго"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2495
+#: ../src/software-update/gpk-update-viewer.c:2329
 msgid "Select security updates"
 msgstr "Вылучыць абноўкі бяспекі"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2501
+#: ../src/software-update/gpk-update-viewer.c:2335
 msgid "Ignore this update"
 msgstr "Праігнараваць гэтую абноўку"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2608
-#: ../src/software-update/gpk-update-viewer.c:2800
+#: ../src/software-update/gpk-update-viewer.c:2442
+#: ../src/software-update/gpk-update-viewer.c:2632
 msgid "Could not get updates"
 msgstr "Памылка атрымання абновак"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2742
-#: ../src/software-update/gpk-update-viewer.c:2830
+#: ../src/software-update/gpk-update-viewer.c:2574
+#: ../src/software-update/gpk-update-viewer.c:2662
 msgid "Checking for updates…"
 msgstr "Праверка наяўнасці абновак..."
 
-#. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3102
-msgid "Could not get list of distribution upgrades"
-msgstr "Не ўдалося атрымаць спіс абновак дыстрыбутыва"
-
-#. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3132
-#, fuzzy, c-format
-msgid "New distribution upgrade release “%s” is available"
-msgstr "Даступна абноўка дыстрыбутыва да версіі \"%s\""
-
-#: ../src/software-update/gpk-update-viewer.c:3411
+#: ../src/software-update/gpk-update-viewer.c:3109
 #, fuzzy
 msgid "Update Software"
 msgstr "Абноўкі сістэмы"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:134
+#: ../src/third-parties/gpk-flatpak-installer.c:190
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "Усталяванне"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:137
+#: ../src/third-parties/gpk-flatpak-installer.c:193
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "Абнаўленне"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:140
+#: ../src/third-parties/gpk-flatpak-installer.c:196
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "Пераўсталяванне"
@@ -3761,21 +3668,79 @@ msgstr "Гэты пакунак ужо ўсталяваны"
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:138
-#: ../src/third-parties/gpk-third-parties.c:182
-#: ../src/third-parties/gpk-third-parties.c:274
+#: ../src/third-parties/gpk-third-parties.c:151
+#: ../src/third-parties/gpk-third-parties.c:195
+#: ../src/third-parties/gpk-third-parties.c:287
 #, fuzzy
 msgid "Failed to install a third party software"
 msgstr "Не ўдалося ўсталяваць апраграмаванне"
 
-#: ../src/third-parties/gpk-third-parties.c:220
+#: ../src/third-parties/gpk-third-parties.c:233
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "Памер сцягвання"
 
-#: ../src/third-parties/gpk-third-parties.c:304
+#: ../src/third-parties/gpk-third-parties.c:317
 msgid "Install third party software from flatpakref"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Software History"
+#~ msgstr "Усталяванне апраграмавання"
+
+#~ msgid "View past package management tasks"
+#~ msgstr "Прагляд апошніх заданняў кіравання пакункамі"
+
+#~ msgid "%d %B %Y"
+#~ msgstr "%d %B %Y"
+
+#~ msgid "Date"
+#~ msgstr "Дата"
+
+#~ msgid "Action"
+#~ msgstr "Дзеянне"
+
+#~ msgid "User name"
+#~ msgstr "Імя карыстальніка"
+
+#~ msgid "Application"
+#~ msgstr "Праграма"
+
+#~ msgid "Command line client"
+#~ msgstr "Праграма для загаднага радка"
+
+#~ msgid "GNOME Packages"
+#~ msgstr "Кіраўнік пакункаў GNOME"
+
+#~ msgid "GNOME Package Updater"
+#~ msgstr "Кіраўнік праграмнага абнаўлення GNOME"
+
+#~ msgid "Update Icon"
+#~ msgstr "Абноўкі значкоў"
+
+#, fuzzy
+#~ msgid "Bash – Command Not Found"
+#~ msgstr "Bash - загад не знойдзены"
+
+#~ msgid "GNOME Session"
+#~ msgstr "Сеанс GNOME"
+
+#, fuzzy
+#~ msgid "GNOME Software"
+#~ msgstr "Праграмны журнал"
+
+#~ msgid "Set the filter to this value"
+#~ msgstr "Наставіць значэнне фільтра"
+
+#~ msgid "The selected updates were installed successfully."
+#~ msgstr "Вылучаныя абноўкі былі паспяхова ўсталяваныя."
+
+#~ msgid "Could not get list of distribution upgrades"
+#~ msgstr "Не ўдалося атрымаць спіс абновак дыстрыбутыва"
+
+#, fuzzy, c-format
+#~ msgid "New distribution upgrade release “%s” is available"
+#~ msgstr "Даступна абноўка дыстрыбутыва да версіі \"%s\""
 
 #, fuzzy
 #~ msgid "Third Parties Installer"

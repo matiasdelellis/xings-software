@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-packagekit\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-24 15:33-0300\n"
+"POT-Creation-Date: 2024-02-20 13:27-0300\n"
 "PO-Revision-Date: 2008-09-20 20:38+0100\n"
 "Last-Translator: Iestyn Pryce <dylunio@gmail.com>\n"
 "Language-Team: Welsh <gnome-cy@lists.linux.org.uk>\n"
@@ -17,16 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../data/appdata/xings-software.appdata.xml.in.h:1
-#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:1
-#: ../src/software/gpk-application.c:308 ../src/software/gpk-application.c:1605
-#: ../src/software/gpk-application.c:1869
-#: ../src/software/gpk-application.c:1948
+#: ../data/xings-software.desktop.in.h:1 ../data/gpk-application.ui.h:6
+#: ../src/software/gpk-application.c:309 ../src/software/gpk-application.c:1617
+#: ../src/software/gpk-application.c:1865
+#: ../src/software/gpk-application.c:1944
 msgid "Software"
 msgstr "Meddalwedd"
 
 #. TRANSLATORS: description of NULL, gpk-application that is
 #: ../data/appdata/xings-software.appdata.xml.in.h:2
-#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1613
+#: ../data/xings-software.desktop.in.h:2 ../src/software/gpk-application.c:1625
 #, fuzzy
 msgid "Add or remove software installed on the system"
 msgstr "Pecyn '%s' wedi'i sefydlu"
@@ -51,14 +51,14 @@ msgstr ""
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:1
 #: ../data/xings-software-update.desktop.in.h:1
 #: ../data/gpk-update-viewer.ui.h:7
-#: ../src/software-service/gpk-updates-notification.c:187
-#: ../src/software-update/gpk-update-viewer.c:3428
+#: ../src/software-service/gpk-updates-notification.c:192
+#: ../src/software-update/gpk-update-viewer.c:3126
 #, fuzzy
 msgid "Software Update"
 msgstr "Gwelydd Diweddariad Pecynnau"
 
 #: ../data/appdata/xings-software-update.appdata.xml.in.h:2
-#: ../data/gpk-application.ui.h:3 ../data/xings-software-update.desktop.in.h:2
+#: ../data/gpk-application.ui.h:8 ../data/xings-software-update.desktop.in.h:2
 #, fuzzy
 msgid "Update software installed on the system"
 msgstr "Pecyn '%s' wedi'i sefydlu"
@@ -168,11 +168,35 @@ msgid ""
 "Store;"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:2 ../src/software/gpk-application.c:311
+#: ../data/gpk-application.ui.h:1
+#, fuzzy
+msgid "Search for third party apps"
+msgstr "Gosod i fyny"
+
+#: ../data/gpk-application.ui.h:2
+#, fuzzy
+msgid "Update Software Sources"
+msgstr "Diweddaru'r System"
+
+#: ../data/gpk-application.ui.h:3 ../data/gpk-prefs.ui.h:10
+#, fuzzy
+msgid "Software Sources"
+msgstr "Mae angen ailgychwyn y system"
+
+#: ../data/gpk-application.ui.h:4
+#, fuzzy
+msgid "About"
+msgstr "_Ynghylch"
+
+#: ../data/gpk-application.ui.h:5
+msgid "_Quit"
+msgstr ""
+
+#: ../data/gpk-application.ui.h:7 ../src/software/gpk-application.c:312
 msgid "Browse by categories or search and discover new apps"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:4 ../data/gpk-third-party-installer.ui.h:4
+#: ../data/gpk-application.ui.h:9 ../data/gpk-third-party-installer.ui.h:4
 msgid "Open"
 msgstr ""
 
@@ -182,7 +206,7 @@ msgstr ""
 #. TRANSLATORS: button: install a font
 #. TRANSLATORS: button: install Plasma services
 #. TRANSLATORS: button: install printer drivers
-#: ../data/gpk-application.ui.h:5 ../src/common/gpk-task.c:396
+#: ../data/gpk-application.ui.h:10 ../src/common/gpk-task.c:396
 #: ../src/packagekit-service/gpk-dbus-task.c:693
 #: ../src/packagekit-service/gpk-dbus-task.c:1238
 #: ../src/packagekit-service/gpk-dbus-task.c:1461
@@ -194,83 +218,56 @@ msgid "Install"
 msgstr "Sefydlu"
 
 #. TRANSLATORS: button: confirm to search for packages
-#: ../data/gpk-application.ui.h:6 ../src/common/gpk-task.c:401
+#: ../data/gpk-application.ui.h:11 ../src/common/gpk-task.c:401
 #: ../src/packagekit-service/gpk-dbus-task.c:2972
 msgid "Remove"
 msgstr "Gwaredu"
 
-#: ../data/gpk-application.ui.h:7
+#: ../data/gpk-application.ui.h:12
 msgid "Homepage"
 msgstr "Tudalen Gartref"
 
-#: ../data/gpk-application.ui.h:8
+#: ../data/gpk-application.ui.h:13
 msgid "Donate"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:9
+#: ../data/gpk-application.ui.h:14
 msgid "Report"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:10
+#: ../data/gpk-application.ui.h:15
 #, fuzzy
 msgid "Translate"
 msgstr "Gwall trosglwyddiad"
 
-#: ../data/gpk-application.ui.h:11
+#: ../data/gpk-application.ui.h:16
 msgid "License"
 msgstr "Trwydded"
 
-#: ../data/gpk-application.ui.h:12 ../src/software/gpk-application.c:1204
+#: ../data/gpk-application.ui.h:17 ../src/software/gpk-application.c:1216
 #, fuzzy
 msgid "Distribution package"
 msgstr "Gosod i fyny"
 
 #. TRANSLATORS: column for the source description
-#: ../data/gpk-application.ui.h:13 ../src/preferences/gpk-prefs.c:395
+#: ../data/gpk-application.ui.h:18 ../src/preferences/gpk-prefs.c:395
 msgid "Source"
 msgstr ""
 
-#: ../data/gpk-application.ui.h:14
+#: ../data/gpk-application.ui.h:19
 #, fuzzy
 msgid "Show categories"
 msgstr "Dango_s diweddariadau"
 
-#: ../data/gpk-application.ui.h:15
+#: ../data/gpk-application.ui.h:20
 #, fuzzy
 msgid "Search for apps or distribution packages"
 msgstr "Adnewyddu clec pecynnau"
 
-#: ../data/gpk-application.ui.h:16 ../src/software/gpk-application.c:1794
+#: ../data/gpk-application.ui.h:21 ../src/software/gpk-application.c:1790
 #, fuzzy
 msgid "Categories"
 msgstr "Dango_s diweddariadau"
-
-#: ../data/gpk-application.ui.h:17
-#, fuzzy
-msgid "Update Software Sources"
-msgstr "Diweddaru'r System"
-
-#: ../data/gpk-application.ui.h:18 ../data/gpk-prefs.ui.h:10
-#, fuzzy
-msgid "Software Sources"
-msgstr "Mae angen ailgychwyn y system"
-
-#. are we running privileged
-#: ../data/gpk-application.ui.h:19
-#: ../data/xings-software-history.desktop.in.h:1 ../data/gpk-log.ui.h:1
-#: ../src/history/gpk-log.c:773 ../src/history/gpk-log.c:781
-#, fuzzy
-msgid "Software History"
-msgstr "Mae angen ailgychwyn y system"
-
-#: ../data/gpk-application.ui.h:20
-#, fuzzy
-msgid "About"
-msgstr "_Ynghylch"
-
-#: ../data/gpk-application.ui.h:21
-msgid "_Quit"
-msgstr ""
 
 #: ../data/gpk-client.ui.h:1
 #, fuzzy
@@ -325,10 +322,6 @@ msgstr "Wedi'i sefydlu"
 msgid "Install selected packages on the system"
 msgstr "Pecyn '%s' wedi'i sefydlu"
 
-#: ../data/xings-software-history.desktop.in.h:2
-msgid "View past package management tasks"
-msgstr ""
-
 #: ../data/xings-software-preferences.desktop.in.h:1
 #, fuzzy
 msgid "Software Preferences"
@@ -373,7 +366,7 @@ msgstr "Disgrifiad Tasg:"
 
 #. TRANSLATORS: the updates mechanism
 #: ../data/gpk-prefs.ui.h:6
-#: ../src/software-service/gpk-updates-notification.c:316
+#: ../src/software-service/gpk-updates-notification.c:321
 #, fuzzy
 msgid "Updates"
 msgstr "Diweddariadau:\n"
@@ -445,7 +438,7 @@ msgstr ""
 #. TRANSLATORS: program name: application to install a package to provide a file
 #: ../data/xings-third-parties-installer.desktop.in.h:1
 #: ../data/gpk-third-party-installer.ui.h:1
-#: ../src/third-parties/gpk-third-parties.c:302
+#: ../src/third-parties/gpk-third-parties.c:315
 #, fuzzy
 msgid "Third Party Software Installer"
 msgstr "Meddalwedd"
@@ -489,14 +482,14 @@ msgstr ""
 
 #. TRANSLATORS: title: nothing to do
 #: ../data/gpk-update-viewer.ui.h:1
-#: ../src/software-update/gpk-update-viewer.c:1457
+#: ../src/software-update/gpk-update-viewer.c:1309
 #, fuzzy
 msgid "All software is up to date"
 msgstr "Gwelydd Diweddariad Pecynnau"
 
 #. TRANSLATORS: tell the user the problem
 #: ../data/gpk-update-viewer.ui.h:2
-#: ../src/software-update/gpk-update-viewer.c:1459
+#: ../src/software-update/gpk-update-viewer.c:1311
 #, fuzzy
 msgid "There are no updates available for your computer at this time."
 msgstr ""
@@ -514,8 +507,7 @@ msgstr ""
 msgid "_Upgrade"
 msgstr ""
 
-#. TRANSLATORS: column for what packages were upgraded
-#: ../data/gpk-update-viewer.ui.h:6 ../src/history/gpk-log.c:328
+#: ../data/gpk-update-viewer.ui.h:6
 #, fuzzy
 msgid "Details"
 msgstr "<b>Manylion</b>"
@@ -843,7 +835,7 @@ msgstr "Rh_eoli pecynnau"
 #. TRANSLATORS: column for the package name
 #. TRANSLATORS: column for package name
 #: ../src/common/gpk-dialog.c:151 ../src/common/gpk-modal-dialog.c:700
-#: ../src/software/gpk-application.c:1117
+#: ../src/software/gpk-application.c:1118
 msgid "Name"
 msgstr "Enw"
 
@@ -2291,8 +2283,8 @@ msgstr "Dydy ID'r pecyn heb ei ffurfio'n dda"
 
 #. TRANSLATORS: title in the libnotify popup
 #: ../src/common/gpk-task.c:411
-#: ../src/software-service/gpk-updates-notification.c:248
-#: ../src/software-service/gpk-updates-notification.c:284
+#: ../src/software-service/gpk-updates-notification.c:253
+#: ../src/software-service/gpk-updates-notification.c:289
 #, fuzzy
 msgid "Update"
 msgid_plural "Updates"
@@ -2452,85 +2444,6 @@ msgstr "Wedi methu adnewyddu clec"
 #. TRANSLATORS: nothing was specified
 #: ../src/helpers/gpk-install-package-name.c:84
 msgid "You need to specify the name of the software to install"
-msgstr ""
-
-#. TRANSLATORS: strftime formatted please
-#: ../src/history/gpk-log.c:167
-msgid "%d %B %Y"
-msgstr ""
-
-#. TRANSLATORS: column for the date
-#: ../src/history/gpk-log.c:292
-#, fuzzy
-msgid "Date"
-msgstr "Statws:"
-
-#. TRANSLATORS: column for what was done, e.g. update-system
-#: ../src/history/gpk-log.c:301
-#, fuzzy
-msgid "Action"
-msgstr "Addysg"
-
-#. TRANSLATORS: column for the user name, e.g. Richard Hughes
-#: ../src/history/gpk-log.c:334
-#, fuzzy
-msgid "User name"
-msgstr "Chwilio:"
-
-#. TRANSLATORS: column for the application used for the install, e.g. Add/Remove Programs
-#: ../src/history/gpk-log.c:341
-#, fuzzy
-msgid "Application"
-msgstr "Addysg"
-
-#. TRANSLATORS: user-friendly name for pkcon
-#: ../src/history/gpk-log.c:505
-msgid "Command line client"
-msgstr ""
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:508
-#, fuzzy
-msgid "GNOME Packages"
-msgstr "Dim pecynnau"
-
-#. TRANSLATORS: user-friendly name for gpk-update-viewer
-#: ../src/history/gpk-log.c:511
-#, fuzzy
-msgid "GNOME Package Updater"
-msgstr "Rhaglennig Diweddaru PackageKit"
-
-#. TRANSLATORS: user-friendly name for gpk-update-icon, which used to exist
-#: ../src/history/gpk-log.c:514
-#, fuzzy
-msgid "Update Icon"
-msgstr "Diweddariadau:\n"
-
-#. TRANSLATORS: user-friendly name for the command not found plugin
-#: ../src/history/gpk-log.c:517
-msgid "Bash – Command Not Found"
-msgstr ""
-
-#. TRANSLATORS: user-friendly name for gnome-settings-daemon, which used to handle updates
-#: ../src/history/gpk-log.c:520
-msgid "GNOME Session"
-msgstr ""
-
-#. TRANSLATORS: user-friendly name for gnome-software
-#: ../src/history/gpk-log.c:523
-#, fuzzy
-msgid "GNOME Software"
-msgstr "Meddalwedd"
-
-#. TRANSLATORS: preset the GtktextBox with this filter text
-#: ../src/history/gpk-log.c:757
-#, fuzzy
-msgid "Set the filter to this value"
-msgstr "Hidlydd chwilio'n annilys"
-
-#. TRANSLATORS: we can make this modal (stay on top of) another window
-#: ../src/history/gpk-log.c:760 ../src/preferences/gpk-prefs.c:737
-msgid "Set the parent window to make this modal"
 msgstr ""
 
 #: ../src/packagekit-service/gpk-dbus-service.c:127
@@ -3083,7 +2996,6 @@ msgstr "Wedi methu adnewyddu clec"
 
 #. TRANSLATORS: backend is broken, and won't tell us what it supports
 #: ../src/preferences/gpk-prefs.c:564
-#: ../src/software-update/gpk-update-viewer.c:3166
 #, fuzzy
 msgid "Exiting as backend details could not be retrieved"
 msgstr "Dydy'r pecyn methu cael ei waredu"
@@ -3092,6 +3004,11 @@ msgstr "Dydy'r pecyn methu cael ei waredu"
 #, fuzzy
 msgid "Getting package source list not supported by backend"
 msgstr "Dydy'r pecyn heb ei sefydlu"
+
+#. TRANSLATORS: we can make this modal (stay on top of) another window
+#: ../src/preferences/gpk-prefs.c:737
+msgid "Set the parent window to make this modal"
+msgstr ""
 
 #. TRANSLATORS: we can display updates or repsository tab by default
 #: ../src/preferences/gpk-prefs.c:740
@@ -3104,108 +3021,108 @@ msgstr ""
 msgid "Software Settings"
 msgstr "Meddalwedd"
 
-#: ../src/software/gpk-application.c:272
+#: ../src/software/gpk-application.c:273
 msgid "Please, be patient"
 msgstr ""
 
 #. TRANSLATORS: no results were found for this search
-#: ../src/software/gpk-application.c:567
+#: ../src/software/gpk-application.c:568
 #, fuzzy
 msgid "No results were found."
 msgstr "Mae angen ailgychwyn y system"
 
 #. TRANSLATORS: tell the user to switch to details search mode
-#: ../src/software/gpk-application.c:573
+#: ../src/software/gpk-application.c:574
 msgid ""
 "Try searching package distributions by clicking the icon next to the search "
 "text."
 msgstr ""
 
 #. TRANSLATORS: tell the user to try harder
-#: ../src/software/gpk-application.c:576
+#: ../src/software/gpk-application.c:577
 msgid "Try again with a different search term."
 msgstr ""
 
 #. TRANSLATORS: title: warn the user they are quitting with unapplied changes
-#: ../src/software/gpk-application.c:952
+#: ../src/software/gpk-application.c:953
 msgid "Changes not applied"
 msgstr ""
 
-#: ../src/software/gpk-application.c:953
+#: ../src/software/gpk-application.c:954
 msgid "Close _Anyway"
 msgstr ""
 
 #. TRANSLATORS: tell the user the problem
-#: ../src/software/gpk-application.c:957
+#: ../src/software/gpk-application.c:958
 msgid "You have made changes that have not yet been applied."
 msgstr ""
 
-#: ../src/software/gpk-application.c:958
+#: ../src/software/gpk-application.c:959
 msgid "These changes will be lost if you close this window."
 msgstr ""
 
-#: ../src/software/gpk-application.c:1262
+#: ../src/software/gpk-application.c:1274
 msgid "Visit the app's website"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1279
+#: ../src/software/gpk-application.c:1291
 msgid "Make a donation"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1296
+#: ../src/software/gpk-application.c:1308
 msgid "Report a problem"
 msgstr ""
 
-#: ../src/software/gpk-application.c:1313
+#: ../src/software/gpk-application.c:1325
 msgid "Translate into your language"
 msgstr ""
 
 #. TRANSLATORS: the size of the meta package
-#: ../src/software/gpk-application.c:1348
+#: ../src/software/gpk-application.c:1360
 msgid "Size"
 msgstr ""
 
 #. TRANSLATORS: the installed size in bytes of the package
-#: ../src/software/gpk-application.c:1351
+#: ../src/software/gpk-application.c:1363
 #, fuzzy
 msgid "Installed size"
 msgstr "Wedi'i sefydlu"
 
 #. TRANSLATORS: the download size of the package
-#: ../src/software/gpk-application.c:1354
+#: ../src/software/gpk-application.c:1366
 #, fuzzy
 msgid "Download size"
 msgstr "Lawrlwytho"
 
 #. TRANSLATORS: entry tooltip: basic search by package name
-#: ../src/software/gpk-application.c:1489
+#: ../src/software/gpk-application.c:1501
 #, fuzzy
 msgid "Searching for distribution packages"
 msgstr "Adnewyddu clec pecynnau"
 
 #. TRANSLATORS: entry tooltip: applications search
-#: ../src/software/gpk-application.c:1512
+#: ../src/software/gpk-application.c:1524
 #, fuzzy
 msgid "Searching for applications"
 msgstr "Gosod i fyny"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1535
+#: ../src/software/gpk-application.c:1547
 #, fuzzy
 msgid "Search for apps"
 msgstr "Gosod i fyny"
 
 #. TRANSLATORS: context menu item for the search type icon
-#: ../src/software/gpk-application.c:1543
+#: ../src/software/gpk-application.c:1555
 #, fuzzy
 msgid "Search for distribution packages"
 msgstr "Adnewyddu clec pecynnau"
 
-#: ../src/software/gpk-application.c:1576
+#: ../src/software/gpk-application.c:1588
 msgid "Licensed under the GNU General Public License Version 2"
 msgstr "Wedi'i drwyddedu o dan Drwydded Gyhoeddus Gyffredinol GNU Fersiwn 2"
 
-#: ../src/software/gpk-application.c:1577
+#: ../src/software/gpk-application.c:1589
 #, fuzzy
 msgid ""
 "PackageKit is free software; you can redistribute it and/or modify it under "
@@ -3218,7 +3135,7 @@ msgstr ""
 " fel sydd wedi ei gyhoeddi gan y Free Software Foundation; un ai fersiwn 2\n"
 " neu (yn ôl eich dewis) unrhyw fersiwn diweddarach."
 
-#: ../src/software/gpk-application.c:1581
+#: ../src/software/gpk-application.c:1593
 #, fuzzy
 msgid ""
 "PackageKit is distributed in the hope that it will be useful, but WITHOUT "
@@ -3231,7 +3148,7 @@ msgstr ""
 " FASNACHEIDDRWYDD nag ADDASRWYDD AR GYFER PWRPAS PENODOL. Gweler\n"
 " Trwydded Gyhoeddus Gyffredinol GNU am fwy o wybodaeth."
 
-#: ../src/software/gpk-application.c:1585
+#: ../src/software/gpk-application.c:1597
 #, fuzzy
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
@@ -3244,33 +3161,33 @@ msgstr ""
 "02110-1301, USA."
 
 #. TRANSLATORS: put your own name here -- you deserve credit!
-#: ../src/software/gpk-application.c:1591
+#: ../src/software/gpk-application.c:1603
 msgid "translator-credits"
 msgstr "Iestyn Pryce <dylunio@gmail.com>"
 
-#: ../src/software/gpk-application.c:1610
+#: ../src/software/gpk-application.c:1622
 #, fuzzy
 msgid "Xings Software Website"
 msgstr "Mae angen ailgychwyn y system"
 
-#: ../src/software/gpk-application.c:1870
+#: ../src/software/gpk-application.c:1866
 #, fuzzy
 msgid "There was an error starting the application"
 msgstr "Mae angen i chi ail-ddechrau'r rhaglen"
 
 #. TRANSLATORS: show the program version
-#: ../src/software/gpk-application.c:2098
-#: ../src/software-update/gpk-update-viewer.c:3398
+#: ../src/software/gpk-application.c:2094
+#: ../src/software-update/gpk-update-viewer.c:3096
 msgid "Show the program version and exit"
 msgstr ""
 
-#: ../src/software/gpk-application.c:2112
+#: ../src/software/gpk-application.c:2108
 #, fuzzy
 msgid "Install Software"
 msgstr "Sefydlu"
 
 #. are we running privileged
-#: ../src/software/gpk-application.c:2128
+#: ../src/software/gpk-application.c:2124
 #, fuzzy
 msgid "Software installer"
 msgstr "Meddalwedd"
@@ -3290,23 +3207,23 @@ msgid "Invalid"
 msgstr "Wedi'i sefydlu"
 
 #. TRANSLATORS: don't install updates now
-#: ../src/software-service/gpk-updates-notification.c:199
+#: ../src/software-service/gpk-updates-notification.c:204
 msgid "Not Now"
 msgstr ""
 
 #. TRANSLATORS: view available updates
-#: ../src/software-service/gpk-updates-notification.c:206
+#: ../src/software-service/gpk-updates-notification.c:211
 msgid "View"
 msgstr ""
 
 #. TRANSLATORS: install available updates
-#: ../src/software-service/gpk-updates-notification.c:217
+#: ../src/software-service/gpk-updates-notification.c:222
 #, fuzzy
 msgid "Restart & Install"
 msgstr "Ailgychwyn y cyfrifiadur yn syth"
 
 #. TRANSLATORS: message when there are security updates
-#: ../src/software-service/gpk-updates-notification.c:251
+#: ../src/software-service/gpk-updates-notification.c:256
 #, fuzzy
 msgid "An important software update is available"
 msgid_plural "Important software updates are available"
@@ -3314,7 +3231,7 @@ msgstr[0] "Mae yna %d diweddariadau ar gael"
 msgstr[1] "Mae yna %d diweddariadau ar gael"
 
 #. TRANSLATORS: message when there are non-security updates
-#: ../src/software-service/gpk-updates-notification.c:287
+#: ../src/software-service/gpk-updates-notification.c:292
 #, fuzzy
 msgid "A software update is available."
 msgid_plural "Software updates are available."
@@ -3323,165 +3240,158 @@ msgstr[1] "Mae yna %d diweddariadau ar gael"
 
 #. TRANSLATORS: we failed to get the updates multiple times,
 #. * and now we need to inform the user that something might be wrong
-#: ../src/software-service/gpk-updates-notification.c:320
+#: ../src/software-service/gpk-updates-notification.c:325
 #, fuzzy
 msgid "Unable to access software updates"
 msgstr "Gwelydd Diweddariad Pecynnau"
 
-#: ../src/software-service/gpk-updates-notification.c:433
+#: ../src/software-service/gpk-updates-notification.c:438
 #, fuzzy
 msgid "Software Updates"
 msgstr "Gwelydd Diweddariad Pecynnau"
 
 #. TRANSLATORS: we don't have a lot to go on here
-#: ../src/software-update/gpk-update-viewer.c:171
+#: ../src/software-update/gpk-update-viewer.c:169
 #, fuzzy
 msgid "Failed to process request."
 msgstr "Wedi methu adnewyddu clec"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:197
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "before the changes will be applied."
 msgstr ""
 
 #. TRANSLATORS: the button text for the restart
-#: ../src/software-update/gpk-update-viewer.c:201
-#: ../src/software-update/gpk-update-viewer.c:207
+#: ../src/software-update/gpk-update-viewer.c:199
+#: ../src/software-update/gpk-update-viewer.c:205
 #, fuzzy
 msgid "Restart Computer"
 msgstr "Ailgychwyn y cyf_rifiadur"
 
 #. TRANSLATORS: the message text for the restart
-#: ../src/software-update/gpk-update-viewer.c:205
+#: ../src/software-update/gpk-update-viewer.c:203
 msgid ""
 "Some of the updates that were installed require the computer to be restarted "
 "to remain secure."
 msgstr ""
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:209
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "before the changes will be applied."
 msgstr ""
 
 #. TRANSLATORS: the button text for the log out
-#: ../src/software-update/gpk-update-viewer.c:213
-#: ../src/software-update/gpk-update-viewer.c:219
+#: ../src/software-update/gpk-update-viewer.c:211
+#: ../src/software-update/gpk-update-viewer.c:217
 msgid "Log Out"
 msgstr ""
 
 #. TRANSLATORS: the message text for the log out
-#: ../src/software-update/gpk-update-viewer.c:217
+#: ../src/software-update/gpk-update-viewer.c:215
 msgid ""
 "Some of the updates that were installed require you to log out and back in "
 "to remain secure."
 msgstr ""
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:258
+#: ../src/software-update/gpk-update-viewer.c:256
 #, fuzzy
 msgid "Could not restart"
 msgstr "Diweddaru pecyn"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:265
+#: ../src/software-update/gpk-update-viewer.c:263
 #, fuzzy
 msgid "Could not log out"
 msgstr "Diweddaru pecyn"
 
 #. TRANSLATORS: we failed to install all the updates we requested
-#: ../src/software-update/gpk-update-viewer.c:328
+#: ../src/software-update/gpk-update-viewer.c:326
 #, fuzzy
 msgid "Some updates were not installed"
 msgstr "Mae diweddaru'r system wedi'i gyflawni"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:395
-#: ../src/software-update/gpk-update-viewer.c:406
+#: ../src/software-update/gpk-update-viewer.c:392
+#: ../src/software-update/gpk-update-viewer.c:403
 #, fuzzy
 msgid "Could not install updates"
 msgstr "Diweddaru pecyn"
 
 #. TRANSLATORS: completed all updates
 #. TRANSLATORS: title: all updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:467
-#: ../src/software-update/gpk-update-viewer.c:477
-#: ../src/software-update/gpk-update-viewer.c:484
+#: ../src/software-update/gpk-update-viewer.c:462
+#: ../src/software-update/gpk-update-viewer.c:471
 #, fuzzy
 msgid "Updates installed"
 msgstr "Pecyn '%s' wedi'i sefydlu"
 
 #. TRANSLATORS: title: all updates for the machine installed okay
-#: ../src/software-update/gpk-update-viewer.c:479
+#: ../src/software-update/gpk-update-viewer.c:473
 #, fuzzy
 msgid "All updates were installed successfully."
 msgstr "Mae diweddaru'r system wedi'i gyflawni"
 
-#. TRANSLATORS: title: all the selected updates installed okay
-#: ../src/software-update/gpk-update-viewer.c:486
-#, fuzzy
-msgid "The selected updates were installed successfully."
-msgstr "Mae diweddaru'r system wedi'i gyflawni"
-
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:694
+#: ../src/software-update/gpk-update-viewer.c:563
 #, fuzzy
 msgid "Trivial updates"
 msgstr "Arferol"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:698
+#: ../src/software-update/gpk-update-viewer.c:567
 #, fuzzy
 msgid "Important updates"
 msgstr "Arferol"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:702
+#: ../src/software-update/gpk-update-viewer.c:571
 #, fuzzy
 msgid "Security updates"
 msgstr "Diweddariad diogelwch ar gael"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:706
+#: ../src/software-update/gpk-update-viewer.c:575
 #, fuzzy
 msgid "Bug fix updates"
 msgstr "Diweddariad diogelwch ar gael"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:710
+#: ../src/software-update/gpk-update-viewer.c:579
 #, fuzzy
 msgid "Enhancement updates"
 msgstr "Diddymu"
 
 #. TRANSLATORS: The type of update
-#: ../src/software-update/gpk-update-viewer.c:714
+#: ../src/software-update/gpk-update-viewer.c:583
 #, fuzzy
 msgid "Blocked updates"
 msgstr "Diddymu"
 
 #. TRANSLATORS: The type of update, i.e. unspecified
-#: ../src/software-update/gpk-update-viewer.c:718
+#: ../src/software-update/gpk-update-viewer.c:587
 #, fuzzy
 msgid "Other updates"
 msgstr "Dango_s diweddariadau"
 
 #. TRANSLATORS: querying update array
-#: ../src/software-update/gpk-update-viewer.c:973
+#: ../src/software-update/gpk-update-viewer.c:826
 #, fuzzy
 msgid "Getting the list of updates"
 msgstr "Gosod i fyny"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:1209
+#: ../src/software-update/gpk-update-viewer.c:1061
 #, fuzzy
 msgid "Could not run upgrade script"
 msgstr "Diweddaru pecyn"
 
 #. TRANSLATORS, are we going to cost the user lots of money?
-#: ../src/software-update/gpk-update-viewer.c:1240
+#: ../src/software-update/gpk-update-viewer.c:1092
 msgid ""
 "Connectivity is being provided by wireless broadband, and it may be "
 "expensive to update this package."
@@ -3491,32 +3401,32 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../src/software-update/gpk-update-viewer.c:1389
+#: ../src/software-update/gpk-update-viewer.c:1241
 #, c-format
 msgid "Last checked: %s"
 msgstr ""
 
 #. TRANSLATORS: title: nothing to do
-#: ../src/software-update/gpk-update-viewer.c:1427
+#: ../src/software-update/gpk-update-viewer.c:1279
 #, fuzzy
 msgid "No updates are available"
 msgstr "Mae yna diweddariad ar gael"
 
 #. TRANSLATORS: no network connection, according to PackageKit
-#: ../src/software-update/gpk-update-viewer.c:1429
+#: ../src/software-update/gpk-update-viewer.c:1281
 #, fuzzy
 msgid "No network connection was detected."
 msgstr "Dim cysylltiad rhwydwaith ar gael"
 
 #. TRANSLATORS: this is the button text when we have updates
-#: ../src/software-update/gpk-update-viewer.c:1447
+#: ../src/software-update/gpk-update-viewer.c:1299
 #, fuzzy
 msgid "_Install Update"
 msgid_plural "_Install Updates"
 msgstr[0] "Wedi'i sefydlu"
 msgstr[1] "Wedi'i sefydlu"
 
-#: ../src/software-update/gpk-update-viewer.c:1492
+#: ../src/software-update/gpk-update-viewer.c:1344
 #, fuzzy, c-format
 msgid "There is %u update available"
 msgid_plural "There are %u updates available"
@@ -3524,7 +3434,7 @@ msgstr[0] "Mae yna %d diweddariadau ar gael"
 msgstr[1] "Mae yna %d diweddariadau ar gael"
 
 #. TRANSLATORS: how many updates are selected in the UI
-#: ../src/software-update/gpk-update-viewer.c:1504
+#: ../src/software-update/gpk-update-viewer.c:1356
 #, fuzzy, c-format
 msgid "%u update selected"
 msgid_plural "%u updates selected"
@@ -3532,7 +3442,7 @@ msgstr[0] "Diweddaru pecyn"
 msgstr[1] "Diweddaru pecyn"
 
 #. TRANSLATORS: how many updates are selected in the UI, and the size of packages to download
-#: ../src/software-update/gpk-update-viewer.c:1513
+#: ../src/software-update/gpk-update-viewer.c:1365
 #, fuzzy, c-format
 msgid "%u update selected (%s)"
 msgid_plural "%u updates selected (%s)"
@@ -3540,52 +3450,52 @@ msgstr[0] "Diweddaru pecyn"
 msgstr[1] "Diweddaru pecyn"
 
 #. TRANSLATORS: a column that has state of each package
-#: ../src/software-update/gpk-update-viewer.c:1709
+#: ../src/software-update/gpk-update-viewer.c:1561
 #, fuzzy
 msgid "Status"
 msgstr "Statws:"
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1887
+#: ../src/software-update/gpk-update-viewer.c:1729
 msgid "This update will add new features and expand functionality."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1891
+#: ../src/software-update/gpk-update-viewer.c:1733
 msgid "This update will fix bugs and other non-critical problems."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1895
+#: ../src/software-update/gpk-update-viewer.c:1737
 msgid "This update is important as it may solve critical problems."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1899
+#: ../src/software-update/gpk-update-viewer.c:1741
 msgid ""
 "This update is needed to fix a security vulnerability with this package."
 msgstr ""
 
 #. TRANSLATORS: this is the update type, e.g. security
-#: ../src/software-update/gpk-update-viewer.c:1903
+#: ../src/software-update/gpk-update-viewer.c:1745
 #, fuzzy
 msgid "This update is blocked."
 msgstr "Diweddaru pecyn"
 
 #. TRANSLATORS: this is when the notification was issued and then updated
-#: ../src/software-update/gpk-update-viewer.c:1915
+#: ../src/software-update/gpk-update-viewer.c:1757
 #, c-format
 msgid "This notification was issued on %s and last updated on %s."
 msgstr ""
 
 #. TRANSLATORS: this is when the update was issued
-#: ../src/software-update/gpk-update-viewer.c:1922
+#: ../src/software-update/gpk-update-viewer.c:1764
 #, c-format
 msgid "This notification was issued on %s."
 msgstr ""
 
 #. TRANSLATORS: this is a array of vendor URLs
-#: ../src/software-update/gpk-update-viewer.c:1940
+#: ../src/software-update/gpk-update-viewer.c:1782
 msgid "For more information about this update please visit this website:"
 msgid_plural ""
 "For more information about this update please visit these websites:"
@@ -3593,7 +3503,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: this is a array of bugzilla URLs
-#: ../src/software-update/gpk-update-viewer.c:1947
+#: ../src/software-update/gpk-update-viewer.c:1789
 msgid ""
 "For more information about bugs fixed by this update please visit this "
 "website:"
@@ -3604,7 +3514,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: this is a array of CVE (security) URLs
-#: ../src/software-update/gpk-update-viewer.c:1954
+#: ../src/software-update/gpk-update-viewer.c:1796
 msgid ""
 "For more information about this security update please visit this website:"
 msgid_plural ""
@@ -3613,14 +3523,14 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TRANSLATORS: reboot required
-#: ../src/software-update/gpk-update-viewer.c:1963
+#: ../src/software-update/gpk-update-viewer.c:1805
 msgid ""
 "The computer will have to be restarted after the update for the changes to "
 "take effect."
 msgstr ""
 
 #. TRANSLATORS: log out required
-#: ../src/software-update/gpk-update-viewer.c:1967
+#: ../src/software-update/gpk-update-viewer.c:1809
 #, fuzzy
 msgid ""
 "You will need to log out and back in after the update for the changes to "
@@ -3628,31 +3538,31 @@ msgid ""
 msgstr "Mi fydd angen i chi logio allan ac logio yn ôl i fewn"
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1974
+#: ../src/software-update/gpk-update-viewer.c:1816
 msgid ""
 "The classification of this update is unstable which means it is not designed "
 "for production use."
 msgstr ""
 
 #. TRANSLATORS: this is the stability status of the update
-#: ../src/software-update/gpk-update-viewer.c:1978
+#: ../src/software-update/gpk-update-viewer.c:1820
 msgid ""
 "This is a test update, and is not designed for normal use. Please report any "
 "problems or regressions you encounter."
 msgstr ""
 
 #. TRANSLATORS: this is a ChangeLog
-#: ../src/software-update/gpk-update-viewer.c:1986
+#: ../src/software-update/gpk-update-viewer.c:1828
 msgid ""
 "The developer logs will be shown as no description is available for this "
 "update:"
 msgstr ""
 
-#: ../src/software-update/gpk-update-viewer.c:2033
+#: ../src/software-update/gpk-update-viewer.c:1875
 msgid "Loading…"
 msgstr ""
 
-#: ../src/software-update/gpk-update-viewer.c:2036
+#: ../src/software-update/gpk-update-viewer.c:1878
 #, fuzzy
 msgid "No update details available."
 msgstr "Mae yna diweddariad ar gael"
@@ -3660,83 +3570,71 @@ msgstr "Mae yna diweddariad ar gael"
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
 #. TRANSLATORS: PackageKit did not send any results for the query...
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2096
-#: ../src/software-update/gpk-update-viewer.c:2116
-#: ../src/software-update/gpk-update-viewer.c:2226
+#: ../src/software-update/gpk-update-viewer.c:1936
+#: ../src/software-update/gpk-update-viewer.c:1956
+#: ../src/software-update/gpk-update-viewer.c:2060
 #, fuzzy
 msgid "Could not get update details"
 msgstr "Diweddaru pecyn"
 
-#: ../src/software-update/gpk-update-viewer.c:2116
+#: ../src/software-update/gpk-update-viewer.c:1956
 #, fuzzy
 msgid "No results were returned."
 msgstr "Mae angen ailgychwyn y system"
 
 #. TRANSLATORS: right click menu, select all the updates
-#: ../src/software-update/gpk-update-viewer.c:2480
+#: ../src/software-update/gpk-update-viewer.c:2314
 msgid "Select all"
 msgstr ""
 
 #. TRANSLATORS: right click menu, unselect all the updates
-#: ../src/software-update/gpk-update-viewer.c:2488
+#: ../src/software-update/gpk-update-viewer.c:2322
 #, fuzzy
 msgid "Unselect all"
 msgstr "Sefydlu"
 
 #. TRANSLATORS: right click menu, select only security updates
-#: ../src/software-update/gpk-update-viewer.c:2495
+#: ../src/software-update/gpk-update-viewer.c:2329
 #, fuzzy
 msgid "Select security updates"
 msgstr "Diweddariadau diogelwch ar gael"
 
 #. TRANSLATORS: right click option, ignore this update name, not currently used
-#: ../src/software-update/gpk-update-viewer.c:2501
+#: ../src/software-update/gpk-update-viewer.c:2335
 #, fuzzy
 msgid "Ignore this update"
 msgstr "Wedi'i sefydlu"
 
 #. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:2608
-#: ../src/software-update/gpk-update-viewer.c:2800
+#: ../src/software-update/gpk-update-viewer.c:2442
+#: ../src/software-update/gpk-update-viewer.c:2632
 #, fuzzy
 msgid "Could not get updates"
 msgstr "Diweddaru pecyn"
 
 #. TRANSLATORS: this is the header
-#: ../src/software-update/gpk-update-viewer.c:2742
-#: ../src/software-update/gpk-update-viewer.c:2830
+#: ../src/software-update/gpk-update-viewer.c:2574
+#: ../src/software-update/gpk-update-viewer.c:2662
 #, fuzzy
 msgid "Checking for updates…"
 msgstr "Dango_s diweddariadau"
 
-#. TRANSLATORS: the PackageKit request did not complete, and it did not send an error
-#: ../src/software-update/gpk-update-viewer.c:3102
-#, fuzzy
-msgid "Could not get list of distribution upgrades"
-msgstr "Gosod i fyny"
-
-#. TRANSLATORS: new distro available, e.g. F9 to F10
-#: ../src/software-update/gpk-update-viewer.c:3132
-#, fuzzy, c-format
-msgid "New distribution upgrade release “%s” is available"
-msgstr "Diweddariadau diogelwch ar gael"
-
-#: ../src/software-update/gpk-update-viewer.c:3411
+#: ../src/software-update/gpk-update-viewer.c:3109
 #, fuzzy
 msgid "Update Software"
 msgstr "Diweddaru'r System"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:134
+#: ../src/third-parties/gpk-flatpak-installer.c:190
 #, fuzzy, c-format
 msgid "Installing %s\n"
 msgstr "Sefydlu"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:137
+#: ../src/third-parties/gpk-flatpak-installer.c:193
 #, fuzzy, c-format
 msgid "Updating %s\n"
 msgstr "Diweddaru"
 
-#: ../src/third-parties/gpk-flatpak-installer.c:140
+#: ../src/third-parties/gpk-flatpak-installer.c:196
 #, fuzzy, c-format
 msgid "Uninstalling %s\n"
 msgstr "Sefydlu"
@@ -3765,21 +3663,73 @@ msgstr "Mae'r pecyn wedi'i sefydlu yn barod"
 msgid "Open it any time from the Applications Menu"
 msgstr ""
 
-#: ../src/third-parties/gpk-third-parties.c:138
-#: ../src/third-parties/gpk-third-parties.c:182
-#: ../src/third-parties/gpk-third-parties.c:274
+#: ../src/third-parties/gpk-third-parties.c:151
+#: ../src/third-parties/gpk-third-parties.c:195
+#: ../src/third-parties/gpk-third-parties.c:287
 #, fuzzy
 msgid "Failed to install a third party software"
 msgstr "Wedi methu adnewyddu clec"
 
-#: ../src/third-parties/gpk-third-parties.c:220
+#: ../src/third-parties/gpk-third-parties.c:233
 #, fuzzy, c-format
 msgid "Download size may be up to %s"
 msgstr "Lawrlwytho"
 
-#: ../src/third-parties/gpk-third-parties.c:304
+#: ../src/third-parties/gpk-third-parties.c:317
 msgid "Install third party software from flatpakref"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Software History"
+#~ msgstr "Mae angen ailgychwyn y system"
+
+#, fuzzy
+#~ msgid "Date"
+#~ msgstr "Statws:"
+
+#, fuzzy
+#~ msgid "Action"
+#~ msgstr "Addysg"
+
+#, fuzzy
+#~ msgid "User name"
+#~ msgstr "Chwilio:"
+
+#, fuzzy
+#~ msgid "Application"
+#~ msgstr "Addysg"
+
+#, fuzzy
+#~ msgid "GNOME Packages"
+#~ msgstr "Dim pecynnau"
+
+#, fuzzy
+#~ msgid "GNOME Package Updater"
+#~ msgstr "Rhaglennig Diweddaru PackageKit"
+
+#, fuzzy
+#~ msgid "Update Icon"
+#~ msgstr "Diweddariadau:\n"
+
+#, fuzzy
+#~ msgid "GNOME Software"
+#~ msgstr "Meddalwedd"
+
+#, fuzzy
+#~ msgid "Set the filter to this value"
+#~ msgstr "Hidlydd chwilio'n annilys"
+
+#, fuzzy
+#~ msgid "The selected updates were installed successfully."
+#~ msgstr "Mae diweddaru'r system wedi'i gyflawni"
+
+#, fuzzy
+#~ msgid "Could not get list of distribution upgrades"
+#~ msgstr "Gosod i fyny"
+
+#, fuzzy, c-format
+#~ msgid "New distribution upgrade release “%s” is available"
+#~ msgstr "Diweddariadau diogelwch ar gael"
 
 #, fuzzy
 #~ msgid "Third Parties Installer"
