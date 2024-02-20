@@ -92,7 +92,7 @@ enum {
 
 static void gpk_update_viewer_empty_stack_message (const gchar *title, const gchar *message, gboolean updated);
 
-static void gpk_update_viewer_get_new_update_array (void);
+static void gpk_update_viewer_get_updates (void);
 static void gpk_update_viewer_refresh_cache (void);
 static void gpk_updates_viewer_validate_cache (void);
 
@@ -2119,7 +2119,7 @@ out:
 static void
 gpk_update_viewer_repo_array_changed_cb (PkClient *client, gpointer user_data)
 {
-	gpk_update_viewer_get_new_update_array ();
+	gpk_update_viewer_get_updates ();
 }
 
 /**
@@ -2557,10 +2557,10 @@ out:
 }
 
 /**
- * gpk_update_viewer_get_new_update_array
+ * gpk_update_viewer_get_updates
  **/
 static void
-gpk_update_viewer_get_new_update_array (void)
+gpk_update_viewer_get_updates (void)
 {
 	gchar *text = NULL;
 	PkBitfield filter = PK_FILTER_ENUM_NONE;
@@ -2854,7 +2854,7 @@ gpk_update_viewer_updates_changed_cb (PkControl *_control, gpointer user_data)
 		g_debug ("ignoring");
 		return;
 	}
-	gpk_update_viewer_get_new_update_array ();
+	gpk_update_viewer_get_updates ();
 }
 
 /**
@@ -2892,7 +2892,7 @@ static void
 gpk_update_viewer_notify_network_state_cb (PkControl *_control, GParamSpec *pspec, gpointer user_data)
 {
 	gpk_update_viewer_check_mobile_broadband ();
-	gpk_update_viewer_get_new_update_array ();
+	gpk_update_viewer_get_updates ();
 }
 
 /**
